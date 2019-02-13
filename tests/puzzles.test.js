@@ -66,7 +66,6 @@ describe('User management', () => {
     browser.url('http://localhost:3000/');
     browser.pause(1000);
     const menu = browser.$('i.settings').$('..');
-    console.log(menu);
     menu.click();
     browser.pause(1000);
     menu.$('i.sign.out').$('..').click();
