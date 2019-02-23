@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, {PropTypes} from 'react';
 import { Grid, Form, Message } from 'semantic-ui-react';
+import utf8 from 'utf8';
 import NCGiveUp from './NCGiveUp';
 
 export default class PuzzleAnswerForm extends React.Component {
@@ -45,7 +46,7 @@ export default class PuzzleAnswerForm extends React.Component {
     const { puzzle } = this.props;
     const { answer } = this.state;
 
-    Meteor.call('team.puzzle.answer', puzzle.puzzleId, answer, (error, result) => {
+    Meteor.call('team.puzzle.answer', puzzle.puzzleId, utf8.encode(answer), (error, result) => {
       this.setState({ answer: '' });
       if (error) return this.setState({ error });
       if (result.message) {

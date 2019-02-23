@@ -42,6 +42,7 @@
     "react-scrollchor": "^4.2.1",
     "request": "^2.85.0",
     "semantic-ui-react": "^0.79",
+    "utf8": "^3.0.0",
     "winston": "^2.4.1"
   },
   "devDependencies": {
