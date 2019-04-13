@@ -69,6 +69,11 @@ const adminMenuItems = [
     iconClass: 'green users',
   },
   {
+    name: 'Teams',
+    to: '/admin/teams',
+    iconClass: 'red users',
+  },
+  {
     name: 'Transactions',
     to: '/admin/transactions',
     iconClass: 'blue ticket',
