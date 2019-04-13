@@ -60,6 +60,7 @@ export const renderRoutes = () => (
       <Route path='admin' component={makeAuthed('admin')}>
         <IndexRoute component={AdminUsers} />
         <Route path='users' component={AdminUsers} />
+        <Route path='teams' component={AdminTeams} />
         <Route path='transactions' component={AdminTransactions} />
         <Route path='sponsors' component={AdminSponsors} />
         <Route path='puzzles' component={AdminPuzzles} />
