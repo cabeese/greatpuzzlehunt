@@ -49,26 +49,27 @@ class AdminTeamTableRow extends Component {
         <span>
           <Icon name='thumbs up' color='green'/> Checked In
         </span>
-      )
+      );
     } else {
       return (
         <span>
           <Icon name='thumbs down' color='red'/> Not Checked In
         </span>
-      )
+      );
     }
   }
 
   _actions() {
-    const { team } = this.props;
+    const { team, selectTeam } = this.props;
     return (
-      <Button basic icon="options" content="More"/>
-    )
+      <Button basic icon="options" content="More" onClick={() => selectTeam(team)}/>
+    );
   }
 }
 
 AdminTeamTableRow.propTypes = {
   team: PropTypes.object.isRequired,
+  selectTeam: PropTypes.func.isRequired,
 };
 
 export default AdminTeamTableRow;
