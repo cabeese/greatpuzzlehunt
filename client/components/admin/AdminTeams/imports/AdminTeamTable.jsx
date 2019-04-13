@@ -4,15 +4,38 @@ import PropTypes from 'prop-types';
 import { Table, Message, Icon } from 'semantic-ui-react';
 
 import AdminTeamTableRow from './AdminTeamTableRow';
+import AdminTeamModal from './AdminTeamModal';
 
 class AdminTeamTable extends Component {
   constructor(props) {
     super(props);
+    this.state = this.stateFromProps(props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.stateFromProps(nextProps, this.state));
+  }
+
+  stateFromProps(newProps, currentState = {}) {
+    const { loading, teams } = newProps;
+    let { selectedTeamId, selectedTeam } = currentState;
+
+    if (selectedTeamId) {
+      selectedTeam = find(teams, (t) => (t._id === selectedTeamId));
+    }
+
+    return {
+      teams,
+      selectedTeamId,
+      selectedTeam,
+    }
   }
 
   render() {
     const { loading, teams } = this.props;
     if (loading) return <Loading/>;
+
+    const { selectedTeam } = this.state;
 
     return (
       <div>
@@ -30,6 +53,8 @@ class AdminTeamTable extends Component {
             {this._mapTeams()}
           </Table.Body>
         </Table>
+
+        <AdminTeamModal team={selectedTeam} clearTeam={() => this._clearSelectedTeam()}/>
       </div>
     );
   }
@@ -38,9 +63,21 @@ class AdminTeamTable extends Component {
     const { teams } = this.props;
     return teams.map((team) => {
       return (
-        <AdminTeamTableRow team={team} key={team._id}/>
+        <AdminTeamTableRow
+          team={team}
+          key={team._id}
+          selectTeam={ () => this._selectTeam(team) }
+        />
       )
     })
+  }
+
+  _selectTeam(team) {
+    this.setState({ selectedTeam: team, selectedTeamId: team._id });
+  }
+
+  _clearSelectedTeam() {
+    this.setState({ selectedTeam: null, selectedUserId: null });
   }
 }
 
