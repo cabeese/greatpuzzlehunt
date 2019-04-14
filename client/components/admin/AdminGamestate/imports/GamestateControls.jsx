@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
-import { Segment, Form, Button, Header } from 'semantic-ui-react';
+import { Radio, Form, Button, Header } from 'semantic-ui-react';
 
 import GamestateComp from '../../../imports/GamestateComp';
 
@@ -75,9 +75,9 @@ class GamestateControlsInner extends Component {
     }
     const fieldValue = this.props.gamestate[fieldName];
     return (
-      <Button
-        color={fieldValue ? 'green' : 'red' }
-        content={`Turn ${displayName} ${(fieldValue ? 'Off' : 'On')}` }
+      <Radio toggle
+        checked={fieldValue}
+        label={displayName}
         onClick={(e) => this._toggleField(e, fieldName) }
       />
     );
