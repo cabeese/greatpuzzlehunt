@@ -21,6 +21,7 @@ class GamestateControlsInner extends Component {
   }
 
   render() {
+    console.log(this.props.gamestate);
     if (this.props.ready) {
       return this._renderForm();
     }
@@ -38,6 +39,10 @@ class GamestateControlsInner extends Component {
 
         <Form.Group>
           <Form.Button icon="mail" content="Email List of Users & Teams to Me" onClick={(e) => { Meteor.call('admin.sendUsersAndTeams'); alert("Emails are sending!"); }}/>
+        </Form.Group>
+
+        <Form.Group>
+          { this._fieldButton('doSendNightlyReports', "Nightly Reports") }
         </Form.Group>
 
         <Header as='h3' content='Registration'/>
@@ -63,13 +68,16 @@ class GamestateControlsInner extends Component {
     );
   }
 
-  _fieldButton(name) {
-    const fieldName = name.toLowerCase();
+  _fieldButton(fieldName, displayName) {
+    if(!displayName){
+      displayName = fieldName;
+      fieldName = fieldName.toLowerCase();
+    }
     const fieldValue = this.props.gamestate[fieldName];
     return (
       <Button
         color={fieldValue ? 'green' : 'red' }
-        content={`Turn ${name} ${(fieldValue ? 'Off' : 'On')}` }
+        content={`Turn ${displayName} ${(fieldValue ? 'Off' : 'On')}` }
         onClick={(e) => this._toggleField(e, fieldName) }
       />
     );

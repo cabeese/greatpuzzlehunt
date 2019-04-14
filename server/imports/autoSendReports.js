@@ -10,6 +10,9 @@ const CHECK_INTERVAL = {
 function autoSendReports() {
   const now = moment();
   const gameState = Gamestate.findOne();
+  if(!gameState.doSendNightlyReports){
+    return;
+  }
   const lastAutoReportSend = moment(gameState.lastAutoReportSend || moment(now).subtract(2, 'day'));
   const waitingUntil = moment(lastAutoReportSend).add(1, 'day');
 
