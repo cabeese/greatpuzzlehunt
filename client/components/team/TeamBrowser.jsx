@@ -93,7 +93,9 @@ TeamBrowser = withTracker((props) => {
   const user = Meteor.user();
   const teamsHandle = Meteor.subscribe('teams.browse');
   const ready = teamsHandle.ready();
-  const teams = Teams.find({}).fetch();
+  // TODO: TEMPORARY FIX - don't list teams without names
+  // This is only here because of the Great Check-In Debacle of 2019
+  const teams = Teams.find({name: { $exists: true }}).fetch();
 
   return {
     ready,
