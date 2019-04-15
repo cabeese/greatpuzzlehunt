@@ -21,7 +21,6 @@ class GamestateControlsInner extends Component {
   }
 
   render() {
-    console.log(this.props.gamestate);
     if (this.props.ready) {
       return this._renderForm();
     }
