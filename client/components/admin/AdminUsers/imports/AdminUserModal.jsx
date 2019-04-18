@@ -5,6 +5,7 @@ import { Modal } from 'semantic-ui-react';
 
 import AdminUserEditForm from './AdminUserEditForm';
 import AdminUserActions from './AdminUserActions';
+import AdminUserTeamChanger from './AdminUserTeamChanger';
 
 class AdminUserModal extends Component {
   constructor(props) {
@@ -33,6 +34,8 @@ class AdminUserModal extends Component {
         <Modal.Header>{user.name}</Modal.Header>
         <Modal.Content>
           <AdminUserEditForm user={user}/>
+          <br />
+          <AdminUserTeamChanger user={user}/>
         </Modal.Content>
         <Modal.Actions>
           <AdminUserActions
