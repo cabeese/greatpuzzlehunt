@@ -10,6 +10,9 @@ import GamestateComp from '../../imports/GamestateComp'
 
 const { eventDate, earlyBirdLastDate, registrationCloseDate } = Meteor.settings.public;
 
+/* TODO: these two components should be on timers, and the official times should be
+   stored in a well-known place with a well known (ISO 8601, anyone?) format. */
+
 const registerNowMessage = (
   <Message icon color='teal'>
     <Icon name='ticket'/>
@@ -93,33 +96,48 @@ class HomeHeader extends Component {
 
   _linkButtons() {
     const earlyBirdEnd = moment("2019-03-17T23:59:59-0700");
-    const { gamestate } = this.props;
+    const gamestate = this.props.gamestate || {};
     let ebMessage = "";
     if(moment() < earlyBirdEnd){
       ebMessage = registerNowMessage;
     }
-    return (
-    <div>
-      {ebMessage}
-      {/* <LinkButton to='/register' size='huge' color='blue' content='Register Now!'/> */}
-      <LinkButton to="/login" size='huge' content='Log In'/>
-      {gamestate && gamestate.leaderboard ? <LinkButton to="/leaderboard" size='huge' content='2019 Leader Board'/> : null}
-      <br /><br />
 
-      {/* {registrationClosesMessage} */}
-
-      {/* <LinkButton as='a' href="https://www.wwu.edu/emarket/puzzlehunt/#design"
+    /* Buttons which may or may not appear, depending on gamestate */
+    const leaderboardButton = (
+      <LinkButton to="/leaderboard" size='huge' color='yellow' content='Leader Board'
+        icon={<Icon name="trophy" />}
+      />
+    );
+    const registerButton = (
+      <LinkButton to='/register' size='huge' color='blue' content='Register Now!'/>
+    );
+    const buyGearButton = (
+      <LinkButton as='a' href="https://www.wwu.edu/emarket/puzzlehunt/#design"
         size="large" color="blue" target="_blank"
         icon={<Icon name="shopping cart" />}
         content="Buy Gear"
-        /> */}
-      <LinkButton to="/faq" size="large" content="FAQ" />
-      <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
-        size='large' color='green'
-        icon={<Icon name='heart'/>}
-        content='Donate'
       />
-    </div>
+    );
+
+    return (
+      <div>
+        {ebMessage}
+        { gamestate.leaderboard ? <div>{leaderboardButton}</div> : null }
+        { gamestate.registration ? registerButton : null }
+        <LinkButton to="/login" size='huge' content='Log In'/>
+        <br /><br />
+
+        {/* {registrationClosesMessage} */}
+
+        { gamestate.buyGear ? buyGearButton : null }
+
+        <LinkButton to="/faq" size="large" content="FAQ" />
+        <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
+          size='large' color='green'
+          icon={<Icon name='heart'/>}
+          content='Donate'
+        />
+      </div>
     );
   }
 }

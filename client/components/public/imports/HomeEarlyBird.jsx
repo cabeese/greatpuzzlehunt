@@ -1,12 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { Grid, Segment, Container, Image, Header, Button } from 'semantic-ui-react';
+import { Grid, Segment, Image, Header } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
+import GamestateComp from '../../imports/GamestateComp'
 
 const { earlyBirdLastDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
-export default class HomeEarlyBird extends Component {
+class HomeEarlyBird extends Component {
   render() {
+    const { gamestate } = this.props;
+    const registration = gamestate && gamestate.registration;
+    const registerButton = (
+      <Segment basic textAlign="center">
+        <LinkButton to='/register' size='huge' content='Register'/>
+      </Segment>
+    );
+
     return (
       <section id="home-early-bird">
         <Segment inverted color='blue' style={{ padding: '4em 0em', margin:'0'}} className="no-border-radius">
@@ -15,9 +23,7 @@ export default class HomeEarlyBird extends Component {
 
               <Grid.Column width={8}>
                 <Image fluid src="/img/2016/event-photos/station1.jpg"/>
-                {/* <Segment basic textAlign="center">
-                  <LinkButton to='/register' size='huge' content='Register'/>
-                </Segment> */}
+                { registration ? registerButton : null }
              </Grid.Column>
 
              <Grid.Column width={6}>
@@ -46,3 +52,6 @@ export default class HomeEarlyBird extends Component {
     );
   }
 }
+
+HomeEarlyBird = GamestateComp(HomeEarlyBird);
+export default HomeEarlyBird
