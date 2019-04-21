@@ -32,6 +32,7 @@ class GamestateControlsInner extends Component {
   _renderForm() {
     return (
       <Form onSubmit={ (e) => e.preventDefault() }>
+      <Header as="h3" content="Emails and Reports" />
         <Form.Group>
           <Form.Button icon="mail" content="Email (all 3) Reports to Me" onClick={(e) => Meteor.call('admin.sendReport')}/>
         </Form.Group>
@@ -44,17 +45,18 @@ class GamestateControlsInner extends Component {
           { this._fieldButton('doSendNightlyReports', "Nightly Reports") }
         </Form.Group>
 
-        <Header as='h3' content='Registration'/>
+        <Header as='h3' content='Registration and Gear'/>
         <Form.Group>
           { this._fieldButton('Registration') }
+          </Form.Group>
+        <Form.Group>
+          { this._fieldButton('buyGear', '"Buy Gear" Button (on homepage)') }
         </Form.Group>
 
-        <Header as='h3' content='Check In'/>
+        <Header as='h3' content='Game Day!'/>
         <Form.Group>
           { this._fieldButton('CheckIn') }
         </Form.Group>
-
-        <Header as='h3' content='Gameplay'/>
         <Form.Group>
           { this._fieldButton('Gameplay') }
         </Form.Group>

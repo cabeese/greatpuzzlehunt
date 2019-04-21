@@ -77,6 +77,7 @@ const adminMenuItems = [
     name: 'Leaderboard',
     to: '/leaderboard',
     iconClass: 'yellow trophy',
+    key: 'adminLeaderboard',
   },
   {
     name: 'Game Control',
@@ -146,19 +147,22 @@ TopBar = class TopBar extends Component {
   }
 
   _renderMenuLink(item) {
+    /* Quick fix for the fact that the leaderboard can be in two menus at
+       once and we don't want to reuse its path as a key. React complains. */
+    const key = item.key || item.to;
     if (item.custom) {
       return (
-        <a key={item.to} className='item' href={item.to}>
+        <a key={key} className='item' href={item.to}>
           <Icon className={item.iconClass}/>
           {item.name}
         </a>
       );
     } else {
       return (
-      <Link key={ item.to } className='item' to={ item.to }>
-        <Icon className={ item.iconClass }/>
-        { item.name }
-      </Link>
+        <Link key={key} className='item' to={ item.to }>
+          <Icon className={ item.iconClass }/>
+          { item.name }
+        </Link>
       );
     }
   }
