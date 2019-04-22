@@ -52,7 +52,13 @@ class VolunteerTeamCheckInMain extends Component {
     let packets = 0;
     const { division, checkinConfirmed } = team;
 
-    if (!checkinConfirmed) return null;
+    if (!checkinConfirmed){
+      return (
+        <Message info size="large">
+          <Message.Header>Confirm check-in to see what they need.</Message.Header>
+        </Message>
+      )
+    };
     teamMembers.forEach(member => {
       if (member.checkedIn) packets++;
       if (!member.photoPermission) noPhotoUsers++;
