@@ -50,9 +50,15 @@ class VolunteerTeamCheckInMain extends Component {
   _itemsToGive(team, teamMembers) {
     let noPhotoUsers = 0;
     let packets = 0;
-    const { division } = team;
+    const { division, checkinConfirmed } = team;
 
-    console.log(teamMembers);
+    if (!checkinConfirmed){
+      return (
+        <Message info size="large">
+          <Message.Header>Confirm check-in to see what they need.</Message.Header>
+        </Message>
+      )
+    };
     teamMembers.forEach(member => {
       if (member.checkedIn) packets++;
       if (!member.photoPermission) noPhotoUsers++;
