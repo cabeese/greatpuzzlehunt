@@ -20,6 +20,14 @@ Media = class Media extends Component {
         <Image.Group size="medium">
 
           <Image
+            src='/img/media-page/cover_2019.jpg'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2019', color: 'black' }}
+            href='https://drive.google.com/drive/folders/1IbBeQz1AHdRC-Njyysmbe_6dA6z-M_iy?usp=sharing'
+            target='_blank'
+            />
+
+          <Image
             src='/img/media-page/cover_2018.jpg'
             as='a'
             label={{ as: 'a', ribbon: 'true', content: '2018', color: 'black' }}
