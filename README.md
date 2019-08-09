@@ -111,3 +111,9 @@ You might see an error message about not having the right version of bcrypt/miss
 ```bash
 $ meteor npm install bcrypt
 ```
+
+If you get a @babel/runtime error, reinstall the correct babel runtime version:
+
+```bash
+$ meteor npm install @babel/runtime@7.0.0-beta.55
+```
