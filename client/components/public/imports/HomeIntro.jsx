@@ -67,7 +67,7 @@ export default class HomeIntro extends Component {
             <Grid.Column>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium" >When?</Header>
-                {eventDate} from 10 AM - 5 PM<br/>
+                {eventDate} from 9:30 AM - 5 PM<br/>
                 Awards and Prizes* at 4:30 PM<br/>
                 *Must be present at awards ceremony to claim prizes, else prizes go to the next place team.<br/>
               </Segment>

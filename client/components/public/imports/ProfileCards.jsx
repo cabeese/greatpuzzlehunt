@@ -21,10 +21,10 @@ export default class ProfileCards extends Component {
         image: '/img/team/wendy.jpg',
       },
       {
-        name: 'Noah Strong',
+        name: 'Ben Johnson',
         title: '',
         role: 'Lead Developer',
-        image: '/img/team/noah.jpg',
+        image: '/img/team/placeholder.png',
       },
       /* Second Row */
       {
@@ -34,10 +34,10 @@ export default class ProfileCards extends Component {
         image: '/img/team/zac.jpg',
       },
       {
-        name: 'Alex Covington',
+        name: 'Raiden van Bronkhorst',
         title: '',
         role: 'Developer',
-        image: '/img/team/alex_c.jpg',
+        image: '/img/team/raiden_v.jpg',
       },
       {
         name: 'Jordan King',
@@ -100,6 +100,18 @@ export default class ProfileCards extends Component {
         title: '',
         role: 'AS Club President 2017-18',
         image: '/img/team/scott.jpg',
+      },
+      {
+        name: 'Noah Strong',
+        title: '',
+        role: 'Lead Developer',
+        image: '/img/team/noah.jpg',
+      },
+      {
+        name: 'Alex Covington',
+        title: '',
+        role: 'Developer',
+        image: '/img/team/alex_c.jpg',
       },
     ]
   }
