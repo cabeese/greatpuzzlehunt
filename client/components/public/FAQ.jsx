@@ -219,7 +219,6 @@ FAQ = class FAQ extends Component {
             What team divisions are there?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 6}>
-            <Header as="h2">Competitive*</Header>
             <List className='bulleted'>
               <List.Item
                 header="WWU Students"
@@ -245,13 +244,6 @@ FAQ = class FAQ extends Component {
              />
              </List>
              <p>* A minimum of 10 teams are required to form a division; else the teams in that division may merge with another division.</p>
-            <p>
-                <strong>Note:</strong> All teams may have up to 6 members. We recommend 4-6 for dividing up tasks.<br/>
-            </p>
-
-            <Header as="h2">Non-competitive</Header>
-            All teams who enjoy puzzling without time pressure.
-            <br /><br />
             <hr />
 
             <strong>Note:</strong> All teams may have up to 6 members. We recommend 4-6 for dividing up tasks.
