@@ -31,8 +31,8 @@ const gearPricing = (
   <span>
     <strong>Official Puzzle Gear Pricing</strong>
     <ul>
-      <li>Early Bird Discount Price (varying styles: prices range from $10-20, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
-      <li>Regular Price (varying styles: prices range from $13-$23, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
+      <li>Early Bird Discount Price (varying styles: prices range from $10-$26, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
+      <li>Regular Price (varying styles: prices range from $13-$29, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
       <li>Gear sale ends midnight {gearSaleEnd}</li>
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul>
@@ -237,11 +237,16 @@ FAQ = class FAQ extends Component {
                 header="Open"
                 description="General public, mixed student/non-student, family (children under age 14 must be accompanied by a parent/guardian)."
               />
-            </List>
+              <br />
+            <span>Contact us to:</span>
+            <List.Item
+                header="Create a Division*"
+                description="Examples: Family Division or Club (Dance, Running, Book, Garden, Wine, ...) where team members are family or in that club."
+             />
+             </List>
+             <p>* A minimum of 10 teams are required to form a division; else the teams in that division may merge with another division.</p>
             <p>
-              <small>
-                <strong>*Note:</strong> A minimum of 10 teams are required to form a division; else the teams in that division may merge with another division.<br/>
-              </small>
+                <strong>Note:</strong> All teams may have up to 6 members. We recommend 4-6 for dividing up tasks.<br/>
             </p>
 
             <Header as="h2">Non-competitive</Header>
