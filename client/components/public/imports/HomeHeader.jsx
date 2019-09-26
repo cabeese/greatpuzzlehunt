@@ -123,7 +123,6 @@ class HomeHeader extends Component {
       <div>
         {ebMessage}
         { gamestate.leaderboard ? <div>{leaderboardButton}</div> : null }
-        // Register button depends upon registration being open/closed{ gamestate.registration ? registerButton : null }
         {registerButton}
         <LinkButton to="/login" size='huge' content='Log In'/>
         <br /><br />
