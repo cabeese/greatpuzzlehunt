@@ -17,17 +17,22 @@ import {
 const { eventYear, eventDate, siteName, earlyBirdLastDate, gearSaleEnd, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
 const prizeNote = (
-  <p>
-    <strong>*</strong> Must be present at awards ceremony to claim prizes, else prizes go to the next place team.
-  </p>
+  <span>
+    Must be present at awards ceremony to claim prizes, else prizes go to the next place team.
+  </span>
+);
+const wristbandNote = (
+  <span>
+    Must be wearing wristband to enter the free refreshments area.
+  </span>
 );
 
 const gearPricing = (
   <span>
     <strong>Official Puzzle Gear Pricing</strong>
     <ul>
-      <li>Early Bird Discount Price (varying styles: prices range from $10-20, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
-      <li>Regular Price (varying styles: prices range from $13-$23, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
+      <li>Early Bird Discount Price (varying styles: prices range from $10-$26, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
+      <li>Regular Price (varying styles: prices range from $13-$29, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
       <li>Gear sale ends midnight {gearSaleEnd}</li>
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul>
@@ -38,38 +43,34 @@ const importantDates = (
   <List className='bulleted'>
     <List.Item><strong>{earlyBirdLastDate}</strong>: Early Bird discount prices for ticket codes and official gear end.</List.Item>
     <List.Item><strong>{gearSaleEnd}</strong>: Official Puzzle Hunt Gear Pre-Order deadline (pick up your gear at check-in on {eventDate})</List.Item>
-    <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration Closes (Or earlier if team limit is reached). <br/>If you've already created an account you can purchase and redeem a ticket codes up until {eventDate} at 10:00 AM.</List.Item>
+    <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration Closes (Or earlier if team limit is reached). <br/>If you've already created an account you can purchase and redeem a ticket codes up until {eventDate} at 9:30 AM.</List.Item>
   </List>
 );
 
 const schedule_data = [
   {
-    time: "10:00 AM",
-    desc: "Red Square, WWU Campus: Check in, receive wristband (color coded by division), information packet, swag, and any pre-ordered shirts. Photos for team costume competition.",
+    time: "9:30 - 10:15 AM",
+    desc: "Red Square Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen & Woods!",
   },
   {
-    time: "10:45 AM",
+    time: "10:15 AM",
     desc: "Red Square: Announcements."
   },
   {
-    time: "11:00 AM",
+    time: "10:30 AM",
     desc: "Red Square: Puzzle Hunt starts!"
   },
   {
-    time: "1:30 - 3:30 PM",
-    desc: "Red Square: KUGS Radio plays music."
+    time: "1:00 - 3:00 PM",
+    desc: "Red Square: KUGS Radio plays music. Domino's pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants."
   },
   {
-    time: "1:30 - 3:30 PM",
-    desc: "Red Square: Domino’s Pizza. Stop by between puzzles and grab a slice or 2. Free to registered participants."
-  },
-  {
-    time: "4:15 PM",
+    time: "4:25 PM",
     desc: "Puzzle Stations close. Finish Puzzles and return to Red Square."
   },
   {
     time: "4:30 - 5:00 PM",
-    desc: "Red Square: Award Ceremony & Prizes*!"
+    desc: "Red Square: Award Ceremony & Prizes**!"
   },
 ]
 
@@ -167,7 +168,7 @@ FAQ = class FAQ extends Component {
               the clock stops and you are sent to the next destination. Connect
               all the code words to complete the game! <strong>OPEN TO ALL!</strong>
             </p>
-            {prizeNote}
+            <strong>* </strong>{prizeNote}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 3} index={3} onClick={(e,p) => this.handleClick(e,p)} >
@@ -188,15 +189,16 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 4}>
             <h3>
-              <strong>{eventDate}</strong> at 10:00 AM, Red Square, WWU
+              <strong>{eventDate}</strong> at 9:30 AM, Red Square, WWU
             </h3>
             Other important dates:
             {importantDates}
 
             Schedule for the day:
             {schedule}
-
-            {prizeNote}
+            <strong>* </strong>{wristbandNote}
+            <br />
+            <strong>** </strong>{prizeNote}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 5} index={5} onClick={(e,p) => this.handleClick(e,p)} >
@@ -217,7 +219,6 @@ FAQ = class FAQ extends Component {
             What team divisions are there?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 6}>
-            <Header as="h2">Competitive*</Header>
             <List className='bulleted'>
               <List.Item
                 header="WWU Students"
@@ -235,16 +236,14 @@ FAQ = class FAQ extends Component {
                 header="Open"
                 description="General public, mixed student/non-student, family (children under age 14 must be accompanied by a parent/guardian)."
               />
-            </List>
-            <p>
-              <small>
-                <strong>*Note:</strong> A minimum of 10 teams are required to form a division; else the teams in that division may merge with another division.<br/>
-              </small>
-            </p>
-
-            <Header as="h2">Non-competitive</Header>
-            All teams who enjoy puzzling without time pressure.
-            <br /><br />
+              <br />
+            <span>Contact us to:</span>
+            <List.Item
+                header="Create a Division*"
+                description="Examples: Family Division or Club (Dance, Running, Book, Garden, Wine, ...) where team members are family or in that club."
+             />
+             </List>
+             <p>* A minimum of 10 teams are required to form a division; else the teams in that division may merge with another division.</p>
             <hr />
 
             <strong>Note:</strong> All teams may have up to 6 members. We recommend 4-6 for dividing up tasks.
@@ -259,7 +258,7 @@ FAQ = class FAQ extends Component {
             <p>
               Awesome prizes* will be awarded to top three teams in each division. Other prizes* for best team names, costumes, and more!
             </p>
-            {prizeNote}
+            <strong>* </strong>{prizeNote}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 8} index={8} onClick={(e,p) => this.handleClick(e,p)} >
@@ -326,7 +325,9 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 11}>
             {schedule}
-            {prizeNote}
+            <strong>* </strong>{wristbandNote}
+            <br />
+            <strong>** </strong>{prizeNote}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 12} index={12} onClick={(e,p) => this.handleClick(e,p)} >
@@ -344,8 +345,8 @@ FAQ = class FAQ extends Component {
               Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) throughout the event while supplies last.
             </p>
             <List>
-              <List.Item description="10:00 AM - Check in/receive wristband. Refreshments area opens along Miller Hall."/>
-              <List.Item description="1:30 PM - Domino’s Pizza Arrives in Red Square"/>
+              <List.Item description="9:30 AM - Check in/receive wristband. Refreshments area opens along Miller Hall."/>
+              <List.Item description="1:00 - 3:00 PM - Domino’s Pizza Arrives in Red Square"/>
             </List>
             <p>
               Special thanks to Market Street Catering of <a target="_blank" href="http://www.haggen.com/">Haggen NW Fresh</a> for providing fresh fruit and
