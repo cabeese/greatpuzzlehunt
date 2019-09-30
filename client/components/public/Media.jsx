@@ -23,7 +23,7 @@ Media = class Media extends Component {
             src='/img/media-page/cover_2019.jpg'
             as='a'
             label={{ as: 'a', ribbon: 'true', content: '2019', color: 'black' }}
-            href='https://drive.google.com/drive/folders/1IbBeQz1AHdRC-Njyysmbe_6dA6z-M_iy?usp=sharing'
+            href='https://flic.kr/s/aHsmHnsMjP'
             target='_blank'
             />
 
