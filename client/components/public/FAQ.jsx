@@ -185,7 +185,7 @@ FAQ = class FAQ extends Component {
           <Accordion.Title active={activeIndex === 4} index={4} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="yellow" name="dropdown"/>
             <Icon name="calendar"/>
-            When is it?
+            When is it? (Event Schedule)
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 4}>
             <h3>
@@ -316,18 +316,6 @@ FAQ = class FAQ extends Component {
             NO! A common misconception is that only mathematically inclined people are good at solving puzzles.
             In this puzzle hunt, it will be to your advantage to have people on your team with
             knowledge of music, art, humanities and social sciences, as well as science and mathematics.
-          </Accordion.Content>
-
-          <Accordion.Title active={activeIndex === 11} index={11} onClick={(e,p) => this.handleClick(e,p)} >
-            <Icon color="teal" name="dropdown"/>
-            <Icon name="clock"/>
-            How long will this last? (Event Schedule)
-          </Accordion.Title>
-          <Accordion.Content active={activeIndex === 11}>
-            {schedule}
-            <strong>* </strong>{wristbandNote}
-            <br />
-            <strong>** </strong>{prizeNote}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 12} index={12} onClick={(e,p) => this.handleClick(e,p)} >
