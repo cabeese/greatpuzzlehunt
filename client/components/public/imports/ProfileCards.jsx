@@ -77,7 +77,7 @@ export default class ProfileCards extends Component {
       {
         name: 'Hailee Desrosier',
         title: '',
-        role: 'AS Assistant Vice President, Marketing & Promotion',
+        role: 'AS Asst. Vice President, Marketing & Promotion',
         image: '/img/team/hailee.jpg',
       },
       {
@@ -89,7 +89,7 @@ export default class ProfileCards extends Component {
       {
         name: 'Rachel Snyder',
         title: '',
-        role: 'AS Assistant Vice President, Budget Coordination',
+        role: 'AS Asst. Vice President, Budget Coordination',
         image: '/img/team/rachel.jpg',
       },
       {
