@@ -21,6 +21,7 @@ const accountTypeOptions = [
   { key: 'volunteer', value: 'VOLUNTEER', text: 'Volunteer (does not play in game)' },
 ];
 
+/* States now include Canadian provinces, but we'll leave the variable name the same */
 const STATES = [
   { key: 'WA', text: 'WA', value: 'WA' },
   { key: 'AL', text: 'AL', value: 'AL' },
@@ -81,6 +82,21 @@ const STATES = [
   { key: 'WV', text: 'WV', value: 'WV' },
   { key: 'WI', text: 'WI', value: 'WI' },
   { key: 'WY', text: 'WY', value: 'WY' },
+
+  /* Canadian Provinces */
+  { key: 'NL', text: 'NL', value: 'NL' },
+  { key: 'PE', text: 'PE', value: 'PE' },
+  { key: 'NS', text: 'NS', value: 'NS' },
+  { key: 'NB', text: 'NB', value: 'NB' },
+  { key: 'QB', text: 'QB', value: 'QB' },
+  { key: 'ON', text: 'ON', value: 'ON' },
+  { key: 'MB', text: 'MB', value: 'MB' },
+  { key: 'SK', text: 'SK', value: 'SK' },
+  { key: 'AB', text: 'AB', value: 'AB' },
+  { key: 'BC', text: 'BC', value: 'BC' },
+  { key: 'YT', text: 'YT', value: 'YT' },
+  { key: 'NT', text: 'NT', value: 'NT' },
+  { key: 'NU', text: 'NU', value: 'NU' },
 ];
 
 class RegisterForm extends Component {
@@ -196,7 +212,7 @@ class RegisterForm extends Component {
                 subheader='This information is required in the case of emergency.'/>
 
         <Form.Group widths='equal'>
-          <Form.Input name='phone' type='tel' label='Phone' placeholder='Your digits'
+          <Form.Input name='phone' type='tel' label='Phone' placeholder='555-555-1234'
                       value={ this.state.phone } onChange={ (e) => this._handleTextChange(e) }/>
           <Form.Input name='age' type='text' label='Age' placeholder='Number of revolutions around sun'
                       value={ this.state.age } onChange={ (e) => this._handleTextChange(e) }/>
@@ -205,15 +221,17 @@ class RegisterForm extends Component {
         <Form.Group widths='equal'>
           <Form.Input name='address' type='text' label='Mailing Address' placeholder='123 Main St'
                       value={ this.state.address } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Input name='city' type='text' label='City' placeholder='Bellingham'
+          <Form.Input name='city' type='text' label='City' placeholder='e.g. Bellingham'
                       value={ this.state.city } onChange={ (e) => this._handleTextChange(e) }/>
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='zip' label='Zip Code' placeholder='98225' value={ this.state.zip }
+          <Form.Input name='zip' label='Zip Code' placeholder='e.g. 98225' value={ this.state.zip }
                       onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Dropdown name='state' label='State' search selection options={ STATES }
+          <Form.Dropdown name='state' label='State/Province' search selection options={ STATES }
                       value={ this.state.state } onChange={ (e,data) => this._handleDataChange(e,data) }/>
+          <Form.Input name='country' label='Country' placeholder='e.g. U.S.A.' value={ this.state.country }
+                      onChange={ (e) => this._handleTextChange(e) }/>
         </Form.Group>
 
         <Header as='h3' icon={<Icon name='ambulance' color='red'/>}
