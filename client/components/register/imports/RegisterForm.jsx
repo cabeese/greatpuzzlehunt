@@ -163,59 +163,87 @@ class RegisterForm extends Component {
     return (
       <Form onSubmit={ (e) => this._register(e) } style={ this._formStyle() }>
 
-        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Register for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
+        <Header as='h1' icon={<Icon name='user' color='green'/>}
+                content={`Register for the ${eventYear} Great Puzzle Hunt`}
+                subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
 
         {this._errorMessage()}
 
         <Form.Group widths='equal'>
-          <Form.Input name='firstname' label='First Name' placeholder='First Name' value={ this.state.firstname } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Input name='lastname' label='Last Name' placeholder='Last Name' value={ this.state.lastname } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='firstname' label='First Name' placeholder='First Name'
+                      value={this.state.firstname} onChange={(e) => this._handleTextChange(e)} />
+          <Form.Input name='lastname' label='Last Name' placeholder='Last Name'
+                      value={this.state.lastname} onChange={(e) => this._handleTextChange(e)} />
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='email' type='email' label='Email' placeholder='your@email.com' value={ this.state.email } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Dropdown name='accountType' label='Account Type' placeholder='Account Type' selection options={accountTypeOptions} value={ this.state.accountType } onChange={ (e, data) => this._handleDataChange(e, data) }/>
+          <Form.Input name='email' type='email' label='Email' placeholder='your@email.com'
+                      value={ this.state.email } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Dropdown name='accountType' label='Account Type' placeholder='Account Type'
+                      selection options={accountTypeOptions} value={ this.state.accountType }
+                      onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='password' type='password' label='Password' placeholder='password' value={ this.state.password } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Input name='confirmPassword' type='password' label='Confirm Password' placeholder='password again' value={ this.state.confirmPassword } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='password' type='password' label='Password' placeholder='password'
+                      value={ this.state.password } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='confirmPassword' type='password' label='Confirm Password'
+                      placeholder='password again' value={ this.state.confirmPassword }
+                      onChange={ (e) => this._handleTextChange(e) }/>
         </Form.Group>
 
-        <Header as='h3' icon={<Icon name='home' color='blue'/>} content='Player Details' subheader='This information is required in the case of emergency.'/>
+        <Header as='h3' icon={<Icon name='home' color='blue'/>} content='Player Details'
+                subheader='This information is required in the case of emergency.'/>
 
         <Form.Group widths='equal'>
-          <Form.Input name='phone' type='tel' label='Phone' placeholder='Your digits' value={ this.state.phone } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Input name='age' type='text' label='Age' placeholder='Number of revolutions around sun' value={ this.state.age } onChange={ (e) => this._handleTextChange(e) }/>
-        </Form.Group>
-
-        <Form.Group widths='equal'>
-          <Form.Input name='address' type='text' label='Mailing Address' placeholder='Your mail goes here' value={ this.state.address } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Input name='city' type='text' label='City' placeholder='Where you hail from' value={ this.state.city } onChange={ (e) => this._handleTextChange(e) }/>
-        </Form.Group>
-
-        <Form.Group widths='equal'>
-          <Form.Input name='zip' label='Zip Code' placeholder='Those 5 digits in particular' value={ this.state.zip } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Dropdown name='state' label='State' search selection options={ STATES } value={ this.state.state } onChange={ (e,data) => this._handleDataChange(e,data) }/>
-        </Form.Group>
-
-        <Header as='h3' icon={<Icon name='ambulance' color='red'/>} content='Emergency Contact' subheader='This information is required in the case of emergency.'/>
-
-        <Form.Group widths='equal'>
-          <Form.Input name='ecName' label='Full Name' placeholder='Emergency Contact' value={ this.state.ecName } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Input name='ecRelationship' label='Relationship' placeholder='How you know this person' value={ this.state.ecRelationship } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='phone' type='tel' label='Phone' placeholder='Your digits'
+                      value={ this.state.phone } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='age' type='text' label='Age' placeholder='Number of revolutions around sun'
+                      value={ this.state.age } onChange={ (e) => this._handleTextChange(e) }/>
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='ecPhone' label='Phone' placeholder='A phone they will answer' value={ this.state.ecPhone } onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Input name='ecEmail' label='Email' placeholder='A reliable email' value={ this.state.ecEmail } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='address' type='text' label='Mailing Address' placeholder='123 Main St'
+                      value={ this.state.address } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='city' type='text' label='City' placeholder='Bellingham'
+                      value={ this.state.city } onChange={ (e) => this._handleTextChange(e) }/>
+        </Form.Group>
+
+        <Form.Group widths='equal'>
+          <Form.Input name='zip' label='Zip Code' placeholder='98225' value={ this.state.zip }
+                      onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Dropdown name='state' label='State' search selection options={ STATES }
+                      value={ this.state.state } onChange={ (e,data) => this._handleDataChange(e,data) }/>
+        </Form.Group>
+
+        <Header as='h3' icon={<Icon name='ambulance' color='red'/>}
+                content='Emergency Contact'
+                subheader='This information is required in the case of emergency.'/>
+
+        <Form.Group widths='equal'>
+          <Form.Input name='ecName' label='Full Name' placeholder='Emergency Contact'
+                      value={ this.state.ecName } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='ecRelationship' label='Relationship'
+                      placeholder='How you know this person' value={ this.state.ecRelationship }
+                      onChange={ (e) => this._handleTextChange(e) }/>
+        </Form.Group>
+
+        <Form.Group widths='equal'>
+          <Form.Input name='ecPhone' label='Phone' placeholder='A phone they will answer'
+                      value={ this.state.ecPhone } onChange={ (e) => this._handleTextChange(e) }/>
+          <Form.Input name='ecEmail' label='Email' placeholder='A reliable email'
+                      value={ this.state.ecEmail } onChange={ (e) => this._handleTextChange(e) }/>
         </Form.Group>
 
         { this._parentGuardian()}
 
         <List>
-          <List.Item><strong>Participants under age 18:</strong> A parent/legal guardian must complete this registration form on behalf of their minor.</List.Item>
-          <List.Item><strong>Participants under age 14:</strong> In addition to registering their child, a <u>parent/legal guardian must also register</u> and <u>join the same team</u> as their under age 14 child and <u>accompany them at all times</u> during the Puzzle Hunt.</List.Item>
+          <List.Item><strong>Participants under age 18:</strong> A parent/legal guardian
+            must complete this registration form on behalf of their minor.</List.Item>
+          <List.Item><strong>Participants under age 14:</strong> In addition to registering
+            their child, a <u>parent/legal guardian must also register</u> and <u>join the
+              same team</u> as their under age 14 child and <u>accompany them at
+                all times</u> during the Puzzle Hunt.</List.Item>
         </List>
 
         <Header as='h3' icon={<Icon name='camera' color='violet'/>} content='Photo Permission'/>
@@ -227,7 +255,8 @@ class RegisterForm extends Component {
           label="I hereby give my permission to Western and the Great Puzzle Hunt to use my (or my minor child's) image, in photo or video, in whole or in part, for public information and marketing of the WWU Great Puzzle Hunt at its discretion."
           onChange={ (e,data) => this._handleDataChange(e,data) } />
 
-        <Header as='h3' icon={<Icon name='pencil' color='orange'/>} content='Acknowledgement of Risk & Hold Harmless Agreement' />
+        <Header as='h3' icon={<Icon name='pencil' color='orange'/>}
+                content='Acknowledgement of Risk & Hold Harmless Agreement' />
 
         { this._holdHarmlessButton() }
 
@@ -273,7 +302,8 @@ class RegisterForm extends Component {
   _registrationData() {
     const fields = [
       'firstname', 'lastname', 'email', 'accountType', 'password', 'confirmPassword', 'coords',
-      'phone', 'age', 'address', 'city', 'zip', 'state', 'ecName', 'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
+      'phone', 'age', 'address', 'city', 'zip', 'state',
+      'ecName', 'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
       'photoPermission', 'holdHarmless'
     ];
 
@@ -325,7 +355,9 @@ class RegisterForm extends Component {
           name='parentGuardian'
           type='text'
           label="Parent/Guardian accompanying player if under the age of 14"
-          placeholder='Full name of legal parent/guardian' value={ this.state.parentGuardian } onChange={ (e) => this._handleTextChange(e) }/>
+          placeholder='Full name of legal parent/guardian'
+          value={ this.state.parentGuardian }
+          onChange={ (e) => this._handleTextChange(e) }/>
       );
     } else {
       return null;
