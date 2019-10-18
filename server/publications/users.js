@@ -70,7 +70,7 @@ Meteor.publish('admin.users', function _publishAdminUsers(search = null) {
   const hasSearch = search && search.length > 0;
 
   const adminFields = {
-    age: 1, phone: 1, address: 1, city: 1, state: 1, zip: 1,
+    age: 1, phone: 1, address: 1, city: 1, state: 1, zip: 1, country: 1,
     ecName: 1, ecRelationship: 1, ecPhone: 1, ecEmail: 1,
     parentGuardian: 1,
   };

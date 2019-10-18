@@ -22,7 +22,7 @@ const accountTypeOptions = [
 
 const USER_FIELDS = [
   '_id', 'firstname', 'lastname', 'email', 'accountType',
-  'phone', 'age', 'address', 'city', 'zip', 'state', 'ecName',
+  'phone', 'age', 'address', 'city', 'zip', 'state', 'country', 'ecName',
   'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
   'photoPermission',
 ];
@@ -82,7 +82,9 @@ class AdminUserEditForm extends Component {
                       value={user.city} onChange={(e) => this._handleTextChange(e)} />
           <Form.Input name='zip' label='Zip Code' placeholder='e.g. 98225'
                       value={user.zip} onChange={(e) => this._handleTextChange(e)} />
-          <Form.Input name='state' label='State' value={user.state}
+          <Form.Input name='state' label='State/Province' value={user.state}
+                      onChange={(e) => this._handleTextChange(e)} />
+          <Form.Input name='country' label='Country' value={user.country}
                       onChange={(e) => this._handleTextChange(e)} />
         </Form.Group>
 
