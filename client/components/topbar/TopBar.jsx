@@ -110,20 +110,35 @@ const volunteerMenuItems = [
 ];
 
 TopBar = class TopBar extends Component {
+  updateDimensions() {
+    this.forceUpdate();
+  }
+  isMobile() {
+    return window.innerWidth < 767; // same as desktop-min
+  }
   render() {
     const { isAdmin, isVolunteer } = this.props;
+    let hamburgerMenu = (
+      <div className="ui dropdown item" ref="menuDropdown">
+        <i className="large content icon"></i>
+        Menu
+        <div className="menu topbar-dropdown-menu">
+          { this._renderMenuLinks(mainMenuLinks) }
+        </div>
+      </div>
+    );
+    let navMenu = (
+      <div className="menu">
+        { this._renderMenuLinks(mainMenuLinks) }
+      </div>
+    );
+
     return (
       <div className="ui fixed inverted small labeled icon menu top-bar" ref="topbar">
-
-        <div className="ui dropdown item" ref="menuDropdown">
-          <i className="large content icon"></i>
-          Menu
-          <div className="menu topbar-dropdown-menu">
-            { this._renderMenuLinks(mainMenuLinks) }
-          </div>
-        </div>
-
+        
         {/* this._renderSocialButtons() */}
+        
+        { this.isMobile() ? hamburgerMenu : navMenu }
 
         <div className="right menu">
           { isAdmin() ? this._renderAdminMenu() : null }
@@ -290,6 +305,7 @@ TopBar = class TopBar extends Component {
 
   componentDidMount() {
     this._initDropDownMenus();
+    window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   componentDidUpdate(prevProps, prevState) {
