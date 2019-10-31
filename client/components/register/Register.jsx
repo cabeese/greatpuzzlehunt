@@ -18,7 +18,7 @@ class RegisterInner extends Component {
     let content = null;
     let iframeStyle = {
         width: '640px',
-        height: '530px',
+        height: '670px',
         display: 'block',
         margin: '0 auto',
         border: '0',
