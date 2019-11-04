@@ -16,6 +16,13 @@ class RegisterInner extends Component {
     if (!ready) return <Loading />;
 
     let content = null;
+    let iframeStyle = {
+        width: '640px',
+        height: '670px',
+        display: 'block',
+        margin: '0 auto',
+        border: '0',
+    };
 
     if (gamestate.registration) {
       content = (
@@ -25,11 +32,14 @@ class RegisterInner extends Component {
       );
     } else {
       content = (
-        <Message
+		<div>
+        	<Message
           info size='large'
           header='Registration is Closed'
-          content={`Registration for the ${eventYear} Great Puzzle Hunt will open ${registrationOpenDate}.`}
-        />
+			  content={`Registration for the ${eventYear} Great Puzzle Hunt will open ${registrationOpenDate}.`}
+			/>
+			<iframe style={iframeStyle} src="https://docs.google.com/forms/d/e/1FAIpQLScKOX4r9pJhxmPUUaroFoBhOwVhREsN7G7Z5GARHG9AcZVQQQ/viewform?embedded=true">Loading…</iframe>
+		</div>
       );
     }
 

@@ -15,23 +15,28 @@ export default class ProfileCards extends Component {
         image: '/img/2016/event-photos/millie_johnson.jpg',
       },
       {
-        name: 'Wendy Aguilar',
-        title: 'Web Design Specialist, CDK Global',
-        role: 'Lead designer',
-        image: '/img/team/wendy.jpg',
-      },
-      {
-        name: 'Ben Johnson',
-        title: '',
-        role: 'Lead Developer',
-        image: '/img/team/placeholder.png',
-      },
-      /* Second Row */
-      {
         name: 'Zac Pontrantolfi',
         title: '',
         role: 'Puzzle Master Team',
         image: '/img/team/zac.jpg',
+      },
+      {
+        name: 'Brennan Commons',
+        title: '',
+        role: 'Lead Designer',
+        image: '/img/team/brennan.jpg',
+      },
+      {
+        name: 'Noah Strong',
+        title: '',
+        role: 'Lead Developer',
+        image: '/img/team/noah.jpg',
+      }, 
+      {
+        name: 'Ben Johnson',
+        title: '',
+        role: 'Lead Developer',
+        image: '/img/team/ben.jpg',
       },
       {
         name: 'Raiden van Bronkhorst',
@@ -42,45 +47,64 @@ export default class ProfileCards extends Component {
       {
         name: 'Jordan King',
         title: '',
-        role: 'AS Club Co-President',
+        role: 'AS President, Management',
         image: '/img/team/jordan_k.jpg',
-      },
-      {
-        name: 'Elias Peters',
-        title: '',
-        role: 'AS Club Co-President',
-        image: '/img/team/elias_p.jpg',
-      },
-      {
-        name: 'Katrina Duttkin',
-        title: '',
-        role: 'AS Marketing and Promotions',
-        image: '/img/team/katrina.jpg',
-      },
-      {
-        name: 'Patrick Carroll',
-        title: '',
-        role: 'AS Marketing and Promotions',
-        image: '/img/team/patrick_c.jpg',
-      },
-      {
-        name: 'Danielle Glewwe',
-        title: '',
-        role: 'AS Marketing and Promotions',
-        image: '/img/team/danielle_g.jpg',
       },
       {
         name: 'Miranda Reed',
         title: '',
-        role: 'AS Co-Budget Coordinator',
+        role: 'AS President, Budget Coordination',
         image: '/img/team/miranda_r.jpeg',
+      },
+      {
+        name: 'Patrick Carroll',
+        title: '',
+        role: 'AS President, Marketing & Promotion',
+        image: '/img/team/patrick_c.jpg',
+      },
+      {
+        name: 'Katrina Duttkin',
+        title: '',
+        role: 'AS Vice President, Marketing & Promotion',
+        image: '/img/team/katrina.jpg',
       },
       {
         name: 'Alex Kuhn',
         title: '',
-        role: 'AS Co-Budget Coordinator',
+        role: 'AS Vice President, Marketing & Promotion',
         image: '/img/team/alex_k.jpg',
       },
+      {
+        name: 'Hailee Desrosier',
+        title: '',
+        role: 'AS Asst. Vice President, Marketing & Promotion',
+        image: '/img/team/hailee.jpg',
+      },
+      {
+        name: 'Zoe Bozich',
+        title: '',
+        role: 'AS Vice President, Budget Coordination',
+        image: '/img/team/zoe.jpg',
+      },
+      {
+        name: 'Rachel Snyder',
+        title: '',
+        role: 'AS Asst. Vice President, Budget Coordination',
+        image: '/img/team/rachel.jpg',
+      },
+      {
+        name: 'Danielle Glewwe',
+        title: '',
+        role: 'AS Vice President, Management',
+        image: '/img/team/danielle_g.jpg',
+      },
+      {
+        name: 'Montana Williams',
+        title: '',
+        role: 'AS Vice President, Management',
+        image: '/img/team/montana.jpg',
+      },
+      
     ];
     this.pastProfiles = [
       {
@@ -101,17 +125,24 @@ export default class ProfileCards extends Component {
         role: 'AS Club President 2017-18',
         image: '/img/team/scott.jpg',
       },
-      {
-        name: 'Noah Strong',
-        title: '',
-        role: 'Lead Developer',
-        image: '/img/team/noah.jpg',
-      },
+
       {
         name: 'Alex Covington',
         title: '',
         role: 'Developer',
         image: '/img/team/alex_c.jpg',
+      },
+      {
+        name: 'Wendy Aguilar',
+        title: 'Web Design Specialist, CDK Global',
+        role: 'Lead designer',
+        image: '/img/team/wendy.jpg',
+      },
+      {
+        name: 'Elias Peters',
+        title: '',
+        role: 'AS Club Co-President',
+        image: '/img/team/elias_p.jpg',
       },
     ]
   }
