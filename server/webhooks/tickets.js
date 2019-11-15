@@ -3,6 +3,7 @@ import { map, extend } from 'lodash';
 
 import { PostRoute } from '../imports/route-types.js';
 import processTransaction from '../imports/processTransaction.js';
+import { convertCashnet } from '../../lib/imports/convertCashnet';
 
 // const { token } = Meteor.settings.accounts;
 const accts = Meteor.settings.accounts || {};
@@ -22,9 +23,19 @@ PostRoute.route('/api/tickets', function(params, req, res, next) {
   }
 
   res.setHeader('Content-Type', 'application/json');
-  res.statusCode = 200;
-  res.end();
 
   Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
-  processTransaction(req.body);
+  try {
+    Meteor.logger.info(req.body)
+    let txData = convertCashnet(req.body)
+    processTransaction(txData);
+    res.statusCode = 200;
+    res.end();
+  } catch (err) {
+    Meteor.logger.info(`Request on "/api/tickets" with bad data`);
+    res.statusCode = 403;
+    res.write('{ "error": "Invalid data" }');
+    Meteor.logger.info(err)
+    return res.end();
+  }
 });

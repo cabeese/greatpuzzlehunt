@@ -16,14 +16,14 @@ export default function processTransaction(txData) {
     tx,
     email,
     name,
-    gear: gearRaw,
+    gear,
     studentTickets: studentTicketsString,
     nonStudentTickets: nonStudentTicketsString,
   } = txData;
 
   const studentTickets = parseInt(studentTicketsString);
   const nonStudentTickets = parseInt(nonStudentTicketsString);
-  const gearOrders = JSON.parse(gearRaw) || [];
+  const gearOrders = gear;
 
   info(`Processing transaction "${tx}" from ${email}`);
   info(`studentTickets: ${studentTickets} nonStudentTickets: ${nonStudentTickets}`);
