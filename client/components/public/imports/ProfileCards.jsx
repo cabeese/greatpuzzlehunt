@@ -63,6 +63,12 @@ export default class ProfileCards extends Component {
         image: '/img/team/patrick_c.jpg',
       },
       {
+        name: 'Zoe Bozich',
+        title: '',
+        role: 'AS Co-President, Marketing & Promotion',
+        image: '/img/team/zoe.jpg',
+      },
+      {
         name: 'Katrina Duttkin',
         title: '',
         role: 'AS Vice President, Marketing & Promotion',
@@ -79,12 +85,6 @@ export default class ProfileCards extends Component {
         title: '',
         role: 'AS Asst. Vice President, Marketing & Promotion',
         image: '/img/team/hailee.jpg',
-      },
-      {
-        name: 'Zoe Bozich',
-        title: '',
-        role: 'AS Co-President, Budget Coordination',
-        image: '/img/team/zoe.jpg',
       },
       {
         name: 'Rachel Snyder',
