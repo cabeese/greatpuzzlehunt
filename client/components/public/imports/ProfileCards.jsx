@@ -59,7 +59,7 @@ export default class ProfileCards extends Component {
       {
         name: 'Patrick Carroll',
         title: '',
-        role: 'AS President, Marketing & Promotion',
+        role: 'AS Co-President, Marketing & Promotion',
         image: '/img/team/patrick_c.jpg',
       },
       {
@@ -83,7 +83,7 @@ export default class ProfileCards extends Component {
       {
         name: 'Zoe Bozich',
         title: '',
-        role: 'AS Vice President, Budget Coordination',
+        role: 'AS Co-President, Budget Coordination',
         image: '/img/team/zoe.jpg',
       },
       {
