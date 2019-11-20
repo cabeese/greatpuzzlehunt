@@ -23,9 +23,9 @@ RedeemTicket = class RedeemTicket extends Component {
   _redeemForm() {
     return (
       <Container>
-        <PuzzlePageTitle title="Finish Registration"/>
+        <PuzzlePageTitle title="Buy and Redeem Ticket Codes"/>
         <Segment raised>
-          <Header as='h3'>Step 2: Buy ticket code</Header>
+          <Header as='h3'>Step 2: Purchase ticket code</Header>
           <Button
             as='a'
             target="_blank"
@@ -53,7 +53,6 @@ RedeemTicket = class RedeemTicket extends Component {
           { this._errorMessage() }
         </Segment>
 
-        <RegistrationProcess currentStep={3}/>
       </Container>
     );
   }

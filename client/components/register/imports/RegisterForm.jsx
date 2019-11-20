@@ -148,13 +148,12 @@ class RegisterForm extends Component {
         <Message icon>
           <Icon name='mail' color='green'/>
           <Message.Content>
-            <Header as='h3'>Thank you for registering!<br/></Header>
+            <Header as='h3'>Thank you for creating an account!<br/></Header>
             <p>We have sent a verification email to <strong>{ this.state.email }</strong>. Go check your email!</p>
-            <p>You must click the verificiation link in that email before you can log in.</p>
+            <p>You must click the verificiation link in that email before you can finish registration.</p>
           </Message.Content>
         </Message>
 
-        <RegistrationProcess currentStep={1} />
       </Segment>
     );
   }
@@ -163,7 +162,7 @@ class RegisterForm extends Component {
     return (
       <Form onSubmit={ (e) => this._register(e) } style={ this._formStyle() }>
 
-        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Register for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
+        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
 
         {this._errorMessage()}
 
@@ -240,12 +239,9 @@ class RegisterForm extends Component {
           label='By checking this box I acknowledge that I have read and understand the Risk & Hold Harmless Agreement and that I am either 18+ years old or a WWU student or the parent/guardian of a minor participant.'
           onChange={ (e,data) => this._handleDataChange(e,data) }/>
 
-        <Form.Button fluid type='submit' content='Register' color='green'/>
+        <Form.Button fluid type='submit' content='Submit' color='green'/>
 
         { this._errorMessage() }
-
-        <RegistrationProcess currentStep={0} />
-
       </Form>
     );
   }
