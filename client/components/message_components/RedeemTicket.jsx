@@ -23,7 +23,7 @@ RedeemTicket = class RedeemTicket extends Component {
   _redeemForm() {
     return (
       <Container>
-        <PuzzlePageTitle title="Buy and Redeem Ticket Codes"/>
+        <PuzzlePageTitle title="Purchase and Redeem Ticket Codes"/>
         <Segment raised>
           <Header as='h3'>Step 2: Purchase ticket code</Header>
           <Button
@@ -33,7 +33,7 @@ RedeemTicket = class RedeemTicket extends Component {
             icon fluid size='large'
             labelPosition='right'
             color='blue'>
-            Buy ticket codes and gear here! <Icon name='shop'/>
+            Purchase ticket codes and gear here! <Icon name='shop'/>
           </Button>
           <Header as='h3'>Step 3: Redeem ticket code</Header>
           <p>You will receive your ticket codes in an email.</p>

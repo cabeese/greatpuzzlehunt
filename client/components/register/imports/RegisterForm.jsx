@@ -150,7 +150,7 @@ class RegisterForm extends Component {
           <Message.Content>
             <Header as='h3'>Thank you for creating an account!<br/></Header>
             <p>We have sent a verification email to <strong>{ this.state.email }</strong>. Go check your email!</p>
-            <p>You must click the verificiation link in that email before you can finish registration.</p>
+            <p><strong>You must click the verification link in that email</strong> in order to complete the registration process.</p>
           </Message.Content>
         </Message>
 
