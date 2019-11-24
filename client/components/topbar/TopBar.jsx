@@ -113,8 +113,8 @@ TopBar = class TopBar extends Component {
   updateDimensions() {
     this.forceUpdate();
   }
-  isMobile() {
-    return window.innerWidth < 767; // same as desktop-min
+  isSmall() {
+    return window.innerWidth < 1100; 
   }
   render() {
     const { isAdmin, isVolunteer } = this.props;
@@ -138,7 +138,7 @@ TopBar = class TopBar extends Component {
         
         {/* this._renderSocialButtons() */}
         
-        { this.isMobile() ? hamburgerMenu : navMenu }
+        { this.isSmall() ? hamburgerMenu : navMenu }
 
         <div className="right menu">
           { isAdmin() ? this._renderAdminMenu() : null }
@@ -168,14 +168,14 @@ TopBar = class TopBar extends Component {
     if (item.custom) {
       return (
         <a key={key} className='item' href={item.to}>
-          <Icon className={item.iconClass}/>
+          {/*<Icon className={item.iconClass}/>*/}
           {item.name}
         </a>
       );
     } else {
       return (
         <Link key={key} className='item' to={ item.to }>
-          <Icon className={ item.iconClass }/>
+          {/*<Icon className={ item.iconClass }/>*/}
           { item.name }
         </Link>
       );
