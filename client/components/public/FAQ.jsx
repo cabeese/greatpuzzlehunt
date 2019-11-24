@@ -382,7 +382,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: January 2020</p>
+        <p>Last Updated: November 2019</p>
       </Container>
     );
   }
