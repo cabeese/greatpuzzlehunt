@@ -117,6 +117,7 @@ class RegisterForm extends Component {
       city: '',
       zip: '',
       state: '',
+      country: '',
       ecName: '',
       ecRelationship: '',
       ecPhone: '',
@@ -143,7 +144,7 @@ class RegisterForm extends Component {
       return <Message
         info
         header='Registration is closed'
-        content='The 2019 Great Puzzle Hunt is now in development' />
+        content="Next year's Great Puzzle Hunt is in development" />
     }
   }
 
@@ -166,7 +167,7 @@ class RegisterForm extends Component {
           <Message.Content>
             <Header as='h3'>Thank you for registering!<br/></Header>
             <p>We have sent a verification email to <strong>{ this.state.email }</strong>. Go check your email!</p>
-            <p>You must click the verificiation link in that email before you can log in.</p>
+            <p>You must click the verification link in that email before you can log in.</p>
           </Message.Content>
         </Message>
 
@@ -320,7 +321,7 @@ class RegisterForm extends Component {
   _registrationData() {
     const fields = [
       'firstname', 'lastname', 'email', 'accountType', 'password', 'confirmPassword', 'coords',
-      'phone', 'age', 'address', 'city', 'zip', 'state',
+      'phone', 'age', 'address', 'city', 'zip', 'state', 'country',
       'ecName', 'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
       'photoPermission', 'holdHarmless'
     ];
