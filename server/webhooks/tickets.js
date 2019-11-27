@@ -12,10 +12,11 @@ const { token } = accts;
 PostRoute.route('/api/tickets', function(params, req, res, next) {
 
   // Validate api token
-  Meteor.logger.info(`Comparing token: ${token} with params.query.token: ${params.query.token}`);
+  // Meteor.logger.info(`Comparing token: ${token} with params.query.token: ${params.query.token}`);
+  Meteor.logger.info(`Comparing token: ${token} with params.query.token: ${req.body.token}`);
 
-  if (!params.query.token || params.query.token !== token) {
-    Meteor.logger.info(`Request on "/api/tickets" with BAD TOKEN: "${params.query.token}" from ${Meteor.logger.jstring(req.headers)}`);
+  if (!req.body.token || req.body.token !== token) {
+    Meteor.logger.info(`Request on "/api/tickets" with BAD TOKEN: "${req.body.token}" from ${Meteor.logger.jstring(req.headers)}`);
     res.setHeader('Content-Type', 'application/json');
     res.statusCode = 403;
     res.write('{ "error": "Invalid token" }');
