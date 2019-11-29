@@ -9,6 +9,12 @@ const accts = Meteor.settings.accounts || {};
 const { token } = accts;
 
 PostRoute.route('/api/tickets', function(params, req, res, next) {
+  Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
+  Meteor.logger.info("--------------------------");
+  Meteor.logger.info(params);
+  Meteor.logger.info("--------------------------");
+  Meteor.logger.info(req);
+  Meteor.logger.info("--------------------------");
   const req_token = params.query.token;
 
   parseFormdata(req, function (err, data) {
@@ -47,7 +53,7 @@ const handleRequest = async (req, res, req_token, body) => {
   /* Parse request and formulate response */
   res.setHeader('Content-Type', 'application/json');
 
-  Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
+  // Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
   Meteor.logger.info(body); /* temp, though perhaps we should save these to the DB? */
   try {
     let txData = convertCashnet(body);
