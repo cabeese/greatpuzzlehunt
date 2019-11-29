@@ -12,7 +12,11 @@ PostRoute.route('/api/tickets', function(params, req, res, next) {
   const req_token = params.query.token;
 
   parseFormdata(req, function (err, data) {
-    if (err) return badResponse("Unable to parse form data");
+    if (err) {
+      Meteor.logger.error("Parsing of form-data Cashnet request failed");
+      Meteor.logger.error(err);
+      return badResponse(res, "Unable to parse form data");
+    }
     handleRequest(req, res, req_token, data.fields);
   });
 });
