@@ -8,7 +8,7 @@ import {
 
 import { sendTickets } from '../../lib/imports/sendTickets';
 
-export default function processTransaction(txData) {
+export default async function processTransaction(txData) {
   const { info, logobj } = Meteor.logger;
   const now = new Date();
 
