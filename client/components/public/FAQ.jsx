@@ -367,7 +367,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 15}>
             <p>This year you have several choices of puzzle hunt gear and hundreds of color combinations!</p>
-            <p>Note: to buy gear you will be redirected to <a target="_blank" href="https://commerce.cashnet.com/TheGreatPuzzleHunt2019">this CashNet page</a> where you need to click the bottom gear link to select your gear options.</p>
+            <p>Note: to buy gear you will be redirected to <a target="_blank" href="https://commerce.cashnet.com/TheGreatPuzzleHunt2020">this CashNet page</a> where you need to click the bottom gear link to select your gear options.</p>
             <List>
               <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#tshirts">Mens Cotton T-Shirts</a></List.Item>
               <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#wtshirts">Womens Cotton T-Shirts</a></List.Item>
@@ -382,7 +382,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: January 2019</p>
+        <p>Last Updated: November 2019</p>
       </Container>
     );
   }
