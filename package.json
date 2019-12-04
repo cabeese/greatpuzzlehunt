@@ -28,7 +28,6 @@
     "lodash": "^4.17.5",
     "meteor-node-stubs": "^0.2.3",
     "moment": "^2.22.0",
-    "parse-formdata": "^1.0.2",
     "prop-types": "^15.6.1",
     "qrcode.react": "^0.6.1",
     "react": "^15.1.0",

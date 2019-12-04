@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-const parseFormdata = require("parse-formdata");
 
 import { PostRoute } from '../imports/route-types.js';
 import processTransaction from '../imports/processTransaction.js';
@@ -10,21 +9,9 @@ const { token } = accts;
 
 PostRoute.route('/api/tickets', function(params, req, res, next) {
   Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
-  Meteor.logger.info("--------------------------");
-  Meteor.logger.info(params);
-  Meteor.logger.info("--------------------------");
-  Meteor.logger.info(req);
-  Meteor.logger.info("--------------------------");
   const req_token = params.query.token;
 
-  parseFormdata(req, function (err, data) {
-    if (err) {
-      Meteor.logger.error("Parsing of form-data Cashnet request failed");
-      Meteor.logger.error(err);
-      return badResponse(res, "Unable to parse form data");
-    }
-    handleRequest(req, res, req_token, data.fields);
-  });
+  handleRequest(req, res, req_token, req.body);
 });
 
 const badResponse = (res, message) => {
