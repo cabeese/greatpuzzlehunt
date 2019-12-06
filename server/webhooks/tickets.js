@@ -9,6 +9,7 @@ const { token } = accts;
 
 PostRoute.route('/api/tickets', function(params, req, res, next) {
   Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
+  Meteor.logger.info(params);
   const req_token = params.query.token;
 
   handleRequest(req, res, req_token, req.body);
@@ -28,6 +29,7 @@ const badResponse = (res, message) => {
 }
 
 const handleRequest = async (req, res, req_token, body) => {
+  Meteor.logger.info(body); /* temp, though perhaps we should save these to the DB? */
   /* Validate Token */
   if (!req_token || req_token !== token) {
     Meteor.logger.info(`Request on "/api/tickets" with BAD TOKEN: "${req_token}" from ${Meteor.logger.jstring(req.headers)}`);
@@ -41,7 +43,6 @@ const handleRequest = async (req, res, req_token, body) => {
   res.setHeader('Content-Type', 'application/json');
 
   // Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
-  Meteor.logger.info(body); /* temp, though perhaps we should save these to the DB? */
   try {
     let txData = convertCashnet(body);
     await processTransaction(txData);
