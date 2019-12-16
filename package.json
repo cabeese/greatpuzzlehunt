@@ -47,6 +47,9 @@
   "devDependencies": {
     "autoprefixer": "^6.3.1"
   },
+  "engines": {
+    "node": "8.12.x"
+  },
   "postcss": {
     "plugins": {
       "autoprefixer": {
