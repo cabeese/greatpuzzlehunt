@@ -13,12 +13,9 @@ const leaderboardLink = {
   iconClass: 'yellow trophy',
 };
 
+
+
 const mainMenuLinks = [
-  {
-    name: 'Home',
-    to: '/',
-    iconClass: 'grey home',
-  },
   {
     name: 'Sponsors',
     to: '/#sponsors',
@@ -118,18 +115,34 @@ TopBar = class TopBar extends Component {
   }
   render() {
     const { isAdmin, isVolunteer } = this.props;
+
+    let logoStyle = {
+      backgroundColor: 'white',
+      width: '50px',
+      height: '50px',
+      borderRadius: '25px',
+      transform: "translate(25px, 25px) scale(2)",
+      marginRight: "55px"
+    };
+    let logoLink = (
+      <a href="/" style={logoStyle}>
+        <img height="50px" src="/img/logo_svg.svg"></img>
+      </a>
+    );
+
     let hamburgerMenu = (
       <div className="ui dropdown item" ref="menuDropdown">
         <i className="large content icon"></i>
         Menu
         <div className="menu topbar-dropdown-menu">
-          { this._renderMenuLinks(mainMenuLinks) }
+          { this._renderMenuLinks(mainMenuLinks) }  
         </div>
       </div>
     );
     let navMenu = (
       <div className="menu">
-        { this._renderMenuLinks(mainMenuLinks) }
+        
+        { this._renderMenuLinks(mainMenuLinks) }  
       </div>
     );
 
@@ -137,7 +150,7 @@ TopBar = class TopBar extends Component {
       <div className="ui fixed inverted small labeled icon menu top-bar" ref="topbar">
         
         {/* this._renderSocialButtons() */}
-        
+        { logoLink }
         { this.isSmall() ? hamburgerMenu : navMenu }
 
         <div className="right menu">
@@ -168,14 +181,14 @@ TopBar = class TopBar extends Component {
     if (item.custom) {
       return (
         <a key={key} className='item' href={item.to}>
-          {/*<Icon className={item.iconClass}/>*/}
+          <Icon className={item.iconClass}/>
           {item.name}
         </a>
       );
     } else {
       return (
         <Link key={key} className='item' to={ item.to }>
-          {/*<Icon className={ item.iconClass }/>*/}
+          <Icon className={ item.iconClass }/>
           { item.name }
         </Link>
       );
