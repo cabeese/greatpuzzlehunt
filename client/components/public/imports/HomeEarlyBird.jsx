@@ -46,7 +46,7 @@ class HomeEarlyBird extends Component {
            </Grid.Row>
          </Grid>
      </Segment>
-      <Image fluid src='/img/2016/event-photos/team-theres-waldo-thin.jpeg'/>
+      {/* <Image fluid src='/img/2016/event-photos/team-theres-waldo-thin.jpeg'/> */}
     </section>
 
     );

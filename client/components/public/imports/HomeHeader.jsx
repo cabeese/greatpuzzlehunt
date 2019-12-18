@@ -108,7 +108,7 @@ class HomeHeader extends Component {
 
           
 
-          <Grid.Row centered>
+          {/* <Grid.Row centered>
             <Grid.Column width={16}>
               <h3>
                 This event is made possible thanks to
@@ -118,7 +118,7 @@ class HomeHeader extends Component {
                 </Scrollchor>
               </h3>
             </Grid.Column>
-          </Grid.Row>
+          </Grid.Row> */}
 
         </Grid>
       </section>

@@ -7,12 +7,12 @@ import SponsorRow from './SponsorRow';
 export default class HomeSponsors extends Component {
   render() {
     return (
-      <section className="pattern-bg" id="sponsors">
+      <section id="sponsors">
         <Grid centered textAlign="left" padded stackable style={{ padding: '2em 0em', margin:'0'}}>
           {this._sponsors()}
           {this._thanks()}
         </Grid>
-        <Image fluid src="/img/2016/event-photos/team-saxaphone-bugs-thin.jpg"/>
+        {/* <Image fluid src="/img/2016/event-photos/team-saxaphone-bugs-thin.jpg"/> */}
       </section>
     );
   }

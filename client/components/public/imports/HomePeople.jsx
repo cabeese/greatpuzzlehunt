@@ -4,7 +4,7 @@ import ProfileCards from './ProfileCards';
 export default class HomePeople extends Component {
   render() {
     return (
-      <section className="pattern-bg" id="HomePeople">
+      <section id="HomePeople">
         <Grid  style={{ padding: '4em 0em 0 0', margin:'0'}}>
 
           <Grid.Row centered textAlign='left' verticalAlign="middle">

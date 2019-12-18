@@ -6,10 +6,7 @@ SamplePuzzles = class Puzzle extends Component {
 
   render() {
     return (
-      <Container>
-        <br/>
         <SamplePuzzlesInner/>
-      </Container>
     );
   }
 }

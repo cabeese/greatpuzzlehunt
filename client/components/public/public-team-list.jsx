@@ -13,9 +13,7 @@ PublicTeamList = class PublicTeamList extends Component {
 
   render() {
     return (
-      <Container>
         <TeamBrowser public={true}/>
-      </Container>
     );
   }
 }

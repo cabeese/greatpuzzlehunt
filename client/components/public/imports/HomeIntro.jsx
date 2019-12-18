@@ -19,7 +19,8 @@ const { eventDate } = Meteor.settings.public;
 export default class HomeIntro extends Component {
   render() {
     return (
-      <div className="pattern-bg" id="HomeIntro">
+      <div id="HomeIntro">
+        <Container>
         <Grid padded stackable centered textAlign='left'>
 
           {/* <Grid.Row>
@@ -75,8 +76,9 @@ export default class HomeIntro extends Component {
           </Grid.Row>
 
         </Grid>
+        </Container>
 
-        <Image fluid src="/img/2016/event-photos/team-mod-thin.jpg"/>
+        {/* <Image fluid src="/img/2016/event-photos/team-mod-thin.jpg"/> */}
       </div>
      );
   }
