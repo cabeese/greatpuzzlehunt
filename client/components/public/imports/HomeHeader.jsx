@@ -38,7 +38,6 @@ const registrationClosesMessage = (
 class HomeHeader extends Component {
   updateDimensions() {
     this.forceUpdate();
-    console.log("updated");
   }
   render() {
     let videoWidth = window.innerWidth;
@@ -53,7 +52,7 @@ class HomeHeader extends Component {
         <Grid stackable>
           
           <Grid.Row className="header-wrap">
-            <Grid.Column verticalAlign="middle">
+            <Grid.Column>
               <div id="header-video-mask">
                 <div id="header-video-container">
                   <iframe id="header-video" frameBorder="0" width={videoWidth} height={videoHeight} 
