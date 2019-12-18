@@ -43,10 +43,12 @@ class HomeHeader extends Component {
   render() {
     let videoWidth = window.innerWidth;
     let videoHeight = videoWidth * 9 / 16;
+    let maskHeight = Math.min(videoHeight, 600) + "px";
     let width = window.innerWidth;
     if (width < 930) {
       videoHeight = 560;
       videoWidth = videoHeight * 16 / 9;
+      maskHeight = videoHeight + "px";
     }
     let opts = {
       height: videoHeight,
@@ -67,8 +69,6 @@ class HomeHeader extends Component {
         <Grid stackable>
           
           <Grid.Row className="header-wrap">
-            <Grid.Column>
-              <div id="header-video-mask">
                 <div id="header-video-container">
                   <YouTube
                     opts={opts}
@@ -76,9 +76,10 @@ class HomeHeader extends Component {
                     id={"player"}
                     onReady={this.playVideo}
                     onEnd={this.playVideo}
+                    containerClassName={"video-mask"}
                     >
                   </YouTube>
-                  <div id="header-video-content" style={{zIndex: "1", position: "absolute", top: "calc(29% + 125px)", width: "100%", transform: "translateY(-50%)"}}>
+                  <div id="header-video-content" style={{zIndex: "1", position: "absolute", top: "calc(29% + 100px)", width: "100%", transform: "translateY(-50%)"}}>
                     <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
                     <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
                     <h2 className="sub-header-text">
@@ -88,8 +89,6 @@ class HomeHeader extends Component {
                   </div>
                   
                 </div>
-              </div>
-            </Grid.Column>
           </Grid.Row>
           <Grid.Row centered>
             <Grid.Column width={16}>
