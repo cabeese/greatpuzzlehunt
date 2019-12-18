@@ -62,6 +62,7 @@ class HomeHeader extends Component {
         mute: 1,
         start: 6,
         end: 29,
+        playsinline: 1
       }
     }
     return (
@@ -79,7 +80,7 @@ class HomeHeader extends Component {
                     containerClassName={"video-mask"}
                     >
                   </YouTube>
-                  <div id="header-video-content" style={{zIndex: "1", position: "absolute", top: "calc(29% + 100px)", width: "100%", transform: "translateY(-50%)"}}>
+                  <div id="header-video-content" style={{zIndex: "2", position: "absolute", top: "calc(29% + 100px)", width: "100%", transform: "translate3D(0, -50%, 1px)"}}>
                     <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
                     <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
                     <h2 className="sub-header-text">
@@ -119,7 +120,7 @@ class HomeHeader extends Component {
                 <Scrollchor
                   to="#sponsors"
                   animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
-                </Scrollchor>!
+                </Scrollchor>
               </h3>
             </Grid.Column>
           </Grid.Row>
