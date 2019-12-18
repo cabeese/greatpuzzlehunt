@@ -118,15 +118,15 @@ TopBar = class TopBar extends Component {
 
     let logoStyle = {
       backgroundColor: 'white',
-      width: '50px',
-      height: '50px',
-      borderRadius: '25px',
-      transform: "translate(25px, 25px) scale(2)",
-      marginRight: "55px"
+      width: '66px',
+      height: '66px',
+      borderRadius: '33px',
+      // transform: "translate(25px, 25px) scale(2)",
+      marginRight: "10px"
     };
     let logoLink = (
       <a href="/" style={logoStyle}>
-        <img height="50px" src="/img/logo_svg.svg"></img>
+        <img height="66px" src="/img/logo_svg.svg"></img>
       </a>
     );
 
