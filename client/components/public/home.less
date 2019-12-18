@@ -3,17 +3,33 @@
 .pattern-bg{
   background-image: url('../../../img/pattern-small.png') !important;
   background-repeat: repeat !important;
+  z-index: -99;
 }
-.home-section{
-  padding: 8em 0 8em 0;
+
+#header-video-container {
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  min-width: 100%;
+  min-height: 530px;
 }
+#header-video {
+  margin-top: -60px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .header-magnyfying-glass{
   position: absolute;
   max-width:870px !important;
   right:0;
 }
 .text-highlight-color{
-    color:red !important;
+  line-height: .8;
+  font-size: 4em !important;
+  color:red !important;
 }
 .ui.huge.header{
   font-family: 'Exo', sans-serif;
@@ -27,26 +43,27 @@
   text-transform: uppercase;
 }
 .header-text{
+  position: relative;
   font-family: 'Exo', sans-serif;
-  color: #14142C;
-  font-size: 3em;
+  color: white;
   text-transform: uppercase;
-
+  text-align: center;
 }
 .sub-header-text{
   font-family: 'Exo', sans-serif;
-  color: #14142C;
+  color: white;
   text-transform: uppercase;
+  text-align: center;
 }
 .gigantic{
-  font-size: 6em;
-  line-height:.75em;
-  white-space: nowrap;
+  font-size: 7.5em;
+  line-height:.8em;
+  // white-space: nowrap;
 }
 
 @media all and (min-width: @desktop-min) {
   .header-wrap{
-    min-height: 40em;
+    min-height: 20em;
   }
   .header-main {
     margin-top: 20px;

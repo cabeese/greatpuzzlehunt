@@ -36,46 +36,63 @@ const registrationClosesMessage = (
 );
 
 class HomeHeader extends Component {
+  updateDimensions() {
+    this.forceUpdate();
+    console.log("updated");
+  }
   render() {
+    let videoWidth = window.innerWidth;
+    let videoHeight = videoWidth * 9 / 16;
+    let width = window.innerWidth;
+    if (width < 930) {
+      videoHeight = 560;
+      videoWidth = videoHeight * 16 / 9;
+    }
     return (
-      <section className="pattern-bg" id="home-header">
+      <section id="home-header">
         <Grid stackable>
-
+          
           <Grid.Row className="header-wrap">
-            <Grid.Column className="hide-on-mobile" width={9}>
-              <img className="header-magnyfying-glass" src="/img/header-magnifying-glass.png"/>
-            </Grid.Column>
-            <Grid.Column verticalAlign="middle" width={6}>
-              <Container>
-                <h1 className="header-text text-highlight-color">Fifth Annual</h1>
-                <h1 className="header-text gigantic">WWU</h1>
-                <h1 className="header-text gigantic">Great</h1>
-                <h1 className="header-text gigantic">Puzzle</h1>
-                <h1 className="header-text gigantic">Hunt</h1>
-              </Container>
+            <Grid.Column verticalAlign="middle">
+              <div id="header-video-mask">
+                <div id="header-video-container">
+                  <iframe id="header-video" frameBorder="0" width={videoWidth} height={videoHeight} 
+                    src="https://youtube.com/embed/paBGQzMCdUo?autoplay=1&controls=0&showinfo=0&autohide=1&mute=1&playlist=paBGQzMCdUo&loop=1">">
+                  </iframe>
+                  <div id="header-video-content" style={{zIndex: "1", position: "absolute", top: "calc(29% + 125px)", width: "100%", transform: "translateY(-50%)"}}>
+                    <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
+                    <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
+                    <h2 className="sub-header-text">
+                      {eventDate} <br/> 9:30 AM
+                    </h2>
+                    { this._linkButtons() }
+                  </div>
+                  
+                </div>
+              </div>
             </Grid.Column>
           </Grid.Row>
-
-          <Grid.Row centered divided>
-            <Grid.Column verticalAlign="middle" width={5}>
-              <h2 className="sub-header-text">
-                {eventDate} <br/> 9:30 AM
-              </h2>
+          <Grid.Row centered>
+            <Grid.Column width={16}>
+              
             </Grid.Column>
-            <Grid.Column verticalAlign="middle" width={5}>
+          </Grid.Row>
+          
+
+          <Grid.Row centered>
+            {/* <Grid.Column width={5}> */}
+              
+            {/* </Grid.Column> */}
+            {/* <Grid.Column width={3}>
               <Segment basic size='large' className="no-padding">
                 Western Washington University<br/>
                 516 High Street<br/>
                 Bellingham, WA 98225<br/>
               </Segment>
-            </Grid.Column>
+            </Grid.Column> */}
           </Grid.Row>
 
-          <Grid.Row centered>
-            <Grid.Column width={16}>
-              { this._linkButtons() }
-            </Grid.Column>
-          </Grid.Row>
+          
 
           <Grid.Row centered>
             <Grid.Column width={16}>
@@ -121,24 +138,30 @@ class HomeHeader extends Component {
 
     return (
       <div>
-        {ebMessage}
+        {/* {ebMessage} */}
+        <div style={{position: "relative", bottom: "0", width:"100%", display: "flex", justifyContent: "center"}}>
         { gamestate.leaderboard ? <div>{leaderboardButton}</div> : null }
         {registerButton}
-        <LinkButton to="/login" size='huge' content='Log In'/>
-        <br /><br />
+        </div>
+        
+        {/* <LinkButton to="/login" size='huge' content='Log In'/> */}
 
         {/* {registrationClosesMessage} */}
 
-        { gamestate.buyGear ? buyGearButton : null }
+        {/* { gamestate.buyGear ? buyGearButton : null } */}
 
-        <LinkButton to="/faq" size="large" content="FAQ" />
-        <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
+        {/* <LinkButton to="/faq" size="large" content="FAQ" /> */}
+        {/* <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
           size='large' color='green'
           icon={<Icon name='heart'/>}
           content='Donate'
-        />
+        /> */}
       </div>
     );
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 }
 

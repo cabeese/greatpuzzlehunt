@@ -16,7 +16,6 @@ Home = class Home extends Component {
   render() {
     return (
       <div className="pattern-bg">
-        <Container>
           <HomeHeader/>
 
           <HomeIntro/>
@@ -34,7 +33,6 @@ Home = class Home extends Component {
           <HomePastEvents/>
 
           <HomePeople/>
-        </Container>
       </div>
     );
   }

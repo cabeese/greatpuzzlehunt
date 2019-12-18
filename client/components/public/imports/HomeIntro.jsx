@@ -22,11 +22,11 @@ export default class HomeIntro extends Component {
       <div className="pattern-bg" id="HomeIntro">
         <Grid padded stackable centered textAlign='left'>
 
-          <Grid.Row>
+          {/* <Grid.Row>
             <Grid.Column width={16} className='raised'>
               <Embed active={true} icon={null} url="https://www.youtube.com/embed/paBGQzMCdUo"/>
             </Grid.Column>
-          </Grid.Row>
+          </Grid.Row> */}
 
           <Grid.Row>
             <Grid.Column width={16} className='raised'>
