@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import Scrollchor from 'react-scrollchor';
+import YouTube from 'react-youtube';
 import { Grid, Container, Segment, Icon, Message, Button } from 'semantic-ui-react';
 import moment from 'moment';
 
@@ -47,6 +48,20 @@ class HomeHeader extends Component {
       videoHeight = 560;
       videoWidth = videoHeight * 16 / 9;
     }
+    let opts = {
+      height: videoHeight,
+      width: videoWidth,
+      playerVars: {
+        rel: 0,
+        autoplay: 1,
+        controls: 0,
+        showinfo: 0,
+        autohide: 1,
+        mute: 1,
+        start: 6,
+        end: 29,
+      }
+    }
     return (
       <section id="home-header">
         <Grid stackable>
@@ -55,9 +70,14 @@ class HomeHeader extends Component {
             <Grid.Column>
               <div id="header-video-mask">
                 <div id="header-video-container">
-                  <iframe id="header-video" frameBorder="0" width={videoWidth} height={videoHeight} 
-                    src="https://youtube.com/embed/paBGQzMCdUo?autoplay=1&controls=0&showinfo=0&autohide=1&mute=1&playlist=paBGQzMCdUo&loop=1">">
-                  </iframe>
+                  <YouTube
+                    opts={opts}
+                    videoId={"paBGQzMCdUo"}
+                    id={"player"}
+                    onReady={this.playVideo}
+                    onEnd={this.playVideo}
+                    >
+                  </YouTube>
                   <div id="header-video-content" style={{zIndex: "1", position: "absolute", top: "calc(29% + 125px)", width: "100%", transform: "translateY(-50%)"}}>
                     <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
                     <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
@@ -162,6 +182,12 @@ class HomeHeader extends Component {
   componentDidMount() {
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
+  playVideo(event) {
+    event.target.seekTo(5);
+    event.target.playVideo();
+  }
+
+
 }
 
 HomeHeader = GamestateComp(HomeHeader);
