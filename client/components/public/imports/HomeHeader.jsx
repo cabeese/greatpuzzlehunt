@@ -91,14 +91,9 @@ class HomeHeader extends Component {
                   
                 </div>
           </Grid.Row>
-          <Grid.Row centered>
-            <Grid.Column width={16}>
-              
-            </Grid.Column>
-          </Grid.Row>
           
 
-          <Grid.Row centered>
+          {/* <Grid.Row centered> */}
             {/* <Grid.Column width={5}> */}
               
             {/* </Grid.Column> */}
@@ -109,7 +104,7 @@ class HomeHeader extends Component {
                 Bellingham, WA 98225<br/>
               </Segment>
             </Grid.Column> */}
-          </Grid.Row>
+          {/* </Grid.Row> */}
 
           
 
