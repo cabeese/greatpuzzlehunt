@@ -21,9 +21,15 @@ export default class ProfileCards extends Component {
         image: '/img/team/zac.jpg',
       },
       {
+        name: 'Wendy Aguilar',
+        title: 'Web Design Specialist, CDK Global',
+        role: 'Co-Lead Designer',
+        image: '/img/team/wendy.jpg',
+      },
+      {
         name: 'Brennan Commons',
         title: '',
-        role: 'Lead Designer',
+        role: 'Co-Lead Designer',
         image: '/img/team/brennan.jpg',
       },
       {
@@ -81,12 +87,6 @@ export default class ProfileCards extends Component {
         image: '/img/team/alex_k.jpg',
       },
       {
-        name: 'Hailee Desrosier',
-        title: '',
-        role: 'AS Asst. Vice President, Marketing & Promotion',
-        image: '/img/team/hailee.jpg',
-      },
-      {
         name: 'Rachel Snyder',
         title: '',
         role: 'AS Asst. Vice President, Budget Coordination',
@@ -104,7 +104,6 @@ export default class ProfileCards extends Component {
         role: 'AS Vice President, Management',
         image: '/img/team/montana.jpg',
       },
-      
     ];
     this.pastProfiles = [
       {
@@ -132,12 +131,7 @@ export default class ProfileCards extends Component {
         role: 'Developer',
         image: '/img/team/alex_c.jpg',
       },
-      {
-        name: 'Wendy Aguilar',
-        title: 'Web Design Specialist, CDK Global',
-        role: 'Lead designer',
-        image: '/img/team/wendy.jpg',
-      },
+      
       {
         name: 'Elias Peters',
         title: '',
