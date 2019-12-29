@@ -139,9 +139,6 @@ class HomeHeader extends Component {
         icon={<Icon name="trophy" />}
       />
     );
-    const registerButton = (
-      <LinkButton to='/register' size='huge' color='blue' content='Register Now!'/>
-    );
     const buyGearButton = (
       <LinkButton as='a' href="https://www.wwu.edu/emarket/puzzlehunt/#design"
         size="large" color="blue" target="_blank"
@@ -155,7 +152,6 @@ class HomeHeader extends Component {
         {/* {ebMessage} */}
         <div style={{position: "relative", bottom: "0", width:"100%", display: "flex", justifyContent: "center"}}>
         { gamestate.leaderboard ? <div>{leaderboardButton}</div> : null }
-        {registerButton}
         </div>
         
         {/* <LinkButton to="/login" size='huge' content='Log In'/> */}

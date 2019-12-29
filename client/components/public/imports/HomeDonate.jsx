@@ -1,11 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Grid, Segment, Header, Icon, Image } from 'semantic-ui-react';
+import { Container, Grid, Segment, Header, Icon, Image } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
 
 export default class HomeDonate extends Component {
   render() {
     return (
+      <Container>
       <section id="donate-message">
 
         <Grid centered textAlign="left" padded stackable style={{ padding: '2em 0em', margin:'0'}}>
@@ -44,6 +45,7 @@ export default class HomeDonate extends Component {
           </Grid.Row>
         </Grid>
       </section>
+      </Container>
     );
   }
 }

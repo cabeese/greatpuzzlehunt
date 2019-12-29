@@ -1,12 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Grid, Segment, Card, Header, Button, Icon, Image, Message } from 'semantic-ui-react';
+import { Container, Grid, Segment, Card, Header, Button, Icon, Image, Message } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
 import SponsorRow from './SponsorRow';
 
 export default class HomeSponsors extends Component {
   render() {
     return (
+      <Container>
       <section id="sponsors">
         <Grid centered textAlign="left" padded stackable style={{ padding: '2em 0em', margin:'0'}}>
           {this._sponsors()}
@@ -14,6 +15,7 @@ export default class HomeSponsors extends Component {
         </Grid>
         {/* <Image fluid src="/img/2016/event-photos/team-saxaphone-bugs-thin.jpg"/> */}
       </section>
+      </Container>
     );
   }
 
