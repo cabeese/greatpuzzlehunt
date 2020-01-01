@@ -31,7 +31,7 @@ class AdminTeamModal extends Component {
         onClose={() => clearTeam() }
       >
         <Modal.Header>{team.name}</Modal.Header>
-        <Modal.Content>Content</Modal.Content>
+        <Modal.Content>Team _id: {team._id}</Modal.Content>
         <Modal.Actions>
           <AdminTeamActions
             team={team}
@@ -45,12 +45,11 @@ class AdminTeamModal extends Component {
   _toggleCheckedIn(e) {
     e.preventDefault();
     const { team } = this.props;
-    if (!confirm(`Toggle check-in for team ${team.name}`)) return;
+    if (!confirm(`Toggle check-in for team ${team.name}?`)) return;
 
     Meteor.call('team.checkin.toggle', team._id, (err, res) => {
       if (err) {
         alert(err);
-        btn.attr('data-content', 'Failed to toggle check-in');
       }
     });
   }

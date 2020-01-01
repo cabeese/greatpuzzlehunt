@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Message, Icon } from 'semantic-ui-react';
+import { find } from 'lodash';
 
 import AdminTeamTableRow from './AdminTeamTableRow';
 import AdminTeamModal from './AdminTeamModal';
@@ -77,7 +78,7 @@ class AdminTeamTable extends Component {
   }
 
   _clearSelectedTeam() {
-    this.setState({ selectedTeam: null, selectedUserId: null });
+    this.setState({ selectedTeam: null });
   }
 }
 

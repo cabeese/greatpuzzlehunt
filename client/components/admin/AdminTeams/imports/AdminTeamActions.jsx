@@ -5,6 +5,7 @@ import { Button, Icon } from 'semantic-ui-react';
 class AdminTeamActions extends Component {
   render() {
     const { team, onToggleCheckedIn } = this.props;
+    const isCheckedIn = team.checkinConfirmed;
 
     return (
       <div>
@@ -12,7 +13,8 @@ class AdminTeamActions extends Component {
           basic
           color={ team.checkinConfirmed ? 'green' : 'red'}
           onClick={ onToggleCheckedIn }
-          icon={ <Icon name={ team.checkinConfirmed ? 'thumbs up' : 'thumbs down'}/> }
+          icon={ <Icon name={ team.checkinConfirmed ? 'check square' : 'square outline'}/> }
+	  content={ team.checkinConfirmed ? "Undo Check-In" : "Check-in Team"}
         />
       </div>
     );

@@ -47,13 +47,13 @@ class AdminTeamTableRow extends Component {
     if (team.checkinConfirmed) {
       return (
         <span>
-          <Icon name='thumbs up' color='green'/> Checked In
+          <Icon name='check square' color='green'/> Checked In
         </span>
       );
     } else {
       return (
         <span>
-          <Icon name='thumbs down' color='red'/> Not Checked In
+          <Icon name='square outline' color='red'/> Not Checked In
         </span>
       );
     }
