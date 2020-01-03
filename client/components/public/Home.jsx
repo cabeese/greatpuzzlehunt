@@ -18,9 +18,9 @@ Home = class Home extends Component {
       <div>
           <HomeHeader/>
 
-          <HomeIntro/>
- 
           <HomeEarlyBird/>
+
+          <HomeIntro/>
 
           <HomeDonate/>
 

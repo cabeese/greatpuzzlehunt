@@ -11,7 +11,7 @@ class HomeEarlyBird extends Component {
     const registration = gamestate && gamestate.registration;
     const registerButton = (
       <Segment basic textAlign="center">
-        <LinkButton to='/register' size='huge' content='Register'/>
+        <LinkButton to='/register' size='massive' content='Register'/>
       </Segment>
     );
 
@@ -20,6 +20,31 @@ class HomeEarlyBird extends Component {
         <Segment style={{ fontSize: "14pt", color: "white", backgroundColor: '#003f87', padding: '4em 0em', margin:'0'}} className="no-border-radius">
         <Container>
           <Grid padded stackable  textAlign='left' >
+          <Grid.Row centered>
+            <Header size="medium" style={{color: "white"}}>Registration for the 2020 Great Puzzle Hunt is a 4-step process:</Header>
+           </Grid.Row>
+           <Grid.Row width={16} columns={4} centered verticalAlign="top">
+            
+            <Grid.Column textAlign="center">
+              <span className="step-number">1</span>
+              <a href="/register">Create</a> an account.<br />Verify your email before continuing.
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+              <span className="step-number">2</span>
+              <a href="https://commerce.cashnet.com/TheGreatPuzzleHunt2020">Purchase</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+              <span className="step-number">3</span>
+              <a href="/redeem">Redeem</a> ticket code(s).
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+              <span className="step-number">4</span>
+              Set-up/join <a href="/team">team</a>.
+            </Grid.Column>
+           </Grid.Row>
+           <Grid.Row centered>
+           {registerButton}
+           </Grid.Row>
             <Grid.Row centered width={16} columns={2}>
               <Grid.Column>
                  <Header size="medium" style={{color: "white"}}>Early Bird Registration</Header>
@@ -36,41 +61,9 @@ class HomeEarlyBird extends Component {
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered style={{fontSize: "12pt"}}>
-                  *Registration prices are per person. Each person wanting to join a team must register themselves first.<br /><br />
-                </Grid.Row>
-           <Grid.Row centered>
-            <Header size="medium" style={{color: "white"}}>Registration for the 2020 Great Puzzle Hunt is a 4-step process:</Header>
-           </Grid.Row>
-           <Grid.Row width={16} columns={4} centered verticalAlign="top">
-            
-            <Grid.Column textAlign="center">
-              <span className="step-number">1</span>
-              Create an account.<br />Verify your email before continuing.
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <span className="step-number">2</span>
-              Purchase ticket code(s).<br />Ticket code(s) will be sent to your email.
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <span className="step-number">3</span>
-              Redeem ticket code(s).
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <span className="step-number">4</span>
-              Set-up/join team.
-            </Grid.Column>
-            
-            
-
-             {/* <Grid.Column width={4}>
-
-               
-
-              </Grid.Column> */}
-           </Grid.Row>
-           <Grid.Row centered>
-           {registerButton}
-           </Grid.Row>
+              *Registration prices are per person. Each person wanting to join a team must register themselves first.<br /><br />
+            </Grid.Row>
+           
          </Grid>
          </Container>
      </Segment>

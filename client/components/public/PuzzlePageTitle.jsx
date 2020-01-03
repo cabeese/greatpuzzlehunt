@@ -13,7 +13,7 @@ PuzzlePageTitle = class PuzzlePageTitle extends Component {
           <Segment basic>
             <h1 className='dark-blue'>
               {this.props.title}<br/>
-              <small style={ smallStyle }>{this.props.subTitle}</small>
+              {/* <small style={ smallStyle }>{this.props.subTitle}</small> */}
             </h1>
           </Segment>
         </Grid.Column>

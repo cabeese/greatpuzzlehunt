@@ -116,19 +116,47 @@ TopBar = class TopBar extends Component {
   render() {
     const { isAdmin, isVolunteer } = this.props;
 
-    let logoStyle = {
-      backgroundColor: 'white',
-      width: '66px',
-      height: '66px',
-      borderRadius: '33px',
-      // transform: "translate(25px, 25px) scale(2)",
-      marginRight: "10px"
+    let logoDesktop = {
+      width: '50px',
+      height: '50px',
+      borderRadius: '25px',
+      transform: "translate(25px, 25px) scale(2.5)",
+      marginLeft: "10px",
+      marginRight: "50px",
+      marginTop: "10px",
+      overflow: "hidden",
+    };
+    let logoMobile = {
+      // width: '66.41px',
+      height: '50px',
+      marginLeft: "10px",
+      marginTop: "auto",
+      marginBottom: "auto",
+      // overflow: "hidden",
+    }
+    let logoShadow = {
+      width: '125px',
+      height: '125px',
+      borderRadius: '62.5px',
+      marginTop: "-66.41px",
+      boxShadow: "0px 0px 20px black",
+      backgroundColor: "white",
+      mixBlendMode: "darken"
     };
     let logoLink = (
-      <a href="/" style={logoStyle}>
-        <img height="66px" src="/img/logo_svg.svg"></img>
+      <a href="/">
+        <div style={ this.isSmall() ? logoMobile : logoDesktop }>
+          <img height="50px" src="/img/topbar-logo-2.png"></img>
+        </div>
       </a>
     );
+    let logoLinkShadow = (
+      
+      <div style={{position: "absolute", height: "100px", width:"100%", overflow: "hidden", marginTop:"66.41px", marginLeft:"-3px"}}>
+      <div style={logoShadow}></div>
+      </div>
+      
+    )
 
     let hamburgerMenu = (
       <div className="ui dropdown item" ref="menuDropdown">
@@ -147,10 +175,11 @@ TopBar = class TopBar extends Component {
     );
 
     return (
-      <div className="ui fixed inverted small labeled icon menu top-bar" ref="topbar">
+      <div className="ui fixed small labeled icon menu top-bar" ref="topbar">
         
         {/* this._renderSocialButtons() */}
         { logoLink }
+        { this.isSmall() ? null : logoLinkShadow }
         { this.isSmall() ? hamburgerMenu : navMenu }
 
         <div className="right menu">

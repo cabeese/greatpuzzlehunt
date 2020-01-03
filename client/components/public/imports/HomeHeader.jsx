@@ -87,38 +87,18 @@ class HomeHeader extends Component {
                       {eventDate} <br/> 9:30 AM
                     </h2>
                     { this._linkButtons() }
+                    <h3 style={{color: "white", textAlign: "center"}}>
+                      This event is made possible thanks to
+                      <Scrollchor
+                        to="#sponsors"
+                        animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
+                      </Scrollchor>
+                    </h3>
                   </div>
+                  { this._socialMediaButtons()}
                   
                 </div>
           </Grid.Row>
-          
-
-          {/* <Grid.Row centered> */}
-            {/* <Grid.Column width={5}> */}
-              
-            {/* </Grid.Column> */}
-            {/* <Grid.Column width={3}>
-              <Segment basic size='large' className="no-padding">
-                Western Washington University<br/>
-                516 High Street<br/>
-                Bellingham, WA 98225<br/>
-              </Segment>
-            </Grid.Column> */}
-          {/* </Grid.Row> */}
-
-          
-
-          {/* <Grid.Row centered>
-            <Grid.Column width={16}>
-              <h3>
-                This event is made possible thanks to
-                <Scrollchor
-                  to="#sponsors"
-                  animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
-                </Scrollchor>
-              </h3>
-            </Grid.Column>
-          </Grid.Row> */}
 
         </Grid>
       </section>
@@ -133,7 +113,15 @@ class HomeHeader extends Component {
       ebMessage = registerNowMessage;
     }
 
-    /* Buttons which may or may not appear, depending on gamestate */
+    const registerButton = (
+      <Scrollchor
+        to="#home-registration"
+        animate={{offset:-60, duration:800}}>
+        <Button size="huge" color="blue" content="Register Now!"/>
+      </Scrollchor>
+      
+    );
+
     const leaderboardButton = (
       <LinkButton to="/leaderboard" size='huge' color='yellow' content='Leader Board'
         icon={<Icon name="trophy" />}
@@ -141,9 +129,18 @@ class HomeHeader extends Component {
     );
     const buyGearButton = (
       <LinkButton as='a' href="https://www.wwu.edu/emarket/puzzlehunt/#design"
-        size="large" color="blue" target="_blank"
+        size="huge" color="green" target="_blank"
         icon={<Icon name="shopping cart" />}
         content="Buy Gear"
+      />
+    );
+
+    const donateButton = (
+      <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
+        size='huge'
+        color="green"
+        icon={<Icon name='heart'/>}
+        content='Donate'
       />
     );
 
@@ -151,23 +148,51 @@ class HomeHeader extends Component {
       <div>
         {/* {ebMessage} */}
         <div style={{position: "relative", bottom: "0", width:"100%", display: "flex", justifyContent: "center"}}>
-        { gamestate.leaderboard ? <div>{leaderboardButton}</div> : null }
+          { registerButton }
+
+          { gamestate.leaderboard ? <div>{leaderboardButton}</div> : null }
+
+          { gamestate.buyGear ? buyGearButton : null }
+          
+          {donateButton}
         </div>
         
         {/* <LinkButton to="/login" size='huge' content='Log In'/> */}
 
         {/* {registrationClosesMessage} */}
 
-        {/* { gamestate.buyGear ? buyGearButton : null } */}
+        
 
         {/* <LinkButton to="/faq" size="large" content="FAQ" /> */}
-        {/* <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
-          size='large' color='green'
-          icon={<Icon name='heart'/>}
-          content='Donate'
-        /> */}
+        
       </div>
     );
+  }
+
+  _socialMediaButtons() {
+    const facebookButton = (
+    <a href="https://www.facebook.com/greatpuzzlehunt/">
+      <img height="40px" src="/img/glyphs/facebook-glyph.png" />
+    </a>
+    );
+    const instagramButton = (
+    <a href="https://www.instagram.com/greatpuzzlehunt/">
+      <img height="40px" src="/img/glyphs/instagram-glyph.png" />
+    </a>
+    );
+    const youtubeButton = (
+    <a  href="https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A">
+      <img height="40px" src="/img/glyphs/youtube-glyph.png" />
+    </a>
+    );
+
+    return (
+      <div className="social-media-buttons" style={{padding: "10px"}}>
+        {facebookButton}
+        {instagramButton}
+        {youtubeButton}
+      </div>
+    )
   }
 
   componentDidMount() {

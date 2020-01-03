@@ -8,15 +8,34 @@
 }
 .video-mask {
   width: 100%;
-  height: 620px;
+  height: 560px;
   overflow: hidden;
   transform: translateZ(1px);
 }
+
 #player {
   pointer-events: none;
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.social-media-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+
+.social-media-buttons > a {
+  margin: 4px;
+  filter: invert(100%);
+}
+
+#home-registration a {
+  color: #bad80a;
+}
+#home-registration a:hover {
+  text-decoration: underline;
 }
 
 .header-magnyfying-glass{
@@ -33,6 +52,12 @@
 .ui.segment {
   font-size: 12pt;
 }
+
+.ui.massive.button {
+  background-color: #bad80a;
+  color: black;
+}
+
 .ui.huge.header{
   font-family: 'Exo', sans-serif;
   color: #1F81C4;
@@ -61,7 +86,6 @@
 .gigantic{
   font-size: 7.5em;
   line-height:.8em;
-  // white-space: nowrap;
 }
 
 .step-number {
@@ -81,6 +105,7 @@
 @media all and (min-width: @desktop-min) {
   .header-wrap{
     padding-top: 0 !important;
+    padding-bottom: 0 !important;
     min-height: 20em;
   }
   .header-main {
@@ -148,8 +173,18 @@
 }
 
 @media all and (max-width: @tablet-max) {
+  .text-highlight-color{
+    line-height: .8;
+    font-size: 3em !important;
+    color:red !important;
+  }
+  .gigantic{
+    font-size: 5.5em;
+    line-height:.8em;
+  }
   .header-wrap{
     padding-top: 0 !important;
+    padding-bottom: 0 !important;
     min-height: 10em;
   }
   .header-main {

@@ -9,7 +9,7 @@ Media = class Media extends Component {
       <Container>
         <PuzzlePageTitle title="Media" subTitle={<span>Photo Credit: <a href="http://www.gabrielleponcz.com/" target="_blank">Gabrielle Poncz</a></span>} />
 
-        Check out videos of past Hunts!<br />
+        <strong>Check out videos of past Hunts!</strong><br />
         <a href="https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A" target="_blank">
           <Icon name="youtube" />
           The Great Puzzle Hunt YouTube Page

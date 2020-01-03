@@ -31,8 +31,8 @@ const gearPricing = (
   <span>
     <strong>Official Puzzle Gear Pricing</strong>
     <ul>
-      <li>Early Bird Discount Price (varying styles: prices range from $10-$26, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
-      <li>Regular Price (varying styles: prices range from $13-$29, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
+      <li>Early Bird Discount Price (varying styles: prices range from $11-$27, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
+      <li>Regular Price (varying styles: prices range from $14-$30, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
       <li>Gear sale ends midnight {gearSaleEnd}</li>
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul>
@@ -107,12 +107,17 @@ FAQ = class FAQ extends Component {
             Directions & Parking
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 1}>
-            <p>
-              Parking is FREE in all C-Lots on south campus on weekends.
-            </p>
-            <p>
-            Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen NW Fresh and Woods Coffee), and Awards Ceremony.
-            </p>
+            <Header as='h3' icon={<Icon color="blue" name="tag"/>} content="Address" />
+            <List>
+              <List.Item description="Western Washington University" />
+              <List.Item description="516 High Street" />
+              <List.Item description="Bellingham, WA 98225" />
+            </List>
+            <Header as='h3' icon={<Icon color="green" name="car"/>} content="Parking" />
+            <List>
+              <List.Item description="Parking is FREE in all C-Lots on south campus on weekends." />
+              <List.Item description="Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen NW Fresh), and Awards Ceremony." />
+            </List>
             <Button as='a' href="http://www.wwu.edu/map/" target="_blank" content="Interactive Campus Map" />
 
             <Header as='h3' icon={<Icon color="blue" name="map"/>} content="Directions from the South" />
@@ -303,7 +308,8 @@ FAQ = class FAQ extends Component {
               <List.Item description="A felt tip marking pen - something that will mark a folded object, but not crush the object."/>
               <List.Item description="Standard 10-12 pack of colored pencils."/>
               <List.Item description="Water to drink and a sack lunch or snacks! Light refreshments will be provided."/>
-              <List.Item description="Umbrella for your puzzles!"/>
+              <List.Item description="Umbrella to stay dry!"/>
+              <List.Item description="Hole punch for your puzzles." />
             </List>
           </Accordion.Content>
 
@@ -338,7 +344,7 @@ FAQ = class FAQ extends Component {
             </List>
             <p>
               Special thanks to Market Street Catering of <a target="_blank" href="http://www.haggen.com/">Haggen NW Fresh</a> for providing fresh fruit and
-              breakfast pastries including gluten free (GF) option and <a target="_blank" href="https://woodscoffee.com/">Woods Coffee</a> for the fresh brewed coffee!
+              breakfast pastries including gluten free (GF) option!
             </p>
           </Accordion.Content>
 
@@ -361,7 +367,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 15} index={15} onClick={(e,p) => this.handleClick(e,p)} >
-            <Icon color="violet" name="dropdown"/>
+            <Icon color="purple" name="dropdown"/>
             <Icon name="shop"/>
             What does the Gear/Apparel look like?
           </Accordion.Title>
@@ -369,19 +375,22 @@ FAQ = class FAQ extends Component {
             <p>This year you have several choices of puzzle hunt gear and hundreds of color combinations!</p>
             <p>Browse and buy our official gear below. All proceeds from these sales help support this event.</p>
             <List>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#tshirts">Mens Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#wtshirts">Womens Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#ktshirts">Youth Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#50/50">Mens 50/50 Poly/Cotton Blend T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/">Womens 50/50 Poly/Cotton Blend T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#Ltshirt">Mens Long Sleeve Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/">Womens Long Sleeve Cotton T-Shirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#tshirts">Men's, Women's, Youth Cotton T-Shirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#50/50">Men's, Women's 50/50 Poly/Cotton Blend T-Shirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#Ltshirt">Men's, Women's Long Sleeve Cotton T-Shirts</a></List.Item>
               <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#csu">Unisex Crew Sweatshirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#sweatshirt">Unisex 50/50 Poly/Cotton Blend Sweatshirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#ksweatshirt">Youth Unisex 50/50 Poly/Cotton Blend Sweatshirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#zcs">Unisex 1/4 Zipper Collar Sweatshirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#sweatshirt">Unisex &amp; Youth 50/50 Poly/Cotton Blend Sweatshirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#zcs">Unisex Quarter-Zip Sweatshirts</a></List.Item>
             </List>
             {gearPricing}
+          </Accordion.Content>
+          <Accordion.Title active={activeIndex === 16} index={16} onClick={(e, p) => this.handleClick(e, p)} >
+            <Icon color="violet" name="dropdown" />
+            <Icon name="bullseye"/>
+            Mission Statement
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 16}>
+            Our goal is to mobilize minds, highlight connections between different fields, and break down imagined barriers to STEM fields by building puzzles that require versatility, persistence, patience, and teamwork to solve. While it is at its core a competitive event, we aim to make it fun and accessible to everyone. We support critical thinking, teamwork, technology, and encourage inclusion.
           </Accordion.Content>
         </Accordion>
 

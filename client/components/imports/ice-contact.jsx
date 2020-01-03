@@ -10,6 +10,7 @@ class ICEContact extends React.Component {
       "(Hidden)"
 
     return (
+      
       <Grid>
         <Grid.Row columns='1'>
           <Grid.Column>

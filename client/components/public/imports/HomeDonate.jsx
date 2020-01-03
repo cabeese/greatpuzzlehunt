@@ -22,8 +22,8 @@ export default class HomeDonate extends Component {
                   Please Consider:<br/>
                 </p>
                 <ul>
-                  <li>Sponsoring a student or team that needs help to participate.</li>
-                  <li>Non-monetary support such as prizes or signing up as a volunteer!</li>
+                  <li><a href="mailto:millie@wwu.edu">Sponsoring</a> a student or team that needs help to participate.</li>
+                  <li>Non-monetary support such as <a href="mailto:millie@wwu.edu">prizes</a> or signing up as a volunteer!</li>
                 </ul>
                 All donations are made through WWU and are tax deductible!
               </Segment>
@@ -31,11 +31,13 @@ export default class HomeDonate extends Component {
                 href="https://alumni.wwu.edu/greatpuzzlehunt"
                 size='large'  content='Donate Online'
                 icon={<Icon name='heart'/>}
+                color="green"
               />
               <LinkButton as='a'
                 href="https://foundation.wwu.edu/making-gift"
                 size='large'  className="white button" content='Donating by check?'
                 icon={<Icon name='heart'/>}
+                color="green"
               />
             </Grid.Column>
 
