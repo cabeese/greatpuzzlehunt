@@ -146,7 +146,7 @@ TopBar = class TopBar extends Component {
     let logoLink = (
       <a href="/">
         <div style={ this.isSmall() ? logoMobile : logoDesktop }>
-          <img height="50px" src="/img/topbar-logo-2.png"></img>
+          <img height="50px" src="/img/topbar-logo.png"></img>
         </div>
       </a>
     );
