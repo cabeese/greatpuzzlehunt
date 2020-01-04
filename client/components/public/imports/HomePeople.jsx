@@ -14,12 +14,6 @@ export default class HomePeople extends Component {
             </Grid.Column>
           </Grid.Row>
 
-          <Grid.Row  centered >
-            <Grid.Column width={16}>
-              <ProfileCards/>
-            </Grid.Column>
-          </Grid.Row>
-
         </Grid>
       </section>
     );

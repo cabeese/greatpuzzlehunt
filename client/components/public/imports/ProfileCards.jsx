@@ -89,7 +89,7 @@ export default class ProfileCards extends Component {
       {
         name: 'Rachel Snyder',
         title: '',
-        role: 'AS Asst. Vice President, Budget Coordination',
+        role: 'AS Vice President, Budget Coordination',
         image: '/img/team/rachel.jpg',
       },
       {

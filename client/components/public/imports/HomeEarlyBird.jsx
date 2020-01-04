@@ -10,7 +10,7 @@ class HomeEarlyBird extends Component {
     const { gamestate } = this.props;
     const registration = gamestate && gamestate.registration;
     const registerButton = (
-      <a href="/register" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black", fontFamily: "'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif"}}>Register</a>
+      <a href="/register" target="_blank" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black", fontFamily: "'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif"}}>Register</a>
     );
 
     return (

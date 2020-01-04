@@ -9,12 +9,12 @@ Media = class Media extends Component {
       <Container>
         <PuzzlePageTitle title="Media" subTitle={<span>Photo Credit: <a href="http://www.gabrielleponcz.com/" target="_blank">Gabrielle Poncz</a></span>} />
 
-        <h3>Check out videos of past Hunts on our 
+        <h2 style={{fontWeight: "600"}}>Check out videos of past Hunts on our 
         <a href="https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A" target="_blank">
           &nbsp;<Icon name="youtube" />
           YouTube channel
         </a>
-        !</h3>
+        !</h2>
         
         <Image.Group size="medium">
           <Image
@@ -82,7 +82,7 @@ Media = class Media extends Component {
           />        
         </Image.Group>
         <Divider />
-        <h3>WWU Great Puzzle Hunt Photos</h3>
+        <h2 style={{fontWeight: "600"}}>WWU Great Puzzle Hunt Photos</h2>
         <Image.Group size="medium">
           <Image
             src='/img/media-page/cover_2019.jpg'

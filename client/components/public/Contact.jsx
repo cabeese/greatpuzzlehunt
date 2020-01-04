@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
+import HomePeople from './imports/HomePeople';
 import ProfileCards from './imports/ProfileCards';
 import ICEContact from '../imports/ice-contact';
-import HomePeople from './imports/HomePeople';
+
 
 Contact = class Contact extends Component {
 
