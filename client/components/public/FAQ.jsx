@@ -31,8 +31,8 @@ const gearPricing = (
   <span>
     <strong>Official Puzzle Gear Pricing</strong>
     <ul>
-      <li>Early Bird Discount Price (varying styles: prices range from $10-$26, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
-      <li>Regular Price (varying styles: prices range from $13-$29, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
+      <li>Early Bird Discount Price (varying styles: prices range from $11-$27, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
+      <li>Regular Price (varying styles: prices range from $14-$30, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
       <li>Gear sale ends midnight {gearSaleEnd}</li>
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul>
@@ -50,7 +50,7 @@ const importantDates = (
 const schedule_data = [
   {
     time: "9:30 - 10:15 AM",
-    desc: "Red Square Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen & Woods!",
+    desc: "Red Square Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
   },
   {
     time: "10:15 AM",
@@ -107,12 +107,17 @@ FAQ = class FAQ extends Component {
             Directions & Parking
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 1}>
-            <p>
-              Parking is FREE in all C-Lots on south campus on weekends.
-            </p>
-            <p>
-            Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen NW Fresh and Woods Coffee), and Awards Ceremony.
-            </p>
+            <Header as='h3' icon={<Icon color="blue" name="tag"/>} content="Address" />
+            <List>
+              <List.Item description="Western Washington University" />
+              <List.Item description="516 High Street" />
+              <List.Item description="Bellingham, WA 98225" />
+            </List>
+            <Header as='h3' icon={<Icon color="green" name="car"/>} content="Parking" />
+            <List>
+              <List.Item description="Parking is FREE in all C-Lots on south campus on weekends." />
+              <List.Item description="Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen NW Fresh), and Awards Ceremony." />
+            </List>
             <Button as='a' href="http://www.wwu.edu/map/" target="_blank" content="Interactive Campus Map" />
 
             <Header as='h3' icon={<Icon color="blue" name="map"/>} content="Directions from the South" />
@@ -143,32 +148,30 @@ FAQ = class FAQ extends Component {
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 2} index={2} onClick={(e,p) => this.handleClick(e,p)} >
-            <Icon color="orange" size="huge" name="dropdown"/>
+            <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="info"/>
             What is the WWU Great Puzzle Hunt?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 2}>
-            <p>
-              The WWU Great Puzzle Hunt is an outdoor adventure - think scavenger hunt, but with puzzle-solving.
-              Teams of up to 6 (recommended size 4-6) travel on foot about WWU campus (outdoors) solving
-              a collection of puzzles (involving logic, patterns, decoding, and a variety
-              of skill sets). Lots of prizes* will be awarded. Whether your team places
-              first or two hundred and fifty-first, competing in the puzzle hunt is a
-              great way to stretch your mental muscles, bond with your teammates,
-              and have a lot of fun!
-            </p>
-            <p>
-              Registered teams are assigned a QR code and connected to our game
-              platform on their smartphone(s). Your mission: Reach each
-              puzzle location and scan your QR code to receive the puzzle and start the clock!
-            </p>
-            <p>
-              Don’t forget your bag of scissors, tape, hole punch, etc. to
-              MacGyver your way through. Once you determine and enter code word(s),
-              the clock stops and you are sent to the next destination. Connect
-              all the code words to complete the game! <strong>OPEN TO ALL!</strong>
-            </p>
+            The annual WWU Great Puzzle Hunt is a fun, full-day, team puzzle-solving event that is <strong>OPEN TO ALL!</strong>
+            <ul>
+              <li>Teams of up to 6 (recommended size 4-6) travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
+              <li><strong>Your mission</strong>: HAVE FUN! Reach the outdoor location shown on your smartphone and scan your team code (which starts clock) to receive a puzzle. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you are sent to the next destination. Connect all the code words to complete the game!</li>
+              <li>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</li>
+              <li>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone.</li>
+              <li>Prizes* are awarded in each division for best: times, costumes, and team names.</li>
+              <li>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</li>
+            </ul>
             <strong>* </strong>{prizeNote}
+          </Accordion.Content>
+
+          <Accordion.Title active={activeIndex === 16} index={16} onClick={(e, p) => this.handleClick(e, p)} >
+            <Icon color="orange" name="dropdown" />
+            <Icon name="bullseye"/>
+            Mission Statement
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 16}>
+            Our goal is to mobilize minds, highlight connections between different fields, and break down imagined barriers to STEM fields by building puzzles that require versatility, persistence, patience, and teamwork to solve. While it is at its core a competitive event, we aim to make it fun and accessible to everyone. We support critical thinking, teamwork, technology, and encourage inclusion.
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 3} index={3} onClick={(e,p) => this.handleClick(e,p)} >
@@ -303,7 +306,8 @@ FAQ = class FAQ extends Component {
               <List.Item description="A felt tip marking pen - something that will mark a folded object, but not crush the object."/>
               <List.Item description="Standard 10-12 pack of colored pencils."/>
               <List.Item description="Water to drink and a sack lunch or snacks! Light refreshments will be provided."/>
-              <List.Item description="Umbrella for your puzzles!"/>
+              <List.Item description="Umbrella to stay dry!"/>
+              <List.Item description="Hole punch for your puzzles." />
             </List>
           </Accordion.Content>
 
@@ -338,7 +342,7 @@ FAQ = class FAQ extends Component {
             </List>
             <p>
               Special thanks to Market Street Catering of <a target="_blank" href="http://www.haggen.com/">Haggen NW Fresh</a> for providing fresh fruit and
-              breakfast pastries including gluten free (GF) option and <a target="_blank" href="https://woodscoffee.com/">Woods Coffee</a> for the fresh brewed coffee!
+              breakfast pastries including gluten free (GF) option, and fresh brewed coffee!
             </p>
           </Accordion.Content>
 
@@ -361,24 +365,24 @@ FAQ = class FAQ extends Component {
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 15} index={15} onClick={(e,p) => this.handleClick(e,p)} >
-            <Icon color="violet" name="dropdown"/>
+            <Icon color="purple" name="dropdown"/>
             <Icon name="shop"/>
             What does the Gear/Apparel look like?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 15}>
             <p>This year you have several choices of puzzle hunt gear and hundreds of color combinations!</p>
-            <p>Note: to buy gear you will be redirected to <a target="_blank" href="https://commerce.cashnet.com/TheGreatPuzzleHunt2020">this CashNet page</a> where you need to click the bottom gear link to select your gear options.</p>
+            <p>Browse and buy our official gear below. All proceeds from these sales help support this event.</p>
             <List>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#tshirts">Mens Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#wtshirts">Womens Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#ktshirts">Youth Cotton Blend T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#50/50">Mens & Womens 50/50 Poly/Cotton Blend T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#Ltshirt">Mens & Womens Long Sleeve Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#sweatshirt">Unisex 50/50 Poly/Cotton Blend Sweatshirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#ksweatshirt">Youth Unisex 50/50 Poly/Cotton Blend Sweatshirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#tshirts">Men's, Women's, Youth Cotton T-Shirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#50/50">Men's, Women's 50/50 Poly/Cotton Blend T-Shirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#Ltshirt">Men's, Women's Long Sleeve Cotton T-Shirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#csu">Unisex Crew Sweatshirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#sweatshirt">Unisex, Youth 50/50 Poly/Cotton Blend Hoodie Sweatshirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#zcs">Unisex Quarter-Zip Collar Sweatshirts</a></List.Item>
             </List>
             {gearPricing}
           </Accordion.Content>
+          
         </Accordion>
 
         <br/>

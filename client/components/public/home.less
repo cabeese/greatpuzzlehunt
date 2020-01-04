@@ -1,20 +1,70 @@
 @import '../../lib/less/variables.less';
 
-.pattern-bg{
-  background-image: url('../../../img/pattern-small.png') !important;
-  background-repeat: repeat !important;
+.header-wrap{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: -10px;
 }
-.home-section{
-  padding: 8em 0 8em 0;
+#header-video-container {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0,0,0);
+  min-width: 100%;
+  min-height: 530px;
 }
+
+.video-mask {
+  width: 120%;
+  height: 560px;
+  overflow: hidden;
+  transform: translateZ(1px);
+  filter: brightness(50%);
+}
+
+#player {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.social-media-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+
+.social-media-buttons > a {
+  margin: 4px;
+  filter: invert(100%);
+}
+
+#home-registration a {
+  color: #bad80a;
+}
+#home-registration a:hover {
+  text-decoration: underline;
+}
+
 .header-magnyfying-glass{
   position: absolute;
   max-width:870px !important;
   right:0;
 }
 .text-highlight-color{
-    color:red !important;
+  line-height: .8;
+  font-size: 4em !important;
+  color:red !important;
 }
+
+.ui.segment {
+  font-size: 12pt;
+}
+
+.ui.massive.button {
+  background-color: #bad80a;
+  color: black;
+}
+
 .ui.huge.header{
   font-family: 'Exo', sans-serif;
   color: #1F81C4;
@@ -27,27 +77,39 @@
   text-transform: uppercase;
 }
 .header-text{
+  z-index: 2;
+  position: relative;
   font-family: 'Exo', sans-serif;
-  color: #14142C;
-  font-size: 3em;
+  color: white;
   text-transform: uppercase;
-
+  text-align: center;
 }
 .sub-header-text{
   font-family: 'Exo', sans-serif;
-  color: #14142C;
+  color: white;
   text-transform: uppercase;
+  text-align: center;
 }
 .gigantic{
-  font-size: 6em;
-  line-height:.75em;
-  white-space: nowrap;
+  font-size: 7.5em;
+  line-height:.8em;
+}
+
+.step-number {
+  background: #bad80a;
+  padding-top: 40px;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  display: block;
+  font-size: 36pt;
+  color: black;
+  border-radius: 50px;
+  margin: 0 auto;
+  margin-bottom: 25px;
 }
 
 @media all and (min-width: @desktop-min) {
-  .header-wrap{
-    min-height: 40em;
-  }
   .header-main {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -113,8 +175,14 @@
 }
 
 @media all and (max-width: @tablet-max) {
-  .header-wrap{
-    min-height: 10em;
+  .text-highlight-color{
+    line-height: .8;
+    font-size: 3em !important;
+    color:red !important;
+  }
+  .gigantic{
+    font-size: 5.5em;
+    line-height:.8em;
   }
   .header-main {
     margin-top: 10px;

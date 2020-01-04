@@ -1,12 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Grid, Segment, Header, Icon, Image } from 'semantic-ui-react';
+import { Container, Grid, Segment, Header, Icon, Image } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
 
 export default class HomeDonate extends Component {
   render() {
     return (
-      <section className="pattern-bg" id="donate-message">
+      <Container>
+      <section id="donate-message">
 
         <Grid centered textAlign="left" padded stackable style={{ padding: '2em 0em', margin:'0'}}>
           <Grid.Row verticalAlign='middle' width={14}>
@@ -21,8 +22,8 @@ export default class HomeDonate extends Component {
                   Please Consider:<br/>
                 </p>
                 <ul>
-                  <li>Sponsoring a student or team that needs help to participate.</li>
-                  <li>Non-monetary support such as prizes or signing up as a volunteer!</li>
+                  <li><a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">Sponsoring</a> a student or team that needs help to participate.</li>
+                  <li>Non-monetary support such as <a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">prizes</a> or <a href="/register">signing up</a> as a volunteer!</li>
                 </ul>
                 All donations are made through WWU and are tax deductible!
               </Segment>
@@ -30,11 +31,13 @@ export default class HomeDonate extends Component {
                 href="https://alumni.wwu.edu/greatpuzzlehunt"
                 size='large'  content='Donate Online'
                 icon={<Icon name='heart'/>}
+                color="green"
               />
               <LinkButton as='a'
                 href="https://foundation.wwu.edu/making-gift"
                 size='large'  className="white button" content='Donating by check?'
                 icon={<Icon name='heart'/>}
+                color="green"
               />
             </Grid.Column>
 
@@ -44,6 +47,7 @@ export default class HomeDonate extends Component {
           </Grid.Row>
         </Grid>
       </section>
+      </Container>
     );
   }
 }

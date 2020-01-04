@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
+import HomePeople from './imports/HomePeople';
 import ProfileCards from './imports/ProfileCards';
 import ICEContact from '../imports/ice-contact';
+
 
 Contact = class Contact extends Component {
 
@@ -15,6 +17,7 @@ Contact = class Contact extends Component {
         <br/><br/>
         For Account/Tech Questions Contact <a href='mailto:support@greatpuzzlehunt.com'>support@greatpuzzlehunt.com</a>
       </h3>
+      <HomePeople />
       <ProfileCards />
     </div>
     );

@@ -15,13 +15,12 @@ import SamplePuzzles from './imports/SamplePuzzles';
 Home = class Home extends Component {
   render() {
     return (
-      <div className="pattern-bg">
-        <Container>
+      <div>
           <HomeHeader/>
 
-          <HomeIntro/>
-
           <HomeEarlyBird/>
+
+          <HomeIntro/>
 
           <HomeDonate/>
 
@@ -29,12 +28,6 @@ Home = class Home extends Component {
 
           <HomeSponsors/>
 
-          <SamplePuzzles/>
-
-          <HomePastEvents/>
-
-          <HomePeople/>
-        </Container>
       </div>
     );
   }

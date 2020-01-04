@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import Scrollchor from 'react-scrollchor';
+import YouTube from 'react-youtube';
 import { Grid, Container, Segment, Icon, Message, Button } from 'semantic-ui-react';
 import moment from 'moment';
 
@@ -36,60 +37,68 @@ const registrationClosesMessage = (
 );
 
 class HomeHeader extends Component {
+  updateDimensions() {
+    this.forceUpdate();
+  }
   render() {
+    let videoWidth = window.innerWidth;
+    let videoHeight = videoWidth * 9 / 16;
+    let maskHeight = Math.min(videoHeight, 600) + "px";
+    let width = window.innerWidth;
+    if (width < 930) {
+      videoHeight = 560;
+      videoWidth = videoHeight * 16 / 9;
+      maskHeight = videoHeight + "px";
+    }
+    let opts = {
+      height: videoHeight,
+      width: videoWidth,
+      playerVars: {
+        rel: 0,
+        autoplay: 1,
+        controls: 0,
+        showinfo: 0,
+        autohide: 1,
+        mute: 1,
+        start: 6,
+        end: 29,
+        playsinline: 1
+      }
+    }
     return (
-      <section className="pattern-bg" id="home-header">
-        <Grid stackable>
+      <section id="home-header">          
+          <div className="header-wrap">
+                <div id="header-video-container">
+                  <YouTube
+                    opts={opts}
+                    videoId={"paBGQzMCdUo"}
+                    id={"player"}
+                    onReady={this.playVideo}
+                    onEnd={this.playVideo}
+                    containerClassName={"video-mask"}
+                    >
+                  </YouTube>
+                  <div id="header-video-content" style={{zIndex: "2", position: "absolute", top: "calc(29% + 100px)", width: "100%", transform: "translate3D(0, -50%, 1px)"}}>
+                    <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
+                    <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
+                    <h2 className="sub-header-text">
+                      {eventDate} <br/> 9:30 AM
+                    </h2>
+                    { this._linkButtons() }
+                    <h3 style={{color: "white", textAlign: "center"}}>
+                      This event is made possible thanks to
+                      <Scrollchor
+                        to="#sponsors"
+                        style={{color: "#bad80a"}}
+                        animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
+                      </Scrollchor>
+                    </h3>
+                  </div>
+                  { this._socialMediaButtons()}
+                  
+                </div>
+          </div>
 
-          <Grid.Row className="header-wrap">
-            <Grid.Column className="hide-on-mobile" width={9}>
-              <img className="header-magnyfying-glass" src="/img/header-magnifying-glass.png"/>
-            </Grid.Column>
-            <Grid.Column verticalAlign="middle" width={6}>
-              <Container>
-                <h1 className="header-text text-highlight-color">Fifth Annual</h1>
-                <h1 className="header-text gigantic">WWU</h1>
-                <h1 className="header-text gigantic">Great</h1>
-                <h1 className="header-text gigantic">Puzzle</h1>
-                <h1 className="header-text gigantic">Hunt</h1>
-              </Container>
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row centered divided>
-            <Grid.Column verticalAlign="middle" width={5}>
-              <h2 className="sub-header-text">
-                {eventDate} <br/> 9:30 AM
-              </h2>
-            </Grid.Column>
-            <Grid.Column verticalAlign="middle" width={5}>
-              <Segment basic size='large' className="no-padding">
-                Western Washington University<br/>
-                516 High Street<br/>
-                Bellingham, WA 98225<br/>
-              </Segment>
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row centered>
-            <Grid.Column width={16}>
-              { this._linkButtons() }
-            </Grid.Column>
-          </Grid.Row>
-
-          <Grid.Row centered>
-            <Grid.Column width={16}>
-              <h3>
-                This event is made possible thanks to
-                <Scrollchor
-                  to="#sponsors"
-                  animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
-                </Scrollchor>!
-              </h3>
-            </Grid.Column>
-          </Grid.Row>
-
-        </Grid>
       </section>
     );
   }
@@ -102,44 +111,97 @@ class HomeHeader extends Component {
       ebMessage = registerNowMessage;
     }
 
-    /* Buttons which may or may not appear, depending on gamestate */
+    const registerButton = (
+      <Scrollchor
+        to="#home-registration"
+        animate={{offset:-60, duration:800}}>
+        <Button size="huge" color="blue" content="Register Now!"/>
+      </Scrollchor>
+      
+    );
+
     const leaderboardButton = (
       <LinkButton to="/leaderboard" size='huge' color='yellow' content='Leader Board'
         icon={<Icon name="trophy" />}
       />
     );
-    const registerButton = (
-      <LinkButton to='/register' size='huge' color='blue' content='Register Now!'/>
-    );
     const buyGearButton = (
       <LinkButton as='a' href="https://www.wwu.edu/emarket/puzzlehunt/#design"
-        size="large" color="blue" target="_blank"
+        size="huge" color="orange" target="_blank"
         icon={<Icon name="shopping cart" />}
         content="Buy Gear"
       />
     );
 
+    const donateButton = (
+      <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
+        size='huge'
+        color="green"
+        icon={<Icon name='heart'/>}
+        content='Donate'
+      />
+    );
+
     return (
       <div>
-        {ebMessage}
-        { gamestate.leaderboard ? <div>{leaderboardButton}</div> : null }
-        {registerButton}
-        <LinkButton to="/login" size='huge' content='Log In'/>
-        <br /><br />
+        {/* {ebMessage} */}
+        <div style={{position: "relative", bottom: "0", width:"100%", display: "flex", justifyContent: "center"}}>
+          { registerButton }
+
+          { gamestate.leaderboard ? <div>{leaderboardButton}</div> : null }
+
+          { gamestate.buyGear ? buyGearButton : null }
+          
+          {donateButton}
+        </div>
+        
+        {/* <LinkButton to="/login" size='huge' content='Log In'/> */}
 
         {/* {registrationClosesMessage} */}
 
-        { gamestate.buyGear ? buyGearButton : null }
+        
 
-        <LinkButton to="/faq" size="large" content="FAQ" />
-        <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
-          size='large' color='green'
-          icon={<Icon name='heart'/>}
-          content='Donate'
-        />
+        {/* <LinkButton to="/faq" size="large" content="FAQ" /> */}
+        
       </div>
     );
   }
+
+  _socialMediaButtons() {
+    const facebookButton = (
+    <a href="https://www.facebook.com/greatpuzzlehunt/">
+      <img height="40px" src="/img/glyphs/facebook-glyph.png" />
+    </a>
+    );
+    const instagramButton = (
+    <a href="https://www.instagram.com/greatpuzzlehunt/">
+      <img height="40px" src="/img/glyphs/instagram-glyph.png" />
+    </a>
+    );
+    const youtubeButton = (
+    <a  href="https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A">
+      <img height="40px" src="/img/glyphs/youtube-glyph.png" />
+    </a>
+    );
+
+    return (
+      <div className="social-media-buttons" style={{padding: "10px"}}>
+        {facebookButton}
+        {instagramButton}
+        {youtubeButton}
+      </div>
+    )
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+  playVideo(event) {
+    event.target.seekTo(5);
+    event.target.playVideo();
+  }
+
+
 }
 
 HomeHeader = GamestateComp(HomeHeader);

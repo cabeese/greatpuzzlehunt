@@ -13,12 +13,9 @@ const leaderboardLink = {
   iconClass: 'yellow trophy',
 };
 
+
+
 const mainMenuLinks = [
-  {
-    name: 'Home',
-    to: '/',
-    iconClass: 'grey home',
-  },
   {
     name: 'Sponsors',
     to: '/#sponsors',
@@ -110,20 +107,75 @@ const volunteerMenuItems = [
 ];
 
 TopBar = class TopBar extends Component {
+  updateDimensions() {
+    this.forceUpdate();
+  }
+  isSmall() {
+    return window.innerWidth < 1100; 
+  }
   render() {
     const { isAdmin, isVolunteer } = this.props;
-    return (
-      <div className="ui fixed inverted small labeled icon menu top-bar" ref="topbar">
 
-        <div className="ui dropdown item" ref="menuDropdown">
+    let logoDesktop = {
+      width: '50px',
+      height: '50px',
+      borderRadius: '25px',
+      transform: "translate(25px, 25px) scale(2.5)",
+      marginLeft: "10px",
+      marginRight: "50px",
+      marginTop: "10px",
+      overflow: "hidden",
+    };
+    let logoMobile = {
+      // width: '66.41px',
+      height: '50px',
+      marginLeft: "10px",
+      marginTop: "auto",
+      marginBottom: "auto",
+      // overflow: "hidden",
+    }
+    let logoShadow = {
+      width: '125px',
+      height: '125px',
+      borderRadius: '62.5px',
+      marginTop: "-66.41px",
+      boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+      backgroundColor: "white",
+      mixBlendMode: "darken"
+    };
+    let logoLink = (
+      <a href="/">
+        <div style={ this.isSmall() ? logoMobile : logoDesktop }>
+          <img height="50px" src="/img/topbar-logo.png"></img>
+        </div>
+      </a>
+    );
+    let logoLinkShadow = (
+      
+      <div style={{position: "absolute", height: "100px", width:"100%", overflow: "hidden", marginTop:"66.41px", marginLeft:"-3px"}}>
+      <div style={logoShadow}></div>
+      </div>
+      
+    )
+
+    return (
+      <div className="ui fixed small labeled icon menu top-bar" ref="topbar">
+        
+        {/* this._renderSocialButtons() */}
+        { logoLink }
+        { this.isSmall() ? null : logoLinkShadow }
+        
+        <div style={{display: this.isSmall() ? "flex" : "none"}} className="ui dropdown item" ref="menuDropdown">
           <i className="large content icon"></i>
           Menu
           <div className="menu topbar-dropdown-menu">
-            { this._renderMenuLinks(mainMenuLinks) }
+            { this._renderMenuLinks(mainMenuLinks) }  
           </div>
         </div>
 
-        {/* this._renderSocialButtons() */}
+        <div style={{display: this.isSmall() ? "none" : "flex"}} className="menu">
+          { this._renderMenuLinks(mainMenuLinks) }  
+        </div>
 
         <div className="right menu">
           { isAdmin() ? this._renderAdminMenu() : null }
@@ -290,6 +342,7 @@ TopBar = class TopBar extends Component {
 
   componentDidMount() {
     this._initDropDownMenus();
+    window.addEventListener("resize", this.updateDimensions.bind(this));
   }
 
   componentDidUpdate(prevProps, prevState) {

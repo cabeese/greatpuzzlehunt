@@ -1,19 +1,21 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Grid, Segment, Card, Header, Button, Icon, Image, Message } from 'semantic-ui-react';
+import { Container, Grid, Segment, Card, Header, Button, Icon, Image, Message } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
 import SponsorRow from './SponsorRow';
 
 export default class HomeSponsors extends Component {
   render() {
     return (
-      <section className="pattern-bg" id="sponsors">
+      <Container>
+      <section id="sponsors">
         <Grid centered textAlign="left" padded stackable style={{ padding: '2em 0em', margin:'0'}}>
           {this._sponsors()}
           {this._thanks()}
         </Grid>
-        <Image fluid src="/img/2016/event-photos/team-saxaphone-bugs-thin.jpg"/>
+        {/* <Image fluid src="/img/2016/event-photos/team-saxaphone-bugs-thin.jpg"/> */}
       </section>
+      </Container>
     );
   }
 
@@ -57,7 +59,7 @@ export default class HomeSponsors extends Component {
       <Grid.Row key='sponsor-thanks-1'>
         <Grid.Column width={14}>
           <Message>
-            Special thanks to Market Street Catering of <a href="http://www.haggen.com/" target="_blank" >Haggen NW Fresh </a> for providing fresh fruit and breakfast pastries including a  GF option and Woods Coffee for the brew!
+            Special thanks to Market Street Catering of <a href="http://www.haggen.com/" target="_blank" >Haggen NW Fresh </a> for providing fresh fruit and breakfast pastries including a GF option and the brew!
           </Message>
         </Grid.Column>
       </Grid.Row>,
