@@ -139,7 +139,7 @@ TopBar = class TopBar extends Component {
       height: '125px',
       borderRadius: '62.5px',
       marginTop: "-66.41px",
-      boxShadow: "0px 0px 20px black",
+      boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
       backgroundColor: "white",
       mixBlendMode: "darken"
     };

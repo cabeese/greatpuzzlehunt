@@ -153,26 +153,15 @@ FAQ = class FAQ extends Component {
             What is the WWU Great Puzzle Hunt?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 2}>
-            <p>
-              The WWU Great Puzzle Hunt is an outdoor adventure - think scavenger hunt, but with puzzle-solving.
-              Teams of up to 6 (recommended size 4-6) travel on foot about WWU campus (outdoors) solving
-              a collection of puzzles (involving logic, patterns, decoding, and a variety
-              of skill sets). Lots of prizes* will be awarded. Whether your team places
-              first or two hundred and fifty-first, competing in the puzzle hunt is a
-              great way to stretch your mental muscles, bond with your teammates,
-              and have a lot of fun!
-            </p>
-            <p>
-              Registered teams are assigned a QR code and connected to our game
-              platform on their smartphone(s). Your mission: Reach each
-              puzzle location and scan your QR code to receive the puzzle and start the clock!
-            </p>
-            <p>
-              Don’t forget your bag of scissors, tape, hole punch, etc. to
-              MacGyver your way through. Once you determine and enter code word(s),
-              the clock stops and you are sent to the next destination. Connect
-              all the code words to complete the game! <strong>OPEN TO ALL!</strong>
-            </p>
+            The annual WWU Great Puzzle Hunt is a fun, full-day, team puzzle-solving event that is <strong>OPEN TO ALL!</strong>
+            <ul>
+              <li>Teams of up to 6 (recommended size 4-6) travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
+              <li><strong>Your mission</strong>: HAVE FUN! Reach the outdoor location shown on your smartphone and scan your team code (which starts clock) to receive a puzzle. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you are sent to the next destination. Connect all the code words to complete the game!</li>
+              <li>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</li>
+              <li>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone.</li>
+              <li>Prizes* are awarded in each division for best: times, costumes, and team names.</li>
+              <li>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</li>
+            </ul>
             <strong>* </strong>{prizeNote}
           </Accordion.Content>
 

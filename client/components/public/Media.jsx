@@ -9,16 +9,79 @@ Media = class Media extends Component {
       <Container>
         <PuzzlePageTitle title="Media" subTitle={<span>Photo Credit: <a href="http://www.gabrielleponcz.com/" target="_blank">Gabrielle Poncz</a></span>} />
 
-        <strong>Check out videos of past Hunts!</strong><br />
-        <a href="https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A" target="_blank">
+        <h3>Check out videos of past Hunts!</h3>
+        {/* <a href="https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A" target="_blank">
           <Icon name="youtube" />
           The Great Puzzle Hunt YouTube Page
-        </a>
-
-        <Divider />
-
+        </a> */}
         <Image.Group size="medium">
-
+          <Image
+            src='https://i.ytimg.com/vi_webp/UCpneLPGd50/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2019', color: 'black'}}
+            href='https://www.youtube.com/watch?v=UCpneLPGd50'
+            target="_blank"
+          />
+          <Image
+            src='https://i.ytimg.com/vi_webp/R3jAEHvdwmY/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2019', color: 'black'}}
+            href='https://www.youtube.com/watch?v=R3jAEHvdwmY'
+            target="_blank"
+          />
+          <Image
+            src='https://i.ytimg.com/vi_webp/paBGQzMCdUo/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2018', color: 'black'}}
+            href='https://www.youtube.com/watch?v=paBGQzMCdUo'
+            target="_blank"
+          />
+          <Image
+            src='https://i.ytimg.com/vi_webp/KApV94SL22I/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2018', color: 'black'}}
+            href='https://www.youtube.com/watch?v=KApV94SL22I'
+            target="_blank"
+          />
+          <Image
+            src='https://i1.ytimg.com/vi/Df_37koPcB0/mqdefault.jpg'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2018', color: 'black'}}
+            href='https://www.youtube.com/watch?v=Df_37koPcB0'
+            target="_blank"
+          />
+          <Image
+            src='https://i.ytimg.com/vi_webp/z6dBrfYnXv0/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2017', color: 'black'}}
+            href='https://www.youtube.com/watch?v=z6dBrfYnXv0'
+            target="_blank"
+          />
+          <Image
+            src='https://i.ytimg.com/vi_webp/LYzpNT-vX7s/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2017', color: 'black'}}
+            href='https://www.youtube.com/watch?v=LYzpNT-vX7s'
+            target="_blank"
+          />
+          <Image
+            src='https://i.ytimg.com/vi_webp/CdsC0CHKsHM/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2016', color: 'black'}}
+            href='https://www.youtube.com/watch?v=CdsC0CHKsHM'
+            target="_blank"
+          />
+          <Image
+            src='https://i.ytimg.com/vi_webp/d0RSN_hGAyM/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2016', color: 'black'}}
+            href='https://www.youtube.com/watch?v=d0RSN_hGAyM'
+            target="_blank"
+          />        
+        </Image.Group>
+        <Divider />
+        <h3>WWU Great Puzzle Hunt Photos</h3>
+        <Image.Group size="medium">
           <Image
             src='/img/media-page/cover_2019.jpg'
             as='a'
