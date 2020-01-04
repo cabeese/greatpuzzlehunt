@@ -158,29 +158,24 @@ TopBar = class TopBar extends Component {
       
     )
 
-    let hamburgerMenu = (
-      <div className="ui dropdown item" ref="menuDropdown">
-        <i className="large content icon"></i>
-        Menu
-        <div className="menu topbar-dropdown-menu">
-          { this._renderMenuLinks(mainMenuLinks) }  
-        </div>
-      </div>
-    );
-    let navMenu = (
-      <div className="menu">
-        
-        { this._renderMenuLinks(mainMenuLinks) }  
-      </div>
-    );
-
     return (
       <div className="ui fixed small labeled icon menu top-bar" ref="topbar">
         
         {/* this._renderSocialButtons() */}
         { logoLink }
         { this.isSmall() ? null : logoLinkShadow }
-        { this.isSmall() ? hamburgerMenu : navMenu }
+        
+        <div style={{display: this.isSmall() ? "flex" : "none"}} className="ui dropdown item" ref="menuDropdown">
+          <i className="large content icon"></i>
+          Menu
+          <div className="menu topbar-dropdown-menu">
+            { this._renderMenuLinks(mainMenuLinks) }  
+          </div>
+        </div>
+
+        <div style={{display: this.isSmall() ? "none" : "flex"}} className="menu">
+          { this._renderMenuLinks(mainMenuLinks) }  
+        </div>
 
         <div className="right menu">
           { isAdmin() ? this._renderAdminMenu() : null }

@@ -22,8 +22,8 @@ export default class HomeDonate extends Component {
                   Please Consider:<br/>
                 </p>
                 <ul>
-                  <li><a href="mailto:millie@wwu.edu">Sponsoring</a> a student or team that needs help to participate.</li>
-                  <li>Non-monetary support such as <a href="mailto:millie@wwu.edu">prizes</a> or <a href="/register">signing up</a> as a volunteer!</li>
+                  <li><a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">Sponsoring</a> a student or team that needs help to participate.</li>
+                  <li>Non-monetary support such as <a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">prizes</a> or <a href="/register">signing up</a> as a volunteer!</li>
                 </ul>
                 All donations are made through WWU and are tax deductible!
               </Segment>
