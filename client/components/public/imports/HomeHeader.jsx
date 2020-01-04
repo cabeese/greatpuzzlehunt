@@ -91,6 +91,7 @@ class HomeHeader extends Component {
                       This event is made possible thanks to
                       <Scrollchor
                         to="#sponsors"
+                        style={{color: "#bad80a"}}
                         animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
                       </Scrollchor>
                     </h3>
@@ -129,7 +130,7 @@ class HomeHeader extends Component {
     );
     const buyGearButton = (
       <LinkButton as='a' href="https://www.wwu.edu/emarket/puzzlehunt/#design"
-        size="huge" color="green" target="_blank"
+        size="huge" color="orange" target="_blank"
         icon={<Icon name="shopping cart" />}
         content="Buy Gear"
       />

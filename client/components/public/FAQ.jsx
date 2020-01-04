@@ -148,7 +148,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 2} index={2} onClick={(e,p) => this.handleClick(e,p)} >
-            <Icon color="orange" size="huge" name="dropdown"/>
+            <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="info"/>
             What is the WWU Great Puzzle Hunt?
           </Accordion.Title>
@@ -163,6 +163,15 @@ FAQ = class FAQ extends Component {
               <li>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</li>
             </ul>
             <strong>* </strong>{prizeNote}
+          </Accordion.Content>
+
+          <Accordion.Title active={activeIndex === 16} index={16} onClick={(e, p) => this.handleClick(e, p)} >
+            <Icon color="orange" name="dropdown" />
+            <Icon name="bullseye"/>
+            Mission Statement
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 16}>
+            Our goal is to mobilize minds, highlight connections between different fields, and break down imagined barriers to STEM fields by building puzzles that require versatility, persistence, patience, and teamwork to solve. While it is at its core a competitive event, we aim to make it fun and accessible to everyone. We support critical thinking, teamwork, technology, and encourage inclusion.
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 3} index={3} onClick={(e,p) => this.handleClick(e,p)} >
@@ -368,19 +377,12 @@ FAQ = class FAQ extends Component {
               <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#50/50">Men's, Women's 50/50 Poly/Cotton Blend T-Shirts</a></List.Item>
               <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#Ltshirt">Men's, Women's Long Sleeve Cotton T-Shirts</a></List.Item>
               <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#csu">Unisex Crew Sweatshirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#sweatshirt">Unisex &amp; Youth 50/50 Poly/Cotton Blend Sweatshirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#zcs">Unisex Quarter-Zip Sweatshirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#sweatshirt">Unisex, Youth 50/50 Poly/Cotton Blend Hoodie Sweatshirts</a></List.Item>
+              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#zcs">Unisex Quarter-Zip Collar Sweatshirts</a></List.Item>
             </List>
             {gearPricing}
           </Accordion.Content>
-          <Accordion.Title active={activeIndex === 16} index={16} onClick={(e, p) => this.handleClick(e, p)} >
-            <Icon color="violet" name="dropdown" />
-            <Icon name="bullseye"/>
-            Mission Statement
-          </Accordion.Title>
-          <Accordion.Content active={activeIndex === 16}>
-            Our goal is to mobilize minds, highlight connections between different fields, and break down imagined barriers to STEM fields by building puzzles that require versatility, persistence, patience, and teamwork to solve. While it is at its core a competitive event, we aim to make it fun and accessible to everyone. We support critical thinking, teamwork, technology, and encourage inclusion.
-          </Accordion.Content>
+          
         </Accordion>
 
         <br/>

@@ -10,7 +10,7 @@ export default class ProfileCards extends Component {
     this.currentProfiles = [
       {
         name: 'Millie Johnson',
-        title: 'Associate Math Professor, WWU',
+        title: 'Professor Emerita Mathematics, WWU',
         role: 'Primary event coordinator, puzzle creator, and founder of the Great Puzzle Hunt',
         image: '/img/2016/event-photos/millie_johnson.jpg',
       },
