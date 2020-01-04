@@ -59,7 +59,7 @@ export default class HomeSponsors extends Component {
       <Grid.Row key='sponsor-thanks-1'>
         <Grid.Column width={14}>
           <Message>
-            Special thanks to Market Street Catering of <a href="http://www.haggen.com/" target="_blank" >Haggen NW Fresh </a> for providing fresh fruit and breakfast pastries including a GF option!
+            Special thanks to Market Street Catering of <a href="http://www.haggen.com/" target="_blank" >Haggen NW Fresh </a> for providing fresh fruit and breakfast pastries including a GF option and the brew!
           </Message>
         </Grid.Column>
       </Grid.Row>,

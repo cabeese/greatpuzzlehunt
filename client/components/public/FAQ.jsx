@@ -50,7 +50,7 @@ const importantDates = (
 const schedule_data = [
   {
     time: "9:30 - 10:15 AM",
-    desc: "Red Square Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen & Woods!",
+    desc: "Red Square Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
   },
   {
     time: "10:15 AM",
@@ -342,7 +342,7 @@ FAQ = class FAQ extends Component {
             </List>
             <p>
               Special thanks to Market Street Catering of <a target="_blank" href="http://www.haggen.com/">Haggen NW Fresh</a> for providing fresh fruit and
-              breakfast pastries including gluten free (GF) option!
+              breakfast pastries including gluten free (GF) option, and fresh brewed coffee!
             </p>
           </Accordion.Content>
 
