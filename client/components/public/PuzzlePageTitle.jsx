@@ -11,6 +11,7 @@ PuzzlePageTitle = class PuzzlePageTitle extends Component {
       <Grid.Row>
         <Grid.Column>
           <Segment basic>
+            <br />
             <h1 className='dark-blue'>
               {this.props.title}<br/>
               {/* <small style={ smallStyle }>{this.props.subTitle}</small> */}
