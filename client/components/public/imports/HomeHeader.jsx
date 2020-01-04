@@ -66,10 +66,8 @@ class HomeHeader extends Component {
       }
     }
     return (
-      <section id="home-header">
-        <Grid stackable>
-          
-          <Grid.Row className="header-wrap">
+      <section id="home-header">          
+          <div className="header-wrap">
                 <div id="header-video-container">
                   <YouTube
                     opts={opts}
@@ -99,9 +97,8 @@ class HomeHeader extends Component {
                   { this._socialMediaButtons()}
                   
                 </div>
-          </Grid.Row>
+          </div>
 
-        </Grid>
       </section>
     );
   }

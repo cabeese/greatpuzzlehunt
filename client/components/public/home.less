@@ -1,11 +1,17 @@
 @import '../../lib/less/variables.less';
 
+.header-wrap{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: -10px;
+}
 #header-video-container {
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0,0,0);
   min-width: 100%;
   min-height: 530px;
 }
+
 .video-mask {
   width: 120%;
   height: 560px;
@@ -104,11 +110,6 @@
 }
 
 @media all and (min-width: @desktop-min) {
-  .header-wrap{
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    min-height: 20em;
-  }
   .header-main {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -182,11 +183,6 @@
   .gigantic{
     font-size: 5.5em;
     line-height:.8em;
-  }
-  .header-wrap{
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    min-height: 10em;
   }
   .header-main {
     margin-top: 10px;
