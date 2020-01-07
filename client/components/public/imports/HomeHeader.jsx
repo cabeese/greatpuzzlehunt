@@ -41,15 +41,9 @@ class HomeHeader extends Component {
     this.forceUpdate();
   }
   render() {
-    let videoWidth = window.innerWidth;
-    let videoHeight = videoWidth * 9 / 16;
-    let maskHeight = Math.min(videoHeight, 600) + "px";
-    let width = window.innerWidth;
-    if (width < 930) {
-      videoHeight = 560;
-      videoWidth = videoHeight * 16 / 9;
-      maskHeight = videoHeight + "px";
-    }
+    let videoHeight = Math.max(700, window.innerWidth * 9 / 16);
+    let videoWidth = videoHeight * 16 / 9;
+
     let opts = {
       height: videoHeight,
       width: videoWidth,
@@ -78,7 +72,7 @@ class HomeHeader extends Component {
                     containerClassName={"video-mask"}
                     >
                   </YouTube>
-                  <div id="header-video-content" style={{zIndex: "2", position: "absolute", top: "calc(29% + 100px)", width: "100%", transform: "translate3D(0, -50%, 1px)"}}>
+                  <div id="header-video-content" style={{zIndex: "2", position: "absolute", width: "100%", height: "calc(100% - 100px)", display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateZ(1px)"}}>
                     <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
                     <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
                     <h2 className="sub-header-text">
