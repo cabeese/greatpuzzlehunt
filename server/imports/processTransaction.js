@@ -8,7 +8,7 @@ import {
 
 import { sendTickets } from '../../lib/imports/sendTickets';
 
-export default function processTransaction(txData) {
+export default async function processTransaction(txData) {
   const { info, logobj } = Meteor.logger;
   const now = new Date();
 
@@ -16,14 +16,14 @@ export default function processTransaction(txData) {
     tx,
     email,
     name,
-    gear: gearRaw,
+    gear,
     studentTickets: studentTicketsString,
     nonStudentTickets: nonStudentTicketsString,
   } = txData;
 
   const studentTickets = parseInt(studentTicketsString);
   const nonStudentTickets = parseInt(nonStudentTicketsString);
-  const gearOrders = JSON.parse(gearRaw) || [];
+  const gearOrders = gear;
 
   info(`Processing transaction "${tx}" from ${email}`);
   info(`studentTickets: ${studentTickets} nonStudentTickets: ${nonStudentTickets}`);

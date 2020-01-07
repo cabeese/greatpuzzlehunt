@@ -79,7 +79,7 @@ Login = class Login extends Component {
           {this.getErrorMessage()}
 
           <Message>
-            <Link to="/register">Join The Puzzle Hunt!</Link> &nbsp; | &nbsp; <Link to="/requestpasswordreset">Forgot Password</Link>
+            <Link to="/register">Sign up</Link> &nbsp; | &nbsp; <Link to="/requestpasswordreset">Forgot Password</Link>
           </Message>
         </Grid.Column>
       </Grid>

@@ -1,0 +1,3 @@
+[submodule "packages/qr-decode/lib/jsqrcode"]
+	path = packages/qr-decode/lib/jsqrcode
+	url = https://github.com/LazarSoft/jsqrcode
