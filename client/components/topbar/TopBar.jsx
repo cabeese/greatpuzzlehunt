@@ -127,12 +127,9 @@ TopBar = class TopBar extends Component {
       overflow: "hidden",
     };
     let logoMobile = {
-      // width: '66.41px',
       height: '50px',
-      marginLeft: "10px",
-      marginTop: "auto",
-      marginBottom: "auto",
-      // overflow: "hidden",
+      marginLeft: "7px",
+      marginTop: "7px",
     }
     let logoShadow = {
       width: '125px',
