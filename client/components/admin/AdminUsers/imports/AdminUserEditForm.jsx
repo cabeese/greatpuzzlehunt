@@ -74,16 +74,16 @@ class AdminUserEditForm extends Component {
                       value={user.age} onChange={(e) => this._handleTextChange(e)} />
         </Form.Group>
 
-        <Form.Group widths='equal'>
+        <Form.Group>
           <Form.Input name='address' type='text' label='Mailing Address'
                       placeholder='123 Main St.' value={user.address}
-                      onChange={(e) => this._handleTextChange(e)} />
+                      onChange={(e) => this._handleTextChange(e)} width={5} />
           <Form.Input name='city' type='text' label='City' placeholder='e.g. Bellingham'
                       value={user.city} onChange={(e) => this._handleTextChange(e)} />
           <Form.Input name='zip' label='Zip Code' placeholder='e.g. 98225'
-                      value={user.zip} onChange={(e) => this._handleTextChange(e)} />
+                      value={user.zip} onChange={(e) => this._handleTextChange(e)} width={2} />
           <Form.Input name='state' label='State/Province' value={user.state}
-                      onChange={(e) => this._handleTextChange(e)} />
+                      onChange={(e) => this._handleTextChange(e)} width={2} />
           <Form.Input name='country' label='Country' value={user.country}
                       onChange={(e) => this._handleTextChange(e)} />
         </Form.Group>
@@ -135,7 +135,7 @@ class AdminUserEditForm extends Component {
       alert(`${userData.firstname} ${userData.lastname} saved!`);
     });
 
-    // One call to update normal string fieldss
+    // One call to update normal string fields
     const emailData = {
       userId: userData._id,
       newEmail: userData.email,
