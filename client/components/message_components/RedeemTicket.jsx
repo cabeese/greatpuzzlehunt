@@ -29,7 +29,7 @@ RedeemTicket = class RedeemTicket extends Component {
           <Button
             as='a'
             target="_blank"
-            href="https://commerce.cashnet.com/TheGreatPuzzleHunt2019"
+            href="https://commerce.cashnet.com/TheGreatPuzzleHunt2020"
             icon fluid size='large'
             labelPosition='right'
             color='blue'>
