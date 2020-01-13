@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Container, Segment, Header, Message, Form, Icon, Button } from 'semantic-ui-react';
 
+const { eventYear} = Meteor.settings.public;
+
 RedeemTicket = class RedeemTicket extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,7 @@ RedeemTicket = class RedeemTicket extends Component {
   }
 
   _redeemForm() {
+    let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
     return (
       <Container>
         <PuzzlePageTitle title="Purchase and Redeem Ticket Codes"/>
@@ -29,7 +32,7 @@ RedeemTicket = class RedeemTicket extends Component {
           <Button
             as='a'
             target="_blank"
-            href="https://commerce.cashnet.com/TheGreatPuzzleHunt2020"
+            href={link}
             icon fluid size='large'
             labelPosition='right'
             color='blue'>

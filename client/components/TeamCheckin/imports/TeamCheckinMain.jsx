@@ -10,6 +10,8 @@ import TeamComp from '../../imports/TeamComp';
 import PreUserCheckin from './PreUserCheckin';
 import PostUserCheckin from './PostUserCheckin';
 
+const {eventYear} = Meteor.settings.public;
+
 class TeamCheckinMain extends Component {
   render() {
     const { ready, user, team, teamMembers } = this.props;
@@ -21,10 +23,10 @@ class TeamCheckinMain extends Component {
         <Message icon="warning" size="large" warning header="Team required!" content="You must be on a team in order to check in!" />
       );
     }
-
+    let title = `GPH ${eventYear} Check In`;
     return (
       <Container>
-        <PuzzlePageTitle title="GPH 2020 Check In" subTitle={team.name}/>
+        <PuzzlePageTitle title={title} subTitle={team.name}/>
         {
           team.userCheckin ?
           <PostUserCheckin user={user} team={team} teamMembers={teamMembers}/> :

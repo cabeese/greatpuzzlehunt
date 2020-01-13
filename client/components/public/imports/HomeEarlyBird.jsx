@@ -3,7 +3,7 @@ import { Grid, Segment, Image, Header, Container } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
 import GamestateComp from '../../imports/GamestateComp'
 
-const { registrationOpenDate, earlyBirdLastDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
+const { eventYear, registrationOpenDate, earlyBirdLastDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
 class HomeEarlyBird extends Component {
   render() {
@@ -12,14 +12,17 @@ class HomeEarlyBird extends Component {
     const registerButton = (
       <a href="/register" target="_blank" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black", fontFamily: "'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif"}}>Register</a>
     );
+    
+    let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
     return (
+      
       <section id="home-registration">
         <Segment style={{ fontSize: "14pt", color: "white", backgroundColor: '#003f87', padding: '4em 0em', margin:'0'}} className="no-border-radius">
         <Container>
           <Grid padded stackable  textAlign='left' >
           <Grid.Row centered>
-            <Header size="medium" style={{color: "white"}}>Registration for the 2020 Great Puzzle Hunt is a 4-step process:</Header>
+            <Header size="medium" style={{color: "white"}}>Registration for the {eventYear} Great Puzzle Hunt is a 4-step process:</Header>
            </Grid.Row>
            <Grid.Row width={16} columns={4} centered verticalAlign="top">
             
@@ -29,7 +32,7 @@ class HomeEarlyBird extends Component {
             </Grid.Column>
             <Grid.Column textAlign="center">
               <span className="step-number">2</span>
-              <a href="https://commerce.cashnet.com/TheGreatPuzzleHunt2020">Purchase</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
+              <a href={link}>Purchase</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
             </Grid.Column>
             <Grid.Column textAlign="center">
               <span className="step-number">3</span>

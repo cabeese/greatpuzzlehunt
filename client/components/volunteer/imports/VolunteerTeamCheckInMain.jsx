@@ -16,6 +16,8 @@ import VolunteerTeamComp from './VolunteerTeamComp';
 
 import {WRIST_BAND_COLOR} from "../../team/imports/team-helpers";
 
+const {eventYear} = Meteor.settings.public;
+
 class VolunteerTeamCheckInMain extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +46,8 @@ class VolunteerTeamCheckInMain extends Component {
 
   _header() {
     const { name } = this.props.team;
-    return <PuzzlePageTitle title="GPH 2020 Checkin" subTitle={name}/>;
+    let title = `GPH ${eventYear} Check In`
+    return <PuzzlePageTitle title={title} subTitle={name}/>;
   }
 
   _itemsToGive(team, teamMembers) {
