@@ -8,6 +8,8 @@ import {
 import GamestateComp from '../imports/GamestateComp';
 import TeamCheckinMain from './imports/TeamCheckinMain';
 
+const {eventYear} = Meteor.settings.public;
+
 class TeamCheckinInner extends Component {
   render() {
     const { ready, gamestate } = this.props;
@@ -21,9 +23,10 @@ class TeamCheckinInner extends Component {
   }
 
   _renderCheckinClosed() {
+    let title = `GPH ${eventYear} Check In`;
     return (
       <Container>
-        <PuzzlePageTitle title="GPH 2019 Check In"/>
+        <PuzzlePageTitle title={title}/>
         <Message icon={<Icon loading name="refresh"/>} info header="Waiting for Check In to open"/>
       </Container>
     );

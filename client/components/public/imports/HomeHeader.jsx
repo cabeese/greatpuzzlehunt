@@ -9,10 +9,11 @@ import LinkButton from '../../imports/LinkButton';
 import TimedComp from './TimedComp';
 import GamestateComp from '../../imports/GamestateComp'
 
-const { eventDate, earlyBirdLastDate, registrationCloseDate } = Meteor.settings.public;
+const { eventYear, eventDate, earlyBirdLastDate, registrationCloseDate } = Meteor.settings.public;
 
 /* TODO: these two components should be on timers, and the official times should be
    stored in a well-known place with a well known (ISO 8601, anyone?) format. */
+let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
 const registerNowMessage = (
   <Message icon color='teal'>
@@ -31,7 +32,7 @@ const registrationClosesMessage = (
       <Message.Header>Why Register Now?</Message.Header>
       Step 1 of Registration Closes {registrationCloseDate}, 11:59 PM. <br/>
       Gear sales are closed, but
-      you can still <a href="https://commerce.cashnet.com/TheGreatPuzzleHunt2019" target="_blank">buy and redeem tickets</a> until 10:00 AM {eventDate}.
+      you can still <a href={link} target="_blank">buy and redeem tickets</a> until 10:00 AM {eventDate}.
     </Message.Content>
   </Message>
 );
@@ -98,12 +99,7 @@ class HomeHeader extends Component {
   }
 
   _linkButtons() {
-    const earlyBirdEnd = moment("2019-03-17T23:59:59-0700");
     const gamestate = this.props.gamestate || {};
-    let ebMessage = "";
-    if(moment() < earlyBirdEnd){
-      ebMessage = registerNowMessage;
-    }
 
     const registerButton = (
       <Scrollchor
@@ -138,7 +134,6 @@ class HomeHeader extends Component {
 
     return (
       <div>
-        {/* {ebMessage} */}
         <div style={{position: "relative", bottom: "0", width:"100%", display: "flex", justifyContent: "center"}}>
           { registerButton }
 
