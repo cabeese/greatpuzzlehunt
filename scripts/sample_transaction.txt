@@ -1,0 +1,22 @@
+result:0
+respmessage:SUCCESS
+merchant:MA4
+custcode:MA3
+operator:MATH03
+station:MA3
+itemcnt:1
+pmtcode:FCEM
+lname:WWU Mathematics Dept
+batchno:229043
+tx:10000000
+cctype:V
+effdate:2/5/2020
+pmttype:CC
+itemcode1:MA3-NSREG
+amount1:10.00
+qty1:1
+gl1:2      2403703450G285 SPTACD
+MA4-REFUNDPOLICYTXT:
+REFUND:jmp
+NAME_G:VOUCHER - J Doe
+EMAIL_G:accounts@greatpuzzlehunt.com
