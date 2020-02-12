@@ -104,6 +104,7 @@ function makeCode(type) {
 };
 
 function createGearOrders(tx, email, gearOrders) {
+  const now = new Date();
   gearOrders.forEach((gearOrder) => {
     const { itemcode, color, logo_color: logoColor, size, qty, amount } = gearOrder;
     GearOrders.insert({
@@ -115,8 +116,8 @@ function createGearOrders(tx, email, gearOrders) {
       size,
       qty: parseInt(qty),
       amount: parseFloat(amount),
-      createdAt: new Date(gearOrder.created_at),
-      updatedAt: new Date(gearOrder.updated_at),
+      createdAt: now,
+      updatedAt: now,
     });
   });
 }
