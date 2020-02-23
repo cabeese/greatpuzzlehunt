@@ -141,7 +141,7 @@ TopBar = class TopBar extends Component {
       mixBlendMode: "darken"
     };
     let logoLink = (
-      <a href="/">
+      <a href="/" style={{zIndex: "99"}}>
         <div style={ this.isSmall() ? logoMobile : logoDesktop }>
           <img height="50px" src="/img/topbar-logo.png"></img>
         </div>
