@@ -77,7 +77,7 @@ class HomeHeader extends Component {
                     <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
                     <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
                     <h2 className="sub-header-text">
-                      {eventDate} <br/> 9:30 AM
+                      <strike>{eventDate} 9:30 AM</strike>
                     </h2>
                     { this._linkButtons() }
                     <h3 style={{color: "white", textAlign: "center"}}>

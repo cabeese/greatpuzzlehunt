@@ -38,7 +38,6 @@ class RegisterInner extends Component {
           header='Registration is Closed'
 			  content={`Registration for the ${eventYear} Great Puzzle Hunt will open ${registrationOpenDate}.`}
 			/>
-			<iframe style={iframeStyle} src="https://docs.google.com/forms/d/e/1FAIpQLScKOX4r9pJhxmPUUaroFoBhOwVhREsN7G7Z5GARHG9AcZVQQQ/viewform?embedded=true">Loading…</iframe>
 		</div>
       );
     }
