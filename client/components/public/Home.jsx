@@ -36,11 +36,13 @@ const CoronavirusMessage = (
 
                     All ticket/shirt purchases will be honored at next year’s event.
                     If you prefer a full refund, please complete
-                    form <a href="https://forms.gle/85RWtZHXX5UCYRpo9">here.</a>
+                    form <a href="https://forms.gle/85RWtZHXX5UCYRpo9">
+                      <strong><u>here</u></strong>
+                    </a>.
 
                     <br /><br />
 
-                    <center>Stay Healthy</center>
+                    <center>Stay Healthy!</center>
                   </Segment>
                   </Message.Content>
                 </Message>
