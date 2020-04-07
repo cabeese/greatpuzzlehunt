@@ -14,7 +14,6 @@ import SamplePuzzles from './imports/SamplePuzzles';
 
 const CoronavirusMessage = (
   <section id="coronavirus-message">
-    <Container>
       <Grid padded stackable centered textAlign='left'>
         <Grid.Row>
           <Grid.Column width={16} className='raised'>
@@ -34,14 +33,8 @@ const CoronavirusMessage = (
 
                     <br /><br />
 
-                    All ticket/shirt purchases will be honored at next year’s event.
-                    If you prefer a full refund, please complete
-                    form <a href="https://forms.gle/85RWtZHXX5UCYRpo9">
-                      <strong><u>here</u></strong>
-                    </a>.
-
+                    All ticket/shirt purchases will be refunded to credit card of purchaser. You will be notified via the email you used for the transaction.
                     <br /><br />
-
                     <center>Stay Healthy!</center>
                   </Segment>
                   </Message.Content>
@@ -51,7 +44,6 @@ const CoronavirusMessage = (
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </Container>
 
   </section>
 )
