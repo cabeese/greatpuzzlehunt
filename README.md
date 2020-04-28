@@ -14,9 +14,9 @@ An on-line and in person real-time puzzle scavenger hunt!
 5. Use NVM to install the most recent version of Node and set an alias for that version as meteor.  If you want to use [yarn](https://code.facebook.com/posts/1840075619545360) as well install yarn.
 
   ```bash
-  $ nvm install 11.12.0
+  $ nvm install 8.12.0
 
-  $ nvm alias meteor 11.12.0
+  $ nvm alias meteor 8.12.0
   $ nvm use meteor
   $ npm i -g yarn
   ```
@@ -116,4 +116,10 @@ If you get a @babel/runtime error, reinstall the correct babel runtime version:
 
 ```bash
 $ meteor npm install @babel/runtime@7.0.0-beta.55
+```
+
+If you're developing on Windows, you may encounter a cannot find  module 'fibers' error. To fix this, run the following command:
+
+```bash
+meteor update --release 1.6.1.2-rc.0
 ```
