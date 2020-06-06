@@ -3,22 +3,21 @@ An on-line and in person real-time puzzle scavenger hunt!
 
 ## Development Setup
 
-1. I recommend you install and start using the [ZSH Shell](https://github.com/robbyrussell/oh-my-zsh) (via the oh-my-zsh project as linked)
+1. Install `python2` if you don't already have it (needed for nvm). You'll likely also need `build-essential` and `coreutils` package if on a fresh Linux install.)
 
 2. Install [NVM](https://github.com/creationix/nvm)
 
-3. Install [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
+3. Install [MongoDB](https://docs.mongodb.com/manual/administration/install-community/). You may want to install the version used in the Heroku mLab instance (as of Spring 2020, that's `3.6.9`). Also read the section about preventing `apt-get` from updating your mongodb install when you're not watching.
 
 4. Install [Meteor](https://www.meteor.com/install)
 
-5. Use NVM to install the most recent version of Node and set an alias for that version as meteor.  If you want to use [yarn](https://code.facebook.com/posts/1840075619545360) as well install yarn.
+5. Use NVM to install Node 8.12 (mirroring Heroku) and set an alias for that version as meteor.  If you want to use [yarn](https://code.facebook.com/posts/1840075619545360) as well install yarn.
 
   ```bash
   $ nvm install 8.12.0
-
   $ nvm alias meteor 8.12.0
   $ nvm use meteor
-  $ npm i -g yarn
+  $ npm i -g yarn # optional, if using yarn
   ```
 6. Clone the repo
 
@@ -29,66 +28,14 @@ An on-line and in person real-time puzzle scavenger hunt!
 
   ```bash
   $ cd greatpuzzlehunt/
-  $ yarn install  # instead of npm install
+  $ npm install  # or use `yarn install`
   ```
-8. Add a new development settings file called `settings-development.json`
-
-  ```
-  {
-    "public": {
-      "siteName": "[DEV] Great Puzzle Hunt",
-      "siteURL": "http://localhost:3000",
-      "accountsEmail": "Great Puzzle Hunt <accounts@greatpuzzlehunt.com>",
-      "infoEmail": "Great Puzzle Hunt <info@greatpuzzlehunt.com>",
-      "eventYear": "2018",
-      "eventDate": "Saturday April 14, 2018",
-      "social": {
-        "facebook": "https://facebook.com/greatpuzzlehunt"
-      },
-      "analyticsSettings": {
-        "Google Analytics": {
-          "trackingId": ""
-        }
-      }
-    },
-    "admin": {
-      "firstname": "Super",
-      "lastname": "Admin",
-      "email": "super.admin@email.com",
-      "password": "testtest",
-      "roles": [
-        "user",
-        "volunteer",
-        "player",
-        "admin"
-      ],
-      "address": "1234 Cool Street",
-      "city": "Redmond",
-      "state": "WA",
-      "zip": "98053",
-      "age": 26,
-      "phone": "1112223333",
-      "accountType": "VOLUNTEER",
-      "photoPermission": true,
-      "holdHarmless": true,
-      "ecName": "Emergency Contact",
-      "ecRelationship": "friend",
-      "ecPhone": "7778889999",
-      "ecEmail": "ec.friend@email.com",
-      "paid": true,
-      "ticketUsed": null
-    },
-    "accounts": {
-      "fromEmail": "Great Puzzle Hunt (Dev)<accounts@greatpuzzlehunt.com>",
-      "token": "test_token"
-    }
-  }
-  ```
+8. If you'd like to, edit the `settings-development.json` file, but don't commit these changes to the repo.
 
 9. Run the application using the scripts define in `package.json`
 
   ```
-  $ yarn start
+  $ npm start
   ```
 
 10. In another shell you can connect to the Meteor server with the Meteor shell (much like rails console).
