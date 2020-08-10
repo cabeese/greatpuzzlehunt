@@ -30,39 +30,39 @@ ProfileEditor = class ProfileEditor extends Component {
   render() {
     const { firstname, lastname, lookingForTeam, bio } = this.state;
     return (
-    <Segment basic>
-      <Form onSubmit={(e) => this._handleSubmit(e)}>
-        <Header as='h3' content='Account' icon={<Icon name='user' color='green' />} />
-        <Form.Group widths='equal'>
-          <Form.Input name='firstname' label='First Name' placeholder='First name' value={firstname} onChange={(e) => this._handleChange(e)} />
-          <Form.Input name='lastname' label='Last Name' placeholder='Last name' value={lastname} onChange={(e) => this._handleChange(e)} />
-        </Form.Group>
+      <Segment basic>
+        <Form onSubmit={(e) => this._handleSubmit(e)}>
+          <Header as='h3' content='Account' icon={<Icon name='user' color='green' />} />
+          <Form.Group widths='equal'>
+            <Form.Input name='firstname' label='First Name' placeholder='First name' value={firstname} onChange={(e) => this._handleChange(e)} />
+            <Form.Input name='lastname' label='Last Name' placeholder='Last name' value={lastname} onChange={(e) => this._handleChange(e)} />
+          </Form.Group>
 
-        <Form.Input name='bio' label='Short Bio' placeholder='I am ...' value={ bio } onChange={(e) => this._handleChange(e)} />
+          <Form.TextArea rows='2' maxLength='250' name='bio' label='Short Bio' placeholder='I am ...' value={bio} onChange={(e) => this._handleChange(e)} />
 
-        <Form.Group widths='equal'>
-          <Form.Field>
-            <label>Looking for a team?</label>
-            <Checkbox toggle name='lookingForTeam' label='List me on the looking for team page' checked={ lookingForTeam } onChange={(e,data) => this._handleDataChange(e,data)} />
-          </Form.Field>
-        </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.Field>
+              <label>Looking for a team?</label>
+              <Checkbox toggle name='lookingForTeam' label='List me on the looking for team page' checked={lookingForTeam} onChange={(e, data) => this._handleDataChange(e, data)} />
+            </Form.Field>
+          </Form.Group>
 
-        <Form.Button type='submit' color="green" content="Save"/>
-        <Message
-         negative
-         hidden={!this.state.error}
-         icon="warning sign"
-         onDismiss={() => this.setState({ error: null })}
-         content={this.state.error ? this.state.error.reason : ''}
-        />
-        <Message
-         positive
-         hidden={!this.state.success}
-         icon="check"
-         content={this.state.success}
-        />
-      </Form>
-    </Segment>
+          <Form.Button type='submit' color="green" content="Save" />
+          <Message
+            negative
+            hidden={!this.state.error}
+            icon="warning sign"
+            onDismiss={() => this.setState({ error: null })}
+            content={this.state.error ? this.state.error.reason : ''}
+          />
+          <Message
+            positive
+            hidden={!this.state.success}
+            icon="check"
+            content={this.state.success}
+          />
+        </Form>
+      </Segment>
     );
   }
 
@@ -71,6 +71,7 @@ ProfileEditor = class ProfileEditor extends Component {
 
     const fields = pick(this.state, ['firstname', 'lastname', 'lookingForTeam', 'bio']);
 
+    // Calls the meteor method "user.update.account" in users.js
     Meteor.call('user.update.account', fields, (error, result) => {
       if (error) return this.setState({ error });
 
