@@ -2,9 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Icon, Button, Progress, Form, Popup, Header } from 'semantic-ui-react';
-import moment from 'moment';
 
 import { DIVISION_MAP } from './imports/team-helpers.js';
+import ContactModal from '../imports/contact-modal';
 
 TeamListCard = class TeamListCard extends Component {
   constructor(props) {
@@ -21,7 +21,6 @@ TeamListCard = class TeamListCard extends Component {
       division: DIVISION_MAP[team.division],
       lookingForMembers: team.lookingForMembers,
       showPasswordField: false,
-      showOwner: false,
       owner: {},
       password: '',
     };
@@ -38,7 +37,7 @@ TeamListCard = class TeamListCard extends Component {
   }
 
   render() {
-    const { division, showPasswordField, memberCount } = this.state;
+    const { division, memberCount } = this.state;
     const { team } = this.props;
     const membersLabel = `${memberCount} of 6 members`;
     const membersPercent = Math.round((memberCount / 6)*100);
@@ -70,30 +69,16 @@ TeamListCard = class TeamListCard extends Component {
       return null;
     }
 
-    const { showPasswordField, isFull, showOwner, lookingForMembers } = this.state;
+    const { showPasswordField, isFull, lookingForMembers } = this.state;
     if (isFull) return null;
 
-    let lookingBtn = null;
-    if (!showPasswordField && lookingForMembers) {
-      lookingBtn = showOwner ?
-        <Popup
-          trigger={<Button size='small' icon='minus' onClick={ () => this.setState({ showOwner: false })} />}
-          content='Hide info'
-        />
-        :
-        <Popup
-          trigger={<Button size='small' icon='eye' color='blue' onClick={ () => this.setState({ showOwner: true })} />}
-          content='Looking for Members, click for team captain info!'
-        />;
-    }
-    const ownerInfo = showOwner ? this._renderOwnerInfo() : null;
+    const lookingBtn = (!showPasswordField && lookingForMembers) ? <ContactModal /> : null;
 
-    const joinBtn = !showOwner && !showPasswordField ? <Button basic size='small' floated='right' icon='reply' labelPosition='right' content='Join Team' onClick={() => this.setState({ showPasswordField: true })}/> : null;
+    const joinBtn = !showPasswordField ? <Button basic size='small' floated='right' icon='reply' labelPosition='right' content='Join Team' onClick={() => this.setState({ showPasswordField: true })}/> : null;
     const passwordForm = showPasswordField ? this._renderPasswordField() : null;
     return (
       <Card.Content extra>
         { lookingBtn }
-        { ownerInfo }
         { joinBtn }
         { passwordForm }
       </Card.Content>
@@ -107,21 +92,6 @@ TeamListCard = class TeamListCard extends Component {
         <Button color='green' type='submit' content='Submit' size='small'/>
         <Button floated='right' color='red' inverted content='Cancel' size='small' onClick={(e) => this._cancel(e)}/>
       </Form>
-    );
-  }
-
-  _renderOwnerInfo() {
-    const { name, email, phone } = this.state.owner;
-    return (
-      <Header as='h4'>
-        <Header.Content>
-          { name }
-          <Header.Subheader>
-            <p><Icon name='mail' size='small'/><a href={`mailto:${email}`}>{email}</a></p>
-            <p><Icon name='phone' size='small'/><a href={`tel:${phone}`}>{phone}</a></p>
-          </Header.Subheader>
-        </Header.Content>
-      </Header>
     );
   }
 

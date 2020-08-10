@@ -1,16 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
+
+import ContactModal from '../../imports/contact-modal';
 
 class Users extends Component {
   render() {
-    if (!this.props.ready) return <Loading/>
+    if (!this.props.ready) return <Loading />
 
     return (
-      <Card.Group>
-        { this._users() }
+      <Card.Group itemsPerRow="3">
+        {this._users()}
       </Card.Group>
     );
   }
@@ -23,11 +24,11 @@ class Users extends Component {
             {user.name}
           </Card.Header>
           <Card.Meta>
-            { user.bio }
+            {user.bio}
           </Card.Meta>
         </Card.Content>
-        <Card.Content extra>
-          <Icon name='mail'/> <a href={`mailto:${user.getEmail()}`}>{user.getEmail()}</a>
+          <Card.Content extra>
+            <ContactModal />
         </Card.Content>
       </Card>
     ));
