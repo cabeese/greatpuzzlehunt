@@ -21,22 +21,18 @@ const CoronavirusMessage = (
               <Message color='blue' size='huge'>
                 <Message.Content>
                   <Message.Header>
-                    Due to COVID-19 and Our Priority on Safety and Health:
-                  </Message.Header>
-
-                  <Segment basic size='large' className="no-padding"
-                    style={{lineHeight: "normal"}}>
-                    It is with deep regret that we are
-                    <strong> postponing the FIFTH Annual WWU Great Puzzle Hunt </strong>
-                    until next year.
-                    Tentative date: Saturday, April 17, 2021.
-
-                    <br /><br />
-
-                    All ticket/shirt purchases will be refunded to credit card of purchaser. You will be notified via the email you used for the transaction.
-                    <br /><br />
+                    We Are Excited to Announce (Due to COVID-19 and Our Priority on Safety and Health):
+                    </Message.Header>
+                    <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
+                    <ul>
+                      <li>The FIFTH Annual WWU Great Puzzle Hunt will be held VIRTUALLY</li>
+                      <li>On Saturday, April 17, 2021</li>
+                      <li>Registration will open in January</li>
+                      <li>The event will be FREE and open to all</li>
+                      <li>Information will be updated this fall</li>
+                    </ul>
                     <center>Stay Healthy!</center>
-                  </Segment>
+                    </Segment>
                   </Message.Content>
                 </Message>
                 <br />

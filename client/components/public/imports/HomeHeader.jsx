@@ -76,9 +76,7 @@ class HomeHeader extends Component {
                   <div id="header-video-content" style={{zIndex: "2", position: "absolute", width: "100%", height: "calc(100% - 100px)", display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateZ(1px)"}}>
                     <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
                     <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
-                    <h2 className="sub-header-text">
-                      <strike>{eventDate} 9:30 AM</strike>
-                    </h2>
+                    <h2 className="sub-header-text">{eventDate} 9:30 AM</h2>
                     { this._linkButtons() }
                     <h3 style={{color: "white", textAlign: "center"}}>
                       This event is made possible thanks to
