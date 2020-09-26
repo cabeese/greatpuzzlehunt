@@ -2,7 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Container, Segment, Header, Message, Form, Icon, Button } from 'semantic-ui-react';
 
-const { eventYear} = Meteor.settings.public;
+const { eventYear } = Meteor.settings.public;
+
+import GamestateComp from '../imports/GamestateComp';
+import RegistrationClosed from '../imports/RegistrationClosed';
 
 RedeemTicket = class RedeemTicket extends Component {
   constructor(props) {
@@ -13,6 +16,18 @@ RedeemTicket = class RedeemTicket extends Component {
   }
 
   render() {
+    const { ready, gamestate } = this.props;
+
+    if (!ready) return <Loading />;
+
+    if (!gamestate.registration) {
+      return (
+        <Container>
+          <br />
+          <RegistrationClosed />
+        </Container>
+      );
+    }
     if (this.state.loading) {
       return (
         <Container><Loading/></Container>
@@ -88,3 +103,4 @@ RedeemTicket = class RedeemTicket extends Component {
       onDismiss={ (e) => this.setState({ error: null }) } />
   }
 }
+RedeemTicket = GamestateComp(RedeemTicket);

@@ -6,6 +6,8 @@ import { Container, Segment, Header, Grid, Form, Icon } from 'semantic-ui-react'
 import moment from 'moment';
 
 import TeamComp from '../imports/TeamComp';
+import GamestateComp from '../imports/GamestateComp';
+import RegistrationClosed from '../imports/RegistrationClosed';
 
 Team = class Team extends Component {
   constructor(props) {
@@ -26,17 +28,25 @@ Team = class Team extends Component {
   }
 
   render() {
+    const { gamestate, ready, team, user } = this.props;
+
+
+    if (!gamestate || !gamestate.registration) {
+      return (
+        <Container>
+        <br/>
+        <RegistrationClosed />
+        </Container>
+      );
+    } 
+
     // If you are a volunteer - hide teams all together
     const { isVolunteer } = this.state;
     if (isVolunteer) {
       browserHistory.push('/volunteer');
     }
 
-    const { ready, team, user } = this.props;
-    let content = <Loading/>;
-    if (ready) {
-      content = team ? this._renderMain() : <Segment basic><NoTeamMessage><ProfileInvites user={user}/></NoTeamMessage></Segment>;
-    }
+    let content = team ? this._renderMain() : <Segment basic><NoTeamMessage><ProfileInvites user={user}/></NoTeamMessage></Segment>;
 
     return (
       <Container>
@@ -79,3 +89,4 @@ Team.propTypes = {
 };
 
 Team = TeamComp(Team);
+Team = GamestateComp(Team);

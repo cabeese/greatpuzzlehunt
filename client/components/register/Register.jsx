@@ -4,6 +4,7 @@ import { Container, Header, Segment, Message, Accordion, Button, Icon } from 'se
 import { Link } from 'react-router';
 
 import GamestateComp from '../imports/GamestateComp';
+import RegistrationClosed from '../imports/RegistrationClosed';
 import RegisterForm from './imports/RegisterForm';
 
 const { eventYear, registrationOpenDate } = Meteor.settings.public;
@@ -32,13 +33,7 @@ class RegisterInner extends Component {
       );
     } else {
       content = (
-		<div>
-        	<Message
-          info size='large'
-          header='Registration is Closed'
-			  content={`Registration for the ${eventYear} Great Puzzle Hunt will open ${registrationOpenDate}.`}
-			/>
-		</div>
+        <RegistrationClosed />
       );
     }
 
