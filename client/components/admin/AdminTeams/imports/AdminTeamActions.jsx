@@ -4,7 +4,7 @@ import { Button, Icon } from 'semantic-ui-react';
 
 class AdminTeamActions extends Component {
   render() {
-    const { team, onToggleCheckedIn } = this.props;
+    const { team, onToggleCheckedIn, clearTeam } = this.props;
     const isCheckedIn = team.checkinConfirmed;
 
     return (
@@ -16,6 +16,12 @@ class AdminTeamActions extends Component {
           icon={ <Icon name={ team.checkinConfirmed ? 'check square' : 'square outline'}/> }
 	  content={ team.checkinConfirmed ? "Undo Check-In" : "Check-in Team"}
         />
+        <Button
+          basic
+          onClick={clearTeam}
+          icon={ <Icon name="close" /> }
+          content="Close"
+          />
       </div>
     );
   }
@@ -24,6 +30,7 @@ class AdminTeamActions extends Component {
 AdminTeamActions.propTypes = {
   team: PropTypes.object.isRequired,
   onToggleCheckedIn: PropTypes.func.isRequired,
+  clearTeam: PropTypes.func.isRequired,
 };
 
 export default AdminTeamActions;

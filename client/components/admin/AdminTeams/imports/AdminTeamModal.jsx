@@ -5,6 +5,7 @@ import { Modal } from 'semantic-ui-react';
 
 //import AdminTeamEditForm from './AdminTeamEditForm';
 import AdminTeamActions from './AdminTeamActions';
+import AdminTeamUserListTracker from './AdminTeamUserList';
 
 class AdminTeamModal extends Component {
   constructor(props) {
@@ -31,11 +32,18 @@ class AdminTeamModal extends Component {
         onClose={() => clearTeam() }
       >
         <Modal.Header>{team.name}</Modal.Header>
-        <Modal.Content>Team _id: {team._id}</Modal.Content>
+        <Modal.Content>
+          <strong>Team _id:</strong> {team._id}
+          &emsp;
+          <strong>Division:</strong> {team.division}<br />
+
+          <AdminTeamUserListTracker id={team._id} />
+        </Modal.Content>
         <Modal.Actions>
           <AdminTeamActions
             team={team}
             onToggleCheckedIn={(e) => this._toggleCheckedIn(e)}
+            clearTeam={this.props.clearTeam}
           />
         </Modal.Actions>
       </Modal>
