@@ -43,7 +43,7 @@ ProfileTeamPreview = class ProfileTeamPreview extends Component {
   }
 
   _renderWithoutTeam() {
-    return (
+    return ( // NoTeamMessage.jsx is in team
       <NoTeamMessage>
         <ProfileInvites user={ this.props.user }/>
         <p></p>
