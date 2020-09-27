@@ -73,6 +73,7 @@ Meteor.publish('teams.browse', function() {
       division:1,
       owner: 1,
       lookingForMembers: 1,
+      bio: 1
     },
   });
 });

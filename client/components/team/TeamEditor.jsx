@@ -29,10 +29,11 @@ TeamEditor = class TeamEditor extends Component {
         password: team.password || '',
         division: team.division || null,
         lookingForMembers: (team.lookingForMembers || false),
+        bio: team.bio || '',
         checkedIn: team.checkinConfirmed,
       };
     }
-    return { name: '', password: '', division: null, lookingForMembers: false, checkedIn: false};
+    return { name: '', password: '', division: null, lookingForMembers: false, bio: '', checkedIn: false};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,12 +60,18 @@ TeamEditor = class TeamEditor extends Component {
           <br/>
           {this._renderDivisionRadio()}
         </Form.Field>
+        <Form.TextArea 
+          name='bio'
+          label='Bio'
+          value={this.state.bio} 
+          rows='2' maxLength='250' placeholder='We are...'
+          onChange={(e, d) => this._handleTextChange(e, d)} />
         <Form.Field>
           <label>Looking for members?</label>
           <Checkbox
             toggle
             name='lookingForMembers'
-            label="Show this team as looking for members on the join team page. (This will display team creator's contact information)"
+            label="Show this team as looking for members on the join team page. (requests to join will be emailed to the team creator)"
             checked={ this.state.lookingForMembers }
             onChange={ (e,data) => this._handleDataChange(e,data) }
           />
@@ -151,9 +158,9 @@ TeamEditor = class TeamEditor extends Component {
 
   _teamData() {
     const { team } = this.props;
-    const { name, password, division, lookingForMembers } = this.state;
+    const { name, password, division, lookingForMembers, bio } = this.state;
     return {
-      name, password, division, lookingForMembers,
+      name, password, division, lookingForMembers, bio,
       _id: team ? team._id : undefined,
     };
   }

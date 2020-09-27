@@ -15,6 +15,8 @@ TeamListCard = class TeamListCard extends Component {
       this.setState({ owner });
     });
 
+    console.log(team);
+
     this.state = {
       isFull: team.members.length >= 6,
       memberCount: team.members.length,
@@ -22,6 +24,7 @@ TeamListCard = class TeamListCard extends Component {
       lookingForMembers: team.lookingForMembers,
       showPasswordField: false,
       owner: {},
+      bio: team.bio,
       password: '',
     };
   }
@@ -44,7 +47,7 @@ TeamListCard = class TeamListCard extends Component {
     const progressColor = this._getProgressColor(memberCount);
 
     return (
-      <Card centered>
+      <Card color={this.state.lookingForMembers && !this.props.public ? 'red' : null} centered>
         <Card.Content>
           <Card.Header>{ team.name }</Card.Header>
           <Card.Meta><Icon name='sitemap'/> { division }</Card.Meta>
@@ -73,11 +76,11 @@ TeamListCard = class TeamListCard extends Component {
     if (isFull) return null;
 
     const lookingBtn = (!showPasswordField && lookingForMembers) ? <ContactModal /> : null;
-
     const joinBtn = !showPasswordField ? <Button basic size='small' floated='right' icon='reply' labelPosition='right' content='Join Team' onClick={() => this.setState({ showPasswordField: true })}/> : null;
     const passwordForm = showPasswordField ? this._renderPasswordField() : null;
     return (
       <Card.Content extra>
+        { lookingForMembers ? this.state.bio : null }
         { lookingBtn }
         { joinBtn }
         { passwordForm }
@@ -93,6 +96,15 @@ TeamListCard = class TeamListCard extends Component {
         <Button floated='right' color='red' inverted content='Cancel' size='small' onClick={(e) => this._cancel(e)}/>
       </Form>
     );
+  }
+
+  _renderLookingForTeamField() {
+    return (
+      <section>
+        <p>{ this.state.bio }</p>
+        
+      </section>
+    )
   }
 
   _handlePasswordSubmit(e) {
