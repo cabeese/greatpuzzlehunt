@@ -50,7 +50,7 @@ Profile = class Profile extends Component {
       Last Updated: {this.state.updatedAt}
       <ProfileEditor user={this.props.user} />
 
-      {/* {showTeamPreview ? <ProfileTeamPreview /> : null } */} {/* commented for testing purposes, as this line breaks the server */}
+      {showTeamPreview ? <ProfileTeamPreview /> : null }
 
       <PasswordEditor />
     </Container>
