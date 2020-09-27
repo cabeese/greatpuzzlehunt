@@ -80,7 +80,7 @@ TeamListCard = class TeamListCard extends Component {
     const passwordForm = showPasswordField ? this._renderPasswordField() : null;
     return (
       <Card.Content extra>
-        { lookingForMembers ? this.state.bio : null }
+        { this.state.bio }
         { lookingBtn }
         { joinBtn }
         { passwordForm }
