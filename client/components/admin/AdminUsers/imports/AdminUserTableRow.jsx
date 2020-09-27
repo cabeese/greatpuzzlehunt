@@ -68,6 +68,9 @@ class AdminUserTableRow extends Component {
   }
 
   _team() {
+    if (this.props.user.teamName == "") {
+      return this.props.user.lookingForTeam ? "LFT" : "Not LFT";
+    }
     return this.props.user.teamName;
   }
 
