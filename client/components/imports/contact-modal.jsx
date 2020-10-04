@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal } from 'semantic-ui-react';
+import { Button, Modal, Form, TextArea } from 'semantic-ui-react';
 
 class ContactModal extends Component {
   render() {
@@ -7,9 +7,14 @@ class ContactModal extends Component {
       <Modal
         closeIcon
         trigger={<Button>Contact</Button>}
+        closeOnDimmerClick={false}
         header='Contact'
-        content='Test Content'
-        actions={['Cancel', { key: 'send', content: 'Send', positive: true }]}
+        content={
+          <Form>
+            <TextArea placeholder='Write why you want to join this team!' />
+          </Form>
+        }
+        actions={[{ key: 'cancel', content: 'Cancel', negative: true}, { key: 'send', content: 'Send', positive: true }]}
         />
 	  );
   }

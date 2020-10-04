@@ -15,8 +15,6 @@ TeamListCard = class TeamListCard extends Component {
       this.setState({ owner });
     });
 
-    console.log(team);
-
     this.state = {
       isFull: team.members.length >= 6,
       memberCount: team.members.length,
