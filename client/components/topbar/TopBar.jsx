@@ -57,6 +57,11 @@ const mainMenuLinks = [
     to: '/qrcode',
     iconClass: 'grey qrcode',
   },
+  {
+    name: 'Gear',
+    to: '/gear',
+    iconClass: 'green dollar sign',
+  }
 ];
 
 const adminMenuItems = [
