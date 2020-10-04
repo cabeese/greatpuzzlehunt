@@ -28,12 +28,13 @@ TeamEditor = class TeamEditor extends Component {
         name: team.name || '',
         password: team.password || '',
         division: team.division || null,
+        members: team.members || null,
         lookingForMembers: (team.lookingForMembers || false),
         bio: team.bio || '',
         checkedIn: team.checkinConfirmed,
       };
     }
-    return { name: '', password: '', division: null, lookingForMembers: false, bio: '', checkedIn: false};
+    return { name: '', password: '', division: null, members: null, lookingForMembers: false, bio: '', checkedIn: false};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -158,9 +159,9 @@ TeamEditor = class TeamEditor extends Component {
 
   _teamData() {
     const { team } = this.props;
-    const { name, password, division, lookingForMembers, bio } = this.state;
+    const { name, password, division, members, lookingForMembers, bio } = this.state;
     return {
-      name, password, division, lookingForMembers, bio,
+      name, password, division, members, lookingForMembers, bio,
       _id: team ? team._id : undefined,
     };
   }
