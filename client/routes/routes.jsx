@@ -12,6 +12,7 @@ export const renderRoutes = () => (
       <IndexRoute component={Home}/>
       <Route path='teams-list' component={PublicTeamList}/>
       <Route path='Media' component={Media}/>
+      <Route path='Gear' component={Gear} />
       <Route path='contact' component={Contact}/>
       <Route path='puzzles' component={SamplePuzzles}/>
       <Route path='faq' component={FAQ}/>
