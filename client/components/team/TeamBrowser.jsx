@@ -40,9 +40,9 @@ TeamBrowser = class TeamBrowser extends Component {
 
   render() {
     return (
-      <Container>
-        <PuzzlePageTitle title={this._getTitle()} />
+      <Container className="section">
         <Segment basic>
+        <PuzzlePageTitle title={this._getTitle()} />
           <Header as='h3' icon={<Icon name='options' color='violet'/>} content='Options'/>
           <Form>
             <Form.Group widths='equal'>

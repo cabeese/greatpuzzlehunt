@@ -6,7 +6,8 @@ import LinkButton from '../../imports/LinkButton';
 export default class HomeDonate extends Component {
   render() {
     return (
-      <Container>
+      <Container className="section">
+      <Segment basic>
       <section id="donate-message">
 
         <Grid centered textAlign="left" padded stackable style={{ padding: '2em 0em', margin:'0'}}>
@@ -47,6 +48,7 @@ export default class HomeDonate extends Component {
           </Grid.Row>
         </Grid>
       </section>
+      </Segment>
       </Container>
     );
   }

@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 import HomePeople from './imports/HomePeople';
 import ProfileCards from './imports/ProfileCards';
 import ICEContact from '../imports/ice-contact';
+import {Container, Segment} from 'semantic-ui-react';
 
 
 Contact = class Contact extends Component {
 
   render() {
     return (
-    <div className="ui container">
+      <Container className="section">
+      <Segment basic>
       <PuzzlePageTitle title="Contact"/>
       <ICEContact/>
       <h3>
@@ -19,7 +21,9 @@ Contact = class Contact extends Component {
       </h3>
       <HomePeople />
       <ProfileCards />
-    </div>
+
+      </Segment>
+      </Container>
     );
   }
 

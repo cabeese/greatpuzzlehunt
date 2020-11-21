@@ -7,19 +7,10 @@ PuzzlePageTitle = class PuzzlePageTitle extends Component {
       fontSize: '.65em',
     };
     return (
-    <Grid stackable padded className='puzzle-page-title filling'>
-      <Grid.Row>
-        <Grid.Column>
-          <Segment basic>
-            <br />
-            <h1 className='dark-blue'>
-              {this.props.title}<br/>
-              {/* <small style={ smallStyle }>{this.props.subTitle}</small> */}
-            </h1>
-          </Segment>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+       <h1 className='dark-blue'>
+         {this.props.title}
+         {/* <small style={ smallStyle }>{this.props.subTitle}</small> */}
+        </h1>
     );
   }
 }

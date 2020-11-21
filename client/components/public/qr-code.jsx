@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import QR from 'qrcode.react';
+import {Container, Segment} from 'semantic-ui-react';
 
 QRCode = class QRCode extends Component {
 
@@ -47,7 +48,8 @@ QRCode = class QRCode extends Component {
 
   render() {
     return (
-    <div className="ui container">
+      <Container className="section">
+      <Segment basic>
 
       <PuzzlePageTitle title="QR Encoder" subTitle="" />
 
@@ -82,7 +84,8 @@ QRCode = class QRCode extends Component {
           <img className="ui hidden image" ref="qrPreview" src="#" alt="QR Code Image" />
         </form>
       </div>
-    </div>
+      </Segment>
+      </Container>
     );
   }
 }

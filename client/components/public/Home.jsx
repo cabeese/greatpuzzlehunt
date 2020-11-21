@@ -38,7 +38,6 @@ const CoronavirusMessage = (
                     </Segment>
                   </Message.Content>
                 </Message>
-                <br />
             </Container>
           </Grid.Column>
         </Grid.Row>

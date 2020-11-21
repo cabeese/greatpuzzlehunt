@@ -1,12 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Container, Image, Divider, Icon } from 'semantic-ui-react';
+import { Container, Segment, Image, Divider, Icon } from 'semantic-ui-react';
 
 Media = class Media extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className="section">
+      <Segment basic>
         <PuzzlePageTitle title="Media" subTitle={<span>Photo Credit: <a href="http://www.gabrielleponcz.com/" target="_blank">Gabrielle Poncz</a></span>} />
 
         <h2 style={{fontWeight: "600"}}>Check out videos of past Hunts on our 
@@ -123,6 +124,7 @@ Media = class Media extends Component {
             target='_blank'
             />
         </Image.Group>
+      </Segment>
       </Container>
     );
   }

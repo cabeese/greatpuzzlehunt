@@ -17,7 +17,8 @@ const { eventYear } = Meteor.settings.public;
 RulesOfPlay = class RulesOfPlay extends Component {
   render() {
     return (
-      <Container>
+      <Container className="section">
+      <Segment basic>
         <PuzzlePageTitle title={`${eventYear} Rules of Play`}/>
 
         {/* SCROLL TO BUTTONS */}
@@ -132,6 +133,7 @@ RulesOfPlay = class RulesOfPlay extends Component {
               </code></pre>
             </List.Item>
           </List>
+        </Segment>
         </Segment>
       </Container>
     );
