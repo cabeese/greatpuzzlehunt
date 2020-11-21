@@ -23,7 +23,6 @@ App = class App extends Component {
       <ScrollToTop showUnder={1000}>
         <Button labelPosition="right" icon="up arrow" content="Scroll Up" className='scroll-top-btn'/>
       </ScrollToTop>
-
     </div>
     );
   }
