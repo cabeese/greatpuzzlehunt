@@ -121,8 +121,10 @@ FAQ = class FAQ extends Component {
   render() {
     const { activeIndex } = this.state;
     return (
-      <Container>
+      <Container className="section">
+      <Segment basic>
         <PuzzlePageTitle title="FAQ"/>
+
 
         <Accordion styled fluid>
 
@@ -480,6 +482,7 @@ FAQ = class FAQ extends Component {
 
         <br/>
         <p>Last Updated: January 2020</p>
+      </Segment>
       </Container>
     );
   }

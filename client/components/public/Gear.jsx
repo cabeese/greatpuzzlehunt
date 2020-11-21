@@ -1,13 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 
-import { Container } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 
 Gear = class Gear extends Component {
   
   render() {
     return (
-      <Container>
+      <Container className="section">
+      <Segment basic>
         <PuzzlePageTitle title="Gear" subTitle=""/>
         <h2>Our 2020 Design!</h2><a name="design"></a>
         <div class="littlelinks">
@@ -350,6 +351,7 @@ Gear = class Gear extends Component {
         </ul>
        <p class="centered"><a class="button" href="#top">Return to Top</a></p>
         
+      </Segment>
       </Container>
     )
   }

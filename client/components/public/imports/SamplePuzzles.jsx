@@ -33,15 +33,13 @@ export default class SamplePuzzles extends Component {
 
   render() {
     return (
-      <section id="SamplePuzzles">
         
-        <Container>
-          <Grid padded centered textAlign="left" stackable style={{ padding: '4em 0em', margin:'0'}} >
+        <Container className="section">
+          <Segment basic>
+          <PuzzlePageTitle title="Sample Puzzles" />
+          <Grid padded centered textAlign="left" stackable>
             <Grid.Row>
               <Grid.Column width={16}>
-                <Header size="huge">
-                  Sample Puzzles (from the 2016 hunt)
-                </Header>
                 Below You can find some of the past Puzzles. Download them and try to solve them for yourself.
               </Grid.Column>
             </Grid.Row>
@@ -51,9 +49,9 @@ export default class SamplePuzzles extends Component {
 
           </Grid>
           <Image fluid src="/img/2016/event-photos/team-the-purple-penguins-thin.jpg"/>
+        </Segment>
        </Container>
        
-    </section>
     )
   }
 
