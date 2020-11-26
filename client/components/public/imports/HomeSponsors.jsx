@@ -11,7 +11,7 @@ export default class HomeSponsors extends Component {
       <section id="sponsors">
         <Grid centered textAlign="left" padded stackable style={{ padding: '2em 0em', margin:'0'}}>
           {this._sponsors()}
-          {this._thanks()}
+          {/* {this._thanks()} */}
         </Grid>
         {/* <Image fluid src="/img/2016/event-photos/team-saxaphone-bugs-thin.jpg"/> */}
       </section>

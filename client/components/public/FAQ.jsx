@@ -29,49 +29,70 @@ const wristbandNote = (
 
 const gearPricing = (
   <span>
-    <strong>Official Puzzle Gear Pricing</strong>
-    <ul>
+    <strong>Official Puzzle Gear Pricing (See <a href="/gear">gear</a>)</strong>
+    {/* <ul>
       <li>Early Bird Discount Price (varying styles: prices range from $11-$27, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
       <li>Regular Price (varying styles: prices range from $14-$30, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
       <li>Gear sale ends midnight {gearSaleEnd}</li>
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
+    </ul> */}
+    <ul>
+      <li>Prices on varying styles range from $14&ndash;$30, additional $2 for extended sizees. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}. <b>FREE Domestic shipping. Discounted international shipping. Bonus: cool swag included with every shirt purchase!</b></li>
+      <li>Gear sales end midnight {gearSaleEnd}</li>
+      <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
+    <p>
+      These fees are kept low thanks to generous donations from our sponsors. They help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more.
+    </p>
+    <p>
+      Please consider <a target="_blank" href="https://foundation.wwu.edu/greatpuzzlehunt">donating to the Great Puzzle Hunt</a>.
+    </p>
+    <p>
+    The WWU Great Puzzle Hunt operates under WWU's 501(c)(3) status, so all donations are tax deductible. 
+    </p>
+
   </span>
 );
 
 const importantDates = (
   <List className='bulleted'>
-    <List.Item><strong>{earlyBirdLastDate}</strong>: Early Bird discount prices for ticket codes and official gear end.</List.Item>
-    <List.Item><strong>{gearSaleEnd}</strong>: Official Puzzle Hunt Gear Pre-Order deadline (pick up your gear at check-in on {eventDate})</List.Item>
-    <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration Closes (Or earlier if team limit is reached). <br/>If you've already created an account you can purchase and redeem a ticket codes up until {eventDate} at 9:30 AM.</List.Item>
+    {/* <List.Item><strong>{earlyBirdLastDate}</strong>: Early Bird discount prices for ticket codes and official gear end.</List.Item> */}
+    <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
+    <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
+    <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can acquire, redeem ticket code(s), and join a team until 10:15 AM (PST).</List.Item>
+    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes. <b>Free Domestic shipping + Bonus: cool swag included with every shirt purchase!</b></List.Item>
   </List>
 );
 
 const schedule_data = [
   {
-    time: "9:30 - 10:15 AM",
-    desc: "Red Square Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
+    time: "9:30 - 10:30 AM (PST)",
+    // desc: "Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
+    desc: "Check-in: Download info packet and all puzzles plus meta puzzle. ALL PUZZLES ARE CODE PROTECTED. Packet can be opened upon download."
   },
   {
-    time: "10:15 AM",
-    desc: "Red Square: Announcements."
+    time: "10:30 AM (PST)",
+    // desc: "Red Square: Announcements."
+    desc: "Puzzle Hunt Starts. Enter team code to open a downloaded puzzle."
   },
   {
-    time: "10:30 AM",
-    desc: "Red Square: Puzzle Hunt starts!"
+    time: "4:30 PM (PST)",
+    // desc: "Red Square: Puzzle Hunt starts!"
+    desc: "Puzzle Hunt Ends."
   },
   {
-    time: "1:00 - 3:00 PM",
-    desc: "Red Square: KUGS Radio plays music. Domino's pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants."
+    time: "5:00 PM (PST)",
+    // desc: "Red Square: KUGS Radio plays music. Domino's pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants."
+    desc: "Leaderboard Posted, Prizes Awarded!"
   },
-  {
-    time: "4:25 PM",
-    desc: "Puzzle Stations close. Finish Puzzles and return to Red Square."
-  },
-  {
-    time: "4:30 - 5:00 PM",
-    desc: "Red Square: Award Ceremony & Prizes**!"
-  },
+  // {
+  //   time: "4:25 PM",
+  //   desc: "Puzzle Stations close. Finish Puzzles and return to Red Square."
+  // },
+  // {
+  //   time: "4:30 - 5:00 PM",
+  //   desc: "Red Square: Award Ceremony & Prizes**!"
+  // },
 ]
 
 const schedule = (
@@ -101,7 +122,7 @@ FAQ = class FAQ extends Component {
 
         <Accordion styled fluid>
 
-          <Accordion.Title active={activeIndex === 1} index={1} onClick={(e,p) => this.handleClick(e,p)} >
+          {/* <Accordion.Title active={activeIndex === 1} index={1} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="map"/>
             Directions & Parking
@@ -145,7 +166,7 @@ FAQ = class FAQ extends Component {
             <br/>
 
             <iframe frameBorder="0" height="450" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDzFT6fltUNTF7Vas25IJmMkUAa5yVPi4I&amp;q=Campus+Services+Bellingham+WA" width="100%" />
-          </Accordion.Content>
+          </Accordion.Content> */}
 
           <Accordion.Title active={activeIndex === 2} index={2} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="red" size="huge" name="dropdown"/>
@@ -155,11 +176,17 @@ FAQ = class FAQ extends Component {
           <Accordion.Content active={activeIndex === 2}>
             The annual WWU Great Puzzle Hunt is a fun, full-day, team puzzle-solving event that is <strong>OPEN TO ALL!</strong>
             <ul>
-              <li>Teams of up to 6 (recommended size 4-6) travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
+              {/* <li>Teams of up to 6 (recommended size 4-6) travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
               <li><strong>Your mission</strong>: HAVE FUN! Reach the outdoor location shown on your smartphone and scan your team code (which starts clock) to receive a puzzle. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you are sent to the next destination. Connect all the code words to complete the game!</li>
               <li>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</li>
               <li>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone.</li>
               <li>Prizes* are awarded in each division for best: times, costumes, and team names.</li>
+              <li>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</li> */}
+              <li>Teams of up to 6 (recommended size 4-6) solve a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
+              <li><b>Your mission</b>: HAVE FUN! Check in on morning of Hunt to download the info packet and puzzles. At START time, enter your team code to open puzzle and start your team clock. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you may open the next puzzle. Connect all the code words to complete the game!</li>
+              <li>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</li>
+              <li>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone or computer.</li>
+              <li>Prizes are awarded to top three scoring teams in each division.</li>
               <li>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</li>
             </ul>
             <strong>* </strong>{prizeNote}
@@ -192,7 +219,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 4}>
             <h3>
-              <strong>{eventDate}</strong> at 9:30 AM, Red Square, WWU
+              <strong>{eventDate}</strong> at 9:30 AM (PST)
             </h3>
             Other important dates:
             {importantDates}
@@ -211,9 +238,10 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 5}>
             <p>
-              Students, Faculty, Staff, Alumni, Community, Everyone!
+              Students, Faculty, Staff, Alumni, Community, Everyone, Anywhere!
             </p>
-            <strong>*</strong> Children under 14 must be accompanied at all times by a parent/legal guardian who must also be registered on the same team as the child.
+            {/* <strong>*</strong> Children under 14 must be accompanied at all times by a parent/legal guardian who must also be registered on the same team as the child. */}
+            *Each participant under age 14 must have permission from a parent/legal guardian. The puzzles are created for ages 14 and older.
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 6} index={6} onClick={(e,p) => this.handleClick(e,p)} >
@@ -243,7 +271,7 @@ FAQ = class FAQ extends Component {
             <span>Contact us to:</span>
             <List.Item
                 header="Create a Division*"
-                description="Examples: Family Division or Club (Dance, Running, Book, Garden, Wine, ...) where team members are family or in that club."
+                description="Examples: Family Division, COVID Pod, or Club (Dance, Running, Book, Garden, Wine, &#x2026;) where team members are family or in that club."
              />
              </List>
              <p>* A minimum of 10 teams are required to form a division; else the teams in that division may merge with another division.</p>
@@ -259,9 +287,9 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 7}>
             <p>
-              Awesome prizes* will be awarded to top three teams in each division. Other prizes* for best team names, costumes, and more!
+              Awesome prizes will be awarded to top three teams in each division.
             </p>
-            <strong>* </strong>{prizeNote}
+            {/* <strong>* </strong>{prizeNote} */}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 8} index={8} onClick={(e,p) => this.handleClick(e,p)} >
@@ -270,7 +298,7 @@ FAQ = class FAQ extends Component {
             How much does this cost?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 8}>
-            <p>
+            {/* <p>
               Registration Prices are per person. All fees are non-refundable. Fees charged when person buys ticket codes.<br/>
               You can SAVE on the early bird discount prices!
             </p>
@@ -288,7 +316,9 @@ FAQ = class FAQ extends Component {
             {prizeNote}
             <p>
               Please consider <a target="_blank" href="https://alumni.wwu.edu/greatpuzzlehunt">donating to the {siteName}</a>.
-            </p>
+            </p> */}
+            <p>We know people are stretched in these times. We want to provide a safe, no cost, educational, fun activity accessible to all.</p>
+            <p>This year, Registration is FREE. Donations are gratefully accepted and will help keep us afloat!</p>
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 9} index={9} onClick={(e,p) => this.handleClick(e,p)} >
@@ -322,7 +352,7 @@ FAQ = class FAQ extends Component {
             knowledge of music, art, humanities and social sciences, as well as science and mathematics.
           </Accordion.Content>
 
-          <Accordion.Title active={activeIndex === 12} index={12} onClick={(e,p) => this.handleClick(e,p)} >
+          {/*<Accordion.Title active={activeIndex === 12} index={12} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="teal" name="dropdown"/>
             <Icon name="food"/>
             Food?
@@ -340,20 +370,20 @@ FAQ = class FAQ extends Component {
               <List.Item description="9:30 AM - Check in/receive wristband. Refreshments area opens along Miller Hall."/>
               <List.Item description="1:00 - 3:00 PM - Domino’s Pizza Arrives in Red Square"/>
             </List>
-            <p>
+             <p>
               Special thanks to Market Street Catering of <a target="_blank" href="http://www.haggen.com/">Haggen NW Fresh</a> for providing fresh fruit and
               breakfast pastries including gluten free (GF) option, and fresh brewed coffee!
             </p>
-          </Accordion.Content>
+          </Accordion.Content>*/}
 
-          <Accordion.Title active={activeIndex === 13} index={13} onClick={(e,p) => this.handleClick(e,p)} >
+          {/* <Accordion.Title active={activeIndex === 13} index={13} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="blue" name="dropdown"/>
             <Icon name="rain"/>
             What if it rains?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 13}>
             Welcome to Washington.  We hunt on!
-          </Accordion.Content>
+          </Accordion.Content> */}
 
           <Accordion.Title active={activeIndex === 14} index={14} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="blue" name="dropdown"/>
