@@ -37,7 +37,7 @@ const gearPricing = (
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul> */}
     <ul>
-      <li>Prices on varying styles range from $14&ndash;$30, additional $2 for extended sizees. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}. <b>FREE Domestic shipping. Discounted international shipping. Bonus: cool swag included with every shirt purchase!</b></li>
+      <li>Prices on varying styles range from $14&ndash;$30, additional $2 for extended sizees. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}. <b>FREE Domestic shipping. Discounted international shipping. Bonus: cool swag included with every shipment!</b></li>
       <li>Gear sales end midnight {gearSaleEnd}</li>
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
@@ -48,7 +48,7 @@ const gearPricing = (
       Please consider <a target="_blank" href="https://foundation.wwu.edu/greatpuzzlehunt">donating to the Great Puzzle Hunt</a>.
     </p>
     <p>
-    The WWU Great Puzzle Hunt operates under WWU's 501(c)(3) status, so all donations are tax deductible. 
+    The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. 
     </p>
 
   </span>
@@ -59,16 +59,20 @@ const importantDates = (
     {/* <List.Item><strong>{earlyBirdLastDate}</strong>: Early Bird discount prices for ticket codes and official gear end.</List.Item> */}
     <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
     <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
-    <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can acquire, redeem ticket code(s), and join a team until 10:15 AM (PST).</List.Item>
-    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes. <b>Free Domestic shipping + Bonus: cool swag included with every shirt purchase!</b></List.Item>
+    <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can acquire, redeem ticket code(s), and join a team until 10:00 AM (PST).</List.Item>
+    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes. <b>Free Domestic shipping + Bonus: cool swag included with every shipment!</b></List.Item>
   </List>
 );
 
 const schedule_data = [
   {
-    time: "9:30 - 10:30 AM (PST)",
+    time: "9:30–10:15 AM (PST)",
     // desc: "Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
     desc: "Check-in: Download info packet and all puzzles plus meta puzzle. ALL PUZZLES ARE CODE PROTECTED. Packet can be opened upon download."
+  },
+  {
+    time: "10:15 AM (PST)",
+    desc: <span>Live Stream Announcements (<a href="#">Link TBA</a>)</span>
   },
   {
     time: "10:30 AM (PST)",
@@ -83,7 +87,7 @@ const schedule_data = [
   {
     time: "5:00 PM (PST)",
     // desc: "Red Square: KUGS Radio plays music. Domino's pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants."
-    desc: "Leaderboard Posted, Prizes Awarded!"
+    desc: <span>Leaderboard Posted, Live stream—Prizes Awarded! (<a href="#">Link TBA</a>)</span>
   },
   // {
   //   time: "4:25 PM",
@@ -98,7 +102,7 @@ const schedule_data = [
 const schedule = (
   <List>
     {schedule_data.map((item, idx) => (
-      <List.Item header={item.time} description={item.desc} key={idx}/>
+      <List.Item header={item.time} content={item.desc} key={idx}/>
     ))}
   </List>
 );
@@ -167,7 +171,26 @@ FAQ = class FAQ extends Component {
 
             <iframe frameBorder="0" height="450" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDzFT6fltUNTF7Vas25IJmMkUAa5yVPi4I&amp;q=Campus+Services+Bellingham+WA" width="100%" />
           </Accordion.Content> */}
-
+          <Accordion.Title active={activeIndex === 1} index={1} onClick={(e,p) => this.handleClick(e,p)} >
+            <Icon color="red" size="huge" name="dropdown"/>
+            <Icon name="info"/>
+            Safety
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 1}>
+            In support of safety, teammates:
+            <ul>
+              <li>From different households may connect via a video conferencing platform (Zoom, Discord, Skype, &#8230;)</li>
+              <li>In the same physical space may follow the <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html">CDC recommendations</a>. Partial list:
+                <ul>
+                  <li>Avoid close contact&mdash;meet outdoors</li>
+                  <li>Wash Hands</li>
+                  <li>Cover mouth and nose with a mask</li>
+                  <li>Cover coughs and sneezes</li>
+                  <li>Clean and disinfect</li>
+                </ul>
+              </li>
+            </ul>
+          </Accordion.Content>
           <Accordion.Title active={activeIndex === 2} index={2} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="info"/>
@@ -211,7 +234,14 @@ FAQ = class FAQ extends Component {
             <br /><br />
             We recommend 4-6 people on a team. It can be an advantage to divvy up the work (cutting, constructing, googling, etc.).
           </Accordion.Content>
-
+          <Accordion.Title active={activeIndex === 17} index={17} onClick={(e,p) => this.handleClick(e,p)} >
+            <Icon color="yellow" name="dropdown" />
+            <Icon name="user"/>
+            Don't Have a team?
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 17}>
+              First create an account. Teams looking for members here: <a href="#">Temporary link!!</a>
+          </Accordion.Content>
           <Accordion.Title active={activeIndex === 4} index={4} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="yellow" name="dropdown"/>
             <Icon name="calendar"/>
@@ -238,7 +268,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 5}>
             <p>
-              Students, Faculty, Staff, Alumni, Community, Everyone, Anywhere!
+              Students, Faculty, Staff, Alumni, Community, Family, Everyone, Anywhere!
             </p>
             {/* <strong>*</strong> Children under 14 must be accompanied at all times by a parent/legal guardian who must also be registered on the same team as the child. */}
             *Each participant under age 14 must have permission from a parent/legal guardian. The puzzles are created for ages 14 and older.
@@ -251,6 +281,28 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 6}>
             <List className='bulleted'>
+              <List.Item 
+                header="WWU Students"
+                description="All team members must be currently enrolled at WWU (undergrad or grad)."
+              />
+              <List.Item 
+                header="Postsecondary Students"
+                description="All team members must be currently enrolled in college (undergrad or grad), technical school, running start. Mix and match-team members from same or different schools."
+              />
+              <List.Item
+                header="Secondary Students"
+                description="All team members must be currently enrolled in middle school or high school. Exception: One adult chaperone per team may register as a team member."
+              />
+              <List.Item
+                header="WWU Alumni"
+                description="At least half of team members must be WWU Alumni"
+              />
+              <List.Item 
+                header="Open"
+                description="General public, mixed student/non-student, family (participants under age 14 must have permission from parent/guardian)."
+              />
+            </List>
+            {/* <List className='bulleted'>
               <List.Item
                 header="WWU Students"
                 description="All team members must be currently enrolled at WWU (undergrad or grad)."
@@ -273,7 +325,7 @@ FAQ = class FAQ extends Component {
                 header="Create a Division*"
                 description="Examples: Family Division, COVID Pod, or Club (Dance, Running, Book, Garden, Wine, &#x2026;) where team members are family or in that club."
              />
-             </List>
+             </List> */}
              <p>* A minimum of 10 teams are required to form a division; else the teams in that division may merge with another division.</p>
             <hr />
 
@@ -324,7 +376,7 @@ FAQ = class FAQ extends Component {
           <Accordion.Title active={activeIndex === 9} index={9} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="green" name="dropdown"/>
             <Icon name="suitcase"/>
-            What should I bring?
+            What should I have on hand?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
             Your creativity and problem solving skills! Along with the following:<br/>

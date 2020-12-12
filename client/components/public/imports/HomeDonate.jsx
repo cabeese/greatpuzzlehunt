@@ -25,7 +25,7 @@ export default class HomeDonate extends Component {
                   <li><a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">Sponsoring</a> a student or team that needs help to participate.</li>
                   <li>Non-monetary support such as <a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">prizes</a> or <a href="/register">signing up</a> as a volunteer!</li>
                 </ul> */}
-                The WWU Great Puzzle Hunt operates under WWU's 501(c)(3) status, so all donations are tax deductible. 
+                The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. 
               </Segment>
               <LinkButton as='a'
                 href="https://foundation.wwu.edu/greatpuzzlehunt"

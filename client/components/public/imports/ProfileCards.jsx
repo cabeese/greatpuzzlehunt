@@ -11,7 +11,6 @@ export default class ProfileCards extends Component {
       {
         name: 'Millie Johnson',
         title: 'Director, Founder, Puzzle Creator',
-        role: 'Primary event coordinator, puzzle creator, and founder of the Great Puzzle Hunt',
         image: '/img/2016/event-photos/millie_johnson.jpg',
       },
       {

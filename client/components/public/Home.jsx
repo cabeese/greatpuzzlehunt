@@ -25,12 +25,14 @@ const CoronavirusMessage = (
                     </Message.Header>
                     <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <ul>
-                      <li>The FIFTH Annual WWU Great Puzzle Hunt will be held VIRTUALLY</li>
-                      <li>On Saturday, April 17, 2021 from 9:30 AM&ndash;5:00 PM (PST)</li>
-                      <li>Registration will open in January</li>
+                      <li>The FIFTH Annual WWU Great Puzzle Hunt will be held <b>VIRTUALLY</b></li>
+                      <li>On Saturday, April 17, 2021</li>
+                      <li>Registration and Gear Sales open January 5, 2021</li>
+                      <li>The event is FREE (donations accepted) and open to all, anywhere in the world</li>
+                      <li>Teammates need to be able to safely communicate with one another (See Safety <a href="/faq">FAQ</a>)</li>
                     </ul>
-                    The event will be FREE and open to all (donations gratefully accepted)<br />
-                    <br /><center>Stay Healthy!</center>
+                    <br/>
+                   <center>Stay Healthy!</center>
                     </Segment>
                   </Message.Content>
                 </Message>
