@@ -51,6 +51,7 @@ class HomeEarlyBird extends Component {
            <br/>
            </Grid.Row>
             <Grid.Row centered width={16} columns={2}>
+            <p>Don't have a team? See our <a href="/faq">FAQ</a></p>
               {/* <Grid.Column>
                  <Header size="medium" style={{color: "white"}}>Early Bird Registration</Header>
                   {registrationOpenDate} through {earlyBirdLastDate}<br /><br />
