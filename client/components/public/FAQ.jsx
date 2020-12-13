@@ -240,7 +240,7 @@ FAQ = class FAQ extends Component {
             Don't Have a team?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 17}>
-              First create an account. Teams looking for members here: <a href="#">Temporary link!!</a>
+              First create an account. Teams looking for members here: (<a href="#">TBA</a>)
           </Accordion.Content>
           <Accordion.Title active={activeIndex === 4} index={4} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="yellow" name="dropdown"/>
