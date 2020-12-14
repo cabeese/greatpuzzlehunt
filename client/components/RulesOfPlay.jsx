@@ -43,7 +43,10 @@ RulesOfPlay = class RulesOfPlay extends Component {
         <Segment basic>
           <Header id="do" as='h2' icon={<Icon name="check" color="green"/>} content="Do"/>
           <List bulleted relaxed size="large">
-            <List.Item>Use the internet! Google things!</List.Item> {/*For public Wi-Fi, select <strong>WWUwireless-Guest</strong>. (<a href="https://atus.wwu.edu/kb/wwu-public-wifi-network" target="_blank">More WiFi info</a>.)</List.Item> */}
+            <List.Item>Use the internet! Google things!</List.Item> 
+            {/* virtualeventonly
+            For public Wi-Fi, select <strong>WWUwireless-Guest</strong>. (<a href="https://atus.wwu.edu/kb/wwu-public-wifi-network" target="_blank">More WiFi info</a>.)</List.Item> 
+            */}
             <List.Item>Have fun and make it fun for others by abiding by the standards of fair play.</List.Item>
             <List.Item>Ask us questions and report anything during the Hunt that you feel is unsafe or represents unsportsmanlike conduct. (<a href="/contact">Contact Info</a>)</List.Item>
           </List>
@@ -75,20 +78,24 @@ RulesOfPlay = class RulesOfPlay extends Component {
         {/* MECHANICS Section */}
         <Segment basic>
           <Header id="mechanics" as="h2" icon={<Icon name="setting" color="orange"/>} content="Game Mechanics" />
-          {/* <List bulleted relaxed size="large"> */}
-            {/* <List.Item>To solve a puzzle you must: */}
+          {/* virtualeventonly
+          <List bulleted relaxed size="large">
+            <List.Item>To solve a puzzle you must: 
+          */}
                 <List relaxed bulleted size="large">
-                  {/* <List.Item>Go to that puzzle's station.</List.Item>
+                  {/* virtualeventonly
+                  <List.Item>Go to that puzzle's station.</List.Item>
                   <List.Item>Select that puzzle from the game page.</List.Item>
                   <List.Item>Present the puzzle QR code.</List.Item>
                   <List.Item>A volunteer will scan it, give you the puzzle packet, and start your timer. </List.Item>
-                  <List.Item>Then your team can enter the code word on the game page to stop the timer.</List.Item> */}
+                  <List.Item>Then your team can enter the code word on the game page to stop the timer.</List.Item> 
+                  */}
                   <List.Item>GET READY: Download &amp; open game packet after you check-in April 17.</List.Item>
                   <List.Item>GET SET: If virtual, ensure your team communication is working (Zoom, Discord, &hellip;)</List.Item>
                   <List.Item>GO! At 10:30 AM (PST) Select a puzzle from the game page.
                     <ul>
-                      <li>Press the button to reveal the puzzle download link and start the clock</li>
-                      <li>Download and print the puzzle</li>
+                      <li>Press the button to reveal the puzzle download link and start the clock.</li>
+                      <li>Download and print the puzzle.</li>
                       <li>Solve the puzzle.</li>
                       <li>Enter the code word(s) on the game page to stop the timer.</li>
                       <li>Repeat with the next puzzle.</li>
@@ -96,8 +103,10 @@ RulesOfPlay = class RulesOfPlay extends Component {
                   </List.Item>
                   <List.Item>The Meta Puzzle opens with team code only when 4 puzzles are completed or timed out.</List.Item>
                 </List>
-              {/* </List.Item> */}
-            {/* </List> */}
+            {/* 
+              </List.Item>
+            </List>
+            */}
         </Segment>
 
         {/* SCORING Section */}

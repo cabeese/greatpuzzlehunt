@@ -52,23 +52,24 @@ class HomeEarlyBird extends Component {
            </Grid.Row>
             <Grid.Row centered width={16} columns={2}>
             <p>Don't have a team? See our <a href="/faq">FAQ</a></p>
-              {/* <Grid.Column>
+              {/* virtualeventonly
+              <Grid.Column>
                  <Header size="medium" style={{color: "white"}}>Early Bird Registration</Header>
                   {registrationOpenDate} through {earlyBirdLastDate}<br /><br />
                   Student   $5<br/><br/>
                   Non-Student   $10<br/><br/><br/>
-               </Grid.Column> */}
+               </Grid.Column>
 
-                {/* <Grid.Column>
+                <Grid.Column>
                   <Header size="medium" style={{color: "white"}}>Regular Registration</Header>
                     {regularRegistrationStart} through {regularRegistrationEnd}<br/><br/>
                     Student   $8<br/><br/>
                     Non-Student   $15<br/><br/>
-                </Grid.Column> */}
+                </Grid.Column> 
+              */}
                 
             </Grid.Row>
             <Grid.Row style={{fontSize: "12pt"}}>
-                {/* *Registration prices are per person. Each person wanting to join a team must register themselves first.<br /><br /> */}
                 *Registration is free and open to all, anywhere in the world. Donations are gratefully accepted.<br/>
                 *Each person wanting to join a team must register themselves first. Each participant under age 14 must have permission from parent/legal guardian. The puzzles are created for ages 14 and older.
             </Grid.Row>

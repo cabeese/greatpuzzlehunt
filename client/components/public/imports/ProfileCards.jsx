@@ -10,7 +10,8 @@ export default class ProfileCards extends Component {
     this.currentProfiles = [
       {
         name: 'Millie Johnson',
-        title: 'Director, Founder, Puzzle Creator',
+        title: '',
+        role: 'Director, Founder, Puzzle Creator',
         image: '/img/2016/event-photos/millie_johnson.jpg',
       },
       {

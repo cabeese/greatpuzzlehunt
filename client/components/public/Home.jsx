@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Container, Grid, Segment, Message } from 'semantic-ui-react';
 
+const { regularRegistrationStart, eventDate } = Meteor.settings.public;
+
 import HomeHeader from './imports/HomeHeader';
 import HomeIntro from './imports/HomeIntro';
 import HomeEarlyBird from './imports/HomeEarlyBird';
@@ -26,8 +28,8 @@ const CoronavirusMessage = (
                     <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <ul>
                       <li>The FIFTH Annual WWU Great Puzzle Hunt will be held <b>VIRTUALLY</b></li>
-                      <li>On Saturday, April 17, 2021</li>
-                      <li>Registration and Gear Sales open January 5, 2021</li>
+                      <li>On {eventDate}</li>
+                      <li>Registration and Gear Sales open {regularRegistrationStart}</li>
                       <li>The event is FREE (donations accepted) and open to all, anywhere in the world</li>
                       <li>Teammates need to be able to safely communicate with one another (See Safety <a href="/faq">FAQ</a>)</li>
                     </ul>
