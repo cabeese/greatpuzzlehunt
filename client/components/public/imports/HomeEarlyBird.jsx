@@ -10,7 +10,7 @@ class HomeEarlyBird extends Component {
     const { gamestate } = this.props;
     const registration = gamestate && gamestate.registration;
     const registerButton = (
-      <a href="/register" target="_blank" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black", fontFamily: "'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif"}}>Register</a>
+      <a href="/register" target="_blank" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
     );
     
     let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
@@ -22,7 +22,7 @@ class HomeEarlyBird extends Component {
         <Container>
           <Grid padded stackable  textAlign='left' >
           <Grid.Row centered>
-            <Header size="medium" style={{color: "white"}}>Registration for the {eventYear} Great Puzzle Hunt is a 4-step process:</Header>
+            <Header size="medium" style={{color: "white"}}>Registration is a 4-step process:</Header>
            </Grid.Row>
            <Grid.Row width={16} columns={4} centered verticalAlign="top">
             
@@ -32,7 +32,7 @@ class HomeEarlyBird extends Component {
             </Grid.Column>
             <Grid.Column textAlign="center">
               <span className="step-number">2</span>
-              <a href={link}>Purchase</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
+              <a href={link}>Acquire</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
             </Grid.Column>
             <Grid.Column textAlign="center">
               <span className="step-number">3</span>
@@ -44,10 +44,15 @@ class HomeEarlyBird extends Component {
             </Grid.Column>
            </Grid.Row>
            <Grid.Row centered>
+           <p>Registration opens {regularRegistrationStart}, and ends {regularRegistrationEnd}.</p>
+           </Grid.Row>
+           <Grid.Row centered>
            {registerButton}
            <br/>
            </Grid.Row>
             <Grid.Row centered width={16} columns={2}>
+            <p>Don't have a team? See our <a href="/faq">FAQ</a></p>
+              {/* virtualeventonly
               <Grid.Column>
                  <Header size="medium" style={{color: "white"}}>Early Bird Registration</Header>
                   {registrationOpenDate} through {earlyBirdLastDate}<br /><br />
@@ -60,10 +65,13 @@ class HomeEarlyBird extends Component {
                     {regularRegistrationStart} through {regularRegistrationEnd}<br/><br/>
                     Student   $8<br/><br/>
                     Non-Student   $15<br/><br/>
-                </Grid.Column>
+                </Grid.Column> 
+              */}
+                
             </Grid.Row>
-            <Grid.Row centered style={{fontSize: "12pt"}}>
-              *Registration prices are per person. Each person wanting to join a team must register themselves first.<br /><br />
+            <Grid.Row style={{fontSize: "12pt"}}>
+                *Registration is free and open to all, anywhere in the world. Donations are gratefully accepted.<br/>
+                *Each person wanting to join a team must register themselves first. Each participant under age 14 must have permission from parent/legal guardian. The puzzles are created for ages 14 and older.
             </Grid.Row>
            
          </Grid>

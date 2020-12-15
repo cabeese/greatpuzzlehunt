@@ -10,9 +10,27 @@ export default class ProfileCards extends Component {
     this.currentProfiles = [
       {
         name: 'Millie Johnson',
-        title: 'Professor Emerita Mathematics, WWU',
-        role: 'Primary event coordinator, puzzle creator, and founder of the Great Puzzle Hunt',
+        title: '',
+        role: 'Director, Founder, Puzzle Creator',
         image: '/img/2016/event-photos/millie_johnson.jpg',
+      },
+      {
+        name: 'Wendy Aguilar',
+        title: '',
+        role: 'Lead Designer',
+        image: '/img/team/wendy.jpg',
+      },
+      {
+        name: 'Noah Strong',
+        title: '',
+        role: 'Lead Developer',
+        image: '/img/team/noah.jpg',
+      },
+      {
+        name: 'Raiden van Bronkhorst',
+        title: '',
+        role: 'Lead Developer & Tech Support',
+        image: '/img/team/raiden_v.jpg',
       },
       {
         name: 'Zac Pontrantolfi',
@@ -21,77 +39,38 @@ export default class ProfileCards extends Component {
         image: '/img/team/zac.jpg',
       },
       {
-        name: 'Wendy Aguilar',
-        title: 'Web Design Specialist, CDK Global',
-        role: 'Co-Lead Designer',
-        image: '/img/team/wendy.jpg',
-      },
-      {
-        name: 'Brennan Commons',
-        title: '',
-        role: 'Co-Lead Designer',
-        image: '/img/team/brennan.jpg',
-      },
-      {
-        name: 'Noah Strong',
-        title: '',
-        role: 'Lead Developer',
-        image: '/img/team/noah.jpg',
-      }, 
-      {
-        name: 'Ben Johnson',
-        title: '',
-        role: 'Lead Developer',
-        image: '/img/team/ben.jpg',
-      },
-      {
-        name: 'Raiden van Bronkhorst',
-        title: '',
-        role: 'Developer',
-        image: '/img/team/raiden_v.jpg',
-      },
-      {
-        name: 'Jordan King',
-        title: '',
-        role: 'AS President, Management',
-        image: '/img/team/jordan_k.jpg',
-      },
-      {
         name: 'Miranda Reed',
         title: '',
         role: 'AS President, Budget Coordination',
         image: '/img/team/miranda_r.jpeg',
       },
       {
-        name: 'Patrick Carroll',
-        title: '',
-        role: 'AS Co-President, Marketing & Promotion',
-        image: '/img/team/patrick_c.jpg',
-      },
-      {
         name: 'Zoe Bozich',
         title: '',
-        role: 'AS Co-President, Marketing & Promotion',
+        role: 'AS President, Marketing & Promotion',
         image: '/img/team/zoe.jpg',
-      },
-      {
-        name: 'Katrina Duttkin',
-        title: '',
-        role: 'AS Vice President, Marketing & Promotion',
-        image: '/img/team/katrina.jpg',
-      },
-      {
-        name: 'Alex Kuhn',
-        title: '',
-        role: 'AS Vice President, Marketing & Promotion',
-        image: '/img/team/alex_k.jpg',
       },
       {
         name: 'Rachel Snyder',
         title: '',
-        role: 'AS Vice President, Budget Coordination',
+        role: 'AS Co-President, Management',
         image: '/img/team/rachel.jpg',
       },
+      {
+        name: 'Nick Satnik',
+        title: '',
+        role: 'AS Co-President, Management',
+        image: '/img/team/nick.jpg'
+      },
+      {
+        name: 'Dalton Lange',
+        title: '',
+        role: 'AS VP Marketing & Promotion, Developer ',
+        image: '/img/team/dalton.jpg'
+      }
+    ];
+    
+    this.pastProfiles = [
       {
         name: 'Danielle Glewwe',
         title: '',
@@ -104,8 +83,42 @@ export default class ProfileCards extends Component {
         role: 'AS Vice President, Management',
         image: '/img/team/montana.jpg',
       },
-    ];
-    this.pastProfiles = [
+      {
+        name: 'Alex Kuhn',
+        title: '',
+        role: 'AS Vice President, Marketing & Promotion',
+        image: '/img/team/alex_k.jpg',
+      },
+      {
+        name: 'Katrina Duttkin',
+        title: '',
+        role: 'AS Vice President, Marketing & Promotion',
+        image: '/img/team/katrina.jpg',
+      },
+      {
+        name: 'Patrick Carroll',
+        title: '',
+        role: 'AS Co-President, Marketing & Promotion',
+        image: '/img/team/patrick_c.jpg',
+      },
+      {
+        name: 'Jordan King',
+        title: '',
+        role: 'AS President, Management',
+        image: '/img/team/jordan_k.jpg',
+      },
+      {
+        name: 'Brennan Commons',
+        title: '',
+        role: 'Co-Lead Designer',
+        image: '/img/team/brennan.jpg',
+      },
+      {
+        name: 'Ben Johnson',
+        title: '',
+        role: 'Lead Developer',
+        image: '/img/team/ben.jpg',
+      },
       {
         name: 'Kyle Rader',
         title: '',

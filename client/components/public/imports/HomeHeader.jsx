@@ -114,7 +114,7 @@ class HomeHeader extends Component {
       />
     );
     const buyGearButton = (
-      <LinkButton as='a' href="https://www.wwu.edu/emarket/puzzlehunt/#design"
+      <LinkButton as='a' href="/gear"
         size="huge" color="orange" target="_blank"
         icon={<Icon name="shopping cart" />}
         content="Buy Gear"
@@ -122,7 +122,7 @@ class HomeHeader extends Component {
     );
 
     const donateButton = (
-      <LinkButton as='a' href="https://alumni.wwu.edu/greatpuzzlehunt"
+      <LinkButton as='a' href="https://foundation.wwu.edu/greatpuzzlehunt"
         size='huge'
         color="green"
         icon={<Icon name='heart'/>}

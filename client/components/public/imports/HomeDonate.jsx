@@ -17,18 +17,18 @@ export default class HomeDonate extends Component {
               Invest in Your Community by Sponsoring The Hunt!
               </Header>
               <Segment basic size='large' className="no-padding">
-                <p>Donations of any amount will help support this Event.</p>
-                <p>
+                <p>Donations of any amount will help support this event.</p>
+                {/* <p>
                   Please Consider:<br/>
                 </p>
                 <ul>
                   <li><a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">Sponsoring</a> a student or team that needs help to participate.</li>
                   <li>Non-monetary support such as <a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">prizes</a> or <a href="/register">signing up</a> as a volunteer!</li>
-                </ul>
-                All donations are made through WWU and are tax deductible!
+                </ul> */}
+                The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. 
               </Segment>
               <LinkButton as='a'
-                href="https://alumni.wwu.edu/greatpuzzlehunt"
+                href="https://foundation.wwu.edu/greatpuzzlehunt"
                 size='large'  content='Donate Online'
                 icon={<Icon name='heart'/>}
                 color="green"

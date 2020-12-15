@@ -22,20 +22,14 @@ export default class HomeIntro extends Component {
       <div id="HomeIntro">
         <Container>
         <Grid padded stackable centered textAlign='left'>
-          {/* <Grid.Row>
-            <Grid.Column width={16} className='raised'>
-              <Embed active={true} icon={null} url="https://www.youtube.com/embed/paBGQzMCdUo"/>
-            </Grid.Column>
-          </Grid.Row> */}
-
           <Grid.Row>
             <Grid.Column width={16} className='raised'>
               <Container textAlign='left'>
                 <br />
                 <Header size='medium'>What is the Puzzle Hunt?</Header>
                 <Segment basic size='large' className="no-padding">
-                  <p>The Great Puzzle Hunt is like a scavenger hunt adventure with puzzles. Teams of up to 6 people travel on foot to various locations solving a total of four hour-long puzzles gathering clues along the way to solve one final meta puzzle.</p>
-                  <p>These are no ordinary puzzles though! It will take a diverse set of skills and talents to solve them! Our mission is to celebrate everyone's talents and demonstrate knowledge comes in many forms. Everything is timed using your phone, QR codes, and this online system! So yes you can win :)</p>
+                  <p>Teams of up to 6 people solve a total of four hour-long puzzles gathering clues along the way to solve one final meta puzzle.</p>
+                  <p>These are no ordinary puzzles though! It will take a diverse set of skills and talents to solve them! Our mission is to celebrate everyone's talents and demonstrate knowledge comes in many forms. Everything is timed using your phone, QR codes, and our online game platform! So yes, you can win! :)</p>
                 </Segment>
               </Container>
             </Grid.Column>
@@ -43,22 +37,25 @@ export default class HomeIntro extends Component {
 
           <Grid.Row columns={3}>
             <Grid.Column>
-              <Segment  inverted color='blue' >
+              <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium">Who?</Header>
-                Everyone! However, each person under age 14 on a team must be accompanied by a parent/legal guardian at all times - parent/legal guardian must be registered on team with child under age 14. *Note: The puzzles are created for ages 14 and older.
+                Everyone! However, each participant under age 14 must have permission from a parent/legal guardian. The puzzles are created for ages 14 and older.
               </Segment>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium">Where?</Header>
-                Red Square<br/>
+                {/* virtualeventonly
+                 Red Square<br/>
                 Western Washington University<br/>
                 516 High Street<br/>
-                Bellingham, WA 98225<br/><br/>
+                Bellingham, WA 98225<br/><br/> 
+                */}
+                <p>The 2021 Puzzle Hunt is virtual, so anywhere that has internet access, a smartphone or computer, a black and white printer, and materials listed under the FAQs under <a href="/faq" style={{color: "#bad80a"}}>What should I bring?</a></p>
               </Segment>
             </Grid.Column>
             <Grid.Column>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium" >What?</Header>
-                Scavenger hunting, puzzle solving, brain adventuring!
+                <p>Hands-on brain adventures involving paper-folding, logic, patterns, and a variety of skill sets.</p>
               </Segment>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium" >Why?</Header>
@@ -68,17 +65,17 @@ export default class HomeIntro extends Component {
             <Grid.Column>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium" >When?</Header>
-                {eventDate} from 9:30 AM - 5 PM<br/>
-                Awards and Prizes* at 4:30 PM<br/>
-                *Must be present at awards ceremony to claim prizes, else prizes go to the next place team.<br/>
+                {eventDate} from 9:30 AM&ndash;4:30 PM (PST). Leaderboard posted and prizes awarded at 5:00 PM (PST).<br/>
+                {/* virtualeventonly
+                 Awards and Prizes* at 4:30 PM<br/>
+                *Must be present at awards ceremony to claim prizes, else prizes go to the next place team.<br/> 
+                */}
               </Segment>
             </Grid.Column>
           </Grid.Row>
 
         </Grid>
         </Container>
-
-        {/* <Image fluid src="/img/2016/event-photos/team-mod-thin.jpg"/> */}
       </div>
      );
   }
