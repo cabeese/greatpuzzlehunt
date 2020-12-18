@@ -9,11 +9,19 @@ class HomeEarlyBird extends Component {
   render() {
     const { gamestate } = this.props;
     const registration = gamestate && gamestate.registration;
-    const registerButton = (
-      <a href="/register" target="_blank" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
+    let registerButton = (
+      <a style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
     );
-    
+
     let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+
+    let urls = ["#", "#", "#", "#"];
+    if (gamestate && gamestate.registration) {
+      registerButton = (
+        <a href="/register" target="_blank" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
+      );
+      urls = ["/register", link, "/redeem", "/team"];
+    }
 
     return (
       
@@ -28,19 +36,19 @@ class HomeEarlyBird extends Component {
             
             <Grid.Column textAlign="center">
               <span className="step-number">1</span>
-              <a href="/register">Create</a> an account.<br />Verify your email before continuing.
+              <a href={urls[0]}>Create</a> an account.<br />Verify your email before continuing.
             </Grid.Column>
             <Grid.Column textAlign="center">
               <span className="step-number">2</span>
-              <a href={link}>Acquire</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
+              <a href={urls[1]}>Acquire</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
             </Grid.Column>
             <Grid.Column textAlign="center">
               <span className="step-number">3</span>
-              <a href="/redeem">Redeem</a> ticket code(s).
+              <a href={urls[2]}>Redeem</a> ticket code(s).
             </Grid.Column>
             <Grid.Column textAlign="center">
               <span className="step-number">4</span>
-              Set-up/join <a href="/team">team</a>.
+              Set-up/join <a href={urls[3]}>team</a>.
             </Grid.Column>
            </Grid.Row>
            <Grid.Row centered>
