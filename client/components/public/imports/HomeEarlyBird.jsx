@@ -52,14 +52,14 @@ class HomeEarlyBird extends Component {
             </Grid.Column>
            </Grid.Row>
            <Grid.Row centered>
-           <p>Registration opens {regularRegistrationStart}, and ends {regularRegistrationEnd}.</p>
+           <p>Registration opens {regularRegistrationStart}, and ends {regularRegistrationEnd} (or earlier if capacity is reached).</p>
            </Grid.Row>
            <Grid.Row centered>
            {registerButton}
            <br/>
            </Grid.Row>
             <Grid.Row centered width={16} columns={2}>
-            <p>Don't have a team? See our <a href="/faq">FAQ</a></p>
+            <a href="/faq">Don't have a team?</a>
               {/* virtualeventonly
               <Grid.Column>
                  <Header size="medium" style={{color: "white"}}>Early Bird Registration</Header>

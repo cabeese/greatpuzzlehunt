@@ -49,7 +49,7 @@ export default class HomeIntro extends Component {
                 516 High Street<br/>
                 Bellingham, WA 98225<br/><br/> 
                 */}
-                <p>The 2021 Puzzle Hunt is virtual, so anywhere that has internet access, a smartphone or computer, a black and white printer, and materials listed under the FAQs under <a href="/faq" style={{color: "#bad80a"}}>What should I bring?</a></p>
+                <p>The 2021 Puzzle Hunt is virtual, so anywhere that has internet access, a smartphone or computer, a black and white printer, and materials listed in the FAQs <a href="/faq" style={{color: "#bad80a"}}>What should I have on hand?</a></p>
               </Segment>
             </Grid.Column>
             <Grid.Column>

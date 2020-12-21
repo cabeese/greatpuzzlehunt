@@ -31,7 +31,7 @@ const CoronavirusMessage = (
                       <li>On {eventDate}</li>
                       <li>Registration and Gear Sales open {regularRegistrationStart}</li>
                       <li>The event is FREE (donations accepted) and open to all, anywhere in the world</li>
-                      <li>Teammates need to be able to safely communicate with one another (See Safety <a href="/faq">FAQ</a>)</li>
+                      <li>Teammates need to be able to safely communicate with one another (See Safety <a style={{textDecoration: "underline"}} href="/faq">FAQ</a>)</li>
                     </ul>
                     <br/>
                    <center>Stay Healthy!</center>
