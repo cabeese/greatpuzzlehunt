@@ -68,7 +68,7 @@ RulesOfPlay = class RulesOfPlay extends Component {
           <Header id="puzzles" as='h2' icon={<Icon name="puzzle" color="purple"/>} content="Puzzles"/>
           <List bulleted relaxed size="large">
             <List.Item>There are 4 primary puzzles followed by 1 Meta Puzzle. <a href="https://en.wikipedia.org/wiki/Metapuzzle" target="_blank">What is a meta puzzle?</a></List.Item>
-            <List.Item>Each puzzle results in a code word or words.</List.Item>
+            <List.Item>Each puzzle results in a code word or words. You need all 4 code words to solve the meta Puzzle.</List.Item>
             <List.Item><strong>Hint:</strong> If your result does not spell out a word, it might be scrambled!</List.Item>
             <List.Item><strong>Hint:</strong> If your result is not letters, you need to decode to letters!</List.Item>
             <List.Item><strong>Hint:</strong> Time is ticking! Make sure everyone on the team is assigned to a job.</List.Item>
@@ -114,8 +114,8 @@ RulesOfPlay = class RulesOfPlay extends Component {
           <Header id="scoring" as='h2' icon={<Icon name="info" color="blue"/>} content="Scoring"/>
           <List bulleted relaxed size="large">
             <List.Item>Your team score is measured in minutes. The fewer minutes, the better.</List.Item>
-            <List.Item>From puzzle timer start, you have 70 minutes to finish that puzzle (15 minutes for meta puzzle).</List.Item>
-            <List.Item>If you do not finish in 70 minutes you receive a score of 100 minutes for that puzzle (25 minutes for meta).</List.Item>
+            <List.Item>From puzzle timer start, you have 70 minutes to finish that puzzle (15 minutes for meta puzzle). <b>Note:</b> We increased the finish time by 5 minutes to account for download and print time.</List.Item>
+            <List.Item>If you do not finish in 70 minutes you are given the code word(s) and receive a score of 105 minutes for that puzzle (25 minutes for meta).</List.Item>
             <List.Item>There is no penalty for incorrect code word entries.</List.Item>
             <List.Item>Each primary puzzle has 3 hints available.</List.Item>
             <List.Item>Teams may "buy" hints. Cost increases per hint: any hint taken 1st, 2nd, or 3rd (in any order) adds 5, 10, or 15 minutes respectively, to your score.</List.Item>
@@ -123,7 +123,8 @@ RulesOfPlay = class RulesOfPlay extends Component {
             <List.Item>Bonus: If you finish within 70 minutes and do not use any hints, 10 minutes are subtracted from your score! (No hints or bonus available for meta.)</List.Item>
             <List.Item>In summary:
               <pre><code>
-              total score = (timed minutes) <br/>
+              total score for an unsolved puzzle = 105 minutes <br/>
+              total score for a solved puzzle = (timed minutes) <br/>
               &nbsp; + (5 * any 1st hint used) <br/>
               &nbsp; + (10 * any 2nd hint used) <br/>
               &nbsp; + (15 * any 3rd hint used) <br/>
