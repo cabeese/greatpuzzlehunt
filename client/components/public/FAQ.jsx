@@ -261,7 +261,7 @@ FAQ = class FAQ extends Component {
 
             Schedule for the day:
             {schedule}
-            {/*
+            {/* virtualeventonly
             <strong>* </strong>{wristbandNote}
             <br />
             <strong>** </strong>{prizeNote}
