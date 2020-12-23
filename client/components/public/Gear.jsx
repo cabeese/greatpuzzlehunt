@@ -1,39 +1,72 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 
-import { Container, Segment, Header, Button} from 'semantic-ui-react';
+import { Container, Segment, Header, Button, Modal } from 'semantic-ui-react';
 
 Gear = class Gear extends Component {
 
   gearDetails(e) {
+    str = e.target.src;
+    str = str.split("").reverse().join("");
+    str = str.substring(5, str.indexOf('/'));
+    str = str.split("").reverse().join("");
+    console.log(str);
     details = document.getElementById("gearDetails");
-    details.style.top = "calc(50% - " + $("#gearDetails").innerHeight() / 2 + "px)";
-    details.style.left = "calc(50% - " + $("#gearDetails").innerWidth() / 2 + "px)";
+    
+    image = details.getElementsByTagName("img")[0];
+    swatches = details.getElementsByTagName("img")[1];
+    image.src = "/img/gear/" + str + "f.png";
     details.style.display = "block";
 
+    details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
+    details.style.left = window.innerWidth / 2 - $("#gearDetails").innerWidth() / 2 + "px";
   }
 
   closeDetails(e) {
     details = document.getElementById("gearDetails");
     details.style.display = "none";
-    console.log("hello?");
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+
+  isTall() {
+    return window.innerWidth < window.innerHeight;
+  }
+
+  updateDimensions() {
+    console.log("poop");
+    this.forceUpdate();
+    details = document.getElementById("gearDetails");
+    details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
+    details.style.left = window.innerWidth / 2 - $("#gearDetails").innerWidth() / 2 + "px";
+    details.style.display = "block";
+    details.style.width = "auto";
+    details.style.height = "auto";
+    closeButton = document.getElementById("close");
+    closeButton.style.top = details.style.top;
+    closeButton.style.left = details.style.left;
+    document.getElementById("flexBox").style.flexDirection = this.isTall() ? "column" : "row";
   }
 
   render() {
+    let direction = this.isTall() ? "column" : "row";
     return (
       <Container className="section">
-        <div id="gearDetails" style={{zIndex: "1000", position: "fixed", display: "none"}}>
-          <div style={{backgroundColor: "white", borderRadius: "5px", boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)"}}>
-            <i className="close icon" onClick={this.closeDetails}></i>
-            <Segment basic>
-              <img className="picture" src="/img/gear/btmf.png" style={{display: "inline-block", maxHeight: window.innerHeight - 300}}></img>
-              <div style={{verticalAlign: "top", display:"inline-block"}}>
-                <Header as="h1">Available Colors:</Header>
-                <img style={{maxWidth: window.innerWidth - 100, verticalAlign: "top"}} className="swatches" src="/img/gear/men_blend_t.png"></img>
+        <div id="gearDetails" style={{padding: "20px", zIndex: "1000", position: "fixed", left: 0, top: 0, display: "none", maxHeight: window.innerHeight - 200, maxWidth: window.innerWidth - 100, backgroundColor: "white", borderRadius: "5px", boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)"}}>
+            <i id="close" style={{position: "fixed"}} className="close icon" onClick={this.closeDetails}></i>
+            {/* <Segment basic> */}
+            <div id="flexBox" style={{display: "flex", flexDirection: direction}}>
+              <div style={{display: "inline-block", minWidth: 0, maxHeight: "100%", flexBasis: 0, flexGrow: 1}}>
+                <img className="picture" src="/img/gear/btmf.png" style={{display: "inline-block", minWidth: 0, maxHeight: "100%", flexBasis: 0, flexGrow: 1}}></img>
               </div>
-              
-            </Segment>
-          </div>
+              <div style={{verticalAlign: "top", display:"inline-block", minWidth: 0, flexBasis: 0, flexGrow: 1}}>
+                <Header as="h2">Available Colors:</Header>
+                <img style={{verticalAlign: "top", maxWidth: "100%"}} className="swatches" src="/img/gear/men_blend_t.png"></img>
+              </div>
+            </div>
+            {/* </Segment> */}
         </div>
         <Segment basic>
           <PuzzlePageTitle title="Gear" />
