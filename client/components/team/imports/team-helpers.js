@@ -3,8 +3,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 
 export const DIVISION_TYPES = [
   {
-    text: 'WWU Student',
-    value: 'wwu-student',
+    text: 'WWU Students',
+    value: 'wwu-students',
     wristBandColor: "Green",
     description: "All team members must be currently enrolled at WWU (undergrad or grad)."
   },
@@ -12,19 +12,25 @@ export const DIVISION_TYPES = [
     text: 'WWU Alumni',
     value: 'wwu-alumni',
     wristBandColor: "Blue",
-    description: "At least half of team members must be WWU Alumni."
+    description: "At least half of team members must be WWU Alumni"
   },
   {
-    text: 'High School',
-    value: 'highschool',
+    text: 'Postsecondary Students',
+    value: 'postsecondary',
     wristBandColor: "Purple",
-    description: "All team members must be currently enrolled in high school. Exception: One adult chaperone per team may register as a team member."
+    description: "All team members must be currently enrolled in college (undergrad or grad), technical school, running start. Mix and match-team members from same or different schools."
+  },
+  {
+    text: 'Secondary Students',
+    value: 'secondary',
+    wristBandColor: "Orange",
+    description: "All team members must be currently enrolled in middle school or high school. Exception: One adult chaperone per team may register as a team member."
   },
   {
     text: 'Open',
     value: 'open',
     wristBandColor: "Orange",
-    description: "General public, mixed student/non-student, family (children under age 14 must be accompanied by a parent/guardian)."
+    description: "General public, mixed student/non-student, family (participants under age 14 must have permission from parent/guardian)."
   },
 ];
 
