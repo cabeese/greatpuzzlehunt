@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Container, Grid, Segment, Message } from 'semantic-ui-react';
 
-const { regularRegistrationStart, eventDate } = Meteor.settings.public;
+const { regularRegistrationStart, eventDate, eventDay } = Meteor.settings.public;
 
 import HomeHeader from './imports/HomeHeader';
 import HomeIntro from './imports/HomeIntro';
@@ -28,7 +28,7 @@ const CoronavirusMessage = (
                     <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <ul>
                       <li>The FIFTH Annual WWU Great Puzzle Hunt will be held <b>VIRTUALLY</b></li>
-                      <li>On {eventDate}</li>
+                      <li>On {eventDay}, {eventDate}</li>
                       <li>Registration and Gear Sales open {regularRegistrationStart}</li>
                       <li>The event is FREE (donations accepted) and open to all, anywhere in the world</li>
                       <li>Teammates need to be able to safely communicate with one another (See Safety <a style={{textDecoration: "underline"}} href="/faq">FAQ</a>)</li>

@@ -14,7 +14,7 @@ import {
   Image
 } from 'semantic-ui-react';
 
-const { eventYear, eventDate, siteName, earlyBirdLastDate, gearSaleEnd, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
+const { eventYear, eventDate, eventDay, siteName, earlyBirdLastDate, gearSaleEnd, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
 const prizeNote = (
   <span>
@@ -254,7 +254,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 4}>
             <h3>
-              <strong>{eventDate}</strong> at 9:30 AM (PST)
+              <strong>{eventDay}, {eventDate}</strong> at 9:30 AM (PST)
             </h3>
             Other important dates:
             {importantDates}

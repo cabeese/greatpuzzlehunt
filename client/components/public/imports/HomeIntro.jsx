@@ -14,7 +14,7 @@ import { Grid,
 import Video from './Video';
 import LinkButton from '../../imports/LinkButton';
 
-const { eventDate } = Meteor.settings.public;
+const { eventDate, eventDay } = Meteor.settings.public;
 
 export default class HomeIntro extends Component {
   render() {
@@ -65,7 +65,7 @@ export default class HomeIntro extends Component {
             <Grid.Column>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium" >When?</Header>
-                {eventDate} from 9:30 AM&ndash;4:30 PM (PST). Leaderboard posted and prizes awarded at 5:00 PM (PST).<br/>
+                {eventDay}, {eventDate} from 9:30 AM&ndash;4:30 PM (PST). Leaderboard posted and prizes awarded at 5:00 PM (PST).<br/>
                 {/* virtualeventonly
                  Awards and Prizes* at 4:30 PM<br/>
                 *Must be present at awards ceremony to claim prizes, else prizes go to the next place team.<br/> 
