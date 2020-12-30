@@ -20,6 +20,7 @@ export default async function processTransaction(txData) {
     studentTickets: studentTicketsString,
     nonStudentTickets: nonStudentTicketsString,
     shippingInfo,
+    internationalShippingLineItems,
   } = txData;
 
   const studentTickets = parseInt(studentTicketsString);
@@ -28,7 +29,7 @@ export default async function processTransaction(txData) {
 
   info(`Processing transaction "${tx}" from ${email}`);
   info(`studentTickets: ${studentTickets} nonStudentTickets: ${nonStudentTickets}` +
-    ` internationalShipping?: ${shippingInfo.isInternational}`);
+    ` internationalShipping?: ${shippingInfo.internationalCount}`);
   info("Gear Orders:")
   logobj(gearOrders);
 
@@ -49,6 +50,7 @@ export default async function processTransaction(txData) {
       studentTickets,
       nonStudentTickets,
       shippingInfo,
+      internationalShippingLineItems,
       gearOrders,
       createdAt: now,
       updatedAt: now,
