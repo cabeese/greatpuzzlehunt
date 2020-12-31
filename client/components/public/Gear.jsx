@@ -28,8 +28,24 @@ Gear = class Gear extends Component {
     details.style.display = "none";
   }
 
+  showBack() {
+    front.style.display = "none";
+    back.style.display = "block";
+  }
+
+  showFront() {
+    front.style.display = "block";
+    back.style.display = "none";
+  }
+
   componentDidMount() {
     window.addEventListener("resize", this.updateDimensions.bind(this));
+    front = document.getElementById("front");
+    back = document.getElementById("back");
+    front.addEventListener("mouseover", this.showBack);
+    front.addEventListener("touchstart", this.showBack);
+    back.addEventListener("mouseout", this.showFront);
+    back.addEventListener("touchend", this.showFront);
   }
 
   isTall() {
@@ -39,17 +55,22 @@ Gear = class Gear extends Component {
   updateDimensions() {
     this.forceUpdate();
     details = document.getElementById("gearDetails");
-    if (details.style.display == "block") {
-      details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
-      details.style.left = window.innerWidth / 2 - $("#gearDetails").innerWidth() / 2 + "px";
-      document.getElementById("flexBox").style.flexDirection = this.isTall() ? "column" : "row";
-      details.style.display = "block";
-      details.style.width = "auto";
-      details.style.height = "auto";
-      closeButton = document.getElementById("close");
-      closeButton.style.top = details.style.top;
-      closeButton.style.left = details.style.left;
+    details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
+    details.style.left = window.innerWidth / 2 - $("#gearDetails").innerWidth() / 2 + "px";
+    let open = details.style.display == "block";
+    details.style.display = "block";
+    details.style.width = "auto";
+    details.style.height = "auto";
+    
+    closeButton = document.getElementById("close");
+    closeButton.style.top = details.style.top;
+    closeButton.style.left = details.style.left;
+
+    if (!open) {
+      details.style.display = "none";
     }
+ 
+
   }
 
   getImageCard(name, code) {
@@ -65,25 +86,22 @@ Gear = class Gear extends Component {
   }
 
   render() {
-    let direction = this.isTall() ? "column" : "row";
-    let flexBoxHeight = window.innerHeight - 200 - 40 + "px";
+    let height = this.isTall() ? "" : window.innerHeight - 200 - 40 + "px";
 
     return (
       <Container className="section">
-        <div id="gearDetails" style={{padding: "20px", zIndex: "1000", position: "fixed", left: 0, top: 0, display: "none", maxWidth: window.innerWidth - 100, backgroundColor: "white", borderRadius: "5px", boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)"}}>
+        <div id="gearDetails" style={{padding: "20px", zIndex: "1000", position: "fixed", left: 0, top: 0, display: "none", backgroundColor: "white", borderRadius: "5px", boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)"}}>
             <i id="close" className="close icon" onClick={this.closeDetails}></i>
-            <div id="flexBox" style={{display: "flex", flexDirection: direction, height: flexBoxHeight}}>
-              <div style={{display: "inline-block", minWidth: 0, minHeight: 0, maxHeight: "100%", flexBasis: 0, flexGrow: 1}}>
-                <div className="ui slide instant masked reveal image">
-                  <img className="visible content" src="/img/gear/btmf.jpg" style={{maxWidth: "100%", maxHeight: "100%"}} />
-                  <img className="hidden content" src="/img/gear/btmb.jpg" style={{maxWidth: "100%", maxHeight: "100%"}} />
-                </div>
-                <br />
-                <p>Hover on image to see back.</p>
+            <div style={{display: "grid", gridTemplateColumns: "auto auto", height: height}}>
+              <div style={{height: "calc(100% - 20px)", minHeight: 0, minWidth: 0}}>
+                  <img id="front" src="/img/gear/btmf.jpg" style={{objectFit: "contain", maxHeight: "100%", maxWidth: "100%"}} />
+                  <img id="back" src="/img/gear/btmb.jpg" style={{display: "none", objectFit: "contain", maxHeight: "100%", maxWidth: "100%"}} />
+                <p>Hover or tap on image to change photo.</p>
               </div>
               <div style={{paddingLeft: "10px", verticalAlign: "top", display:"inline-block", minWidth: 0, minHeight: 0, flexBasis: 0, flexGrow: 1}}>
-                <Header as="h2">Available Colors:</Header>
-                <img style={{verticalAlign: "top", maxWidth: "100%"}} className="swatches" src="/img/gear/men_blend_t.jpg"></img>
+                <Header as="h2"></Header>
+                <Header as="h2">Colors:</Header>
+                <img style={{verticalAlign: "top", maxWidth: "100%"}} className="swatches" src="/img/gear/men_blend_t.png"></img>
               </div>
             </div>
         </div>
