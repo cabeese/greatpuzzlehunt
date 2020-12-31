@@ -3,6 +3,64 @@ import React, { Component } from 'react';
 
 import { Container, Segment, Header, Button, Modal } from 'semantic-ui-react';
 
+const xxlStr = ", +$2 for 2XL or larger.";
+
+const titles = {
+  "ctm": "Men's Cotton Tee",
+  "ctw": "Women's Cotton Tee",
+  "cty": "Youth Cotton Tee",
+  "btm": "Men's Cotton/Poly Blend Tee",
+  "btw": "Women's Cotton/Poly Blend Tee",
+  "lstw": "Women's Long Sleeve Cotton Tee",
+  "lstm": "Men's Long Sleeve Cotton Tee",
+  "fcu": "Unisex Crew Sweatshirt",
+  "hu": "Unisex Hoodie Sweatshirt", 
+  "hy": "Youth Hoodie",
+  "qzu": "Unisex Quarter-zip Collar Sweatshirt",
+}
+
+const materials = {
+  "ctm": "100% Cotton",
+  "ctw": "100% Cotton",
+  "cty": "100% Cotton",
+  "btm": "50/50 Cotton/Polyester",
+  "btw": "50/50 Cotton/Polyester",
+  "lstw": "100% Cotton",
+  "lstm": "100% Cotton",
+  "fcu": "50/50 Cotton/Polyester",
+  "hu": "50/50 Cotton/Polyester",
+  "hy": "50/50 Cotton/Polyester",
+  "qzu": "50/50 Cotton/Polyester"
+};
+
+const prices = {
+  "ctm": "$14" + xxlStr,
+  "ctw": "$14" + xxlStr,
+  "cty": "$14" + xxlStr,
+  "btm": "$15" + xxlStr,
+  "btw": "$15" + xxlStr,
+  "lstw": "$17" + xxlStr,
+  "lstm": "$17" + xxlStr,
+  "fcu": "$20" + xxlStr,
+  "hu": "$25" + xxlStr,
+  "hy": "$25" + xxlStr,
+  "qzu": "$30" + xxlStr
+}
+
+const sizes = {
+  "ctm": "S-5XL",
+  "ctw": "XS-3XL",
+  "cty": "XS-L",
+  "btm": "XS-4XL",
+  "btw": "XS-4XL",
+  "lstw": "S-3XL",
+  "lstm": "S-5XL",
+  "fcu": "S-5XL",
+  "hu": "S-5XL",
+  "hy": "S-XL",
+  "qzu": "S-3XL"
+}
+
 Gear = class Gear extends Component {
 
   gearDetails(e) {
@@ -18,6 +76,11 @@ Gear = class Gear extends Component {
     front.src = "/img/gear/" + str + "f.jpg";
     back.src = "/img/gear/" + str + "b.jpg";
     swatches.src = "/img/gear/swatches/" + str + ".png";
+    document.getElementById("sizes").innerHTML = sizes[str];
+    document.getElementById("title").innerHTML = titles[str];
+    document.getElementById("price").innerHTML = prices[str];
+    document.getElementById("materials").innerHTML = materials[str];
+
     details.style.display = "block";
 
     details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
@@ -74,7 +137,8 @@ Gear = class Gear extends Component {
 
   }
 
-  getImageCard(name, code) {
+  getImageCard(code) {
+    name = titles[code];
     path = "/img/gear/" + code + "f.jpg";
     return (
       <div className="gearitem ui card" style={{width: "30%", display: "inline-block", marginLeft: "20px"}}>
@@ -100,31 +164,35 @@ Gear = class Gear extends Component {
                 <p>Hover or tap on image to change photo.</p>
               </div>
               <div style={{paddingLeft: "10px", verticalAlign: "top", display:"inline-block", minWidth: 0, minHeight: 0, flexBasis: 0, flexGrow: 1}}>
-                <Header as="h2"></Header>
+                <Header id="title" as="h2">Men's Cotton Tee</Header>
+                <p id="price"></p>
+                <p>Size range: <span id="sizes"></span></p>
+                <p>Material: <span id="materials"></span></p>
                 <Header as="h2">Colors:</Header>
                 <div style={{height: "50%", overflowY: "auto", overflowX: "hidden"}}>
                   <img style={{verticalAlign: "top", width: "100%"}} className="swatches" src="/img/gear/swatches/btm.png"></img>
                 </div>
+
               </div>
             </div>
         </div>
         <Segment basic>
           <PuzzlePageTitle title="Gear" />
           <Header size="medium">Shirts</Header>
-          { this.getImageCard("Men's Cotton/Poly Blend Tee", "btm") }
-          { this.getImageCard("Women's Cotton/Poly Blend Tee", "btw") }
-          { this.getImageCard("Men's Cotton Tee", "ctm") }
-          { this.getImageCard("Women's Cotton Tee", "ctw") }
-          { this.getImageCard("Men's Long Sleeve Cotton Tee", "lstm") }
-          { this.getImageCard("Women's Long Sleeve Cotton Tee", "lstw") }
-          { this.getImageCard("Youth Cotton Tee", "cty") }
+          { this.getImageCard("btm") }
+          { this.getImageCard("btw") }
+          { this.getImageCard("ctm") }
+          { this.getImageCard("ctw") }
+          { this.getImageCard("lstm") }
+          { this.getImageCard("lstw") }
+          { this.getImageCard("cty") }
 
           <Header size="medium">Outerwear</Header>
 
-          { this.getImageCard("Unisex Crew Sweatshirt", "fcu") }
-          { this.getImageCard("Unisex Hoodie Sweatshirt", "hu") }
-          { this.getImageCard("Youth Hoodie", "hy") }
-          { this.getImageCard("Unisex Quarter-zip Collar Sweatshirt", "qzu") }
+          { this.getImageCard("fcu") }
+          { this.getImageCard("hu") }
+          { this.getImageCard("hy") }
+          { this.getImageCard("qzu") }
 
         </Segment>
       </Container>
