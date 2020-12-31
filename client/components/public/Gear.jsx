@@ -1,7 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 
-import { Container, Segment, Header, Button, Modal } from 'semantic-ui-react';
+import { Container, Segment, Header, Icon } from 'semantic-ui-react';
+import LinkButton from '../imports/LinkButton';
+
+const buyButton = (
+  <LinkButton as='a' href="https://commerce.cashnet.com/cashnetg/selfserve/BrowseCatalog.aspx"
+    size="huge" color="orange" target="_blank"
+    icon={<Icon name="shopping cart" />}
+    content="Buy"
+  />
+);
 
 const xxlStr = ", +$2 for 2XL or larger.";
 
@@ -138,13 +147,13 @@ Gear = class Gear extends Component {
   }
 
   getImageCard(code) {
-    name = titles[code];
+    title = titles[code];
     path = "/img/gear/" + code + "f.jpg";
     return (
       <div className="gearitem ui card" style={{width: "30%", display: "inline-block", marginLeft: "20px"}}>
         <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails} src={path}></img>
         <div className="content" style={{height: "75px"}}>
-          <span> {name} </span>
+          <span> {title} </span>
         </div>
       </div>
     );
@@ -155,6 +164,8 @@ Gear = class Gear extends Component {
 
     return (
       <Container className="section">
+
+
         <div id="gearDetails" style={{padding: "20px", zIndex: "1000", position: "fixed", left: 0, top: 0, display: "none", backgroundColor: "white", borderRadius: "5px", boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)"}}>
             <i id="close" className="close icon" onClick={this.closeDetails}></i>
             <div style={{display: "grid", gridTemplateColumns: "auto auto", height: height}}>
@@ -172,12 +183,23 @@ Gear = class Gear extends Component {
                 <div style={{height: "50%", overflowY: "auto", overflowX: "hidden"}}>
                   <img style={{verticalAlign: "top", width: "100%"}} className="swatches" src="/img/gear/swatches/btm.png"></img>
                 </div>
-
+                <br />
+                <center>
+                  { buyButton }
+                </center>
               </div>
             </div>
         </div>
         <Segment basic>
           <PuzzlePageTitle title="Gear" />
+          Prices on varying styles range from $14&ndash;$30, additional $2 for extended sizes. <b>Cool swag included with every shipment!</b>
+
+          <Header as="h2">Shipping</Header>
+          For items shipped <b>domestically</b>, SHIPPING IS FREE (we are covering the cost!).<br />
+          For items shipped <b>internationally</b>, the charge is $8 per T-shirt &amp; $15 per Sweatshirt (we are covering most of the cost!).
+          <br /><br />
+          Unfortunately, if shipping is not added to international orders, we will be unable to ship and will refund the purchase.
+
           <Header size="medium">Shirts</Header>
           { this.getImageCard("btm") }
           { this.getImageCard("btw") }
