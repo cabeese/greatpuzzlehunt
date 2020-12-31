@@ -8,7 +8,10 @@ class GamestateControlsInner extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      reportDLBusy: false,
+    };
+    this._getGearOrdersReport = this._getGearOrdersReport.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -29,6 +32,24 @@ class GamestateControlsInner extends Component {
     }
   }
 
+  _getGearOrdersReport() {
+    let self = this;
+    this.setState({reportDLBusy: true});
+    Meteor.call('admin.downloadReport', 2, (error, result) => {
+      self.setState({reportDLBusy: false});
+      if(error){
+        console.log(error);
+        alert(`Failed to generate report. ${error.message}. See logs for details`);
+      } else if(result) {
+        let encodedUri = `data:text/csv;charset=${result.encoding},` +
+          encodeURI(result.content);
+        window.open(encodedUri);
+      } else {
+        alert("Something went wrong - no error but also no data.");
+      }
+    });
+  }
+
   _renderForm() {
     return (
       <Form onSubmit={ (e) => e.preventDefault() }>
@@ -39,6 +60,10 @@ class GamestateControlsInner extends Component {
 
         <Form.Group>
           <Form.Button icon="mail" content="Email List of Users & Teams to Me" onClick={(e) => { Meteor.call('admin.sendUsersAndTeams'); alert("Emails are sending!"); }}/>
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Button icon="download" content="Generate + Download 'Gear Orders' Report" onClick={this._getGearOrdersReport} disabled={this.state.reportDLBusy} />
         </Form.Group>
 
         <Form.Group>
