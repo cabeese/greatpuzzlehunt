@@ -11,6 +11,8 @@ class GamestateControlsInner extends Component {
     this.state = {
       reportDLBusy: false,
     };
+    this._getReport = this._getReport.bind(this);
+    this._getTransactionReport = this._getTransactionReport.bind(this);
     this._getGearOrdersReport = this._getGearOrdersReport.bind(this);
   }
 
@@ -32,10 +34,16 @@ class GamestateControlsInner extends Component {
     }
   }
 
+  _getTransactionReport() {
+    this._getReport(1);
+  }
   _getGearOrdersReport() {
+    this._getReport(2);
+  }
+  _getReport(index) {
     let self = this;
     this.setState({reportDLBusy: true});
-    Meteor.call('admin.downloadReport', 2, (error, result) => {
+    Meteor.call('admin.downloadReport', index, (error, result) => {
       self.setState({reportDLBusy: false});
       if(error){
         console.log(error);
@@ -53,7 +61,7 @@ class GamestateControlsInner extends Component {
   _renderForm() {
     return (
       <Form onSubmit={ (e) => e.preventDefault() }>
-      <Header as="h3" content="Emails and Reports" />
+        <Header as="h3" content="Emails and Reports" />
         <Form.Group>
           <Form.Button icon="mail" content="Email (all 3) Reports to Me" onClick={(e) => Meteor.call('admin.sendReport')}/>
         </Form.Group>
@@ -62,8 +70,16 @@ class GamestateControlsInner extends Component {
           <Form.Button icon="mail" content="Email List of Users & Teams to Me" onClick={(e) => { Meteor.call('admin.sendUsersAndTeams'); alert("Emails are sending!"); }}/>
         </Form.Group>
 
+        <Header as="h4" content="Generate and Download Reports" />
         <Form.Group>
-          <Form.Button icon="download" content="Generate + Download 'Gear Orders' Report" onClick={this._getGearOrdersReport} disabled={this.state.reportDLBusy} />
+          <Form.Button icon="download"
+            content="Transactions"
+            onClick={this._getTransactionReport}
+            disabled={this.state.reportDLBusy} />
+          <Form.Button icon="download"
+            content="Gear Orders"
+            onClick={this._getGearOrdersReport}
+            disabled={this.state.reportDLBusy} />
         </Form.Group>
 
         <Form.Group>
