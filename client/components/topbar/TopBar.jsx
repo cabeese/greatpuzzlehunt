@@ -154,7 +154,7 @@ TopBar = class TopBar extends Component {
     );
     let logoLinkShadow = (
       
-      <div style={{position: "absolute", height: "100px", width:"100%", overflow: "hidden", marginTop:"66.41px", marginLeft:"-3px"}}>
+      <div style={{position: "absolute", height: "100px", width:"100%", overflow: "hidden", marginTop:"66.41px", marginLeft:"-3px", pointerEvents: "none"}}>
       <div style={logoShadow}></div>
       </div>
       
