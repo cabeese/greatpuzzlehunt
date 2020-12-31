@@ -12,8 +12,6 @@ class GamestateControlsInner extends Component {
       reportDLBusy: false,
     };
     this._getReport = this._getReport.bind(this);
-    this._getTransactionReport = this._getTransactionReport.bind(this);
-    this._getGearOrdersReport = this._getGearOrdersReport.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -34,12 +32,6 @@ class GamestateControlsInner extends Component {
     }
   }
 
-  _getTransactionReport() {
-    this._getReport(1);
-  }
-  _getGearOrdersReport() {
-    this._getReport(2);
-  }
   _getReport(index) {
     let self = this;
     this.setState({reportDLBusy: true});
@@ -72,14 +64,9 @@ class GamestateControlsInner extends Component {
 
         <Header as="h4" content="Generate and Download Reports" />
         <Form.Group>
-          <Form.Button icon="download"
-            content="Transactions"
-            onClick={this._getTransactionReport}
-            disabled={this.state.reportDLBusy} />
-          <Form.Button icon="download"
-            content="Gear Orders"
-            onClick={this._getGearOrdersReport}
-            disabled={this.state.reportDLBusy} />
+          { this._reportDownloadButton("Users", 0) }
+          { this._reportDownloadButton("Transactions", 1) }
+          { this._reportDownloadButton("Gear Orders", 2) }
         </Form.Group>
 
         <Form.Group>
@@ -107,6 +94,15 @@ class GamestateControlsInner extends Component {
           { this._fieldButton('Leaderboard') }
         </Form.Group>
       </Form>
+    );
+  }
+
+  _reportDownloadButton(name, index) {
+    return (
+      <Form.Button icon="download"
+        content={name}
+        onClick={ ()=> this._getReport(index) }
+        disabled={this.state.reportDLBusy} />
     );
   }
 
