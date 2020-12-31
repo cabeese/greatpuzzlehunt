@@ -10,12 +10,13 @@ Gear = class Gear extends Component {
     str = str.split("").reverse().join("");
     str = str.substring(5, str.indexOf('/'));
     str = str.split("").reverse().join("");
-    console.log(str);
     details = document.getElementById("gearDetails");
     
-    image = details.getElementsByTagName("img")[0];
-    swatches = details.getElementsByTagName("img")[1];
-    image.src = "/img/gear/" + str + "f.png";
+    front = details.getElementsByTagName("img")[0];
+    back = details.getElementsByTagName("img")[1];
+    swatches = details.getElementsByTagName("img")[2];
+    front.src = "/img/gear/" + str + "f.jpg";
+    back.src = "/img/gear/" + str + "b.jpg";
     details.style.display = "block";
 
     details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
@@ -32,126 +33,77 @@ Gear = class Gear extends Component {
   }
 
   isTall() {
-    return window.innerWidth < window.innerHeight;
+    return window.innerWidth < window.innerHeight - 200;
   }
 
   updateDimensions() {
-    console.log("poop");
     this.forceUpdate();
     details = document.getElementById("gearDetails");
-    details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
-    details.style.left = window.innerWidth / 2 - $("#gearDetails").innerWidth() / 2 + "px";
-    details.style.display = "block";
-    details.style.width = "auto";
-    details.style.height = "auto";
-    closeButton = document.getElementById("close");
-    closeButton.style.top = details.style.top;
-    closeButton.style.left = details.style.left;
-    document.getElementById("flexBox").style.flexDirection = this.isTall() ? "column" : "row";
+    if (details.style.display == "block") {
+      details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
+      details.style.left = window.innerWidth / 2 - $("#gearDetails").innerWidth() / 2 + "px";
+      document.getElementById("flexBox").style.flexDirection = this.isTall() ? "column" : "row";
+      details.style.display = "block";
+      details.style.width = "auto";
+      details.style.height = "auto";
+      closeButton = document.getElementById("close");
+      closeButton.style.top = details.style.top;
+      closeButton.style.left = details.style.left;
+    }
+  }
+
+  getImageCard(name, code) {
+    path = "/img/gear/" + code + "f.jpg";
+    return (
+      <div className="gearitem ui card" style={{width: "30%", display: "inline-block", marginLeft: "20px"}}>
+        <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails} src={path}></img>
+        <div className="content" style={{height: "75px"}}>
+          <span> {name} </span>
+        </div>
+      </div>
+    );
   }
 
   render() {
     let direction = this.isTall() ? "column" : "row";
+    let flexBoxHeight = window.innerHeight - 200 - 40 + "px";
+
     return (
       <Container className="section">
-        <div id="gearDetails" style={{padding: "20px", zIndex: "1000", position: "fixed", left: 0, top: 0, display: "none", maxHeight: window.innerHeight - 200, maxWidth: window.innerWidth - 100, backgroundColor: "white", borderRadius: "5px", boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)"}}>
-            <i id="close" style={{position: "fixed"}} className="close icon" onClick={this.closeDetails}></i>
-            {/* <Segment basic> */}
-            <div id="flexBox" style={{display: "flex", flexDirection: direction}}>
-              <div style={{display: "inline-block", minWidth: 0, maxHeight: "100%", flexBasis: 0, flexGrow: 1}}>
-                <img className="picture" src="/img/gear/btmf.png" style={{display: "inline-block", minWidth: 0, maxHeight: "100%", flexBasis: 0, flexGrow: 1}}></img>
+        <div id="gearDetails" style={{padding: "20px", zIndex: "1000", position: "fixed", left: 0, top: 0, display: "none", maxWidth: window.innerWidth - 100, backgroundColor: "white", borderRadius: "5px", boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)"}}>
+            <i id="close" className="close icon" onClick={this.closeDetails}></i>
+            <div id="flexBox" style={{display: "flex", flexDirection: direction, height: flexBoxHeight}}>
+              <div style={{display: "inline-block", minWidth: 0, minHeight: 0, maxHeight: "100%", flexBasis: 0, flexGrow: 1}}>
+                <div className="ui slide instant masked reveal image">
+                  <img className="visible content" src="/img/gear/btmf.jpg" style={{maxWidth: "100%", maxHeight: "100%"}} />
+                  <img className="hidden content" src="/img/gear/btmb.jpg" style={{maxWidth: "100%", maxHeight: "100%"}} />
+                </div>
+                <br />
+                <p>Hover on image to see back.</p>
               </div>
-              <div style={{verticalAlign: "top", display:"inline-block", minWidth: 0, flexBasis: 0, flexGrow: 1}}>
+              <div style={{paddingLeft: "10px", verticalAlign: "top", display:"inline-block", minWidth: 0, minHeight: 0, flexBasis: 0, flexGrow: 1}}>
                 <Header as="h2">Available Colors:</Header>
-                <img style={{verticalAlign: "top", maxWidth: "100%"}} className="swatches" src="/img/gear/men_blend_t.png"></img>
+                <img style={{verticalAlign: "top", maxWidth: "100%"}} className="swatches" src="/img/gear/men_blend_t.jpg"></img>
               </div>
             </div>
-            {/* </Segment> */}
         </div>
         <Segment basic>
           <PuzzlePageTitle title="Gear" />
           <Header size="medium">Shirts</Header>
-          <div className="gearitem ui card" style={{width: "40%", display: "inline-block", marginLeft: "20px"}}>
-            <div onClick={this.gearDetails} className="ui image">
-              <img className="content" src="/img/gear/btmf.png"></img>
-              {/* <img className="hidden content" src="/img/gear/btmf.png"></img> */}
-            </div>
-            <div className="content">
-              <div style={{verticalAlign: "top", width: "75%", textAlign: "left", display: "inline-block"}}>Men's Cotton/Poly Blend Tee</div>
-              <div style={{verticalAlign: "top", width: "25%", textAlign: "right", display: "inline-block"}}>$555</div>
-            </div>
-          </div>
-
-          <div className="gearitem ui card" style={{width: "40%", display: "inline-block", marginLeft: "20px"}}>
-            <div onClick={this.gearDetails} className="ui image">
-              <img className="content" src="/img/gear/btwf.png"></img>
-              {/* <img className="hidden content" src="/img/gear/btwf.png"></img> */}
-            </div>
-            <div className="content">
-              <div style={{verticalAlign: "top", width: "75%", textAlign: "left", display: "inline-block"}}>Women's Cotton/Poly Blend Tee</div>
-              <div style={{verticalAlign: "top", width: "25%", textAlign: "right", display: "inline-block"}}>$555</div>
-            </div>
-          </div>
-
-          <div className="gearitem ui card" style={{width: "40%", display: "inline-block", marginLeft: "20px"}}>
-            <div onClick={this.gearDetails} className="ui image">
-              {/* <img className="visible content" src="/img/gear/ctmf.png"></img> */}
-              <img className="content" src="/img/gear/ctmb.png"></img>
-            </div>
-            <div className="content">
-              <div style={{verticalAlign: "top", width: "75%", textAlign: "left", display: "inline-block"}}>Men's Cotton Tee</div>
-              <div style={{verticalAlign: "top", width: "25%", textAlign: "right", display: "inline-block"}}>$555</div>
-              <br />&nbsp;
-            </div>
-          </div>
-
-          <div className="gearitem ui card" style={{width: "40%", display: "inline-block", marginLeft: "20px"}}>
-            <div onClick={this.gearDetails} className="ui slide masked reveal image">
-              <img className="visible content" src="/img/gear/ctwf.png"></img>
-              <img className="hidden content" src="/img/gear/ctwb.png"></img>
-            </div>
-            <div className="content">
-              <div style={{verticalAlign: "top", width: "75%", textAlign: "left", display: "inline-block"}}>Women's Cotton Tee</div>
-              <div style={{verticalAlign: "top", width: "25%", textAlign: "right", display: "inline-block"}}>$555</div>
-              <br />&nbsp;
-            </div>
-          </div>
-
-          <div className="gearitem ui card" style={{width: "40%", display: "inline-block", marginLeft: "20px"}}>
-            <div onClick={this.gearDetails} className="ui image">
-              {/* <img className="visible content" src="/img/gear/lstmf.png"></img> */}
-              <img className="content" src="/img/gear/lstmb.png"></img>
-            </div>
-            <div className="content">
-              <div style={{verticalAlign: "top", width: "75%", textAlign: "left", display: "inline-block"}}>Men's Long Sleeve Cotton Tee</div>
-              <div style={{verticalAlign: "top", width: "25%", textAlign: "right", display: "inline-block"}}>$555</div>
-            </div>
-          </div>
-
-          <div className="gearitem ui card" style={{width: "40%", display: "inline-block", marginLeft: "20px"}}>
-            <div onClick={this.gearDetails} className="ui slide masked reveal image">
-              <img className="visible content" src="/img/gear/lstwf.png"></img>
-              <img className="hidden content" src="/img/gear/lstwb.png"></img>
-            </div>
-            <div className="content">
-              <div style={{verticalAlign: "top", width: "75%", textAlign: "left", display: "inline-block"}}>Women's Long Sleeve Cotton Tee</div>
-              <div style={{verticalAlign: "top", width: "25%", textAlign: "right", display: "inline-block"}}>$555</div>
-            </div>
-          </div>
-
-          <div className="gearitem ui card" style={{width: "40%", display: "inline-block", marginLeft: "20px"}}>
-            <div onClick={this.gearDetails} className="ui image">
-              {/* <img className="visible content" src="/img/gear/ctyf.png"></img> */}
-              <img className="content" src="/img/gear/ctyb.png"></img>
-            </div>
-            <div className="content">
-              <div style={{verticalAlign: "top", width: "75%", textAlign: "left", display: "inline-block"}}>Youth Cotton Tee</div>
-              <div style={{verticalAlign: "top", width: "25%", textAlign: "right", display: "inline-block"}}>$555</div>
-              <br />&nbsp;
-            </div>
-          </div>
+          { this.getImageCard("Men's Cotton/Poly Blend Tee", "btm") }
+          { this.getImageCard("Women's Cotton/Poly Blend Tee", "btw") }
+          { this.getImageCard("Men's Cotton Tee", "ctm") }
+          { this.getImageCard("Women's Cotton Tee", "ctw") }
+          { this.getImageCard("Men's Long Sleeve Cotton Tee", "lstm") }
+          { this.getImageCard("Women's Long Sleeve Cotton Tee", "lstw") }
+          { this.getImageCard("Youth Cotton Tee", "cty") }
 
           <Header size="medium">Outerwear</Header>
+
+          { this.getImageCard("Unisex Crew Sweatshirt", "fcu") }
+          { this.getImageCard("Unisex Hoodie Sweatshirt", "hu") }
+          { this.getImageCard("Youth Hoodie", "hy") }
+          { this.getImageCard("Unisex Quarter-zip Collar Sweatshirt", "qzu") }
 
         </Segment>
       </Container>
