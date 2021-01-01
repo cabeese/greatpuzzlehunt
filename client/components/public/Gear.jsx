@@ -149,10 +149,11 @@ Gear = class Gear extends Component {
   getImageCard(code) {
     title = titles[code];
     path = "/img/gear/" + code + "f.jpg";
+    let width = this.isTall() ? "40%" : "30%";
     return (
-      <div className="gearitem ui card" style={{width: "30%", display: "inline-block", marginLeft: "20px"}}>
+      <div className="gearitem ui card" style={{verticalAlign: "top", width: width, display: "inline-block", marginLeft: "20px"}}>
         <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails} src={path}></img>
-        <div className="content" style={{height: "75px"}}>
+        <div className="content">
           <span> {title} </span>
         </div>
       </div>
@@ -180,7 +181,7 @@ Gear = class Gear extends Component {
                 <p>Size range: <span id="sizes"></span></p>
                 <p>Material: <span id="materials"></span></p>
                 <Header as="h2">Colors:</Header>
-                <div style={{height: "50%", overflowY: "auto", overflowX: "hidden"}}>
+                <div style={{overflowY: "auto", overflowX: "hidden"}}>
                   <img style={{verticalAlign: "top", width: "100%"}} className="swatches" src="/img/gear/swatches/btm.png"></img>
                 </div>
                 <br />
