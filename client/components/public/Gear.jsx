@@ -8,8 +8,12 @@ import "slick-carousel/slick/slick-theme.css"
 import { Container, Segment, Header, Icon, Modal, Grid } from 'semantic-ui-react';
 import LinkButton from '../imports/LinkButton';
 
-const buyButton = (
-  <LinkButton as='a' href="https://commerce.cashnet.com/cashnetg/selfserve/BrowseCatalog.aspx"
+const { eventYear } = Meteor.settings.public;
+
+const link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+
+const buyButton = (  
+  <LinkButton as='a' href={link}
     size="huge" color="orange" target="_blank"
     icon={<Icon name="shopping cart" />}
     content="Buy"
@@ -18,7 +22,7 @@ const buyButton = (
 
 const xxlStr = ", +$2 for 2XL or larger.";
 
-const front = {
+const forward = {
   "ctm": 0,
   "ctw": 1,
   "cty": 1,
@@ -125,31 +129,15 @@ Gear = class Gear extends Component {
     this.setState({open: true});
   }
 
-  showBack() {
-    front.style.display = "none";
-    back.style.display = "block";
-  }
-
-  showFront() {
-    front.style.display = "block";
-    back.style.display = "none";
-  }
-
-  componentDidMount() {
-    front = document.getElementById("front");
-    back = document.getElementById("back");
-  }
-
   isTall() {
     return window.innerWidth < window.innerHeight - 200;
   }
 
   getImageCard(code) {
     title = titles[code];
-    path = "/img/gear/" + code + (front[code] ? "f.jpg" : "b.jpg");
-    let width = this.isTall() ? "40%" : "30%";
+    path = "/img/gear/" + code + (forward[code] ? "f.jpg" : "b.jpg");
     return (
-      <div className="gearitem ui card link" style={{verticalAlign: "top", width: width, display: "inline-block", marginLeft: "20px"}}>
+      <div className="gearitem ui card link" style={{verticalAlign: "top", display: "inline-block", marginLeft: "20px"}}>
         <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails.bind(this)} src={path}></img>
         <div className="content">
           <span> {title} </span>
@@ -159,11 +147,11 @@ Gear = class Gear extends Component {
   }
 
   render() {
-    let height = this.isTall() ? "" : window.innerHeight - 200 - 40 + "px";
     let settings = {
       arrows: false,
       dots: true,
       autoplay: true,
+      autoplaySpeed: 5000,
       infinite: true,
       speed: 500,
       slidesToShow: 1,

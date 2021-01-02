@@ -1,3 +1,5 @@
+@import '../../lib/less/variables.less';
+
 .carousel-dots
 {
     position: absolute;
@@ -79,4 +81,14 @@
 {
     opacity: .75;
     color: black;
+}
+
+.gearitem {
+    width: 30% !important;
+}
+
+@media all and (max-width: @desktop-min) {
+    .gearitem {
+        width: 45% !important;
+    }
 }
