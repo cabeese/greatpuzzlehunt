@@ -18,12 +18,12 @@ export const DIVISION_TYPES = [
     text: 'Postsecondary Students',
     value: 'postsecondary',
     wristBandColor: "Purple",
-    description: "All team members must be currently enrolled in college (undergrad or grad), technical school, running start. Mix and match-team members from same or different schools."
+    description: "All team members must be currently enrolled in college (undergrad or grad), technical school, or running start. Mix and match-team members from same or different schools."
   },
   {
     text: 'Secondary Students',
     value: 'secondary',
-    wristBandColor: "Orange",
+    wristBandColor: "Red",
     description: "All team members must be currently enrolled in middle school or high school. Exception: One adult chaperone per team may register as a team member."
   },
   {
