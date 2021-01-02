@@ -1,7 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 
-import { Container, Segment, Header, Icon } from 'semantic-ui-react';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css"
+
+import { Container, Segment, Header, Icon, Modal, Grid } from 'semantic-ui-react';
 import LinkButton from '../imports/LinkButton';
 
 const buyButton = (
@@ -13,6 +17,20 @@ const buyButton = (
 );
 
 const xxlStr = ", +$2 for 2XL or larger.";
+
+const front = {
+  "ctm": 0,
+  "ctw": 1,
+  "cty": 1,
+  "btm": 0,
+  "btw": 0,
+  "lstw": 0,
+  "lstm": 1,
+  "fcu": 0,
+  "hu": 1,
+  "hy": 1,
+  "qzu": 1
+}
 
 const titles = {
   "ctm": "Men's Cotton Tee",
@@ -72,33 +90,39 @@ const sizes = {
 
 Gear = class Gear extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false,
+      front: "",
+      back: "",
+      title: "",
+      size: "",
+      materials: "",
+      swatches: ""
+    };
+  }
+
+  onClose = () => this.setState({open: false});
+
   gearDetails(e) {
+    
     str = e.target.src;
     str = str.split("").reverse().join("");
     str = str.substring(5, str.indexOf('/'));
     str = str.split("").reverse().join("");
-    details = document.getElementById("gearDetails");
-    
-    front = details.getElementsByTagName("img")[0];
-    back = details.getElementsByTagName("img")[1];
-    swatches = details.getElementsByTagName("img")[2];
-    front.src = "/img/gear/" + str + "f.jpg";
-    back.src = "/img/gear/" + str + "b.jpg";
-    swatches.src = "/img/gear/swatches/" + str + ".png";
-    document.getElementById("sizes").innerHTML = sizes[str];
-    document.getElementById("title").innerHTML = titles[str];
-    document.getElementById("price").innerHTML = prices[str];
-    document.getElementById("materials").innerHTML = materials[str];
+  
+    this.setState({
+                  front: "/img/gear/" + str + "f.jpg",
+                  back: "/img/gear/" + str + "b.jpg",
+                  swatches: "/img/gear/swatches/" + str + ".png",
+                  size: sizes[str],
+                  title: titles[str],
+                  price: prices[str],
+                  materials: materials[str]});
 
-    details.style.display = "block";
-
-    details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
-    details.style.left = window.innerWidth / 2 - $("#gearDetails").innerWidth() / 2 + "px";
-  }
-
-  closeDetails(e) {
-    details = document.getElementById("gearDetails");
-    details.style.display = "none";
+    this.setState({open: true});
   }
 
   showBack() {
@@ -112,47 +136,21 @@ Gear = class Gear extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateDimensions.bind(this));
     front = document.getElementById("front");
     back = document.getElementById("back");
-    front.addEventListener("mouseover", this.showBack);
-    front.addEventListener("touchstart", this.showBack);
-    back.addEventListener("mouseout", this.showFront);
-    back.addEventListener("touchend", this.showFront);
   }
 
   isTall() {
     return window.innerWidth < window.innerHeight - 200;
   }
 
-  updateDimensions() {
-    this.forceUpdate();
-    details = document.getElementById("gearDetails");
-    details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
-    details.style.left = window.innerWidth / 2 - $("#gearDetails").innerWidth() / 2 + "px";
-    let open = details.style.display == "block";
-    details.style.display = "block";
-    details.style.width = "auto";
-    details.style.height = "auto";
-    
-    closeButton = document.getElementById("close");
-    closeButton.style.top = details.style.top;
-    closeButton.style.left = details.style.left;
-
-    if (!open) {
-      details.style.display = "none";
-    }
- 
-
-  }
-
   getImageCard(code) {
     title = titles[code];
-    path = "/img/gear/" + code + "f.jpg";
+    path = "/img/gear/" + code + (front[code] ? "f.jpg" : "b.jpg");
     let width = this.isTall() ? "40%" : "30%";
     return (
-      <div className="gearitem ui card" style={{verticalAlign: "top", width: width, display: "inline-block", marginLeft: "20px"}}>
-        <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails} src={path}></img>
+      <div className="gearitem ui card link" style={{verticalAlign: "top", width: width, display: "inline-block", marginLeft: "20px"}}>
+        <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails.bind(this)} src={path}></img>
         <div className="content">
           <span> {title} </span>
         </div>
@@ -162,38 +160,50 @@ Gear = class Gear extends Component {
 
   render() {
     let height = this.isTall() ? "" : window.innerHeight - 200 - 40 + "px";
+    let settings = {
+      arrows: false,
+      dots: true,
+      autoplay: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      dotsClass: "carousel-dots"
+    }
 
     return (
       <Container className="section">
-
-
-        <div id="gearDetails" style={{padding: "20px", zIndex: "1000", position: "fixed", left: 0, top: 0, display: "none", backgroundColor: "white", borderRadius: "5px", boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)"}}>
-            <i id="close" className="close icon" onClick={this.closeDetails}></i>
-            <div style={{display: "grid", gridTemplateColumns: "auto auto", height: height}}>
-              <div style={{height: "calc(100% - 20px)", minHeight: 0, minWidth: 0}}>
-                  <img id="front" src="/img/gear/btmf.jpg" style={{objectFit: "contain", maxHeight: "100%", maxWidth: "100%"}} />
-                  <img id="back" src="/img/gear/btmb.jpg" style={{display: "none", objectFit: "contain", maxHeight: "100%", maxWidth: "100%"}} />
-                <p>Hover or tap on image to change photo.</p>
-              </div>
-              <div style={{paddingLeft: "10px", verticalAlign: "top", display:"inline-block", minWidth: 0, minHeight: 0, flexBasis: 0, flexGrow: 1}}>
-                <Header id="title" as="h2">Men's Cotton Tee</Header>
-                <p id="price"></p>
-                <p>Size range: <span id="sizes"></span></p>
-                <p>Material: <span id="materials"></span></p>
-                <Header as="h2">Colors:</Header>
-                <div style={{overflowY: "auto", overflowX: "hidden"}}>
-                  <img style={{verticalAlign: "top", width: "100%"}} className="swatches" src="/img/gear/swatches/btm.png"></img>
-                </div>
-                <br />
-                <center>
+        <Modal closeIcon open={this.state.open} onClose={this.onClose}>
+            <Modal.Content>
+              <Grid stackable columns={2}>
+                <Grid.Column width={6}>
+                <Slider {...settings}>
+                  <img src={this.state.front} />
+                  <img src={this.state.back} />
+                </Slider>
+                  <br /><br />
+                  <center>
                   { buyButton }
                 </center>
-              </div>
-            </div>
-        </div>
+                </Grid.Column>
+                <Grid.Column width={10}>
+                  <Header id="title" as="h2">{this.state.title}</Header>
+                  <p> {this.state.price}</p>
+                  <p>Size range: {this.state.size}</p>
+                  <p>Material: {this.state.materials}</p>
+                  <Header as="h2">Colors:</Header>
+                  <img width="100%" src={this.state.swatches}></img>
+                </Grid.Column>
+                
+            </Grid>
+            </Modal.Content>
+        </Modal>
+
         <Segment basic>
           <PuzzlePageTitle title="Gear" />
           Prices on varying styles range from $14&ndash;$30, additional $2 for extended sizes. <b>Cool swag included with every shipment!</b>
+          <br /><br />
+          Click on each item for more information.
 
           <Header as="h2">Shipping</Header>
           For items shipped <b>domestically</b>, SHIPPING IS FREE (we are covering the cost!).<br />
@@ -202,13 +212,13 @@ Gear = class Gear extends Component {
           Unfortunately, if shipping is not added to international orders, we will be unable to ship and will refund the purchase.
 
           <Header size="medium">Shirts</Header>
-          { this.getImageCard("btm") }
-          { this.getImageCard("btw") }
           { this.getImageCard("ctm") }
           { this.getImageCard("ctw") }
+          { this.getImageCard("cty") }
+          { this.getImageCard("btm") }
+          { this.getImageCard("btw") }
           { this.getImageCard("lstm") }
           { this.getImageCard("lstw") }
-          { this.getImageCard("cty") }
 
           <Header size="medium">Outerwear</Header>
 
