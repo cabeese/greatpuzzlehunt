@@ -67,7 +67,7 @@ TeamListCard = class TeamListCard extends Component {
             { team.bio }
             <br />
             <Header as="h3">Want to join { team.name }? Write a request to join:</Header>
-            <TextArea>
+            <TextArea style={{width: "100%"}}>
             </TextArea>
           </Modal.Content>
           <Modal.Actions>
