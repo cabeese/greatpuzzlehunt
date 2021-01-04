@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Icon, Button, Progress, Form, Popup, Header } from 'semantic-ui-react';
+import { Card, Icon, Button, Progress, Form, Popup, Header, Modal, TextArea } from 'semantic-ui-react';
 
 import { DIVISION_MAP } from './imports/team-helpers.js';
 import ContactModal from '../imports/contact-modal';
@@ -24,8 +24,12 @@ TeamListCard = class TeamListCard extends Component {
       owner: {},
       bio: team.bio,
       password: '',
+      modalOpen: false
     };
   }
+
+  onClick = () => this.setState({modalOpen: true });
+  onClose = () => this.setState({modalOpen: false});
 
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.showPasswordField && this.state.showPasswordField) {
@@ -45,7 +49,7 @@ TeamListCard = class TeamListCard extends Component {
     const progressColor = this._getProgressColor(memberCount);
 
     return (
-      <Card color={this.state.lookingForMembers && !this.props.public ? 'red' : null} centered>
+      <Card link color={this.state.lookingForMembers && !this.props.public ? 'red' : null} centered onClick={this.onClick}>
         <Card.Content>
           <Card.Header>{ team.name }</Card.Header>
           <Card.Meta><Icon name='sitemap'/> { division }</Card.Meta>
@@ -55,7 +59,28 @@ TeamListCard = class TeamListCard extends Component {
         </Card.Content>
 
         { this._getCardExtra() }
+
+        <Modal closeIcon open={this.state.modalOpen} onClose={this.onClose}>
+          <Modal.Header>{ team.name }</Modal.Header>
+          <Modal.Content>
+            <Header as="h3">Team Bio:</Header>
+            { team.bio }
+            <br />
+            <Header as="h3">Want to join { team.name }? Write a request to join:</Header>
+            <TextArea>
+            </TextArea>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color='black' onClick={this.onClose}>
+              Cancel
+            </Button>
+            <Button
+              content="Submit Request"
+            />
+          </Modal.Actions>
+      </Modal>
       </Card>
+      
     );
   }
 
