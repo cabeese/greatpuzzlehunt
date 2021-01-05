@@ -55,6 +55,7 @@ class GamestateControlsInner extends Component {
   }
 
   _renderForm() {
+    const sendReportsTo = this.state.sendReportsTo || [];
     return (
       <Container>
         <Header as="h3" content="Emails and Reports" />
@@ -74,7 +75,7 @@ class GamestateControlsInner extends Component {
 
         <Header as="h4" content="Nightly Reports" />
         <div>
-          {this.state.sendReportsTo.map(email => {
+          {sendReportsTo.map(email => {
             return (
               <Button
                 onClick={() => this.removeRecipient(email)}
