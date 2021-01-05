@@ -13,7 +13,7 @@ import { pick } from 'lodash';
 
 import GamestateComp from '../../imports/GamestateComp';
 
-const { eventYear, eventDate } = Meteor.settings.public;
+const { eventYear, eventDate, eventDay } = Meteor.settings.public;
 
 const accountTypeOptions = [
   { key: 'student', value: 'STUDENT', text: 'Student (currently enrolled in any school)' },
@@ -346,7 +346,7 @@ class RegisterForm extends Component {
     if (!this.state.showHoldHarmless) return <p></p>;
     return (
       <Segment basic>
-        <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor child) to participate in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU Mathematics Department, held on {eventDate} (hereinafter referred to as “Puzzle Hunt”).  I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
+        <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor child) to participate in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU Mathematics Department, held on {eventDay}, {eventDate} (hereinafter referred to as “Puzzle Hunt”).  I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
         <p>In consideration of my (or my minor child’s) voluntary participation in the Puzzle Hunt, I agree to hold harmless Western Washington University, its officers, agents, volunteers, or employees from and against all financial loss, claim, suit, action, damage, or expense, arising out of my (or my minor child’s) participation, unless caused by the negligence or willful misconduct of the University, its officers, agents, volunteers, or employees.</p>
         <p>I understand that Western Washington University strongly recommends that participants have comprehensive health insurance coverage.</p>
         <p>I understand and acknowledge that a medical emergency may develop which necessitates the need for immediate medical treatment for a participant.  I hereby authorize Western and its officers, agents, volunteers or employees to arrange or provide any necessary emergency medical treatment on my (or my minor child’s) behalf.</p>

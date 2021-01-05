@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Message, List, Icon, Header } from 'semantic-ui-react';
 
-const { eventYear, eventDate, siteName, siteURL, registrationCloseDate } = Meteor.settings.public;
+const { eventYear, eventDate, eventDay, siteName, siteURL, registrationCloseDate } = Meteor.settings.public;
 
 RegistrationProcess = class RegistrationProcess extends Component {
   constructor(props) {
@@ -48,12 +48,12 @@ RegistrationProcess = class RegistrationProcess extends Component {
         <List.Item>
           {currentStep === 1 ? this._youAreHere() : null }
           Purchase ticket code <a target="_blank" href="https://commerce.cashnet.com/TheGreatPuzzleHunt2019">HERE</a>.<br/>
-          Deadline: <strong>10:00 AM {eventDate}</strong>
+          Deadline: <strong>10:00 AM {eventDay}, {eventDate}</strong>
         </List.Item>
         <List.Item>
           {currentStep === 3 ? this._youAreHere() : null }
           Redeem ticket code <a target="blank" href={`${siteURL}/redeem`}>HERE</a>.<br/>
-          Deadline: <strong> 10:00 AM {eventDate}</strong>
+          Deadline: <strong> 10:00 AM {eventDay}, {eventDate}</strong>
         </List.Item>
       </List>
     );

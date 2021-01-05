@@ -9,7 +9,7 @@ import LinkButton from '../../imports/LinkButton';
 import TimedComp from './TimedComp';
 import GamestateComp from '../../imports/GamestateComp'
 
-const { eventYear, eventDate, earlyBirdLastDate, registrationCloseDate } = Meteor.settings.public;
+const { eventYear, eventDate, eventDay, earlyBirdLastDate, registrationCloseDate } = Meteor.settings.public;
 
 /* TODO: these two components should be on timers, and the official times should be
    stored in a well-known place with a well known (ISO 8601, anyone?) format. */
@@ -32,7 +32,7 @@ const registrationClosesMessage = (
       <Message.Header>Why Register Now?</Message.Header>
       Step 1 of Registration Closes {registrationCloseDate}, 11:59 PM. <br/>
       Gear sales are closed, but
-      you can still <a href={link} target="_blank">buy and redeem tickets</a> until 10:00 AM {eventDate}.
+      you can still <a href={link} target="_blank">buy and redeem tickets</a> until 10:00 AM {eventDay}, {eventDate}.
     </Message.Content>
   </Message>
 );
@@ -76,7 +76,7 @@ class HomeHeader extends Component {
                   <div id="header-video-content" style={{zIndex: "2", position: "absolute", width: "100%", height: "calc(100% - 100px)", display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateZ(1px)"}}>
                     <h1 className="header-text text-highlight-color">WWU Fifth Annual</h1>
                     <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
-                    <h2 className="sub-header-text">{eventDate} 9:30 AM</h2>
+                    <h2 className="sub-header-text">{eventDay}, {eventDate} 9:30 AM</h2>
                     { this._linkButtons() }
                     <h3 style={{color: "white", textAlign: "center"}}>
                       This event is made possible thanks to

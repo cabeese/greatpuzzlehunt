@@ -14,7 +14,7 @@ import {
   Image
 } from 'semantic-ui-react';
 
-const { eventYear, eventDate, siteName, earlyBirdLastDate, gearSaleEnd, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
+const { eventYear, eventDate, eventDay, siteName, earlyBirdLastDate, gearSaleEnd, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
 const prizeNote = (
   <span>
@@ -254,7 +254,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 4}>
             <h3>
-              <strong>{eventDate}</strong> at 9:30 AM (PST)
+              <strong>{eventDay}, {eventDate}</strong> at 9:30 AM (PST)
             </h3>
             Other important dates:
             {importantDates}
@@ -292,6 +292,10 @@ FAQ = class FAQ extends Component {
                 header="WWU Students"
                 description="All team members must be currently enrolled at WWU (undergrad or grad)."
               />
+              <List.Item
+                header="WWU Alumni"
+                description="At least half of team members must be WWU Alumni"
+              />
               <List.Item 
                 header="Postsecondary Students"
                 description="All team members must be currently enrolled in college (undergrad or grad), technical school, running start. Mix and match-team members from same or different schools."
@@ -299,10 +303,6 @@ FAQ = class FAQ extends Component {
               <List.Item
                 header="Secondary Students"
                 description="All team members must be currently enrolled in middle school or high school. Exception: One adult chaperone per team may register as a team member."
-              />
-              <List.Item
-                header="WWU Alumni"
-                description="At least half of team members must be WWU Alumni"
               />
               <List.Item 
                 header="Open"
