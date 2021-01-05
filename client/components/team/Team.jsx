@@ -41,7 +41,6 @@ Team = class Team extends Component {
     return (
       <Segment basic>
         <PuzzlePageTitle title={this._getTitle()} subTitle={this.state.lastUpdate ? `Last Updated: ${this.state.lastUpdated}` : ''}/>
-        <Header as='h1' content="I'm here!"/>
         {content}
       </Segment>
     );

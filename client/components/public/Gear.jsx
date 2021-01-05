@@ -118,6 +118,7 @@ Gear = class Gear extends Component {
     str = str.split("").reverse().join("");
   
     this.setState({
+                  open: true,
                   front: "/img/gear/" + str + "f.jpg",
                   back: "/img/gear/" + str + "b.jpg",
                   swatches: "/img/gear/swatches/" + str + ".png",
@@ -125,8 +126,6 @@ Gear = class Gear extends Component {
                   title: titles[str],
                   price: prices[str],
                   materials: materials[str]});
-
-    this.setState({open: true});
   }
 
   isTall() {
@@ -134,8 +133,8 @@ Gear = class Gear extends Component {
   }
 
   getImageCard(code) {
-    title = titles[code];
-    path = "/img/gear/" + code + (forward[code] ? "f.jpg" : "b.jpg");
+    let title = titles[code];
+    let path = "/img/gear/" + code + (forward[code] ? "f.jpg" : "b.jpg");
     return (
       <div className="gearitem ui card link" style={{verticalAlign: "top", display: "inline-block", marginLeft: "20px"}}>
         <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails.bind(this)} src={path}></img>
