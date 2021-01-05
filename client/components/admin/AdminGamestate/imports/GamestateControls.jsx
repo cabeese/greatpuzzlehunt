@@ -8,7 +8,10 @@ class GamestateControlsInner extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      reportDLBusy: false,
+    };
+    this._getReport = this._getReport.bind(this);
   }
 
   componentWillReceiveProps(props) {
@@ -29,16 +32,41 @@ class GamestateControlsInner extends Component {
     }
   }
 
+  _getReport(index) {
+    let self = this;
+    this.setState({reportDLBusy: true});
+    Meteor.call('admin.downloadReport', index, (error, result) => {
+      self.setState({reportDLBusy: false});
+      if(error){
+        console.log(error);
+        alert(`Failed to generate report. ${error.message}. See logs for details`);
+      } else if(result) {
+        let encodedUri = `data:text/csv;charset=${result.encoding},` +
+          encodeURI(result.content);
+        window.open(encodedUri);
+      } else {
+        alert("Something went wrong - no error but also no data.");
+      }
+    });
+  }
+
   _renderForm() {
     return (
       <Form onSubmit={ (e) => e.preventDefault() }>
-      <Header as="h3" content="Emails and Reports" />
+        <Header as="h3" content="Emails and Reports" />
         <Form.Group>
           <Form.Button icon="mail" content="Email (all 3) Reports to Me" onClick={(e) => Meteor.call('admin.sendReport')}/>
         </Form.Group>
 
         <Form.Group>
           <Form.Button icon="mail" content="Email List of Users & Teams to Me" onClick={(e) => { Meteor.call('admin.sendUsersAndTeams'); alert("Emails are sending!"); }}/>
+        </Form.Group>
+
+        <Header as="h4" content="Generate and Download Reports" />
+        <Form.Group>
+          { this._reportDownloadButton("Users", 0) }
+          { this._reportDownloadButton("Transactions", 1) }
+          { this._reportDownloadButton("Gear Orders", 2) }
         </Form.Group>
 
         <Form.Group>
@@ -66,6 +94,15 @@ class GamestateControlsInner extends Component {
           { this._fieldButton('Leaderboard') }
         </Form.Group>
       </Form>
+    );
+  }
+
+  _reportDownloadButton(name, index) {
+    return (
+      <Form.Button icon="download"
+        content={name}
+        onClick={ ()=> this._getReport(index) }
+        disabled={this.state.reportDLBusy} />
     );
   }
 
