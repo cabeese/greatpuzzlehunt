@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component, PropTypes } from 'react';
-import { Radio, Form, Button, Header } from 'semantic-ui-react';
+import { Radio, Container, Input, Button, Header } from 'semantic-ui-react';
 
 import GamestateComp from '../../../imports/GamestateComp';
 
@@ -10,6 +10,7 @@ class GamestateControlsInner extends Component {
     super(props);
     this.state = {
       reportDLBusy: false,
+      reportEmail: "",
     };
     this._getReport = this._getReport.bind(this);
   }
@@ -19,9 +20,12 @@ class GamestateControlsInner extends Component {
       this.setState({
         registration: props.gamestate.registration,
         gameplay: props.gamestate.gameplay,
+        sendReportsTo: props.gamestate.sendReportsTo,
       });
     }
   }
+
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   render() {
     if (this.props.ready) {
@@ -52,59 +56,95 @@ class GamestateControlsInner extends Component {
 
   _renderForm() {
     return (
-      <Form onSubmit={ (e) => e.preventDefault() }>
+      <Container>
         <Header as="h3" content="Emails and Reports" />
-        <Form.Group>
-          <Form.Button icon="mail" content="Email (all 3) Reports to Me" onClick={(e) => Meteor.call('admin.sendReport')}/>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Button icon="mail" content="Email List of Users & Teams to Me" onClick={(e) => { Meteor.call('admin.sendUsersAndTeams'); alert("Emails are sending!"); }}/>
-        </Form.Group>
 
         <Header as="h4" content="Generate and Download Reports" />
-        <Form.Group>
-          { this._reportDownloadButton("Users", 0) }
-          { this._reportDownloadButton("Transactions", 1) }
-          { this._reportDownloadButton("Gear Orders", 2) }
-        </Form.Group>
+        { this._reportDownloadButton("Users", 0) }
+        { this._reportDownloadButton("Transactions", 1) }
+        { this._reportDownloadButton("Gear Orders", 2) }
 
-        <Form.Group>
-          { this._fieldButton('doSendNightlyReports', "Nightly Reports") }
-        </Form.Group>
+        <Header as="h4" content="Email Reports" />
+        <Button icon="mail" content="Email (all 3) Reports to Me"
+          onClick={(e) => Meteor.call('admin.sendReport')} />
+        <Button icon="mail" content="Email List of Users & Teams to Me"
+          onClick={(e) => {
+            Meteor.call('admin.sendUsersAndTeams'); alert("Emails are sending!");
+          }} />
+
+        <Header as="h4" content="Nightly Reports" />
+        <div>
+          {this.state.sendReportsTo.map(email => {
+            return (
+              <Button
+                onClick={() => this.removeRecipient(email)}
+                key={email}
+                content={email}
+                icon="x"
+                color="red"
+                size="tiny" />
+            );
+          })}
+        </div>
+        <div style={{marginTop: 10, marginBottom: 10}}>
+          <Input
+            placeholder="you@example.com"
+            name="reportEmail"
+            size="small"
+            value={this.state.reportEmail}
+            onChange={this.handleChange}
+            />
+
+          <Button
+            content="Add recipient to reports list"
+            onClick={() => this.addRecipient(this.state.reportEmail)} />
+        </div>
+        { this._fieldButton('doSendNightlyReports', "Nightly Reports") }
 
         <Header as='h3' content='Registration and Gear'/>
-        <Form.Group>
-          { this._fieldButton('Registration') }
-          </Form.Group>
-        <Form.Group>
-          { this._fieldButton('buyGear', '"Buy Gear" Button (on homepage)') }
-        </Form.Group>
+        { this._fieldButton('Registration') }
+        { this._fieldButton('buyGear', '"Buy Gear" Button (on homepage)') }
 
         <Header as='h3' content='Game Day!'/>
-        <Form.Group>
-          { this._fieldButton('CheckIn') }
-        </Form.Group>
-        <Form.Group>
-          { this._fieldButton('Gameplay') }
-        </Form.Group>
+        { this._fieldButton('CheckIn') }
+        { this._fieldButton('Gameplay') }
 
         <Header as='h3' content='Leaderboard'/>
-        <Form.Group>
-          { this._fieldButton('Leaderboard') }
-        </Form.Group>
-      </Form>
+        { this._fieldButton('Leaderboard') }
+      </Container>
     );
   }
 
   _reportDownloadButton(name, index) {
     return (
-      <Form.Button icon="download"
+      <Button icon="download"
         content={name}
-        onClick={ ()=> this._getReport(index) }
+        onClick={ () => this._getReport(index) }
         disabled={this.state.reportDLBusy} />
     );
   }
+
+  removeRecipient(email) {
+    if(confirm(`Are you sure you want to remove ${email} from nightly reports?`)){
+      Meteor.call(`admin.gamestate.reports.removeRecipient`, email, error => {
+        if (error){
+          console.log(error);
+          alert("Failed to remove email. " + error.reason);
+        }
+      });
+    }
+  }
+
+  addRecipient(email) {
+    if(!email) return;
+
+    Meteor.call(`admin.gamestate.reports.addRecipient`, email, error => {
+      if (error){
+        console.log(error);
+        alert("Failed to add email. " + error.reason);
+      }
+    });
+  };
 
   _fieldButton(fieldName, displayName) {
     if(!displayName){
@@ -113,16 +153,17 @@ class GamestateControlsInner extends Component {
     }
     const fieldValue = this.props.gamestate[fieldName];
     return (
-      <Radio toggle
-        checked={fieldValue}
-        label={displayName}
-        onClick={(e) => this._toggleField(e, fieldName) }
-      />
+      <div style={{marginTop: 10}}>
+        <Radio toggle
+          checked={fieldValue}
+          label={displayName}
+          onClick={(e) => this._toggleField(fieldName) }
+        />
+      </div>
     );
   }
 
-  _toggleField(e, fieldName) {
-    e.preventDefault();
+  _toggleField(fieldName) {
     if (confirm(`Are you sure you want to toggle ${fieldName}?`)) {
       Meteor.call(`admin.gamestate.toggleField`, fieldName, (error, result) => {
         if (error) alert(error.reason);
