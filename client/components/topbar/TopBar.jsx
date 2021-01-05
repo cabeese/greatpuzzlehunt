@@ -13,6 +13,11 @@ const leaderboardLink = {
   iconClass: 'yellow trophy',
 };
 
+const gearLink = {
+  name: 'Gear',
+  to: '/gear',
+  iconClass: 'green dollar sign',
+};
 
 
 const mainMenuLinks = [
@@ -57,11 +62,6 @@ const mainMenuLinks = [
     to: '/qrcode',
     iconClass: 'grey qrcode',
   },
-  {
-    name: 'Gear',
-    to: '/gear',
-    iconClass: 'green dollar sign',
-  }
 ];
 
 const adminMenuItems = [
@@ -197,6 +197,8 @@ TopBar = class TopBar extends Component {
     const linksToRender = links.slice();
     if (gamestate && gamestate.leaderboard)
       linksToRender.push(leaderboardLink);
+    if (gamestate && gamestate.buyGear)
+      linksToRender.push(gearLink);
     return linksToRender.map((item) => this._renderMenuLink(item));
   }
 
