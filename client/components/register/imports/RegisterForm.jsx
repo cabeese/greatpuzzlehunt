@@ -127,12 +127,6 @@ class RegisterForm extends Component {
       holdHarmless: false,
       showHoldHarmless: false,
     };
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((loc) => {
-        this.setState({ coords: { longitude: loc.coords.longitude, latitude: loc.coords.latitude } });
-      });
-    }
   }
 
   render() {

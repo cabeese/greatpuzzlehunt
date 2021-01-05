@@ -68,16 +68,16 @@ const schedule_data = [
   {
     time: "9:30–10:15 AM (PST)",
     // desc: "Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
-    desc: "Check-in: Download info packet and all puzzles plus meta puzzle. ALL PUZZLES ARE CODE PROTECTED. Packet can be opened upon download."
+    desc: "Check-in: Download and open information packet."
   },
   {
     time: "10:15 AM (PST)",
-    desc: <span>Live Stream Announcements (<a href="#">Link TBA</a>)</span>
+    desc: <span>Live Stream Announcements (<a href="#">link TBA</a>)</span>
   },
   {
     time: "10:30 AM (PST)",
     // desc: "Red Square: Announcements."
-    desc: "Puzzle Hunt Starts. Enter team code to open a downloaded puzzle."
+    desc: "Puzzle Hunt Starts."
   },
   {
     time: "4:30 PM (PST)",
@@ -87,7 +87,7 @@ const schedule_data = [
   {
     time: "5:00 PM (PST)",
     // desc: "Red Square: KUGS Radio plays music. Domino's pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants."
-    desc: <span>Leaderboard Posted, Live stream—Prizes Awarded! (<a href="#">Link TBA</a>)</span>
+    desc: <span>Leaderboard Posted, Live stream—Prizes Awarded! (<a href="#">link TBA</a>)</span>
   },
   // {
   //   time: "4:25 PM",
@@ -211,13 +211,15 @@ FAQ = class FAQ extends Component {
               <li>Prizes* are awarded in each division for best: times, costumes, and team names.</li>
               */}
               <li>Teams of up to 6 (recommended size 4-6) solve a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
-              <li><b>Your mission</b>: HAVE FUN! Check in on morning of Hunt to download the info packet and puzzles. At START time, select the first puzzle to download it and start the team clock. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you may open the next puzzle. Connect all the code words to complete the game!</li>
+              <li><b>Your mission</b>: HAVE FUN! Check in on morning of Hunt to download the info packet. At START time, select the first puzzle to download and start the team clock. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you may open the next puzzle. Connect all the code words to complete the game!</li>
               <li>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</li>
               <li>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone or computer.</li>
               <li>Prizes are awarded to top three scoring teams in each division.</li>
               <li>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</li>
             </ul>
+            {/* virtualeventonly
             <strong>* </strong>{prizeNote}
+             */}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 16} index={16} onClick={(e, p) => this.handleClick(e, p)} >
@@ -261,9 +263,11 @@ FAQ = class FAQ extends Component {
 
             Schedule for the day:
             {schedule}
+            {/* virtualeventonly
             <strong>* </strong>{wristbandNote}
             <br />
             <strong>** </strong>{prizeNote}
+             */}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 5} index={5} onClick={(e,p) => this.handleClick(e,p)} >
@@ -388,17 +392,23 @@ FAQ = class FAQ extends Component {
             What should I have on hand?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
-            Your creativity and problem solving skills! Along with the following:<br/>
-            <List>
-              <List.Item description="At least one smart phone. The more the better! (Think about battery life). Googling is encouraged!"/>
-              <List.Item description="A clip board, or a note pad. Graph paper might come in handy."/>
-              <List.Item description="Scissors and tape."/>
-              <List.Item description="Writing utensils (pencils, erasers, highlighters)."/>
-              <List.Item description="A felt tip marking pen - something that will mark a folded object, but not crush the object."/>
-              <List.Item description="Standard 10-12 pack of colored pencils."/>
-              <List.Item description="Water to drink and a sack lunch or snacks! Light refreshments will be provided."/>
-              <List.Item description="Umbrella to stay dry!"/>
-              <List.Item description="Hole punch for your puzzles." />
+            <List bulleted>
+              <List.Item description="Your creativity and problem solving skills!"/>
+              <List.Item description="Black and White printer. You will want hard copies of most puzzles to fold, cut, etc."/>
+              <List.Item description="At least one smart phone or computer. The more the better! Googling is encouraged!"/>
+              <List.Item description="Battery charger"/>
+            </List>
+            The following list will be updated, but useful materials in past hunts:
+            <List bulleted>
+              <List.Item description="A clip board, or a note pad"/>
+              <List.Item description="Graph paper"/>
+              <List.Item description="Scissors and tape"/>
+              <List.Item description="Writing utensils (pencils, erasers, highlighters"/>
+              <List.Item description="Felt tip marking pen"/>
+              <List.Item description="Standard 10&ndash;12 pack of colored pencils"/>
+              <List.Item description="Hole punch"/>
+              <List.Item description="Ruler/straightedge"/>
+              <List.Item description="Water to drink and a sack lunch or snacks!"/>
             </List>
           </Accordion.Content>
 
@@ -481,8 +491,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: January 2020</p>
-      </Segment>
+        <p>Last Updated: December 2020</p>
       </Container>
     );
   }

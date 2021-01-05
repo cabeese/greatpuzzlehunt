@@ -35,7 +35,7 @@ export default class HomeDonate extends Component {
                 color="green"
               />
               <LinkButton as='a'
-                href="https://foundation.wwu.edu/making-gift"
+                href="https://foundation.wwu.edu/how-make-gift"
                 size='large'  className="white button" content='Donating by check?'
                 icon={<Icon name='heart'/>}
                 color="green"
