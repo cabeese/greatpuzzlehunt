@@ -492,6 +492,7 @@ FAQ = class FAQ extends Component {
 
         <br/>
         <p>Last Updated: December 2020</p>
+      </Segment>
       </Container>
     );
   }
