@@ -103,7 +103,7 @@ Media = class Media extends Component {
             src='/img/media-page/cover_2018.jpg'
             as='a'
             label={{ as: 'a', ribbon: 'true', content: '2018', color: 'black' }}
-            href='https://www.gabrielleponcz.com/scienceandart/#/3rd-annual-great-puzzle-hunt-2018/'
+            href='https://flic.kr/s/aHsmTsvAFh'
             target='_blank'
             />
 
@@ -111,7 +111,7 @@ Media = class Media extends Component {
             src='/img/media-page/cover_2017.jpg'
             as='a'
             label={{ as: 'a', ribbon: 'true', content: '2017', color: 'black' }}
-            href='https://www.gabrielleponcz.com/puzzlehunt/'
+            href='https://flic.kr/s/aHsmTsVoRy'
             target='_blank'
             />
 
@@ -119,7 +119,7 @@ Media = class Media extends Component {
             src='/img/media-page/cover_2016.jpg'
             as='a'
             label={{ as: 'a', ribbon: 'true', content: '2016', color: 'black' }}
-            href='https://www.gabrielleponcz.com/wwu-great-puzzle-hunt/'
+            href='https://flic.kr/s/aHsmTsVf8r'
             target='_blank'
             />
         </Image.Group>
