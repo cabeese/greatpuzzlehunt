@@ -17,6 +17,7 @@ Gear = class Gear extends Component {
     swatches = details.getElementsByTagName("img")[2];
     front.src = "/img/gear/" + str + "f.jpg";
     back.src = "/img/gear/" + str + "b.jpg";
+    swatches.src = "/img/gear/swatches/" + str + ".png";
     details.style.display = "block";
 
     details.style.top = window.innerHeight / 2 - $("#gearDetails").innerHeight() / 2 + "px";
@@ -101,7 +102,9 @@ Gear = class Gear extends Component {
               <div style={{paddingLeft: "10px", verticalAlign: "top", display:"inline-block", minWidth: 0, minHeight: 0, flexBasis: 0, flexGrow: 1}}>
                 <Header as="h2"></Header>
                 <Header as="h2">Colors:</Header>
-                <img style={{verticalAlign: "top", maxWidth: "100%"}} className="swatches" src="/img/gear/men_blend_t.png"></img>
+                <div style={{height: "50%", overflowY: "auto", overflowX: "hidden"}}>
+                  <img style={{verticalAlign: "top", width: "100%"}} className="swatches" src="/img/gear/swatches/btm.png"></img>
+                </div>
               </div>
             </div>
         </div>
