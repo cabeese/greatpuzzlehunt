@@ -13,6 +13,7 @@ import {
   Button,
   Image
 } from 'semantic-ui-react';
+import GamestateComp from '../imports/GamestateComp';
 
 const { eventYear, eventDate, eventDay, siteName, earlyBirdLastDate, gearSaleEnd, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
@@ -29,7 +30,7 @@ const wristbandNote = (
 
 const gearPricing = (
   <span>
-    <strong>Official Puzzle Gear Pricing (See <a href="/gear">gear</a>)</strong>
+    <strong>Official Puzzle Gear Pricing</strong>
     {/* <ul>
       <li>Early Bird Discount Price (varying styles: prices range from $11-$27, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
       <li>Regular Price (varying styles: prices range from $14-$30, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
@@ -120,6 +121,7 @@ FAQ = class FAQ extends Component {
 
   render() {
     const { activeIndex } = this.state;
+    const gamestate = this.props.gamestate || {};
     return (
       <Container>
         <PuzzlePageTitle title="FAQ"/>
@@ -474,15 +476,8 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 15}>
             <p>This year you have several choices of puzzle hunt gear and hundreds of color combinations!</p>
-            <p>Browse and buy our official gear below. All proceeds from these sales help support this event.</p>
-            <List>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#tshirts">Men's, Women's, Youth Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#50/50">Men's, Women's 50/50 Poly/Cotton Blend T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#Ltshirt">Men's, Women's Long Sleeve Cotton T-Shirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#csu">Unisex Crew Sweatshirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#sweatshirt">Unisex, Youth 50/50 Poly/Cotton Blend Hoodie Sweatshirts</a></List.Item>
-              <List.Item><a target="_blank" href="http://www.wwu.edu/emarket/puzzlehunt/#zcs">Unisex Quarter-Zip Collar Sweatshirts</a></List.Item>
-            </List>
+            { gamestate && gamestate.buyGear ? <p>Take a look at our gear <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
+
             {gearPricing}
           </Accordion.Content>
           
@@ -515,3 +510,5 @@ FAQ = class FAQ extends Component {
     );
   }
 }
+
+FAQ = GamestateComp(FAQ);
