@@ -35,14 +35,14 @@ Team = class Team extends Component {
     const { ready, team, user } = this.props;
     let content = <Loading/>;
     if (ready) {
-      content = team ? this._renderMain() : <Segment basic><NoTeamMessage><ProfileInvites user={user}/></NoTeamMessage></Segment>;
+      content = team ? this._renderMain() : <NoTeamMessage><ProfileInvites user={user}/></NoTeamMessage>;
     }
 
     return (
-      <Container>
+      <Segment basic>
         <PuzzlePageTitle title={this._getTitle()} subTitle={this.state.lastUpdate ? `Last Updated: ${this.state.lastUpdated}` : ''}/>
         {content}
-      </Container>
+      </Segment>
     );
   }
 

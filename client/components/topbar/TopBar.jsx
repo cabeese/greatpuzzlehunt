@@ -13,6 +13,11 @@ const leaderboardLink = {
   iconClass: 'yellow trophy',
 };
 
+const gearLink = {
+  name: 'Gear',
+  to: '/gear',
+  iconClass: 'green dollar sign',
+};
 
 
 const mainMenuLinks = [
@@ -136,7 +141,7 @@ TopBar = class TopBar extends Component {
       height: '125px',
       borderRadius: '62.5px',
       marginTop: "-66.41px",
-      boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+      boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
       backgroundColor: "white",
       mixBlendMode: "darken"
     };
@@ -149,7 +154,7 @@ TopBar = class TopBar extends Component {
     );
     let logoLinkShadow = (
       
-      <div style={{position: "absolute", height: "100px", width:"100%", overflow: "hidden", marginTop:"66.41px", marginLeft:"-3px"}}>
+      <div style={{position: "absolute", height: "100px", width:"100%", overflow: "hidden", marginTop:"66.41px", marginLeft:"-3px", pointerEvents: "none"}}>
       <div style={logoShadow}></div>
       </div>
       
@@ -192,6 +197,8 @@ TopBar = class TopBar extends Component {
     const linksToRender = links.slice();
     if (gamestate && gamestate.leaderboard)
       linksToRender.push(leaderboardLink);
+    if (gamestate && gamestate.buyGear)
+      linksToRender.push(gearLink);
     return linksToRender.map((item) => this._renderMenuLink(item));
   }
 

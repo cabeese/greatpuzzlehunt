@@ -20,7 +20,8 @@ export default class HomeIntro extends Component {
   render() {
     return (
       <div id="HomeIntro">
-        <Container>
+        <Container className="section">
+        <Segment basic>
         <Grid padded stackable centered textAlign='left'>
           <Grid.Row>
             <Grid.Column width={16} className='raised'>
@@ -75,6 +76,7 @@ export default class HomeIntro extends Component {
           </Grid.Row>
 
         </Grid>
+        </Segment>
         </Container>
       </div>
      );
