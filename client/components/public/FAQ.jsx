@@ -512,3 +512,4 @@ FAQ = class FAQ extends Component {
 }
 
 FAQ = GamestateComp(FAQ);
+
