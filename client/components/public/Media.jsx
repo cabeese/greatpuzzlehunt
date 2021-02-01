@@ -21,7 +21,7 @@ Media = class Media extends Component {
           <Image
             src='https://i.ytimg.com/vi_webp/IZU0sLW9pJk/maxresdefault.webp'
             as='a'
-            label={{ as: 'a', ribbon: 'true', content: '2020', color: 'black'}}
+            label={{ as: 'a', ribbon: 'true', content: '2021', color: 'black'}}
             href='https://www.youtube.com/watch?v=IZU0sLW9pJk'
             target="_blank"
           />
@@ -101,10 +101,17 @@ Media = class Media extends Component {
             />
 
           <Image
-            src='/img/media-page/cover_2018.jpg'
+            src='/img/media-page/cover_2018_1.jpg'
             as='a'
             label={{ as: 'a', ribbon: 'true', content: '2018', color: 'black' }}
-            href='https://flic.kr/s/aHsmTsvAFh'
+            href='https://flic.kr/s/aHsmTFUGZT'
+            target='_blank'
+            />
+          <Image
+            src='/img/media-page/cover_2018_2.jpg'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2018', color: 'black' }}
+            href='https://flic.kr/s/aHsmTFUN1u'
             target='_blank'
             />
 
