@@ -27,7 +27,7 @@ class TeamMemeberCheckIn extends Component {
       content = (
         <List bulleted>
           <List.Item>Check in your players below.</List.Item>
-          <List.Item>Then scroll down & check in with a volunteer to get your supplies!</List.Item>
+          <List.Item>Then check in your team with the button at the bottom!</List.Item>
         </List>
       );
     }
