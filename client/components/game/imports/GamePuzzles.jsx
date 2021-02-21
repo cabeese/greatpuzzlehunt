@@ -18,9 +18,10 @@ export default class GamePuzzles extends Component {
   }
 
   _renderPuzzles() {
-    const { team } = this.props;
+    const { team, user } = this.props;
     return team.puzzles.map((puzzle) => <GamePuzzle
       team={ team }
+      user={ user }
       puzzle={ puzzle }
       key={ puzzle.puzzleId }
     />);
@@ -29,4 +30,5 @@ export default class GamePuzzles extends Component {
 
 GamePuzzles.propTypes = {
   team: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };

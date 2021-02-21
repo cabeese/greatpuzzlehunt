@@ -24,11 +24,11 @@ class GameUI extends Component {
   }
 
   _main() {
-    const { team } = this.props;
+    const { team, user } = this.props;
     return (
       <div>
         <GameStats team={ team }/>
-        <GamePuzzles team={ team }/>
+        <GamePuzzles team={ team } user={ user }/>
       </div>
     );
   }
@@ -36,6 +36,7 @@ class GameUI extends Component {
 
 GameUI.propTypes = {
   team: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default GameUI;

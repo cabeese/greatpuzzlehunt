@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import React, { PropTypes } from 'react';
-import { Segment, Header, Progress, Button } from 'semantic-ui-react';
+import { Segment, Header, Icon, Button } from 'semantic-ui-react';
 
-import PuzzleQRCode from './PuzzleQrCode';
+// import PuzzleQRCode from './PuzzleQrCode';
 import PuzzleAnswerForm from './PuzzleAnswerForm';
 import PuzzleProgress from '../../imports/PuzzleProgress';
 import PuzzleHints from './PuzzleHints';
@@ -22,18 +22,24 @@ export default class ActivePuzzle extends React.Component {
 
   render() {
     const { team, puzzle } = this.props;
+    const { downloadURL } = puzzle;
 
     return (
       <Segment>
         <Header as='h3' content={ puzzle.name }/>
-        <PuzzleQRCode
+        {/* virtualeventonly <PuzzleQRCode
           team={ team }
           puzzle={ puzzle }
           disabled={ false }
           qrLabel='Show to a Volunteer in case of puzzle emergency'
           qrButtonLabel='Puzzle QR Code'
           color='grey'
-        />
+        /> */}
+        <Button as="a" href={downloadURL} fluid color="blue"
+          download={puzzle.name} target="_blank">
+          <Icon name="download" />
+          Download Puzzle (PDF)
+        </Button>
         { this._inner(team, puzzle) }
         <PuzzleAnswerForm
           team={ team }
