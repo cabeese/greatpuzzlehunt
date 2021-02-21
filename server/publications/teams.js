@@ -33,10 +33,25 @@ Meteor.publish('teams.myTeam', function() {
     teamId: 1,
   };
 
-  return [
+  ret = [
     Teams.find({ members: userId }),
-    Meteor.users.find({ teamId: user.teamId }, { fields: userFields }),
   ];
+  /* There's a mongo edge case that will cause an error if the 'myTeam' service
+   * is called when the current user is not on a team. It appears to be due to
+   * Mongo and Meteor disagreeing on how to handle the query when `user.teamId`
+   * is undefined. Thus we only run the query if the user is actually on a team.
+   * For the time being, additional print statements are being added here to
+   * help provide insight if this continues to be a problem, but they could be
+   * removed at a later date if needed.
+   */
+  if( user.teamId ){
+    Meteor.logger.debug("[teams.myTeam] User has a team; query for members");
+    ret.push(Meteor.users.find({ teamId: user.teamId }, { fields: userFields }));
+  } else {
+    Meteor.logger.info("[teams.myTeam] User has no team; do not query for members");
+  }
+
+  return ret
 });
 
 Meteor.publish('volunteer.team', function(teamId) {
