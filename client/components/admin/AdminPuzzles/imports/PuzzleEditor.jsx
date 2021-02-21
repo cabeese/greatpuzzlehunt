@@ -74,6 +74,13 @@ class PuzzleEditor extends Component {
           onChange={ (e) => this._handleChange(e) }
         />
 
+        <Form.Input
+          name='downloadURL'
+          label='Download URL'
+          value={ this.state.downloadURL }
+          onChange={ (e) => this._handleChange(e) }
+        />
+
         <HintEditor hints={this.state.hints} updateHints={(hints) => this.setState({ hints })}/>
 
         <Form.Group>
@@ -87,7 +94,7 @@ class PuzzleEditor extends Component {
 
   _save(e) {
     e.preventDefault();
-    const { name, stage, answer, allowedTime, timeoutScore, bonusTime, location, hints } = this.state;
+    const { name, stage, answer, allowedTime, timeoutScore, bonusTime, location, downloadURL, hints } = this.state;
     const fields = {
       name: name.trim(),
       stage: parseInt(stage),
@@ -96,6 +103,7 @@ class PuzzleEditor extends Component {
       bonusTime: parseInt(bonusTime),
       answer: answer.trim().toLowerCase(),
       location: location.trim(),
+      downloadURL: downloadURL.trim(),
       hints,
     };
 
