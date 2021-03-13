@@ -397,6 +397,7 @@ FAQ = class FAQ extends Component {
             <List bulleted>
               <List.Item description="Your creativity and problem solving skills!"/>
               <List.Item description="Black and White printer. You will want hard copies of most puzzles to fold, cut, etc."/>
+              <List.Item description="A protractor (or other angle measuring device)."/>
               <List.Item description="At least one smart phone or computer. The more the better! Googling is encouraged!"/>
               <List.Item description="Battery charger"/>
             </List>
