@@ -29,12 +29,8 @@ export default class UnstartedPuzzleVirtual extends React.Component {
   }
 
   _downloadButton = () => {
-    const { user, team } = this.props;
-    const disabled = this.props.disabled || team.owner != user._id;
-    const text = disabled ?
-      "Your team leader must start the puzzle"
-      :
-      "Download puzzle (PDF) and start timer";
+    const disabled = this.props.disabled;
+    const text = "Download puzzle (PDF) and start timer";
 
     return (
       <Button
