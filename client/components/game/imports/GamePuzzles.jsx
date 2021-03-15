@@ -10,7 +10,7 @@ export default class GamePuzzles extends Component {
     return (
       <Grid.Row columns='1'>
         <Grid.Column>
-          <Header as='h2' content='Your Puzzles'/>
+          <Header as='h2' content='Your Puzzles' style={{marginTop: "10px"}} />
           { this._renderPuzzles() }
         </Grid.Column>
       </Grid.Row>

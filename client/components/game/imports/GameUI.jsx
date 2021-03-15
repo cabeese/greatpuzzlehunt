@@ -4,6 +4,7 @@ import { Container, Button } from 'semantic-ui-react';
 
 import GameStats from './GameStats';
 import GamePuzzles from './GamePuzzles';
+import CheckInPacket from './CheckInPacket'; // virtualeventonly
 
 class GameUI extends Component {
   render() {
@@ -28,6 +29,7 @@ class GameUI extends Component {
     return (
       <div>
         <GameStats team={ team }/>
+        <CheckInPacket /> {/*virtualeventonly*/}
         <GamePuzzles team={ team } user={ user }/>
       </div>
     );
