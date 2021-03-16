@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'semantic-ui-react';
+import { Modal, Tab, Button, Icon } from 'semantic-ui-react';
 
 //import AdminTeamEditForm from './AdminTeamEditForm';
-import AdminTeamActions from './AdminTeamActions';
-import AdminTeamUserListTracker from './AdminTeamUserList';
+import AdminTeamModalGeneral from './AdminTeamModalGeneral';
+import AdminTeamModalProgress from './AdminTeamModalProgress';
 
 class AdminTeamModal extends Component {
   constructor(props) {
@@ -24,6 +24,33 @@ class AdminTeamModal extends Component {
     const { open } = this.state;
     if (!open) return null;
 
+    const paneMap = {
+      "General": AdminTeamModalGeneral,
+      "Progress": AdminTeamModalProgress,
+    };
+    const panes = [
+      {
+        menuItem: "General",
+        render: () => {
+          return (
+            <Tab.Pane>
+              <AdminTeamModalGeneral team={team} />
+            </Tab.Pane>
+          );
+        }
+      },
+      {
+        menuItem: "Progress",
+        render: () => {
+          return (
+            <Tab.Pane>
+              <AdminTeamModalProgress team={team} />
+            </Tab.Pane>
+          );
+        }
+      },
+    ];
+
     return (
       <Modal
         size="large"
@@ -32,35 +59,23 @@ class AdminTeamModal extends Component {
         onClose={() => clearTeam() }
       >
         <Modal.Header>{team.name}</Modal.Header>
-        <Modal.Content>
-          <strong>Team _id:</strong> {team._id}
-          &emsp;
-          <strong>Division:</strong> {team.division}<br />
 
-          <AdminTeamUserListTracker id={team._id} />
+        <Modal.Content>
+          <Tab panes={panes} />
         </Modal.Content>
+
         <Modal.Actions>
-          <AdminTeamActions
-            team={team}
-            onToggleCheckedIn={(e) => this._toggleCheckedIn(e)}
-            clearTeam={this.props.clearTeam}
-          />
+          <Button
+            basic
+            onClick={clearTeam}
+            icon={ <Icon name="close" /> }
+            content="Close"
+            />
         </Modal.Actions>
       </Modal>
     );
   }
 
-  _toggleCheckedIn(e) {
-    e.preventDefault();
-    const { team } = this.props;
-    if (!confirm(`Toggle check-in for team ${team.name}?`)) return;
-
-    Meteor.call('team.checkin.toggle', team._id, (err, res) => {
-      if (err) {
-        alert(err);
-      }
-    });
-  }
 }
 
 AdminTeamModal.propTypes = {
