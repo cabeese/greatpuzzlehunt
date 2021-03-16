@@ -40,13 +40,15 @@ class AdminTeamTable extends Component {
 
     return (
       <div>
-        <Table celled striped>
+        <Table celled striped compact>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Created</Table.HeaderCell>
               <Table.HeaderCell>Name</Table.HeaderCell>
               <Table.HeaderCell>Division</Table.HeaderCell>
               <Table.HeaderCell>Checked In</Table.HeaderCell>
+              <Table.HeaderCell>Started?</Table.HeaderCell>
+              <Table.HeaderCell>Progress</Table.HeaderCell>
               <Table.HeaderCell>Actions</Table.HeaderCell>
             </Table.Row>
           </Table.Header>

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Icon, Button } from 'semantic-ui-react';
+import { Table, Icon, Button, Progress } from 'semantic-ui-react';
 import moment from 'moment';
 
 class AdminTeamTableRow extends Component {
@@ -21,6 +21,8 @@ class AdminTeamTableRow extends Component {
         <Table.Cell>{this._name()}</Table.Cell>
         <Table.Cell>{this._division()}</Table.Cell>
         <Table.Cell>{this._checkedIn()}</Table.Cell>
+        <Table.Cell>{this._hasBegun()}</Table.Cell>
+        <Table.Cell>{this._progress()}</Table.Cell>
         <Table.Cell>{this._actions()}</Table.Cell>
       </Table.Row>
     );
@@ -32,8 +34,12 @@ class AdminTeamTableRow extends Component {
   }
 
   _name() {
-    const { team } = this.props;
-    return team.name;
+    const maxLen = 30; // TODO: ensure this is a good value. test it
+    let { name } = this.props.team;
+    if (name.length > maxLen) {
+      name = name.substr(0, maxLen) + "..."
+    }
+    return name;
   }
 
   _division() {
@@ -57,6 +63,34 @@ class AdminTeamTableRow extends Component {
         </span>
       );
     }
+  }
+
+  _hasBegun() {
+    return this.props.team.hasBegun ?
+      <Icon name='check square' color='green'/> :
+      <Icon name="square outline" color='red' />;
+  }
+
+  _progress() {
+    const { team } = this.props;
+    if (!team.hasBegun || !team.puzzles || team.puzzles.length < 1){
+      return "--";
+    };
+
+    const started = team.puzzles.reduce((acc, puzzle) => {
+      return acc + ( puzzle.start ? 1 : 0);
+    }, 0);
+    const done = team.puzzles.reduce((acc, puzzle) => {
+      return acc + ( puzzle.end ? 1 : 0 );
+    }, 0);
+    const total = team.puzzles.length;
+
+    let color = "teal";
+    if (started === 0) color = "black"
+    if (done === total) color = "olive"
+
+    return <Progress value={done} total={total}
+      progress='ratio' color={color} />
   }
 
   _actions() {
