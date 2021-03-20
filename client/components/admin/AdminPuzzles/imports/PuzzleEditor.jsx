@@ -25,28 +25,28 @@ class PuzzleEditor extends Component {
     return (
       <Form onSubmit={(e) => e.preventDefault() }>
         <Header as='h3' content='Puzzle Editor'/>
-        <Form.Input
-          name='name'
-          label='Puzzle Name'
-          value={ this.state.name }
-          onChange={ (e) => this._handleChange(e) }
-        />
-        <Form.Group widths='equal'>
+        <Form.Group>
+          <Form.Input
+            name='name'
+            label='Puzzle Name'
+            value={ this.state.name }
+            onChange={ (e) => this._handleChange(e) }
+          />
           <Form.Input
             name='answer'
             label='Answer'
             value={ this.state.answer }
             onChange={ (e) => this._handleChange(e) }
           />
+        </Form.Group>
+
+        <Form.Group widths='equal'>
           <Form.Input
             name='stage'
             label='Stage'
             value={ this.state.stage }
             onChange={ (e) => this._handleChange(e) }
           />
-        </Form.Group>
-
-        <Form.Group widths='equal'>
           <Form.Input
             name='allowedTime'
             label='Time Allowed (min)'

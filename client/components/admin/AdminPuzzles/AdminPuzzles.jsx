@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Container, Header, Message, Image, Button } from 'semantic-ui-react';
+import { Container, Divider, Message, Image, Button } from 'semantic-ui-react';
 
 import PuzzleEditor from './imports/PuzzleEditor';
 import PuzzleList from './imports/PuzzleList';
+import { CheckinPacketEditor } from './imports/CheckinPacketEditor';
+import GamestateControls from '../AdminGamestate/imports/GamestateControls';
 
 AdminPuzzles = class AdminPuzzles extends Component {
   constructor(props) {
@@ -15,11 +17,13 @@ AdminPuzzles = class AdminPuzzles extends Component {
   }
 
   render() {
-    const { activePuzzle } = this.state;
     return (
       <Container>
         <PuzzlePageTitle title='Puzzles'/>
+        <CheckinPacketEditor />
+        <Divider />
         { this._editor() }
+        <Divider />
         <br/>
         <PuzzleList
           onEdit={ (puzzle) => this._editPuzzle(puzzle) }
