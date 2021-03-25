@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 import { sendReports } from '../../lib/imports/sendReports';
 
@@ -7,7 +7,8 @@ SyncedCron.add({
   name: 'Nightly gear reports',
   schedule: function(parser) {
     // We need to convert to UTC and account for Daylight Savings
-    const time = moment().isDST() ? "at 7:15am" : "at 8:15am";
+    const time = moment().tz("America/Vancouver").isDST() ? "at 7:15am" : "at 8:15am";
+    Meteor.logger.info(`Auto-reports scheduled for ${time}`);
     return parser.text(time);
   },
   job: function() {
