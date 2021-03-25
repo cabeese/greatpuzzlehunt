@@ -4,6 +4,7 @@ import { Container, Button } from 'semantic-ui-react';
 
 import GameStats from './GameStats';
 import GamePuzzles from './GamePuzzles';
+import CheckInPacket from './CheckInPacket'; // virtualeventonly
 
 class GameUI extends Component {
   render() {
@@ -24,11 +25,12 @@ class GameUI extends Component {
   }
 
   _main() {
-    const { team } = this.props;
+    const { team, user } = this.props;
     return (
       <div>
         <GameStats team={ team }/>
-        <GamePuzzles team={ team }/>
+        <CheckInPacket /> {/*virtualeventonly*/}
+        <GamePuzzles team={ team } user={ user }/>
       </div>
     );
   }
@@ -36,6 +38,7 @@ class GameUI extends Component {
 
 GameUI.propTypes = {
   team: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default GameUI;

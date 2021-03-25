@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Segment, Header, Progress, Button } from 'semantic-ui-react';
 
-import UnstartedPuzzle from './UnstartedPuzzle';
+import UnstartedPuzzleVirtual from './UnstartedPuzzleVirtual';
 import CompletePuzzle from '../../imports/CompletePuzzle';
 
 export default class InactivePuzzle extends React.Component {
@@ -15,7 +15,7 @@ export default class InactivePuzzle extends React.Component {
   }
 
   render() {
-    const { team, puzzle, disabled } = this.props;
+    const { team, user, puzzle, disabled } = this.props;
     const { complete } = this.state;
     if (complete) {
       return <CompletePuzzle
@@ -25,8 +25,9 @@ export default class InactivePuzzle extends React.Component {
         showAnswer={ true }
       />;
     } else {
-      return <UnstartedPuzzle
+      return <UnstartedPuzzleVirtual
         team={ team }
+        user={ user }
         puzzle={ puzzle }
         disabled={ disabled }
       />;
@@ -36,6 +37,7 @@ export default class InactivePuzzle extends React.Component {
 
 InactivePuzzle.propTypes = {
   team: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   puzzle: PropTypes.object.isRequired,
   disabled: PropTypes.bool.isRequired,
 };

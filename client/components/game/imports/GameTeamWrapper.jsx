@@ -22,7 +22,7 @@ class GameTeamWrapper extends Component {
   }
 
   _content() {
-    const { ready, team } = this.props;
+    const { ready, user, team } = this.props;
     if (!ready) {
       return <Loading/>;
     }
@@ -35,7 +35,7 @@ class GameTeamWrapper extends Component {
       return this._checkin();
     }
 
-    return <GameUI team={team} />
+    return <GameUI team={team} user={user} />
   }
 
   _checkin() {
@@ -51,6 +51,7 @@ class GameTeamWrapper extends Component {
 GameTeamWrapper.propTypes = {
   ready: PropTypes.bool.isRequired,
   team: PropTypes.object,
+  user: PropTypes.object.isRequired,
 };
 
 export default TeamComp(GameTeamWrapper);

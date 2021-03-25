@@ -56,10 +56,11 @@ class GameStats extends Component {
   _doneMessage() {
     const { finished } = this.state;
     if (!finished) return null;
+	// virtualeventonly: head back to Red Square, not tune into webcast
     return (
       <Header as='h3'
         content={`Congratulations! You've finished the ${eventYear} Puzzle Hunt!`}
-        subheader="Head back to Red Square"
+        subheader="Tune back into the webcast by 5pm PST for prizes."
       />
     );
   }
