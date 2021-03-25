@@ -6,7 +6,8 @@ import {
 } from 'semantic-ui-react';
 
 import TeamMemberCheckIn from './TeamMemberCheckIn';
-import TeamCheckInQRCode from './TeamCheckInQRCode';
+// virtualeventonly -- change back to QR code for in-person
+import TeamCheckInVirtually from './TeamCheckInVirtually';
 
 class PostUserCheckin extends Component {
   render() {
@@ -14,7 +15,7 @@ class PostUserCheckin extends Component {
     return (
       <div>
         <TeamMemberCheckIn team={team} teamMembers={teamMembers}/>
-        <TeamCheckInQRCode teamId={user.teamId}/>
+        <TeamCheckInVirtually teamId={user.teamId}/>
       </div>
     );
   }
