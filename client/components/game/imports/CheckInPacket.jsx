@@ -6,7 +6,6 @@ import GamestateComp from '../../imports/GamestateComp';
 
 class CheckinPacketUI extends Component {
     render() {
-        console.log(this.props);
         if (!this.props.ready){
             return <span>Check-in Packet loading...</span>;
         }
