@@ -6,6 +6,8 @@ import {
   Segment, Header, Grid, Icon, Button, Message, List
 } from 'semantic-ui-react';
 
+import CheckInPacket from '../../game/imports/CheckInPacket'; // virtualeventonly
+
 class TeamMemeberCheckIn extends Component {
   render() {
     return (
@@ -19,27 +21,35 @@ class TeamMemeberCheckIn extends Component {
     );
   }
 
-  _checkinConfirmation() {
-    const { checkinConfirmed: confirmed } = this.props.team;
-    const header = confirmed ? "Team Check In Confirmed!" : "Awaiting Check In Confirmation";
-    let content = <Link to="/game"><Button size="small" color="purple" icon="puzzle" content="Go To Game" style={{ marginTop: '10px' }} /></Link>;
-    if (!confirmed) {
-      content = (
+  _unconfirmed(){
+    return (
+      <Message size="large" info>
+        <Message.Header>Awaiting Check In Confirmation</Message.Header>
         <List bulleted>
           <List.Item>Check in your players below.</List.Item>
           <List.Item>Then check in your team with the button at the bottom!</List.Item>
         </List>
-      );
-    }
+      </Message>
+    )
+  }
 
+  _confirmed(){
     return (
-      <Message
-        size="large"
-        positive={confirmed}
-        info={!confirmed}
-        header={header}
-        content={content}/>
-    );
+      <Message size="large" positive>
+        <Message.Header>Team Check In Confirmed!</Message.Header>
+        <CheckInPacket />
+        <Link to="/game">
+          <Button fluid color="purple" icon="puzzle"
+            content="Go To Game" style={{ marginTop: '10px' }} />
+        </Link>
+      </Message>
+    )
+  }
+
+  _checkinConfirmation() {
+    const { checkinConfirmed: confirmed } = this.props.team;
+
+    return confirmed ? this._confirmed() : this._unconfirmed();
   }
 
   _renderMembers() {
