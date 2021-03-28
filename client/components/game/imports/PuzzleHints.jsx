@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { PropTypes } from 'react';
-import { Segment, Grid, Header, Button, Image, Message, Confirm } from 'semantic-ui-react';
+import { Segment, Grid, Header, Button, Image, Message, Confirm, Icon } from 'semantic-ui-react';
 import { getHintsTaken } from '../../../../lib/imports/puzzle-helpers';
 
 const HINT_COST = [5, 10, 15];
@@ -25,16 +25,27 @@ export default class PuzzleHints extends React.Component {
     const { showConfirm, hintToTake } = this.state;
     const currentHintCost = HINT_COST[getHintsTaken(puzzle)];
 
+    const confirmContent = (
+      <Segment basic style={{fontSize: '16px'}}>
+        <p>Do you want to take <b>Hint {hintToTake + 1}</b>?</p>
+        <p>This will add <b>{currentHintCost} minutes</b> to your team's score!</p>
+      </Segment>
+    );
+    const confirmButton = (
+      <Button color="blue">
+        <Icon name="clock" /> YES! Take the hint!
+        </Button>
+    );
     return (
       <Grid style={ this.gridStyle }>
         { this._renderHints() }
 
         <Confirm
           open={showConfirm}
-          header="Are you sure?"
-          content={<Segment basic style={{fontSize: '16px'}}><p>Do you want to take <b>Hint {hintToTake + 1}</b>?</p><p>Cost: <b>{currentHintCost} minutes</b></p></Segment>}
-          confirmButton={`Take the Hint!`}
-          cancelButton="Nevermind"
+          header="Wait! Are you sure?"
+          content={confirmContent}
+          confirmButton={confirmButton}
+          cancelButton="No, not yet"
           onCancel={() => this.setState({showConfirm: false, hintToTake: null })}
           onConfirm={() => this._takeHint()}
           size="large"

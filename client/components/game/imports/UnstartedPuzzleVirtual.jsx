@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import { Segment, Header, Button, Confirm, Modal } from 'semantic-ui-react';
+import { Segment, Header, Button, Modal, Icon, } from 'semantic-ui-react';
 
 export default class UnstartedPuzzleVirtual extends React.Component {
   constructor(props) {
@@ -62,14 +62,32 @@ export default class UnstartedPuzzleVirtual extends React.Component {
 
         { this._downloadButton() }
 
-        <Confirm open={confirmOpen}
-          onCancel={this.handleCancelConfirm}
-          onConfirm={this.handleConfirm}
-          header={`Are you sure you're ready to start the puzzle "${puzzleName}"?`}
-          content="You will be presented with a download link (PDF) and the timer will start immediately. Make sure your whole team is ready to go!"
-          confirmButton="YES, we're ready!"
-          cancelButton="Not yet"
-        />
+        <Modal open={confirmOpen} onClose={this.handleCancelConfirm}>
+          <Header color="red">
+            <Icon name="warning" />
+            <Header.Content>
+              <strong>Are you sure you're ready to start the puzzle "{puzzleName}"?</strong>
+            </Header.Content>
+          </Header>
+          <Modal.Content>
+            If you click Yes,
+            <ul>
+              <li>The timer will start</li>
+              <li>You will be able to download the puzzle (PDF)</li>
+            </ul>
+            <Segment textAlign="center">
+              <strong>Make sure your whole team is ready!</strong>
+            </Segment>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button onClick={() => this.handleCancelConfirm()}>
+              Not yet...
+            </Button>
+            <Button color="blue" onClick={() => this.handleConfirm()}>
+              <Icon name="clock" /> YES! Start the timer!
+            </Button>
+          </Modal.Actions>
+        </Modal>
 
       </Segment>
     );
