@@ -1,13 +1,22 @@
 import { Meteor } from 'meteor/meteor'
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import { Table, Icon, Label } from 'semantic-ui-react'
+import { Table, Icon, Label, Button } from 'semantic-ui-react'
 
 AdminTeamUserList = class AdminTeamsUserList extends Component {
     constructor(props){
         super(props);
 
         this._userRow = this._userRow.bind(this);
+    }
+
+    removeUserFromTeam(userId){
+        Meteor.call('admin.user.setTeam', userId, "", error => {
+            if(error){
+                console.log(error);
+                alert(`Failed to remove user from team. ${error.reason}`);
+            }
+        });
     }
 
     _userRow(user){
@@ -28,6 +37,12 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
                 <Table.Cell>{user.name}</Table.Cell>
                 <Table.Cell positive={checkedIn} negative={!checkedIn}>
                     {checkedIn ? "Checked In" : "NOT Checked In"}
+                </Table.Cell>
+                <Table.Cell>
+                    <Button color="red" size="small" disabled={isOwner}
+                        onClick={() => this.removeUserFromTeam(user._id)}>
+                        <Icon name="x" />Remove
+                    </Button>
                 </Table.Cell>
             </Table.Row>
         )
@@ -64,6 +79,7 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
                         <Table.HeaderCell>Acct Type</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
                         <Table.HeaderCell>Check-in Status</Table.HeaderCell>
+                        <Table.HeaderCell>Remove</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
