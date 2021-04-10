@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Segment, Container } from 'semantic-ui-react';
 import Scrollchor from 'react-scrollchor';
 
 import GamestateComp from '../imports/GamestateComp';
@@ -119,6 +119,33 @@ TopBar = class TopBar extends Component {
     return window.innerWidth < 1100; 
   }
   render() {
+    return (
+      <div>
+        {this._renderTopBar()}
+        {this._renderBanner()}
+      </div>
+    );
+  }
+
+  _renderBanner() {
+    const { gamestate } = this.props;
+    if (!gamestate || !gamestate.showWebinarLink) return "";
+
+    const { webinarURL } = gamestate
+
+    return (
+      <Container>
+        <Segment textAlign="center" color="blue" inverted>
+          <a href={webinarURL} target="_blank" style={{color: "white"}}>
+            <Icon name="video camera" />
+            Click here to join the Zoom Webinar
+          </a>
+        </Segment>
+      </Container>
+    )
+  }
+
+  _renderTopBar() {
     const { isAdmin, isVolunteer } = this.props;
 
     let logoDesktop = {

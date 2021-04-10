@@ -11,6 +11,8 @@ class GamestateControlsInner extends Component {
     this.state = {
       reportDLBusy: false,
       reportEmail: "",
+      webinarURL: "",
+      webinarID: "",
     };
     this._getReport = this._getReport.bind(this);
   }
@@ -20,6 +22,8 @@ class GamestateControlsInner extends Component {
       this.setState({
         registration: props.gamestate.registration,
         gameplay: props.gamestate.gameplay,
+        webinarURL: props.gamestate.webinarURL || "",
+        webinarID: props.gamestate.webinarID || "",
       });
     }
   }
@@ -105,6 +109,29 @@ class GamestateControlsInner extends Component {
         { this._fieldButton('Registration') }
         { this._fieldButton('buyGear', '"Buy Gear" Button (on homepage)') }
 
+        <Header as='h3' content='Webinar'/>
+        <Input
+            placeholder="https://zoom.us/"
+            name="webinarURL"
+            size="small"
+            label="URL"
+            value={this.state.webinarURL}
+            onChange={this.handleChange}
+            />
+        <Input
+            placeholder="123 456 789"
+            name="webinarID"
+            size="small"
+            label="ID"
+            value={this.state.webinarID}
+            onChange={this.handleChange}
+            />
+
+          <Button
+            content="Update Zoom Info"
+            onClick={() => this.setWebinarInfo(this.state.webinarURL, this.state.webinarID)} />
+        { this._fieldButton('showWebinarLink', 'Zoom Webinar link banner')}
+
         <Header as='h3' content='Game Day!'/>
         { this._fieldButton('CheckIn') }
         { this._fieldButton('Gameplay') }
@@ -145,6 +172,15 @@ class GamestateControlsInner extends Component {
       }
     });
   };
+
+  setWebinarInfo(url, id){
+    Meteor.call('admin.gamestate.setWebinarInfo', url, id, error => {
+      if(error){
+        console.log(error);
+        alert("Failed to set webinar info. " + error.reason);
+      }
+    });
+  }
 
   _fieldButton(fieldName, displayName) {
     if(!displayName){
