@@ -204,7 +204,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 2}>
             The annual WWU Great Puzzle Hunt is a fun, full-day, team puzzle-solving event that is <strong>OPEN TO ALL!</strong>
-            <ul>
+            <List bulleted>
               {/* virtualeventonly
               <li>Teams of up to 6 (recommended size 4-6) travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
               <li><strong>Your mission</strong>: HAVE FUN! Reach the outdoor location shown on your smartphone and scan your team code (which starts clock) to receive a puzzle. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you are sent to the next destination. Connect all the code words to complete the game!</li>
@@ -212,13 +212,13 @@ FAQ = class FAQ extends Component {
               <li>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone.</li>
               <li>Prizes* are awarded in each division for best: times, costumes, and team names.</li>
               */}
-              <li>Teams of up to 6 (recommended size 4-6) solve a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
-              <li><b>Your mission</b>: HAVE FUN! Check in on morning of Hunt to download the info packet. At START time, select the first puzzle to download and start the team clock. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you may open the next puzzle. Connect all the code words to complete the game!</li>
-              <li>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</li>
-              <li>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone or computer.</li>
-              <li>Prizes are awarded to top three scoring teams in each division.</li>
-              <li>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</li>
-            </ul>
+              <List.Item>Teams of up to 6 (recommended size 4-6) solve a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</List.Item>
+              <List.Item><b>Your mission</b>: HAVE FUN! Check in on morning of Hunt to download the info packet. At START time, select the first puzzle to download and start the team clock. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you may open the next puzzle. Connect all the code words to complete the game!</List.Item>
+              <List.Item>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</List.Item>
+              <List.Item>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone or computer.</List.Item>
+              <List.Item>Prizes are awarded to top three scoring teams in each division.</List.Item>
+              <List.Item>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</List.Item>
+            </List>
             {/* virtualeventonly
             <strong>* </strong>{prizeNote}
              */}
@@ -395,23 +395,49 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
             <List bulleted>
-              <List.Item description="Your creativity and problem solving skills!"/>
-              <List.Item description="Black and White printer. You will want hard copies of most puzzles to fold, cut, etc."/>
-              <List.Item description="A protractor (or other angle measuring device)."/>
-              <List.Item description="At least one smart phone or computer. The more the better! Googling is encouraged!"/>
-              <List.Item description="Battery charger"/>
+              <List.Item><span className="description">A smartphone or computer</span>
+                <List.List>
+                  <List.Item description="Used for downloading puzzles, inputting code words, Googling, communicating with your team, and more!" />
+                </List.List>
+              </List.Item>
+              <List.Item><span className="description"><a href="https://zoom.us/">Zoom</a> software downloaded (no account needed)</span>
+                <List.List>
+                  <List.Item description="Will be used by event leaders for announcements, prizes, and troubleshooting. A link to join the Zoom session will be provided on the website on game day." />
+                </List.List>
+              </List.Item>
+              <List.Item><span className="description">Black and White printer</span>
+                <List.List>
+                  <List.Item description="You will want hard copies of most puzzles to fold, cut, etc." />
+                </List.List>
+              </List.Item>
+              <List.Item>
+                <span className="description"><b>40 cubes</b>, roughly 2 cm per side, that will link together. Download the linked PDF below for details.</span>
+                <List.List>
+                  <List.Item>
+                    <span className="description">US: <a href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">Download</a></span>
+                  </List.Item>
+                  <List.Item>
+                    <span className="description">Europe: <a href="https://gph-rep-eu-central-1.s3.eu-central-1.amazonaws.com/GPH2021-what-you-need.pdf">Download</a></span>
+                  </List.Item>
+                  <List.Item>
+                    <span className="description">Asia: <a href="https://gph-rep-ap-southeast-1.s3-ap-southeast-1.amazonaws.com/GPH2021-what-you-need.pdf">Download</a></span>
+                  </List.Item>
+                </List.List>
+              </List.Item>
+              <List.Item description="A clip board, or a notepad" />
+              <List.Item description="Ruler/Straightedge" />
+              <List.Item description="Scissors" />
+              <List.Item description="Transparent Tape (like Scotch Tape)" />
+              <List.Item description="Glue stick or Double-sided Tape" />
+              <List.Item description="Writing utensils (pencils, pens, erasers)" />
+              <List.Item description="A Protractor (or other angle measuring device)" />
+              <List.Item description="Your creativity and problem-solving skills!" />
             </List>
-            The following list will be updated, but useful materials in past hunts:
+            Other optional, but helpful, materials
             <List bulleted>
-              <List.Item description="A clip board, or a note pad"/>
-              <List.Item description="Graph paper"/>
-              <List.Item description="Scissors and tape"/>
-              <List.Item description="Writing utensils (pencils, erasers, highlighters"/>
-              <List.Item description="Felt tip marking pen"/>
-              <List.Item description="Standard 10&ndash;12 pack of colored pencils"/>
-              <List.Item description="Hole punch"/>
-              <List.Item description="Ruler/straightedge"/>
-              <List.Item description="Water to drink and a sack lunch or snacks!"/>
+              <List.Item description="Felt tip marking pen in a color that will stand out on B&amp;W print" />
+              <List.Item description="Highlighters-2 colors useful" />
+              <List.Item description="Water to drink and a sack lunch or snacks" />
             </List>
           </Accordion.Content>
 
