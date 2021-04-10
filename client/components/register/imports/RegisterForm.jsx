@@ -172,8 +172,12 @@ class RegisterForm extends Component {
   _form() {
     return (
       <Form onSubmit={ (e) => this._register(e) } style={ this._formStyle() }>
-
         <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
+        <Message color='orange' size='huge'>
+          <Message.Content>
+            <Segment basic size='large' className='no-padding'>Game day is soon! Make sure at least one team member can obtain the <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">necessary materials</a>.</Segment>
+          </Message.Content>
+        </Message>
 
         {this._errorMessage()}
 
