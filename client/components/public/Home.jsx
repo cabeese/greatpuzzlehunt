@@ -14,24 +14,21 @@ import HomeDonate from './imports/HomeDonate';
 import HomeSponsors from './imports/HomeSponsors';
 import SamplePuzzles from './imports/SamplePuzzles';
 
-const CoronavirusMessage = (
-  <section id="coronavirus-message">
+const AnnouncementsMessage = (
+  <section id="announcements-message">
       <Grid padded stackable centered textAlign='left'>
         <Grid.Row>
           <Grid.Column width={16} className='raised'>
             <Container textAlign='left'>
-              <Message color='blue' size='huge'>
+              <Message color='orange' size='huge'>
                 <Message.Content>
                   <Message.Header>
-                    We Are Excited to Announce (Due to COVID-19 and Our Priority on Safety and Health):
+                    Announcements
                     </Message.Header>
                     <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <ul>
-                      <li>The FIFTH Annual WWU Great Puzzle Hunt will be held <b>VIRTUALLY</b></li>
-                      <li>On {eventDay}, {eventDate}</li>
-                      <li>Registration and Gear Sales open {regularRegistrationStart}</li>
-                      <li>The event is FREE (donations accepted) and open to all, anywhere in the world</li>
-                      <li>Teammates need to be able to safely communicate with one another (See Safety <a style={{textDecoration: "underline"}} href="/faq">FAQ</a>)</li>
+                      <li><strong>IMPORTANT</strong>: Game day is soon! Make sure at least one team member can obtain the <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">necessary materials</a>.</li>
+                      <li>The WWU Fifth Annual Great Puzzle Hunt is virtual, free, fun, and safe (See Safety <a href="/faq">FAQ</a>).</li>
                     </ul>
                     <br/>
                    <center>Stay Healthy!</center>
@@ -50,7 +47,7 @@ Home = class Home extends Component {
   render() {
     return (
       <div>
-          {CoronavirusMessage}
+          {AnnouncementsMessage}
 
           <HomeHeader/>
 
