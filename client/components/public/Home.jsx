@@ -27,7 +27,7 @@ const AnnouncementsMessage = (
                     </Message.Header>
                     <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <ul>
-                      <li><strong>IMPORTANT</strong>: Game day is soon! Make sure at least one team member can obtain the <a href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">necessary materials</a>.</li>
+                      <li><strong>IMPORTANT</strong>: Game day is soon! Make sure at least one team member can obtain the <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">necessary materials</a>.</li>
                       <li>The WWU Fifth Annual Great Puzzle Hunt is virtual, free, fun, and safe (See Safety <a href="/faq">FAQ</a>).</li>
                     </ul>
                     <br/>
