@@ -81,9 +81,9 @@ RulesOfPlay = class RulesOfPlay extends Component {
           <Header id="mechanics" as="h2" icon={<Icon name="setting" color="orange"/>} content="Game Mechanics" />
             For more detailed information, see the following PDF:
             <List relaxed bulleted size="large">
-              <List.Item>US: <a href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
-              <List.Item>Asia: <a href="https://gph-rep-ap-southeast-1.s3-ap-southeast-1.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
-              <List.Item>Europe: <a href="https://gph-rep-eu-central-1.s3.eu-central-1.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
+              <List.Item>US: <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
+              <List.Item>Asia: <a target="_blank" href="https://gph-rep-ap-southeast-1.s3-ap-southeast-1.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
+              <List.Item>Europe: <a target="_blank" href="https://gph-rep-eu-central-1.s3.eu-central-1.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
             </List>
             <br />
           {/* virtualeventonly
