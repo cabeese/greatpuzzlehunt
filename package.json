@@ -42,7 +42,7 @@
     "react-scroll-up": "^1.1.5",
     "react-scrollchor": "^4.2.1",
     "react-slick": "^0.27.13",
-    "react-youtube": "^7.9.0",
+    "react-youtube": "7.9.0",
     "request": "^2.85.0",
     "semantic-ui-react": "^0.79",
     "slick-carousel": "^1.8.1",
