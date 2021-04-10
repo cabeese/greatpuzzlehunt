@@ -19,7 +19,6 @@ Contact = class Contact extends Component {
         <br/><br/>
         For Account/Tech Questions Contact <a href='mailto:support@greatpuzzlehunt.com'>support@greatpuzzlehunt.com</a>
       </h3>
-      <HomePeople />
       <ProfileCards />
 
       </Segment>
