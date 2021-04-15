@@ -60,33 +60,33 @@ const importantDates = (
     {/* <List.Item><strong>{earlyBirdLastDate}</strong>: Early Bird discount prices for ticket codes and official gear end.</List.Item> */}
     <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
     <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
-    <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can acquire, redeem ticket code(s), and join a team until 10:00 AM (PST).</List.Item>
+    <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can acquire, redeem ticket code(s), and join a team until 10:00 AM (PT).</List.Item>
     <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes. <b>Free Domestic shipping + Bonus: cool swag included with every shipment!</b></List.Item>
   </List>
 );
 
 const schedule_data = [
   {
-    time: "9:30–10:15 AM (PST)",
+    time: "9:30–10:15 AM (PT)",
     // desc: "Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
     desc: "Check-in: Download and open information packet."
   },
   {
-    time: "10:15 AM (PST)",
+    time: "10:15 AM (PT)",
     desc: <span>Live Stream Announcements (<a href="#">link TBA</a>)</span>
   },
   {
-    time: "10:30 AM (PST)",
+    time: "10:30 AM (PT)",
     // desc: "Red Square: Announcements."
     desc: "Puzzle Hunt Starts."
   },
   {
-    time: "4:30 PM (PST)",
+    time: "4:30 PM (PT)",
     // desc: "Red Square: Puzzle Hunt starts!"
     desc: "Puzzle Hunt Ends."
   },
   {
-    time: "5:00 PM (PST)",
+    time: "5:00 PM (PT)",
     // desc: "Red Square: KUGS Radio plays music. Domino's pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants."
     desc: <span>Leaderboard Posted, Live stream—Prizes Awarded! (<a href="#">link TBA</a>)</span>
   },
@@ -258,7 +258,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 4}>
             <h3>
-              <strong>{eventDay}, {eventDate}</strong> at 9:30 AM (PST)
+              <strong>{eventDay}, {eventDate}</strong> at 9:30 AM (PT)
             </h3>
             Other important dates:
             {importantDates}
