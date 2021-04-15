@@ -45,10 +45,7 @@ Meteor.publish('teams.myTeam', function() {
    * removed at a later date if needed.
    */
   if( user.teamId ){
-    Meteor.logger.debug("[teams.myTeam] User has a team; query for members");
     ret.push(Meteor.users.find({ teamId: user.teamId }, { fields: userFields }));
-  } else {
-    Meteor.logger.info("[teams.myTeam] User has no team; do not query for members");
   }
 
   return ret
