@@ -8,14 +8,14 @@ class Editor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
+            loading: false,
+            url: "",
         };
     }
     componentWillReceiveProps(props) {
         if (props.gamestate) {
             this.setState({
                 url: props.gamestate.checkinPacketURL || "",
-                loading: false,
             });
         }
     }
