@@ -8,7 +8,7 @@ class ICEContact extends React.Component {
     const { gameplay } = gamestate;
     const phone = gameplay ? Meteor.settings.public.contact.phone :
       "(Hidden)"
-    let { webinarURL, webinarID } = gamestate;
+    let { webinarURL, webinarID, livestreamBackupURL } = gamestate;
     if (!webinarID) webinarID = "Coming soon...";
 
     let joinByLink = "Meeting details will be posted soon";
@@ -18,6 +18,11 @@ class ICEContact extends React.Component {
               <strong>Click to join the webinar:</strong> <a href={webinarURL} target="_blank">{webinarURL}</a>
             </Header>
       );
+    }
+
+    let backupLivestream = "Coming soon...";
+    if (livestreamBackupURL) {
+      backupLivestream = <a href={livestreamBackupURL} target="_blank">YouTube Livestream</a>
     }
 
     return (
@@ -73,6 +78,7 @@ class ICEContact extends React.Component {
                 <strong>Webinar ID:</strong> {webinarID}<br />
               </List.Content>
             </List>
+            <strong>Zoom Alternative:</strong> {backupLivestream}
           </Grid.Column>
         </Grid.Row>
       </Grid>

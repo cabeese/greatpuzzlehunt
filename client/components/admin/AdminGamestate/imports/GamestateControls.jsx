@@ -13,6 +13,7 @@ class GamestateControlsInner extends Component {
       reportEmail: "",
       webinarURL: "",
       webinarID: "",
+      livestreamBackupURL: "",
     };
     this._getReport = this._getReport.bind(this);
   }
@@ -24,6 +25,7 @@ class GamestateControlsInner extends Component {
         gameplay: props.gamestate.gameplay,
         webinarURL: props.gamestate.webinarURL || "",
         webinarID: props.gamestate.webinarID || "",
+        livestreamBackupURL: props.gamestate.livestreamBackupURL || "",
       });
     }
   }
@@ -126,10 +128,20 @@ class GamestateControlsInner extends Component {
             value={this.state.webinarID}
             onChange={this.handleChange}
             />
+          <br />
+          <Input
+            placeholder="https://youtube.com/?..."
+            name="livestreamBackupURL"
+            size="small"
+            label="Backup"
+            value={this.state.livestreamBackupURL}
+            onChange={this.handleChange}
+            />
 
           <Button
             content="Update Zoom Info"
-            onClick={() => this.setWebinarInfo(this.state.webinarURL, this.state.webinarID)} />
+            onClick={() => this.setWebinarInfo(this.state.webinarURL, this.state.webinarID,
+              this.state.livestreamBackupURL)} />
         { this._fieldButton('showWebinarLink', 'Zoom Webinar link banner')}
 
         <Header as='h3' content='Game Day!'/>
@@ -173,8 +185,8 @@ class GamestateControlsInner extends Component {
     });
   };
 
-  setWebinarInfo(url, id){
-    Meteor.call('admin.gamestate.setWebinarInfo', url, id, error => {
+  setWebinarInfo(url, id, backupURL){
+    Meteor.call('admin.gamestate.setWebinarInfo', url, id, backupURL, error => {
       if(error){
         console.log(error);
         alert("Failed to set webinar info. " + error.reason);
