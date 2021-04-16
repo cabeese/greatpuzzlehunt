@@ -100,7 +100,7 @@ RulesOfPlay = class RulesOfPlay extends Component {
                   */}
                   <List.Item>GET READY: Download &amp; open game packet after you check-in April 17.</List.Item>
                   <List.Item>GET SET: If virtual, ensure your team communication is working (Zoom, Discord, &hellip;)</List.Item>
-                  <List.Item>GO! At 10:30 AM (PST) Select a puzzle from the game page.
+                  <List.Item>GO! At 10:30 AM (PT) Select a puzzle from the game page.
                     <ul>
                       <li>Press the button to reveal the puzzle download link and start the clock.</li>
                       <li>Download and print the puzzle.</li>

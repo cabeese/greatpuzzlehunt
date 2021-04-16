@@ -47,7 +47,7 @@ class ICEContact extends React.Component {
           <Grid.Column>
             <Header as='h2' content='Zoom Webinar' />
             Join us before and after the Hunt for announcements and information.
-            Stream starts at <strong>10:15 am (PST)</strong> on the day of the Hunt.
+            Stream starts at <strong>10:15 am (PT)</strong> on the day of the Hunt.
 
             {joinByLink}
             <List>

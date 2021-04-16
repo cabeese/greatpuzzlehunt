@@ -60,7 +60,7 @@ class GameStats extends Component {
     return (
       <Header as='h3'
         content={`Congratulations! You've finished the ${eventYear} Puzzle Hunt!`}
-        subheader="Tune back into the webcast by 5pm PST for prizes."
+        subheader="Tune back into the webcast by 5pm PT for prizes."
       />
     );
   }
