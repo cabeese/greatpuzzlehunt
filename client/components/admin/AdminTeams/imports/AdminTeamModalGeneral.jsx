@@ -17,6 +17,15 @@ class AdminTeamModalGeneral extends Component {
             }
         });
     }
+    _toggleLockout(e){
+        e.preventDefault();
+        const { team } = this.props;
+        if(!confirm(`Are you SURE you want to toggle the puzzle answer lock team for "${team.name}"?`)) return;
+
+        Meteor.call('admin.team.toggleLockout', team._id, err => {
+            if (err) alert(err);
+        });
+    }
     render() {
         const { team } = this.props;
 
@@ -35,6 +44,15 @@ class AdminTeamModalGeneral extends Component {
                 </Grid>
 
                 <AdminTeamUserListTracker id={team._id} owner={team.owner} />
+
+                <Button
+                    label="Locking a team will prevent them from answering puzzles"
+                    color={team.EMERGENCY_LOCK_OUT ? 'green' : 'red'}
+                    onClick={this._toggleLockout.bind(this)}
+                    icon={<Icon name={team.EMERGENCY_LOCK_OUT ? 'unlock' : 'lock'} />}
+                    content={team.EMERGENCY_LOCK_OUT ? "UNLOCK Team" : "LOCK TEAM (DANGER)"}
+                />
+                <br /><br />
 
                 <Button
                     basic
