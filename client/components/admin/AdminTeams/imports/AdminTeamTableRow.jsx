@@ -14,14 +14,15 @@ class AdminTeamTableRow extends Component {
     if (!team) {
       return <Table.Row negative>MISSING TEAM!</Table.Row>;
     }
+    const { EMERGENCY_LOCK_OUT } = team;
 
     return (
-      <Table.Row>
+      <Table.Row error={EMERGENCY_LOCK_OUT}>
         <Table.Cell>{this._createdAt()}</Table.Cell>
         <Table.Cell>{this._name()}</Table.Cell>
         <Table.Cell>{this._division()}</Table.Cell>
         <Table.Cell>{this._checkedIn()}</Table.Cell>
-        <Table.Cell>{this._hasBegun()}</Table.Cell>
+        <Table.Cell>{this._hasBegun()} {this._lockout(EMERGENCY_LOCK_OUT)}</Table.Cell>
         <Table.Cell>{this._progress()}</Table.Cell>
         <Table.Cell>{this._actions()}</Table.Cell>
       </Table.Row>
@@ -69,6 +70,10 @@ class AdminTeamTableRow extends Component {
     return this.props.team.hasBegun ?
       <Icon name='check square' color='green'/> :
       <Icon name="square outline" color='red' />;
+  }
+
+  _lockout(locked){
+    return locked ? <Icon name="attention" /> : "";
   }
 
   _progress() {
