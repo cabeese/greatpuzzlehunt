@@ -8,6 +8,7 @@ import {
   Header,
   Table,
   Icon,
+  Popup,
 } from 'semantic-ui-react';
 
 import { renderScore } from '../../../imports/PuzzleProgress';
@@ -73,7 +74,8 @@ class AdminLeaderboardDivisionTable extends Component {
         <Table.Cell>{i+1} | {name}</Table.Cell>
         <Table.Cell>{playerCt}</Table.Cell>
         <Table.Cell positive={finished} warning={!finished}>
-          <code>{renderScore(finalScore).time} ({finalScore} sec)</code> {!finished ? <Icon name="spinner" color="blue" loading /> : null}
+          <code>{renderScore(finalScore).time} ({finalScore} sec)</code>
+		  {!finished ? <Popup content="Team has incomplete puzzles" trigger={<Icon name="warning sign" />} /> : null}
         </Table.Cell>
         {puzzles.map((puzzle) => this._renderPuzzle(puzzle))}
       </Table.Row>
