@@ -36,8 +36,10 @@ class GameStats extends Component {
     const { time, minutes } = renderScore(getFinalScore(team));
     return (
       <Message info={!finished} positive={finished}>
+        {/* virtualeventonly
         {puzzlesSolved > 0 ? null : <Header as="h4" content="Starting Puzzle"/>}
         {puzzlesSolved > 0 ? null : <p>{team.startLocation}</p>}
+        */}
 
         <Header as="h4" content="Puzzles Solved" />
         <p>{puzzlesSolved} of {team.puzzles.length}</p>
