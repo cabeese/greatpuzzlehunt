@@ -66,11 +66,12 @@ class AdminLeaderboardDivisionTable extends Component {
   _renderTeamRow(team, i) {
     const { _id: teamId, name, members, memberIds, puzzles, finished } = team;
     const finalScore = getFinalScore(team);
+    let playerCt = members ? members.length : (memberIds ? memberIds.length : "?");
 
     return (
       <Table.Row key={teamId}>
         <Table.Cell>{i+1} | {name}</Table.Cell>
-        <Table.Cell>{members.length} / {memberIds.length}</Table.Cell>
+        <Table.Cell>{playerCt}</Table.Cell>
         <Table.Cell positive={finished} warning={!finished}>
           <code>{renderScore(finalScore).time} ({finalScore} sec)</code> {!finished ? <Icon name="spinner" color="blue" loading /> : null}
         </Table.Cell>
