@@ -20,23 +20,32 @@ const AnnouncementsMessage = (
         <Grid.Row>
           <Grid.Column width={16} className='raised'>
             <Container textAlign='left'>
-              <Message color='orange' size='huge'>
+              <Message color='blue' size='huge'>
                 <Message.Content>
                   <Message.Header>
-                    Announcements
+                    Thank you for participating!
                     </Message.Header>
                     <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
-                    <ul>
-                      <li><strong>IMPORTANT</strong>: Game day is soon! Make sure at least one team member can obtain the <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">necessary materials (PDF)</a>.</li>
-                      <li>Check-in starts at <strong>9:30 am Pacific Time.</strong> See <a target="_blank" href="https://www.timeanddate.com/worldclock/converter.html?iso=20210417T163000&p1=2447&p2=179&p3=136&p4=16&p5=240">other timezones.</a></li>
-                      <li>
-                        To understand how check-in and gameplay work, check out the <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-game-mechanics.pdf">
-                        gameplay mechanics (PDF)</a>.
-                      </li>
-                      <li>The WWU Fifth Annual Great Puzzle Hunt is virtual, free, fun, and safe (See Safety <a href="/faq">FAQ</a>).</li>
-                    </ul>
-                    <br/>
-                   <center>Stay Healthy!</center>
+                      Thank you so much to everyone who participated this year!
+                      We hope that you had fun in spite of some growing pains on our end.
+                      We love this event and nothing is more important than making it fun for everyone!
+                      <ul>
+                        <li>All 2021 materials (puzzles, hints, and solutions) will be posted on Monday, 4/19.</li>
+                        <li>
+                          The <u><Link to="/leaderboard">leaderboard</Link></u> is now public.
+                          All prize winners will receive an email from us soon. We will need to verify your name,
+                          email address, and (in some cases) mailing address.
+                          You MUST respond within 24 hours or the prizes will go to the next place team.
+                        </li>
+                        <li>
+                          Please look for a brief survey in your email. We are interested in whether we should
+                          try the event virtually again, or return to in-person in Bellingham, WA.
+                        </li>
+                      </ul>
+                      In our ever-continuing quest for a day devoted to thinking, learning, puzzling, and having fun,
+                      we will march forward based on the survey results and, as always, we will work on improving.
+                      <br/>
+                     <center>Thank you to everyone!</center>
                     </Segment>
                   </Message.Content>
                 </Message>
