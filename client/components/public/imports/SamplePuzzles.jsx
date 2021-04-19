@@ -6,28 +6,48 @@ export default class SamplePuzzles extends Component {
   constructor(props) {
     super(props);
 
-    this.puzzles = [
-      {
-        name: 'Cite Unseen',
-        tagline: 'Visual literature',
-        link: 'Cite-Unseen.pdf',
-      },
-      {
-        name: 'Fold and Behold',
-        tagline: 'Folding and geometry',
-        link: 'Fold-and-Behold.pdf',
-      },
-      {
-        name: 'Stop the Clock',
-        tagline: 'Visual numbers, numerals, and logic',
-        link: 'Stop-the-Clock.pdf',
-      },
-      {
-        name: 'Time will Tell',
-        tagline: 'Music and melody',
-        link: 'Time-will-Tell.pdf',
-      },
-    ];
+    this.puzzles = {
+      '2016': [
+        {
+          name: 'Cite Unseen',
+          link: 'Cite-Unseen.pdf',
+        },
+        {
+          name: 'Fold and Behold',
+          link: 'Fold-and-Behold.pdf',
+        },
+        {
+          name: 'Stop the Clock',
+          link: 'Stop-the-Clock.pdf',
+        },
+        {
+          name: 'Time will Tell',
+          link: 'Time-will-Tell.pdf',
+        }
+      ],
+      '2021': [
+        {
+          name: 'Scents and Scents-Ability!',
+          link: '',
+        },
+        {
+          name: 'Dough, a Dear!',
+          link: '',
+        },
+        {
+          name: 'My Life is in Ruins!',
+          link: '',
+        },
+        {
+          name: 'The Inside Scoop!',
+          link: '',
+        },
+        {
+          name: 'Meta-Puzzle',
+          link: '',
+        }
+      ]
+    }
   }
 
 
@@ -40,12 +60,10 @@ export default class SamplePuzzles extends Component {
           <Grid padded centered textAlign="left" stackable>
             <Grid.Row>
               <Grid.Column width={16}>
-                Below You can find some of the past Puzzles. Download them and try to solve them for yourself.
+                Below you can find some of the past Puzzles. Download them and try to solve them for yourself!
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row centered columns={4}>
-                  { this._puzzles() }
-            </Grid.Row>
+            { this._puzzles() }
 
           </Grid>
           <Image fluid src="/img/2016/event-photos/team-the-purple-penguins-thin.jpg"/>
@@ -57,16 +75,24 @@ export default class SamplePuzzles extends Component {
 
 
   _puzzles() {
-    return this.puzzles.map((puzzle, i) => (
-      <Grid.Column key={`puzzle-${i}`}>
-        <Segment  style={{minHeight:'250px'}} padded inverted color='blue' key={ puzzle.link }>
-          <Header as='h1' size="medium">{ puzzle.name }</Header>
-          { puzzle.tagline }
-          <br/>
-          <br/>
-          <Button  as='a' href='_blank' href={`/puzzles/2016/${puzzle.link}`} content='Download'/>
-        </Segment>
-      </Grid.Column>
+    return Object.keys(this.puzzles).map((key) => (
+      <Grid.Row centered columns={4}>
+      <h1>Hello, World!</h1>
+      { console.log("map") }
+        { this.puzzles[key].map((puzzle, j) => (
+          <Grid.Column key={`puzzle-${j}`}>
+            <Segment style={{minHeight:'250px'}} padded inverted color='blue' key={ puzzle.link }>
+              <Header as='h1' size="medium">{ puzzle.name }</Header>
+                <p>Hello!</p>
+              <br/>
+              <br/>
+              <Button  as='a' href='_blank' href={`/puzzles/2016/${puzzle.link}`} content='Download'/>
+            </Segment>
+          </Grid.Column>
+        )) 
+        }
+      </Grid.Row>
     ));
+      
   }
 }
