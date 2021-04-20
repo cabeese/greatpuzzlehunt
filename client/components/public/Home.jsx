@@ -30,7 +30,8 @@ const AnnouncementsMessage = (
                       We hope that you had fun in spite of some growing pains on our end.
                       We love this event and nothing is more important than making it fun for everyone!
                       <ul>
-                        <li>All 2021 materials (puzzles, hints, and solutions) will be posted on Monday, 4/19.</li>
+                        <li>All 2021 materials (puzzles, hints, and solutions) are now posted
+                          on the <u><Link to="/puzzles">Puzzles</Link></u> page! Walkthroughs are in the making.</li>
                         <li>
                           The <u><Link to="/leaderboard">leaderboard</Link></u> is now public.
                           All prize winners will receive an email from us soon. We will need to verify your name,
