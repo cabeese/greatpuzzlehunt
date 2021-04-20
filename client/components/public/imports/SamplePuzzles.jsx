@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { List } from 'semantic-ui-react';
-import { Grid, Card, Container, Segment, Header, Button, Icon, Image, Accordion } from 'semantic-ui-react';
-import GamestateComp from '../../imports/GamestateComp';
+import { Grid, Card, Container, Segment, Header, Button, Icon, Image, Accordion, List } from 'semantic-ui-react';
 
 export default class SamplePuzzles extends Component {
   constructor(props) {
@@ -135,12 +133,12 @@ export default class SamplePuzzles extends Component {
     const { activeIndex } = this.state;
     let ridx = 0
     return Object.keys(this.puzzles).map((year) => (
-      <Segment basic>
+      <Segment basic key={year}>
       <Header as='h1'>{year}</Header>
         <Button as='a' target='_blank' href={this.puzzles[year].infoPacket} content='Info Packet'/>
         <br />
         { this.puzzles[year].puzzles.map((puzzle, j) => (
-          <Accordion styled fluid>
+          <Accordion styled fluid key={year+j}>
             <Accordion.Title active={activeIndex === ridx} index={ridx} onClick={(e,p) => this.handleClick(e,p)} >
               <Icon color="black" size="huge" name="dropdown"/>
               {j+1}. {puzzle.name}
@@ -157,9 +155,9 @@ export default class SamplePuzzles extends Component {
                   <Grid.Column>
                     <Segment padded inverted color='blue'>
                       <Header as='h2'>Hints</Header>
-                      <List relaxed>
+                      <List relaxed >
                         { puzzle.hints.length ? puzzle.hints.map((file, k) => (
-                          <List.Item>
+                          <List.Item key={year+j+k}>
                             {k+1}. <Button as='a' target='_blank' href={file} content='Download'/>
                           </List.Item>
                         )) : "No hints for this one!" }
