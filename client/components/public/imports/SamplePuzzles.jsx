@@ -9,6 +9,7 @@ export default class SamplePuzzles extends Component {
 
     this.puzzles = {
       '2021': {
+        inspiration: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/0.READ_ME_FIRST+v5-2021.pdf',
         infoPacket: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/2021_infopacket.pdf',
         puzzles: [
           {
@@ -19,7 +20,8 @@ export default class SamplePuzzles extends Component {
               "https://gph-distributed.s3-us-west-2.amazonaws.com/2021/scents/2-C4D8CF79-F6AF-4F15-9DB7-A38E8A3DB4A0.JPG",
               "https://gph-distributed.s3-us-west-2.amazonaws.com/2021/scents/3-5B64AAAA-04E7-4613-BFAB-73D845E4D056.JPG"
             ],
-            codeWord: 'royal jelly'
+            codeWord: 'royal jelly',
+            walkthrough: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/1Scents_and_Scents-Ability_Walk-Through.pdf'
           },
           {
             name: 'Dough, a Dear!',
@@ -29,7 +31,8 @@ export default class SamplePuzzles extends Component {
               "https://gph-distributed.s3-us-west-2.amazonaws.com/2021/dough/2-BE4D6721-F263-41A3-979F-7825715A8CD6.JPG",
               "https://gph-distributed.s3-us-west-2.amazonaws.com/2021/dough/3-56766A65-949D-46BF-9C54-E51628ED7A79.JPG"
             ],
-            codeWord: 'all you need is love'
+            codeWord: 'all you need is love',
+            walkthrough: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/2Dough_a_Dear_Walk-Through.pdf'
           },
           {
             name: 'My Life is in Ruins!',
@@ -39,7 +42,8 @@ export default class SamplePuzzles extends Component {
               "https://gph-distributed.s3-us-west-2.amazonaws.com/2021/ruins/2-C2A5279D-53DC-4F31-B548-19A36DB36171.JPG",
               "https://gph-distributed.s3-us-west-2.amazonaws.com/2021/ruins/3-F2385B41-56C9-4E2B-A9A0-E5C72C19668A.JPG"
             ],
-            codeWord: 'sarah parcak'
+            codeWord: 'sarah parcak',
+            walkthrough: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/3My_Life_is_in_Ruins_Walk-Through.pdf'
           },
           {
             name: 'The Inside Scoop!',
@@ -49,13 +53,15 @@ export default class SamplePuzzles extends Component {
               "https://gph-distributed.s3-us-west-2.amazonaws.com/2021/scoop/2-DB3E6A12-BBE7-4603-88E8-0CCB649A13E1.JPG",
               "https://gph-distributed.s3-us-west-2.amazonaws.com/2021/scoop/3-3597E9ED-E3BE-4A7A-905E-0F2B4B8F4C77.JPG"
             ],
-            codeWord: 'microcosm'
+            codeWord: 'microcosm',
+            walkthrough: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/4The_Inside_Scoop_Walk-Through.pdf'
           },
           {
             name: 'Meta-Puzzle',
             link: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/meta/MP-1DEAEA4C-DBA4-4F10-92AD-7C8501C52A83.pdf',
             hints: [],
-            codeWord: 'it\'s a small world'
+            codeWord: 'it\'s a small world',
+            walkthrough: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/5Meta-Puzzle_Walk-Through.pdf'
           }
         ]
       },
@@ -118,7 +124,9 @@ export default class SamplePuzzles extends Component {
           <Grid padded centered textAlign="left" stackable>
             <Grid.Row>
               <Grid.Column width={16}>
-                Below you can find some of the past Puzzles. Download them and try to solve them for yourself!
+                <Header as='h2'>Apology</Header>
+                <p className='h4'>The puzzles were more challenging than intended this year. Like all of you, I have been isolated for over a year. Working in a vacuum, I missed the mark on some hints and the amount of time needed in a virtual environment. The goal was to provide a fun, free, safe opportunity for anyone to play and puzzle for the day. I hope that you might still enjoy playing with the puzzles after the event.</p>
+                <p className='h4'>Below you can find some of the past Puzzles. Download them and try to solve them for yourself!</p>
               </Grid.Column>
             </Grid.Row>   
           </Grid>
@@ -135,8 +143,10 @@ export default class SamplePuzzles extends Component {
     return Object.keys(this.puzzles).map((year) => (
       <Segment basic key={year}>
       <Header as='h1'>{year}</Header>
-        <Button as='a' target='_blank' href={this.puzzles[year].infoPacket} content='Info Packet'/>
-        <br />
+        <span className='h4'>Info Packet: </span><Button as='a' target='_blank' href={this.puzzles[year].infoPacket} content='Download'/>
+        { this.puzzles[year].inspiration ? 
+          <span className='h4'><br />Puzzle Inspiration (Contains spoilers): <Button as='a' target='_blank' href={this.puzzles[year].inspiration} content="Download"/></span>
+        : null }
         { this.puzzles[year].puzzles.map((puzzle, j) => (
           <Accordion styled fluid key={year+j}>
             <Accordion.Title active={activeIndex === ridx} index={ridx} onClick={(e,p) => this.handleClick(e,p)} >
@@ -172,10 +182,12 @@ export default class SamplePuzzles extends Component {
                     </Segment>
                   </Grid.Column>
                   <Grid.Column>
+                    { puzzle.walkthrough ?
                     <Segment padded inverted color='blue'>
                       <Header as='h2'>Walkthrough</Header>
-                      <p>Coming soon!</p>
+                        <Button as='a' target='_blank' href={puzzle.walkthrough} content="Download"/>
                     </Segment>
+                    : null }
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
