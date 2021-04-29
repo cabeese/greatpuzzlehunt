@@ -10,6 +10,13 @@ export default class SamplePuzzles extends Component {
     this.puzzles = {
       '2021': {
         inspiration: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/0.READ_ME_FIRST+v5-2021.pdf',
+        extra: (
+          <div>
+          <Header as='h2'>Apology</Header>
+          <p className='h4'>The puzzles were more challenging than intended this year. Like all of you, I have been isolated for over a year. Working in a vacuum, I missed the mark on some hints and the amount of time needed in a virtual environment. The goal was to provide a fun, free, safe opportunity for anyone to play and puzzle for the day. I hope that you might still enjoy playing with the puzzles after the event.</p>
+          <br />
+          </div>
+        ),
         infoPacket: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/2021_infopacket.pdf',
         puzzles: [
           {
@@ -124,8 +131,6 @@ export default class SamplePuzzles extends Component {
           <Grid padded centered textAlign="left" stackable>
             <Grid.Row>
               <Grid.Column width={16}>
-                <Header as='h2'>Apology</Header>
-                <p className='h4'>The puzzles were more challenging than intended this year. Like all of you, I have been isolated for over a year. Working in a vacuum, I missed the mark on some hints and the amount of time needed in a virtual environment. The goal was to provide a fun, free, safe opportunity for anyone to play and puzzle for the day. I hope that you might still enjoy playing with the puzzles after the event.</p>
                 <p className='h4'>Below you can find some of the past Puzzles. Download them and try to solve them for yourself!</p>
               </Grid.Column>
             </Grid.Row>   
@@ -143,6 +148,7 @@ export default class SamplePuzzles extends Component {
     return Object.keys(this.puzzles).map((year) => (
       <Segment basic key={year}>
       <Header as='h1'>{year}</Header>
+        { this.puzzles[year].extra ? this.puzzles[year].extra : null }
         <span className='h4'>Info Packet: </span><Button as='a' target='_blank' href={this.puzzles[year].infoPacket} content='Download'/>
         { this.puzzles[year].inspiration ? 
           <span className='h4'><br />Puzzle Inspiration (Contains spoilers): <Button as='a' target='_blank' href={this.puzzles[year].inspiration} content="Download"/></span>
