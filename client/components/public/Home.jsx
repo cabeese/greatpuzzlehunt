@@ -38,10 +38,6 @@ const AnnouncementsMessage = (
                           email address, and (in some cases) mailing address.
                           You MUST respond within 24 hours or the prizes will go to the next place team.
                         </li>
-                        <li>
-                          Please look for a brief survey in your email. We are interested in whether we should
-                          try the event virtually again, or return to in-person in Bellingham, WA.
-                        </li>
                       </ul>
                       In our ever-continuing quest for a day devoted to thinking, learning, puzzling, and having fun,
                       we will march forward based on the survey results and, as always, we will work on improving.
