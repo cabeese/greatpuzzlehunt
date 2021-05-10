@@ -25,7 +25,7 @@
     "body-parser": "^1.15.2",
     "clipboard": "^1.6.1",
     "jszip": "^3.1.5",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.21",
     "meteor-node-stubs": "^0.2.3",
     "moment": "^2.22.0",
     "moment-timezone": "^0.5.33",
