@@ -11,7 +11,7 @@ export default class ProfileCards extends Component {
       {
         name: 'Millie Johnson',
         title: '',
-        role: 'Director, Founder, Puzzle Creator',
+        role: 'Director, Founder, Coordinator, Puzzle Creator',
         image: '/img/2016/event-photos/millie_johnson.jpg',
       },
       {
@@ -39,72 +39,86 @@ export default class ProfileCards extends Component {
         image: '/img/team/zac.jpg',
       },
       {
-        name: 'Miranda Reed',
-        title: '',
-        role: 'AS President, Budget Coordination',
-        image: '/img/team/miranda_r.jpeg',
-      },
-      {
         name: 'Zoe Bozich',
         title: '',
-        role: 'AS President, Marketing & Promotion',
+        role: 'President, Budget Coordination',
         image: '/img/team/zoe.jpg',
-      },
-      {
-        name: 'Rachel Snyder',
-        title: '',
-        role: 'AS Co-President, Management',
-        image: '/img/team/rachel.jpg',
       },
       {
         name: 'Nick Satnik',
         title: '',
-        role: 'AS Co-President, Management',
-        image: '/img/team/nick.jpg'
+        role: 'President Management',
+        image: '/img/team/nick.jpg',
       },
       {
         name: 'Dalton Lange',
         title: '',
-        role: 'AS VP Marketing & Promotion, Developer ',
-        image: '/img/team/dalton.jpg'
+        role: 'VP Marketing & Promotion, Developer',
+        image: '/img/team/dalton.jpg',
+      },
+      {
+        name: 'Katie Lane',
+        title: '',
+        role: 'Co-President, Marketing and Promotion',
+        image: '/img/team/katie.png'
+      },
+
+      {
+        name: 'Alexandria Tan',
+        title: '',
+        role: 'Co-President, Marketing and Promotion, Developer',
+        image: '/img/team/alexandria_tan.jpg'
       }
+
     ];
-    
+
     this.pastProfiles = [
+      {
+        name: 'Miranda Reed',
+        title: '',
+        role: 'President, Budget Coordination',
+        image: '/img/team/miranda_r.jpeg',
+      },
+      {
+        name: 'Rachel Snyder',
+        title: '',
+        role: 'Co-President, Management',
+        image: '/img/team/rachel.jpg',
+      },
       {
         name: 'Danielle Glewwe',
         title: '',
-        role: 'AS Vice President, Management',
+        role: 'Vice President, Management',
         image: '/img/team/danielle_g.jpg',
       },
       {
         name: 'Montana Williams',
         title: '',
-        role: 'AS Vice President, Management',
+        role: 'Vice President, Management',
         image: '/img/team/montana.jpg',
       },
       {
         name: 'Alex Kuhn',
         title: '',
-        role: 'AS Vice President, Marketing & Promotion',
+        role: 'Vice President, Marketing & Promotion',
         image: '/img/team/alex_k.jpg',
       },
       {
         name: 'Katrina Duttkin',
         title: '',
-        role: 'AS Vice President, Marketing & Promotion',
+        role: 'Vice President, Marketing & Promotion',
         image: '/img/team/katrina.jpg',
       },
       {
         name: 'Patrick Carroll',
         title: '',
-        role: 'AS Co-President, Marketing & Promotion',
+        role: 'Co-President, Marketing & Promotion',
         image: '/img/team/patrick_c.jpg',
       },
       {
         name: 'Jordan King',
         title: '',
-        role: 'AS President, Management',
+        role: 'President, Management',
         image: '/img/team/jordan_k.jpg',
       },
       {
@@ -134,7 +148,7 @@ export default class ProfileCards extends Component {
       {
         name: 'Scott St. Clair',
         title: '',
-        role: 'AS Club President 2017-18',
+        role: 'Club President 2017-18',
         image: '/img/team/scott.jpg',
       },
 
@@ -144,11 +158,10 @@ export default class ProfileCards extends Component {
         role: 'Developer',
         image: '/img/team/alex_c.jpg',
       },
-      
       {
         name: 'Elias Peters',
         title: '',
-        role: 'AS Club Co-President',
+        role: 'Club Co-President',
         image: '/img/team/elias_p.jpg',
       },
     ]
