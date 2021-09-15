@@ -23,26 +23,18 @@ const AnnouncementsMessage = (
               <Message color='blue' size='huge'>
                 <Message.Content>
                   <Message.Header>
-                    Thank you for participating!
+                    We Are Excited to Announce the SIXTH Annual Great Puzzle Hunt
                     </Message.Header>
                     <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
-                      Thank you so much to everyone who participated this year!
-                      We hope that you had fun in spite of some growing pains on our end.
-                      We love this event and nothing is more important than making it fun for everyone!
                       <ul>
-                        <li>All 2021 materials (puzzles, hints, solutions, and walkthroughs) are now posted
-                          on the <u><Link to="/puzzles">Puzzles</Link></u> page!</li>
-                        <li>
-                          The <u><Link to="/leaderboard">leaderboard</Link></u> is now public.
-                          All prize winners will receive an email from us soon. We will need to verify your name,
-                          email address, and (in some cases) mailing address.
-                          You MUST respond within 24 hours or the prizes will go to the next place team.
-                        </li>
+                        <li>Date: { eventDay }, { eventDate } from 9:30 AM&mdash;5:00 PM (PT).</li>
+                        <li>Event is FREE and open to all (donations gratefully accepted)</li>
+                        <li>We hope to run a HYBRID event this year (virtual and in-person options).</li>
+                        <li>Due to COVID-19 and our Priority on Safety and Health, we will follow University and CDC Guidelines.</li>
+                        <li>If necessary, we will adapt the event to be fully virtual.</li>
                       </ul>
-                      In our ever-continuing quest for a day devoted to thinking, learning, puzzling, and having fun,
-                      we will march forward based on the survey results and, as always, we will work on improving.
-                      <br/>
-                     <center>Thank you to everyone!</center>
+                      <br />
+                      <center><strong>Watch this space for updates!</strong></center>
                     </Segment>
                   </Message.Content>
                 </Message>
@@ -58,7 +50,7 @@ Home = class Home extends Component {
   render() {
     return (
       <div>
-          {/*AnnouncementsMessage*/}
+          {AnnouncementsMessage}
 
           <HomeHeader/>
 
