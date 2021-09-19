@@ -34,7 +34,7 @@ const AnnouncementsMessage = (
                         <li>If necessary, we will adapt the event to be fully virtual.</li>
                       </ul>
                       <br />
-                      <center><strong>Watch this space for updates!</strong></center>
+                      <center><strong>Check back in November for updates!</strong></center>
                     </Segment>
                   </Message.Content>
                 </Message>
