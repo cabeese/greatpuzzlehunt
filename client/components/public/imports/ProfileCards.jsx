@@ -41,7 +41,7 @@ export default class ProfileCards extends Component {
       {
         name: 'Zoe Bozich',
         title: '',
-        role: 'President, Budget Coordination',
+        role: 'Co-President, Budget Coordination',
         image: '/img/team/zoe.jpg',
       },
       {
@@ -68,8 +68,14 @@ export default class ProfileCards extends Component {
         title: '',
         role: 'Co-President, Marketing and Promotion, Developer',
         image: '/img/team/alexandria_tan.jpg'
-      }
+      },
 
+      {
+        name: 'Joanna Schroeder',
+        title: '',
+        role: 'Co-President, Budget Coordination',
+        image: '/img/team/joanna.jpg'
+      }
     ];
 
     this.pastProfiles = [
