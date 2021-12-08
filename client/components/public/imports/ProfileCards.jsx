@@ -7,7 +7,7 @@ export default class ProfileCards extends Component {
   constructor(props) {
     super(props);
 
-    this.currentProfiles = [
+    this.puzzleTeam = [
       {
         name: 'Millie Johnson',
         title: '',
@@ -20,54 +20,73 @@ export default class ProfileCards extends Component {
         role: 'Lead Designer',
         image: '/img/team/wendy.jpg',
       },
+      
+      {
+        name: 'Zac Pontrantolfi',
+        title: '',
+        role: 'Puzzle Master Team',
+        image: '/img/team/zac.jpg',
+      }
+    ];
+
+    this.marketingPromo = [
+      {
+        name: 'Katie Lane',
+        title: '',
+        role: 'President, Marketing & Promotion',
+        image: '/img/team/katie.png'
+      },
+      
+      {
+        name: 'Dalton Lange',
+        title: '',
+        role: 'VP Marketing & Promotion',
+        image: '/img/team/dalton.jpg',
+      },
+      {
+        name: 'Alexandria Tan',
+        title: '',
+        role: 'VP Marketing & Promotion',
+        image: '/img/team/alexandria_tan.jpg'
+      },
+    ];
+
+    this.developers = [
       {
         name: 'Noah Strong',
         title: '',
         role: 'Lead Developer',
         image: '/img/team/noah.jpg',
       },
+
       {
         name: 'Raiden van Bronkhorst',
         title: '',
-        role: 'Lead Developer & Tech Support',
+        role: 'Developer & Tech Support',
         image: '/img/team/raiden_v.jpg',
       },
+
       {
-        name: 'Zac Pontrantolfi',
+        name: 'Richard Golding',
         title: '',
-        role: 'Puzzle Master Team',
-        image: '/img/team/zac.jpg',
-      },
-      {
-        name: 'Zoe Bozich',
-        title: '',
-        role: 'Co-President, Budget Coordination',
-        image: '/img/team/zoe.jpg',
-      },
-      {
-        name: 'Nick Satnik',
-        title: '',
-        role: 'President Management',
-        image: '/img/team/nick.jpg',
-      },
-      {
-        name: 'Dalton Lange',
-        title: '',
-        role: 'VP Marketing & Promotion, Developer',
-        image: '/img/team/dalton.jpg',
-      },
-      {
-        name: 'Katie Lane',
-        title: '',
-        role: 'Co-President, Marketing and Promotion',
-        image: '/img/team/katie.png'
+        role: 'Developer & Tech Support',
+        image: '/img/team/richard.jpg'
       },
 
       {
         name: 'Alexandria Tan',
         title: '',
-        role: 'Co-President, Marketing and Promotion, Developer',
+        role: 'Developer & Tech Support',
         image: '/img/team/alexandria_tan.jpg'
+      }
+    ]
+
+    this.budgetCoord = [
+      {
+        name: 'Zoe Bozich',
+        title: '',
+        role: 'Co-President, Budget Coordination',
+        image: '/img/team/zoe.jpg',
       },
 
       {
@@ -75,6 +94,14 @@ export default class ProfileCards extends Component {
         title: '',
         role: 'Co-President, Budget Coordination',
         image: '/img/team/joanna.jpg'
+      }
+    ];
+    this.management = [
+      {
+        name: 'Nick Satnik',
+        title: '',
+        role: 'President, Management',
+        image: '/img/team/nick.jpg',
       }
     ];
 
@@ -177,10 +204,30 @@ export default class ProfileCards extends Component {
     return (
       <div>
         <h1>Our Leadership</h1>
-        <Card.Group stackable doubling itemsPerRow={3}>
-          { this._renderProfiles(this.currentProfiles) }
-        </Card.Group>
+          <Card.Group stackable doubling itemsPerRow={3}>
+            { this._renderProfiles(this.puzzleTeam) }
+          </Card.Group>
+      
+          <h2>Developers</h2>
+          <Card.Group stackable doubling itemsPerRow={3}>
+            { this._renderProfiles(this.developers) }
+          </Card.Group>
+        
+          <h2>Budget Coordination</h2>
+          <Card.Group stackable doubling itemsPerRow={3}>
+            { this._renderProfiles(this.budgetCoord) }
+          </Card.Group>
 
+          <h2>Marketing &amp; Promotion</h2>
+          <Card.Group stackable doubling itemsPerRow={3}>
+            { this._renderProfiles(this.marketingPromo) }
+          </Card.Group>
+  
+          <h2>Management</h2>
+          <Card.Group stackable doubling itemsPerRow={3}>
+            { this._renderProfiles(this.management) }
+          </Card.Group>
+  
         <h1>Past Leadership</h1>
         <Card.Group stackable doubling itemsPerRow={3}>
           { this._renderProfiles(this.pastProfiles) }
