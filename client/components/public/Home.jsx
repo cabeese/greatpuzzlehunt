@@ -29,7 +29,7 @@ const AnnouncementsMessage = (
                       <ul>
                         <li>Date: { eventDay }, { eventDate } from 9:30 AM&mdash;5:00 PM (PT).</li>
                         <li>Event is FREE and open to all (donations gratefully accepted).</li>
-                        <li>We hope to run a HYBRID event this year (virtual and in-person options).</li>
+                        <li>We plan to run a HYBRID event this year: In-Person (WWU campus community only this year) and Virtual options.</li>
                         <li>Due to COVID-19 and our Priority on Safety and Health, we will follow University and CDC Guidelines.</li>
                         <li>If necessary, we will adapt the event to be fully virtual.</li>
                       </ul>
