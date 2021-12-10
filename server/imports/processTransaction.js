@@ -7,6 +7,7 @@ import {
 } from 'lodash';
 
 import { sendTickets } from '../../lib/imports/sendTickets';
+import { info } from 'winston';
 
 export default async function processTransaction(txData) {
   const { info, logobj } = Meteor.logger;
@@ -17,21 +18,19 @@ export default async function processTransaction(txData) {
     email,
     name,
     gear,
-    studentTickets: studentTicketsString,
-    nonStudentTickets: nonStudentTicketsString,
+    tickets,
     shippingInfo,
     internationalShippingLineItems,
   } = txData;
 
-  const studentTickets = parseInt(studentTicketsString);
-  const nonStudentTickets = parseInt(nonStudentTicketsString);
   const gearOrders = gear;
 
   info(`Processing transaction "${tx}" from ${email}`);
-  info(`studentTickets: ${studentTickets} nonStudentTickets: ${nonStudentTickets}` +
-    ` internationalShipping?: ${shippingInfo.internationalCount}`);
+  info(`internationalShipping?: ${shippingInfo.internationalCount}`);
   info("Gear Orders:")
   logobj(gearOrders);
+  info("Tickets:");
+  logobj(tickets);
 
   /*
   Important Note:
@@ -47,8 +46,7 @@ export default async function processTransaction(txData) {
       tx,
       email,
       name,
-      studentTickets,
-      nonStudentTickets,
+      tickets,
       shippingInfo,
       internationalShippingLineItems,
       gearOrders,
@@ -62,8 +60,9 @@ export default async function processTransaction(txData) {
   // 2. Create Tickets
   const existingTxTickets = Tickets.find({ tx }).count();
   if (existingTxTickets === 0) {
-    createTickets(tx, email, 'STUDENT', studentTickets);
-    createTickets(tx, email, 'NONSTUDENT', nonStudentTickets);
+    tickets.forEach(ticket => {
+      createTickets(tx, email, ticket.isStudent, ticket.inPerson, ticket.qty);
+    });
     sendTickets(tx, email);
   } else {
     info(`processTransaction: Tickets for tx:${tx} already exists. Skipping Create Tickets`);
@@ -78,34 +77,38 @@ export default async function processTransaction(txData) {
   }
 };
 
-function createTickets(tx, email, type, qty) {
+function createTickets(tx, email, isStudent, inPerson, qty) {
   for (let i = 0; i < qty; i++) {
-    createTicket(tx, email, type);
+    createTicket(tx, email, isStudent, inPerson);
   }
 };
 
-function createTicket(tx, email, type) {
+function createTicket(tx, email, isStudent, inPerson) {
   // 1. Generate new code
-  let newCode = makeCode(type);
+  const prefix = (inPerson ? "INPR" : "VIRT") + (isStudent ? "STUDENT" : "NONSTUDENT");
+  let newCode = makeCode(prefix);
 
   // 2. While this code is already in use, generate another
   while ( Boolean(Tickets.findOne({ code: newCode })) ) {
-    newCode = makeCode(type);
+    newCode = makeCode(prefix);
   }
 
   // 3. Create ticket
   Tickets.insert({
     tx: tx,
     boughtBy: email,
-    type: type,
+    type: isStudent ? "STUDENT" : "NONSTUDENT",
+    isStudent: isStudent,
+    inPerson: inPerson,
     code: newCode,
     redeemed: false,
     redeemedBy: null,
   });
+  info(`Created ticket code ${newCode} for user ${email}`);
 };
 
-function makeCode(type) {
-  return `${type}${Random.hexString(10)}`.toUpperCase();
+function makeCode(prefix) {
+  return `${prefix}${Random.hexString(10)}`.toUpperCase();
 };
 
 function createGearOrders(tx, email, gearOrders) {
