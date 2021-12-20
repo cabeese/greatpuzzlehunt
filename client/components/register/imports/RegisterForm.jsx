@@ -23,6 +23,7 @@ const accountTypeOptions = [
 
 /* States now include Canadian provinces, but we'll leave the variable name the same */
 const STATES = [
+  { key: '',   text: '',   value: 'none'},
   { key: 'WA', text: 'WA', value: 'WA' },
   { key: 'AL', text: 'AL', value: 'AL' },
   { key: 'AK', text: 'AK', value: 'AK' },
@@ -222,7 +223,7 @@ class RegisterForm extends Component {
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='zip' label='Zip Code' placeholder='e.g. 98225' value={ this.state.zip }
+          <Form.Input name='zip' label='Zip/Postal Code' placeholder='e.g. 98225' value={ this.state.zip }
                       onChange={ (e) => this._handleTextChange(e) }/>
           <Form.Dropdown name='state' label='State/Province' search selection options={ STATES }
                       value={ this.state.state } onChange={ (e,data) => this._handleDataChange(e,data) }/>
