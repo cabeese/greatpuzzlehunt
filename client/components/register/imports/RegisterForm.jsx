@@ -173,11 +173,13 @@ class RegisterForm extends Component {
     return (
       <Form onSubmit={ (e) => this._register(e) } style={ this._formStyle() }>
         <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
+        {/* materials banner
         <Message color='orange' size='huge'>
           <Message.Content>
             <Segment basic size='large' className='no-padding'>Game day is soon! Make sure at least one team member can obtain the <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">necessary materials</a>.</Segment>
           </Message.Content>
         </Message>
+        */}
 
         {this._errorMessage()}
 
@@ -252,12 +254,8 @@ class RegisterForm extends Component {
         { this._parentGuardian()}
 
         <List>
-          <List.Item><strong>Participants under age 18:</strong> A parent/legal guardian
-            must complete this registration form on behalf of their minor.</List.Item>
-          <List.Item><strong>Participants under age 14:</strong> In addition to registering
-            their child, a <u>parent/legal guardian must also register</u> and <u>join the
-              same team</u> as their under age 14 child and <u>accompany them at
-                all times</u> during the Puzzle Hunt.</List.Item>
+          <List.Item><strong>Participants under age 18 who are not enrolled WWU students</strong>: A parent/legal guardian must complete this registration form on behalf of their minor. </List.Item>
+          <List.Item><strong>Participants under age 14</strong>: A parent/legal guardian must complete this registration form on behalf of their minor. In addition, at least one adult must register as a team member on a team with any participants under age 14 and accompany them at all times during the Puzzle Hunt.</List.Item>
         </List>
 
         <Header as='h3' icon={<Icon name='camera' color='violet'/>} content='Photo Permission'/>
@@ -348,14 +346,23 @@ class RegisterForm extends Component {
 
   _holdHarmless() {
     if (!this.state.showHoldHarmless) return <p></p>;
-    return (
-      <Segment basic>
-        <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor child) to participate in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU Mathematics Department, held on {eventDay}, {eventDate}. I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
+    {/*<Segment basic>
+         <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor child) to participate in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU Mathematics Department, held on {eventDay}, {eventDate}. I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
         <p><strong>Introduction:</strong> Western Washington University (Western) is offering the {eventYear} Great Puzzle Hunt as a virtual event. All participation is done online and communications involving issues such as registration questions, troubleshooting, event updates, or awards will be done via text, email, phone, social media, and the website <a href="https://greatpuzzlehunt.com">https://greatpuzzlehunt.com</a>. Participants will be asked to use a smartphone or computer, scissors, writing utensils (colored pencils, pen, pencil, highlighters, felt tips), tape, eraser, paper, straightedge, hole punch, and a printer to print out puzzles.</p>
         <p><strong>Responsibility for Participants:</strong> Participants are voluntarily participating in the {eventYear} Great Puzzle Hunt with the knowledge of the risks involved and hereby agree to accept any and all inherent risks of the activity. Parents/legal guardians are ultimately responsible for the supervision, health, safety and well-being of their minor children who are participating in the {eventYear} Great Puzzle Hunt.</p>
         <p><strong>Liability:</strong> Western is not responsible or liable for any injury to a participant, including a minor child, unless caused by the negligence or willful misconduct of Western Washington University, its officers, agents, volunteers, or employees.</p>
         <p><strong>Communication:</strong> All direct communication between {eventYear} Great Puzzle Hunt staff and participants, including minor children, shall be for purposes of the virtual event. The agreement below authorizes {eventYear} Great Puzzle Hunt staff to communicate directly with a participant via phone, text, and email.</p>
         <p><strong>Participants under age 18:</strong> A parent/legal guardian must complete this registration form on behalf of their minor.</p>
+    </Segment> */}
+    return (
+      <Segment basic>
+        <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor
+child) to participate either in-person or virtually in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU MathematicsDepartment, held on {eventDay}, {eventDate} (hereinafter referred to as “Puzzle Hunt”). I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of
+injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
+        <p>In consideration of my (or my minor child’s) voluntary participation in the Puzzle Hunt, I agree to hold harmless Western Washington University, its officers, agents, volunteers, or employees from and against all financial loss, claim, suit, action, damage, or expense, arising out of my (or my minor child’s) participation, unless caused by the negligence or willful misconduct of the University, its officers, agents, volunteers, or employees.</p>
+        <p><strong>In-Person Participation</strong>: I understand that Western Washington University strongly recommends that participants have comprehensive health insurance coverage. However, all in-person participants must show ID and proof of vaccination or negative COVID test within 72 hours of attending event (Western students may use their COVID Clearance pass). Masks covering nose and mouth are required in all indoor spaces and strongly recommended outdoors near groups of people. Hand sanitizer will be available in abundant supply.</p>
+        <p>I understand and acknowledge that a medical emergency may develop which necessitates the need for immediate medical treatment for a participant. I hereby authorize Western and its officers, agents, volunteers, or employees to arrange or provide any necessary emergency medical treatment on my (or my minor child’s) behalf.</p>
+        <p><strong>Virtual Participation</strong>: For the virtual event, all participation is done online and communications involving issues such as registration questions, troubleshooting, event updates, or awards will be done via text, email, phone, social media, and the website <a href="https://greatpuzzlehunt.com">https://greatpuzzlehunt.com</a>. Participants will be asked to use a smartphone or computer, and such items as scissors, writing utensils (colored pencils, pen, pencil, highlighters, felt tips), tape, eraser, paper, straightedge, hole punch, and a printer to print out puzzles. I agree (or give permission for my minor child) to receive direct communication from Western’s {eventYear} Great Puzzle Hunt staff.</p>
       </Segment>
     );
   }
