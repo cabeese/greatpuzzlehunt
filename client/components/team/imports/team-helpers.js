@@ -14,12 +14,13 @@ export const DIVISION_TYPES = [
     wristBandColor: "Blue",
     description: "At least half of team members must be WWU Alumni"
   },
-  {
+  /*{
     text: 'Postsecondary Students',
     value: 'postsecondary',
     wristBandColor: "Purple",
     description: "All team members must be currently enrolled in college (undergrad or grad), technical school, or running start. Mix and match-team members from same or different schools."
   },
+  */
   {
     text: 'Secondary Students',
     value: 'secondary',
