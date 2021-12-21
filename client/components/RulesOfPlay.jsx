@@ -59,7 +59,7 @@ RulesOfPlay = class RulesOfPlay extends Component {
           <List bulleted relaxed size="large">
             <List.Item>Interfere with another team’s enjoyment of the Hunt.</List.Item>
             <List.Item>Give puzzle information to or obtain puzzle information from another team.</List.Item>
-            {/* <List.Item>Shout out code words.</List.Item> */}
+            <List.Item>Shout out code words.</List.Item>
             <List.Item>Post photos of others without their explicit consent.</List.Item>
           </List>
         </Segment>
@@ -122,7 +122,7 @@ RulesOfPlay = class RulesOfPlay extends Component {
           <Header id="scoring" as='h2' icon={<Icon name="info" color="blue"/>} content="Scoring"/>
           <List bulleted relaxed size="large">
             <List.Item>Your team score is measured in minutes. The fewer minutes, the better.</List.Item>
-            <List.Item>From puzzle timer start, you have 70 minutes to finish that puzzle (15 minutes for meta puzzle). <b>Note:</b> We increased the finish time by 5 minutes to account for download and print time.</List.Item>
+            <List.Item>From puzzle timer start, you have 70 minutes to finish that puzzle (15 minutes for meta puzzle).</List.Item>
             <List.Item>If you do not finish in 70 minutes you are given the code word(s) and receive a score of 105 minutes for that puzzle (25 minutes for meta).</List.Item>
             <List.Item>There is no penalty for incorrect code word entries.</List.Item>
             <List.Item>Each primary puzzle has 3 hints available.</List.Item>
