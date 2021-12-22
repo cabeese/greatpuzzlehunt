@@ -16,6 +16,7 @@ const USER_FIELDS = {
   lookingForTeam: 1,
   bio: 1,
   photoPermission: 1,
+  inPersonAllowed: 1,
   holdHarmless: 1,
   paid: 1,
   ticketUsed: 1,
