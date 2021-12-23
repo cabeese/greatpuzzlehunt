@@ -31,10 +31,12 @@ TeamEditor = class TeamEditor extends Component {
         password: team.password || '',
         division: team.division || null,
         lookingForMembers: (team.lookingForMembers || false),
+        inPerson: (team.inPerson || false),
         checkedIn: team.checkinConfirmed,
       };
     }
-    return { name: '', password: '', division: null, lookingForMembers: false, checkedIn: false};
+    return { name: '', password: '', division: null, lookingForMembers: false,
+      checkedIn: false, inPerson: false };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,6 +58,18 @@ TeamEditor = class TeamEditor extends Component {
             <Input name='password' placeholder='Team Password' value={this.state.password} onChange={(e, d) => this._handleTextChange(e, d)} />
           </Form.Field>
         </Form.Group>
+
+        <Form.Field>
+          <label>Playing in-person or virtually?</label>
+          <Checkbox
+            toggle
+            name="inPerson"
+            label="If selected, your entire team MUST be present for the event. All team members must have 'in-person' ticket codes."
+            checked={ this.state.inPerson }
+            onChange={ (e, data) => this._handleDataChange(e, data) }
+            />
+        </Form.Field>
+
         <Form.Field>
           <label>Team Division <br/><small>This determines your prize group</small></label>
           <br/>
@@ -153,9 +167,9 @@ TeamEditor = class TeamEditor extends Component {
 
   _teamData() {
     const { team } = this.props;
-    const { name, password, division, lookingForMembers } = this.state;
+    const { name, password, division, lookingForMembers, inPerson, } = this.state;
     return {
-      name, password, division, lookingForMembers,
+      name, password, division, lookingForMembers, inPerson,
       _id: team ? team._id : undefined,
     };
   }
