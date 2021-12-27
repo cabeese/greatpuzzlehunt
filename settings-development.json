@@ -8,15 +8,15 @@
     },
     "accountsEmail": "Great Puzzle Hunt <accounts@greatpuzzlehunt.com>",
     "infoEmail": "Great Puzzle Hunt <info@greatpuzzlehunt.com>",
-    "eventYear": "2021",
+    "eventYear": "2022",
     "eventDay": "Saturday",
-    "eventDate": "April 17, 2021",
-    "registrationOpenDate": "Tuesday, January 5, 2021",
-    "registrationCloseDate": "April 15, 2021",
-    "earlyBirdLastDate": "March 15, 2021",
-    "regularRegistrationStart": "January 5, 2021",
-    "regularRegistrationEnd": "April 15, 2021",
-    "gearSaleEnd": "April 18, 2021",
+    "eventDate": "April 17, 2022",
+    "registrationOpenDate": "Tuesday, January 5, 2022",
+    "registrationCloseDate": "April 15, 2022",
+    "earlyBirdLastDate": "March 15, 2022",
+    "regularRegistrationStart": "January 5, 2022",
+    "regularRegistrationEnd": "April 15, 2022",
+    "gearSaleEnd": "April 18, 2022",
     "social": {
       "facebook": "https://facebook.com/greatpuzzlehunt"
     },
@@ -24,7 +24,8 @@
       "Google Analytics": {
         "trackingId": ""
       }
-    }
+    },
+    "fromEmail": "accounts@greatpuzzlehunt.com"
   },
   "admin": {
     "firstname": "Noah",
