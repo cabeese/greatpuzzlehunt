@@ -97,6 +97,7 @@ const STATES = [
   { key: 'YT', text: 'YT', value: 'YT' },
   { key: 'NT', text: 'NT', value: 'NT' },
   { key: 'NU', text: 'NU', value: 'NU' },
+  { key: 'OTHER', text: 'OTHER', value: 'OTHER' }
 ];
 
 class RegisterForm extends Component {
@@ -222,9 +223,9 @@ class RegisterForm extends Component {
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='zip' label='Zip Code' placeholder='e.g. 98225' value={ this.state.zip }
+          <Form.Input name='zip' label='Zip/Postal Code' placeholder='e.g. 98225' value={ this.state.zip }
                       onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Dropdown name='state' label='State/Province' search selection options={ STATES }
+          <Form.Dropdown name='state' label='State/Province (or "other")' search selection options={ STATES }
                       value={ this.state.state } onChange={ (e,data) => this._handleDataChange(e,data) }/>
           <Form.Input name='country' label='Country' placeholder='e.g. U.S.A.' value={ this.state.country }
                       onChange={ (e) => this._handleTextChange(e) }/>
