@@ -225,7 +225,7 @@ class RegisterForm extends Component {
         <Form.Group widths='equal'>
           <Form.Input name='zip' label='Zip/Postal Code' placeholder='e.g. 98225' value={ this.state.zip }
                       onChange={ (e) => this._handleTextChange(e) }/>
-          <Form.Dropdown name='state' label='State/Province (or other)' search selection options={ STATES }
+          <Form.Dropdown name='state' label='State/Province (or "other")' search selection options={ STATES }
                       value={ this.state.state } onChange={ (e,data) => this._handleDataChange(e,data) }/>
           <Form.Input name='country' label='Country' placeholder='e.g. U.S.A.' value={ this.state.country }
                       onChange={ (e) => this._handleTextChange(e) }/>
