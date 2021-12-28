@@ -1,13 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Form } from 'semantic-ui-react';
-import MessageUserActions from './message-user-actions';
+import { Modal, Button, Form, Message } from 'semantic-ui-react';
 
 class MessageUserModal extends Component {
     constructor(props) {
 	super(props);
-	this.state = { text: '', user: props.user };
+	this.state = { text: '', user: props.user, error: null };
 	console.log('messageusermodal, constructor, props user: ', props.user);
     }
 
@@ -26,13 +25,18 @@ class MessageUserModal extends Component {
 		size="large"
 		open={true}
 		closeIcon={true}
-		onClose={() => this.props.clearUser() }
+		onClose={() => this._clearState() }
 	    >
 		<Modal.Header>Message {user.name}</Modal.Header>
 		<Modal.Content>
 		    <Form onSubmit={(e) => this._sendMessage(e)}>
 			<Form.TextArea label='Message:' placeholder='Text...' name='text' value={text} onChange={this._handleChange} />
 			<Form.Button type='submit' content='Send' />
+			<Message negative
+				 hidden={!this.state.error}
+				 icon='warning sign'
+				 content={this.state.error ? this.state.error : ''}
+				 />
 		    </Form>
 		</Modal.Content>
 	    </Modal>
@@ -53,14 +57,21 @@ class MessageUserModal extends Component {
 	    console.log('error: ', error);
 	    console.log('result: ', result);
 	    if (error) {
-	 	// XXX handle the error
+	 	// handle the error
+		this.setState({ error: error.message });
 	    } else {
 	 	// close the dialog and clear the mesage
 	 	console.log('clearing modal state');
-	 	this.props.clearUser();
-	 	this.setState({ text: '' });
+	 	// this.props.clearUser();
+	 	// this.setState({ text: '' });
+		this._clearState();
 	    }
 	});
+    }
+
+    _clearState() {
+	this.props.clearUser();
+	this.setState({ text: '', error: null });
     }
 
     componentDidUpdate(prevProps, prevState) {
