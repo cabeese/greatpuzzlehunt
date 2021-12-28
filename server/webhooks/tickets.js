@@ -9,7 +9,6 @@ const { token } = accts;
 
 PostRoute.route('/api/tickets', function(params, req, res, next) {
   Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
-  Meteor.logger.info(params);
   const req_token = params.query.token;
 
   handleRequest(req, res, req_token, req.body);
