@@ -18,7 +18,6 @@ class Users extends Component {
 	}
 
 	const { messageUser } = this.state;
-	console.log('user list, render, message user: ', messageUser);
 	return (
 	    <div>
 		<Card.Group>
@@ -48,12 +47,10 @@ class Users extends Component {
     }
 
     _messageUser(user) {
-	console.log('message user: ', user);
 	this.setState({ messageUser: user });
     }
 
     _clearMessageUser() {
-	console.log('clear message user');
 	this.setState({ messageUser: null });
     }
 }

@@ -34,13 +34,10 @@ TeamList = class TeamList extends Component {
     }
     
     _messageUser(user) {
-	console.log('message team captain: ', user);
-	console.log('this is: ', this);
 	this.setState({ messageUser: user });
     }
 
     _clearMessageUser() {
-	console.log('clear message user');
 	this.setState({ messageUser: null });
     }
 }
