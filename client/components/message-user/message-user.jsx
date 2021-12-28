@@ -1,94 +1,82 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'semantic-ui-react';
+import { Modal, Button, Form } from 'semantic-ui-react';
+import MessageUserActions from './message-user-actions';
 
 class MessageUserModal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: Boolean(props.user),
-    };
-  }
+    constructor(props) {
+	super(props);
+	this.state = { text: '', user: props.user };
+	console.log('messageusermodal, constructor, props user: ', props.user);
+    }
 
-  componentWillReceiveProps(props) {
-    this.setState({ open: Boolean(props.user) });
-  }
+    render() {
+	const user = this.state.user;
+	const open = Boolean(this.state.user);
+	console.log('messageusermodal render, user: ', this.state.user, ' open: ', open);
+	if (!open) {
+	    return null;
+	}
 
-  render() {
-    const { user, clearUser } = this.props;
-    const { open } = this.state;
-    if (!open) return null;
+	const { text } = this.state;
 
-    return (
-      <Modal
-        size="large"
-        open={true}
-        closeIcon={true}
-        onClose={() => clearUser() }
-      >
-        <Modal.Header>Message {user.name}</Modal.Header>
-          <Modal.Content>
-	      <p> Enter your message: </p>
-        </Modal.Content>
-        <Modal.Actions>
-          <AdminUserActions
-            user={user}
-          />
-        </Modal.Actions>
-      </Modal>
-    );
-  }
+	return (
+	    <Modal
+		size="large"
+		open={true}
+		closeIcon={true}
+		onClose={() => this.props.clearUser() }
+	    >
+		<Modal.Header>Message {user.name}</Modal.Header>
+		<Modal.Content>
+		    <Form onSubmit={(e) => this._sendMessage(e)}>
+			<Form.TextArea label='Message:' placeholder='Text...' name='text' value={text} onChange={this._handleChange} />
+			<Form.Button type='submit' content='Send' />
+		    </Form>
+		</Modal.Content>
+	    </Modal>
+	);
+    }
 
-  _sendPasswordReset(event) {
-    const btn = $(event.target);
+    _handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
-    Meteor.call('admin.user.resetPassword', { _id: this.props.user._id }, (err, result) => {
-      if (err) {
-        console.log(err);
-        btn.attr('data-content', 'Failed to send password reset email! 😰');
-      } else {
-        btn.attr('data-content', 'Password Reset Email Sent! 😀');
-      }
+    _sendMessage(e) {
+	console.log('send message', e);
+	console.log('message text: ', this.state.text);
+	console.log('message destination: ', this.state.user);
+	console.log('email addr: ', this.state.user.email.toLowerCase());
 
-      btn.popup({
-        on: 'manual'
-      }).popup('show');
+	// send the message
+	Meteor.call('user.message', this.state.user.email.toLowerCase(), this.state.text, (error, result) => {
+	    console.log('send user message callback');
+	    console.log('error: ', error);
+	    console.log('result: ', result);
+	    if (error) {
+	 	// XXX handle the error
+	    } else {
+	 	// close the dialog and clear the mesage
+	 	console.log('clearing modal state');
+	 	this.props.clearUser();
+	 	this.setState({ text: '' });
+	    }
+	});
+    }
 
-      Meteor.setTimeout(() => {
-        btn.popup('hide');
-      }, 2500);
-    });
-  }
-
-  _resendEmailVerification(event) {
-    if (!confirm(`Confirm Resend Verification email for "${this.props.user.name}" ?`))
-      return;
-
-    const btn = $(event.target);
-
-    Meteor.call('admin.user.emailResend', this.props.user._id, (err, result) => {
-      if (err) {
-        console.log(err);
-        btn.attr('data-content', `Send Failed! 😰 ${err.reason}`);
-      } else {
-        btn.attr('data-content', 'Email Sent! 😀');
-      }
-
-      btn.popup({
-        on: 'manual'
-      }).popup('show');
-
-      Meteor.setTimeout(() => {
-        btn.popup('hide');
-      }, 2500);
-    });
-  }
+    componentDidUpdate(prevProps, prevState) {
+	console.log('messageusermodal, component did update');
+	console.log('prev props:', prevProps);
+	console.log('new props:', this.props);
+	if (prevProps.user != this.props.user) {
+	    this.setState({ user: this.props.user });
+	    console.log('updated state to: ', this.state);
+	}
+    }
 }
 
 MessageUserModal.propTypes = {
-  user: PropTypes.object,
-  clearUser: PropTypes.func.isRequired,
+    user: PropTypes.object,
+    clearUser: PropTypes.func.isRequired,
 };
 
 export default MessageUserModal;
