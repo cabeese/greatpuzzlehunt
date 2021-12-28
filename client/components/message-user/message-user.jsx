@@ -31,7 +31,11 @@ class MessageUserModal extends Component {
 		<Modal.Content>
 		    <Form onSubmit={(e) => this._sendMessage(e)}>
 			<Form.TextArea label='Message:' placeholder='Text...' name='text' value={text} onChange={this._handleChange} />
-			<Form.Button type='submit' content='Send' />
+			<Form.Group>
+			    <Form.Button color='green' type='submit' content='Send' />
+			    <Form.Button floated='right' color='red' inverted type='submit' content='Cancel' onclick={() => this._clearState() } />
+			</Form.Group>
+			<p> This will send an email message to the player. The email message will include your message and email address for them to reply to you.</p>
 			<Message negative
 				 hidden={!this.state.error}
 				 icon='warning sign'

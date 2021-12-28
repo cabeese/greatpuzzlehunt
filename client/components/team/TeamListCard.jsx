@@ -15,6 +15,8 @@ TeamListCard = class TeamListCard extends Component {
       this.setState({ owner });
     });
 
+      console.log('team list card, props: ', this.props);
+
     this.state = {
       isFull: team.members.length >= 6,
       memberCount: team.members.length,
@@ -116,9 +118,8 @@ TeamListCard = class TeamListCard extends Component {
       <Header as='h4'>
         <Header.Content>
           { name }
-          <Header.Subheader>
-            <p><Icon name='mail' size='small'/><a href={`mailto:${email}`}>{email}</a></p>
-            <p><Icon name='phone' size='small'/><a href={`tel:${phone}`}>{phone}</a></p>
+            <Header.Subheader>
+		<Button basic icon='mail' content='Message team captain' onClick={ () => this.props.messageuser(this.state.owner) } />
           </Header.Subheader>
         </Header.Content>
       </Header>
