@@ -15,6 +15,8 @@ import GamestateComp from '../../imports/GamestateComp';
 
 const { eventYear, eventDate, eventDay } = Meteor.settings.public;
 
+const { fromEmail } = Meteor.settings.public;
+
 const accountTypeOptions = [
   { key: 'student', value: 'STUDENT', text: 'Student (currently enrolled in any school)' },
   { key: 'nonstudent', value: 'NONSTUDENT', text: 'Non-Student (not currently enrolled)' },
@@ -162,7 +164,8 @@ class RegisterForm extends Component {
           <Message.Content>
             <Header as='h3'>Thank you for creating an account!<br/></Header>
             <p>We have sent a verification email to <strong>{ this.state.email }</strong>. Go check your email!</p>
-            <p><strong>You must click the verification link in that email</strong> in order to complete the registration process.</p>
+              <p><strong>You must click the verification link in that email</strong> in order to complete the registration process.</p>
+	      <p>If you don't get the verification email, please check your spam folder or equivalent. Be sure to add <strong>{ fromEmail }</strong> to your address book or safe sender list so all future emails get to your inbox.</p>
           </Message.Content>
         </Message>
 
@@ -176,7 +179,7 @@ class RegisterForm extends Component {
         <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
         <Message color='orange' size='huge'>
           <Message.Content>
-            <Segment basic size='large' className='no-padding'>Game day is soon! Make sure at least one team member can obtain the <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">necessary materials</a>.</Segment>
+            <Segment basic size='large' className='no-padding'>Game day is soon! Make sure at least one team member can obtain the <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">necessary materials</a>.<br/>We will send an email to verify your registration. Be sure to add <strong>{ fromEmail }</strong> to your address book or safe sender list so all future emails get to your inbox. </Segment>
           </Message.Content>
         </Message>
 
