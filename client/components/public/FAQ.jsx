@@ -155,12 +155,12 @@ FAQ = class FAQ extends Component {
 
         <Accordion styled fluid>
 
-          <Accordion.Title active={activeIndex === 1} index={1} onClick={(e,p) => this.handleClick(e,p)} >
+          <Accordion.Title active={activeIndex === 0} index={0} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="map"/>
             Directions & Parking
           </Accordion.Title>
-          <Accordion.Content active={activeIndex === 1}>
+          <Accordion.Content active={activeIndex === 0}>
             <h2><Icon color="blue" name="tag"/> Address</h2>
             <List>
               <List.Item description="Western Washington University" />
@@ -548,7 +548,6 @@ FAQ = class FAQ extends Component {
   }
 
   handleClick(e, titleProps) {
-    console.log("handling click for: ", titleProps);
     const { index } = titleProps;
     const { activeIndex } = this.state;
     const newIndex = (activeIndex === index) ? -1 : index;
