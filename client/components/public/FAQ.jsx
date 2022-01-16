@@ -12,7 +12,8 @@ import {
   Message,
   Segment,
   Button,
-  Image
+  Image,
+  Grid
 } from 'semantic-ui-react';
 import GamestateComp from '../imports/GamestateComp';
 
@@ -521,14 +522,20 @@ FAQ = class FAQ extends Component {
             What does the Gear/Apparel look like?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 15}>
-            <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
-            { gamestate && gamestate.buyGear ? <p>Take a look at our gear <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
+            <Grid stackable>
+              <Grid.Row>
+                <Grid.Column width={10}>
+                  <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
+                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
+                  {gearPricing}
+                </Grid.Column>
+                <Grid.Column width={6}>
+                  <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/2022/gear/shirt_design.png'/>
+                </Grid.Column>
 
-            <Image
-              src='https://i.ytimg.com/vi_webp/IZU0sLW9pJk/maxresdefault.webp'
-            />
+              </Grid.Row>
 
-            {gearPricing}
+            </Grid>
           </Accordion.Content>
           
         </Accordion>
