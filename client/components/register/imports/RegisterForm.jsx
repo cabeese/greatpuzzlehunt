@@ -171,6 +171,7 @@ class RegisterForm extends Component {
 
   _form() {
     return (
+      <div>
       <Form onSubmit={ (e) => this._register(e) } style={ this._formStyle() }>
         <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
         {/* materials banner
@@ -180,6 +181,8 @@ class RegisterForm extends Component {
           </Message.Content>
         </Message>
         */}
+
+        <p><strong>Important</strong>: Without valid name, email, or mailing address, you eliminate the chances to receive prizes. We use age to guide our puzzle development and location to make certain we geodistribute the files to proper sites that can be accessed by all participants.</p>
 
         {this._errorMessage()}
 
@@ -285,6 +288,7 @@ class RegisterForm extends Component {
 
         { this._errorMessage() }
       </Form>
+      </div>
     );
   }
 
