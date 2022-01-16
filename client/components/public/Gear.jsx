@@ -5,7 +5,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"
 
-import { Container, Segment, Header, Icon, Modal, Grid, List, Card } from 'semantic-ui-react';
+import { Container, Segment, Header, Icon, Modal, Grid, List, Card, Image } from 'semantic-ui-react';
 import LinkButton from '../imports/LinkButton';
 
 const { eventYear } = Meteor.settings.public;
@@ -158,7 +158,7 @@ Gear = class Gear extends Component {
     let title = titles[code];
     let path = `${s3_prefix}${code}${forward[code] ? "f.jpg" : "b.jpg"}`;
     return (
-      <div className="gearitem ui card link" style={{verticalAlign: "top", display: "inline-block", marginLeft: "20px"}}>
+      <div className="gearitem ui card link" style={{verticalAlign: "top", display: "inline-block", marginLeft: "0.5em"}}>
         <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails.bind(this)} src={path}></img>
         <div className="content">
           <span> {title} </span>
@@ -201,25 +201,23 @@ Gear = class Gear extends Component {
                   <p>Size range: {this.state.size}</p>
                   <p>Material: {this.state.materials}</p>
                   <Header as="h2">Colors:</Header>
-                  <Card.Group itemsPerRow={3}>
-                    {
-                      Object.keys(this.state.color_indices).map((i) => {
-                        let index = this.state.color_indices[i];
-                        return (
-                          <Card key={i}>
-                            <img src={`${s3_prefix}${this.state.code}_${color_names[index].toLowerCase().replaceAll(" ", "")}.jpg`} />
-                            <Card.Content>
-                              <Card.Description>
-                                { color_names[index] }
-                              </Card.Description>
+                  {
+                    Object.keys(this.state.color_indices).map((i) => {
+                      let index = this.state.color_indices[i];
+                      return (
+                        <div className="gearitem ui card" key={i} style={{verticalAlign: "top", display: "inline-block", marginLeft: "1em"}}>
+                          <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} src={`${s3_prefix}${this.state.code}_${color_names[index].toLowerCase().replaceAll(" ", "")}.jpg`}/>
+                          <Card.Content>
+                            <Card.Description>
+                              { color_names[index] }
+                            </Card.Description>
 
-                            </Card.Content>
+                          </Card.Content>
 
-                          </Card>
-                        );
-                      }) 
-                    }
-                  </Card.Group>
+                        </div>
+                      );
+                    }) 
+                  }
                   <img width="100%" src={this.state.swatches}></img>
                 </Grid.Column>
                 
