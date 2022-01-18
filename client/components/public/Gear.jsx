@@ -227,48 +227,58 @@ Gear = class Gear extends Component {
 
         <Segment basic>
           <PuzzlePageTitle title="Gear" />
-          Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. <b>Cool swag included with every shipment!</b>
+          Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes.
           <br /><br />
           Click on each item for more information.
+          <br /><br />
 
-          <Header as="h2">Shipping Options</Header>
-          
-          <List bulleted>
-            <List.Item><strong>Pick up on campus</strong>: FREE</List.Item>
-            <List.Item>
-              <strong>Domestic Shipping</strong>:
-              <List.List>
-                <List.Item>For any T-shirt (long or short sleeve):</List.Item>
-                <List.List>
-                  <List.Item>1 shirt: $5</List.Item>
-                  <List.Item>2&ndash;3 shirts: $8</List.Item>
-                  <List.Item>4&ndash;6 shirts: $15</List.Item>
-                </List.List>
-                <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip)
-                  <List.List>
-                    <List.Item>1 sweatshirt: $8</List.Item>
-                    <List.Item>2 sweatshirts: $15</List.Item>
-                  </List.List>
-                </List.Item>
-              </List.List>
-            </List.Item>
-            <List.Item>
-              <strong>International Shipping</strong>:
-              <List.List>
-                <List.Item>For any T-shirt (long or short sleeve):</List.Item>
-                <List.List>
-                  <List.Item>1&ndash;3 shirts: $25</List.Item>
-                  <List.Item>4&ndash;6 shirts: $50</List.Item>
-                </List.List>
-                <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip)
-                  <List.List>
-                    <List.Item>1 sweatshirt: $25</List.Item>
-                    <List.Item>2 sweatshirts: $50</List.Item>
-                  </List.List>
-                </List.Item>
-              </List.List>
-            </List.Item>
-          </List>
+          <Grid stackable>
+            <Grid.Row>
+              <Grid.Column width={7}>
+                <Header as="h2">Shipping Options</Header>
+                
+                <List bulleted>
+                  <List.Item><strong>Pick up on campus</strong>: FREE</List.Item>
+                  <List.Item>
+                    <strong>Domestic Shipping</strong>:
+                    <List.List>
+                      <List.Item>For any T-shirt (long or short sleeve):</List.Item>
+                      <List.List>
+                        <List.Item>1 shirt: $5</List.Item>
+                        <List.Item>2&ndash;3 shirts: $8</List.Item>
+                        <List.Item>4&ndash;6 shirts: $15</List.Item>
+                      </List.List>
+                      <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip)
+                        <List.List>
+                          <List.Item>1 sweatshirt: $8</List.Item>
+                          <List.Item>2 sweatshirts: $15</List.Item>
+                        </List.List>
+                      </List.Item>
+                    </List.List>
+                  </List.Item>
+                  <List.Item>
+                    <strong>International Shipping</strong>:
+                    <List.List>
+                      <List.Item>For any T-shirt (long or short sleeve):</List.Item>
+                      <List.List>
+                        <List.Item>1&ndash;3 shirts: $25</List.Item>
+                        <List.Item>4&ndash;6 shirts: $50</List.Item>
+                      </List.List>
+                      <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip)
+                        <List.List>
+                          <List.Item>1 sweatshirt: $25</List.Item>
+                          <List.Item>2 sweatshirts: $50</List.Item>
+                        </List.List>
+                      </List.Item>
+                    </List.List>
+                  </List.Item>
+                </List>
+              </Grid.Column>
+              <Grid.Column width={5}>
+                  <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/2022/gear/shirt_design.png'/>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
           <Header size="medium">Shirts</Header>
           { this.getImageCard("ctm") }
           { this.getImageCard("ctw") }

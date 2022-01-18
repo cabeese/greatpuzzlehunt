@@ -52,7 +52,7 @@ class HomeEarlyBird extends Component {
             </Grid.Column>
            </Grid.Row>
            <Grid.Row centered>
-           <p>Registration opens {regularRegistrationStart}, and ends {regularRegistrationEnd} (or earlier if capacity is reached).</p>
+             <p>Registration {/*opens {regularRegistrationStart}, and */}ends {regularRegistrationEnd} (or earlier if capacity is reached).</p>
            </Grid.Row>
            <Grid.Row centered>
            {registerButton}

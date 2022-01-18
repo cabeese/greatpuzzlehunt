@@ -30,7 +30,7 @@ export default class HomeIntro extends Component {
                 <Header size='medium'>What is the Puzzle Hunt?</Header>
                 <Segment basic size='large' className="no-padding">
                   <p>For in-person participants, the Great Puzzle Hunt is like a scavenger hunt adventure with puzzles. Teams of up to 6 people travel on foot to various locations on WWU campus solving a total of four hour-long puzzles gathering clues along the way to solve one final meta puzzle.</p>
-                  <p>These are no ordinary puzzles though! It will take a diverse set of skills and talents to solve them! Our mission is to celebrate everyone's talents and demonstrate knowledge comes in many forms. Everything is timed using your phone, QR codes, and this online system! So yes you can win :)</p>
+                  <p>These are no ordinary puzzles though! It will take a diverse set of skills and talents to solve them! Our mission is to celebrate everyone's talents and demonstrate knowledge comes in many forms. Everything is timed using your phone, QR codes, and this online system! So yes, you can win :)</p>
                 </Segment>
               </Container>
             </Grid.Column>

@@ -42,10 +42,10 @@ const gearPricing = (
     <ul>
       <li>Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
       <li>Gear sales end midnight {gearSaleEnd}</li>
-      <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
+      <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
     <p>
-      These fees are kept low thanks to generous donations from our sponsors. They help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more.
+      Our costs to you are kept low thanks to generous donations from our sponsors. Their contributions help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more.
     </p>
     <p>
       Please consider <a target="_blank" href="https://foundation.wwu.edu/greatpuzzlehunt">donating to the Great Puzzle Hunt</a>.
@@ -70,7 +70,7 @@ const importantDates = (
 const schedule_inPerson_data = [
   {
     time: "9:30–10:15 AM",
-    desc: "Red Square Check-in: Information packet, wristband*, swag bag. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
+    desc: "Red Square Check-in: Information packet, wristband*, swag bag. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen and Woods Coffee!",
   },
   {
     time: "10:15 AM",
@@ -82,7 +82,7 @@ const schedule_inPerson_data = [
   },
   {
     time: "1:00–3:00 PM",
-    desc: "Red Square: Music. Domino's pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants."
+    desc: "Red Square: Music. Pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants. Thank you, Domino's Pizza!"
   },
   {
     time: "4:30 PM",
@@ -170,7 +170,7 @@ FAQ = class FAQ extends Component {
             <h2><Icon color="green" name="car"/> Parking</h2>
             <List>
               <List.Item description="Parking is FREE in all C-Lots on south campus on weekends." />
-              <List.Item description="Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen NW Fresh), and Awards Ceremony." />
+              <List.Item description="Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen &amp; Woods Coffee), and Awards Ceremony." />
             </List>
             <Button as='a' href="http://www.wwu.edu/map/" target="_blank" content="Interactive Campus Map" />
 
@@ -432,9 +432,9 @@ FAQ = class FAQ extends Component {
           <Accordion.Content active={activeIndex === 9}>
             Your creativity and problem-solving skills! Along with the following:<br />
             <List bulleted>
-              <List.Item><span className="description">At least one smartphone or computer</span>
+              <List.Item><span className="description">At least one smartphone or computer. The more the better! (think about battery life).</span>
                 <List.List>
-                  <List.Item description="Used for downloading puzzles, inputting code words, Googling, communicating with your team, and more!" />
+                  <List.Item description="Used for inputting code words, Googling, communicating with your team, and more!" />
                 </List.List>
               </List.Item>
 
@@ -541,7 +541,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: April 2021</p>
+        <p>Last Updated: January 2022</p>
       </Segment>
       </Container>
     );
