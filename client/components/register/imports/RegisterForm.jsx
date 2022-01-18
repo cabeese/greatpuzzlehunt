@@ -350,14 +350,6 @@ class RegisterForm extends Component {
 
   _holdHarmless() {
     if (!this.state.showHoldHarmless) return <p></p>;
-    {/*<Segment basic>
-         <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor child) to participate in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU Mathematics Department, held on {eventDay}, {eventDate}. I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
-        <p><strong>Introduction:</strong> Western Washington University (Western) is offering the {eventYear} Great Puzzle Hunt as a virtual event. All participation is done online and communications involving issues such as registration questions, troubleshooting, event updates, or awards will be done via text, email, phone, social media, and the website <a href="https://greatpuzzlehunt.com">https://greatpuzzlehunt.com</a>. Participants will be asked to use a smartphone or computer, scissors, writing utensils (colored pencils, pen, pencil, highlighters, felt tips), tape, eraser, paper, straightedge, hole punch, and a printer to print out puzzles.</p>
-        <p><strong>Responsibility for Participants:</strong> Participants are voluntarily participating in the {eventYear} Great Puzzle Hunt with the knowledge of the risks involved and hereby agree to accept any and all inherent risks of the activity. Parents/legal guardians are ultimately responsible for the supervision, health, safety and well-being of their minor children who are participating in the {eventYear} Great Puzzle Hunt.</p>
-        <p><strong>Liability:</strong> Western is not responsible or liable for any injury to a participant, including a minor child, unless caused by the negligence or willful misconduct of Western Washington University, its officers, agents, volunteers, or employees.</p>
-        <p><strong>Communication:</strong> All direct communication between {eventYear} Great Puzzle Hunt staff and participants, including minor children, shall be for purposes of the virtual event. The agreement below authorizes {eventYear} Great Puzzle Hunt staff to communicate directly with a participant via phone, text, and email.</p>
-        <p><strong>Participants under age 18:</strong> A parent/legal guardian must complete this registration form on behalf of their minor.</p>
-    </Segment> */}
     return (
       <Segment basic>
         <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor

@@ -96,23 +96,23 @@ const schedule_inPerson_data = [
 
 const schedule_virtual_data = [
   {
-    time: "9:30–10:15 AM",
+    time: "9:30–10:15 AM (PT)",
     desc: "Check-in: Download and open information packet."
   },
   {
-    time: "10:15 AM",
+    time: "10:15 AM (PT)",
     desc: <span>Live Stream Announcements (<a href="#">link TBA</a>)</span>
   },
   {
-    time: "10:30 AM",
+    time: "10:30 AM (PT)",
     desc: "Puzzle Hunt Starts."
   },
   {
-    time: "4:30 PM",
+    time: "4:30 PM (PT)",
     desc: "Puzzle Hunt Ends."
   },
   {
-    time: "5:00 PM",
+    time: "5:00 PM (PT)",
     desc: <span>Leaderboard Posted, Live stream—Prizes Awarded! (<a href="#">link TBA</a>)</span>
   },
 ]
@@ -305,7 +305,7 @@ FAQ = class FAQ extends Component {
           <Accordion.Content active={activeIndex === 5}>
             <List bulleted>
               <List.Item>Students, Faculty, Staff, Alumni, Community, Family, Everyone, Anywhere!</List.Item>
-              <List.Item>In the interest of safety, the in-person option this year is only open to the WWU campus community this year.</List.Item>
+              <List.Item>In the interest of safety, the in-person option this year is only open to the WWU campus community.</List.Item>
               <List.Item>Each team with participant(s) under age 14 must include at least one registered adult team member to accompany minor(s) at all times.</List.Item>
               <List.Item>Participants under 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.</List.Item>
             </List>
