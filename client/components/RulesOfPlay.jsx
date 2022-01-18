@@ -59,7 +59,7 @@ RulesOfPlay = class RulesOfPlay extends Component {
           <List bulleted relaxed size="large">
             <List.Item>Interfere with another team’s enjoyment of the Hunt.</List.Item>
             <List.Item>Give puzzle information to or obtain puzzle information from another team.</List.Item>
-            {/* <List.Item>Shout out code words.</List.Item> */}
+            <List.Item>Shout out code words.</List.Item>
             <List.Item>Post photos of others without their explicit consent.</List.Item>
           </List>
         </Segment>
@@ -79,42 +79,37 @@ RulesOfPlay = class RulesOfPlay extends Component {
         {/* MECHANICS Section */}
         <Segment basic>
           <Header id="mechanics" as="h2" icon={<Icon name="setting" color="orange"/>} content="Game Mechanics" />
-            For more detailed information, see the following PDF:
-            <List relaxed bulleted size="large">
-              <List.Item>US: <a target="_blank" href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
-              <List.Item>Asia: <a target="_blank" href="https://gph-rep-ap-southeast-1.s3-ap-southeast-1.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
-              <List.Item>Europe: <a target="_blank" href="https://gph-rep-eu-central-1.s3.eu-central-1.amazonaws.com/GPH2021-game-mechanics.pdf">Download</a></List.Item>
-            </List>
-            <br />
-          {/* virtualeventonly
+          <Header as="h2">In-Person</Header>
+          <List relaxed bulleted size="large">
+            <List.Item>To solve a puzzle you must:
+              <List.List size="large">
+                <List.Item>Go to that puzzle's station.</List.Item>
+                <List.Item>Select that puzzle from the game page.</List.Item>
+                <List.Item>Present the puzzle QR code.</List.Item>
+                <List.Item>A volunteer will scan it, give you the puzzle packet, and start your timer. </List.Item>
+                <List.Item>Then your team can enter the code word on the game page to stop the timer.</List.Item> 
+              </List.List>
+            </List.Item>
+          </List>
+          <Header as="h2">Virtual</Header>
           <List bulleted relaxed size="large">
             <List.Item>To solve a puzzle you must: 
-          */}
-                <List relaxed bulleted size="large">
-                  {/* virtualeventonly
-                  <List.Item>Go to that puzzle's station.</List.Item>
-                  <List.Item>Select that puzzle from the game page.</List.Item>
-                  <List.Item>Present the puzzle QR code.</List.Item>
-                  <List.Item>A volunteer will scan it, give you the puzzle packet, and start your timer. </List.Item>
-                  <List.Item>Then your team can enter the code word on the game page to stop the timer.</List.Item> 
-                  */}
-                  <List.Item>GET READY: Download &amp; open game packet after you check-in April 17.</List.Item>
+                <List.List size="large">
+                  <List.Item>GET READY: Download &amp; open game packet after you check-in April 9.</List.Item>
                   <List.Item>GET SET: If virtual, ensure your team communication is working (Zoom, Discord, &hellip;)</List.Item>
                   <List.Item>GO! At 10:30 AM (PT) Select a puzzle from the game page.
-                    <ul>
-                      <li>Press the button to reveal the puzzle download link and start the clock.</li>
-                      <li>Download and print the puzzle.</li>
-                      <li>Solve the puzzle.</li>
-                      <li>Enter the code word(s) on the game page to stop the timer.</li>
-                      <li>Repeat with the next puzzle.</li>
-                    </ul>
+                    <List.List size="large">
+                      <List.Item>Press the button to reveal the puzzle download link and start the clock.</List.Item>
+                      <List.Item>Download and print the puzzle.</List.Item>
+                      <List.Item>Solve the puzzle.</List.Item>
+                      <List.Item>Enter the code word(s) on the game page to stop the timer.</List.Item>
+                      <List.Item>Repeat with the next puzzle.</List.Item>
+                    </List.List>
                   </List.Item>
                   <List.Item>The Meta Puzzle opens with team code only when 4 puzzles are completed or timed out.</List.Item>
-                </List>
-            {/* 
+                </List.List>
               </List.Item>
             </List>
-            */}
         </Segment>
 
         {/* SCORING Section */}
@@ -122,7 +117,7 @@ RulesOfPlay = class RulesOfPlay extends Component {
           <Header id="scoring" as='h2' icon={<Icon name="info" color="blue"/>} content="Scoring"/>
           <List bulleted relaxed size="large">
             <List.Item>Your team score is measured in minutes. The fewer minutes, the better.</List.Item>
-            <List.Item>From puzzle timer start, you have 70 minutes to finish that puzzle (15 minutes for meta puzzle). <b>Note:</b> We increased the finish time by 5 minutes to account for download and print time.</List.Item>
+            <List.Item>From puzzle timer start, you have 70 minutes to finish that puzzle (15 minutes for meta puzzle).</List.Item>
             <List.Item>If you do not finish in 70 minutes you are given the code word(s) and receive a score of 105 minutes for that puzzle (25 minutes for meta).</List.Item>
             <List.Item>There is no penalty for incorrect code word entries.</List.Item>
             <List.Item>Each primary puzzle has 3 hints available.</List.Item>

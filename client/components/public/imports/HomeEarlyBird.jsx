@@ -52,7 +52,7 @@ class HomeEarlyBird extends Component {
             </Grid.Column>
            </Grid.Row>
            <Grid.Row centered>
-           <p>Registration opens {regularRegistrationStart}, and ends {regularRegistrationEnd} (or earlier if capacity is reached).</p>
+             <p>Registration {/*opens {regularRegistrationStart}, and */}ends {regularRegistrationEnd} (or earlier if capacity is reached).</p>
            </Grid.Row>
            <Grid.Row centered>
            {registerButton}
@@ -78,8 +78,10 @@ class HomeEarlyBird extends Component {
                 
             </Grid.Row>
             <Grid.Row style={{fontSize: "12pt"}}>
-                *Registration is free and open to all, anywhere in the world. Donations are gratefully accepted.<br/>
-                *Each person wanting to join a team must register themselves first. Each participant under age 14 must have permission from parent/legal guardian. The puzzles are created for ages 14 and older.
+              *Registration is free and open to all, anywhere in the world. Donations are gratefully accepted.<br/>
+              *In-Person option is only open to WWU students, faculty, and staff.<br />
+              *Each person wanting to join a team must register themselves first.<br />
+              Participants under age 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.
             </Grid.Row>
            
          </Grid>

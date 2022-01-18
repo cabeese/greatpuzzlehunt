@@ -10,7 +10,7 @@ export default class HomeDonate extends Component {
       <Segment basic>
       <section id="donate-message">
 
-        <Grid centered textAlign="left" padded stackable style={{ padding: '2em 0em', margin:'0'}}>
+        <Grid centered textAlign="left" padded stackable>
           <Grid.Row verticalAlign='middle' width={14}>
 
             <Grid.Column width={8}>

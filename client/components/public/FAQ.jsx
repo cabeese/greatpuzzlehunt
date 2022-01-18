@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { renderToString } from 'react-dom/server';
 import { Link } from 'react-router';
+import LinkButton from '../imports/LinkButton';
 import {
   Container,
   Accordion,
@@ -11,7 +12,8 @@ import {
   Message,
   Segment,
   Button,
-  Image
+  Image,
+  Grid
 } from 'semantic-ui-react';
 import GamestateComp from '../imports/GamestateComp';
 
@@ -38,12 +40,12 @@ const gearPricing = (
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul> */}
     <ul>
-      <li>Prices on varying styles range from $14&ndash;$30, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}. <b>FREE Domestic shipping. Discounted international shipping. Bonus: cool swag included with every shipment!</b></li>
+      <li>Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
       <li>Gear sales end midnight {gearSaleEnd}</li>
-      <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
+      <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
     <p>
-      These fees are kept low thanks to generous donations from our sponsors. They help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more.
+      Our costs to you are kept low thanks to generous donations from our sponsors. Their contributions help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more.
     </p>
     <p>
       Please consider <a target="_blank" href="https://foundation.wwu.edu/greatpuzzlehunt">donating to the Great Puzzle Hunt</a>.
@@ -61,14 +63,40 @@ const importantDates = (
     <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
     <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
     <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can acquire, redeem ticket code(s), and join a team until 10:00 AM (PT).</List.Item>
-    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes. <b>Free Domestic shipping + Bonus: cool swag included with every shipment!</b></List.Item>
+    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes.</List.Item>
   </List>
 );
 
-const schedule_data = [
+const schedule_inPerson_data = [
+  {
+    time: "9:30–10:15 AM",
+    desc: "Red Square Check-in: Information packet, wristband*, swag bag. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen and Woods Coffee!",
+  },
+  {
+    time: "10:15 AM",
+    desc: "Red Square: Announcements."
+  },
+  {
+    time: "10:30 AM",
+    desc: "Red Square: Puzzle Hunt Starts."
+  },
+  {
+    time: "1:00–3:00 PM",
+    desc: "Red Square: Music. Pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants. Thank you, Domino's Pizza!"
+  },
+  {
+    time: "4:30 PM",
+    desc: "Puzzle Stations close."
+  },
+  {
+    time: "5:00 PM",
+    desc: "Red Square: Award Ceremony & Prizes!"
+  },
+]
+
+const schedule_virtual_data = [
   {
     time: "9:30–10:15 AM (PT)",
-    // desc: "Check-in: Information packet, wristband*, swag bag, pre-ordered shirts. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen!",
     desc: "Check-in: Download and open information packet."
   },
   {
@@ -77,32 +105,29 @@ const schedule_data = [
   },
   {
     time: "10:30 AM (PT)",
-    // desc: "Red Square: Announcements."
     desc: "Puzzle Hunt Starts."
   },
   {
     time: "4:30 PM (PT)",
-    // desc: "Red Square: Puzzle Hunt starts!"
     desc: "Puzzle Hunt Ends."
   },
   {
     time: "5:00 PM (PT)",
-    // desc: "Red Square: KUGS Radio plays music. Domino's pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants."
     desc: <span>Leaderboard Posted, Live stream—Prizes Awarded! (<a href="#">link TBA</a>)</span>
   },
-  // {
-  //   time: "4:25 PM",
-  //   desc: "Puzzle Stations close. Finish Puzzles and return to Red Square."
-  // },
-  // {
-  //   time: "4:30 - 5:00 PM",
-  //   desc: "Red Square: Award Ceremony & Prizes**!"
-  // },
 ]
 
-const schedule = (
-  <List>
-    {schedule_data.map((item, idx) => (
+const schedule_inPerson = (
+  <List bulleted>
+    {schedule_inPerson_data.map((item, idx) => (
+      <List.Item header={item.time} content={item.desc} key={idx}/>
+    ))}
+  </List>
+);
+
+const schedule_virtual = (
+  <List bulleted>
+    {schedule_virtual_data.map((item, idx) => (
       <List.Item header={item.time} content={item.desc} key={idx}/>
     ))}
   </List>
@@ -130,27 +155,26 @@ FAQ = class FAQ extends Component {
 
         <Accordion styled fluid>
 
-          {/* virtualeventonly
-          <Accordion.Title active={activeIndex === 1} index={1} onClick={(e,p) => this.handleClick(e,p)} >
+          <Accordion.Title active={activeIndex === 0} index={0} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="map"/>
             Directions & Parking
           </Accordion.Title>
-          <Accordion.Content active={activeIndex === 1}>
-            <Header as='h3' icon={<Icon color="blue" name="tag"/>} content="Address" />
+          <Accordion.Content active={activeIndex === 0}>
+            <h2><Icon color="blue" name="tag"/> Address</h2>
             <List>
               <List.Item description="Western Washington University" />
               <List.Item description="516 High Street" />
               <List.Item description="Bellingham, WA 98225" />
             </List>
-            <Header as='h3' icon={<Icon color="green" name="car"/>} content="Parking" />
+            <h2><Icon color="green" name="car"/> Parking</h2>
             <List>
               <List.Item description="Parking is FREE in all C-Lots on south campus on weekends." />
-              <List.Item description="Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen NW Fresh), and Awards Ceremony." />
+              <List.Item description="Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen &amp; Woods Coffee), and Awards Ceremony." />
             </List>
             <Button as='a' href="http://www.wwu.edu/map/" target="_blank" content="Interactive Campus Map" />
 
-            <Header as='h3' icon={<Icon color="blue" name="map"/>} content="Directions from the South" />
+            <h2><Icon color="blue" name="map"/> Directions from the South</h2>
             <List bulleted>
               <List.Item description="From Interstate 5, take exit 252."/>
               <List.Item description="Turn left off the ramp onto S. Samish Way."/>
@@ -162,7 +186,7 @@ FAQ = class FAQ extends Component {
               <List.Item description="The C-Lots will be the next left and right turns."/>
             </List>
 
-            <Header as='h3' icon={<Icon color="green" name="map"/>} content="Directions from the North" />
+            <h2><Icon color="green" name="map"/> Directions from the North</h2>
             <List bulleted>
               <List.Item description="From Interstate 5 going south, take exit 252 and get in the right lane."/>
               <List.Item description="Turn right off the ramp onto N. Samish Way, and get into the far left turn lane."/>
@@ -176,7 +200,7 @@ FAQ = class FAQ extends Component {
 
             <iframe frameBorder="0" height="450" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDzFT6fltUNTF7Vas25IJmMkUAa5yVPi4I&amp;q=Campus+Services+Bellingham+WA" width="100%" />
           </Accordion.Content> 
-          */}
+
           <Accordion.Title active={activeIndex === 1} index={1} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="info"/>
@@ -205,18 +229,18 @@ FAQ = class FAQ extends Component {
           <Accordion.Content active={activeIndex === 2}>
             The annual WWU Great Puzzle Hunt is a fun, full-day, team puzzle-solving event that is <strong>OPEN TO ALL!</strong>
             <List bulleted>
-              {/* virtualeventonly
-              <li>Teams of up to 6 (recommended size 4-6) travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</li>
-              <li><strong>Your mission</strong>: HAVE FUN! Reach the outdoor location shown on your smartphone and scan your team code (which starts clock) to receive a puzzle. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you are sent to the next destination. Connect all the code words to complete the game!</li>
-              <li>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</li>
-              <li>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone.</li>
-              <li>Prizes* are awarded in each division for best: times, costumes, and team names.</li>
-              */}
-              <List.Item>Teams of up to 6 (recommended size 4-6) solve a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</List.Item>
-              <List.Item><b>Your mission</b>: HAVE FUN! Check in on morning of Hunt to download the info packet. At START time, select the first puzzle to download and start the team clock. You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and you may open the next puzzle. Connect all the code words to complete the game!</List.Item>
+              <List.Item>Teams of up to 6 (recommended size 4-6) work virtually or travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.</List.Item>
+
+              <List.Item><strong>Your mission</strong>: HAVE FUN!
+                <List.List>
+                  <List.Item><strong>In-Person teams</strong>: Reach the outdoor location shown on your smartphone and scan your team code (which starts clock) to receive a puzzle. </List.Item>
+                  <List.Item><strong>Virtual teams</strong>: Check in on morning of Hunt to download the info packet. At START time, select the first puzzle to download and start the team clock. </List.Item>
+                  <List.Item>You’ll need your wizard bag (scissors, tape, hole punch, etc.), as well as critical thinking, reasoning, and teamwork to MacGyver your way through. Once you solve the puzzle and enter the code word(s), the clock stops, and (in-person) &ndash; you are sent to the next destination or (virtual) &ndash; you may open the next puzzle. Connect all the code words to complete the game!</List.Item>
+                </List.List>
+              </List.Item>
               <List.Item>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</List.Item>
               <List.Item>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone or computer.</List.Item>
-              <List.Item>Prizes are awarded to top three scoring teams in each division.</List.Item>
+              <List.Item>Prizes are awarded to top scoring teams in each division, best in-person costumes, and team names.</List.Item>
               <List.Item>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</List.Item>
             </List>
             {/* virtualeventonly
@@ -264,12 +288,13 @@ FAQ = class FAQ extends Component {
             {importantDates}
 
             Schedule for the day:
-            {schedule}
-            {/* virtualeventonly
+            <Header as='h2'>In-Person</Header>
+            {schedule_inPerson}
             <strong>* </strong>{wristbandNote}
-            <br />
-            <strong>** </strong>{prizeNote}
-             */}
+
+            <Header as='h2'>Virtual</Header>
+            {schedule_virtual}
+            {/* <strong>** </strong>{prizeNote} */}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 5} index={5} onClick={(e,p) => this.handleClick(e,p)} >
@@ -278,11 +303,14 @@ FAQ = class FAQ extends Component {
             Who is it for?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 5}>
-            <p>
-              Students, Faculty, Staff, Alumni, Community, Family, Everyone, Anywhere!
-            </p>
+            <List bulleted>
+              <List.Item>Students, Faculty, Staff, Alumni, Community, Family, Everyone, Anywhere!</List.Item>
+              <List.Item>In the interest of safety, the in-person option this year is only open to the WWU campus community.</List.Item>
+              <List.Item>Each team with participant(s) under age 14 must include at least one registered adult team member to accompany minor(s) at all times.</List.Item>
+              <List.Item>Participants under 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.</List.Item>
+            </List>
             {/* <strong>*</strong> Children under 14 must be accompanied at all times by a parent/legal guardian who must also be registered on the same team as the child. */}
-            *Each participant under age 14 must have permission from a parent/legal guardian. The puzzles are created for ages 14 and older.
+            {/* *Each participant under age 14 must have permission from a parent/legal guardian. The puzzles are created for ages 14 and older. */}
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 6} index={6} onClick={(e,p) => this.handleClick(e,p)} >
@@ -300,10 +328,12 @@ FAQ = class FAQ extends Component {
                 header="WWU Alumni"
                 description="At least half of team members must be WWU Alumni"
               />
+              {/*
               <List.Item 
                 header="Postsecondary Students"
                 description="All team members must be currently enrolled in college (undergrad or grad), technical school, running start. Mix and match-team members from same or different schools."
               />
+              */}
               <List.Item
                 header="Secondary Students"
                 description="All team members must be currently enrolled in middle school or high school. Exception: One adult chaperone per team may register as a team member."
@@ -352,7 +382,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 7}>
             <p>
-              Awesome prizes will be awarded to top three teams in each division.
+              Awesome prizes will be awarded to top scoring teams in each division. Other prizes for best in-person team names, costumes, and more!
             </p>
             {/* <strong>* </strong>{prizeNote} */}
           </Accordion.Content>
@@ -384,8 +414,14 @@ FAQ = class FAQ extends Component {
               Please consider <a target="_blank" href="https://alumni.wwu.edu/greatpuzzlehunt">donating to the {siteName}</a>.
             </p> 
             */}
-            <p>We know people are stretched in these times. We want to provide a safe, no cost, educational, fun activity accessible to all.</p>
-            <p>This year, Registration is FREE. Donations are gratefully accepted and will help keep us afloat!</p>
+            
+            <p>We know people are stretched in these times. We want to provide a safe, no cost, educational, fun activity accessible to all. This year, registration is FREE. Donations are gratefully accepted and will help keep us afloat!</p>
+            <LinkButton as='a'
+                href="https://foundation.wwu.edu/greatpuzzlehunt"
+                size='large'  content='Donate Online'
+                icon={<Icon name='heart'/>}
+                color="green"
+              />
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 9} index={9} onClick={(e,p) => this.handleClick(e,p)} >
@@ -394,12 +430,25 @@ FAQ = class FAQ extends Component {
             What should I have on hand?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
+            Your creativity and problem-solving skills! Along with the following:<br />
             <List bulleted>
-              <List.Item><span className="description">A smartphone or computer</span>
+              <List.Item><span className="description">At least one smartphone or computer. The more the better! (think about battery life).</span>
                 <List.List>
-                  <List.Item description="Used for downloading puzzles, inputting code words, Googling, communicating with your team, and more!" />
+                  <List.Item description="Used for inputting code words, Googling, communicating with your team, and more!" />
                 </List.List>
               </List.Item>
+
+              <List.Item description="A clip board, or a notepad" />
+              <List.Item description="Ruler/Straightedge" />
+              <List.Item description="Scissors" />
+              <List.Item description="Transparent Tape (like Scotch Tape)" />
+              <List.Item description="Writing utensils (pencils, pens, erasers, felt-tips, highlighters)" />
+              <List.Item description="Water bottle, snacks" />
+              <List.Item description="Umbrella" />
+              <List.Item><span className="description"><strong>Other items TBA</strong></span></List.Item>
+            </List>
+            Additional items for <strong>virtual</strong> participants:
+            <List bulleted>
               <List.Item><span className="description"><a href="https://zoom.us/">Zoom</a> software downloaded (no account needed)</span>
                 <List.List>
                   <List.Item description="Will be used by event leaders for announcements, prizes, and troubleshooting. A link to join the Zoom session will be provided on the website on game day." />
@@ -410,33 +459,6 @@ FAQ = class FAQ extends Component {
                   <List.Item description="You will want hard copies of most puzzles to fold, cut, etc." />
                 </List.List>
               </List.Item>
-              <List.Item>
-                <span className="description"><b>40 cubes</b>, roughly 2 cm per side, that will link together. Download the linked PDF below for details.</span>
-                <List.List>
-                  <List.Item>
-                    <span className="description">US: <a href="https://gph-distributed.s3-us-west-2.amazonaws.com/GPH2021-what-you-need.pdf">Download</a></span>
-                  </List.Item>
-                  <List.Item>
-                    <span className="description">Europe: <a href="https://gph-rep-eu-central-1.s3.eu-central-1.amazonaws.com/GPH2021-what-you-need.pdf">Download</a></span>
-                  </List.Item>
-                  <List.Item>
-                    <span className="description">Asia: <a href="https://gph-rep-ap-southeast-1.s3-ap-southeast-1.amazonaws.com/GPH2021-what-you-need.pdf">Download</a></span>
-                  </List.Item>
-                </List.List>
-              </List.Item>
-              <List.Item description="A clip board, or a notepad" />
-              <List.Item description="Ruler/Straightedge" />
-              <List.Item description="Scissors" />
-              <List.Item description="Transparent Tape (like Scotch Tape)" />
-              <List.Item description="Glue stick or Double-sided Tape" />
-              <List.Item description="Writing utensils (pencils, pens, erasers)" />
-              <List.Item description="A Protractor (or other angle measuring device)" />
-              <List.Item description="Your creativity and problem-solving skills!" />
-            </List>
-            Other optional, but helpful, materials
-            <List bulleted>
-              <List.Item description="Felt tip marking pen in a color that will stand out on B&amp;W print" />
-              <List.Item description="Highlighters-2 colors useful" />
               <List.Item description="Water to drink and a sack lunch or snacks" />
             </List>
           </Accordion.Content>
@@ -452,7 +474,6 @@ FAQ = class FAQ extends Component {
             knowledge of music, art, humanities and social sciences, as well as science and mathematics.
           </Accordion.Content>
 
-          {/* virtualeventonly
           <Accordion.Title active={activeIndex === 12} index={12} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="teal" name="dropdown"/>
             <Icon name="food"/>
@@ -460,7 +481,7 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 12}>
             <p>
-              Yes! To enter the free refreshments area, <strong>you must be wearing your wristband</strong> at all times.
+              Yes, for in-person participants! To enter the free refreshments area, <strong>you must be wearing your wristband</strong> at all times.
               <br/>
               Wristbands are distributed at check-in.
             </p>
@@ -468,17 +489,15 @@ FAQ = class FAQ extends Component {
               Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) throughout the event while supplies last.
             </p>
             <List>
-              <List.Item description="9:30 AM - Check in/receive wristband. Refreshments area opens along Miller Hall."/>
+              <List.Item description="9:30 AM - Check in/receive wristband. Refreshment* area opens along Miller Hall."/>
               <List.Item description="1:00 - 3:00 PM - Domino’s Pizza Arrives in Red Square"/>
             </List>
             <p>
-              Special thanks to Market Street Catering of <a target="_blank" href="http://www.haggen.com/">Haggen NW Fresh</a> for providing fresh fruit and
-              breakfast pastries including gluten free (GF) option, and fresh brewed coffee!
+              Special thanks to Haggen, Woods Coffee, and Domino's Pizza.
             </p>
+            * Fresh fruit, rolls, coffee, cocoa, tea
           </Accordion.Content>
-          */}
 
-          {/* virtualeventonly
           <Accordion.Title active={activeIndex === 13} index={13} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="blue" name="dropdown"/>
             <Icon name="rain"/>
@@ -487,7 +506,6 @@ FAQ = class FAQ extends Component {
           <Accordion.Content active={activeIndex === 13}>
             Welcome to Washington.  We hunt on!
           </Accordion.Content> 
-          */}
 
           <Accordion.Title active={activeIndex === 14} index={14} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="blue" name="dropdown"/>
@@ -504,23 +522,32 @@ FAQ = class FAQ extends Component {
             What does the Gear/Apparel look like?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 15}>
-            <p>This year you have several choices of puzzle hunt gear and hundreds of color combinations!</p>
-            { gamestate && gamestate.buyGear ? <p>Take a look at our gear <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
+            <Grid stackable>
+              <Grid.Row>
+                <Grid.Column width={10}>
+                  <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
+                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
+                  {gearPricing}
+                </Grid.Column>
+                <Grid.Column width={6}>
+                  <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/2022/gear/shirt_design.png'/>
+                </Grid.Column>
 
-            {gearPricing}
+              </Grid.Row>
+
+            </Grid>
           </Accordion.Content>
           
         </Accordion>
 
         <br/>
-        <p>Last Updated: April 2021</p>
+        <p>Last Updated: January 2022</p>
       </Segment>
       </Container>
     );
   }
 
   handleClick(e, titleProps) {
-    console.log("handling click for: ", titleProps);
     const { index } = titleProps;
     const { activeIndex } = this.state;
     const newIndex = (activeIndex === index) ? -1 : index;

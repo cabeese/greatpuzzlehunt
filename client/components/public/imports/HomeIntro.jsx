@@ -29,8 +29,8 @@ export default class HomeIntro extends Component {
                 <br />
                 <Header size='medium'>What is the Puzzle Hunt?</Header>
                 <Segment basic size='large' className="no-padding">
-                  <p>Teams of up to 6 people solve a total of four hour-long puzzles gathering clues along the way to solve one final meta puzzle.</p>
-                  <p>These are no ordinary puzzles though! It will take a diverse set of skills and talents to solve them! Our mission is to celebrate everyone's talents and demonstrate knowledge comes in many forms. Everything is timed using your phone, QR codes, and our online game platform! So yes, you can win! :)</p>
+                  <p>For in-person participants, the Great Puzzle Hunt is like a scavenger hunt adventure with puzzles. Teams of up to 6 people travel on foot to various locations on WWU campus solving a total of four hour-long puzzles gathering clues along the way to solve one final meta puzzle.</p>
+                  <p>These are no ordinary puzzles though! It will take a diverse set of skills and talents to solve them! Our mission is to celebrate everyone's talents and demonstrate knowledge comes in many forms. Everything is timed using your phone, QR codes, and this online system! So yes, you can win :)</p>
                 </Segment>
               </Container>
             </Grid.Column>
@@ -40,27 +40,12 @@ export default class HomeIntro extends Component {
             <Grid.Column>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium">Who?</Header>
-                Everyone! However, each participant under age 14 must have permission from a parent/legal guardian. The puzzles are created for ages 14 and older.
+                Everyone! However, each team with participant(s) under age 14 must include at least one registered adult team member to accompany minor(s) at all times. *Note: The puzzles are created for ages 14 and older.
               </Segment>
-              <Segment padded inverted color='blue' >
-                <Header as='h1' size="medium">Where?</Header>
-                {/* virtualeventonly
-                 Red Square<br/>
-                Western Washington University<br/>
-                516 High Street<br/>
-                Bellingham, WA 98225<br/><br/> 
-                */}
-                <p>The 2021 Puzzle Hunt is virtual, so anywhere that has internet access, a smartphone or computer, a black and white printer, and materials listed in the FAQs <a href="/faq" style={{color: "#bad80a"}}>What should I have on hand?</a></p>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium" >What?</Header>
                 <p>Hands-on brain adventures involving paper-folding, logic, patterns, and a variety of skill sets.</p>
-              </Segment>
-              <Segment padded inverted color='blue' >
-                <Header as='h1' size="medium" >Why?</Header>
-                Stretch your mental muscles, bond with your teammates, compete alongside people of all ages and walks of life, and have a lot of fun!
+                FOOD, SWAG, MUSIC, PRIZES!
               </Segment>
             </Grid.Column>
             <Grid.Column>
@@ -72,9 +57,22 @@ export default class HomeIntro extends Component {
                 *Must be present at awards ceremony to claim prizes, else prizes go to the next place team.<br/> 
                 */}
               </Segment>
+              <Segment padded inverted color='blue' >
+                <Header as='h1' size="medium">Where?</Header>
+                <strong>In Person:</strong> Red Square<br/>
+                Western Washington University<br/>
+                516 High Street<br/>
+                Bellingham, WA 98225<br/><br/> 
+                <strong>Virtual:</strong> Anywhere that has internet access, a smartphone or computer, a black and white printer, and materials to be listed in the FAQs <a href="/faq" style={{color: "#bad80a"}}>What should I have on hand?</a>
+              </Segment>
+            </Grid.Column>
+            <Grid.Column>
+              <Segment padded inverted color='blue' >
+                <Header as='h1' size="medium" >Why?</Header>
+                Stretch your mental muscles, bond with your teammates, compete alongside people of all ages and walks of life, and have a lot of fun!
+              </Segment>
             </Grid.Column>
           </Grid.Row>
-
         </Grid>
         </Segment>
         </Container>
