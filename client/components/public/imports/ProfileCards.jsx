@@ -62,14 +62,14 @@ export default class ProfileCards extends Component {
       {
         name: 'Raiden van Bronkhorst',
         title: '',
-        role: 'Developer & Tech Support',
+        role: 'Lead Developer & Tech Support',
         image: '/img/team/raiden_v.jpg',
       },
 
       {
         name: 'Richard Golding',
         title: '',
-        role: 'Developer & Tech Support',
+        role: 'Lead Developer & Tech Support',
         image: '/img/team/richard.jpg'
       },
 
@@ -204,30 +204,31 @@ export default class ProfileCards extends Component {
     return (
       <div>
         <h1>Our Leadership</h1>
-          <Card.Group stackable doubling itemsPerRow={3}>
-            { this._renderProfiles(this.puzzleTeam) }
-          </Card.Group>
+        <Card.Group stackable doubling itemsPerRow={3}>
+          { this._renderProfiles(this.puzzleTeam) }
+        </Card.Group>
+    
+        <h2>Developers</h2>
+        <Card.Group stackable doubling itemsPerRow={3}>
+          { this._renderProfiles(this.developers) }
+        </Card.Group>
       
-          <h2>Developers</h2>
-          <Card.Group stackable doubling itemsPerRow={3}>
-            { this._renderProfiles(this.developers) }
-          </Card.Group>
-        
-          <h2>Budget Coordination</h2>
-          <Card.Group stackable doubling itemsPerRow={3}>
-            { this._renderProfiles(this.budgetCoord) }
-          </Card.Group>
 
-          <h2>Marketing &amp; Promotion</h2>
-          <Card.Group stackable doubling itemsPerRow={3}>
-            { this._renderProfiles(this.marketingPromo) }
-          </Card.Group>
-  
-          <h2>Management</h2>
-          <Card.Group stackable doubling itemsPerRow={3}>
-            { this._renderProfiles(this.management) }
-          </Card.Group>
-  
+        <h2>Marketing &amp; Promotion</h2>
+        <Card.Group stackable doubling itemsPerRow={3}>
+          { this._renderProfiles(this.marketingPromo) }
+        </Card.Group>
+
+        <h2>Management</h2>
+        <Card.Group stackable doubling itemsPerRow={3}>
+          { this._renderProfiles(this.management) }
+        </Card.Group>
+
+        <h2>Budget Coordination</h2>
+        <Card.Group stackable doubling itemsPerRow={3}>
+          { this._renderProfiles(this.budgetCoord) }
+        </Card.Group>
+
         <h1>Past Leadership</h1>
         <Card.Group stackable doubling itemsPerRow={3}>
           { this._renderProfiles(this.pastProfiles) }
