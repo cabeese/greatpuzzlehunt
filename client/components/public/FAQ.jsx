@@ -169,7 +169,7 @@ FAQ = class FAQ extends Component {
             </List>
             <h2><Icon color="green" name="car"/> Parking</h2>
             <List>
-              <List.Item description="Parking is FREE in all C-Lots on south campus on weekends." />
+              <List.Item description="Parking is FREE in the C-Lots on south campus on weekends." />
               <List.Item description="Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen &amp; Woods Coffee), and Awards Ceremony." />
             </List>
             <Button as='a' href="http://www.wwu.edu/map/" target="_blank" content="Interactive Campus Map" />
