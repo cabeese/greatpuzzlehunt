@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import { browserHistory } from '../../history';
 import { Segment, Header, Card, Button, Icon } from 'semantic-ui-react';
 import { map } from 'lodash';
 import moment from 'moment';

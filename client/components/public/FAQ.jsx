@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { renderToString } from 'react-dom/server';
-import { Link } from 'react-router';
-import LinkButton from '../imports/LinkButton';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Accordion,

@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import React, { Component, PropTypes } from 'react';
+// import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Container, Button, Icon } from 'semantic-ui-react';
 
 import GamestateComp from '../../../imports/GamestateComp';

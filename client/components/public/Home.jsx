@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Container, Grid, Segment, Message } from 'semantic-ui-react';
 
 const { regularRegistrationStart, eventDate, eventDay } = Meteor.settings.public;

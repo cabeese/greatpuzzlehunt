@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Container, Header, Segment, Message, Accordion, Button, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import GamestateComp from '../imports/GamestateComp';
 import RegisterForm from './imports/RegisterForm';

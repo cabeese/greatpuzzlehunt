@@ -1,7 +1,7 @@
 import { meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import {
   Segment, Header, Grid, Icon, Button, Message, List
 } from 'semantic-ui-react';

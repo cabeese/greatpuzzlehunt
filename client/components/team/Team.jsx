@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
+import { browserHistory } from '../../history';
 import { Container, Segment, Header, Grid, Form, Icon } from 'semantic-ui-react';
 import moment from 'moment';
 

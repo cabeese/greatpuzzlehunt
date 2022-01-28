@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+// import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Segment, Container, Image, Header, Button } from 'semantic-ui-react';
 import ProfileCards from './ProfileCards';
 export default class HomePeople extends Component {

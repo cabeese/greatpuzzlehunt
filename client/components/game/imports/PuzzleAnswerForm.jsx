@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import React, {PropTypes} from 'react';
+// import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Form, Message } from 'semantic-ui-react';
 import NCGiveUp from './NCGiveUp';
 
