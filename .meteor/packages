@@ -4,40 +4,43 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-base@1.3.0             # Packages every Meteor app needs to have
-mobile-experience@1.0.5       # Packages for a great mobile UX
-mongo@1.4.2                   # The database Meteor supports right now
-blaze-html-templates@1.0.4    # Compile .html files into Meteor Blaze views
-session@1.1.7                 # Client-side reactive dictionary for your app
-jquery@1.11.10                  # Helpful client-side library
-tracker@1.1.3                 # Meteor's client-side reactive programming library
+meteor-base@1.5.1             # Packages every Meteor app needs to have
+mobile-experience@1.1.0       # Packages for a great mobile UX
+mongo@1.13.0                   # The database Meteor supports right now
+reactive-var@1.0.11            # Reactive variable for tracker
 
-es5-shim@4.7.0                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.10.0              # Enable ECMAScript2015+ syntax in app code
+standard-minifier-js@2.7.2    # JS minifier run for production mode
+es5-shim@4.8.0                # ECMAScript 5 compatibility for older browsers
+ecmascript@0.16.0              # Enable ECMAScript2015+ syntax in app code
+# typescript@4.4.0              # Enable TypeScript syntax in .ts and .tsx modules
+shell-server            # Server-side component of the `meteor shell` command
+# hot-module-replacement@0.4.0  # Update client in development without reloading the page
 
-semantic:ui
-accounts-password@1.5.0
-check@1.3.0
-audit-argument-checks@1.0.7
-random@1.1.0
-jparker:crypto-base64
-pagebakers:ionicons
-accounts-base@1.4.2
-standard-minifier-js@2.3.1
-react-meteor-data
-email@1.2.3
-gadicc:blaze-react-component
-
-raderk:qr-decode
-cfs:standard-packages
-okgrow:analytics
-shell-server@0.3.1
-juliancwirko:postcss
-less@2.7.11
-meteorhacks:picker
-froatsnook:valid-email
-cfs:filesystem
-percolate:migrations
-dynamic-import@0.3.0
-cfs:gridfs
+# autopublish@1.0.7             # Publish all data to the clients (for prototyping)
+# insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
+# static-html@1.3.2             # Define static page content in .html files
+react-meteor-data       # React higher-order component for reactively tracking Meteor data
+accounts-base
+accounts-password
+email
 littledata:synced-cron
+percolate:migrations
+froatsnook:valid-email
+meteorhacks:picker
+okgrow:analytics
+
+audit-argument-checks
+blaze-html-templates
+check
+dynamic-import
+gadicc:blaze-react-component
+jparker:crypto-base64
+jquery
+pagebakers:ionicons
+raderk:qr-decode
+random
+semantic:ui
+session
+tracker
+juliancwirko:postcss
+less
