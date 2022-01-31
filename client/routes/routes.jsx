@@ -46,9 +46,9 @@ export const renderRoutes = () => {
 
         {/* Authentication Routes */}
         <Route path='login' element={<Login />}/>
-        <Route path='requestpasswordreset' element={RequestPasswordReset}/>
-        <Route path='passwordreset/:token' element={PasswordReset}/>
-        <Route path='redeem' element={RedeemTicket}/>
+        <Route path='requestpasswordreset' element={<RequireAuth accessLevel='user'><RequestPasswordReset /></RequireAuth>}/>
+        <Route path='passwordreset/:token' element={<RequireAuth accessLevel='user'><PasswordReset /></RequireAuth>}/>
+        <Route path='redeem' element={<RequireAuth accessLevel='user'><RedeemTicket /></RequireAuth>}/>
 
         {/* User Routes */}
         <Route path='profile' element={<Profile />}/>
