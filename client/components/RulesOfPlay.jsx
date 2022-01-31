@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import Scrollchor from 'react-scrollchor';
 import {
   Container,
@@ -7,7 +7,6 @@ import {
   Header,
   List,
   Icon,
-  Responsive,
   Button,
 } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
@@ -20,25 +19,6 @@ RulesOfPlay = class RulesOfPlay extends Component {
       <Container className="section">
       <Segment basic>
         <PuzzlePageTitle title={`${eventYear} Rules of Play`}/>
-
-        {/* SCROLL TO BUTTONS */}
-        <Responsive as={Segment} {...Responsive.onlyMobile} basic>
-          <p>Scroll To: <br/></p>
-          <p>
-            <Scrollchor to="#dont" animate={{ offset: -70, duration: 300 }}>
-              <Button basic content="Don't" color="red"/>
-            </Scrollchor>
-            <Scrollchor to="#puzzles" animate={{ offset: -70, duration: 300 }}>
-              <Button basic content="Puzzles" color="purple"/>
-            </Scrollchor>
-            <Scrollchor to="#mechanics" animate={{ offset: -70, duration: 300 }}>
-              <Button basic content="Mechanics" color="orange"/>
-            </Scrollchor>
-            <Scrollchor to="#scoring" animate={{ offset: -70, duration: 300 }}>
-              <Button basic content="Scoring" color="blue"/>
-            </Scrollchor>
-          </p>
-        </Responsive>
 
         {/* DO Section */}
         <Segment basic>

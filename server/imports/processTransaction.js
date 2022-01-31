@@ -7,7 +7,6 @@ import {
 } from 'lodash';
 
 import { sendTickets } from '../../lib/imports/sendTickets';
-import { info } from 'winston';
 
 export default async function processTransaction(txData) {
   const { info, logobj } = Meteor.logger;
@@ -104,7 +103,7 @@ function createTicket(tx, email, isStudent, inPerson) {
     redeemed: false,
     redeemedBy: null,
   });
-  info(`Created ticket code ${newCode} for user ${email}`);
+  Meteor.logger.info(`Created ticket code ${newCode} for user ${email}`);
 };
 
 function makeCode(prefix) {

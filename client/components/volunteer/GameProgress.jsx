@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { sortBy, groupBy, map, clone, each } from 'lodash';
 import { Container, Grid, Icon, Header, Progress } from 'semantic-ui-react';
 import moment from 'moment';

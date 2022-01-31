@@ -1,9 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Container, Segment, Form, Message, Header, Icon, Button } from 'semantic-ui-react';
 import TeamComp from '../imports/TeamComp';
 
+import { browserHistory } from '../../history';
 TeamCreator = class TeamCreator extends Component {
 
   constructor(props) {

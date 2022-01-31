@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Segment, Image, Header, Container } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
 import GamestateComp from '../../imports/GamestateComp'

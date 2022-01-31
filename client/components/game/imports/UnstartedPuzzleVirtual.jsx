@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Segment, Header, Button, Modal, Icon, } from 'semantic-ui-react';
 
 export default class UnstartedPuzzleVirtual extends React.Component {

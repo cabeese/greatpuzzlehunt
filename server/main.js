@@ -5,7 +5,14 @@ import bodyParser from 'body-parser';
 /************************************************
 * Setup Winston Logger
 ************************************************/
-const logger = require('winston');
+const { createLogger, transports, format } = require('winston');
+const Transport = require('winston-transport');
+const logger = createLogger({
+    transports: [new transports.Console()]
+});
+
+/* const logger = require('winston'); */
+
 logger.logobj = function logobj(obj, level) {
   level = level || 'info';
   logger[level](JSON.stringify(obj, null, 2));
@@ -17,11 +24,7 @@ logger.jstring = function(obj) {
 
 Meteor.logger = logger;
 
-/************************************************
-* Add body parser
-************************************************/
-Picker.middleware(bodyParser.json());
-Picker.middleware(bodyParser.urlencoded({ extended: true }));
+logger.info(`Server starting. Node@${process.version}; ${Meteor.release}`);
 
 import './imports/start-up';
 import './imports/accounts';

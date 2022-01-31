@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Container, Header, Segment, Accordion, Button, Icon } from 'semantic-ui-react';
 
 Volunteer = class Volunteer extends Component {

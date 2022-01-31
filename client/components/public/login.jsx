@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Container, Grid, Form, Segment, Header, Message } from 'semantic-ui-react';
 
 Login = class Login extends Component {

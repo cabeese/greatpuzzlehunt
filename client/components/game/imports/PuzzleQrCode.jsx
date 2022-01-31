@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
 import QR from 'qrcode.react';
 

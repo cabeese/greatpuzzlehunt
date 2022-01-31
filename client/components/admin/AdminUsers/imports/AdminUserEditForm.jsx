@@ -10,7 +10,7 @@ import {
   Dropdown,
   Message,
 } from 'semantic-ui-react';
-import { pick } from 'lodash';
+import { _, pick } from 'lodash';
 
 const { eventYear, eventDate } = Meteor.settings.public;
 

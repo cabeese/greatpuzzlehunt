@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Header, Grid, Segment, Form, Message } from 'semantic-ui-react';
 
 RequestPasswordReset = class RequestPasswordReset extends Component {

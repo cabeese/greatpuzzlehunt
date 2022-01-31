@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import Scrollchor from 'react-scrollchor';
+import { Scrollchor } from 'react-scrollchor';
 import YouTube from 'react-youtube';
 import { Grid, Container, Segment, Icon, Message, Button } from 'semantic-ui-react';
 import moment from 'moment';

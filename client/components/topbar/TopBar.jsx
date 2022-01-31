@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Icon, Segment, Container } from 'semantic-ui-react';
 import Scrollchor from 'react-scrollchor';
+
+import { browserHistory } from '../../history';
 
 import GamestateComp from '../imports/GamestateComp';
 
@@ -116,7 +118,7 @@ const volunteerMenuItems = [
   },
 ];
 
-TopBar = class TopBar extends Component {
+export default TopBar = class TopBar extends Component {
   updateDimensions() {
     this.forceUpdate();
   }

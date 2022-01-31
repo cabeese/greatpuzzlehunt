@@ -1,10 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Container, Segment, Grid, Form, Header, Icon, Message } from 'semantic-ui-react';
 import { filter, sortBy as sort } from 'lodash';
 import moment from 'moment';
+
+import { browserHistory } from '../../history';
 
 import {DIVISION_TYPES} from './imports/team-helpers';
 

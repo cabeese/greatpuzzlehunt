@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Segment, Message, Header, Statistic, Progress } from 'semantic-ui-react';
 
 import { renderScore } from '../../imports/PuzzleProgress';

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 
 const { eventYear } = Meteor.settings.public;
 
-Footer = class Footer extends Component {
-  render() {
+export default Footer = class Footer extends Component {
+    render() {
     return (
       <div className="ui basic small container segment center aligned">
         <div className="ui three column grid">

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Form, Icon, Message, Button } from 'semantic-ui-react';
 
 TeamInviter = class TeamInviter extends Component {

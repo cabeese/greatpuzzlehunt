@@ -1,15 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 
-import { PostRoute } from '../imports/route-types.js';
 import processTransaction from '../imports/processTransaction.js';
 import { convertCashnet } from '../../lib/imports/convertCashnet';
+import bodyParser from "body-parser";
 
 const accts = Meteor.settings.accounts || {};
 const { token } = accts;
 
-PostRoute.route('/api/tickets', function(params, req, res, next) {
+WebApp.connectHandlers.use("/api", bodyParser.urlencoded({ extended: true }));
+WebApp.connectHandlers.use('/api/tickets', (req, res, next) => {
   Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
-  const req_token = params.query.token;
+  const req_token = req.query.token;
 
   handleRequest(req, res, req_token, req.body);
 });

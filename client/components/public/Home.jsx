@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Container, Grid, Segment, Message } from 'semantic-ui-react';
 
 const { regularRegistrationStart, eventDate, eventDay } = Meteor.settings.public;
@@ -33,11 +33,8 @@ const AnnouncementsMessage = (
                         <li>Due to COVID-19 and our Priority on Safety and Health, we will follow University and CDC Guidelines.</li>
                         <li>If necessary, we will adapt the event to be fully virtual.</li>
                       </ul>
-                      <strong>Updates</strong>
-                      <ul>
-                        <li>January 18: Registration has been slightly delayed due to technical upgrades.</li>
-                      </ul>
-
+                      <br />
+                      <center><strong>Check back here for updates!</strong></center>
                     </Segment>
                   </Message.Content>
                 </Message>

@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Form, Message, Input, Popup, Icon, Checkbox, Confirm, Segment } from 'semantic-ui-react';
 import { DIVISION_TYPES } from "./imports/team-helpers"
+
+import { browserHistory } from '../../history';
 
 TeamEditor = class TeamEditor extends Component {
 

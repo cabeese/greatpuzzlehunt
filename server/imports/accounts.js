@@ -3,6 +3,8 @@ import { Accounts } from 'meteor/accounts-base';
 
 import { registrationInfoHTML, questions, signature } from '../../lib/imports/emails';
 
+import { extend, omit } from 'lodash';
+
 const { siteName, eventYear, siteURL, accountsEmail } = Meteor.settings.public;
 
 // Customize Email Verification email
@@ -55,7 +57,7 @@ Accounts.onCreateUser((options, user) => {
 
   // email and password get set specially, take all other options and
   // set them directly on the user document.
-  user = _.extend(user, _.omit(options, ['email', 'password', 'confirmPassword']));
+  user = extend(user, omit(options, ['email', 'password', 'confirmPassword']));
   const now = new Date();
   user.createdAt = now;
   user.updatedAt = now;

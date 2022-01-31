@@ -43,7 +43,7 @@ class SponsorRow extends Component {
       level,
       publish,
       message: null,
-      logoUrl: logoUrl || "https://react.semantic-ui.com/assets/images/avatar/large/matthew.png",
+      logoUrl: logoUrl || "https://react.semantic-ui.com/images/avatar/large/matthew.png",
       imageId,
     };
   }
@@ -69,9 +69,17 @@ class SponsorRow extends Component {
             <p></p> {/* For mobile spacing */}
 
             <Form.Group>
+              Image URL: <input name='logoURL' type="text" onChange={(e) => this._onUrlChange(e.target.value) }/>
+              {/* Uses Mongo Image Handling
               <Dropzone name='logoUpload' className="ui basic teal button" disablePreview style={dropZoneStyle} accept='image/*' multiple={false} onDrop={(files) => this._onDrop(files)}>
-                Upload Logo
+          	    {({getRootProps, getInputProps}) => (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <Button>Upload Logo</Button>
+                    </div>
+                )}
               </Dropzone>
+              */ }
 
               <Form.Checkbox toggle
                 name='publish'
@@ -93,6 +101,19 @@ class SponsorRow extends Component {
         </Grid.Column>
       </Grid.Row>
     );
+  }
+
+  _onUrlChange(value) {
+    this._save();
+
+    const data = {
+      sponsorId: this.props.sponsor._id,
+      imageUrl: value,
+    };
+
+    Meteor.call('sponsors.updateImage', data, (error, result) => {
+      if (error) return alert(error.reason);
+    });
   }
 
   _onDrop(files) {

@@ -1,10 +1,12 @@
 import { Meteor } from 'meteor/meteor';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 import moment from 'moment';
 import { extend } from 'lodash';
+
+import { browserHistory } from '../../history';
 
 Profile = class Profile extends Component {
 
