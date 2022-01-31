@@ -24,11 +24,7 @@ logger.jstring = function(obj) {
 
 Meteor.logger = logger;
 
-/************************************************
-* Add body parser
-************************************************/
-Picker.middleware(bodyParser.json());
-Picker.middleware(bodyParser.urlencoded({ extended: true }));
+logger.info(`Server starting. Node@${process.version}; ${Meteor.release}`);
 
 import './imports/start-up';
 import './imports/accounts';
