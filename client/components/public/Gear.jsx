@@ -132,7 +132,7 @@ Gear = class Gear extends Component {
 
   gearDetails(e) {
     
-    str = e.target.src;
+    let str = e.target.src;
     str = str.split("").reverse().join("");
     str = str.substring(5, str.indexOf('/'));
     str = str.split("").reverse().join("");
