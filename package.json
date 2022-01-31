@@ -2,6 +2,9 @@
   "name": "wwugreatpuzzlehunt",
   "version": "1.0.0",
   "description": "A Puzzle Hunt Game System",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "main.js",
   "scripts": {
     "start": "meteor --settings settings-development.json || true",
