@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-// import React, { PropTypes } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Grid, Header, Button, Image, Message, Confirm, Icon } from 'semantic-ui-react';
