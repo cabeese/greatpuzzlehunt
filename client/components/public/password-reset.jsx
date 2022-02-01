@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Header, Grid, Segment, Form, Message } from 'semantic-ui-react';
 
 import { browserHistory } from '../../history';
+import WithRouter from '../imports/WithRouter';
 
 const PASSWORD_MIN_LENGTH = 6;
 
@@ -63,10 +64,12 @@ PasswordReset = class PasswordReset extends Component {
     }
 
     // Call Meteor method to create account.
-    Accounts.resetPassword(this.props.params.token, newPassword, (error, result) => {
+    Accounts.resetPassword(this.props.router.params.token, newPassword, (error, result) => {
       if (error) return this.setState({ error });
 
       browserHistory.push('/profile');
     });
   }
 }
+
+PasswordReset = WithRouter(PasswordReset);

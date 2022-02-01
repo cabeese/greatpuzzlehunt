@@ -39,5 +39,5 @@ Accounts.onEnrollmentLink((token, done) => {
 // now that we have theur reset token
 Accounts.onResetPasswordLink((token, done) => {
     done();
-    browserHistory.push('/passwordreset/' + token);
+    browserHistory.push('/reset-password/' + token);
 });
