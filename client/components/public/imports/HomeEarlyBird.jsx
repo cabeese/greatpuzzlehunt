@@ -32,33 +32,34 @@ class HomeEarlyBird extends Component {
           <Grid padded stackable  textAlign='left' >
           <Grid.Row centered>
             <Header size="medium" style={{color: "white"}}>Registration is a 4-step process:</Header>
-           </Grid.Row>
-           <Grid.Row width={16} columns={4} centered verticalAlign="top">
-            
-            <Grid.Column textAlign="center">
-              <span className="step-number">1</span>
-              <a href={urls[0]}>Create</a> an account.<br />Verify your email before continuing.
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <span className="step-number">2</span>
-              <a href={urls[1]}>Acquire</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <span className="step-number">3</span>
-              <a href={urls[2]}>Redeem</a> ticket code(s).
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <span className="step-number">4</span>
-              Set-up/join <a href={urls[3]}>team</a>.
-            </Grid.Column>
-           </Grid.Row>
-           <Grid.Row centered>
-             <p>Registration {/*opens {regularRegistrationStart}, and */}ends {regularRegistrationEnd} (or earlier if capacity is reached).</p>
-           </Grid.Row>
-           <Grid.Row centered>
-           {registerButton}
-           <br/>
-           </Grid.Row>
+            </Grid.Row>
+            <Grid.Row centered>
+              <p style={{color: 'red'}}><strong>Important</strong>: In-person participants must use their WWU email address.</p>
+            </Grid.Row>
+            <Grid.Row width={16} columns={4} centered verticalAlign="top">
+              <Grid.Column textAlign="center">
+                <span className="step-number">1</span>
+                <a href={urls[0]}>Create</a> an account.<br />Verify your email before continuing.
+              </Grid.Column>
+              <Grid.Column textAlign="center">
+                <span className="step-number">2</span>
+                <a href={urls[1]}>Acquire</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
+              </Grid.Column>
+              <Grid.Column textAlign="center">
+                <span className="step-number">3</span>
+                <a href={urls[2]}>Redeem</a> ticket code(s).
+              </Grid.Column>
+              <Grid.Column textAlign="center">
+                <span className="step-number">4</span>
+                Set-up/join <a href={urls[3]}>team</a>.
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row centered>
+              <p>Registration {/*opens {regularRegistrationStart}, and */}ends {regularRegistrationEnd} (or earlier if capacity is reached).</p>
+            </Grid.Row>
+            <Grid.Row centered>
+              {registerButton}
+            </Grid.Row>
             <Grid.Row centered width={16} columns={2}>
             <a href="/faq">Don't have a team?</a>
               {/* virtualeventonly
@@ -85,11 +86,11 @@ class HomeEarlyBird extends Component {
               Participants under age 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.
             </Grid.Row>
            
-         </Grid>
-         </Container>
-     </Segment>
+          </Grid>
+          </Container>
+      </Segment>
       {/* <Image fluid src='/img/2016/event-photos/team-theres-waldo-thin.jpeg'/> */}
-    </section>
+      </section>
 
     );
   }

@@ -196,6 +196,8 @@ class RegisterForm extends Component {
           <Form.Input name='lastname' label='Last Name' placeholder='Last Name'
                       value={this.state.lastname} onChange={(e) => this._handleTextChange(e)} />
         </Form.Group>
+        
+        <p style={{color: 'red'}}><strong>Important</strong>: In-person participants must use their WWU email address.</p>
 
         <Form.Group widths='equal'>
           <Form.Input name='email' type='email' label='Email' placeholder='your@email.com'
@@ -288,6 +290,7 @@ class RegisterForm extends Component {
           label='By checking this box I acknowledge that I have read and understand the Risk & Hold Harmless Agreement and that I agree (or give permission for my minor child) to receive direct communication from Western’s 2021 Great Puzzle Hunt staff.'
           onChange={ (e,data) => this._handleDataChange(e,data) }/>
 
+        <p style={{color: 'red'}}><strong>Important</strong>: In-person participants must use their WWU email address.</p>
         <Form.Button fluid type='submit' content='Submit' color='green'/>
 
         { this._errorMessage() }
