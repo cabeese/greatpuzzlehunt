@@ -24,7 +24,7 @@ const USER_FIELDS = [
   '_id', 'firstname', 'lastname', 'email', 'accountType',
   'phone', 'age', 'address', 'city', 'zip', 'state', 'country', 'ecName',
   'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
-  'photoPermission',
+  'photoPermission', "inPersonAllowed",
 ];
 
 class AdminUserEditForm extends Component {
@@ -34,7 +34,7 @@ class AdminUserEditForm extends Component {
   }
 
   _stateFromProps(props) {
-    return _.pick(props.user, USER_FIELDS);
+    return _.pick(props.user, [...USER_FIELDS, "paid"]);
   }
 
   componentWillReceiveProps(props) {
@@ -42,7 +42,7 @@ class AdminUserEditForm extends Component {
   }
 
   render() {
-    const user = _.pick(this.state, USER_FIELDS);
+    const user = _.pick(this.state, [...USER_FIELDS, "paid"]);
     return (
       <Form onSubmit={(e) => this._update(e)}>
 
@@ -93,6 +93,14 @@ class AdminUserEditForm extends Component {
           defaultChecked={user.photoPermission}
           name='photoPermission'
           label="User photo/video permission"
+          onChange={(e, data) => this._handleDataChange(e, data)} />
+
+        <Form.Checkbox
+          toggle
+          defaultChecked={user.inPersonAllowed}
+          name='inPersonAllowed'
+          label="In-person gameplay allowed"
+          disabled={!user.paid}
           onChange={(e, data) => this._handleDataChange(e, data)} />
 
         <Header as='h3' icon={<Icon name='ambulance' color='red' />}

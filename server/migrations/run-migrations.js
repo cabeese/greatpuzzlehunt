@@ -1,3 +1,3 @@
 Meteor.startup(() => {
-  Migrations.migrateTo('5');
+  Migrations.migrateTo('6');
 });
