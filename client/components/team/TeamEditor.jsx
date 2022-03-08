@@ -30,11 +30,12 @@ TeamEditor = class TeamEditor extends Component {
         name: team.name || '',
         password: team.password || '',
         division: team.division || null,
+        inPerson: (team.inPerson || false),
         lookingForMembers: (team.lookingForMembers || false),
         checkedIn: team.checkinConfirmed,
       };
     }
-    return { name: '', password: '', division: null, lookingForMembers: false, checkedIn: false};
+    return { name: '', password: '', division: null, inPerson: false, lookingForMembers: false, checkedIn: false};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,6 +61,23 @@ TeamEditor = class TeamEditor extends Component {
           <label>Team Division <br/><small>This determines your prize group</small></label>
           <br/>
           {this._renderDivisionRadio()}
+        </Form.Field>
+        <Form.Field>
+          <label>Virtual or in-person?</label>
+          <small>This setting applies to the entire team. We cannot support "mixed" teams at this point;
+            that is, either ALL members of the team must be in-person or ALL members must be remote.
+            Currently, the in-person option is only available to WWU community, and every member of your
+            team must have an "in-person" ticket code.
+            If you have any questions, please <Link to="/contact">Contact Us</Link>.
+            <br />
+          </small>
+          <Checkbox
+            toggle
+            name='inPerson'
+            label='Play in-person on the WWU Campus'
+            checked={this.state.inPerson}
+            onChange={ (e, data) => this._handleDataChange(e, data) }
+            />
         </Form.Field>
         <Form.Field>
           <label>Looking for members?</label>
@@ -153,9 +171,9 @@ TeamEditor = class TeamEditor extends Component {
 
   _teamData() {
     const { team } = this.props;
-    const { name, password, division, lookingForMembers } = this.state;
+    const { name, password, division, lookingForMembers, inPerson } = this.state;
     return {
-      name, password, division, lookingForMembers,
+      name, password, division, lookingForMembers, inPerson,
       _id: team ? team._id : undefined,
     };
   }
