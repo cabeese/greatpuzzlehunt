@@ -44,8 +44,18 @@ class AdminTeamTableRow extends Component {
   }
 
   _division() {
-    const { team } = this.props;
-    return team.division;
+    const { division, inPerson } = this.props.team;
+    const ic = inPerson ?
+      <Icon name="group" color="blue" />
+      :
+      <Icon name="video" color="yellow" />;
+    return (
+      <span>
+        {ic}
+        <strong> | </strong>
+        {division}
+      </span>
+    );
   }
 
   _checkedIn() {

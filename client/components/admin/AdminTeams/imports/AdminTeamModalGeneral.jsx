@@ -17,6 +17,17 @@ class AdminTeamModalGeneral extends Component {
             }
         });
     }
+    _toggleInPerson(e) {
+        e.preventDefault();
+        const { team } = this.props;
+        if (!confirm(`Toggle in-person for team ${team.name}?`)) return;
+
+        Meteor.call('admin.team.toggleInPerson', team._id, (err, res) => {
+            if (err) {
+                alert(err);
+            }
+        });
+    }
     _toggleLockout(e){
         e.preventDefault();
         const { team } = this.props;
@@ -44,6 +55,14 @@ class AdminTeamModalGeneral extends Component {
                 </Grid>
 
                 <AdminTeamUserListTracker id={team._id} owner={team.owner} />
+
+                <Button
+                  label="Manually override this team's in-person setting"
+                  color={team.inPerson ? "blue" : "yellow"}
+                  onClick={this._toggleInPerson.bind(this)}
+                  content={team.inPerson ? "Team playing in-person" : "Team playing virtually"}
+                  />
+                <br /><br />
 
                 <Button
                     label="Locking a team will prevent them from answering puzzles"
