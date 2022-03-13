@@ -438,14 +438,15 @@ FAQ = class FAQ extends Component {
                 </List.List>
               </List.Item>
 
-              <List.Item description="A clip board, or a notepad" />
+              <List.Item description="A clip board, or a notepad. Graph paper might come in handy." />
               <List.Item description="Ruler/Straightedge" />
               <List.Item description="Scissors" />
               <List.Item description="Transparent Tape (like Scotch Tape)" />
               <List.Item description="Writing utensils (pencils, pens, erasers, felt-tips, highlighters)" />
+              <List.Item description="Colored Pencils" />
+              <List.Item description="4–6 Coins or pebbles or something to use as markers on a game board" />
               <List.Item description="Water bottle, snacks" />
               <List.Item description="Umbrella" />
-              <List.Item><span className="description"><strong>Other items TBA</strong></span></List.Item>
             </List>
             Additional items for <strong>virtual</strong> participants:
             <List bulleted>
@@ -459,7 +460,7 @@ FAQ = class FAQ extends Component {
                   <List.Item description="You will want hard copies of most puzzles to fold, cut, etc." />
                 </List.List>
               </List.Item>
-              <List.Item description="Water to drink and a sack lunch or snacks" />
+              <List.Item description="Water to drink and a sack lunch or snacks." />
             </List>
           </Accordion.Content>
 
