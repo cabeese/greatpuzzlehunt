@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Segment, Message } from 'semantic-ui-react';
 
-const { regularRegistrationStart, eventDate, eventDay } = Meteor.settings.public;
+const { regularRegistrationStart, eventDate, eventDay, gearSaleEnd } = Meteor.settings.public;
 
 import HomeHeader from './imports/HomeHeader';
 import HomeIntro from './imports/HomeIntro';
@@ -32,6 +32,10 @@ const AnnouncementsMessage = (
                         <li>We plan to run a HYBRID event this year: In-Person (WWU campus community only this year) and Virtual options.</li>
                         <li>Due to COVID-19 and our Priority on Safety and Health, we will follow University and CDC Guidelines.</li>
                         <li>If necessary, we will adapt the event to be fully virtual.</li>
+                      </ul>
+                      <ul>
+                        <li>Gear store closes { gearSaleEnd }.</li>
+                        <li>Shirts will be ordered on Monday, April 11 and assuming no supply chain delays, should be shipped out or ready for pick-up the week of April 18.</li>
                       </ul>
                       <br />
                       <center><strong>Check back here for updates!</strong></center>
