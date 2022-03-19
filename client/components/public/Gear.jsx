@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css"
 import { Container, Segment, Header, Icon, Modal, Grid, List, Card, Image } from 'semantic-ui-react';
 import LinkButton from '../imports/LinkButton';
 
-const { eventYear } = Meteor.settings.public;
+const { eventYear, gearSaleEnd } = Meteor.settings.public;
 
 const link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
@@ -227,6 +227,10 @@ Gear = class Gear extends Component {
 
         <Segment basic>
           <PuzzlePageTitle title="Gear" />
+          Gear store closes { gearSaleEnd }.
+          <br />
+          Shirts will be ordered on Monday, April 11 and assuming no supply chain delays, should be shipped out or ready for pick-up the week of April 18.
+          <br /><br />
           Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes.
           <br /><br />
           Click on each item for more information.
