@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Form, Message, Input, Popup, Icon, Checkbox, Confirm, Segment } from 'semantic-ui-react';
+import { Form, Message, Input, Popup, Icon, Checkbox, Confirm, Segment, Menu, } from 'semantic-ui-react';
 import { DIVISION_TYPES } from "./imports/team-helpers"
 
 import { browserHistory } from '../../history';
@@ -50,46 +50,25 @@ TeamEditor = class TeamEditor extends Component {
 
         { (this.state.checkedIn) ? <Message positive header="Check in Confirmed" content="Your team is checked in an cannot be updated anymore"/> : null}
 
-        <Form.Group>
-          <Form.Input name='name' label='Team Name' placeholder='Team Name' value={this.state.name} onChange={(e,d) => this._handleTextChange(e,d)} />
-          <Form.Field>
-            <label>Team Password <Popup trigger={<Icon name='question'/>} content='You can share your team password with your friends to let them join your team!'/></label>
-            <Input name='password' placeholder='Team Password' value={this.state.password} onChange={(e, d) => this._handleTextChange(e, d)} />
-          </Form.Field>
-        </Form.Group>
-        <Form.Field>
-          <label>Team Division <br/><small>This determines your prize group</small></label>
-          <br/>
-          {this._renderDivisionRadio()}
-        </Form.Field>
-        <Form.Field>
-          <label>Virtual or in-person?</label>
-          <small>This setting applies to the entire team. We cannot support "mixed" teams at this point;
-            that is, either ALL members of the team must be in-person or ALL members must be remote.
-            Currently, the in-person option is only available to WWU community, and every member of your
-            team must have an "in-person" ticket code.
-            If you have any questions, please <Link to="/contact">Contact Us</Link>.
-            <br />
-          </small>
-          <Checkbox
-            toggle
-            name='inPerson'
-            label='Play in-person on the WWU Campus'
-            checked={this.state.inPerson}
-            onChange={ (e, data) => this._handleDataChange(e, data) }
-            />
-        </Form.Field>
-        <Form.Field>
-          <label>Looking for members?</label>
-          <Checkbox
-            toggle
-            name='lookingForMembers'
-            label="Show this team as looking for members on the join team page. (This will display team creator's contact information)"
-            checked={ this.state.lookingForMembers }
-            onChange={ (e,data) => this._handleDataChange(e,data) }
-          />
-        </Form.Field>
-        <Form.Button type='submit' icon='save' labelPosition='right' content={this.props.team ? 'Save Team' : 'Create Team'} disabled={this.state.checkedIn}/>
+        <Segment>
+          {this._renderNameAndPw()}
+        </Segment>
+
+        <Segment>
+          {this._renderDivision()}
+        </Segment>
+
+        <Segment>
+          {this._renderHybrid()}
+        </Segment>
+
+        <Segment>
+          {this._renderLFM()}
+        </Segment>
+
+        <Form.Button type='submit' icon='save' labelPosition='right'
+                     content={this.props.team ? 'Save Team' : 'Create Team'}
+                     disabled={this.state.checkedIn}/>
         <Message
          negative
          hidden={!this.state.error}
@@ -104,6 +83,82 @@ TeamEditor = class TeamEditor extends Component {
          content={this.state.success}
         />
       </Form>
+    );
+  }
+
+  _renderNameAndPw() {
+    return (
+      <Form.Group>
+        <Form.Input name='name' label='Team Name' placeholder='Team Name'
+                    value={this.state.name} disabled={this.state.checkedIn}
+                    onChange={(e,d) => this._handleTextChange(e,d)}
+          />
+        <Form.Field disabled={this.state.checkedIn}>
+          <label>Team Password <Popup trigger={<Icon name='question'/>} content='You can share your team password with your friends to let them join your team!'/></label>
+          <Input name='password' placeholder='Team Password' value={this.state.password} onChange={(e, d) => this._handleTextChange(e, d)} />
+        </Form.Field>
+      </Form.Group>
+    );
+  }
+
+  _renderDivision() {
+    return (
+      <Form.Field disabled={this.state.checkedIn}>
+        <label>Team Division</label>
+        <small>This determines your prize group</small>
+        <br/>
+        {this._renderDivisionRadio()}
+      </Form.Field>
+    );
+  }
+
+  _renderHybrid() {
+      /* Not sure if this "menu" approach is the best for the toggle, but I
+       * think it works, and it definitely gets the point across better than
+       * using a radio button
+       */
+      return (
+        <Form.Field disabled={this.state.checkedIn}>
+          <label>Virtual or in-person?</label>
+          <small>This setting applies to the entire team. We cannot support "mixed" teams at this point;
+            that is, either ALL members of the team must be in-person or ALL members must be remote.
+            Currently, the in-person option is only available to WWU community, and every member of your
+            team must have an "in-person" ticket code.
+            If you have any questions, please <Link to="/contact">Contact Us</Link>.
+            <br />
+          </small>
+          <Menu compact>
+            <Menu.Item name="inPerson"
+                       color="green"
+                       active={!this.state.inPerson}
+                       onClick={ (e, data) => this._toggleInPerson(false) }>
+              <Icon name="video" />
+              Play Virtually
+            </Menu.Item>
+            <Menu.Item name="inPerson"
+                       color="blue"
+                       active={this.state.inPerson}
+                       onClick={ (e, data) => this._toggleInPerson(true) }>
+              <Icon name="group" />
+              Play In-Person&nbsp;<small>(See restrictions)</small>
+            </Menu.Item>
+          </Menu>
+        </Form.Field>
+    );
+  }
+
+  _renderLFM() {
+    return (
+      <Form.Field disabled={this.state.checkedIn}>
+        <label>Looking for members?</label>
+        <Checkbox
+          toggle
+          name='lookingForMembers'
+          label="Show this team as looking for members on the join team page. (This will display team creator's contact information)"
+          checked={ this.state.lookingForMembers }
+          onChange={ (e,data) => this._handleDataChange(e,data) }
+          />
+      </Form.Field>
     );
   }
 
@@ -129,6 +184,10 @@ TeamEditor = class TeamEditor extends Component {
   _handleTextChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+  }
+
+  _toggleInPerson(enableInPerson) {
+    this.setState({inPerson: enableInPerson});
   }
 
   _handleDataChange(e, data) {
