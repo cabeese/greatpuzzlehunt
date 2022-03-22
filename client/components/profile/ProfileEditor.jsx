@@ -28,49 +28,12 @@ ProfileEditor = class ProfileEditor extends Component {
     };
   }
 
-  _gameTypeBox() {
-    let icon, header, content;
-    const footer = (
-      <span>For questions, see our <Link to="/contact">Contact Page</Link> or
-      our <Link to="/faq">FAQ</Link>.</span>
-    );
-
-    if (!this.state.inPersonAllowed) {
-      icon = "video camera";
-      header = "You are registered to play virtually";
-      content = (
-        <span>
-          Only WWU community members with in-person ticket codes are allowed to
-          participate in person for 2022. {footer}
-        </span>
-      );
-    } else {
-      icon = "group";
-      header = "You may play in person this year!";
-      content = (
-        <span>
-          You have purchased an in-person ticket code. If your team has the
-          "in person" setting enabled, please join us on Red Square for the
-          event. {footer}
-        </span>
-      );
-    }
-    return (
-      <Message
-        icon={icon}
-        header={header}
-        content={content} />
-    )
-  }
-
   render() {
     const { firstname, lastname, lookingForTeam, bio } = this.state;
     return (
     <Segment basic>
       <Form onSubmit={(e) => this._handleSubmit(e)}>
         <Header as='h3' content='Account' icon={<Icon name='user' color='green' />} />
-
-        {this._gameTypeBox()}
 
         <Form.Group widths='equal'>
           <Form.Input name='firstname' label='First Name' placeholder='First name' value={firstname} onChange={(e) => this._handleChange(e)} />
