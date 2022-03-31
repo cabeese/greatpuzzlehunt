@@ -32,7 +32,7 @@ ProfileTeamPreview = class ProfileTeamPreview extends Component {
               <Link to='/team'><Button content='View Team'/></Link>
             </Grid.Column>
             <Grid.Column width={10}>
-              <Link to='looking-for-team'>
+              <Link to='/looking-for-team'>
                 <Button basic color='violet' content='Browse other players looking to join teams!'/>
               </Link>
             </Grid.Column>
