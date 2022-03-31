@@ -25,7 +25,7 @@ TeamInviter = class TeamInviter extends Component {
         <Form.Input type='text' name='email' placeholder="Friend's Email" label="Friend's Email" value={this.state.email} onChange={(e) => this._handleChange(e)}/>
         <Form.Group>
           <Form.Button type='submit' content='Invite' icon='send' labelPosition='right'/>
-          <Link to='looking-for-team'>
+          <Link to='/looking-for-team'>
             <Button basic color='violet' content='Browse other players looking to join teams!'/>
           </Link>
         </Form.Group>
