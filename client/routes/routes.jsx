@@ -51,7 +51,10 @@ export const renderRoutes = () => {
         <Route path='redeem' element={<RequireAuth accessLevel='user'><RedeemTicket /></RequireAuth>}/>
 
         {/* User Routes */}
-        <Route path='profile' element={<Profile />}/>
+        <Route path='profile'>
+          <Route index element={<Profile />}/>
+          <Route path='looking-for-team' element={<RequireAuth accessLevel='user'><LookingForTeam /></RequireAuth>} />
+        </Route>
 
         {/* Game Routes */}
         <Route path='game' element={<RequireAuth accessLevel='user'><Game /></RequireAuth>} />
@@ -65,7 +68,6 @@ export const renderRoutes = () => {
           <Route path='checkin' element={<RequireAuth accessLevel='user'><TeamCheckin /></RequireAuth>}/>
         </Route>
 
-        <Route path='looking-for-team' element={<RequireAuth accessLevel='user'><LookingForTeam /></RequireAuth>} />
 
         {/* Volunteer Routes */}
         <Route path='volunteer'>
