@@ -131,14 +131,14 @@ TeamEditor = class TeamEditor extends Component {
             <Menu.Item name="inPerson"
                        color="green"
                        active={!this.state.inPerson}
-                       onClick={ (e, data) => this._toggleInPerson(false) }>
+                       onClick={ (e, data) => this._setInPerson(false) }>
               <Icon name="video" />
               Play Virtually
             </Menu.Item>
             <Menu.Item name="inPerson"
                        color="blue"
                        active={this.state.inPerson}
-                       onClick={ (e, data) => this._toggleInPerson(true) }>
+                       onClick={ (e, data) => this._setInPerson(true) }>
               <Icon name="group" />
               Play In-Person&nbsp;<small>(See restrictions)</small>
             </Menu.Item>
@@ -186,7 +186,7 @@ TeamEditor = class TeamEditor extends Component {
     this.setState({ [name]: value });
   }
 
-  _toggleInPerson(enableInPerson) {
+  _setInPerson(enableInPerson) {
     this.setState({inPerson: enableInPerson});
   }
 
