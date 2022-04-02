@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 Migrations.add({
-	version: 6,
+	version: 7,
 	name: "Set inPerson flag to FALSE for existing teams",
 	up: function () {
 		// We'll need to manually clean this up, which is doable for
