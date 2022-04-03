@@ -1,47 +1,55 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Message, Icon } from 'semantic-ui-react';
+import { Table, Message, Icon, Statistic } from 'semantic-ui-react';
 import { reduce } from 'lodash';
 
 import AdminTransactionTableRow from './AdminTransactionTableRow';
 
 class AdminTransactionTable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.stateFromProps(props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.stateFromProps(nextProps));
-  }
-
-  stateFromProps(props) {
-    const { transactions } = props;
-    const counts = transactions.reduce((acc, tx) => {
-      acc.students = acc.students + tx.studentTickets;
-      acc.nonStudents = acc.nonStudents + tx.nonStudentTickets;
-      return acc;
-    }, { students: 0, nonStudents: 0 });
-    return {
-      studentTickets: counts.students,
-      nonStudentTickets: counts.nonStudents,
-      total: counts.students + counts.nonStudents,
+  getStats(transactions) {
+    let ret = {
+      total: 0,
+      inPerson: 0,
+      virtual: 0,
     };
+    transactions.forEach(tx => {
+      if (tx.tickets) {
+        ret.total += tx.tickets.length;
+        tx.tickets.forEach(ticket => {
+          const ct = ticket.qty;
+          if (ticket.inPerson) ret.inPerson += ct;
+          else ret.virtual += ct;
+        });
+      }
+    });
+    return ret;
   }
 
   render() {
     const { loading, transactions } = this.props;
-    const { total, studentTickets, nonStudentTickets } = this.state;
     if (loading) return <Loading />;
+    const { total, inPerson, virtual } = this.getStats(transactions);
 
     return (
       <div> {/* outer div for react root component element */}
         <Message icon>
           <Icon name="ticket" color="blue"/>
           <Message.Content>
-            <Message.Header>User Summary</Message.Header>
-            <strong>Total Tickets:</strong> {total} &nbsp; <strong>Student:</strong> {studentTickets} &nbsp; <strong>Non-Student:</strong> {nonStudentTickets}
+            <Statistic.Group size="tiny">
+              <Statistic>
+                <Statistic.Label>Total</Statistic.Label>
+                <Statistic.Value>{total}</Statistic.Value>
+              </Statistic>
+              <Statistic>
+                <Statistic.Label>Virtual</Statistic.Label>
+                <Statistic.Value>{virtual}</Statistic.Value>
+              </Statistic>
+              <Statistic>
+                <Statistic.Label>In-Person</Statistic.Label>
+                <Statistic.Value>{inPerson}</Statistic.Value>
+              </Statistic>
+            </Statistic.Group>
           </Message.Content>
         </Message>
         <Table celled striped>
