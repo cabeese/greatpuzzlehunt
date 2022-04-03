@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Icon, Button, Progress } from 'semantic-ui-react';
+import MaybeNullIcon from '../../../imports/MaybeNullIcon';
 import moment from 'moment';
 
 class AdminTeamTableRow extends Component {
@@ -45,10 +46,11 @@ class AdminTeamTableRow extends Component {
 
   _division() {
     const { division, inPerson } = this.props.team;
-    const ic = inPerson ?
-      <Icon name="group" color="blue" />
-      :
-      <Icon name="video" color="yellow" />;
+    const ic = <MaybeNullIcon
+      value={inPerson}
+      truthy={<Icon name="group" color="blue" />}
+      falsey={<Icon name="video" color="yellow" />}
+      />;
     return (
       <span>
         {ic}
