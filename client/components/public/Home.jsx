@@ -31,7 +31,7 @@ const AnnouncementsMessage = (
                         <li>Event is FREE and open to all (donations gratefully accepted).</li>
                         <li>The event is HYBRID this year with In-Person (WWU campus community OR by permission*) and Virtual options.</li>
                         <ul>
-                          <li>* If some or all your team members are not WWU Community (<a style={{"text-decoration": "underline"}} href="https://www.wwu.edu">wwu.edu</a> email addresses) but your team would like to play “in-person,” please contact <a style={{"text-decoration": "underline"}} href="mailto:millie@greatpuzzlehunt.com">millie@greatpuzzlehunt.com</a> asap. In the interest of safety, each team member will need to verify vaccination status and agree to mask when indoors.</li>
+                          <li>* If some or all your team members are not WWU Community (<a style={{"text-decoration": "underline"}} href="https://www.wwu.edu">wwu.edu</a> email addresses) but your team would like to play “in-person,” please contact <a style={{"text-decoration": "underline"}} href="mailto:millie@greatpuzzlehunt.com">millie@greatpuzzlehunt.com</a> asap. In the interest of safety, each non-WWU team member will need to verify vaccination status and agree to mask when indoors.</li>
                         </ul>
                       </ul>
                       <ul>
