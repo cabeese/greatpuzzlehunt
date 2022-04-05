@@ -29,9 +29,10 @@ const AnnouncementsMessage = (
                       <ul>
                         <li>Date: { eventDay }, { eventDate } from 9:30 AM&mdash;5:00 PM (PT).</li>
                         <li>Event is FREE and open to all (donations gratefully accepted).</li>
-                        <li>We plan to run a HYBRID event this year: In-Person (WWU campus community only this year) and Virtual options.</li>
-                        <li>Due to COVID-19 and our Priority on Safety and Health, we will follow University and CDC Guidelines.</li>
-                        <li>If necessary, we will adapt the event to be fully virtual.</li>
+                        <li>The event is HYBRID this year with In-Person (WWU campus community OR by permission*) and Virtual options.</li>
+                        <ul>
+                          <li>* If some or all your team members are not WWU Community (<a style={{"text-decoration": "underline"}} href="https://www.wwu.edu">wwu.edu</a> email addresses) but your team would like to play “in-person,” please contact <a style={{"text-decoration": "underline"}} href="mailto:millie@greatpuzzlehunt.com">millie@greatpuzzlehunt.com</a> asap. In the interest of safety, each non-WWU team member will need to verify vaccination status and agree to mask when indoors.</li>
+                        </ul>
                       </ul>
                       <ul>
                         <li>Gear store closes { gearSaleEnd }.</li>
