@@ -5,6 +5,10 @@ import {
   Segment, Button, Confirm, Modal,
 } from 'semantic-ui-react';
 
+const confirmMessage = "LAST CHANCE!! Your team is set to play virtually, NOT on Western's campus. " +
+      "If your team is here in person, DO NOT CHECK YOUR TEAM IN. " +
+      "Please talk to someone at the check-in table.";
+
 class TeamCheckInVirtually extends Component {
   constructor(props) {
     super(props);
@@ -59,14 +63,14 @@ class TeamCheckInVirtually extends Component {
           />
 
         <Button fluid color="green" onClick={this.showConfirm}>
-          Check in team!
+          VIRTUAL Self-Check in
         </Button>
         <Confirm open={confirmationOpen}
           onCancel={this.handleCancelConfirm}
           onConfirm={this.handleConfirm}
-          content="Is your team ready to check in?"
-          confirmButton="We're ready!"
-          cancelButton="Not yet"
+          content={confirmMessage}
+          confirmButton="We're playing virtually!"
+          cancelButton="Cancel"
         />
       </Segment>
     );
