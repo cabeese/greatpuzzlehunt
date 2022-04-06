@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Icon, Button, Progress } from 'semantic-ui-react';
+import { Table, Icon, Label, Button, Progress } from 'semantic-ui-react';
 import MaybeNullIcon from '../../../imports/MaybeNullIcon';
 import moment from 'moment';
 
@@ -101,13 +101,29 @@ class AdminTeamTableRow extends Component {
       return acc + ( puzzle.end ? 1 : 0 );
     }, 0);
     const total = team.puzzles.length;
+    const active = started > done;
+    const completed = done == total;
 
-    let color = "teal";
-    if (started === 0) color = "black"
-    if (done === total) color = "olive"
-
-    return <Progress value={done} total={total}
-      progress='ratio' color={color} />
+    if (completed) {
+      return (
+        <div>
+          <Icon name="star" color="yellow" /> Done!
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Label>
+            <Icon name="check square" /> {done}
+          </Label>&nbsp;
+          { active ?
+            <Icon name="redo" loading />
+            :
+            ""
+          }
+        </div>
+      );
+    }
   }
 
   _actions() {

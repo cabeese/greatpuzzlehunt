@@ -50,7 +50,9 @@ class AdminTeamModalGeneral extends Component {
                         <strong> Division:</strong> {team.division}
                     </Grid.Column>
                     <Grid.Column>
-                        <strong> Looking for members?</strong> {team.lookingForMembers ? "Yes" : "No"}
+                        <strike>
+                            <strong> Looking for members?</strong> n/a
+                        </strike>
                     </Grid.Column>
                 </Grid>
 

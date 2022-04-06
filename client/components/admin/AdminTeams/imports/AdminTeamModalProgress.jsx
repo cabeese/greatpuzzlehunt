@@ -30,10 +30,12 @@ class AdminTeamModalProgress extends Component {
 
     _puzzleRow(puzzle) {
         let hintsTaken = [];
-        puzzle.hints.forEach((hint, index) => {
-            const name = hint.taken ? "check square" : "square outline";
-            hintsTaken.push(<Icon key={index} name={name} />);
-        });
+        // TODO: we no longer publish the hints to save bandwidth/CPU/etc, so
+        // this section has no data to display.
+        // puzzle.hints.forEach((hint, index) => {
+        //     const name = hint.taken ? "check square" : "square outline";
+        //     hintsTaken.push(<Icon key={index} name={name} />);
+        // });
         const start = puzzle.start ? moment(puzzle.start).format("HH:mm:ss") : "--";
         const end = puzzle.end ? moment(puzzle.end).format("HH:mm:ss") : "--";
         return (
@@ -41,8 +43,8 @@ class AdminTeamModalProgress extends Component {
                 <Table.Cell>{puzzle.name}</Table.Cell>
                 <Table.Cell>{start}</Table.Cell>
                 <Table.Cell>{end}</Table.Cell>
-                <Table.Cell>{puzzle.tries || 0}</Table.Cell>
-                <Table.Cell>{hintsTaken}</Table.Cell>
+                <Table.Cell>{puzzle.tries || "(n/a - TODO)"}</Table.Cell>
+                <Table.Cell>(n/a - TODO)</Table.Cell>
                 <Table.Cell>{puzzle.score || "--"}</Table.Cell>
             </Table.Row>
         )

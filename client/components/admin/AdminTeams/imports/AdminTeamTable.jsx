@@ -15,6 +15,12 @@ class AdminTeamTable extends Component {
     };
   }
 
+  componentWillUnmount() {
+    if (this.props.teamHandle) {
+      this.props.teamHandle.stop();
+    }
+  }
+
   getSelectedTeam(selectedTeamId, teams){
     if (!selectedTeamId) return null;
     return find(teams, (t) => (t._id === selectedTeamId));
