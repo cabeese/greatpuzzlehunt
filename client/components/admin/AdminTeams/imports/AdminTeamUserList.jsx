@@ -10,6 +10,13 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
         this._userRow = this._userRow.bind(this);
     }
 
+    componentWillUnmount() {
+        const { userHandle } = this.props;
+        if (userHandle) {
+            userHandle.stop();
+        }
+    }
+
     removeUserFromTeam(userId){
         Meteor.call('admin.user.setTeam', userId, "", error => {
             if(error){
@@ -66,9 +73,14 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
     }
 
     render() {
-        if(!this.props.users || this.props.users.length < 1){
+        const {loading, users} = this.props;
+        if (loading) {
             return (
                 <p>Loading user list...</p>
+            )
+        } else if(!users || users.length < 1){
+            return (
+                <p>No users to display. (This shouldn't happen)</p>
             )
         }
 
@@ -83,7 +95,7 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {this.props.users.map(this._userRow)}
+                    {users.map(this._userRow)}
                 </Table.Body>
             </Table>
         );
@@ -97,5 +109,5 @@ export default AdminTeamUserListTracker = withTracker((props) => {
   const users = Meteor.users.find({ teamId: id }).fetch();
   const loading = !userHandle.ready();
 
-  return { loading, users };
+  return { loading, users, userHandle };
 })(AdminTeamUserList);
