@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Header, Progress, Button } from 'semantic-ui-react';
+import UnstartedPuzzle from './UnstartedPuzzle';
 import UnstartedPuzzleVirtual from './UnstartedPuzzleVirtual';
 import CompletePuzzle from '../../imports/CompletePuzzle';
 
@@ -23,6 +24,13 @@ export default class InactivePuzzle extends React.Component {
         puzzle={ puzzle }
         disabled={ disabled }
         showAnswer={ true }
+      />;
+    } else if (team.inPerson) {
+      return <UnstartedPuzzle
+        team={team}
+        user={user}
+        puzzle={puzzle}
+        disabled={disabled}
       />;
     } else {
       return <UnstartedPuzzleVirtual

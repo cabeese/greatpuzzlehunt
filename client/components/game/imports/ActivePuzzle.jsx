@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Header, Icon, Button } from 'semantic-ui-react';
 
-// import PuzzleQRCode from './PuzzleQrCode';
+import PuzzleQRCode from './PuzzleQrCode';
 import PuzzleAnswerForm from './PuzzleAnswerForm';
 import PuzzleProgress from '../../imports/PuzzleProgress';
 import PuzzleHints from './PuzzleHints';
@@ -14,34 +14,57 @@ export default class ActivePuzzle extends React.Component {
   }
 
   /* Hide the progress bar for non-competitive teams */
-  _inner(team, puzzle){
+  _progress(team, puzzle){
     const isNC = team.division === "noncompetitive";
     if(isNC) return null;
 
     return <PuzzleProgress puzzle={puzzle} />
   }
 
-  render() {
-    const { team, puzzle } = this.props;
-    const { downloadURL } = puzzle;
-
+  _activePuzzleVirtual(name, downloadURL, embedded){
     return (
-      <Segment>
-        <Header as='h3' content={ puzzle.name }/>
-        {/* virtualeventonly <PuzzleQRCode
+      <Button as="a" href={downloadURL} fluid color={embedded ? "grey" : "blue"}
+        download={name} target="_blank" size={embedded ? "tiny" : undefined}>
+        <Icon name="download" />
+        Download Puzzle (PDF)
+      </Button>
+    );
+  }
+
+  _activePuzzleViaQRCode(team, puzzle) {
+    return (
+      <div>
+        <PuzzleQRCode
           team={ team }
           puzzle={ puzzle }
           disabled={ false }
           qrLabel='Show to a Volunteer in case of puzzle emergency'
           qrButtonLabel='Puzzle QR Code'
           color='grey'
-        /> */}
-        <Button as="a" href={downloadURL} fluid color="blue"
-          download={puzzle.name} target="_blank">
-          <Icon name="download" />
-          Download Puzzle (PDF)
-        </Button>
-        { this._inner(team, puzzle) }
+          />
+        <br />
+        {this._activePuzzleVirtual(puzzle.name, puzzle.downloadURL, true)}
+      </div>
+    );
+  }
+
+  _activePuzzle(team, puzzle) {
+    const {name, downloadURL} = puzzle;
+    if (team.inPerson) {
+      return this._activePuzzleViaQRCode(team, puzzle);
+    } else {
+      return this._activePuzzleVirtual(name, downloadURL, false);
+    }
+  }
+
+  render() {
+    const { team, puzzle } = this.props;
+
+    return (
+      <Segment>
+        <Header as='h3' content={ puzzle.name }/>
+        { this._activePuzzle(team, puzzle) }
+        { this._progress(team, puzzle) }
         <PuzzleAnswerForm
           team={ team }
           puzzle={ puzzle }

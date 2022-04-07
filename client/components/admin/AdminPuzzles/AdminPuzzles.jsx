@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Container, Divider, Message, Image, Button } from 'semantic-ui-react';
+import { Container, Divider, Message, Segment } from 'semantic-ui-react';
 
 import PuzzleEditor from './imports/PuzzleEditor';
 import PuzzleList from './imports/PuzzleList';
@@ -20,15 +20,21 @@ AdminPuzzles = class AdminPuzzles extends Component {
     return (
       <Container>
         <PuzzlePageTitle title='Puzzles'/>
-        <CheckinPacketEditor />
-        <Divider />
-        { this._editor() }
-        <Divider />
-        <br/>
+        <Segment>
+          <CheckinPacketEditor />
+        </Segment>
+
+        <Segment>
         <PuzzleList
+          activePuzzle={this.state.activePuzzle}
           onEdit={ (puzzle) => this._editPuzzle(puzzle) }
           onDelete={ (puzzle) => this._deletePuzzle(puzzle) }
         />
+        </Segment>
+
+        <Segment>
+          { this._editor() }
+        </Segment>
       </Container>
     );
   }
@@ -41,6 +47,7 @@ AdminPuzzles = class AdminPuzzles extends Component {
     return (
       <PuzzleEditor
         puzzle={ activePuzzle }
+        key={activePuzzle._id}
         closePuzzle={ () => this.setState({ activePuzzle: null }) }
       />
     );

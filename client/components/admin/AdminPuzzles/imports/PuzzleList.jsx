@@ -35,13 +35,15 @@ class PuzzleList extends Component {
   }
 
   _puzzles() {
-    const { puzzles } = this.props;
-    return puzzles.map((puzzle) => this._puzzle(puzzle));
+    const { puzzles, activePuzzle } = this.props;
+    const activePuzzleId = activePuzzle ? activePuzzle._id : null;
+    return puzzles.map((puzzle) => this._puzzle(puzzle, activePuzzleId));
   }
 
-  _puzzle(puzzle) {
+  _puzzle(puzzle, activePuzzleId) {
+    const isActive = puzzle._id === activePuzzleId;
     return (
-      <Grid.Row columns={5} key={ puzzle._id }>
+      <Grid.Row columns={5} key={ puzzle._id } color={isActive ? "teal" : undefined}>
         <Grid.Column>
           <Label color={ stagesColors[puzzle.stage] } content={ puzzle.stage }/>&nbsp; { puzzle.name }
         </Grid.Column>
