@@ -55,7 +55,6 @@ export const renderRoutes = () => {
 
         {/* Game Routes */}
         <Route path='game' element={<RequireAuth accessLevel='user'><Game /></RequireAuth>} />
-        {/* </Route> */}
 
         {/* Team Routes */}
         <Route path='team'>
@@ -64,16 +63,15 @@ export const renderRoutes = () => {
           <Route path='join' element={<RequireAuth accessLevel='user'><TeamBrowser /></RequireAuth>}/>
           <Route path='checkin' element={<RequireAuth accessLevel='user'><TeamCheckin /></RequireAuth>}/>
         </Route>
-
         <Route path='looking-for-team' element={<RequireAuth accessLevel='user'><LookingForTeam /></RequireAuth>} />
 
         {/* Volunteer Routes */}
         <Route path='volunteer'>
           <Route index element={<RequireAuth accessLevel='volunteer'><Volunteer /></RequireAuth> }/>
           <Route path='time/:teamId/:puzzleId' element={<RequireAuth accessLevel='volunteer'><VolunteerTimer /></RequireAuth>}/>
-          <Route path='game-progress' element={<RequireAuth accessLevel='volunteer'><GameProgress /></RequireAuth>}/>
           <Route path='checkin/:teamId' element={<RequireAuth accessLevel='volunteer'><VolunteerTeamCheckIn /></RequireAuth>}/>
         </Route>
+        <Route path='game-progress' element={<RequireAuth accessLevel='volunteer'><GameProgress /></RequireAuth>}/>
 
         {/* Admin Routes */}
         <Route path='admin'>
