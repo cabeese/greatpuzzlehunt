@@ -70,6 +70,7 @@ class GamestateControlsInner extends Component {
         { this._reportDownloadButton("Users", 0) }
         { this._reportDownloadButton("Transactions", 1) }
         { this._reportDownloadButton("Gear Orders", 2) }
+        { this._reportDownloadButton("Leaderboard", 3) }
 
         <Header as="h4" content="Email Reports" />
         <Button icon="mail" content="Email (all 3) Reports to Me"
