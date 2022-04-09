@@ -79,6 +79,8 @@ class GamestateControlsInner extends Component {
           onClick={(e) => {
             Meteor.call('admin.sendUsersAndTeams'); alert("Emails are sending!");
           }} />
+        <Button icon="mail" content="Email Leaderboard to Me"
+          onClick={(e) => Meteor.call('admin.sendLeaderboard')} />
 
         <Header as="h4" content="Nightly Reports" />
         <div>
