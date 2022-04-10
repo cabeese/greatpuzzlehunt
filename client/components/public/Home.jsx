@@ -23,16 +23,13 @@ const AnnouncementsMessage = (
               <Message color='blue' size='huge'>
                 <Message.Content>
                   <Message.Header>
-                    We Are Excited to Announce the SIXTH Annual Great Puzzle Hunt
-                    </Message.Header>
+                    Thank you!
+                  </Message.Header>
                     <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                       <ul>
-                        <li>Date: { eventDay }, { eventDate } from 9:30 AM&mdash;5:00 PM (PT).</li>
-                        <li>Event is FREE and open to all (donations gratefully accepted).</li>
-                        <li>The event is HYBRID this year with In-Person (WWU campus community OR by permission*) and Virtual options.</li>
-                        <ul>
-                          <li>* If some or all your team members are not WWU Community (<a style={{"text-decoration": "underline"}} href="https://www.wwu.edu">wwu.edu</a> email addresses) but your team would like to play “in-person,” please contact <a style={{"text-decoration": "underline"}} href="mailto:millie@greatpuzzlehunt.com">millie@greatpuzzlehunt.com</a> asap. In the interest of safety, each non-WWU team member will need to verify vaccination status and agree to mask when indoors.</li>
-                        </ul>
+                        <li>Thank you to everyone who participated in the 2022 hunt!</li>
+                        <li>Puzzles, hints, and walk-throughs are posted on the <a style={{'text-decoration': 'underline'}} href="/puzzles">puzzles</a> page.</li>
+                        <li>Leaderboard will be fixed and posted soon.</li>
                       </ul>
                       <ul>
                         <li>Gear store closes { gearSaleEnd }.</li>
