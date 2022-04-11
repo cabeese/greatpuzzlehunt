@@ -46,7 +46,7 @@ export default class SamplePuzzles extends Component {
           },
           {
             name: 'Trade Secret!',
-            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/4.Walk-Through+Solution-Trade+Secret.pdf',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/trade-ad96c1e8-681e-4a9c-a583-5ba006afc040.pdf',
             hints: [
               'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/h1-3eca0f61-9ebc-48d6-ac9d-9dce31a1cb73.JPG',
               'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/h2-85419144-f834-4db0-ba04-799be50655b7.JPG',
