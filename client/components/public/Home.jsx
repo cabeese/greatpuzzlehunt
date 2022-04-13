@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Grid, Segment, Message } from 'semantic-ui-react';
+import { Container, Grid, List, Segment, Message } from 'semantic-ui-react';
 
 const { regularRegistrationStart, eventDate, eventDay, gearSaleEnd } = Meteor.settings.public;
 
@@ -20,24 +20,61 @@ const AnnouncementsMessage = (
         <Grid.Row>
           <Grid.Column width={16} className='raised'>
             <Container textAlign='left'>
-              <Message color='blue' size='huge'>
+              <Message size='huge'>
                 <Message.Content>
                   <Message.Header>
                     Thank you!
                   </Message.Header>
-                    <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
-                      <ul>
-                        <li>Thank you to everyone who participated in the 2022 hunt!</li>
-                        <li>Puzzles, hints, and walk-throughs are posted on the <a style={{'text-decoration': 'underline'}} href="/puzzles">puzzles</a> page.</li>
-                        <li>Leaderboard will be fixed and posted soon.</li>
-                      </ul>
-                      <ul>
-                        <li>Gear store closes { gearSaleEnd }.</li>
-                        <li>Shirts will be ordered on Monday, April 11 and assuming no supply chain delays, should be shipped out or ready for pick-up the week of April 18.</li>
-                      </ul>
-                      <br />
-                      <center><strong>Check back here for updates!</strong></center>
-                    </Segment>
+                  <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
+                    <List>
+                      <List.Item>
+                        <List.Icon name="cart" />
+                        <List.Content>
+                          Assuming no supply chain delays, <strong>shirts</strong> should be shipped out or ready for pick-up the week of April 25.
+                        </List.Content>
+                      </List.Item>
+                      <List.Item>
+                        <List.Icon name="puzzle" />
+                        <List.Content>
+                          <strong>Puzzles, hints, and walk-throughs</strong> are posted on
+                          the <a style={{'text-decoration': 'underline'}} href="/puzzles">puzzles</a> page.
+                        </List.Content>
+                      </List.Item>
+                      <List.Item>
+                        <List.Icon name="trophy" />
+                        <List.Content>
+                          <strong>Leaderboards</strong> are available by division here:
+                          <br />
+                          <List horizontal celled size="large">
+                            <List.Item>
+                              <a target="_blank" href="https://gph-distributed.s3.us-west-2.amazonaws.com/2022/leaderboards/2022-GPH-Leaderboard_RevB_Students.pdf">
+                                WWU Students
+                              </a>
+                            </List.Item>
+                            <List.Item>
+                              <a target="_blank" href="https://gph-distributed.s3.us-west-2.amazonaws.com/2022/leaderboards/2022-GPH-Leaderboard_RevB_Alumni.pdf">
+                                WWU Alumni
+                              </a>
+                            </List.Item>
+                            <List.Item>
+                              <a target="_blank" href="https://gph-distributed.s3.us-west-2.amazonaws.com/2022/leaderboards/2022-GPH-Leaderboard_RevB_Secondary.pdf">
+                                Secondary Students
+                              </a>
+                            </List.Item>
+                            <List.Item>
+                              <a target="_blank" href="https://gph-distributed.s3.us-west-2.amazonaws.com/2022/leaderboards/2022-GPH-Leaderboard_RevA_Open.pdf">
+                                Open
+                              </a>
+                            </List.Item>
+                          </List>
+                          <br />
+                          <small>Thank you for your patience as we try to compensate for lag in the system.
+                          If you think your team experienced a scoring miscalculation, please email us
+                          at <a href="mailto:support@greatpuzzlehunt.com">support@greatpuzzlehunt.com</a>.</small>
+                        </List.Content>
+                      </List.Item>
+                    </List>
+                  </Segment>
                   </Message.Content>
                 </Message>
             </Container>
