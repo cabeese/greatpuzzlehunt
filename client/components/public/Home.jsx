@@ -28,6 +28,18 @@ const AnnouncementsMessage = (
                   <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <List>
                       <List.Item>
+                        <List.Icon name="dollar" />
+                        <List.Content>
+                          <strong>WWU Give Day is Thursday, May 26th</strong>, and donations to the Puzzle Hunt will be matched!
+                          We are extremely grateful for all contributions.
+                          To donate, please use this specific
+                          link: <a href="https://wwugiveday.wwu.edu/giving-day/55617/department/55661">
+                            https://wwugiveday.wwu.edu/giving-day/55617/department/55661
+                          </a>.
+                          Thank you!
+                        </List.Content>
+                      </List.Item>
+                      <List.Item>
                         <List.Icon name="cart" />
                         <List.Content>
                           Assuming no supply chain delays, <strong>shirts</strong> should be shipped out or ready for pick-up the week of April 25.
