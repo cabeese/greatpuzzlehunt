@@ -1,0 +1,103 @@
+1. Get a recent Ruby version installed (>= 3.0)
+
+   MacOS:
+	* Using MacPorts:
+	    sudo port install ruby31
+	    sudo port select ruby ruby31
+	    add to $PATH: $HOME/.gem/ruby/ruby/3.1.0/bin
+	    sudo gem update --system --verbose --no-document
+	    sudo gem update --verbose --no-document
+	    
+   Linux:
+	* Using rvm:
+	    (install curl and gnupg2 if not in the base installation)
+	    gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+	    curl -sSL https://get.rvm.io | bash -s stable --ruby
+	    rvm install 3.1
+	    rvm use 3.1 --default
+	    gem update --system --verbose --no-document
+	    gem update --verbose --no-document
+	* Using apt (Ubuntu):
+	    sudo apt-get install ruby-full
+
+2. Install the Ruby Selenium interface
+
+   gem install selenium-webdriver --verbose --no-document --user-install
+
+3. Install the web drivers for browsers
+
+   The Selenium tools use the W3C webdriver interface to communicate
+   between the the test cases and a web browser. The set of web
+   drivers to install depends on the browsers to be tested against.
+
+   The web driver binary should be downloaded from the sources below
+   and installed in some directory in your $PATH.  (Recommended:
+   install in $HOME/bin)
+
+   * Firefox
+
+     The geckodriver binary can be installed from
+     https://github.com/mozilla/geckodriver/releases
+
+   * Chrome
+
+     The chromedriver binary can be installed from
+     https://chromedriver.chromium.org/downloads
+
+   * Safari
+
+     When running on MacOS (the only system that supports Safari), the
+     webdriver interface is included in Safari and nothing extra need
+     be installed
+   
+4. Install the test runner interface
+
+   Test runner is a web interface for running Ruby minitest test
+   cases.
+
+   Download the testrunner gem from
+   https://chrysaetos.org/extras/testrunner-0.1.7.gem
+
+   Then run
+   gem install <dir>/testrunner-0.1.7.gem --no-document --user-install
+
+   where <dir> is the directory where the gem was downloaded
+
+5. Set up the test configuration
+
+   This sets basic parameters for what server instance should be used
+   for testing, and what the admin account on that server is
+
+   Rename config-example.rb to config.rb
+
+   Edit the config.rb file:
+     :site is the URL for the test instance
+     :adminuser is the email address for an admin account
+     :adminpw is the password for that admin account
+     :browsers is the list of browsers to test against. The default
+       is [:firefox, :safari, :chrome]. Only include those browsers
+       that are locally installed on the test system
+
+6. Run tests
+
+   Cd to the tests directory, then run
+
+   tr2 --port 7100 --dir . --name 'gph'
+
+   (Replace the port with another port number if needed)
+
+   http://localhost:7100
+
+   in a local browser, and you should see a list of all the test
+   cases.
+
+   The "Run all" button will run all the tests; a colored block will
+   appear by each test as it is queued up, passes, or fails. The
+   "Delete old logs" and "Delete all logs" clean up old logs or all
+   test logs, as appropriate.
+
+   To run a single test, use the "Run" button by the test. To see the
+   details of the test result, use the "Log" button by the test. 
+
+   If multiple tests have been set to run, they will be run in a
+   random order.
