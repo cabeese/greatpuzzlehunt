@@ -255,6 +255,56 @@ x = proc do |browser|
       refute_nil f
     end
     
+    it 'allows all-digits phone' do
+      nav_to_register
+      fn, ln, em = gen_random_id
+      puts "First name: #{fn}"
+      puts "Last name: #{ln}"
+      puts "Email: #{em}"
+      fill_registration_form(fn, ln, em,
+                             :volunteer, 'abcdefghijk', 'abcdefghijk',
+                             '1234567890', '37', '10 Maple', 'Someplace',
+                             '01234', 'NE', 'USA', 'A B', 'def',
+                             '123-456-7890', 'abc@def.ghi', true, true)
+      submit_registration_form
+      f = match_source('Thank you for creating an account')
+      refute_nil f
+    end
+    
+    it 'allows punctuated phone number' do
+      nav_to_register
+      fn, ln, em = gen_random_id
+      puts "First name: #{fn}"
+      puts "Last name: #{ln}"
+      puts "Email: #{em}"
+      fill_registration_form(fn, ln, em,
+                             :volunteer, 'abcdefghijk', 'abcdefghijk',
+                             '(123) 456-7890', '37', '10 Maple', 'Someplace',
+                             '01234', 'NE', 'USA', 'A B', 'def',
+                             '123-456-7890', 'abc@def.ghi', true, true)
+      submit_registration_form
+      f = match_source('Thank you for creating an account')
+      refute_nil f
+    end
+    
+    it 'requires valid US or Canada phone' do
+      nav_to_register
+      fn, ln, em = gen_random_id
+      puts "First name: #{fn}"
+      puts "Last name: #{ln}"
+      puts "Email: #{em}"
+      fill_registration_form(fn, ln, em,
+                             :volunteer, 'abcdefghijk', 'abcdefghijk',
+                             '(123) 45', '37', '10 Maple', 'Someplace',
+                             '01234', 'NE', 'USA', 'A B', 'def',
+                             '123-456-7890', 'abc@def.ghi', true, true)
+      submit_registration_form
+      f = match_source('Please enter your 10 digit phone number')
+      refute_nil f
+      f = match_source(em)
+      refute_nil f
+    end
+    
     it 'allows non-US phone' do
       nav_to_register
       fn, ln, em = gen_random_id
@@ -264,6 +314,24 @@ x = proc do |browser|
       fill_registration_form(fn, ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk',
                              '+1 31 202020', '37', '10 Maple', 'Someplace',
+                             '01234', 'NE', 'NL', 'A B', 'def',
+                             '123-456-7890', 'abc@def.ghi', true, true)
+      submit_registration_form
+      f = match_source('Thank you for creating an account')
+      refute_nil f
+      f = match_source(em)
+      refute_nil f
+    end
+    
+    it 'does not require non-US phone' do
+      nav_to_register
+      fn, ln, em = gen_random_id
+      puts "First name: #{fn}"
+      puts "Last name: #{ln}"
+      puts "Email: #{em}"
+      fill_registration_form(fn, ln, em,
+                             :volunteer, 'abcdefghijk', 'abcdefghijk',
+                             nil, '37', '10 Maple', 'Someplace',
                              '01234', 'NE', 'NL', 'A B', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -579,6 +647,39 @@ x = proc do |browser|
       refute_nil f
     end
     
+    it 'allows all-digits emergency contact phone' do
+      nav_to_register
+      fn, ln, em = gen_random_id
+      puts "First name: #{fn}"
+      puts "Last name: #{ln}"
+      puts "Email: #{em}"
+      fill_registration_form(fn, ln, em,
+                             :volunteer, 'abcdefghijk', 'abcdefghijk',
+                             '555-555-5555', '25', '10 Maple', 'Anyplace',
+                             '01234', 'NE', 'USA', 'A B', 'def',
+                             '1234567890', 'abc@def.ghi', true, true)
+      submit_registration_form
+      f = match_source('Thank you for creating an account')
+      refute_nil f
+    end
+    
+    
+    it 'allows punctuated emergency contact phone' do
+      nav_to_register
+      fn, ln, em = gen_random_id
+      puts "First name: #{fn}"
+      puts "Last name: #{ln}"
+      puts "Email: #{em}"
+      fill_registration_form(fn, ln, em,
+                             :volunteer, 'abcdefghijk', 'abcdefghijk',
+                             '555-555-5555', '25', '10 Maple', 'Anyplace',
+                             '01234', 'NE', 'USA', 'A B', 'def',
+                             '(123) 456-7890', 'abc@def.ghi', true, true)
+      submit_registration_form
+      f = match_source('Thank you for creating an account')
+      refute_nil f
+    end
+    
     it 'requires plausible emergency contact phone' do
       nav_to_register
       fn, ln, em = gen_random_id
@@ -611,7 +712,21 @@ x = proc do |browser|
       submit_registration_form
       f = match_source('Thank you for creating an account')
       refute_nil f
-      f = match_source(em)
+    end
+    
+    it 'does not require non-US emergency contact phone' do
+      nav_to_register
+      fn, ln, em = gen_random_id
+      puts "First name: #{fn}"
+      puts "Last name: #{ln}"
+      puts "Email: #{em}"
+      fill_registration_form(fn, ln, em,
+                             :volunteer, 'abcdefghijk', 'abcdefghijk',
+                             '555-555-5555', '25', '10 Maple', 'Anyplace',
+                             '01234', 'NE', 'NL', 'A B', 'def',
+                             nil, 'abc@def.ghi', true, true)
+      submit_registration_form
+      f = match_source('Thank you for creating an account')
       refute_nil f
     end
     
