@@ -69,7 +69,7 @@ x = proc do |browser|
       end
       puts "found xpath header: #{header}"
       puts "xpath header text: #{header.text}"
-      assert_equal(header.text, 'Richard Golding')
+      assert_equal(header.text, TESTCONFIG[:adminfullname])
     end
 
     it 'must log in admin' do
