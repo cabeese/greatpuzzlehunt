@@ -101,3 +101,37 @@
 
    If multiple tests have been set to run, they will be run in a
    random order.
+
+7. Running tests from the command line
+
+   It is possible to run all the tests from the command line without
+   using the testrunner tool.
+
+   ruby -r minitest/autorun <testfiles>
+
+   This will run all of the tests in the testfiles, in random
+   order. It will print the output from each of the tests followed by
+   a summary like:
+   
+   Finished in 79.178562s, 0.1516 runs/s, 0.4168 assertions/s.
+
+   12 runs, 33 assertions, 0 failures, 0 errors, 0 skips
+
+   It is not conveniently possible to run a single test from the
+   command line (which was why I wrote testrunner in the first
+   place). There are two issues. First, the string used to name a test
+   is not quite the name that is used internally to run the test,
+   given the describe/it format used to declare tests. Second, these
+   tests are written so that there are (implicitly) multiple describe
+   blocks in each test file, one for each browser being tested. The
+   internal facility for running based on a test name only considers
+   the name of the individual test case and does not have a way to
+   specify only one describe block.
+
+   That said, the command
+
+   ruby -r minitest/autorun -I test <testfile> --name '/<text in case name>/'
+
+   will run any tests whose name matches the expression 'text in case
+   name'. This typically means that a test gets run once for each
+   browser. 

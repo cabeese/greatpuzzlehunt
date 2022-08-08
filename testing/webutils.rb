@@ -32,6 +32,15 @@ module WebTestUtils
     @browser.quit
   end
 
+  # Cause the browser to navigate to the home page (that is, the base
+  # URL for the site).
+  # 
+  # Does a wait, polling on the top-level HTML element on the page
+  # until it finds that the HTML element has been replaced in the DOM
+  # in the browser.
+  #
+  # This appears to work correctly in single-page applications as well
+  # as in traditional page-per-URL applications. Not sure why.
   def nav_to_home(browser = @browser)
     puts 'in nav_to_home'
     x = browser.find_element(:tag_name, 'html')
@@ -186,6 +195,8 @@ module WebTestUtils
   def succeed_login_as_admin(browser = @browser)
     login_as_admin(browser)
     match_source('Last Updated', browser)
+    match_source(TESTCONFIG[:adminfullname], browser)
+    match_source('Admin', browser)
   end    
 
   def fail_login_as_admin(browser = @browser)
