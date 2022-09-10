@@ -33,9 +33,6 @@ class HomeEarlyBird extends Component {
           <Grid.Row centered>
             <Header size="medium" style={{color: "white"}}>Registration is a 4-step process:</Header>
             </Grid.Row>
-            <Grid.Row centered>
-              <p style={{color: 'red'}}><strong>Important</strong>: In-person participants must use their WWU email address.</p>
-            </Grid.Row>
             <Grid.Row width={16} columns={4} centered verticalAlign="top">
               <Grid.Column textAlign="center">
                 <span className="step-number">1</span>
