@@ -383,7 +383,8 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 7}>
             <p>
-              Awesome prizes will be awarded to top scoring teams in each division. Other prizes for best in-person team names, costumes, and more!
+              Awesome prizes will be awarded to top scoring <em>in-person</em> teams in each division.
+              Other prizes for best in-person team names, costumes, and more!
             </p>
             {/* <strong>* </strong>{prizeNote} */}
           </Accordion.Content>
@@ -431,6 +432,10 @@ FAQ = class FAQ extends Component {
             What should I have on hand?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
+            <Message error>
+              <em>Note: this information is from 2022 and may be adjusted for the 2023 Hunt.</em>
+            </Message>
+
             Your creativity and problem-solving skills! Along with the following:<br />
             <List bulleted>
               <List.Item><span className="description">At least one smartphone or computer. The more the better! (think about battery life).</span>
@@ -543,7 +548,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: January 2022</p>
+        <p>Last Updated: September 2023</p>
       </Segment>
       </Container>
     );

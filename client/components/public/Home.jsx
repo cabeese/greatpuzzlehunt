@@ -20,70 +20,25 @@ const AnnouncementsMessage = (
         <Grid.Row>
           <Grid.Column width={16} className='raised'>
             <Container textAlign='left'>
-              <Message size='huge'>
+              <Message size='huge' warning>
                 <Message.Content>
                   <Message.Header>
-                    Thank you!
+                    Join us in 2023!
                   </Message.Header>
                   <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <List>
                       <List.Item>
-                        <List.Icon name="dollar" />
-                        <List.Content>
-                          <strong>WWU Give Day is Thursday, May 26th</strong>, and donations to the Puzzle Hunt will be matched!
-                          We are extremely grateful for all contributions.
-                          To donate, please use this specific
-                          link: <a href="https://wwugiveday.wwu.edu/giving-day/55617/department/55661">
-                            https://wwugiveday.wwu.edu/giving-day/55617/department/55661
-                          </a>.
-                          Thank you!
-                        </List.Content>
+                        The seventh annual Great Puzzle Hunt will take place
+                        on <strong>Saturday, April 15th, 2023</strong>.
                       </List.Item>
+
                       <List.Item>
-                        <List.Icon name="cart" />
-                        <List.Content>
-                          Assuming no supply chain delays, <strong>shirts</strong> should be shipped out or ready for pick-up the week of April 25.
-                        </List.Content>
+                        Registration is FREE and open to all, anywhere in the world.
+                        Donations are gratefully accepted.
                       </List.Item>
+
                       <List.Item>
-                        <List.Icon name="puzzle" />
-                        <List.Content>
-                          <strong>Puzzles, hints, and walk-throughs</strong> are posted on
-                          the <a style={{'text-decoration': 'underline'}} href="/puzzles">puzzles</a> page.
-                        </List.Content>
-                      </List.Item>
-                      <List.Item>
-                        <List.Icon name="trophy" />
-                        <List.Content>
-                          <strong>Leaderboards</strong> are available by division here:
-                          <br />
-                          <List horizontal celled size="large">
-                            <List.Item>
-                              <a target="_blank" href="https://gph-distributed.s3.us-west-2.amazonaws.com/2022/leaderboards/2022-GPH-Leaderboard_RevB_Students.pdf">
-                                WWU Students
-                              </a>
-                            </List.Item>
-                            <List.Item>
-                              <a target="_blank" href="https://gph-distributed.s3.us-west-2.amazonaws.com/2022/leaderboards/2022-GPH-Leaderboard_RevB_Alumni.pdf">
-                                WWU Alumni
-                              </a>
-                            </List.Item>
-                            <List.Item>
-                              <a target="_blank" href="https://gph-distributed.s3.us-west-2.amazonaws.com/2022/leaderboards/2022-GPH-Leaderboard_RevB_Secondary.pdf">
-                                Secondary Students
-                              </a>
-                            </List.Item>
-                            <List.Item>
-                              <a target="_blank" href="https://gph-distributed.s3.us-west-2.amazonaws.com/2022/leaderboards/2022-GPH-Leaderboard_RevA_Open.pdf">
-                                Open
-                              </a>
-                            </List.Item>
-                          </List>
-                          <br />
-                          <small>Thank you for your patience as we try to compensate for lag in the system.
-                          If you think your team experienced a scoring miscalculation, please email us
-                          at <a href="mailto:support@greatpuzzlehunt.com">support@greatpuzzlehunt.com</a>.</small>
-                        </List.Content>
+                        The event is <em>hybrid</em>: teams may play in person or virtually.
                       </List.Item>
                     </List>
                   </Segment>
