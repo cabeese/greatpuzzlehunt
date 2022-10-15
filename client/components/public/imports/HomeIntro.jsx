@@ -63,7 +63,7 @@ export default class HomeIntro extends Component {
                 Western Washington University<br/>
                 516 High Street<br/>
                 Bellingham, WA 98225<br/><br/> 
-                <strong>Virtual:</strong> Anywhere that has internet access, a smartphone or computer, a black and white printer, and materials to be listed in the FAQs <a href="/faq" style={{color: "#bad80a"}}>What should I have on hand?</a>
+                <strong>Virtual:</strong> Anywhere that has internet access, a smartphone or computer, a printer, and materials to be listed in the FAQs <a href="/faq" style={{color: "#bad80a"}}>What should I have on hand?</a>
               </Segment>
             </Grid.Column>
             <Grid.Column>
