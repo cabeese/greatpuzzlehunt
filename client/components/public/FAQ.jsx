@@ -21,7 +21,7 @@ const { eventYear, eventDate, eventDay, siteName, earlyBirdLastDate, gearSaleEnd
 
 const prizeNote = (
   <span>
-    Must be present at awards ceremony to claim prizes, else prizes go to the next place team.
+    Must be present at awards ceremony to claim prizes.
   </span>
 );
 const wristbandNote = (
@@ -42,7 +42,7 @@ const gearPricing = (
     <ul>
       <li>Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
       <li>Gear sales end midnight {gearSaleEnd}</li>
-      <li>Shirts will be ordered on Monday, April 11 and assuming no supply chain delays, should be shipped out or ready for pick-up the week of April 18.</li>
+      <li>Shirts will be ordered on Monday, April 17 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of April 24.</li>
       <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
     <p>
@@ -114,7 +114,7 @@ const schedule_virtual_data = [
   },
   {
     time: "5:00 PM (PT)",
-    desc: <span>Leaderboard Posted, Live stream—Prizes Awarded! (<a href="#">link TBA</a>)</span>
+    desc: <span>Leaderboard Posted, Live stream - claim your bragging rights! (<a href="#">link TBA</a>)</span>
   },
 ]
 
@@ -211,14 +211,7 @@ FAQ = class FAQ extends Component {
             In support of safety, teammates:
             <ul>
               <li>From different households may connect via a video conferencing platform (Zoom, Discord, Skype, &hellip;).</li>
-              <li>In the same physical space may follow the <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html">CDC recommendations</a>. Partial list:
-                <ul>
-                  <li>Avoid close contact&mdash;meet outdoors</li>
-                  <li>Wash Hands</li>
-                  <li>Cover mouth and nose with a mask</li>
-                  <li>Cover coughs and sneezes</li>
-                  <li>Clean and disinfect</li>
-                </ul>
+              <li>In the same physical space may follow the <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html">CDC recommendations</a>.
               </li>
             </ul>
           </Accordion.Content>
@@ -241,7 +234,7 @@ FAQ = class FAQ extends Component {
               </List.Item>
               <List.Item>The four main puzzles pertain to (1) Arts (Visual and Performing), (2) Sciences, (3) Humanities, and (4) the fourth puzzle is from a different academic discipline each year – past puzzle 4 topics included Paper Folding, Geometry, and Communication. Each person on the team is important and has special input to share. Choose a versatile team!</List.Item>
               <List.Item>Registered teams gain access to the Puzzle Hunt game platform (owned and built by WWU students) via smartphone or computer.</List.Item>
-              <List.Item>Prizes are awarded to top scoring teams in each division, best in-person costumes, and team names.</List.Item>
+              <List.Item>Prizes are awarded to <em>in-person</em> top scoring teams in each division, best in-person costumes, and team names. Must be present at awards ceremony to claim prizes.</List.Item>
               <List.Item>Whether your team places first or two hundred and fifty-first, competing in the puzzle hunt is a great way to stretch your mental muscles, bond with your teammates, and have a lot of fun!</List.Item>
             </List>
             {/* virtualeventonly
@@ -292,6 +285,8 @@ FAQ = class FAQ extends Component {
             <Header as='h2'>In-Person</Header>
             {schedule_inPerson}
             <strong>* </strong>{wristbandNote}
+            <br />
+            <strong>** </strong>{prizeNote}
 
             <Header as='h2'>Virtual</Header>
             {schedule_virtual}
@@ -306,7 +301,6 @@ FAQ = class FAQ extends Component {
           <Accordion.Content active={activeIndex === 5}>
             <List bulleted>
               <List.Item>Students, Faculty, Staff, Alumni, Community, Family, Everyone, Anywhere!</List.Item>
-              <List.Item>In the interest of safety, the in-person option this year is only open to the WWU campus community.</List.Item>
               <List.Item>Each team with participant(s) under age 14 must include at least one registered adult team member to accompany minor(s) at all times.</List.Item>
               <List.Item>Participants under 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.</List.Item>
             </List>
@@ -383,8 +377,11 @@ FAQ = class FAQ extends Component {
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 7}>
             <p>
-              Awesome prizes will be awarded to top scoring <em>in-person</em> teams in each division.
+              Prizes will be awarded to top scoring <em>in-person</em> teams in each division.
               Other prizes for best in-person team names, costumes, and more!
+            </p>
+            <p>
+              Must be present at awards ceremony to claim prizes.
             </p>
             {/* <strong>* </strong>{prizeNote} */}
           </Accordion.Content>
@@ -461,7 +458,7 @@ FAQ = class FAQ extends Component {
                   <List.Item description="Will be used by event leaders for announcements, prizes, and troubleshooting. A link to join the Zoom session will be provided on the website on game day." />
                 </List.List>
               </List.Item>
-              <List.Item><span className="description">Black and White printer</span>
+              <List.Item><span className="description">Printer (a color printer might be helpful)</span>
                 <List.List>
                   <List.Item description="You will want hard copies of most puzzles to fold, cut, etc." />
                 </List.List>
@@ -532,6 +529,9 @@ FAQ = class FAQ extends Component {
             <Grid stackable>
               <Grid.Row>
                 <Grid.Column width={10}>
+                  <Message error>
+                    <em>Note: this information is from 2022 and may be adjusted for the 2023 Hunt.</em>
+                  </Message>
                   <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
                   { gamestate && gamestate.buyGear ? <p>Take a look at our gear <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
                   {gearPricing}
