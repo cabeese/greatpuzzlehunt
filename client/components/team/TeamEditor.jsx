@@ -48,7 +48,7 @@ TeamEditor = class TeamEditor extends Component {
 
         {this._ncConfirmation()}
 
-        { (this.state.checkedIn) ? <Message positive header="Check in Confirmed" content="Your team is checked in an cannot be updated anymore"/> : null}
+        { (this.state.checkedIn) ? <Message positive header="Check in Confirmed" content="Your team is checked in and cannot be updated anymore"/> : null}
 
         <Segment>
           {this._renderNameAndPw()}
