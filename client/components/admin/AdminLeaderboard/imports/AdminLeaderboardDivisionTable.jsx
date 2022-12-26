@@ -91,7 +91,7 @@ class AdminLeaderboardDivisionTable extends Component {
     return (
       <Table.Cell key={puzzle.puzzleId} positive={finished} warning={!finished}>
         { gaveUp ? <Icon name="ban" color="red" /> : null }
-        {finished ? <code>{renderScore(puzzle.score).time} (hints {hintsTaken}) ({puzzle.score} sec)</code> : null }
+          {finished ? <code>{renderScore(puzzle.score).time} (hints {hintsTaken}) ({puzzle.score.toFixed(1)} sec)</code> : null }
         {inProgress ? <div><Icon name="spinner" color="blue" loading /> In Progress</div> : null }
         { !started ? <code>--:--:--</code> : null }
       </Table.Cell>
