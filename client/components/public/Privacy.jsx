@@ -23,7 +23,7 @@ Privacy = class Privacy extends Component {
 	      <Segment basic>
 		<PuzzlePageTitle title="Privacy" />
 		<Grid padded centered textAlign="left" stackable>
-		  <Grid.row>
+		  <Grid.Row>
 		    <Grid.Column width={16}>
 		      <Header as="h1"> Great Puzzle Hunt Privacy Statement </Header>
 		      <p><em>Last updated: 23 December 2022</em></p>
@@ -195,16 +195,10 @@ Privacy = class Privacy extends Component {
 			complain to your local data protection
 			authority. If you wish to contact us in
 			connection with the exercise of your rights
-			listed above, please email us at
-			compliance@greatpuzzlehunt.com. We will
-			respond to your written request in a
+			listed above, please email us at&nbsp;
+			<a href="mailto:compliance@greatpuzzlehunt.com">compliance@greatpuzzlehunt.com</a>. We
+			will respond to your written request in a
 			reasonable amount of time. </p>
-		      <p> If you wish to contact us in connection with
-			the exercise of your rights listed above,
-			please email us at
-			<a href="mailto:compliance@greatpuzzlehunt.com">compliance@greatpuzzlehunt.com</a>. We will
-			respond to your written request in a
-			reasonable amount of time. </p> 
 		      <p> Unless we inform you at the time of your
 			request, we will not charge you a fee to
 			exercise the rights listed above.</p> 
@@ -217,7 +211,14 @@ Privacy = class Privacy extends Component {
 			to read the privacy policies of each website
 			you visit.</p>
 		      <Header as="h2">SECURITY MEASURES </Header>
-		      <p> The Great Puzzle Hunt works hard to protect the security of the information that you provide to the Site.  This site has reasonable security measures in place to help protect against the loss, misuse, and alteration of the information under our control. However, no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
+		      <p> The Great Puzzle Hunt works hard to protect
+			the security of the information that you provide
+			to the Site.  This site has reasonable security
+			measures in place to help protect against the
+			loss, misuse, and alteration of the information
+			under our control. However, no method of
+			transmission over the Internet or method of
+			electronic storage is 100% secure.</p>
 		      <Header as="h2">CHANGES</Header>
 		      <p> The Great Puzzle Hunt may change this
 			Privacy Statement from time to time.  If we do
@@ -227,16 +228,14 @@ Privacy = class Privacy extends Component {
 		      <Header as="h2">CONTACT INFORMATION </Header>
 		      <p> The Great Puzzle Hunt welcomes your comments
 		      or questions regarding this Privacy
-		      Statement. Please e-mail us at
-		      <a href="mailto:compliance@greatpuzzlehunt.com>
-		      compliance@greatpuzzlehunt.com</a>. </p>
-		      
-		      
-		      </Grid.Column>
-</Grid.Row>
-</Grid>
-</Segment>
-</Container>
+			Statement. Please e-mail us at&nbsp;
+			<a href="mailto:compliance@greatpuzzlehunt.com">
+			  compliance@greatpuzzlehunt.com</a>. </p>
+		    </Grid.Column>
+		  </Grid.Row>
+		</Grid>
+	      </Segment>
+	    </Container>
 )
     }
 

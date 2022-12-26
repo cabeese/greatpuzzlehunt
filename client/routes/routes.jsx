@@ -36,6 +36,7 @@ export const renderRoutes = () => {
         <Route path='teams-list' element={<PublicTeamList />}/>
         <Route path='Media' element={<Media />}/>
         <Route path='Gear' element={<Gear />} />
+        <Route path='privacy' element={<Privacy />} />
         <Route path='contact' element={<Contact />}/>
         <Route path='puzzles' element={<SamplePuzzles />}/>
         <Route path='faq' element={<FAQ />}/>
