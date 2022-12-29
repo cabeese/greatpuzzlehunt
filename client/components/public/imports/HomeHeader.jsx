@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Scrollchor } from 'react-scrollchor';
 import YouTube from 'react-youtube';
 import { Grid, Container, Segment, Icon, Message, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import LinkButton from '../../imports/LinkButton';
@@ -155,27 +156,24 @@ class HomeHeader extends Component {
   }
 
   _socialMediaButtons() {
-    const facebookButton = (
-    <a href="https://www.facebook.com/greatpuzzlehunt/">
-      <img height="40px" src="/img/glyphs/facebook-glyph.png" />
-    </a>
-    );
-    const instagramButton = (
-    <a href="https://www.instagram.com/greatpuzzlehunt/">
-      <img height="40px" src="/img/glyphs/instagram-glyph.png" />
-    </a>
-    );
-    const youtubeButton = (
-    <a  href="https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A">
-      <img height="40px" src="/img/glyphs/youtube-glyph.png" />
-    </a>
-    );
+    function SMButton(siteName, url) {
+      const color = siteName === "reddit" ? "red" : siteName;
+      return <Button
+              color={color}
+              circular
+              as='a'
+              target='_blank'
+              href={url}
+              icon={<Icon name={siteName}/>}
+        />
+    };
 
     return (
       <div className="social-media-buttons" style={{padding: "10px"}}>
-        {facebookButton}
-        {instagramButton}
-        {youtubeButton}
+        {SMButton("facebook", "https://www.facebook.com/greatpuzzlehunt/")}
+        {SMButton("instagram", "https://www.instagram.com/greatpuzzlehunt/")}
+        {SMButton("reddit", "https://www.reddit.com/user/gph_official")}
+        {SMButton("youtube", "https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A")}
       </div>
     )
   }
