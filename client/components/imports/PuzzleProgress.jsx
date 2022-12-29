@@ -49,7 +49,7 @@ export default class PuzzleProgress extends React.Component {
           if (err) _this.setState({ now: moment() });
           else _this.setState({ now: moment(time) });
         })
-      }, 1000);
+      }, 10000);
     }
   }
 
