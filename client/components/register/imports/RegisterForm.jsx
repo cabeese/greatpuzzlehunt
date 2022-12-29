@@ -177,7 +177,7 @@ class RegisterForm extends Component {
     return (
       <div>
       <Form onSubmit={ (e) => this._register(e) } style={ this._formStyle() }>
-        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
+        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at 9:30am Pacific Time`} />
         {/* materials banner
         <Message color='orange' size='huge'>
           <Message.Content>
