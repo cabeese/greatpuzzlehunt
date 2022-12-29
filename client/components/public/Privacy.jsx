@@ -123,7 +123,7 @@ Privacy = class Privacy extends Component {
 			  <li> Establish or exercise our legal rights
 			    or defend against legal claims </li>
 			  <li> Take action regarding fraud, unlawful
-			    or criminal activity </li>n
+			    or criminal activity </li>
 			  <li> Take action regarding misconduct,
 			    security or technical issues </li> 
 			  <li> Take action regarding unauthorized

@@ -12,7 +12,7 @@ export default Footer = class Footer extends Component {
             Great Puzzle Hunt &copy; {eventYear}
           </div>
           <div className="column">
-	    <a href="/privacy" target="_blank">Privacy Policy</a>
+	    <a href="/privacy">Privacy Policy</a>
           </div>
           <div className="column">
             <a href="mailto:support@greatpuzzlehunt.com">Account Questions</a>
