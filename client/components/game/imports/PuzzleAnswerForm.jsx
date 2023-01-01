@@ -1,17 +1,26 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Form, Message } from 'semantic-ui-react';
+import { Image, Form, Message } from 'semantic-ui-react';
 import NCGiveUp from './NCGiveUp';
 
 export default class PuzzleAnswerForm extends React.Component {
+  messageTimer = null;
   constructor(props) {
     super(props);
     this.state = {
       answer: '',
+      triggerHintImageURL: '',
       message: null,
       error: null,
     };
+  }
+
+  componentWillUnmount() {
+    if (this.messageTimer) {
+      Meteor.clearTimeout(this.messageTimer);
+      this.messageTimer = null;
+    }
   }
 
   render() {
@@ -51,9 +60,21 @@ export default class PuzzleAnswerForm extends React.Component {
     Meteor.call('team.puzzle.answer', puzzle.puzzleId, answer, (error, result) => {
       this.setState({ answer: '' });
       if (error) return this.setState({ error });
-      if (result.message) {
-        this.setState({ message: result.message });
-        Meteor.setTimeout(() => this.setState({ message: null }), 2000);
+
+      if (this.messageTimer) Meteor.clearTimeout(this.messageTimer);
+
+      const { message, triggerHintImageURL } = result;
+      let timeout = 2000;
+      if (message || triggerHintImageURL) {
+        if (message) {
+          this.setState({ message, triggerHintImageURL: '' });
+        } else {
+          timeout = 10000;
+          this.setState({ triggerHintImageURL, message: '' });
+        }
+        this.messageTimer = Meteor.setTimeout(() => this.setState({
+          message: null, triggerHintImageURL: '',
+        }), timeout);
       }
     });
   }
@@ -64,12 +85,22 @@ export default class PuzzleAnswerForm extends React.Component {
   }
 
   _message() {
-    const { message } = this.state;
-    if (!message) return null;
-    return <Message
-      content={ message }
-      onDismiss={ () => this.setState({ message: null }) }
-    />
+    const { message, triggerHintImageURL } = this.state;
+    if (message) {
+      return <Message
+        content={ message }
+        onDismiss={ () => this.setState({ message: null }) }
+      />
+    } else if (triggerHintImageURL) {
+      return (
+        <Message>
+          Almost!<br />
+          <Image as="a" href={triggerHintImageURL} src={triggerHintImageURL}/>
+        </Message>
+      );
+    } else {
+      return null;
+    }
   }
 
   _error() {

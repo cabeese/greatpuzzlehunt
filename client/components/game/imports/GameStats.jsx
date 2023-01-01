@@ -9,38 +9,28 @@ import { getFinalScore } from '../../../../lib/imports/puzzle-helpers';
 const { eventYear } = Meteor.settings.public;
 
 class GameStats extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this._stateFromProps(props);
-  }
+  _startingPuzzle(team, puzzlesSolved) {
+    if (!team.inPerson) return;
+    if (puzzlesSolved > 0) return;
+    if (!team.startLocation) return;
 
-  componentWillReceiveProps(props) {
-    const newState = this._stateFromProps(props);
-    if (newState.finished !== this.state.finished) {
-      Meteor.setTimeout(() => $('.ui.button.scroll-top-btn').click(), 1500);
-    }
-    this.setState(newState);
-  }
-
-  _stateFromProps(props) {
-    const { team } = props;
-    const puzzlesSolved = team.puzzles.reduce((acc, p) => (acc + (p.score ? 1 : 0)), 0);
-    return {
-      puzzlesSolved,
-      finished: team.puzzles.length === puzzlesSolved,
-    };
+    return (
+      <div>
+        <Header as="h4" content="Starting Puzzle (Suggested)" />
+        <p>{team.startLocation}</p>
+      </div>
+    )
   }
 
   render() {
     const { team } = this.props;
-    const { puzzlesSolved, finished } = this.state;
+    const puzzlesSolved = team.puzzles.reduce((acc, p) => (acc + (p.score ? 1 : 0)), 0);
+    const finished = team.puzzles.length === puzzlesSolved;
     const { time, minutes } = renderScore(getFinalScore(team));
+
     return (
       <Message info={!finished} positive={finished}>
-        {/* virtualeventonly
-        {puzzlesSolved > 0 ? null : <Header as="h4" content="Starting Puzzle"/>}
-        {puzzlesSolved > 0 ? null : <p>{team.startLocation}</p>}
-        */}
+        {this._startingPuzzle(team, puzzlesSolved)}
 
         <Header as="h4" content="Puzzles Solved" />
         <p>{puzzlesSolved} of {team.puzzles.length}</p>
@@ -51,19 +41,17 @@ class GameStats extends Component {
           ({minutes} minutes)
         </p>
 
-        { this._doneMessage() }
+        { this._doneMessage(finished) }
       </Message>
     );
   }
 
-  _doneMessage() {
-    const { finished } = this.state;
+  _doneMessage(finished) {
     if (!finished) return null;
-	// virtualeventonly: head back to Red Square, not tune into webcast
     return (
       <Header as='h3'
         content={`Congratulations! You've finished the ${eventYear} Puzzle Hunt!`}
-        subheader="Tune back into the webcast by 5pm PT for prizes."
+        subheader="Tune into the webcast or return to Red Square by 5pm PT for prizes."
       />
     );
   }

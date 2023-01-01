@@ -12,10 +12,6 @@ class PuzzleEditor extends Component {
     this.state = this._stateFromProps(props);
   }
 
-  componentWillReceiveProps(props) {
-    this.setState(this._stateFromProps(props));
-  }
-
   _stateFromProps(props) {
     const { puzzle } = props;
     return omit(puzzle, ['_id']);
@@ -25,7 +21,7 @@ class PuzzleEditor extends Component {
     return (
       <Form onSubmit={(e) => e.preventDefault() }>
         <Header as='h3' content='Puzzle Editor'/>
-        <Form.Group>
+        <Form.Group inline>
           <Form.Input
             name='name'
             label='Puzzle Name'
@@ -69,19 +65,43 @@ class PuzzleEditor extends Component {
 
         <Form.Input
           name='location'
-          label='Location'
+          label='Location (in-person only)'
           value={ this.state.location }
           onChange={ (e) => this._handleChange(e) }
         />
 
         <Form.Input
           name='downloadURL'
-          label='Download URL'
+          label='Download URL (virtual only)'
           value={ this.state.downloadURL }
           onChange={ (e) => this._handleChange(e) }
         />
 
         <HintEditor hints={this.state.hints} updateHints={(hints) => this.setState({ hints })}/>
+
+        <Message size="tiny">
+          In some cases, we may know of a wrong answer that teams may be
+          likely to guess. If they do, we can provide them with a free hint
+          that directs them back to the right path.
+          If a team guesses any of the "trigger codewords," they will be
+          given the "trigger hint" for free.
+        </Message>
+        <Form.Group>
+          <Form.Input
+            name="triggerCodewords"
+            label="Trigger codeword(s) [optional]"
+            placeholder="soclose,almostthere"
+            value={this.state.triggerCodewords}
+            onChange={ (e) => this._handleChange(e) }
+            />
+
+          <Form.Input
+            name="triggerHintImageURL"
+            label="Trigger Hint image URL [optional]"
+            value={this.state.triggerHintImageURL}
+            onChange={ (e) => this._handleChange(e) }
+            />
+        </Form.Group>
 
         <Form.Group>
           <Form.Button color='green' content='Save' onClick={(e) => this._save(e)}/>
@@ -94,7 +114,9 @@ class PuzzleEditor extends Component {
 
   _save(e) {
     e.preventDefault();
-    const { name, stage, answer, allowedTime, timeoutScore, bonusTime, location, downloadURL, hints } = this.state;
+    const { name, stage, answer, allowedTime, timeoutScore,
+            bonusTime, location, downloadURL, hints,
+            triggerCodewords, triggerHintImageURL } = this.state;
     const fields = {
       name: name.trim(),
       stage: parseInt(stage),
@@ -105,6 +127,8 @@ class PuzzleEditor extends Component {
       location: location.trim(),
       downloadURL: downloadURL.trim(),
       hints,
+      triggerCodewords: triggerCodewords.trim(),
+      triggerHintImageURL: triggerHintImageURL.trim(),
     };
 
     Meteor.call('admin.puzzle.update', this.props.puzzle._id, fields, (error, result) => {

@@ -7,7 +7,7 @@ Meteor.publish('admin.transactions', function _publishAdminTransactions(search =
   if (!isAdmin(this.userId)) { return this.ready(); }
 
   const fields = {
-    tx:1, email:1, name:1, studentTickets: 1, nonStudentTickets: 1, createdAt:1, gear:1
+    tx:1, email:1, name:1, tickets: 1, createdAt:1, gear:1
   };
   const hasSearch = search && search.length > 0;
 

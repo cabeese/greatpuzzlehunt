@@ -74,7 +74,7 @@ class AdminLeaderboardDivisionTable extends Component {
         <Table.Cell>{i+1} | {name}</Table.Cell>
         <Table.Cell>{playerCt}</Table.Cell>
         <Table.Cell positive={finished} warning={!finished}>
-          <code>{renderScore(finalScore).time} ({finalScore} sec)</code>
+          <code>{renderScore(finalScore).time} ({finalScore.toFixed(1)} sec)</code>
 		  {!finished ? <Popup content="Team has incomplete puzzles" trigger={<Icon name="warning sign" />} /> : null}
         </Table.Cell>
         {puzzles.map((puzzle) => this._renderPuzzle(puzzle))}
@@ -91,7 +91,7 @@ class AdminLeaderboardDivisionTable extends Component {
     return (
       <Table.Cell key={puzzle.puzzleId} positive={finished} warning={!finished}>
         { gaveUp ? <Icon name="ban" color="red" /> : null }
-        {finished ? <code>{renderScore(puzzle.score).time} (hints {hintsTaken}) ({puzzle.score} sec)</code> : null }
+        {finished ? <code>{renderScore(puzzle.score).time} (hints {hintsTaken}) ({puzzle.score.toFixed(1)} sec)</code> : null }
         {inProgress ? <div><Icon name="spinner" color="blue" loading /> In Progress</div> : null }
         { !started ? <code>--:--:--</code> : null }
       </Table.Cell>

@@ -27,10 +27,11 @@ class GameUI extends Component {
 
   _main() {
     const { team, user } = this.props;
+    const { inPerson } = team;
     return (
       <div>
         <GameStats team={ team }/>
-        <CheckInPacket /> {/*virtualeventonly*/}
+        {inPerson ? "" : <CheckInPacket />}
         <GamePuzzles team={ team } user={ user }/>
       </div>
     );

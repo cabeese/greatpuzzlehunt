@@ -14,5 +14,5 @@ export default AdminTeamListTracker = withTracker(() => {
 
   const teams = Teams.find({}).fetch();
 
-  return { loading, teams };
+  return { loading, teams, teamHandle };
 })(AdminTeamTable);

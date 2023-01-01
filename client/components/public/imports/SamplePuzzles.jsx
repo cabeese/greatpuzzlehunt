@@ -9,6 +9,61 @@ export default class SamplePuzzles extends Component {
     this.state = {};
 
     this.puzzles = {
+      '2022': {
+        puzzles: [
+          {
+            name: 'Shark – Loan or Pool? Chews Wisely!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/shark/shark-b005d73b-1256-441c-adf8-74e2a8f25ecc.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/shark/h1-6f0d91db-bea2-43e0-8ecf-5a726ce88d32.JPG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/shark/h2-0ace70dc-9be5-4320-b723-a2997844ea43.JPG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/shark/h3-edfe4c17-ec99-4a0f-88e1-857681c0ddb1.JPG'
+            ],
+            codeWord: 'duchess of doom',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/shark/1.Walk-Through+Solution+Shark-Loan+or+Pool+Chews+Wisely.pdf'
+          },
+          {
+            name: 'Operation Ship Shape!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/ship/ship-5d5706bd-7e09-4c9a-8d69-59c658029296.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/ship/h1-1b2565de-0ffc-4d6b-baf8-c626ce7541a7.JPG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/ship/h2-b3a2dd06-81cf-47f7-8e9f-1241792bf0d2.JPG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/ship/h3-9a777cc0-0c6e-4106-8e4c-26faf299ffc9.JPG'
+            ],
+            codeWord: 'uss olympia',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/ship/2.Walk-Through+Solution-Operation+Ship+Shape.pdf'
+          },
+          {
+            name: 'Go for Baroque!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/baroque/baroque-bc9c3bc7-4795-42f0-8e90-17813b5a1309.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/baroque/h1-9f6fb206-9b67-495e-8bdc-e0cbe925185a.JPG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/baroque/h2-451d4fe4-5ddd-47c3-98f5-0c0dc77314f7.JPG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/baroque/h3-a13f72b4-e0d0-46bf-b3f9-bd5f95dea48e.JPG'
+            ],
+            codeWord: 'fourth',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/baroque/3.Walk-Through+Solution-Go+for+Baroque.pdf'
+          },
+          {
+            name: 'Trade Secret!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/trade-ad96c1e8-681e-4a9c-a583-5ba006afc040.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/h1-3eca0f61-9ebc-48d6-ac9d-9dce31a1cb73.JPG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/h2-85419144-f834-4db0-ba04-799be50655b7.JPG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/h3-25345ff6-f175-4006-90cc-2da40ef95e44.JPG'
+            ],
+            codeWord: 'rear view mirror',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/trade/4.Walk-Through+Solution-Trade+Secret.pdf'
+          },
+          {
+            name: 'Meta Puzzle',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/meta/meta-c9cd6144-7f94-4c44-b1f0-3ac34ed65d4a.pdf',
+            hints: [],
+            codeWord: 'let\'s party',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/meta/5.Walk-Through+Solution-Meta-Puzzle.pdf'
+          }
+        ]
+      },
       '2021': {
         inspiration: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/0.READ_ME_FIRST+v5-2021.pdf',
         extra: (
@@ -150,7 +205,7 @@ export default class SamplePuzzles extends Component {
       <Segment basic key={year}>
       <Header as='h1'>{year}</Header>
         { this.puzzles[year].extra ? this.puzzles[year].extra : null }
-        <span className='h4'>Info Packet: </span><Button as='a' target='_blank' href={this.puzzles[year].infoPacket} content='Download'/>
+        { this.puzzles[year].infoPacket ? <><span className='h4'>Info Packet: </span><Button as='a' target='_blank' href={this.puzzles[year].infoPacket} content='Download'/></> : null }
         { this.puzzles[year].inspiration ? 
           <span className='h4'><br />Puzzle Inspiration (Contains spoilers): <Button as='a' target='_blank' href={this.puzzles[year].inspiration} content="Download"/></span>
         : null }

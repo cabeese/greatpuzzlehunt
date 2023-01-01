@@ -10,6 +10,7 @@ import {
   Message,
   Label,
   Confirm,
+  Grid
 } from 'semantic-ui-react';
 
 import VolunteerTeamComp from './VolunteerTeamComp';
@@ -63,7 +64,7 @@ class VolunteerTeamCheckInMain extends Component {
       )
     };
     teamMembers.forEach(member => {
-      if (member.checkedIn) packets++;
+      if (member.checkedIn && member.inPersonAllowed) packets++;
       if (!member.photoPermission) noPhotoUsers++;
     });
 
@@ -86,7 +87,10 @@ class VolunteerTeamCheckInMain extends Component {
     return (
       <Segment basic>
         <Header as="h3" content="Team Members"/>
+
+        <Grid>
         { members.map((member) => this._member(member)) }
+        </Grid>
       </Segment>
     );
   }
@@ -96,13 +100,32 @@ class VolunteerTeamCheckInMain extends Component {
     const warning = member.paid && !member.checkedIn;
     const failure = !member.paid; // or missing info
     const status = this._status(member);
+
+    const className = success ? "green" : (warning ? "yellow" : "red");
+
     return (
-      <Message positive={success} warning={warning} negative={failure} key={member._id}>
-        <Message.Content>
-          {member.name}
-          <Label style={{float: 'right'}}>{status}</Label>
-        </Message.Content>
-      </Message>
+      //<Message positive={success} warning={warning} negative={failure} key={member._id}>
+        //<Message.Content>
+          <Grid.Row columns={3} className={className} key={member._id}>
+            <Grid.Column width={8}>
+              { member.name }
+            </Grid.Column>
+            <Grid.Column width={4}>
+              { member.inPersonAllowed ? 
+                <><Icon name="group" color="blue" /> In-Person</>
+                :
+                <><Icon name="video" color="yellow" /> Virtual</>
+              }
+            </Grid.Column>
+            <Grid.Column width={4}>
+              { status }
+            </Grid.Column>
+          </Grid.Row>
+
+          //{member.name}
+          //<Label style={{float: 'right'}}>{status}</Label>
+        //</Message.Content>
+      //</Message>
     );
   }
 
