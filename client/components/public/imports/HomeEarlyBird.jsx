@@ -33,9 +33,6 @@ class HomeEarlyBird extends Component {
           <Grid.Row centered>
             <Header size="medium" style={{color: "white"}}>Registration is a 4-step process:</Header>
             </Grid.Row>
-            <Grid.Row centered>
-              <p style={{color: 'red'}}><strong>Important</strong>: In-person participants must use their WWU email address.</p>
-            </Grid.Row>
             <Grid.Row width={16} columns={4} centered verticalAlign="top">
               <Grid.Column textAlign="center">
                 <span className="step-number">1</span>
@@ -81,7 +78,6 @@ class HomeEarlyBird extends Component {
             </Grid.Row>
             <Grid.Row style={{fontSize: "12pt"}}>
               *Registration is free and open to all, anywhere in the world. Donations are gratefully accepted.<br/>
-              *In-Person option is only open to WWU students, faculty, and staff.<br />
               *Each person wanting to join a team must register themselves first.<br />
               Participants under age 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.
             </Grid.Row>

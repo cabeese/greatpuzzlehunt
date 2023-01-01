@@ -10,33 +10,28 @@ import AdminTeamModal from './AdminTeamModal';
 class AdminTeamTable extends Component {
   constructor(props) {
     super(props);
-    this.state = this.stateFromProps(props);
+    this.state = {
+      selectedTeamId: ''
+    };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.stateFromProps(nextProps, this.state));
+  componentWillUnmount() {
+    if (this.props.teamHandle) {
+      this.props.teamHandle.stop();
+    }
   }
 
-  stateFromProps(newProps, currentState = {}) {
-    const { loading, teams } = newProps;
-    let { selectedTeamId, selectedTeam } = currentState;
-
-    if (selectedTeamId) {
-      selectedTeam = find(teams, (t) => (t._id === selectedTeamId));
-    }
-
-    return {
-      teams,
-      selectedTeamId,
-      selectedTeam,
-    }
+  getSelectedTeam(selectedTeamId, teams){
+    if (!selectedTeamId) return null;
+    return find(teams, (t) => (t._id === selectedTeamId));
   }
 
   render() {
     const { loading, teams } = this.props;
     if (loading) return <Loading/>;
 
-    const { selectedTeam } = this.state;
+    const { selectedTeamId } = this.state;
+    const selectedTeam = this.getSelectedTeam(selectedTeamId, teams);
 
     return (
       <div>
@@ -69,18 +64,18 @@ class AdminTeamTable extends Component {
         <AdminTeamTableRow
           team={team}
           key={team._id}
-          selectTeam={ () => this._selectTeam(team) }
+          selectTeam={ () => this._selectTeam(team._id) }
         />
       )
     })
   }
 
-  _selectTeam(team) {
-    this.setState({ selectedTeam: team, selectedTeamId: team._id });
+  _selectTeam(teamId) {
+    this.setState({ selectedTeamId: teamId });
   }
 
   _clearSelectedTeam() {
-    this.setState({ selectedTeam: null });
+    this.setState({ selectedTeamId: '' });
   }
 }
 

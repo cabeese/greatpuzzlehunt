@@ -8,21 +8,9 @@ import AdminTeamModalGeneral from './AdminTeamModalGeneral';
 import AdminTeamModalProgress from './AdminTeamModalProgress';
 
 class AdminTeamModal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: Boolean(props.team),
-    };
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({ open: Boolean(props.team) });
-  }
-
   render() {
     const { team, clearTeam } = this.props;
-    const { open } = this.state;
-    if (!open) return null;
+    if (!team) return null;
 
     const paneMap = {
       "General": AdminTeamModalGeneral,

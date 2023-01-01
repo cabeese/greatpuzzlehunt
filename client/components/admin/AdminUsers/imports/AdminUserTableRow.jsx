@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Icon, Button } from 'semantic-ui-react';
+import MaybeNullIcon from '../../../imports/MaybeNullIcon';
 import moment from 'moment';
 
 class AdminUserTableRow extends Component {
@@ -37,6 +38,10 @@ class AdminUserTableRow extends Component {
     const fullname = `${firstname} ${lastname}`;
     let volunteerIcon = null;
     let adminIcon = null;
+    let venueIcon = <MaybeNullIcon value={user.inPersonAllowed}
+      truthy={<Icon name="group" color="blue" />}
+      falsey={<Icon name="video" color="green" />}
+      />;
 
     if (user.hasRole('volunteer')) {
       volunteerIcon = <Icon name='hand paper' color='teal'/>;
@@ -48,14 +53,23 @@ class AdminUserTableRow extends Component {
 
     return (
       <span>
-        <Icon name='ticket' color={paid ? 'green' : 'yellow'}/> {fullname} {adminIcon}{volunteerIcon}
+        <Icon name='ticket' color={paid ? 'green' : 'yellow'}/>
+        {venueIcon}
+        {fullname}
+        {adminIcon}{volunteerIcon}
       </span>
     );
   }
 
   _email() {
     const { user } = this.props;
-    const icon = user.isVerified() ? <Icon name='lock' color='green' /> : <Icon name='unlock alternate' color='yellow'/>;
+    const icon = user.isVerified() ?
+      <Icon name='mail' color='green' />
+      :
+      <Icon.Group>
+        <Icon name="dont" color="yellow" size="large" />
+        <Icon name='mail' color='grey' size="small" />
+      </Icon.Group>;
     return (
       <span>
         {icon} {user.email}

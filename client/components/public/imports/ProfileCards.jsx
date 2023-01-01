@@ -14,6 +14,7 @@ export default class ProfileCards extends Component {
         role: 'Director, Founder, Coordinator, Puzzle Creator',
         image: '/img/2016/event-photos/millie_johnson.jpg',
       },
+	  
       {
         name: 'Wendy Aguilar',
         title: '',
@@ -33,22 +34,30 @@ export default class ProfileCards extends Component {
       {
         name: 'Katie Lane',
         title: '',
-        role: 'President, Marketing & Promotion',
+        role: 'Co-President, Marketing & Promotion',
         image: '/img/team/katie.png'
+      },
+	  
+	  {
+        name: 'Anya Davis',
+        title: '',
+        role: 'Co-President, Marketing & Promotion',
+        image: '/img/team/anya.png'
       },
       
       {
         name: 'Dalton Lange',
         title: '',
-        role: 'VP Marketing & Promotion',
+        role: 'VP, Marketing & Promotion',
         image: '/img/team/dalton.jpg',
       },
+	  
       {
         name: 'Alexandria Tan',
         title: '',
-        role: 'VP Marketing & Promotion',
+        role: 'VP, Marketing & Promotion',
         image: '/img/team/alexandria_tan.jpg'
-      },
+      }
     ];
 
     this.developers = [
@@ -56,7 +65,7 @@ export default class ProfileCards extends Component {
         name: 'Noah Strong',
         title: '',
         role: 'Lead Developer',
-        image: '/img/team/noah.jpg',
+        image: '/img/team/noah_s.jpg',
       },
 
       {
@@ -78,8 +87,15 @@ export default class ProfileCards extends Component {
         title: '',
         role: 'Developer & Tech Support',
         image: '/img/team/alexandria_tan.jpg'
+      },
+	  
+	  {
+        name: 'Eric Fox',
+        title: '',
+        role: 'Developer',
+        image: '/img/team/eric.png'
       }
-    ]
+    ];
 
     this.budgetCoord = [
       {
@@ -88,20 +104,56 @@ export default class ProfileCards extends Component {
         role: 'Co-President, Budget Coordination',
         image: '/img/team/zoe.jpg',
       },
+	  
+	  {
+        name: 'Mayla Ward',
+        title: '',
+        role: 'Co-President, Budget Coordination',
+        image: '/img/team/mayla.png',
+      },
+	  
+	  {
+        name: 'Noah Jensen',
+        title: '',
+        role: 'Co-President, Budget Coordination',
+        image: '/img/team/noah_j.png',
+      },
 
       {
         name: 'Joanna Schroeder',
         title: '',
-        role: 'Co-President, Budget Coordination',
+        role: 'VP, Budget Coordination',
         image: '/img/team/joanna.jpg'
       }
     ];
+	
     this.management = [
       {
         name: 'Nick Satnik',
         title: '',
-        role: 'President, Management',
+        role: 'Co-President, Management',
         image: '/img/team/nick.jpg',
+      },
+	  
+	  {
+        name: 'Lucas Ragsdale',
+        title: '',
+        role: 'Co-President, Management',
+        image: '/img/team/lucas.png',
+      },
+	  
+	  {
+        name: 'Owen Montefisher',
+        title: '',
+        role: 'Co-President, Management',
+        image: '/img/team/owen.png',
+      },
+	  
+	  {
+        name: 'Andy Nugent',
+        title: '',
+        role: 'VP, Management',
+        image: '/img/team/andy.png',
       }
     ];
 
@@ -184,7 +236,6 @@ export default class ProfileCards extends Component {
         role: 'Club President 2017-18',
         image: '/img/team/scott.jpg',
       },
-
       {
         name: 'Alex Covington',
         title: '',

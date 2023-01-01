@@ -8,12 +8,12 @@ import GamestateComp from '../../imports/GamestateComp';
 class CheckinPacketUI extends Component {
     render() {
         if (!this.props.ready){
-            return <span>Check-in Packet loading...</span>;
+            return <Segment>Check-in Packet loading...</Segment>;
         }
 
         const { checkinPacketURL } = this.props.gamestate;
         if (!checkinPacketURL){
-            return <span>No downloadable check-in packet found</span>;
+            return <Segment>No downloadable check-in packet found</Segment>;
         }
 
         return (

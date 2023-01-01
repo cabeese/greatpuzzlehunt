@@ -2,7 +2,19 @@ import { Meteor } from 'meteor/meteor';
 import { isAdmin, isVolunteer } from '../../lib/imports/method-helpers.js';
 
 Meteor.publish('admin.teams', function() {
-  return isAdmin(this.userId) ? Teams.find({}) : this.ready();
+  if (!isAdmin(this.userId)) return this.ready();
+
+  const projection = {
+    name: 1,
+    division: 1,
+    checkinConfirmed: 1,
+    inPerson: 1,
+    hasBegun: 1,
+    'puzzles.start': 1,
+    'puzzles.end': 1,
+    'puzzles.name': 1,
+  }
+  return Teams.find({}, {fields: projection});
 });
 
 Meteor.publish('admin.teams.export', function() {

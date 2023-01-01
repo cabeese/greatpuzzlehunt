@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Grid, Segment, Message } from 'semantic-ui-react';
+import { Container, Grid, List, Segment, Message } from 'semantic-ui-react';
 
-const { regularRegistrationStart, eventDate, eventDay } = Meteor.settings.public;
+const { regularRegistrationStart, eventDate, eventDay, gearSaleEnd } = Meteor.settings.public;
 
 import HomeHeader from './imports/HomeHeader';
 import HomeIntro from './imports/HomeIntro';
@@ -20,22 +20,28 @@ const AnnouncementsMessage = (
         <Grid.Row>
           <Grid.Column width={16} className='raised'>
             <Container textAlign='left'>
-              <Message color='blue' size='huge'>
+              <Message size='huge' warning>
                 <Message.Content>
                   <Message.Header>
-                    We Are Excited to Announce the SIXTH Annual Great Puzzle Hunt
-                    </Message.Header>
-                    <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
-                      <ul>
-                        <li>Date: { eventDay }, { eventDate } from 9:30 AM&mdash;5:00 PM (PT).</li>
-                        <li>Event is FREE and open to all (donations gratefully accepted).</li>
-                        <li>We plan to run a HYBRID event this year: In-Person (WWU campus community only this year) and Virtual options.</li>
-                        <li>Due to COVID-19 and our Priority on Safety and Health, we will follow University and CDC Guidelines.</li>
-                        <li>If necessary, we will adapt the event to be fully virtual.</li>
-                      </ul>
-                      <br />
-                      <center><strong>Check back here for updates!</strong></center>
-                    </Segment>
+                    Join us in 2023!
+                  </Message.Header>
+                  <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
+                    <List>
+                      <List.Item>
+                        The seventh annual Great Puzzle Hunt will take place
+                        on <strong>Saturday, April 15th, 2023</strong>.
+                      </List.Item>
+
+                      <List.Item>
+                        Registration is FREE and open to all, anywhere in the world.
+                        Donations are gratefully accepted.
+                      </List.Item>
+
+                      <List.Item>
+                        The event is <em>hybrid</em>: teams may play in person or virtually.
+                      </List.Item>
+                    </List>
+                  </Segment>
                   </Message.Content>
                 </Message>
             </Container>
