@@ -49,7 +49,7 @@ class MessageUserModal extends Component {
 
     _sendMessage(e) {
 	// send the message
-	Meteor.call('user.message', this.state.user.email.toLowerCase(), this.state.text, (error, result) => {
+	Meteor.call('user.matchmaking-message', this.state.user.email.toLowerCase(), this.state.text, (error, result) => {
 	    if (error) {
 	 	// handle the error
 		this.setState({ error: error.message });
