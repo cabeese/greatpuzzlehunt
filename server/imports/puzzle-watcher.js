@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
+import { getShortName } from '../../lib/imports/util';
 
 const CHECK_INTERVAL = {
   seconds: 5,
@@ -28,6 +29,8 @@ function timeOutPuzzles() {
 
     if (now.isAfter(maxTime)) {
       // Timeout this puzzle
+      const teamNameShort = getShortName(team.name);
+      Meteor.logger.info(`Team "${teamNameShort} timed out on puzzle ${puzzle.name}`);
       Teams.update(team._id, {
         $set: {
           currentPuzzle: null,
