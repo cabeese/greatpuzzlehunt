@@ -257,7 +257,7 @@ Gear = class Gear extends Component {
                 </List>
               </Grid.Column>
               <Grid.Column width={5}>
-                  <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/2023/gear/shirt_design.png'/>
+                  <Image src={`${s3_prefix}shirt_design.png`}/>
               </Grid.Column>
             </Grid.Row>
           </Grid>
