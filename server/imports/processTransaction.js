@@ -21,13 +21,11 @@ export default async function processTransaction(txData) {
     gear,
     tickets,
     shippingInfo,
-    internationalShippingLineItems,
   } = txData;
 
   const gearOrders = gear;
 
   info(`Processing transaction "${tx}" from ${email}`);
-  info(`internationalShipping?: ${shippingInfo.internationalCount}`);
   info("Gear Orders:")
   logobj(gearOrders);
   if (USING_TICKET_CODES) {
@@ -51,7 +49,6 @@ export default async function processTransaction(txData) {
       name,
       tickets,
       shippingInfo,
-      // internationalShippingLineItems,
       gearOrders,
       createdAt: now,
       updatedAt: now,
