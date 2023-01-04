@@ -34,11 +34,12 @@ class AdminUserTableRow extends Component {
 
   _name() {
     const { user } = this.props;
-    const { firstname, lastname, paid, accountType } = user;
+    const { firstname, lastname, gameMode, paid, accountType } = user;
     const fullname = `${firstname} ${lastname}`;
+    const gameModeIcon = gameMode ? gameMode === "INPERSON" : null;
     let volunteerIcon = null;
     let adminIcon = null;
-    let venueIcon = <MaybeNullIcon value={user.inPersonAllowed}
+    let venueIcon = <MaybeNullIcon value={gameModeIcon}
       truthy={<Icon name="group" color="blue" />}
       falsey={<Icon name="video" color="green" />}
       />;
