@@ -529,15 +529,12 @@ FAQ = class FAQ extends Component {
             <Grid stackable>
               <Grid.Row>
                 <Grid.Column width={10}>
-                  <Message error>
-                    <em>Note: this information is from 2022 and may be adjusted for the 2023 Hunt.</em>
-                  </Message>
                   <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
                   { gamestate && gamestate.buyGear ? <p>Take a look at our gear <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
                   {gearPricing}
                 </Grid.Column>
                 <Grid.Column width={6}>
-                  <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/2022/gear/shirt_design.png'/>
+                  <Image src={`https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/shirt_design_sponsorless.png`}/>
                 </Grid.Column>
 
               </Grid.Row>
