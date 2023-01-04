@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css"
+import "slick-carousel/slick/slick-theme.css";
 
 import { Container, Segment, Header, Icon, Modal, Grid, List, Card, Image } from 'semantic-ui-react';
 import LinkButton from '../imports/LinkButton';
@@ -12,7 +12,7 @@ const { eventYear, gearSaleEnd } = Meteor.settings.public;
 
 const link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
-const s3_prefix = 'https://gph-distributed.s3.us-west-2.amazonaws.com/2022/gear/';
+const s3_prefix = `https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/`;
 
 const buyButton = (  
   <LinkButton as='a' href={link}
@@ -74,7 +74,7 @@ const prices = {
   "btw": "$20" + xxlStr,
   "lstw": "$25" + xxlStr,
   "lstm": "$25" + xxlStr,
-  "fcu": "$25" + xxlStr,
+  "fcu": "$30" + xxlStr,
   "hu": "$35" + xxlStr,
   "hy": "$35" + xxlStr,
   "qzu": "$35" + xxlStr
@@ -94,20 +94,18 @@ const sizes = {
   "qzu": "S-3XL"
 };
 
-const color_names = ["Black", "Dark Chocolate", "Forest", "Heathered Navy", "Navy", "Purple", "Charcoal", "Dark Heather", "Heathered Charcoal", "Heathered Brown", "Forest Green", "Legion Blue", "Black Heather", "Charcoal Grey", "J Navy", "Vintage Htr Navy"];
-
-const style_color_indices = {
-  "ctm": [0, 1, 2, 3, 4, 5],
-  "ctw": [0, 6, 7, 4, 5],
-  "cty": [0, 2, 4, 5],
-  "btm": [0, 6, 8, 3],
-  "btw": [0, 6, 9, 8],
-  "lstw": [0, 4],
-  "lstm": [0, 6, 1, 10, 4, 5],
-  "fcu": [0, 6, 1, 10, 11, 4, 5],
-  "hu": [0, 1, 7, 10, 4, 5],
-  "hy": [0, 10, 4, 5],
-  "qzu": [0, 12, 13, 10, 14, 15]
+const style_colors = {
+  "ctm": ["Black", "Dark Chocolate", "Forest", "Navy", "Purple"],
+  "ctw": ["Black", "Dark Heather", "Navy", "Purple"],
+  "cty": ["Black", "Forest", "Navy", "Purple"],
+  "btm": ["Black", "Charcoal", "Heathered Brown", "Heathered Charcoal", "Heathered Navy"],
+  "btw": ["Black", "Charcoal", "Heathered Brown", "Heathered Charcoal", "Heathered Navy"],
+  "lstm": ["Black", "Dark Chocolate", "Dark Heather", "Forest Green", "Navy", "Purple"],
+  "lstw": ["Black", "Navy"],
+  "fcu": ["Black", "Dark Chocolate", "Forest Green", "Navy", "Purple"],
+  "hu": ["Black", "Dark Chocolate", "Dark Heather", "Forest Green", "Navy", "Purple"],
+  "hy": ["Black", "Forest Green", "Navy", "Purple"],
+  "qzu": ["Black", "Black Heather", "Forest Green", "J Navy", "Vintage Htr Navy"]
 };
 
 Gear = class Gear extends Component {
@@ -123,7 +121,7 @@ Gear = class Gear extends Component {
       title: "",
       size: "",
       materials: "",
-      color_indices: []
+      colors: []
       //swatches: ""
     };
   }
@@ -143,7 +141,7 @@ Gear = class Gear extends Component {
                   back: `${s3_prefix}${str}b.jpg`,
                   code: str,
                   //swatches: "/img/gear/swatches/" + str + ".png",
-                  color_indices: style_color_indices[str],
+                  colors: style_colors[str],
                   size: sizes[str],
                   title: titles[str],
                   price: prices[str],
@@ -202,14 +200,14 @@ Gear = class Gear extends Component {
                   <p>Material: {this.state.materials}</p>
                   <Header as="h2">Colors:</Header>
                   {
-                    Object.keys(this.state.color_indices).map((i) => {
-                      let index = this.state.color_indices[i];
+                    Object.keys(this.state.colors).map((idx) => {
+                      let color_name = this.state.colors[idx];
                       return (
-                        <div className="gearitem ui card" key={i} style={{verticalAlign: "top", display: "inline-block", marginLeft: "1em"}}>
-                          <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} src={`${s3_prefix}${this.state.code}_${color_names[index].toLowerCase().replaceAll(" ", "")}.jpg`}/>
+                        <div className="gearitem ui card" key={idx} style={{verticalAlign: "top", display: "inline-block", marginLeft: "1em"}}>
+                          <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} src={`${s3_prefix}${this.state.code}_${color_name.toLowerCase().replaceAll(" ", "")}.jpg`}/>
                           <Card.Content>
                             <Card.Description>
-                              { color_names[index] }
+                              { color_name }
                             </Card.Description>
 
                           </Card.Content>
@@ -229,7 +227,7 @@ Gear = class Gear extends Component {
           <PuzzlePageTitle title="Gear" />
           Gear store closes { gearSaleEnd }.
           <br />
-          Shirts will be ordered on Monday, April 11 and assuming no supply chain delays, should be shipped out or ready for pick-up the week of April 18.
+          Shirts will be ordered on Monday, April 17 and assuming no supply chain delays, should be shipped out or ready for pick-up the week of April 24.
           <br /><br />
           Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes.
           <br /><br />
@@ -246,40 +244,20 @@ Gear = class Gear extends Component {
                   <List.Item>
                     <strong>Domestic Shipping</strong>:
                     <List.List>
-                      <List.Item>For any T-shirt (long or short sleeve):</List.Item>
-                      <List.List>
-                        <List.Item>1 shirt: $5</List.Item>
-                        <List.Item>2&ndash;3 shirts: $8</List.Item>
-                        <List.Item>4&ndash;6 shirts: $15</List.Item>
-                      </List.List>
-                      <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip)
-                        <List.List>
-                          <List.Item>1 sweatshirt: $8</List.Item>
-                          <List.Item>2 sweatshirts: $15</List.Item>
-                        </List.List>
-                      </List.Item>
+                      <List.Item>For any T-shirt (long or short sleeve): $5/shirt</List.Item>
+                      <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip): $8/sweatshirt</List.Item>
                     </List.List>
                   </List.Item>
                   <List.Item>
                     <strong>International Shipping</strong>:
                     <List.List>
-                      <List.Item>For any T-shirt (long or short sleeve):</List.Item>
-                      <List.List>
-                        <List.Item>1&ndash;3 shirts: $25</List.Item>
-                        <List.Item>4&ndash;6 shirts: $50</List.Item>
-                      </List.List>
-                      <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip)
-                        <List.List>
-                          <List.Item>1 sweatshirt: $25</List.Item>
-                          <List.Item>2 sweatshirts: $50</List.Item>
-                        </List.List>
-                      </List.Item>
+                      <List.Item>For any shirt (T-shirt or sweatshirt): $25/shirt</List.Item>
                     </List.List>
                   </List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={5}>
-                  <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/2022/gear/shirt_design.png'/>
+                  <Image src={`${s3_prefix}shirt_design.png`}/>
               </Grid.Column>
             </Grid.Row>
           </Grid>
