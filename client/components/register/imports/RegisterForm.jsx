@@ -219,7 +219,7 @@ class RegisterForm extends Component {
                 subheader='This information is required in the case of emergency.'/>
 
         <Form.Group widths='equal'>
-          <Form.Input name='phone' type='tel' label='Phone' placeholder='555-555-1234'
+          <Form.Input name='phone' type='tel' label='Phone (US/Canada only)' placeholder='555-555-1234'
                       value={ this.state.phone } onChange={ (e) => this._handleTextChange(e) }/>
           <Form.Input name='age' type='text' label='Age' placeholder='Number of revolutions around sun'
                       value={ this.state.age } onChange={ (e) => this._handleTextChange(e) }/>
@@ -254,7 +254,7 @@ class RegisterForm extends Component {
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='ecPhone' label='Phone' placeholder='A phone they will answer'
+          <Form.Input name='ecPhone' label='Phone (US/Canada Only)' placeholder='A phone they will answer'
                       value={ this.state.ecPhone } onChange={ (e) => this._handleTextChange(e) }/>
           <Form.Input name='ecEmail' label='Email' placeholder='A reliable email'
                       value={ this.state.ecEmail } onChange={ (e) => this._handleTextChange(e) }/>
