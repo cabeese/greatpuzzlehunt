@@ -346,13 +346,11 @@ class RegisterForm extends Component {
 
   _handleDataChange(e, data) {
     const { name, value, checked } = data;
-    // console.log(data);
     this.setState({ [name]: (value || checked) });
   }
 
   _handleCheckBoxChange(e) {
     const { name, value } = e.target;
-    console.log(name, value);
   }
 
   _holdHarmlessButton() {
