@@ -101,12 +101,9 @@ class HomeHeader extends Component {
     const gamestate = this.props.gamestate || {};
 
     const registerButton = (
-      <Scrollchor
-        to="#home-registration"
-        animate={{offset:-60, duration:800}}>
-        <Button size="huge" color="blue" content="Register Now!"/>
-      </Scrollchor>
-      
+      <LinkButton
+        to="/register"
+        size="huge" color="blue" content="Register Now!" />
     );
 
     const leaderboardButton = (

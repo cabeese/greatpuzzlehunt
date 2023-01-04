@@ -41,34 +41,6 @@ Profile = class Profile extends Component {
     );
   }
 
-  _hybridMessage(){
-    const { inPersonAllowed } = this.props.user;
-    if (this.props.user.accountType === "VOLUNTEER") return "";
-
-    if (inPersonAllowed){
-      return (
-        <Segment color="blue">
-          <Icon name="group" />
-          <span>
-            You have an in-person ticket code.
-            Great!
-            Please note that <em>this does not necessarily allow you to play on
-            campus this year!</em> You must set
-            the <em>in-person</em> setting on your Team page separately.
-            If you have questions,
-            please <Link to="/contact">Contact Us</Link>!
-          </span>
-        </Segment>
-      );
-    } else {
-      return (
-        <Segment color="green">
-          <span>You are registered to play virtually this year!</span>
-        </Segment>
-      );
-    }
-  }
-
   _renderMain() {
     const { showTeamPreview } = this.state;
     return (
@@ -79,8 +51,6 @@ Profile = class Profile extends Component {
             subTitle={this.props.user.getEmail()}
             />
           Last Updated: {this.state.updatedAt}
-          <br />
-          {this._hybridMessage()}
           <ProfileEditor user={this.props.user} />
           {showTeamPreview ? <ProfileTeamPreview /> : null }
 

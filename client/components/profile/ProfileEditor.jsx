@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Segment, Header, Form, Message, Icon, Checkbox } from 'semantic-ui-react';
 import { extend, pick } from 'lodash';
+import { gameModeOptions } from '../../../lib/imports/util'
 
 ProfileEditor = class ProfileEditor extends Component {
   constructor(props) {
@@ -21,15 +22,15 @@ ProfileEditor = class ProfileEditor extends Component {
     return {
       firstname: user.firstname || '',
       lastname: user.lastname || '',
+      gameMode: user.gameMode || '',
       email: user.getEmail(),
       lookingForTeam: user.lookingForTeam || false,
-      inPersonAllowed: user.inPersonAllowed,
       bio: user.bio || '',
     };
   }
 
   render() {
-    const { firstname, lastname, lookingForTeam, bio } = this.state;
+    const { firstname, lastname, gameMode, lookingForTeam, bio } = this.state;
     return (
     <Segment basic>
       <Form onSubmit={(e) => this._handleSubmit(e)}>
@@ -38,6 +39,10 @@ ProfileEditor = class ProfileEditor extends Component {
         <Form.Group widths='equal'>
           <Form.Input name='firstname' label='First Name' placeholder='First name' value={firstname} onChange={(e) => this._handleChange(e)} />
           <Form.Input name='lastname' label='Last Name' placeholder='Last name' value={lastname} onChange={(e) => this._handleChange(e)} />
+          <Form.Dropdown name='gameMode' label='Anticipated Game Mode'
+                         placeholder='Virtual vs In-Person...'
+                         selection options={gameModeOptions} value={ this.state.gameMode }
+                         onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
 
         <Form.Input name='bio' label='Short Bio' placeholder='I am ...' value={ bio } onChange={(e) => this._handleChange(e)} />
@@ -71,7 +76,7 @@ ProfileEditor = class ProfileEditor extends Component {
   _handleSubmit(e) {
     e.preventDefault();
 
-    const fields = pick(this.state, ['firstname', 'lastname', 'lookingForTeam', 'bio']);
+    const fields = pick(this.state, ['firstname', 'lastname', 'gameMode', 'lookingForTeam', 'bio']);
 
     Meteor.call('user.update.account', fields, (error, result) => {
       if (error) return this.setState({ error });

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Container, Segment, Header, Message, Form, Icon, Button } from 'semantic-ui-react';
+import LinkButton from '../imports/LinkButton';
 
 const { eventYear} = Meteor.settings.public;
 
@@ -18,8 +19,33 @@ RedeemTicket = class RedeemTicket extends Component {
         <Container><Loading/></Container>
       );
     } else {
-      return this._redeemForm();
+      return this._noRedeemNeeded();
+
+      // We no longer need ticket codes, but may again in the future
+      // so I'm leaving this dead code around for then.
+      // return this._redeemForm();
     }
+  }
+
+  _noRedeemNeeded() {
+    return (
+      <Container>
+        <PuzzlePageTitle title="Redeem"/>
+        <Segment raised>
+          <Header as='h3'>Oops! No need to redeem ticket codes this year!</Header>
+          If you're seeing this page, it was probably a mistake on our end.
+          Tickets are free this year, so there is no need to redeem ticket codes.
+          <br /><br />
+          <LinkButton
+            to="/profile"
+            icon fluid size='large'
+            labelPosition='right'
+            color='blue'
+            icon={<Icon name='user'/>}
+            content="Return to Profile Page" />
+        </Segment>
+      </Container>
+    );
   }
 
   _redeemForm() {

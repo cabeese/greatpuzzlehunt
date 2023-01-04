@@ -9,7 +9,7 @@ const { eventYear, registrationOpenDate, earlyBirdLastDate, regularRegistrationS
 class HomeEarlyBird extends Component {
   render() {
     const { gamestate } = this.props;
-    const registration = gamestate && gamestate.registration;
+    const registrationOpen = gamestate && gamestate.registration;
     let registerButton = (
       <a style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
     );
@@ -17,7 +17,7 @@ class HomeEarlyBird extends Component {
     let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
     let urls = ["#", "#", "#", "#"];
-    if (gamestate && gamestate.registration) {
+    if (registrationOpen) {
       registerButton = (
         <a href="/register" target="_blank" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
       );
@@ -31,25 +31,8 @@ class HomeEarlyBird extends Component {
         <Container>
           <Grid padded stackable  textAlign='left' >
           <Grid.Row centered>
-            <Header size="medium" style={{color: "white"}}>Registration is a 4-step process:</Header>
-            </Grid.Row>
-            <Grid.Row width={16} columns={4} centered verticalAlign="top">
-              <Grid.Column textAlign="center">
-                <span className="step-number">1</span>
-                <a href={urls[0]}>Create</a> an account.<br />Verify your email before continuing.
-              </Grid.Column>
-              <Grid.Column textAlign="center">
-                <span className="step-number">2</span>
-                <a href={urls[1]}>Acquire</a> ticket code(s).<br />Ticket code(s) will be sent to your email.
-              </Grid.Column>
-              <Grid.Column textAlign="center">
-                <span className="step-number">3</span>
-                <a href={urls[2]}>Redeem</a> ticket code(s).
-              </Grid.Column>
-              <Grid.Column textAlign="center">
-                <span className="step-number">4</span>
-                Set-up/join <a href={urls[3]}>team</a>.
-              </Grid.Column>
+            <Header size="medium" style={{color: "white"}}>
+              {registrationOpen ? "Registration is Open!" : `Registration opens ${regularRegistrationStart}!`}</Header>
             </Grid.Row>
             <Grid.Row centered>
               <p>Registration {/*opens {regularRegistrationStart}, and */}ends {regularRegistrationEnd} (or earlier if capacity is reached).</p>
@@ -57,28 +40,10 @@ class HomeEarlyBird extends Component {
             <Grid.Row centered>
               {registerButton}
             </Grid.Row>
-            <Grid.Row centered width={16} columns={2}>
-            <a href="/faq">Don't have a team?</a>
-              {/* virtualeventonly
-              <Grid.Column>
-                 <Header size="medium" style={{color: "white"}}>Early Bird Registration</Header>
-                  {registrationOpenDate} through {earlyBirdLastDate}<br /><br />
-                  Student   $5<br/><br/>
-                  Non-Student   $10<br/><br/><br/>
-               </Grid.Column>
-
-                <Grid.Column>
-                  <Header size="medium" style={{color: "white"}}>Regular Registration</Header>
-                    {regularRegistrationStart} through {regularRegistrationEnd}<br/><br/>
-                    Student   $8<br/><br/>
-                    Non-Student   $15<br/><br/>
-                </Grid.Column> 
-              */}
-                
-            </Grid.Row>
             <Grid.Row style={{fontSize: "12pt"}}>
-              *Registration is free and open to all, anywhere in the world. Donations are gratefully accepted.<br/>
-              *Each person wanting to join a team must register themselves first.<br />
+              * Registration is free and open to all, anywhere in the world. Donations are gratefully accepted.<br/>
+              * Each person wanting to join a team must register themselves first.<br />
+              * The event is hybrid: teams may play in person or virtually.<br />
               Participants under age 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.
             </Grid.Row>
            

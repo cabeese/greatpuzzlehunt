@@ -8,8 +8,10 @@ import { Segment,
   List,
   Dropdown,
   Message,
+  Radio,
 } from 'semantic-ui-react';
 import { pick } from 'lodash';
+import { gameModeOptions } from '../../../../lib/imports/util'
 
 import GamestateComp from '../../imports/GamestateComp';
 
@@ -113,6 +115,7 @@ class RegisterForm extends Component {
       accountType: '',
       password: '',
       confirmPassword: '',
+      gameMode: '',
       coords: '',
       phone: '',
       age: '',
@@ -177,7 +180,7 @@ class RegisterForm extends Component {
     return (
       <div>
       <Form onSubmit={ (e) => this._register(e) } style={ this._formStyle() }>
-        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at Western Washington University, Bellingham, WA`}/>
+        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at 9:30am Pacific Time`} />
         {/* materials banner
         <Message color='orange' size='huge'>
           <Message.Content>
@@ -197,8 +200,6 @@ class RegisterForm extends Component {
                       value={this.state.lastname} onChange={(e) => this._handleTextChange(e)} />
         </Form.Group>
         
-        <p style={{color: 'red'}}><strong>Important</strong>: In-person participants must use their WWU email address.</p>
-
         <Form.Group widths='equal'>
           <Form.Input name='email' type='email' label='Email' placeholder='your@email.com'
                       value={ this.state.email } onChange={ (e) => this._handleTextChange(e) }/>
@@ -215,11 +216,20 @@ class RegisterForm extends Component {
                       onChange={ (e) => this._handleTextChange(e) }/>
         </Form.Group>
 
+        <Form.Group widths='equal' grouped>
+          <Form.Dropdown name='gameMode' label='Anticipated Game Mode'
+                         placeholder='Virtual vs In-Person...'
+                         selection options={gameModeOptions} value={ this.state.gameMode }
+                         onChange={ (e, data) => this._handleDataChange(e, data) }/>
+        </Form.Group>
+
+        <p><strong>Note:</strong> game mode can be changed any time before the game starts.</p>
+
         <Header as='h3' icon={<Icon name='home' color='blue'/>} content='Player Details'
                 subheader='This information is required in the case of emergency.'/>
 
         <Form.Group widths='equal'>
-          <Form.Input name='phone' type='tel' label='Phone' placeholder='555-555-1234'
+          <Form.Input name='phone' type='tel' label='Phone (US/Canada only)' placeholder='555-555-1234'
                       value={ this.state.phone } onChange={ (e) => this._handleTextChange(e) }/>
           <Form.Input name='age' type='text' label='Age' placeholder='Number of revolutions around sun'
                       value={ this.state.age } onChange={ (e) => this._handleTextChange(e) }/>
@@ -254,7 +264,7 @@ class RegisterForm extends Component {
         </Form.Group>
 
         <Form.Group widths='equal'>
-          <Form.Input name='ecPhone' label='Phone' placeholder='A phone they will answer'
+          <Form.Input name='ecPhone' label='Phone (US/Canada Only)' placeholder='A phone they will answer'
                       value={ this.state.ecPhone } onChange={ (e) => this._handleTextChange(e) }/>
           <Form.Input name='ecEmail' label='Email' placeholder='A reliable email'
                       value={ this.state.ecEmail } onChange={ (e) => this._handleTextChange(e) }/>
@@ -290,7 +300,6 @@ class RegisterForm extends Component {
           label='By checking this box I acknowledge that I have read and understand the Risk & Hold Harmless Agreement and that I agree (or give permission for my minor child) to receive direct communication from Western’s 2021 Great Puzzle Hunt staff.'
           onChange={ (e,data) => this._handleDataChange(e,data) }/>
 
-        <p style={{color: 'red'}}><strong>Important</strong>: In-person participants must use their WWU email address.</p>
         <Form.Button fluid type='submit' content='Submit' color='green'/>
 
         { this._errorMessage() }
@@ -321,10 +330,10 @@ class RegisterForm extends Component {
 
   _registrationData() {
     const fields = [
-      'firstname', 'lastname', 'email', 'accountType', 'password', 'confirmPassword', 'coords',
-      'phone', 'age', 'address', 'city', 'zip', 'state', 'country',
-      'ecName', 'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
-      'photoPermission', 'holdHarmless'
+        'firstname', 'lastname', 'email', 'accountType', 'password', 'confirmPassword', 'gameMode',
+        'coords', 'phone', 'age', 'address', 'city', 'zip', 'state', 'country',
+        'ecName', 'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
+        'photoPermission', 'holdHarmless'
     ];
 
     return pick(this.state, fields);

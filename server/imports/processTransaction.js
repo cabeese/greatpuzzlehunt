@@ -8,6 +8,8 @@ import {
 
 import { sendTickets } from '../../lib/imports/sendTickets';
 
+const USING_TICKET_CODES = false;
+
 export default async function processTransaction(txData) {
   const { info, logobj } = Meteor.logger;
   const now = new Date();
@@ -19,17 +21,17 @@ export default async function processTransaction(txData) {
     gear,
     tickets,
     shippingInfo,
-    internationalShippingLineItems,
   } = txData;
 
   const gearOrders = gear;
 
   info(`Processing transaction "${tx}" from ${email}`);
-  info(`internationalShipping?: ${shippingInfo.internationalCount}`);
   info("Gear Orders:")
   logobj(gearOrders);
-  info("Tickets:");
-  logobj(tickets);
+  if (USING_TICKET_CODES) {
+    info("Tickets:");
+    logobj(tickets);
+  }
 
   /*
   Important Note:
@@ -47,7 +49,6 @@ export default async function processTransaction(txData) {
       name,
       tickets,
       shippingInfo,
-      internationalShippingLineItems,
       gearOrders,
       createdAt: now,
       updatedAt: now,
@@ -57,14 +58,16 @@ export default async function processTransaction(txData) {
   }
 
   // 2. Create Tickets
-  const existingTxTickets = Tickets.find({ tx }).count();
-  if (existingTxTickets === 0) {
-    tickets.forEach(ticket => {
-      createTickets(tx, email, ticket.isStudent, ticket.inPerson, ticket.qty);
-    });
-    sendTickets(tx, email);
-  } else {
-    info(`processTransaction: Tickets for tx:${tx} already exists. Skipping Create Tickets`);
+  if (USING_TICKET_CODES) {
+    const existingTxTickets = Tickets.find({ tx }).count();
+    if (existingTxTickets === 0) {
+      tickets.forEach(ticket => {
+        createTickets(tx, email, ticket.isStudent, ticket.inPerson, ticket.qty);
+      });
+      sendTickets(tx, email);
+    } else {
+      info(`processTransaction: Tickets for tx:${tx} already exists. Skipping Create Tickets`);
+    }
   }
 
   // 3. Create GearOrders
@@ -113,7 +116,8 @@ function makeCode(prefix) {
 function createGearOrders(tx, email, gearOrders) {
   const now = new Date();
   gearOrders.forEach((gearOrder) => {
-    const { itemcode, color, logo_color: logoColor, size, qty, amount } = gearOrder;
+    const { itemcode, color, logo_color: logoColor, size, qty, amount,
+            shipping } = gearOrder;
     GearOrders.insert({
       tx,
       email,
@@ -121,6 +125,7 @@ function createGearOrders(tx, email, gearOrders) {
       color,
       logoColor,
       size,
+      shipping,
       qty: parseInt(qty),
       amount: parseFloat(amount),
       createdAt: now,
