@@ -283,7 +283,7 @@ class RegisterForm extends Component {
           toggle
           defaultChecked={this.state.photoPermission}
           name='photoPermission'
-          label="Participants are welcome to send photos of their teams in action to millie@greatpuzzlehunt.com. I hereby give my permission to Western and the Great Puzzle Hunt to use my (or my minor child’s) submitted image, in photo or video, in whole or in part, for public information and marketing of the WWU Great Puzzle Hunt at its discretion."
+          label="I hereby give my permission to Western and the Great Puzzle Hunt to use my (or my minor child's) image, in photo or video, in whole or in part, for public information and marketing of the WWU Great Puzzle Hunt at its discretion."
           onChange={ (e,data) => this._handleDataChange(e,data) } />
 
         <Header as='h3' icon={<Icon name='pencil' color='orange'/>}
@@ -297,7 +297,7 @@ class RegisterForm extends Component {
           toggle
           defaultChecked={this.state.holdHarmless}
           name='holdHarmless'
-          label='By checking this box I acknowledge that I have read and understand the Risk & Hold Harmless Agreement and that I agree (or give permission for my minor child) to receive direct communication from Western’s 2021 Great Puzzle Hunt staff.'
+          label='By checking this box, I acknowledge that I have read and understand the Risk & Hold Harmless Agreement and that I am either 18+ years old or an enrolled WWU student or the parent/guardian of a minor participant.'
           onChange={ (e,data) => this._handleDataChange(e,data) }/>
 
         <Form.Button fluid type='submit' content='Submit' color='green'/>
@@ -367,10 +367,10 @@ class RegisterForm extends Component {
     return (
       <Segment basic>
         <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor
-child) to participate either in-person or virtually in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU MathematicsDepartment, held on {eventDay}, {eventDate} (hereinafter referred to as “Puzzle Hunt”). I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of
+child) to participate either in-person or virtually in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU Mathematics Department, held on {eventDay}, {eventDate} (hereinafter referred to as “Puzzle Hunt”). I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of
 injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
         <p>In consideration of my (or my minor child’s) voluntary participation in the Puzzle Hunt, I agree to hold harmless Western Washington University, its officers, agents, volunteers, or employees from and against all financial loss, claim, suit, action, damage, or expense, arising out of my (or my minor child’s) participation, unless caused by the negligence or willful misconduct of the University, its officers, agents, volunteers, or employees.</p>
-          <p><strong>In-Person Participation</strong>: I understand that Western Washington University strongly recommends that participants have comprehensive health insurance coverage. If you are feeling ill, please stay home. Masks are no longer required on Western's campus, but please be understanding, respectful, and considerate of individual choices to mask or not to masek.  Hand sanitizer will be available in abundant supply.</p>
+          <p><strong>In-Person Participation</strong>: I understand that Western Washington University strongly recommends that participants have comprehensive health insurance coverage. If you are feeling ill, please stay home. Masks are no longer required on Western's campus, but please be understanding, respectful, and considerate of individual choices to mask or not to mask.  Hand sanitizer will be available in abundant supply.</p>
         <p>I understand and acknowledge that a medical emergency may develop which necessitates the need for immediate medical treatment for a participant. I hereby authorize Western and its officers, agents, volunteers, or employees to arrange or provide any necessary emergency medical treatment on my (or my minor child’s) behalf.</p>
         <p><strong>Virtual Participation</strong>: For the virtual event, all participation is done online and communications involving issues such as registration questions, troubleshooting, event updates, or awards will be done via text, email, phone, social media, and the website <a href="https://greatpuzzlehunt.com">https://greatpuzzlehunt.com</a>. Participants will be asked to use a smartphone or computer, and such items as scissors, writing utensils (colored pencils, pen, pencil, highlighters, felt tips), tape, eraser, paper, straightedge, hole punch, and a printer to print out puzzles. I agree (or give permission for my minor child) to receive direct communication from Western’s {eventYear} Great Puzzle Hunt staff.</p>
       </Segment>
