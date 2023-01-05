@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
-import { registrationInfoHTML, questions, signature } from '../../lib/imports/emails';
+import { questions, signature } from '../../lib/imports/emails';
 
 import { extend, omit } from 'lodash';
 
@@ -20,7 +20,6 @@ Accounts.emailTemplates.verifyEmail = {
 <p>Hi ${user.firstname}!</p>
 <p>Please verify your email (${user.getEmail()}) by <a target="_blank" href='${url}'>clicking here</a>.</p>
 ${questions}
-${registrationInfoHTML}
 ${signature}
 `;
     }
