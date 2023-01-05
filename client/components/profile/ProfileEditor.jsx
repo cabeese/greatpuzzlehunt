@@ -13,6 +13,7 @@ ProfileEditorUI = class ProfileEditor extends Component {
   constructor(props) {
     super(props);
     this.state = extend({
+      saving: false,
     }, this._makeStateFromProps(props));
   }
 
@@ -65,7 +66,7 @@ ProfileEditorUI = class ProfileEditor extends Component {
           </Form.Field>
         </Form.Group>
 
-        <Form.Button type='submit' color="green" content="Save"/>
+        <Form.Button type='submit' color="green" content="Save" disabled={this.state.saving} />
         <Message
          negative
          hidden={!this.state.error}
@@ -88,8 +89,10 @@ ProfileEditorUI = class ProfileEditor extends Component {
     e.preventDefault();
 
     const fields = pick(this.state, ['firstname', 'lastname', 'gameMode', 'lookingForTeam', 'bio']);
+    this.setState({saving: true});
 
     Meteor.call('user.update.account', fields, (error, result) => {
+      this.setState({saving: false});
       if (error) return this.setState({ error });
 
       this.setState({ success: 'Account Saved!', error: null });
