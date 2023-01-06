@@ -287,7 +287,7 @@ class RegisterForm extends Component {
           onChange={ (e,data) => this._handleDataChange(e,data) } />
 
         <Header as='h3' icon={<Icon name='pencil' color='orange'/>}
-                content='Acknowledgement of Risk & Hold Harmless Agreement' />
+                content='Acknowledgment of Risk & Hold Harmless Agreement' />
 
         { this._holdHarmlessButton() }
 
