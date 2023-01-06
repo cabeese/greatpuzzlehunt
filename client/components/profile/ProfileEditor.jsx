@@ -5,8 +5,11 @@ import { Link } from 'react-router-dom';
 import { Segment, Header, Form, Message, Icon, Checkbox } from 'semantic-ui-react';
 import { extend, pick } from 'lodash';
 import { gameModeOptions } from '../../../lib/imports/util'
+import GamestateComp from '../imports/GamestateComp';
 
-ProfileEditor = class ProfileEditor extends Component {
+const { registrationCloseDate } = Meteor.settings.public;
+
+ProfileEditorUI = class ProfileEditor extends Component {
   constructor(props) {
     super(props);
     this.state = extend({
@@ -31,6 +34,8 @@ ProfileEditor = class ProfileEditor extends Component {
 
   render() {
     const { firstname, lastname, gameMode, lookingForTeam, bio } = this.state;
+    const { ready, gamestate } = this.props;
+    const canChangeGameMode = ready && gamestate.registration;
     return (
     <Segment basic>
       <Form onSubmit={(e) => this._handleSubmit(e)}>
@@ -39,11 +44,17 @@ ProfileEditor = class ProfileEditor extends Component {
         <Form.Group widths='equal'>
           <Form.Input name='firstname' label='First Name' placeholder='First name' value={firstname} onChange={(e) => this._handleChange(e)} />
           <Form.Input name='lastname' label='Last Name' placeholder='Last name' value={lastname} onChange={(e) => this._handleChange(e)} />
-          <Form.Dropdown name='gameMode' label='Anticipated Game Mode'
+        </Form.Group>
+        <Form.Group widths='equal'>
+          <Form.Dropdown name='gameMode' label={`Anticipated Game Mode (can be changed until ${registrationCloseDate})`}
                          placeholder='Virtual vs In-Person...'
+                         disabled={!canChangeGameMode}
                          selection options={gameModeOptions} value={ this.state.gameMode }
                          onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
+        <p><small><strong>Note:</strong> if you need to change this setting after the deadline has passed,
+             please email us at <a href="mailto:support@greatpuzzlehunt.com">support@greatpuzzlehunt.com</a> ASAP.
+             We need an accurate headcount for ordering food, etc.</small></p>
 
         <Form.Input name='bio' label='Short Bio' placeholder='I am ...' value={ bio } onChange={(e) => this._handleChange(e)} />
 
@@ -96,8 +107,12 @@ ProfileEditor = class ProfileEditor extends Component {
     this.setState({ [name]: (value || checked) });
   }
 
-}
-
-ProfileEditor.propTypes = {
-  user: PropTypes.object.isRequired,
 };
+
+ProfileEditorUI.propTypes = {
+  user: PropTypes.object.isRequired,
+  ready: PropTypes.bool.isRequired,
+  gamestate: PropTypes.object,
+};
+
+export default ProfileEditor = GamestateComp(ProfileEditorUI);

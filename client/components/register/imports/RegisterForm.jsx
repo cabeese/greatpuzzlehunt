@@ -15,7 +15,7 @@ import { gameModeOptions } from '../../../../lib/imports/util'
 
 import GamestateComp from '../../imports/GamestateComp';
 
-const { eventYear, eventDate, eventDay } = Meteor.settings.public;
+const { registrationCloseDate, eventYear, eventDate, eventDay } = Meteor.settings.public;
 
 const { fromEmail } = Meteor.settings.public;
 
@@ -223,7 +223,7 @@ class RegisterForm extends Component {
                          onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
 
-        <p><strong>Note:</strong> game mode can be changed any time before the game starts.</p>
+        <p><strong>Note:</strong> game mode can be changed until {registrationCloseDate}.</p>
 
         <Header as='h3' icon={<Icon name='home' color='blue'/>} content='Player Details'
                 subheader='This information is required in the case of emergency.'/>
