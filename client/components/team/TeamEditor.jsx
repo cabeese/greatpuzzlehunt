@@ -126,13 +126,6 @@ TeamEditor = class TeamEditor extends Component {
             If you have any questions, please <Link to="/contact">Contact Us</Link>.
             <br />
           </small>
-          // <small>This setting applies to the entire team. We cannot support "mixed" teams at this point;
-          //   that is, either ALL members of the team must be in-person or ALL members must be remote.
-          //   Currently, the in-person option is only available to WWU community, and every member of your
-          //   team must have an "in-person" ticket code.
-          //   If you have any questions, please <Link to="/contact">Contact Us</Link>.
-          //   <br />
-          // </small>
           <Menu compact>
             <Menu.Item name="inPerson"
                        color="green"
