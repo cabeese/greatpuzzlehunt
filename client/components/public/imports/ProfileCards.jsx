@@ -51,13 +51,6 @@ export default class ProfileCards extends Component {
         role: 'VP, Marketing & Promotion',
         image: '/img/team/dalton.jpg',
       },
-	  
-      {
-        name: 'Alexandria Tan',
-        title: '',
-        role: 'VP, Marketing & Promotion',
-        image: '/img/team/alexandria_tan.jpg'
-      }
     ];
 
     this.developers = [
@@ -81,14 +74,6 @@ export default class ProfileCards extends Component {
         role: 'Lead Developer & Tech Support',
         image: '/img/team/richard.jpg'
       },
-
-      {
-        name: 'Alexandria Tan',
-        title: '',
-        role: 'Developer & Tech Support',
-        image: '/img/team/alexandria_tan.jpg'
-      },
-	  
 	  {
         name: 'Eric Fox',
         title: '',
@@ -98,13 +83,6 @@ export default class ProfileCards extends Component {
     ];
 
     this.budgetCoord = [
-      {
-        name: 'Zoe Bozich',
-        title: '',
-        role: 'Co-President, Budget Coordination',
-        image: '/img/team/zoe.jpg',
-      },
-	  
 	  {
         name: 'Mayla Ward',
         title: '',
@@ -128,13 +106,6 @@ export default class ProfileCards extends Component {
     ];
 	
     this.management = [
-      {
-        name: 'Nick Satnik',
-        title: '',
-        role: 'Co-President, Management',
-        image: '/img/team/nick.jpg',
-      },
-	  
 	  {
         name: 'Lucas Ragsdale',
         title: '',
@@ -158,6 +129,24 @@ export default class ProfileCards extends Component {
     ];
 
     this.pastProfiles = [
+      {
+        name: 'Alexandria Tan',
+        title: '',
+        role: 'Developer & Tech Support; VP, Marketing & Promotion',
+        image: '/img/team/alexandria_tan.jpg'
+      },
+      {
+        name: 'Nick Satnik',
+        title: '',
+        role: 'Co-President, Management',
+        image: '/img/team/nick.jpg',
+      },
+      {
+        name: 'Zoe Bozich',
+        title: '',
+        role: 'Co-President, Budget Coordination',
+        image: '/img/team/zoe.jpg',
+      },
       {
         name: 'Miranda Reed',
         title: '',
