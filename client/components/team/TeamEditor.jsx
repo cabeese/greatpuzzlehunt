@@ -120,10 +120,7 @@ TeamEditor = class TeamEditor extends Component {
       return (
         <Form.Field disabled={this.state.checkedIn}>
           <label>Virtual or in-person?</label>
-          <small>This setting applies to the entire team. We cannot support "mixed" teams at this point;
-            that is, either ALL members of the team must be in-person or ALL members must be remote.
-            Currently, the in-person option is only available to WWU community.
-            If you have any questions, please <Link to="/contact">Contact Us</Link>.
+          <small>This setting affects how puzzles are started for the entire team.
             <br />
           </small>
           <Menu compact>
@@ -139,9 +136,15 @@ TeamEditor = class TeamEditor extends Component {
                        active={this.state.inPerson}
                        onClick={ (e, data) => this._setInPerson(true) }>
               <Icon name="group" />
-              Play In-Person&nbsp;<small>(See restrictions)</small>
+              Play In-Person
             </Menu.Item>
           </Menu>
+          <br />
+          <small>
+            Note: "Hybrid" teams (some players on campus, others remote) may be cumbersome
+            for a team, but can be accommodated by selecting the In-Person setting.
+            If you have any questions, please <Link to="/contact">Contact Us</Link>.
+          </small>
         </Form.Field>
     );
   }
