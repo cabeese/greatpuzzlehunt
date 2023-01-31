@@ -1,12 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Form, Message } from 'semantic-ui-react';
+import { Modal, Button, Form, Message, Icon, } from 'semantic-ui-react';
 
 class MessageUserModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: '', user: props.user, error: null };
+    this.state = {
+      text: '', user: props.user, error: null,
+      loading: false,
+      didSend: false,
+    };
   }
 
   render() {
@@ -28,17 +32,29 @@ class MessageUserModal extends Component {
 	<Modal.Header>Message {user.name}</Modal.Header>
 	<Modal.Content>
 	  <Form onSubmit={(e) => this._sendMessage(e)}>
-	    <Form.TextArea label='Message:' placeholder='Text...' name='text' value={text} onChange={this._handleChange} />
+	    <Form.TextArea label='Message:' placeholder="Hi, I'm looking to join a team. My background is in..."
+                     name='text' value={text} onChange={this._handleChange}
+                     disabled={this.state.loading || this.state.didSend} />
 	    <Form.Group>
-	      <Form.Button color='green' type='submit' content='Send' />
-	      <Form.Button floated='right' color='red' inverted type='submit' content='Cancel' onclick={() => this._clearState() } />
+	      <Form.Button color='green' type='submit' content='Send'
+                     disabled={this.state.loading || this.state.didSend} />
+	      <Form.Button floated='right' color='red' inverted type='submit' content='Cancel'
+                     onClick={(e) => { e.preventDefault(); this._clearState(); }}
+                     disabled={this.state.loading} />
 	    </Form.Group>
-	    <p> This will send an email message to the player. The email message will include your message and email address for them to reply to you.</p>
+	    <p>Clicking "Send" will share your email address and the message above with the team captain.</p>
 	    <Message negative
 		     hidden={!this.state.error}
 		     icon='warning sign'
 		     content={this.state.error ? this.state.error : ''}
 	    />
+	    <Message positive hidden={!this.state.didSend}>
+        <Icon name="check" />
+        Message Sent!<br /><br />
+        <Button color="blue" onClick={(e) => { e.preventDefault(); this._clearState(); }}>
+          Close
+        </Button>
+      </Message>
 	  </Form>
 	</Modal.Content>
       </Modal>
@@ -49,20 +65,22 @@ class MessageUserModal extends Component {
 
   _sendMessage(e) {
     // send the message
+    this.setState({loading: true});
     Meteor.call('user.matchmaking-message', this.state.user.email.toLowerCase(), this.state.text, (error, result) => {
       if (error) {
-	// handle the error
-	this.setState({ error: error.message });
+	      this.setState({
+          error: error.message,
+          loading: false,
+        });
       } else {
-	// close the dialog and clear the mesage
-	this._clearState();
+        this.setState({didSend: true, loading: false});
       }
     });
   }
 
   _clearState() {
     this.props.clearUser();
-    this.setState({ text: '', error: null });
+    this.setState({ text: '', error: null, loading: false, didSend: false, });
   }
 
   componentDidUpdate(prevProps, prevState) {
