@@ -17,10 +17,18 @@ const DIVISION_OPTS = [
   { text: 'All', value: 'all' }
 ];
 
+// Matchmaking filter options. Allow user to view only teams looking for new
+// "strangers" to join them.
+const MM_FILTER_OPTS = [
+  { text: "All Teams", value: "all" },
+  { text: "Recruiting New Members", value: "recruiting" },
+];
+
 const SORT_BY_OPTS = [
   { text: 'None', value: 'none' },
   { text: 'Last Updated', value: 'last-updated' },
   { text: 'Team Size', value: 'size' },
+  { text: 'Looking for Members', value: 'looking-for-members'},
 ];
 const { eventYear } = Meteor.settings.public;
 
@@ -28,6 +36,7 @@ TeamBrowser = class TeamBrowser extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      mmFilter: 'all',
       sortBy: 'none',
       division: 'all',
       public: Boolean(this.props.public),
@@ -44,10 +53,15 @@ TeamBrowser = class TeamBrowser extends Component {
     return (
       <Container className="section">
         <Segment basic>
-        <PuzzlePageTitle title={this._getTitle()} />
+          <PuzzlePageTitle title={this._getTitle()} />
+          <p>Don't have a team to join? Filter by "Recruiting" teams to find open teams
+          looking for players like you!</p>
           <Header as='h3' icon={<Icon name='options' color='violet'/>} content='Options'/>
           <Form>
             <Form.Group widths='equal'>
+              <Form.Select label='Filter' name='mmFilter' options={MM_FILTER_OPTS}
+                           value={this.state.mmFilter}
+                           onChange={(e, data) => this._handleChange(e, data)}/>
               <Form.Select label='Sort By' name='sortBy' options={SORT_BY_OPTS} value={this.state.sortBy} onChange={(e, data) => this._handleChange(e, data)}/>
               <Form.Select label='Division' name='division' options={DIVISION_OPTS} value={this.state.division} onChange={(e, data) => this._handleChange(e, data)}/>
             </Form.Group>
@@ -70,12 +84,15 @@ TeamBrowser = class TeamBrowser extends Component {
   }
 
   _getTeams() {
-    const { sortBy, division } = this.state;
+    const { mmFilter, sortBy, division } = this.state;
     let { teams } = this.props;
 
     // First filter down teams
     if (division !== 'all') {
       teams = filter(teams, (team) => team.division === division);
+    }
+    if (mmFilter === "recruiting") {
+      teams = filter(teams, team => team.lookingForMembers === true);
     }
 
     // Then sort filtered results.

@@ -11,6 +11,7 @@ TeamListCard = class TeamListCard extends Component {
     super(props);
     const { team } = this.props;
     Meteor.call('team.owner', team.owner, (error, owner) => {
+      // TODO: handle case where this completes after component unmounts
       if (error) return console.log(error);
       this.setState({ owner });
     });
@@ -20,6 +21,7 @@ TeamListCard = class TeamListCard extends Component {
       memberCount: team.members.length,
       division: DIVISION_MAP[team.division],
       lookingForMembers: team.lookingForMembers,
+      inPerson: team.inPerson,
       showPasswordField: false,
       showOwner: false,
       owner: {},
@@ -38,7 +40,7 @@ TeamListCard = class TeamListCard extends Component {
   }
 
   render() {
-    const { division, showPasswordField, memberCount } = this.state;
+    const { division, showPasswordField, memberCount, inPerson, } = this.state;
     const { team } = this.props;
     const membersLabel = `${memberCount} of 6 members`;
     const membersPercent = Math.round((memberCount / 6)*100);
@@ -48,7 +50,9 @@ TeamListCard = class TeamListCard extends Component {
       <Card centered>
         <Card.Content>
           <Card.Header>{ team.name }</Card.Header>
-          <Card.Meta><Icon name='sitemap'/> { division }</Card.Meta>
+          <Card.Meta>
+            { this._getGameModeIcon(inPerson) } { division }
+          </Card.Meta>
           <Card.Description>
             <Progress size='small' percent={ membersPercent } color={progressColor}>{ membersLabel }</Progress>
           </Card.Description>
@@ -57,6 +61,18 @@ TeamListCard = class TeamListCard extends Component {
         { this._getCardExtra() }
       </Card>
     );
+  }
+
+  _getGameModeIcon(inPerson) {
+    if (inPerson === true) {
+      return <Icon name="group" color="blue" />;
+    } else if (inPerson === false) {
+      return <Icon name="video camera" color="yellow" />;
+    } else {
+      // Shouldn't get here, but better to show nothing than show
+      // something incorrect.
+      return "";
+    }
   }
 
   _getProgressColor(count) {
