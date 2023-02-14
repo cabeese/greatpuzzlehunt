@@ -11,6 +11,7 @@ import {
   Message,
 } from 'semantic-ui-react';
 import { _, pick } from 'lodash';
+import { gameModeOptions } from '../../../../../lib/imports/util'
 
 const { eventYear, eventDate } = Meteor.settings.public;
 
@@ -24,7 +25,7 @@ const USER_FIELDS = [
   '_id', 'firstname', 'lastname', 'email', 'accountType',
   'phone', 'age', 'address', 'city', 'zip', 'state', 'country', 'ecName',
   'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
-  'photoPermission', "inPersonAllowed",
+  'photoPermission', "gameMode",
 ];
 
 class AdminUserEditForm extends Component {
@@ -95,13 +96,10 @@ class AdminUserEditForm extends Component {
           label="User photo/video permission"
           onChange={(e, data) => this._handleDataChange(e, data)} />
 
-        <Form.Checkbox
-          toggle
-          defaultChecked={user.inPersonAllowed}
-          name='inPersonAllowed'
-          label="In-person gameplay allowed"
-          disabled={!user.paid}
-          onChange={(e, data) => this._handleDataChange(e, data)} />
+        <Form.Dropdown name='gameMode' label='Anticipated Game Mode'
+                       placeholder='Virtual vs In-Person...'
+                       selection options={gameModeOptions} value={ user.gameMode }
+                       onChange={ (e, data) => this._handleDataChange(e, data) }/>
 
         <Header as='h3' icon={<Icon name='ambulance' color='red' />}
                 content='Emergency Contact'
@@ -138,7 +136,10 @@ class AdminUserEditForm extends Component {
 
     // One call to update normal string fields
     Meteor.call('admin.user.update', userData, (error, result) => {
-      if (error) return this.setState({ error });
+      if (error) {
+        alert(`Failed to save user. ${error}`);
+        return this.setState({ error });
+      }
       this.setState({ error: null });
       alert(`${userData.firstname} ${userData.lastname} saved!`);
     });
