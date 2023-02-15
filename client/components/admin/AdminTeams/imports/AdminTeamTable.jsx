@@ -44,8 +44,11 @@ class AdminTeamTable extends Component {
 
     const { selectedTeamId } = this.state;
     const selectedTeam = this.getSelectedTeam(selectedTeamId, teams);
-    const teamCount = teams.length;
-    const inPersonCount = reduce(teams, (acc, team) => {
+      const teamCount = teams.length;
+      Meteor.logger.info("team count: " + teamCount);
+      const inPersonCount = reduce(teams, (acc, team) => {
+	  Meteor.logger.info("looking at team:");
+	  Meteor.logger.logobj(team);
       if (team.inPerson) {
         acc += 1;
       }
