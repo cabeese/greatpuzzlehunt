@@ -26,21 +26,30 @@ class AdminTeamTable extends Component {
     return find(teams, (t) => (t._id === selectedTeamId));
   }
 
+    getTeamCounts(teams) {
+	const teamCount = teams.length;
+	const inPersonCount = reduce(teams, (acc, team) => {
+	    if (team.inPerson) {
+		acc += 1;
+	    }
+	    return acc;
+	}, 0);
+	const virtualCount = teamCount - inPersonCount;
+	return { teamCount, inPersonCount, virtualCount };
+    }
+
   render() {
     const { loading, teams } = this.props;
     if (loading) return <Loading/>;
 
     const { selectedTeamId } = this.state;
     const selectedTeam = this.getSelectedTeam(selectedTeamId, teams);
-
-      const teamCount = 3;
-      const inPersonCount = 2;
-      const virtualCount = 1;
+    const { teamCount, inPersonCount, virtualCount } = this.getTeamCounts(teams);
 
     return (
 	<div>
 	    <Message icon>
-		<Icon name="teams" color="green"/>
+		<Icon name="teal address book" color="green"/>
 		<Message.Content>
 		    <Message.Header>
 			Teams Summary
