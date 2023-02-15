@@ -44,10 +44,14 @@ class AdminTeamTable extends Component {
 
     const { selectedTeamId } = this.state;
     const selectedTeam = this.getSelectedTeam(selectedTeamId, teams);
-      // const { teamCount, inPersonCount, virtualCount } = this.getTeamCounts(teams);
-      const teamCount = 2;
-      const inPersonCount = 1;
-      const virtualCount = 3;
+    const teamCount = teams.length;
+    const inPersonCount = reduce(teams, (acc, team) => {
+      if (team.inPerson) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
+    const virtualCount = teamCount - inPersonCount;
 
     return (
 	<div>
