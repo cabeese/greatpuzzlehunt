@@ -33,8 +33,23 @@ class AdminTeamTable extends Component {
     const { selectedTeamId } = this.state;
     const selectedTeam = this.getSelectedTeam(selectedTeamId, teams);
 
+      const teamCount = 3;
+      const inPersonCount = 2;
+      const virtualCount = 1;
+
     return (
-      <div>
+	<div>
+	    <Message icon>
+		<Icon name="teams" color="green"/>
+		<Message.Content>
+		    <Message.Header>
+			Teams Summary
+		    </Message.Header>
+		    <strong>Total:</strong> {teamCount} &nbsp;
+		    <strong>In person:</strong> {inPersonCount} &nbsp;
+		    <strong>Virtual:</strong> {virtualCount} &nbsp;
+		</Message.Content>
+	    </Message>
         <Table celled striped compact>
           <Table.Header>
             <Table.Row>
