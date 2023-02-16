@@ -48,18 +48,18 @@ class AdminTeamTable extends Component {
     const { teamCount, inPersonCount, virtualCount } = this.getTeamCounts();
 
     return (
-	<div>
-	  <Message icon>
-	    <Icon name="teal address book"/>
-	    <Message.Content>
-              <Message.Header>
-		Teams Summary
-	      </Message.Header>
-	      <strong>Total:</strong> {teamCount} &nbsp;
-	      <strong>In person:</strong> {inPersonCount} &nbsp;
-	      <strong>Virtual:</strong> {virtualCount} &nbsp;
-	    </Message.Content>
-	  </Message>
+      <div>
+	<Message icon>
+	  <Icon name="teal address book"/>
+	  <Message.Content>
+            <Message.Header>
+	      Teams Summary
+	    </Message.Header>
+	    <strong>Total:</strong> {teamCount} &nbsp;
+	    <strong>In person:</strong> {inPersonCount} &nbsp;
+	    <strong>Virtual:</strong> {virtualCount} &nbsp;
+	  </Message.Content>
+	</Message>
         <Table celled striped compact>
           <Table.Header>
             <Table.Row>
