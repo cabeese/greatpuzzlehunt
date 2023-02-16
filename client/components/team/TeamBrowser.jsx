@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Container, Segment, Grid, Form, Header, Icon, Message } from 'semantic-ui-react';
 import { filter, sortBy as sort } from 'lodash';
 import moment from 'moment';
@@ -36,11 +36,15 @@ TeamBrowser = class TeamBrowser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mmFilter: 'all',
+      mmFilter: this.props.urlFilter == 'recruiting' ? 'recruiting' : 'all',
       sortBy: 'none',
       division: 'all',
       public: Boolean(this.props.public),
     };
+  }
+
+  componentDidMount() {
+    $('html, body').scrollTop(0);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -109,6 +113,8 @@ TeamBrowser = class TeamBrowser extends Component {
 }
 
 TeamBrowser = withTracker((props) => {
+  let [searchParams, setSearchParams] = useSearchParams();
+  const urlFilter = searchParams.get("filter");
   const user = Meteor.user();
   const teamsHandle = Meteor.subscribe('teams.browse');
   const ready = teamsHandle.ready();
@@ -117,6 +123,7 @@ TeamBrowser = withTracker((props) => {
   const teams = Teams.find({name: { $exists: true }}).fetch();
 
   return {
+    urlFilter,
     ready,
     user,
     teams,
