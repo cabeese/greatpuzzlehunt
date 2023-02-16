@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Message, Icon } from 'semantic-ui-react';
-import { find } from 'lodash';
+import { reduce, find } from 'lodash';
 
 import AdminTeamTableRow from './AdminTeamTableRow';
 import AdminTeamModal from './AdminTeamModal';
@@ -26,15 +26,40 @@ class AdminTeamTable extends Component {
     return find(teams, (t) => (t._id === selectedTeamId));
   }
 
+  getTeamCounts() {
+    const { teams } = this.props;
+    const teamCount = teams.length;
+    const inPersonCount = reduce(teams, (acc, team) => {
+      if (team.inPerson) {
+	acc += 1;
+      }
+      return acc;
+    }, 0);
+    const virtualCount = teamCount - inPersonCount;
+    return { teamCount, inPersonCount, virtualCount };
+  }
+
   render() {
     const { loading, teams } = this.props;
     if (loading) return <Loading/>;
 
     const { selectedTeamId } = this.state;
     const selectedTeam = this.getSelectedTeam(selectedTeamId, teams);
+    const { teamCount, inPersonCount, virtualCount } = this.getTeamCounts();
 
     return (
       <div>
+	<Message icon>
+	  <Icon name="teal address book"/>
+	  <Message.Content>
+            <Message.Header>
+	      Teams Summary
+	    </Message.Header>
+	    <strong>Total:</strong> {teamCount} &nbsp;
+	    <strong>In person:</strong> {inPersonCount} &nbsp;
+	    <strong>Virtual:</strong> {virtualCount} &nbsp;
+	  </Message.Content>
+	</Message>
         <Table celled striped compact>
           <Table.Header>
             <Table.Row>

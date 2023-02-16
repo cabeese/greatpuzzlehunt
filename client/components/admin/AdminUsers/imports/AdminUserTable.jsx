@@ -25,6 +25,22 @@ class AdminUserTable extends Component {
       }
       return acc;
     }, 0);
+    const inPersonCount = reduce(users, (acc, user) => {
+      if (user.accountType !== 'VOLUNTEER') {
+	if (user.gameMode === 'INPERSON') {
+          acc += 1;
+        }
+      }
+      return acc;
+    }, 0);
+    const virtualCount = reduce(users, (acc, user) => {
+      if (user.accountType !== 'VOLUNTEER') {
+	if (user.gameMode === 'VIRTUAL') {
+          acc += 1;
+        }
+      }
+      return acc;
+    }, 0);
 
     let { selectedUserId, selectedUser } = currentState;
 
@@ -36,6 +52,8 @@ class AdminUserTable extends Component {
       userCount: users.length,
       volunteerCount,
       playerCount: users.length - volunteerCount,
+      inPersonCount,
+      virtualCount,
       teamCount: teams ? Object.keys(teams).length : 0,
       selectedUserId,
       selectedUser,
@@ -46,7 +64,7 @@ class AdminUserTable extends Component {
     const { loading, users } = this.props;
     if (loading) return <Loading/>;
 
-    const { userCount, volunteerCount, playerCount, teamCount, selectedUser } = this.state;
+    const { userCount, volunteerCount, playerCount, inPersonCount, virtualCount, teamCount, selectedUser } = this.state;
 
     return (
       <div> {/* outer div for react root component element */}
@@ -56,6 +74,7 @@ class AdminUserTable extends Component {
             <Message.Header>User Summary</Message.Header>
             <strong>Total:</strong> {userCount} &nbsp;
             <strong>Players:</strong> {playerCount} &nbsp;
+            (In person: {inPersonCount}, Virtual: {virtualCount}) &nbsp;
             <strong>Volunteers:</strong> {volunteerCount} &nbsp;
             <strong>Teams:</strong> {teamCount} &nbsp;
           </Message.Content>
