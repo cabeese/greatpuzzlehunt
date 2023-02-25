@@ -43,7 +43,7 @@ class HomeEarlyBird extends Component {
             <Grid.Row style={{fontSize: "12pt"}}>
               * Registration is free and open to all, anywhere in the world. Donations are gratefully accepted.<br/>
               * Each person wanting to join a team must register themselves first.<br />
-              * The event is hybrid: teams may play in person or virtually.<br />
+              * The event is hybrid: teams may play in-person or virtually.<br /><br />
               Participants under age 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.
             </Grid.Row>
            

@@ -91,7 +91,7 @@ const schedule_inPerson_data = [
   },
   {
     time: "5:00 PM",
-    desc: "Red Square: Award Ceremony & Prizes!"
+    desc: "Red Square: Award Ceremony & Prizes!**"
   },
 ]
 
@@ -448,7 +448,7 @@ FAQ = class FAQ extends Component {
               <List.Item description="Writing utensils (pencils, pens, erasers, felt-tips, highlighters)" />
               <List.Item description="Colored Pencils" />
               <List.Item description="4–6 Coins or pebbles or something to use as markers on a game board" />
-              <List.Item description="Water bottle, snacks" />
+              <List.Item description="Water bottle, snacks (Be sure to bring snacks if you have special dietary needs)" />
               <List.Item description="Umbrella" />
             </List>
             Additional items for <strong>virtual</strong> participants:
