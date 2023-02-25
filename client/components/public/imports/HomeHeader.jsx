@@ -168,7 +168,7 @@ class HomeHeader extends Component {
     return (
       <div className="social-media-buttons" style={{padding: "10px"}}>
         {SMButton("facebook", "https://www.facebook.com/greatpuzzlehunt/")}
-        {SMButton("instagram", "https://www.instagram.com/greatpuzzlehunt/")}
+        {SMButton("instagram", "https://www.instagram.com/wwu.greatpuzzlehunt/")}
         {SMButton("reddit", "https://www.reddit.com/user/gph_official")}
         {SMButton("youtube", "https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A")}
       </div>
