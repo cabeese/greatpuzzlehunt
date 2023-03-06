@@ -9,6 +9,9 @@ import { extend } from 'lodash';
 
 import { browserHistory } from '../../history';
 
+const { eventYear } = Meteor.settings.public;
+let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+
 Profile = class Profile extends Component {
 
   constructor(props) {
@@ -65,14 +68,14 @@ Profile = class Profile extends Component {
                         To do that, we depend on donations from those who
                         can afford them. If you are able, please consider
                          making a small donation (suggested $5 students,
-                         $10 nonstudents) and/or buy a shirt (our only fund
+                         $10 nonstudents) and/or buying a shirt (our only fund
                          raiser)`}
             />
             </div>
             <br/>
             <div>
             <LinkButton as='a'
-              href="https://foundation.wwu.edu/greatpuzzlehunt"
+              href={link}
               size='large'  content='Donate Online'
               icon={<Icon name='heart'/>}
               color="green"

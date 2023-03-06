@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { Container, Grid, Segment, Header, Icon, Image } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
 
+const { eventYear } = Meteor.settings.public;
+let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+
 export default class HomeDonate0 extends Component {
   render() {
     return (
@@ -23,12 +26,12 @@ export default class HomeDonate0 extends Component {
                    To do that, we depend on donations from those who
                    can afford them. If you are able, please consider
                    making a small donation (suggested $5 students,
-                   $10 nonstudents) and/or buy a shirt (our only fund
+                   $10 nonstudents) and/or buying a shirt (our only fund
                    raiser).</p>
                 <p>Donations of any amount will help support this event.</p>
               </Segment>
               <LinkButton as='a'
-                href="https://foundation.wwu.edu/greatpuzzlehunt"
+                href={link}
                 size='large'  content='Donate Online'
                 icon={<Icon name='heart'/>}
                 color="green"
