@@ -29,6 +29,11 @@ class Users extends Component {
   }
   
   _users() {
+    if (!this.props.users || this.props.users.length === 0) {
+      return (
+        <span>There are currently no players looking to join a team.</span>
+      );
+    }
     return this.props.users.map((user) => (
       <Card key={user._id}>
 	<Card.Content>
