@@ -19,6 +19,13 @@ Media = class Media extends Component {
         
         <Image.Group size="medium">
           <Image
+            src='https://i.ytimg.com/vi_webp/D88rTg08wnk/maxresdefault.webp'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2023', color: 'black'}}
+            href='https://www.youtube.com/watch?v=D88rTg08wnk'
+            target="_blank"
+          />
+          <Image
             src='https://i.ytimg.com/vi_webp/IZU0sLW9pJk/maxresdefault.webp'
             as='a'
             label={{ as: 'a', ribbon: 'true', content: '2021', color: 'black'}}
