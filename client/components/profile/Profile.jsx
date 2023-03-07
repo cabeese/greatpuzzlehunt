@@ -2,11 +2,15 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
-import { Container, Segment, Icon, } from 'semantic-ui-react';
+import { Container, Message, Segment, Icon, } from 'semantic-ui-react';
+import LinkButton from '../imports/LinkButton';
 import moment from 'moment';
 import { extend } from 'lodash';
 
 import { browserHistory } from '../../history';
+
+const { eventYear } = Meteor.settings.public;
+let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
 Profile = class Profile extends Component {
 
@@ -55,6 +59,33 @@ Profile = class Profile extends Component {
           {showTeamPreview ? <ProfileTeamPreview /> : null }
 
           <PasswordEditor />
+          <div>
+            <Message
+              info size='large'
+              header='Help keep us afloat!'
+              content={`One of our goals is to keep the WWU Great
+                        Puzzle Hunt FREE so that EVERYONE can participate.
+                        To do that, we depend on donations from those who
+                        can afford them. If you are able, please consider
+                         making a small donation (suggested $5 students,
+                         $10 nonstudents) and/or buying a shirt (our only fund
+                         raiser)`}
+            />
+            </div>
+            <br/>
+            <div>
+            <LinkButton as='a'
+              href={link}
+              size='large'  content='Donate Online'
+              icon={<Icon name='heart'/>}
+              color="green"
+            />
+            <LinkButton as='a' href="/gear"
+              size="large" color="orange" target="_blank"
+              icon={<Icon name="shopping cart" />}
+              content="Buy Gear"
+            />
+          </div>
         </Segment>
       </Container>
     );

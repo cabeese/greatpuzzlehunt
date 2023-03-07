@@ -11,6 +11,7 @@ import HomeEarlyBird from './imports/HomeEarlyBird';
 import HomePastEvents from './imports/HomePastEvents';
 import HomePeople from './imports/HomePeople';
 import HomeDonate from './imports/HomeDonate';
+import HomeDonate0 from './imports/HomeDonate0';
 import HomeSponsors from './imports/HomeSponsors';
 import SamplePuzzles from './imports/SamplePuzzles';
 
@@ -59,6 +60,8 @@ Home = class Home extends Component {
           {/*AnnouncementsMessage*/}
 
           <HomeHeader/>
+
+          <HomeDonate0 />
 
           <HomeEarlyBird/>
 
