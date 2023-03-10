@@ -19,6 +19,8 @@ import GamestateComp from '../imports/GamestateComp';
 
 const { eventYear, eventDate, eventDay, siteName, earlyBirdLastDate, gearSaleEnd, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
+let donationLink = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+
 const prizeNote = (
   <span>
     Must be present at awards ceremony to claim prizes.
@@ -41,19 +43,11 @@ const gearPricing = (
     </ul> */}
     <ul>
       <li>Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
-      <li>Gear sales end midnight {gearSaleEnd}</li>
+      <li>Gear sales end midnight {gearSaleEnd}.</li>
       <li>Shirts will be ordered on Monday, April 17 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of April 24.</li>
       <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
-    <p>
-      Our costs to you are kept low thanks to generous donations from our sponsors. Their contributions help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more.
-    </p>
-    <p>
-      Please consider <a target="_blank" href="https://foundation.wwu.edu/greatpuzzlehunt">donating to the Great Puzzle Hunt</a>.
-    </p>
-    <p>
-    The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. 
-    </p>
+    <p> If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help sustain this event. </p>
 
   </span>
 );
@@ -383,6 +377,9 @@ FAQ = class FAQ extends Component {
             <p>
               Must be present at awards ceremony to claim prizes.
             </p>
+            <p>
+              Virtual team prizes will be to claim bragging rights!
+            </p>
             {/* <strong>* </strong>{prizeNote} */}
           </Accordion.Content>
 
@@ -414,7 +411,8 @@ FAQ = class FAQ extends Component {
             </p> 
             */}
             
-            <p>We know people are stretched in these times. We want to provide a safe, no cost, educational, fun activity accessible to all. This year, registration is FREE. Donations are gratefully accepted and will help keep us afloat!</p>
+              <p>We know people are stretched in these times. We want to provide a safe, no cost, educational, fun activity accessible to all. Registration is FREE. If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help keep us afloat! </p>
+              <p> The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. </p>
             <LinkButton as='a'
                 href="https://foundation.wwu.edu/greatpuzzlehunt"
                 size='large'  content='Donate Online'
@@ -492,6 +490,7 @@ FAQ = class FAQ extends Component {
             <p>
               Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) throughout the event while supplies last.
             </p>
+	    <p><em> Be sure to bring snacks if you have special dietary needs.</em></p>
             <List>
               <List.Item description="9:30 AM - Check in/receive wristband. Refreshment* area opens along Miller Hall."/>
               <List.Item description="1:00 - 3:00 PM - Domino’s Pizza Arrives in Red Square"/>
@@ -542,10 +541,38 @@ FAQ = class FAQ extends Component {
             </Grid>
           </Accordion.Content>
           
+          <Accordion.Title active={activeIndex === 18} index={18} onClick={(e,p) => this.handleClick(e,p)} >
+            <Icon color="purple" name="dropdown"/>
+            <Icon name="dollar"/>
+            How can I support the Great Puzzle Hunt?
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 18}>
+            <p> Our costs to you are kept low thanks to generous donations from our sponsors, and from gear purchases. These contributions help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more. </p>
+            <p>You can help out by:
+              <ul>
+                <li> Donating any amount. $5 and $10 donations make a difference. </li>
+                 <li> Purchasing a shirt!</li>
+		<li> Volunteering! It takes a team to make the Puzzle Hunt happen, and we are grateful for everyone who helps out.</li>
+	      </ul>
+	    </p> 
+            <p> The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. </p>
+            <LinkButton as='a'
+              href={donationLink}
+              size='large'  content='Donate Online'
+              icon={<Icon name='heart'/>}
+              color="green"
+            />
+            <LinkButton as='a' href="/gear"
+              size="large" color="orange" target="_blank"
+              icon={<Icon name="shopping cart" />}
+              content="Buy Gear"
+            />
+          </Accordion.Content>
+
         </Accordion>
 
         <br/>
-        <p>Last Updated: September 2023</p>
+        <p>Last Updated: March 2023</p>
       </Segment>
       </Container>
     );
