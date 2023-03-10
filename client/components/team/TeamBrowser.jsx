@@ -28,7 +28,6 @@ const SORT_BY_OPTS = [
   { text: 'None', value: 'none' },
   { text: 'Last Updated', value: 'last-updated' },
   { text: 'Team Size', value: 'size' },
-  { text: 'Looking for Members', value: 'looking-for-members'},
 ];
 const { eventYear } = Meteor.settings.public;
 
