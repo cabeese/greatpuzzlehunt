@@ -264,10 +264,32 @@ FAQ = class FAQ extends Component {
           <Accordion.Title active={activeIndex === 17} index={17} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="yellow" name="dropdown" />
             <Icon name="user"/>
-            Don't Have a team?
+            Don't have a team?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 17}>
-              First create an account. View teams looking for members here: (<a href="/team/join">Join a Team</a>)
+            That's okay! After you create an account, you can use our "matchmaking" feature to find an open team to join
+            or other players who are also looking for a team. Then, visit the <Link to="/profile">Profile</Link> page to
+            select one of two options:<br /><br />
+
+            <strong>Browse players looking for a team:</strong> Select this option to see other players who are
+            currently "solo" but would like to find other players to form a new team with. You can send them a message to
+            decide if you'd be a good fit.<br /><br />
+
+            <strong>Browse teams looking for more members:</strong> Select this option to see teams that are short a few
+            members and are actively recruiting new players. Send a message to their team captain to get in touch. The
+            team captain can then share the Team Password so you can join that group.<br /><br />
+
+            <strong>A few things to note:</strong>
+            <List>
+              <List.Item>
+                When exchanging messages with other players or team captains, your email address may be shared with
+                whoever you contact.
+              </List.Item>
+              <List.Item>
+                Be sure to check the Virtual or In-Person setting for a team you're interested in joining. If that team
+                is planning to play in-person but you can't be there physically, this could be a problem!
+              </List.Item>
+            </List>
           </Accordion.Content>
           <Accordion.Title active={activeIndex === 4} index={4} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="yellow" name="dropdown"/>
