@@ -411,8 +411,8 @@ FAQ = class FAQ extends Component {
             </p> 
             */}
             
-              <p>We know people are stretched in these times. We want to provide a safe, no cost, educational, fun activity accessible to all. Registration is FREE. If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help keep us afloat! </p>
-              <p> The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. </p>
+            <p>We know people are stretched in these times. We want to provide a safe, no cost, educational, fun activity accessible to all. Registration is FREE. </p>
+            <p>If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help keep us afloat!  The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. </p>
             <LinkButton as='a'
                 href="https://foundation.wwu.edu/greatpuzzlehunt"
                 size='large'  content='Donate Online'
@@ -529,7 +529,7 @@ FAQ = class FAQ extends Component {
               <Grid.Row>
                 <Grid.Column width={10}>
                   <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
-                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
+                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
                   {gearPricing}
                 </Grid.Column>
                 <Grid.Column width={6}>
@@ -547,17 +547,18 @@ FAQ = class FAQ extends Component {
             How can I support the Great Puzzle Hunt?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 18}>
-            <p> Our costs to you are kept low thanks to generous donations from our sponsors, and from gear purchases. These contributions help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more. </p>
+            <p> We keep this event free to you thanks to generous donations from our sponsors, and from gear purchases. These contributions help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more. </p>
             <p>You can help out by:
               <ul>
                 <li> Donating any amount. $5 and $10 donations make a difference. </li>
                  <li> Purchasing a shirt!</li>
-		<li> Volunteering! It takes a team to make the Puzzle Hunt happen, and we are grateful for everyone who helps out.</li>
+		<li> Volunteering!* It takes a team to make the Puzzle Hunt happen, and we are grateful for everyone who helps out.</li>
 	      </ul>
 	    </p> 
             <p> The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. </p>
+            <p> <strong>*</strong> Volunteers choose the "volunteer" account type when <a href="/register">registering</a>. Questions? Contact <a href="mailto:info@greatpuzzlehunt.com">info@greatpuzzlehunt.com</a>. </p>
             <LinkButton as='a'
-              href={donationLink}
+              href="https://foundation.wwu.edu/greatpuzzlehunt"
               size='large'  content='Donate Online'
               icon={<Icon name='heart'/>}
               color="green"
