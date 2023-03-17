@@ -18,11 +18,33 @@ export default class UnstartedPuzzle extends React.Component {
     return (
       <Segment disabled={ disabled }>
         <Header as='h3' content={ puzzle.name }/>
+        { this._teamMembers(team) }
         { this._startButton() }
         { this._error() }
       </Segment>
     );
   }
+
+    _teamMembers(team) {
+	const members = Meteor.users.find({ teamId: team._id }).fetch();
+	let checkedin = 0;
+	members.forEach(member => {
+	    if (member.checkedIn && (member.gameMode == "INPERSON")) {
+		checkedin++;
+	    }
+	});
+	let m = (checkedin == 1) ? 'member' : 'members';
+	return (
+	    <Message info>
+		<Message.Header>
+		    Team {team.name}
+		</Message.Header>
+		<Message.Content>
+		    <p>{checkedin} team {m} checked in</p>
+		</Message.Content>
+	    </Message>
+	);
+    }
 
   _startButton() {
     const { disabled } = this.props;
