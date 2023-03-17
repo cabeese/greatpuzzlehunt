@@ -25,14 +25,14 @@ class VolunteerTimerInner extends React.Component {
   }
 
   _timerUI() {
-    const { ready, volunteer, team, puzzleId } = this.props;
+    const { ready, volunteer, team, teamId, puzzleId } = this.props;
     if (!ready) {
       return <Loading />
     } else if (!team) {
       return <Message
         negative
         header='Oops!'
-        content={ `No team with id ${prams.teamId}` }
+        content={ `No team with id ${teamId}` }
       />;
     } else {
       const puzzle = team.puzzles.find((p) => p.puzzleId === puzzleId);
@@ -45,6 +45,7 @@ VolunteerTimerInner.propTypes = {
   ready: PropTypes.bool.isRequired,
   volunteer: PropTypes.object,
   team: PropTypes.object,
+  teamId: PropTypes.object,  
   puzzleId: PropTypes.string,
 };
 
@@ -58,6 +59,7 @@ VolunteerTimer = WithRouter(withTracker(( props ) => {
     ready,
     volunteer,
     team,
+    teamId,
     puzzleId,
   };
 })(VolunteerTimerInner));
