@@ -64,7 +64,7 @@ class VolunteerTeamCheckInMain extends Component {
       )
     };
     teamMembers.forEach(member => {
-      if (member.checkedIn && member.inPersonAllowed) packets++;
+      if (member.checkedIn && (member.gameMode === 'INPERSON')) packets++;
       if (!member.photoPermission) noPhotoUsers++;
     });
 
@@ -111,7 +111,7 @@ class VolunteerTeamCheckInMain extends Component {
               { member.name }
             </Grid.Column>
             <Grid.Column width={4}>
-              { member.inPersonAllowed ? 
+              { (member.gameMode === 'INPERSON') ? 
                 <><Icon name="group" color="blue" /> In-Person</>
                 :
                 <><Icon name="video" color="yellow" /> Virtual</>
