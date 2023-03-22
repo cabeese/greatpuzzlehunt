@@ -117,13 +117,14 @@ class PuzzleEditor extends Component {
     const { name, stage, answer, allowedTime, timeoutScore,
             bonusTime, location, downloadURL, hints,
             triggerCodewords, triggerHintImageURL } = this.state;
+    const nonCharacterDigit = /[^a-zA-Z0-9]/ug
     const fields = {
       name: name.trim(),
       stage: parseInt(stage),
       allowedTime: parseInt(allowedTime),
       timeoutScore: parseInt(timeoutScore),
       bonusTime: parseInt(bonusTime),
-      answer: answer.trim().toLowerCase(),
+      answer: answer.replaceAll(nonCharacterDigit, '').toLowerCase(),
       location: location.trim(),
       downloadURL: downloadURL.trim(),
       hints,
