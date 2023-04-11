@@ -9,7 +9,9 @@ const { eventYear, registrationOpenDate, earlyBirdLastDate, regularRegistrationS
 class HomeEarlyBird extends Component {
   render() {
     const { gamestate } = this.props;
-    const registrationOpen = gamestate && gamestate.registration;
+    const registrationOpen = gamestate &&
+          this.props.gamestate.registrationInPersonOpen &&
+          this.props.gamestate.registrationInPersonOpen;
     let registerButton = (
       <a style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
     );

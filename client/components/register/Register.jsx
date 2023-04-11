@@ -24,7 +24,8 @@ class RegisterInner extends Component {
         border: '0',
     };
 
-    if (gamestate.registration) {
+    if (gamestate.registrationInPersonOpen ||
+        gamestate.registrationVirtualOpen) {
       content = (
         <Segment basic>
           <RegisterForm />
@@ -32,13 +33,13 @@ class RegisterInner extends Component {
       );
     } else {
       content = (
-		<div>
-        	<Message
-          info size='large'
-          header='Registration is Closed'
-			  content={`Registration for the ${eventYear} Great Puzzle Hunt will open ${registrationOpenDate}.`}
-			/>
-		</div>
+	<div>
+          <Message
+            info size='large'
+            header='Registration is Closed'
+	    content={`Registration is closed at this time.`}
+	  />
+	</div>
       );
     }
 
