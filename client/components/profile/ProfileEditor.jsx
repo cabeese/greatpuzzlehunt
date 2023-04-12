@@ -36,7 +36,7 @@ ProfileEditorUI = class ProfileEditor extends Component {
   render() {
     const { firstname, lastname, gameMode, lookingForTeam, bio } = this.state;
     const { ready, gamestate } = this.props;
-    const canChangeGameMode = ready && gamestate.registration;
+    const canChangeGameMode = ready && gamestate.registrationInPersonOpen;
     return (
     <Segment basic>
       <Form onSubmit={(e) => this._handleSubmit(e)}>

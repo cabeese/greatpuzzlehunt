@@ -11,7 +11,7 @@ import { Segment,
   Radio,
 } from 'semantic-ui-react';
 import { pick } from 'lodash';
-import { gameModeOptions } from '../../../../lib/imports/util'
+import { gameModeOptions, gameModeEnum, } from '../../../../lib/imports/util'
 
 import GamestateComp from '../../imports/GamestateComp';
 
@@ -138,7 +138,8 @@ class RegisterForm extends Component {
   render() {
     if (!this.props.ready) {
       return <Loading/>
-    } else if (this.props.gamestate.registration) {
+    } else if (this.props.gamestate.registrationInPersonOpen ||
+               this.props.gamestate.registrationVirtualOpen) {
       return this._renderMain();
     } else {
       return <Message
@@ -222,8 +223,7 @@ class RegisterForm extends Component {
                          selection options={gameModeOptions} value={ this.state.gameMode }
                          onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
-
-        <p><strong>Note:</strong> game mode can be changed until {registrationCloseDate}.</p>
+        { this._gameModeNote(this.props.gamestate.registrationInPersonOpen) }
 
         <Header as='h3' icon={<Icon name='home' color='blue'/>} content='Player Details'
                 subheader='This information is required in the case of emergency.'/>
@@ -326,6 +326,24 @@ class RegisterForm extends Component {
       if (error) return this.setState({ error, mode: 'register' });
       this.setState({ error: null, result, mode: 'thankyou' });
     });
+  }
+
+  _gameModeNote(inPersonOpen) {
+    if (inPersonOpen) {
+      return (
+        <p><strong>Note:</strong> game mode can be changed
+          until {registrationCloseDate}.
+        </p>
+      );
+    } else {
+      return (
+        <Message
+          color='yellow'
+          header='In-person registration is now closed'
+          content="We are no longer accepting additional in-person players for this year"
+        />
+      );
+    }
   }
 
   _registrationData() {

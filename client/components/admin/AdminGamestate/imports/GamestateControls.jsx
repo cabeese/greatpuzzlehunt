@@ -23,6 +23,8 @@ class GamestateControlsInner extends Component {
     if (props.gamestate) {
       this.setState({
         registration: props.gamestate.registration,
+        registrationInPersonOpen: props.gamestate.registrationInPersonOpen,
+        registrationVirtualOpen: props.gamestate.registrationVirtualOpen,
         gameplay: props.gamestate.gameplay,
         webinarURL: props.gamestate.webinarURL || "",
         webinarID: props.gamestate.webinarID || "",
@@ -62,6 +64,8 @@ class GamestateControlsInner extends Component {
 
   _renderForm() {
     const sendReportsTo = this.props.gamestate.sendReportsTo || [];
+    let registration_status = this.state.registration === true ?
+        "TRUE" : ( this.state.registration === false ? "FALSE" : "unset" );
     return (
       <Container>
         <Header as="h3" content="Emails and Reports" />
@@ -112,7 +116,10 @@ class GamestateControlsInner extends Component {
         { this._fieldButton('doSendNightlyReports', "Nightly Reports") }
 
         <Header as='h3' content='Registration and Gear'/>
-        { this._fieldButton('Registration') }
+        { /* TODO: remove this after 2023 Hunt */ }
+        <small>Deprecated 'register' state: {`${registration_status}`}</small>
+        { this._fieldButton('registrationInPersonOpen', 'In-Person Registration') }
+        { this._fieldButton('registrationVirtualOpen', 'Virtual Registration') }
         { this._fieldButton('buyGear', '"Buy Gear" Button (on homepage)') }
 
         <Header as='h3' content='Webinar'/>
