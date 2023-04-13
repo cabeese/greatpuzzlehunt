@@ -481,6 +481,7 @@ FAQ = class FAQ extends Component {
                 </List.List>
               </List.Item>
               <List.Item description="Water to drink and a sack lunch or snacks." />
+              <List.Item> If your team members are playing from separate locations, you can try <a href='https://jamboard.google.com/'>Google Jamboard</a> for a free interactive whiteboard. </List.Item>
             </List>
           </Accordion.Content>
 
