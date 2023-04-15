@@ -32,6 +32,7 @@ export function renderScore(score) {
 }
 
 export default class PuzzleProgress extends React.Component {
+  server_poll_count = 0;
   constructor(props) {
     super(props);
     const hasEnded = Boolean(props.puzzle.end);
@@ -42,14 +43,27 @@ export default class PuzzleProgress extends React.Component {
       hasEnded,
     };
 
+    // If the puzzle is in-progress, update the timer regularly
     if (!hasEnded) {
+      const _this = this;
+
+      // We want the displayed clock to update every second, but still stay in
+      // sync with the server. Fetching time from the server every 1 second is
+      // extremely taxing on the server with many clients, so we opt to poll
+      // at a slower interval and make local adjustments in-between. This may
+      // lead to some jitter if the server is under heavy load, so we may want
+      // to reevaluate this in the future.
       this.interval = Meteor.setInterval(() => {
-        const _this = this;
-        Meteor.call('serverTime', (err, time) => {
-          if (err) _this.setState({ now: moment() });
-          else _this.setState({ now: moment(time) });
-        })
-      }, 10000);
+        if (this.server_poll_count % 10 === 0) {
+          Meteor.call('serverTime', (err, time) => {
+            if (err) _this.setState({ now: moment() });
+            else _this.setState({ now: moment(time) });
+          });
+        } else {
+          _this.setState({ now: moment(_this.state.now).add(1, 'second') });
+        }
+        this.server_poll_count++;
+      }, 1000);
     }
   }
 
