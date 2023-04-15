@@ -36,6 +36,7 @@ class PuzzleEditor extends Component {
           />
         </Form.Group>
 
+        <small>Note: 'stage' should be 0 for the four main puzzles and 1 (or higher) for Meta puzzle ONLY.</small>
         <Form.Group widths='equal'>
           <Form.Input
             name='stage'
