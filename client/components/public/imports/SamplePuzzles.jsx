@@ -13,7 +13,7 @@ export default class SamplePuzzles extends Component {
         puzzles: [
           {
             name: 'May the Forest be with You!',
-            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/1.Walk-Through+Solution+May+the+Forest+be+with+You.pdf',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/forest-4449A0B3-0B68-4E6E-9FFE-A60F71D4E83D.pdf',
             hints: [
               'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/h1-C86D9A9B-235C-4F9F-AB75-FBF5DD19EE41.png',
               'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/h2-E9ED2D08-AC23-4796-98D1-692539B02459.png',
