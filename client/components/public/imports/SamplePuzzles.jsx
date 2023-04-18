@@ -9,6 +9,61 @@ export default class SamplePuzzles extends Component {
     this.state = {};
 
     this.puzzles = {
+      '2023': {
+        puzzles: [
+          {
+            name: 'May the Forest be with You!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/1.Walk-Through+Solution+May+the+Forest+be+with+You.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/h1-C86D9A9B-235C-4F9F-AB75-FBF5DD19EE41.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/h2-E9ED2D08-AC23-4796-98D1-692539B02459.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/h3-A88B264E-5A74-4F5F-A8CC-0EBB52BC8B29.png'
+            ],
+            codeWord: 'coach beard',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/forest/1.Walk-Through+Solution+May+the+Forest+be+with+You.pdf' 
+          },
+          {
+            name: 'Once a Pawn a Time!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/pawn/pawn-C12B1FB4-EAF1-42C0-ABAB-710E3419098A.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/pawn/h1-FE48F5C9-07E1-4F80-A5E7-330B0A577776.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/pawn/h2-DB248C96-2269-4464-A92B-4E4E82725AB3.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/pawn/h3-B0FA2A68-110F-48BD-99E3-B067C8B33BF9.png'
+            ],
+            codeWord: 'maelzel\'s chess player',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/pawn/4.Walk-Through+Solution+Once+a+Pawn+a+Time.pdf'
+          },
+          {
+            name: 'The Sound of Silence!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/silence/silence-3B5C2D8A-1398-4E73-869B-48AA162501C3.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/silence/h1-B7573EEC-5D66-41E8-ADB3-0B546CF5B632.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/silence/h2-DE77456C-5A6C-4C96-8A02-1B1ACF884645.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/silence/h3-3CDC2870-F7D6-44A7-8D61-244D9A312245.png'
+            ],
+            codeWord: 'get along',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/silence/2.Walk-Through+Solution+The+Sound+of+Silence.pdf'
+          },
+          {
+            name: 'Give it a Whorl!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/whorl/whorl-9E07BCF4-B566-4875-99E1-938A85A4A841.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/whorl/Give+Whorl+Hint1.Corrected.PNG',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/whorl/h2-3D0EA7D6-8F7F-4CF1-B7F7-908A4F6FA7E9.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/whorl/h3-9FB9802F-8317-4C70-8CA3-9CC3F2345F58.png'
+            ],
+            codeWord: 'the partridge family',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/whorl/3.Walk-Through+Solution+Give+it+a+Whorl.pdf'
+          },
+          {
+            name: 'Meta-Puzzle',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/meta/meta-F8012121-E334-4DB3-8ABE-43E093757927.pdf',
+            hints: [],
+            codeWord: 'a charged tale',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2023/puzzles/meta/5.Walk-Through+Solution+Meta+2023+Puzzle+Walk.pdf'
+          },
+        ]
+      },
       '2022': {
         puzzles: [
           {
