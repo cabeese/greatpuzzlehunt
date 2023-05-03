@@ -17,66 +17,52 @@ class PuzzleEditor extends Component {
     return omit(puzzle, ['_id']);
   }
 
+  _textInput(name, label) {
+    return (
+      <Form.Input
+        name={name}
+        label={label}
+        error={ this.state[name] ? false : 'Empty!' }
+        value={ this.state[name] }
+        onChange={ (e) => this._handleChange(e) }
+      />
+    );
+  }
+
+  _numericalInput(name, label) {
+    const value = this.state[name];
+    const isError = isNaN(parseInt(value, 10)) ||
+          String(value) !== String(parseInt(value, 10));
+    return (
+      <Form.Input
+        name={name}
+        label={label}
+        error={ isError ? "Fishy value..." : false }
+        value={ value }
+        onChange={ (e) => this._handleChange(e) }
+      />
+    );
+  }
+
   render() {
     return (
       <Form onSubmit={(e) => e.preventDefault() }>
         <Header as='h3' content='Puzzle Editor'/>
         <Form.Group inline>
-          <Form.Input
-            name='name'
-            label='Puzzle Name'
-            value={ this.state.name }
-            onChange={ (e) => this._handleChange(e) }
-          />
-          <Form.Input
-            name='answer'
-            label='Answer'
-            value={ this.state.answer }
-            onChange={ (e) => this._handleChange(e) }
-          />
+          { this._textInput("name", "Puzzle Name") }
+          { this._textInput("answer", "Answer") }
         </Form.Group>
 
         <small>Note: 'stage' should be 0 for the four main puzzles and 1 (or higher) for Meta puzzle ONLY.</small>
         <Form.Group widths='equal'>
-          <Form.Input
-            name='stage'
-            label='Stage'
-            value={ this.state.stage }
-            onChange={ (e) => this._handleChange(e) }
-          />
-          <Form.Input
-            name='allowedTime'
-            label='Time Allowed (min)'
-            value={ this.state.allowedTime }
-            onChange={ (e) => this._handleChange(e) }
-          />
-          <Form.Input
-            name='timeoutScore'
-            label='Timeout Score (min)'
-            value={ this.state.timeoutScore }
-            onChange={ (e) => this._handleChange(e) }
-          />
-          <Form.Input
-            name='bonusTime'
-            label='Bonus Time (min)'
-            value={ this.state.bonusTime }
-            onChange={ (e) => this._handleChange(e) }
-          />
+          { this._numericalInput("stage", "Stage") }
+          { this._numericalInput("allowedTime", "Time Allowed (min)") }
+          { this._numericalInput("timeoutScore", "Timeout Score (min)") }
+          { this._numericalInput("bonusTime", "Bonus Time (min)") }
         </Form.Group>
 
-        <Form.Input
-          name='location'
-          label='Location (in-person only)'
-          value={ this.state.location }
-          onChange={ (e) => this._handleChange(e) }
-        />
-
-        <Form.Input
-          name='downloadURL'
-          label='Download URL (virtual only)'
-          value={ this.state.downloadURL }
-          onChange={ (e) => this._handleChange(e) }
-        />
+        { this._textInput("location", "Location (in-person only)") }
+        { this._textInput("downloadURL", "Download URL (virtual only)") }
 
         <HintEditor hints={this.state.hints} updateHints={(hints) => this.setState({ hints })}/>
 
