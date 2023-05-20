@@ -24,22 +24,27 @@ const AnnouncementsMessage = (
               <Message size='huge' warning>
                 <Message.Content>
                   <Message.Header>
-                    Join us in 2023!
+                    Thank you, Participants! Join us in 2024!
                   </Message.Header>
                   <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <List>
                       <List.Item>
-                        The seventh annual Great Puzzle Hunt will take place
-                        on <strong>Saturday, April 15th, 2023</strong>.
+                        The eigth annual Great Puzzle Hunt will take place
+                        on <strong>Saturday, April 20th, 2024</strong>.
+                        Mark your calendars!
                       </List.Item>
 
                       <List.Item>
-                        Registration is FREE and open to all, anywhere in the world.
-                        Donations are gratefully accepted.
+                        Please consider donating for WWU's Give Day
+                        using <a href="https://wwugiveday.wwu.edu/giving-day/61075/department/61118">this
+                                specific link</a>!
                       </List.Item>
 
                       <List.Item>
-                        The event is <em>hybrid</em>: teams may play in person or virtually.
+                        There were a few minor scoring miscalculations on the Meta Puzzle in the
+                        Open Division. Click to view
+                        the <a href="https://gph-distributed.s3.us-west-2.amazonaws.com/2023/2023-gph-leaderboard_open-division.pdf">corrected
+                              leaderboard</a>.
                       </List.Item>
                     </List>
                   </Segment>
@@ -57,7 +62,7 @@ Home = class Home extends Component {
   render() {
     return (
       <div>
-          {/*AnnouncementsMessage*/}
+          {AnnouncementsMessage}
 
           <HomeHeader/>
 
