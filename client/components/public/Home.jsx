@@ -35,12 +35,6 @@ const AnnouncementsMessage = (
                       </List.Item>
 
                       <List.Item>
-                        Please consider donating for WWU's Give Day
-                        using <a href="https://wwugiveday.wwu.edu/giving-day/61075/department/61118">this
-                                specific link</a>!
-                      </List.Item>
-
-                      <List.Item>
                         There were a few minor scoring miscalculations on the Meta Puzzle in the
                         Open Division. Click to view
                         the <a href="https://gph-distributed.s3.us-west-2.amazonaws.com/2023/2023-gph-leaderboard_open-division.pdf">corrected
