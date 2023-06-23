@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Header, Label, Button } from 'semantic-ui-react';
+import { Grid, Header, Label, Button, Icon, Popup, List, } from 'semantic-ui-react';
 
 import puzzleTracker from './PuzzleTracker';
 
@@ -40,8 +40,41 @@ class PuzzleList extends Component {
     return puzzles.map((puzzle) => this._puzzle(puzzle, activePuzzleId));
   }
 
+  _validation(issues) {
+    if (!issues || issues.length === 0) {
+      return;
+    }
+
+    let content = <List>
+                    {issues.map((issue, index) => <List.Item key={index}>{issue}</List.Item> )}
+                  </List>;
+
+    return (
+      <Popup content={content} trigger={<Icon name='exclamation' />} />
+    );
+  }
+
   _puzzle(puzzle, activePuzzleId) {
     const isActive = puzzle._id === activePuzzleId;
+    let issues = [];
+    const text_fields = ["name", "answer"];
+    const num_fields = ["stage", "allowedTime", "timeoutScore",  "bonusTime"];
+    text_fields.forEach(field => {
+      if (puzzle[field] === '') {
+        issues.push(`Invalid value for ${field}`);
+      }
+    });
+    num_fields.forEach(field => {
+      if (puzzle[field] === '' || puzzle[field] < 0 || isNaN(puzzle[field])) {
+        issues.push(`Invalid value for ${field}`);
+      }
+    });
+    puzzle.hints.forEach((hint, i) => {
+      if (!hint.imageUrl || !hint.text) {
+        issues.push(`Hint ${i} empty or missing data`);
+      }
+    });
+
     return (
       <Grid.Row columns={5} key={ puzzle._id } color={isActive ? "teal" : undefined}>
         <Grid.Column>
@@ -57,6 +90,7 @@ class PuzzleList extends Component {
           {puzzle.timeoutScore} timeout score
         </Grid.Column>
         <Grid.Column>
+          { this._validation(issues) }
           <Button basic floated='right'
             icon='trash'
             onClick={ () => this._delete(puzzle) }

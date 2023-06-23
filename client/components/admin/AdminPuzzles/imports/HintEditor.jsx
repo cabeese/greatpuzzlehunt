@@ -68,12 +68,14 @@ class HintEditor extends Component {
           name={`hint_${i}_text`}
           label={`Hint ${i+1} Text`}
           value={hint.text}
+          error={ hint.text === '' }
           onChange={(e) => this._handleHintChange('text', e, i)}
         />
 
         <Form.Input
           name={`hint_${i}_imageUrl`}
           label={`Hint ${i+1} Image URL`}
+          error={ !hasImage }
           value={hint.imageUrl}
           onChange={(e) => this._handleHintChange('imageUrl', e, i)}
         />
