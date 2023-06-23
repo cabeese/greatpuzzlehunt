@@ -42,7 +42,8 @@ TeamListCard = class TeamListCard extends Component {
   render() {
     const { division, showPasswordField, memberCount, inPerson, } = this.state;
     const { team } = this.props;
-    const membersLabel = `${memberCount} of 6 members`;
+    const membersLabelPostfix = this.state.isFull ? " (full)" : "";
+    const membersLabel = `${memberCount} of 6 members ${membersLabelPostfix}`;
     const membersPercent = Math.round((memberCount / 6)*100);
     const progressColor = this._getProgressColor(memberCount);
 
@@ -87,7 +88,6 @@ TeamListCard = class TeamListCard extends Component {
     }
 
     const { showPasswordField, isFull, showOwner, lookingForMembers } = this.state;
-    if (isFull) return null;
 
     let lookingBtn = null;
     if (!showPasswordField && lookingForMembers) {
@@ -103,6 +103,16 @@ TeamListCard = class TeamListCard extends Component {
         />;
     }
     const ownerInfo = showOwner ? this._renderOwnerInfo() : null;
+
+    if (isFull) {
+      // Still allow players to message the team, but not join it
+      return (
+        <Card.Content extra>
+          { lookingBtn }
+          { ownerInfo }
+        </Card.Content>
+      );
+    }
 
     const joinBtn = !showOwner && !showPasswordField ? <Button basic size='small' floated='right' icon='reply' labelPosition='right' content='Join Team' onClick={() => this.setState({ showPasswordField: true })}/> : null;
     const passwordForm = showPasswordField ? this._renderPasswordField() : null;
