@@ -5,6 +5,7 @@ Meteor.publish('admin.teams', function() {
   if (!isAdmin(this.userId)) return this.ready();
 
   const projection = {
+    createdAt: 1,
     name: 1,
     division: 1,
     checkinConfirmed: 1,
