@@ -3,6 +3,7 @@
  * For running appliction startup code
 */
 import { cloneDeep } from 'lodash';
+import { WebApp} from 'meteor/webapp';
 
 Meteor.startup(() => {
 
@@ -32,4 +33,9 @@ Meteor.startup(() => {
 
   Meteor.logger.logobj(adminUser);
 
+  // include HSTS in response headers for security compliance
+  WebApp.connectHandlers.use(function (req, res, next) {
+    res.setHeader('Strict-Transport-Security', 'max-age=86400; includeSubDomains');
+    next();
+  });
 });
