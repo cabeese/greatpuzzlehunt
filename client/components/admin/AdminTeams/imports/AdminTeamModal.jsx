@@ -12,11 +12,14 @@ class AdminTeamModal extends Component {
     const { team, clearTeam } = this.props;
     if (!team) return null;
 
+      console.log("admin team modal:");
+      console.log(team);
+
     const paneMap = {
       "General": AdminTeamModalGeneral,
       "Progress": AdminTeamModalProgress,
     };
-    const panes = [
+      let panes = [
       {
         menuItem: "General",
         render: () => {
@@ -26,7 +29,11 @@ class AdminTeamModal extends Component {
             </Tab.Pane>
           );
         }
-      },
+      }
+    ];
+
+      if (this._inProgress(team)) {
+	  panes.push(
       {
         menuItem: "Progress",
         render: () => {
@@ -36,8 +43,9 @@ class AdminTeamModal extends Component {
             </Tab.Pane>
           );
         }
-      },
-    ];
+      }
+	  )
+      };
 
     return (
       <Modal
@@ -63,6 +71,10 @@ class AdminTeamModal extends Component {
       </Modal>
     );
   }
+
+    _inProgress(team) {
+	return (team.hasBegun && team.puzzles && (team.puzzles.length >= 0));
+    }
 
 }
 

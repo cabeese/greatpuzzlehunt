@@ -7,7 +7,7 @@ import { Table, Icon } from 'semantic-ui-react';
 class AdminTeamModalProgress extends Component {
     _puzzleStats() {
         const { puzzles } = this.props.team;
-        if (!puzzles) return "";
+        // if (!puzzles) return "";
 
         return (
             <Table>
@@ -22,7 +22,7 @@ class AdminTeamModalProgress extends Component {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {puzzles.map(this._puzzleRow)}
+                  {puzzles ? puzzles.map(this._puzzleRow) : ""}
                 </Table.Body>
             </Table>
         )
@@ -36,6 +36,7 @@ class AdminTeamModalProgress extends Component {
         //     const name = hint.taken ? "check square" : "square outline";
         //     hintsTaken.push(<Icon key={index} name={name} />);
         // });
+
         const start = puzzle.start ? moment(puzzle.start).format("HH:mm:ss") : "--";
         const end = puzzle.end ? moment(puzzle.end).format("HH:mm:ss") : "--";
         return (
@@ -53,6 +54,8 @@ class AdminTeamModalProgress extends Component {
   render() {
     const { team } = this.props;
     const { puzzles } = team;
+
+    console.log(team);
 
     const puzzlesCt = puzzles.length;
     const puzzlesComplete = puzzles.reduce((acc, puzzle) => {
