@@ -117,3 +117,27 @@ Meteor.publish('game.progress', function() {
     Puzzles.find({}, { fields: puzzleProjection }),
   ];
 });
+
+Meteor.publish('admin.team.puzzlestatus', function(teamId) {
+    check(teamId, String);
+    if (!isAdmin(this.userId)) {
+	return this.ready();
+    }
+
+    const teamProjection = {
+	// _id: 1,
+	beganAt: 1,
+	'puzzles.puzzleId': 1,
+	'puzzles.name': 1,
+	'puzzles.start': 1,
+	'puzzles.end': 1,
+	'puzzles.score': 1,
+	'puzzles.hints': 1,
+	'puzzles.tries': 1,
+	'puzzles.timedOut': 1
+    };
+    
+    return Teams.find({ '_id': teamId},
+		      { fields: teamProjection });
+    // return Teams.find({ '_id': teamId})
+});

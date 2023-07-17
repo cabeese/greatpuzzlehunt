@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Table, Icon } from 'semantic-ui-react';
 
+import AdminTeamProgressTracker from './AdminTeamProgress';
+
 class AdminTeamModalProgress extends Component {
     _puzzleStats() {
         const { puzzles } = this.props.team;
@@ -62,6 +64,7 @@ class AdminTeamModalProgress extends Component {
         return acc + ( puzzle.end ? 1 : 0 );
     }, 0);
 
+      console.log("ATMP render");
 
     return (
         <div>
@@ -87,6 +90,8 @@ class AdminTeamModalProgress extends Component {
                 </Table.Body>
             </Table>
             <br />
+	    <AdminTeamProgressTracker id={team._id} />
+	    <br />
             {this._puzzleStats()}
         </div>
     );

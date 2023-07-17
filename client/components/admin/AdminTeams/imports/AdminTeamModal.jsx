@@ -19,7 +19,7 @@ class AdminTeamModal extends Component {
       "General": AdminTeamModalGeneral,
       "Progress": AdminTeamModalProgress,
     };
-      let panes = [
+    let panes = [
       {
         menuItem: "General",
         render: () => {
@@ -32,20 +32,20 @@ class AdminTeamModal extends Component {
       }
     ];
 
-      if (this._inProgress(team)) {
-	  panes.push(
-      {
-        menuItem: "Progress",
-        render: () => {
-          return (
-            <Tab.Pane>
-              <AdminTeamModalProgress team={team} />
-            </Tab.Pane>
-          );
+    if (this._inProgress(team)) {
+      panes.push(
+	{
+          menuItem: "Progress",
+          render: () => {
+            return (
+              <Tab.Pane>
+                <AdminTeamModalProgress team={team} />
+              </Tab.Pane>
+            );
+          }
         }
-      }
-	  )
-      };
+      )
+    };
 
     return (
       <Modal
