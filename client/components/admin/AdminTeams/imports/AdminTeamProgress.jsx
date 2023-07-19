@@ -29,6 +29,7 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
 
         const start = puzzle.start ? moment(puzzle.start).format("HH:mm:ss") : "--";
         const end = puzzle.end ? moment(puzzle.end).format("HH:mm:ss") : "--";
+
         return (
             <Table.Row key={puzzle.name}>
                 <Table.Cell>{puzzle.name}</Table.Cell>
@@ -36,6 +37,7 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
                 <Table.Cell>{end}</Table.Cell>
                 <Table.Cell>{puzzle.tries || "--"}</Table.Cell>
                 <Table.Cell>{hintsTaken}</Table.Cell>
+		<Table.Cell> <Icon name={ puzzle.timedOut ? "check square" : "square outline" } /> </Table.Cell>
                 <Table.Cell>{puzzle.score || "--"}</Table.Cell>
             </Table.Row>
         )
@@ -68,6 +70,7 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
                         <Table.Cell>Finished</Table.Cell>
                         <Table.Cell>Answer Attempts</Table.Cell>
                         <Table.Cell>Hints Taken</Table.Cell>
+                        <Table.Cell>Timed Out</Table.Cell>
                         <Table.Cell>Score</Table.Cell>
                     </Table.Row>
                 </Table.Header>
