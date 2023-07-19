@@ -91,8 +91,6 @@ class AdminTeamModalProgress extends Component {
             </Table>
             <br />
 	    <AdminTeamProgressTracker id={team._id} />
-	    <br />
-            {this._puzzleStats()}
         </div>
     );
   }
