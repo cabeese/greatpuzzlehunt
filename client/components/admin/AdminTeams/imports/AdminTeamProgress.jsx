@@ -20,12 +20,12 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
 
     _puzzleRow(puzzle) {
         let hintsTaken = [];
-        // TODO: we no longer publish the hints to save bandwidth/CPU/etc, so
-        // this section has no data to display.
          puzzle.hints.forEach((hint, index) => {
              const name = hint.taken ? "check square" : "square outline";
              hintsTaken.push(<Icon key={index} name={name} />);
          });
+
+	const timedout =  <Icon name={ puzzle.timedOut ? "check square" : "square outline" } />;
 
         const start = puzzle.start ? moment(puzzle.start).format("HH:mm:ss") : "--";
         const end = puzzle.end ? moment(puzzle.end).format("HH:mm:ss") : "--";
@@ -37,7 +37,7 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
                 <Table.Cell>{end}</Table.Cell>
                 <Table.Cell>{puzzle.tries || "--"}</Table.Cell>
                 <Table.Cell>{hintsTaken}</Table.Cell>
-		<Table.Cell> <Icon name={ puzzle.timedOut ? "check square" : "square outline" } /> </Table.Cell>
+		<Table.Cell> {timedout} </Table.Cell>
                 <Table.Cell>{puzzle.score || "--"}</Table.Cell>
             </Table.Row>
         )

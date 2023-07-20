@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Modal, Tab, Button, Icon } from 'semantic-ui-react';
 
 //import AdminTeamEditForm from './AdminTeamEditForm';
+import AdminTeamModalEdit from './AdminTeamModalEdit';
 import AdminTeamModalGeneral from './AdminTeamModalGeneral';
 import AdminTeamModalProgress from './AdminTeamModalProgress';
 
@@ -40,6 +41,18 @@ class AdminTeamModal extends Component {
             return (
               <Tab.Pane>
                 <AdminTeamModalProgress team={team} />
+              </Tab.Pane>
+            );
+          }
+        }
+      )
+      panes.push(
+	{
+          menuItem: "Edit",
+          render: () => {
+            return (
+              <Tab.Pane>
+                <AdminTeamModalEdit team={team} />
               </Tab.Pane>
             );
           }
