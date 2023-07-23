@@ -3,23 +3,36 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Tab, Button, Icon } from 'semantic-ui-react';
 
-//import AdminTeamEditForm from './AdminTeamEditForm';
-import AdminTeamModalEdit from './AdminTeamModalEdit';
 import AdminTeamModalGeneral from './AdminTeamModalGeneral';
 import AdminTeamModalProgress from './AdminTeamModalProgress';
+import AdminTeamPuzzleEdit from './AdminTeamPuzzleEdit';
 
 class AdminTeamModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedPuzzleId: '' };
+  }
+
+  _getSelectedPuzzle(puzzleId, team) {
+    if (!puzzleId) {
+      return null;
+    }
+    console.log("ATM gsp puzzleid: ", puzzleId);
+    console.log("ATM gsp team: ", team);
+    return team.puzzles.find(({ puzzleId }) => puzzleId === puzzleId);
+  }
+  
   render() {
+    console.log("ATM render");
     const { team, clearTeam } = this.props;
     if (!team) return null;
 
-      console.log("admin team modal:");
-      console.log(team);
+    const { selectedPuzzleId } = this.state;
+    const puzzle = this._getSelectedPuzzle(selectedPuzzleId, team);
 
-    const paneMap = {
-      "General": AdminTeamModalGeneral,
-      "Progress": AdminTeamModalProgress,
-    };
+    console.log("ATM: puzzle id: ", selectedPuzzleId);
+    console.log("ATM: puzzle: ", puzzle);
+
     let panes = [
       {
         menuItem: "General",
@@ -40,55 +53,55 @@ class AdminTeamModal extends Component {
           render: () => {
             return (
               <Tab.Pane>
-                <AdminTeamModalProgress team={team} />
-              </Tab.Pane>
-            );
-          }
-        }
-      )
-      panes.push(
-	{
-          menuItem: "Edit",
-          render: () => {
-            return (
-              <Tab.Pane>
-                <AdminTeamModalEdit team={team} />
+                <AdminTeamModalProgress team={team} selectPuzzle={(puzzleId) => this._selectPuzzle(puzzleId)} />
               </Tab.Pane>
             );
           }
         }
       )
     };
-
+    
     return (
-      <Modal
-        size="large"
-        open={true}
-        closeIcon={true}
-        onClose={() => clearTeam() }
-      >
-        <Modal.Header>{team.name}</Modal.Header>
-
-        <Modal.Content>
-          <Tab panes={panes} />
-        </Modal.Content>
-
-        <Modal.Actions>
-          <Button
-            basic
-            onClick={clearTeam}
-            icon={ <Icon name="close" /> }
-            content="Close"
-            />
-        </Modal.Actions>
-      </Modal>
+      <div>
+	<Modal
+	  size="large"
+	  open={true}
+	  closeIcon={true}
+	  onClose={() => clearTeam() }
+	>
+	  <Modal.Header>{team.name}</Modal.Header>
+	  
+	  <Modal.Content>
+	    <Tab panes={panes} />
+	  </Modal.Content>
+	  
+	  <Modal.Actions>
+	    <Button
+	      basic
+	      onClick={clearTeam}
+	      icon={ <Icon name="close" /> }
+	      content="Close"
+	    />
+	  </Modal.Actions>
+	</Modal>
+	
+        <AdminTeamPuzzleEdit team={team} puzzle={puzzle} clearPuzzle={() => this._clearSelectedPuzzle()}/>
+      </div>
     );
   }
 
-    _inProgress(team) {
-	return (team.hasBegun && team.puzzles && (team.puzzles.length >= 0));
-    }
+  _inProgress(team) {
+    return (team.hasBegun && team.puzzles && (team.puzzles.length >= 0));
+  }
 
+  _selectPuzzle(puzzleId) {
+    console.log("ATM select puzzle: ", puzzleId);
+    this.setState({ selectedPuzzleId: puzzleId });
+  }
+
+  _clearSelectedPuzzle() {
+    this.setState({ selectedPuzzleId: '' });
+  }
 }
 
 AdminTeamModal.propTypes = {
