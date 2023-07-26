@@ -1,7 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container, Form, Icon, Input, Modal, Tab } from 'semantic-ui-react';
+import { Button, Checkbox, Container, Form, Icon,
+	 Input, Modal, Tab } from 'semantic-ui-react';
+import { getPuzzleScore } from '../../../../../lib/imports/puzzle-helpers';
 import moment from 'moment';
 
 class AdminTeamPuzzleEdit extends Component {
@@ -21,33 +23,51 @@ class AdminTeamPuzzleEdit extends Component {
     }
     console.log("ATPE render actually rendering");
 
+    let pstart = null;
+    let pstarttext = '--';
+    let pstarthh = '0';
+    let pstartmm = '0';
+    let pstartss = '0';
     if (puzzle.start) {
-      const pstart = moment(puzzle.start);
-      const pstarttext = pstart.format("HH:mm:ss");
-      const pstarthh = pstart.hour();
-      const pstartmm = pstart.minute();
-      const pstartss = pstart.second();
-    } else {
-      const pstart = null;
-      const pstarttext = '--';
-      const pstarthh = '0';
-      const pstartmm = '0';
-      const pstartss = '0';
+      pstart = moment(puzzle.start);
+      pstarttext = pstart.format("HH:mm:ss");
+      pstarthh = pstart.hour();
+      pstartmm = pstart.minute();
+      pstartss = pstart.second();
+    }
+    
+    let pend = null;
+    let pendtext = '--';
+    let pendhh = '0';
+    let pendmm = '0';
+    let pendss = '0';
+    if (puzzle.end) {
+      pend = moment(puzzle.end);
+      pendtext = pend.format("HH:mm:ss");
+      pendhh = pend.hour();
+      pendmm = pend.minute();
+      pendss = pend.second();
     }
 
-    if (puzzle.end) {
-      const pend = moment(puzzle.end);
-      const pendtext = pend.format("HH:mm:ss");
-      const pendhh = pend.hour();
-      const pendmm = pend.minute();
-      const pendss = pend.second();
-    } else {
-      const pend = null;
-      const pendtext = '--';
-      const pendhh = '0';
-      const pendmm = '0';
-      const pendss = '0';
-    }
+    let hintsTaken = [];
+    let hintsEdit = [];
+    puzzle.hints.forEach((hint, index) => {
+      const name = hint.taken? 'check square' : 'square outline';
+      hintsTaken.push(<Icon key={index} name={name} />);
+      const boxname = 'hint' + index;
+      if (hint.taken) {
+	hintsEdit.push(<Checkbox name={boxname}
+				 onChange={(e, data) => this._handleCheckChange(e, data)}
+				 defaultChecked
+		       />);
+      } else {
+	hintsEdit.push(<Checkbox name={boxname}
+				 onChange={(e, data) => this._handleCheckChange(e, data)}
+		       />);
+      }
+    });
+
+    const timedOut = puzzle.timedOut ? 'check square' : 'square outline' ;
     
     return (
       <Modal
@@ -56,10 +76,11 @@ class AdminTeamPuzzleEdit extends Component {
         closeIcon={true}
         onClose={() => clearPuzzle() }
       >
-        <Modal.Header>{team.name}: {puzzle.name}</Modal.Header>
+        <Modal.Header>Edit times for {team.name}: {puzzle.name}</Modal.Header>
 	
         <Modal.Content>
 	  <Form>
+
 	    <Form.Group>
 	      <Form.Field width={4}>
 		<label> Start </label>
@@ -87,38 +108,53 @@ class AdminTeamPuzzleEdit extends Component {
 		/>
 	      </Form.Field>
 	    </Form.Group>
+
 	    <Form.Group>
 	      <Form.Field width={4}>
 		<label> End </label>
-		<Input readOnly />
+		<Container> {pendtext} </Container>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<label> hh </label>
-		<Input />
+		<Input name='end-hh'
+                       onChange={(e, data) => this._handleDataChange(e, data)}
+		       defaultValue={pendhh}
+		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<label> mm </label>
-		<Input />
+		<Input name='end-mm'
+                       onChange={(e, data) => this._handleDataChange(e, data)}
+		       defaultValue={pendmm}
+		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<label> ss </label>
-		<Input />
+		<Input name='end-ss'
+                       onChange={(e, data) => this._handleDataChange(e, data)}
+		       defaultValue={pendss}
+		/>
 	      </Form.Field>
 	    </Form.Group>
+
 	    <Form.Group widths='equal'>
-	      <Form.Field width={4}>
+	      <Form.Field width={1}>
 		<label> Hints taken </label>
-		<Container> text here </Container>
+		<Container> {hintsTaken} </Container>
 	      </Form.Field>
-	      <Form.Input label='Update' />
+	      <Form.Field width={1}>
+		<label> Update </label>
+		<Container> {hintsEdit} </Container>
+	      </Form.Field>
 	    </Form.Group>
+	    
 	    <Form.Group>
 	      <Form.Field width={4}>
 		<label> Timed out </label>
-		<Container> {puzzle.timedOut ? 'true' : 'false'} </Container>
+		<Container> <Icon key='timeOut' name={timedOut} /> </Container>
 	      </Form.Field>
 	      <Form.Field width={4}>
-		<label> update </label>
+		<label> New result </label>
 		<Container> -- </Container>
 	      </Form.Field>
 	    </Form.Group>
@@ -128,7 +164,7 @@ class AdminTeamPuzzleEdit extends Component {
 		<Container> {puzzle.score} </Container>
 	      </Form.Field>
 	      <Form.Field width={4}>
-		<label> update </label>
+		<label> New result </label>
 		<Container> -- </Container>
 	      </Form.Field>
 	    </Form.Group>
@@ -154,6 +190,11 @@ class AdminTeamPuzzleEdit extends Component {
   _handleDataChange(e, data) {
     const { name, value } = data;
     console.log("field ", name, " changed to ", data);
+  }
+
+  _handleCheckChange(e, data) {
+    const { name, value } = data;
+    console.log('checkbox ', name, ' changed to ', data);
   }
 }
 

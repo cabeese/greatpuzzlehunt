@@ -13,13 +13,13 @@ class AdminTeamModal extends Component {
     this.state = { selectedPuzzleId: '' };
   }
 
-  _getSelectedPuzzle(puzzleId, team) {
-    if (!puzzleId) {
+  _getSelectedPuzzle(pid, team) {
+    if (!pid) {
       return null;
     }
-    console.log("ATM gsp puzzleid: ", puzzleId);
+    console.log("ATM gsp puzzleid: ", pid);
     console.log("ATM gsp team: ", team);
-    return team.puzzles.find(({ puzzleId }) => puzzleId === puzzleId);
+    return team.puzzles.find(({ puzzleId }) => puzzleId === pid);
   }
   
   render() {
