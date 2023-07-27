@@ -44,50 +44,54 @@ class AdminTeamPuzzleEdit extends Component {
     let pstarthh = '0';
     let pstartmm = '0';
     let pstartss = '0';
+    if (puzzle.start) {
+      pstarttext = moment(puzzle.start).format("HH:mm:ss");
+    }
     if (this.state.start) {
       pstart = moment(this.state.start);
-      pstarttext = pstart.format("HH:mm:ss");
       pstarthh = pstart.hour();
       pstartmm = pstart.minute();
       pstartss = pstart.second();
     }
+    console.log('set up start times');
     
     let pend = null;
     let pendtext = '--';
     let pendhh = '0';
     let pendmm = '0';
     let pendss = '0';
+    if (puzzle.end) {
+      pendtext = moment(puzzle.end).format("HH:mm:ss");
+    }
     if (this.state.end) {
       pend = moment(this.state.end);
-      pendtext = pend.format("HH:mm:ss");
       pendhh = pend.hour();
       pendmm = pend.minute();
       pendss = pend.second();
     }
+    console.log('set up end times');
 
     let hintsTaken = [];
     puzzle.hints.forEach((hint, index) => {
       const name = hint.taken? 'check square' : 'square outline';
       hintsTaken.push(<Icon key={index} name={name} />);
     });
+    console.log('set up hints taken');
 
     let hintsEdit = [];
     this.state.hints.forEach((hint, index) => {
       const boxname = 'hint' + index;
-      if (hint.taken) {
-	hintsEdit.push(<Checkbox name={boxname}
-				 onChange={(e, data) => this._handleCheckChange(e, data)}
-				 defaultChecked
-		       />);
-      } else {
-	hintsEdit.push(<Checkbox name={boxname}
-				 onChange={(e, data) => this._handleCheckChange(e, data)}
-		       />);
-      }
+      hintsEdit.push(<Checkbox name={boxname}
+			       onChange={(e, data) => this._handleCheckChange(e, data)}
+			       checked={hint.taken}
+		     />);
     });
+    console.log('set up hints edit: ', hintsEdit);
 
     const timedOut = puzzle.timedOut ? 'check square' : 'square outline' ;
+    console.log('set up timed out');
     const editTimedOut = this.state.timedOut ? 'check square' : 'square outline' ;
+    console.log('set up timed out edit');
     
     return (
       <Modal
@@ -109,22 +113,22 @@ class AdminTeamPuzzleEdit extends Component {
 	      <Form.Field width={1}>
 		<label> hh </label>
 		<Input name='start-hh'
-                       onChange={(e, data) => this._handleDataChange(e, data)}
-		       defaultValue={pstarthh}
+                       onChange={(e, data) => this._handleStartDataChange(e, data)}
+		       value={pstarthh}
 		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<label> mm </label>
 		<Input name='start-mm'
-                       onChange={(e, data) => this._handleDataChange(e, data)}
-		       defaultValue={pstartmm}
+                       onChange={(e, data) => this._handleStartDataChange(e, data)}
+		       value={pstartmm}
 		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<label> ss </label>
 		<Input name='start-ss'
-                       onChange={(e, data) => this._handleDataChange(e, data)}
-		       defaultValue={pstartss}
+                       onChange={(e, data) => this._handleStartDataChange(e, data)}
+		       value={pstartss}
 		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
@@ -142,21 +146,21 @@ class AdminTeamPuzzleEdit extends Component {
 	      <Form.Field width={1}>
 		<label> hh </label>
 		<Input name='end-hh'
-                       onChange={(e, data) => this._handleDataChange(e, data)}
+                       onChange={(e, data) => this._handleEndDataChange(e, data)}
 		       defaultValue={pendhh}
 		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<label> mm </label>
 		<Input name='end-mm'
-                       onChange={(e, data) => this._handleDataChange(e, data)}
+                       onChange={(e, data) => this._handleEndDataChange(e, data)}
 		       defaultValue={pendmm}
 		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<label> ss </label>
 		<Input name='end-ss'
-                       onChange={(e, data) => this._handleDataChange(e, data)}
+                       onChange={(e, data) => this._handleEndDataChange(e, data)}
 		       defaultValue={pendss}
 		/>
 	      </Form.Field>
@@ -222,9 +226,35 @@ class AdminTeamPuzzleEdit extends Component {
     );
   }
 
-  _handleDataChange(e, data) {
-    const { name, value } = data;
+  _handleStartDataChange(e, data) {
+    const { name } = data;
     console.log("field ", name, " changed to ", data);
+
+    let startEdit = moment(this.state.start);
+    if (name == 'start-hh') {
+      startEdit.hour(data.value);
+    } else if (name == 'start-mm') {
+      startEdit.minute(data.value);
+    } else if (name == 'start-ss') {
+      startEdit.second(data.value);
+    }
+    this.setState({start: startEdit.toDate()});
+    this._recalculateScore();
+  }
+
+  _handleEndDataChange(e, data) {
+    const { name } = data;
+    console.log("field ", name, " changed to ", data);
+
+    let endEdit = moment(this.state.end);
+    if (name == 'end-hh') {
+      endEdit.hour(data.value);
+    } else if (name == 'end-mm') {
+      endEdit.minute(data.value);
+    } else if (name == 'end-ss') {
+      endEdit.second(data.value);
+    }
+    this.setState({end: endEdit.toDate()});
     this._recalculateScore();
   }
 
@@ -253,18 +283,21 @@ class AdminTeamPuzzleEdit extends Component {
   // XXX need to adjust timed out as well
   _recalculateScore() {
     console.log('recalculating score');
-    // const newScore = this.state.score + 2;
-    // this.setState({ score: newScore });
+    const newScore = this.state.score + 2;
+    this.setState({ score: newScore });
 
-    const { puzzleId } = this.props.puzzle;
-    console.log("puzzle id: ", puzzleId);
-    const masterPuzzle = Puzzles.findOne(puzzleId);
-    console.log("master puzzle: ", masterPuzzle);
-    const endTime = this.state.end;
-    console.log("end time: ", endTime);
-    const editScore = getPuzzleScore(this.state, endTime, masterPuzzle, false);
-    console.log("edit score: ", editScore);
-    this.setState({ score: editScore });
+    // this does not work on client side because puzzle collection
+    // is not present (and shouldn't be)
+    
+    // const { puzzleId } = this.props.puzzle;
+    // console.log("puzzle id: ", puzzleId);
+    // const masterPuzzle = Puzzles.findOne(puzzleId);
+    // console.log("master puzzle: ", masterPuzzle);
+    // const endTime = this.state.end;
+    // console.log("end time: ", endTime);
+    // const editScore = getPuzzleScore(this.state, endTime, masterPuzzle, false);
+    // console.log("edit score: ", editScore);
+    // this.setState({ score: editScore });
   }
 
   _resetStart() {
