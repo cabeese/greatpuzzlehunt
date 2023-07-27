@@ -281,10 +281,23 @@ class AdminTeamPuzzleEdit extends Component {
   }
 
   // XXX need to adjust timed out as well
+
+  // XXX doesn't seem to pick up the last data change from updating
+  // the field
   _recalculateScore() {
     console.log('recalculating score');
-    const newScore = this.state.score + 2;
-    this.setState({ score: newScore });
+    // const newScore = this.state.score + 2;
+    // this.setState({ score: newScore });
+
+    Meteor.call('admin.team.computeScore', this.state,
+		(err, res) => {
+		  if (err) {
+		    console.log('recalculate score error');
+		    console.log(err);
+		  } else {
+		    console.log('new score got: ', res);
+		  }
+		});
 
     // this does not work on client side because puzzle collection
     // is not present (and shouldn't be)
