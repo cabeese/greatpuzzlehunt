@@ -17,6 +17,7 @@ class AdminTeamPuzzleEdit extends Component {
 		   endMMError: false,
 		   endSSError: false,
 		 };
+    this._isAnError.bind(this);
   }
 
   _setupEditCopy() {
@@ -96,6 +97,7 @@ class AdminTeamPuzzleEdit extends Component {
 			       onChange={(e, data) => this._handleCheckChange(e, data)}
 			       checked={hint.taken}
 		     />);
+      hintsEdit.push('\u00A0\u00A0');
     });
     console.log('set up hints edit: ', hintsEdit);
 
@@ -114,94 +116,113 @@ class AdminTeamPuzzleEdit extends Component {
         <Modal.Header>Edit times for {team.name}: {puzzle.name}</Modal.Header>
 	
 	{ this.state.startEndOrderError ?
-	  <Message error>
+	  <Message error icon='warning'>
 	    End time must be later than start time
 	  </Message>
 	  
 	  : null
 	}
 	
+	{ this.state.saveError ?
+	  <Message error icon='warning'
+		   onDismiss={(e) => this.setState({saveError: null})}
+		   title='Issues saving puzzle play update'
+		   content={this.state.saveError.reason} />
+	  : null
+	}
+	
         <Modal.Content>
 	  <Form>
 
-	    <Form.Group>
+	    <Form.Group inline>
 	      <Form.Field width={3}>
 		<label> Start </label>
 		<Container> {pstarttext} </Container>
 	      </Form.Field>
-	      <Form.Field width={1} error={this.state.startHHError}>
-		<label> hh </label>
+	      <Form.Field width={2} error={this.state.startHHError}>
 		<Input name='start-hh'
                        onChange={(e, data) => this._handleStartDataChange(e, data)}
 		       value={pstarthh}
 		/>
 	      </Form.Field>
-	      <Form.Field width={1} error={this.state.startMMError}>
-		<label> mm </label>
+	      <Form.Field width={2} error={this.state.startMMError}>
+		<label> : </label>
 		<Input name='start-mm'
                        onChange={(e, data) => this._handleStartDataChange(e, data)}
 		       value={pstartmm}
 		/>
 	      </Form.Field>
-	      <Form.Field width={1} error={this.state.startSSError}>
-		<label> ss </label>
+	      <Form.Field width={2} error={this.state.startSSError}>
+		<label> : </label>
 		<Input name='start-ss'
                        onChange={(e, data) => this._handleStartDataChange(e, data)}
 		       value={pstartss}
 		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
+		{'\u00A0'} 
+	      </Form.Field>
+	      <Form.Field width={1}>
 		<Button onClick={this._resetStart.bind(this)}
 			content='Reset'
+			basic
 		/>
 	      </Form.Field>
 	    </Form.Group>
 
-	    <Form.Group>
+	    <Form.Group inline>
 	      <Form.Field width={3}>
 		<label> End </label>
 		<Container> {pendtext} </Container>
 	      </Form.Field>
-	      <Form.Field width={1} error={this.state.endHHError}>
-		<label> hh </label>
+	      <Form.Field width={2} error={this.state.endHHError} inline>
 		<Input name='end-hh'
                        onChange={(e, data) => this._handleEndDataChange(e, data)}
 		       value={pendhh}
 		/>
 	      </Form.Field>
-	      <Form.Field width={1} error={this.state.endMMError}>
-		<label> mm </label>
+	      <Form.Field width={2} error={this.state.endMMError} inline>
+		<label> : </label>
 		<Input name='end-mm'
                        onChange={(e, data) => this._handleEndDataChange(e, data)}
 		       value={pendmm}
 		/>
 	      </Form.Field>
-	      <Form.Field width={1} error={this.state.endSSError}>
-		<label> ss </label>
+	      <Form.Field width={2} error={this.state.endSSError} inline>
+		<label> : </label>
 		<Input name='end-ss'
                        onChange={(e, data) => this._handleEndDataChange(e, data)}
 		       value={pendss}
 		/>
 	      </Form.Field>
 	      <Form.Field width={1}>
+		{'\u00A0'} 
+	      </Form.Field>
+	      <Form.Field width={1}>
 		<Button onClick={this._resetEnd.bind(this)}
 			content='Reset'
+			basic
 		/>
 	      </Form.Field>
 	    </Form.Group>
 
-	    <Form.Group widths='equal'>
-	      <Form.Field width={1}>
+	    <Form.Group>
+	      <Form.Field width={3}>
 		<label> Hints taken </label>
 		<Container> {hintsTaken} </Container>
 	      </Form.Field>
-	      <Form.Field width={1}>
-		<label> Update </label>
+	      <Form.Field width={2}>
+		<label> {'\u00A0'} </label>
 		<Container> {hintsEdit} </Container>
 	      </Form.Field>
 	      <Form.Field width={1}>
+		{'\u00A0'} 
+	      </Form.Field>
+	      <Form.Field width={1}>
+		<label> {'\u00A0'} </label>
 		<Button onClick={this._resetHints.bind(this)}
 			content='Reset'
+			basic
 		/>
 	      </Form.Field>
 	    </Form.Group>
@@ -212,7 +233,7 @@ class AdminTeamPuzzleEdit extends Component {
 		<Container> <Icon key='timeOut' name={timedOut} /> </Container>
 	      </Form.Field>
 	      <Form.Field width={4}>
-		<label> Update </label>
+		<label> {'\u00A0'} </label>
 		<Container> <Icon key='timeOut' name={editTimedOut} /> </Container>
 	      </Form.Field>
 	    </Form.Group>
@@ -221,19 +242,24 @@ class AdminTeamPuzzleEdit extends Component {
 		<label> Score </label>
 		<Container> {puzzle.score} </Container>
 	      </Form.Field>
-	      <Form.Field width={4}>
-		<label> Updated score </label>
+	      <Form.Field width={3}>
+		<label> New score </label>
 		<Container> {this.state.score} </Container>
+	      </Form.Field>
+	      <Form.Field width={1}>
+		<Button
+		  type='submit'
+		  color='green'
+		  content='Update'
+		  disabled={this._isAnError()}
+		  onClick={(e) => this._update(e)}
+		/>
 	      </Form.Field>
 	    </Form.Group>
 	  </Form>
         </Modal.Content>
 	
 	<Modal.Actions>
-	  <Button
-	    color='green'
-	    content='Save'
-	  />
           <Button
             basic
             onClick={clearPuzzle}
@@ -402,6 +428,33 @@ class AdminTeamPuzzleEdit extends Component {
     this.editPuzzle.hints = this.props.puzzle.hints;
     this.setState({ hints: this.props.puzzle.hints });
     this._recalculateScore();
+  }
+
+  _isAnError() {
+    return (this.state.startEndOrderError ||
+	    this.state.startHHError ||
+	    this.state.startMMError ||
+	    this.state.startSSError ||
+	    this.state.endHHError ||
+	    this.state.endMMError ||
+	    this.state.endSSError ||
+	    this.state.saveError );
+  }
+
+  _update(e) {
+    e.preventDefault();
+
+    Meteor.call('admin.team.updatePuzzlePlay', this.editPuzzle,
+		(err, res) => {
+		  if (err) {
+		    alert(`Failed to update game play information. ${err}`);
+		    return this.setState({saveError: err});
+		  } else {
+		    this.setState({saveError: null});
+		    alert('Game play information updated');
+		  }
+		});
+		
   }
 }
 
