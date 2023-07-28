@@ -9,20 +9,27 @@ import moment from 'moment';
 class AdminTeamPuzzleEdit extends Component {
   constructor(props) {
     super(props);
-    this.state = { setup: false };
-  }
-  // constructor(props) {
-  //   super(props);
-  //   // this.state = props.puzzle;
-  //   this.state = {x: 'y'};
-  // }
+    // state is the react-observable information that will trigger
+    // re-rendering; however, all actual computations are done using
+    // independent state that can be known to be synchronously up to
+    // date, and the state variable is updated separately
+    this.state = { last: '--' };
 
-  _setupState() {
-    console.log('in ATPE setup state');
-    console.log('puzzle: ', this.props.puzzle);
-    this.setState({ setup: true, ...this.props.puzzle});
+    // independent information is in editPuzzle
   }
-  
+
+  _setupEditCopy() {
+    console.log('in ATPE setup edit copy of puzzle');
+    this.editPuzzle = {
+      start: this.props.puzzle.start,
+      end: this.props.puzzle.end,
+      hints: this.props.puzzle.hints,
+      puzzleId: this.props.puzzle.puzzleId,
+      timedOut: this.props.puzzle.timedOut,
+      score: this.props.puzzle.score
+    };
+  }
+
   render() {
     console.log("ATPE render");
     const { team, puzzle, clearPuzzle } = this.props;
@@ -33,10 +40,16 @@ class AdminTeamPuzzleEdit extends Component {
       return null;
     }
     console.log("state: ", this.state);
-    if (!this.state.setup) {
-      this._setupState();
-      return null;
+    console.log("edit puzzle: ", this.editPuzzle);
+    if (!this.editPuzzle) {
+      this._setupEditCopy();
+      // this.editPuzzle = this.props.puzzle;
+      console.log("set edit puzzle: ", this.editPuzzle);
     }
+    // if (!this.setup) {
+    //   this._setupState();
+    //   return null;
+    // }
     console.log("ATPE render actually rendering");
 
     let pstart = null;
@@ -47,8 +60,8 @@ class AdminTeamPuzzleEdit extends Component {
     if (puzzle.start) {
       pstarttext = moment(puzzle.start).format("HH:mm:ss");
     }
-    if (this.state.start) {
-      pstart = moment(this.state.start);
+    if (this.editPuzzle.start) {
+      pstart = moment(this.editPuzzle.start);
       pstarthh = pstart.hour();
       pstartmm = pstart.minute();
       pstartss = pstart.second();
@@ -63,8 +76,8 @@ class AdminTeamPuzzleEdit extends Component {
     if (puzzle.end) {
       pendtext = moment(puzzle.end).format("HH:mm:ss");
     }
-    if (this.state.end) {
-      pend = moment(this.state.end);
+    if (this.editPuzzle.end) {
+      pend = moment(this.editPuzzle.end);
       pendhh = pend.hour();
       pendmm = pend.minute();
       pendss = pend.second();
@@ -79,7 +92,7 @@ class AdminTeamPuzzleEdit extends Component {
     console.log('set up hints taken');
 
     let hintsEdit = [];
-    this.state.hints.forEach((hint, index) => {
+    this.editPuzzle.hints.forEach((hint, index) => {
       const boxname = 'hint' + index;
       hintsEdit.push(<Checkbox name={boxname}
 			       onChange={(e, data) => this._handleCheckChange(e, data)}
@@ -90,7 +103,7 @@ class AdminTeamPuzzleEdit extends Component {
 
     const timedOut = puzzle.timedOut ? 'check square' : 'square outline' ;
     console.log('set up timed out');
-    const editTimedOut = this.state.timedOut ? 'check square' : 'square outline' ;
+    const editTimedOut = this.editPuzzle.timedOut ? 'check square' : 'square outline' ;
     console.log('set up timed out edit');
     
     return (
@@ -204,7 +217,7 @@ class AdminTeamPuzzleEdit extends Component {
 	      </Form.Field>
 	      <Form.Field width={4}>
 		<label> New result </label>
-		<Container> {this.state.score} </Container>
+		<Container> {this.editPuzzle.score} </Container>
 	      </Form.Field>
 	    </Form.Group>
 	  </Form>
@@ -230,7 +243,8 @@ class AdminTeamPuzzleEdit extends Component {
     const { name } = data;
     console.log("field ", name, " changed to ", data);
 
-    let startEdit = moment(this.state.start);
+    console.log('hsdc: edit puzzle before: ', this.editPuzzle);
+    let startEdit = moment(this.editPuzzle.start);
     if (name == 'start-hh') {
       startEdit.hour(data.value);
     } else if (name == 'start-mm') {
@@ -238,7 +252,10 @@ class AdminTeamPuzzleEdit extends Component {
     } else if (name == 'start-ss') {
       startEdit.second(data.value);
     }
-    this.setState({start: startEdit.toDate()});
+    console.log('hsdc: start edit: ', startEdit);
+    this.editPuzzle.start = startEdit.toDate();
+    console.log('hsdc: edit puzzle after: ', this.editPuzzle);
+    // this.setState({start: startEdit.toDate()});
     this._recalculateScore();
   }
 
@@ -246,7 +263,7 @@ class AdminTeamPuzzleEdit extends Component {
     const { name } = data;
     console.log("field ", name, " changed to ", data);
 
-    let endEdit = moment(this.state.end);
+    let endEdit = moment(this.editPuzzle.end);
     if (name == 'end-hh') {
       endEdit.hour(data.value);
     } else if (name == 'end-mm') {
@@ -254,14 +271,15 @@ class AdminTeamPuzzleEdit extends Component {
     } else if (name == 'end-ss') {
       endEdit.second(data.value);
     }
-    this.setState({end: endEdit.toDate()});
+    this.editPuzzle.end = endEdit.toDate();
+    // this.setState({end: endEdit.toDate()});
     this._recalculateScore();
   }
 
   _handleCheckChange(e, data) {
     const { name } = data;
     console.log('checkbox ', name, ' changed to ', data);
-    const oldHints = this.state.hints;
+    const oldHints = this.editPuzzle.hints;
     let newHints = [];
     // update the hints by looping so that there is no dependency on
     // the number of hints involved, as opposed to trying to compute
@@ -276,7 +294,8 @@ class AdminTeamPuzzleEdit extends Component {
       }
     });
     console.log('new hints: ', newHints);
-    this.setState({ hints: newHints });
+    this.editPuzzle.hints = newHints;
+    // this.setState({ hints: newHints });
     this._recalculateScore();
   }
 
@@ -288,16 +307,24 @@ class AdminTeamPuzzleEdit extends Component {
     console.log('recalculating score');
     // const newScore = this.state.score + 2;
     // this.setState({ score: newScore });
+    console.log('edit puzzle: ', this.editPuzzle);
 
-    Meteor.call('admin.team.computeScore', this.state,
+    Meteor.call('admin.team.computeScore', this.editPuzzle,
 		(err, res) => {
 		  if (err) {
 		    console.log('recalculate score error');
 		    console.log(err);
 		  } else {
 		    console.log('new score got: ', res);
+		    this.editPuzzle.score = res;
+		    const n = Date.now();
+		    const ns = n.toString();
+		    console.log('date string: ', ns);
+		    this.setState({ last: ns });
 		  }
 		});
+
+    console.log('out of method call');
 
     // this does not work on client side because puzzle collection
     // is not present (and shouldn't be)
@@ -314,17 +341,20 @@ class AdminTeamPuzzleEdit extends Component {
   }
 
   _resetStart() {
-    this.setState({ start: this.props.puzzle.start });
+    this.editPuzzle.start = this.props.puzzle.start;
+    // this.setState({ start: this.props.puzzle.start });
     this._recalculateScore();
   }
 
   _resetEnd() {
-    this.setState({ end: this.props.puzzle.end });
+    this.editPuzzle.end = this.props.puzzle.end;
+    // this.setState({ end: this.props.puzzle.end });
     this._recalculateScore();
   }
 
   _resetHints() {
-    this.setState({ hints: this.props.puzzle.hints });
+    this.editPuzzle.hints = this.props.puzzle.hints;
+    //this.setState({ hints: this.props.puzzle.hints });
     this._recalculateScore();
   }
 }
