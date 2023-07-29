@@ -21,7 +21,6 @@ class AdminTeamPuzzleEdit extends Component {
   }
 
   _setupEditCopy() {
-    console.log('in ATPE setup edit copy of puzzle');
     this.editPuzzle = {
       start: this.props.puzzle.start,
       end: this.props.puzzle.end,
@@ -34,22 +33,15 @@ class AdminTeamPuzzleEdit extends Component {
   }
 
   render() {
-    console.log("ATPE render");
     const { team, puzzle, clearPuzzle } = this.props;
-    console.log("team: ", team);
-    console.log("puzzle: ", puzzle);
-    console.log("clearPuzzle: ", clearPuzzle);
     if (!team || !puzzle) {
       return null;
     }
-    console.log("state: ", this.state);
-    console.log("edit puzzle: ", this.editPuzzle);
+
     if (!this.editPuzzle) {
       this._setupEditCopy();
-      console.log("set edit puzzle: ", this.editPuzzle);
       return null;
     }
-    console.log("ATPE render actually rendering");
 
     let pstart = null;
     let pstarttext = '--';
@@ -65,7 +57,6 @@ class AdminTeamPuzzleEdit extends Component {
       pstartmm = pstart.minute();
       pstartss = pstart.second();
     }
-    console.log('set up start times');
     
     let pend = null;
     let pendtext = '--';
@@ -81,14 +72,12 @@ class AdminTeamPuzzleEdit extends Component {
       pendmm = pend.minute();
       pendss = pend.second();
     }
-    console.log('set up end times');
 
     let hintsTaken = [];
     puzzle.hints.forEach((hint, index) => {
       const name = hint.taken? 'check square' : 'square outline';
       hintsTaken.push(<Icon key={index} name={name} />);
     });
-    console.log('set up hints taken');
 
     let hintsEdit = [];
     this.state.hints.forEach((hint, index) => {
@@ -99,12 +88,9 @@ class AdminTeamPuzzleEdit extends Component {
 		     />);
       hintsEdit.push('\u00A0\u00A0');
     });
-    console.log('set up hints edit: ', hintsEdit);
 
     const timedOut = puzzle.timedOut ? 'check square' : 'square outline' ;
-    console.log('set up timed out');
     const editTimedOut = this.state.timedOut ? 'check square' : 'square outline' ;
-    console.log('set up timed out edit');
     
     return (
       <Modal
@@ -250,7 +236,7 @@ class AdminTeamPuzzleEdit extends Component {
 		<Button
 		  type='submit'
 		  color='green'
-		  content='Update'
+		  content='Save'
 		  disabled={this._isAnError()}
 		  onClick={(e) => this._update(e)}
 		/>
@@ -273,38 +259,31 @@ class AdminTeamPuzzleEdit extends Component {
 
   _handleStartDataChange(e, data) {
     const { name } = data;
-    console.log("field ", name, " changed to ", data);
 
-    console.log('hsdc: edit puzzle before: ', this.editPuzzle);
     let startEdit = moment(this.state.start);
     let hhErr = false;
     let mmErr = false;
     let ssErr = false;
     if (name == 'start-hh') {
       if ((data.value < 0) || (data.value > 23)) {
-	console.log('start hours out of range');
 	hhErr = true
       } else {
 	startEdit.hour(data.value);
       }
     } else if (name == 'start-mm') {
       if ((data.value < 0) || (data.value > 59)) {
-	console.log('start minutes out of range');
 	mmErr = true
       } else {
 	startEdit.minute(data.value);
       }
     } else if (name == 'start-ss') {
       if ((data.value < 0) || (data.value > 59)) {
-	console.log('start seconds out of range');
 	ssErr = true;
       } else {
 	startEdit.second(data.value);
       }
     }
-    console.log('hsdc: start edit: ', startEdit);
     this.editPuzzle.start = startEdit.toDate();
-    console.log('hsdc: edit puzzle after: ', this.editPuzzle);
     this.setState({ start: startEdit.toDate(),
 		    startHHError: hhErr,
 		    startMMError: mmErr,
@@ -315,7 +294,6 @@ class AdminTeamPuzzleEdit extends Component {
 
   _handleEndDataChange(e, data) {
     const { name } = data;
-    console.log("field ", name, " changed to ", data);
 
     let endEdit = moment(this.editPuzzle.end);
     let hhErr = false;
@@ -323,21 +301,18 @@ class AdminTeamPuzzleEdit extends Component {
     let ssErr = false;
     if (name == 'end-hh') {
       if ((data.value < 0) || (data.value > 23)) {
-	console.log('end hours out of range');
 	hhErr = true
       } else {
 	endEdit.hour(data.value);
       }
     } else if (name == 'end-mm') {
       if ((data.value < 0) || (data.value > 59)) {
-	console.log('start minutes out of range');
 	mmErr = true
       } else {
 	endEdit.minute(data.value);
       }
     } else if (name == 'end-ss') {
       if ((data.value < 0) || (data.value > 59)) {
-	console.log('start seconds out of range');
 	ssErr = true;
       } else {
 	endEdit.second(data.value);
@@ -354,7 +329,6 @@ class AdminTeamPuzzleEdit extends Component {
 
   _handleCheckChange(e, data) {
     const { name } = data;
-    console.log('checkbox ', name, ' changed to ', data);
     const oldHints = this.editPuzzle.hints;
     let newHints = [];
     // update the hints by looping so that there is no dependency on
@@ -363,22 +337,17 @@ class AdminTeamPuzzleEdit extends Component {
     oldHints.forEach((hint, index) => {
       const boxname = 'hint' + index;
       if (boxname === name) {
-	console.log('found name: ', name);
 	newHints.push({...hint, taken: data.checked});
       } else {
 	newHints.push(hint);
       }
     });
-    console.log('new hints: ', newHints);
     this.editPuzzle.hints = newHints;
     this.setState({ hints: newHints });
     this._recalculateScore();
   }
 
   _recalculateScore() {
-    console.log('recalculating score');
-    console.log('edit puzzle: ', this.editPuzzle);
-
     this.setState( { startEndOrderError: (this.editPuzzle.start >= this.editPuzzle.end) });
 
     Meteor.call('admin.team.computeScore', this.editPuzzle,
@@ -387,22 +356,15 @@ class AdminTeamPuzzleEdit extends Component {
 		    console.log('recalculate score error');
 		    console.log(err);
 		  } else {
-		    console.log('compute score reply: ', res);
 		    const [newTimeout, newScore] = res;
-		    console.log('new score got: ', newScore);
-		    console.log('new timeout got: ', newTimeout);
 		    this.editPuzzle.score = newScore;
 		    this.editPuzzle.timedOut = newTimeout;
-		    // const n = Date.now();
-		    // const ns = n.toString();
-		    // console.log('date string: ', ns);
 		    this.setState({ score: newScore, timedOut: newTimeout });
 		  }
 		});
   }
 
   _resetStart() {
-    console.log('reset start time');
     this.editPuzzle.start = this.props.puzzle.start;
     this.setState({ start: this.props.puzzle.start,
 		    startHHError: false,
@@ -413,7 +375,6 @@ class AdminTeamPuzzleEdit extends Component {
   }
 
   _resetEnd() {
-    console.log('reset end time');
     this.editPuzzle.end = this.props.puzzle.end;
     this.setState({ end: this.props.puzzle.end,
 		    endHHError: false,
@@ -424,7 +385,6 @@ class AdminTeamPuzzleEdit extends Component {
   }
 
   _resetHints() {
-    console.log('reset hints');
     this.editPuzzle.hints = this.props.puzzle.hints;
     this.setState({ hints: this.props.puzzle.hints });
     this._recalculateScore();
@@ -444,14 +404,16 @@ class AdminTeamPuzzleEdit extends Component {
   _update(e) {
     e.preventDefault();
 
-    Meteor.call('admin.team.updatePuzzlePlay', this.editPuzzle,
+    Meteor.call('admin.team.updatePuzzlePlay',
+		this.props.team._id,
+		this.editPuzzle,
 		(err, res) => {
 		  if (err) {
-		    alert(`Failed to update game play information. ${err}`);
+		    alert(`Failed to update puzzle play information. ${err}`);
 		    return this.setState({saveError: err});
 		  } else {
 		    this.setState({saveError: null});
-		    alert('Game play information updated');
+		    alert('Puzzle play information updated');
 		  }
 		});
 		

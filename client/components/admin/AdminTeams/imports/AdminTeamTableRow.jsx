@@ -17,9 +17,6 @@ class AdminTeamTableRow extends Component {
     }
     const { EMERGENCY_LOCK_OUT } = team;
 
-      console.log("team table row:");
-      console.log(team);
-
     return (
       <Table.Row error={EMERGENCY_LOCK_OUT}>
         <Table.Cell>{this._createdAt()}</Table.Cell>

@@ -17,21 +17,15 @@ class AdminTeamModal extends Component {
     if (!pid) {
       return null;
     }
-    console.log("ATM gsp puzzleid: ", pid);
-    console.log("ATM gsp team: ", team);
     return team.puzzles.find(({ puzzleId }) => puzzleId === pid);
   }
   
   render() {
-    console.log("ATM render");
     const { team, clearTeam } = this.props;
     if (!team) return null;
 
     const { selectedPuzzleId } = this.state;
     const puzzle = this._getSelectedPuzzle(selectedPuzzleId, team);
-
-    console.log("ATM: puzzle id: ", selectedPuzzleId);
-    console.log("ATM: puzzle: ", puzzle);
 
     let panes = [
       {
@@ -95,7 +89,6 @@ class AdminTeamModal extends Component {
   }
 
   _selectPuzzle(puzzleId) {
-    console.log("ATM select puzzle: ", puzzleId);
     this.setState({ selectedPuzzleId: puzzleId });
   }
 

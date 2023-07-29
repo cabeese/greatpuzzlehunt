@@ -12,14 +12,10 @@ class AdminTeamModalProgress extends Component {
     const { team, selectPuzzle } = this.props;
     const { puzzles } = team;
     
-    console.log(team);
-    
     const puzzlesCt = puzzles.length;
     const puzzlesComplete = puzzles.reduce((acc, puzzle) => {
       return acc + ( puzzle.end ? 1 : 0 );
     }, 0);
-    
-    console.log("ATMP render");
     
     return (
       <div>

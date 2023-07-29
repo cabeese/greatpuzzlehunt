@@ -19,7 +19,6 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
   }
   
   _selectPuzzle(puzzle) {
-    console.log("ATP select puzzle: ", puzzle);
     const { puzzleId } = puzzle;
     const { selectPuzzle } = this.props;
     selectPuzzle(puzzleId);
@@ -44,8 +43,6 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
       );
     }
 
-    console.log("actions: ", actions);
-    
     return (
       <Table.Row key={puzzle.name}>
         <Table.Cell>{puzzle.name}</Table.Cell>
@@ -61,11 +58,7 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
   }
   
   render() {
-    console.log("in ATP render");
     const {loading, team, selectPuzzle} = this.props;
-    console.log("loading: ", loading);
-    console.log("team: ", team);
-    console.log("select puzzle: ", selectPuzzle);
     if (loading) {
       return (
         <p>Loading puzzle information...</p>
@@ -77,7 +70,6 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
     }
     
     const { puzzles } = team[0];
-    console.log("puzzles: ", puzzles);
     
     return (
       <Table>
@@ -102,16 +94,10 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
 }
 
 export default AdminTeamProgressTracker = withTracker((props) => {
-  console.log("in ATP tracker setup");
   const {id, selectPuzzle} = props;
-  console.log("id is: ", id);
-  console.log("selectPuzzle is: ", selectPuzzle);
   const teamHandle = Meteor.subscribe('admin.team.puzzlestatus', id);
-  console.log("got team handle");
   const team = Teams.find({ _id: id }).fetch();
-  console.log("got team: ", team);
   const loading = !teamHandle.ready();
-  console.log("loading: ", loading);
   
   return { loading, team, teamHandle, selectPuzzle };
 })(AdminTeamProgress);
