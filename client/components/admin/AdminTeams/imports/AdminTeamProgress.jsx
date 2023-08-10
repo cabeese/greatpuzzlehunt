@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
 import { Table, Icon, Label, Button } from 'semantic-ui-react'
+import { renderScore } from '../../../imports/PuzzleProgress';
 import moment from 'moment';
 
 AdminTeamProgress = class AdminTeamsProgress extends Component {
@@ -35,6 +36,8 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
     
     const start = puzzle.start ? moment(puzzle.start).format("HH:mm:ss") : "--";
     const end = puzzle.end ? moment(puzzle.end).format("HH:mm:ss") : "--";
+
+    const scoreText = puzzle.score ? "" + renderScore(puzzle.score).time + " (" + puzzle.score.toFixed(1) + " sec)" : "--";
     
     let actions = [];
     if (puzzle.start && puzzle.end) {
@@ -51,7 +54,7 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
         <Table.Cell>{puzzle.tries || "--"}</Table.Cell>
         <Table.Cell>{hintsTaken}</Table.Cell>
 	<Table.Cell> {timedout} </Table.Cell>
-        <Table.Cell>{puzzle.score || "--"}</Table.Cell>
+        <Table.Cell>{scoreText}</Table.Cell>
 	<Table.Cell>{actions}</Table.Cell>
       </Table.Row>
     )

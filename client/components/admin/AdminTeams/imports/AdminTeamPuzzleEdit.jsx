@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button, Checkbox, Container, Form, Icon,
 	 Input, Message, Modal, Tab } from 'semantic-ui-react';
 import { getPuzzleScore } from '../../../../../lib/imports/puzzle-helpers';
+import { renderScore } from '../../../imports/PuzzleProgress';
 import moment from 'moment';
 
 class AdminTeamPuzzleEdit extends Component {
@@ -226,11 +227,11 @@ class AdminTeamPuzzleEdit extends Component {
 	    <Form.Group>
 	      <Form.Field width={3}>
 		<label> Score </label>
-		<Container> {puzzle.score} </Container>
+		<Container> {renderScore(puzzle.score).time} ({puzzle.score.toFixed(1)} sec) </Container>
 	      </Form.Field>
 	      <Form.Field width={3}>
 		<label> New score </label>
-		<Container> {this.state.score} </Container>
+	      <Container> {renderScore(this.state.score).time} ({this.state.score.toFixed(1)} sec) </Container>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<Button
