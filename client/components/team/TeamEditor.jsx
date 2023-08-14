@@ -102,7 +102,8 @@ TeamEditor = class TeamEditor extends Component {
 	<Form.Group>
 	  <br />
 	  <small>
-	    Please choose a team name that is family-friendly and appropriate for a press release. Western has a no-profanity policy. We retain the option of disallowing or vetoing inappropriate team names. If you have any questions, please <Link to="/contact">Contact Us</Link>.
+	    We reserve veto rights over non-family-friendly team names.
+	    If you have any questions, please <Link to="/contact">Contact Us</Link>.
 	  </small>
 	</Form.Group>
       </div>
