@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { groupBy, every, sortBy } from 'lodash';
+import MaybeNullIcon from '../../../imports/MaybeNullIcon';
 
 import {
   Segment,
@@ -65,13 +66,18 @@ class AdminLeaderboardDivisionTable extends Component {
   }
 
   _renderTeamRow(team, i) {
-    const { _id: teamId, name, members, memberIds, puzzles, finished } = team;
+    const { _id: teamId, name, members, memberIds, puzzles, finished, inPerson } = team;
     const finalScore = getFinalScore(team);
     let playerCt = members ? members.length : (memberIds ? memberIds.length : "?");
+    const ic = <MaybeNullIcon
+      value={inPerson}
+      truthy={<Icon name="group" color="blue" />}
+      falsey={<Icon name="video" color="yellow" />}
+      />;
 
     return (
       <Table.Row key={teamId}>
-        <Table.Cell>{i+1} | {name}</Table.Cell>
+        <Table.Cell>{i+1} | {name} | {ic} </Table.Cell>
         <Table.Cell>{playerCt}</Table.Cell>
         <Table.Cell positive={finished} warning={!finished}>
           <code>{renderScore(finalScore).time} ({finalScore.toFixed(1)} sec)</code>
