@@ -11,6 +11,7 @@ Meteor.publish('admin.teams', function() {
     checkinConfirmed: 1,
     inPerson: 1,
     hasBegun: 1,
+    owner: 1,
     'puzzles.start': 1,
     'puzzles.end': 1,
     'puzzles.name': 1,
