@@ -54,6 +54,10 @@ class AdminTeamModalProgress extends Component {
     const { team } = this.props;
     const { puzzles } = team;
 
+    if ((puzzles == undefined) || !team.hasBegun) {
+      return ( <div> Team has not started game (yet) </div> );
+    }
+
     const puzzlesCt = puzzles.length;
     const puzzlesComplete = puzzles.reduce((acc, puzzle) => {
         return acc + ( puzzle.end ? 1 : 0 );
