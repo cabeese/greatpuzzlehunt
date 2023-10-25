@@ -92,6 +92,8 @@ class AdminTeamPuzzleEdit extends Component {
 
     const timedOut = puzzle.timedOut ? 'check square' : 'square outline' ;
     const editTimedOut = this.state.timedOut ? 'check square' : 'square outline' ;
+    const scoreDiff = this.state.score.toFixed(1) - puzzle.score.toFixed(1);
+    const scorePrefix = (scoreDiff > 0) ? '+' : '';
     
     return (
       <Modal
@@ -231,7 +233,8 @@ class AdminTeamPuzzleEdit extends Component {
 	      </Form.Field>
 	      <Form.Field width={3}>
 		<label> New score </label>
-	      <Container> {renderScore(this.state.score).time} ({this.state.score.toFixed(1)} sec) </Container>
+ 	      <Container> {renderScore(this.state.score).time} ({this.state.score.toFixed(1)} sec) </Container>
+	      <Container> Diff {scorePrefix}{scoreDiff} </Container>
 	      </Form.Field>
 	      <Form.Field width={1}>
 		<Button
