@@ -29,7 +29,7 @@ const AnnouncementsMessage = (
                   <Segment basic size='large' className='no-padding' style={{lineHeight: "normal"}}>
                     <List>
                       <List.Item>
-                        The eigth annual Great Puzzle Hunt will take place
+                        The eighth annual Great Puzzle Hunt will take place
                         on <strong>Saturday, April 20th, 2024</strong>.
                         Mark your calendars!
                       </List.Item>
