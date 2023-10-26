@@ -77,9 +77,10 @@ class AdminLeaderboardDivisionTable extends Component {
       falsey={<Icon name="video" color="yellow" />}
       />;
 
-    const dispName = (prize_ineligible && !userIsAdmin) ? '(redacted)' : name
+    const isPrizeIneligible = prize_ineligible ? true : false;
+    const dispName = (isPrizeIneligible && !userIsAdmin) ? '(redacted, ineligible)' : name
     const ineligible = <MaybeNullIcon
-			 value={prize_ineligible && userIsAdmin}
+			 value={isPrizeIneligible && userIsAdmin}
 			 truthy={<Icon name='eye slash' color='red' />}
 			 falsey={ ' ' }
 		       />;
