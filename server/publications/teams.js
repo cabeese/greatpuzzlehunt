@@ -14,9 +14,7 @@ Meteor.publish('admin.teams', function() {
     owner: 1,
     prize_ineligible: 1,
     EMERGENCY_LOCK_OUT: 1,
-    'puzzles.start': 1,
-    'puzzles.end': 1,
-    'puzzles.name': 1,
+    puzzles: 1,
   }
   return Teams.find({}, {fields: projection});
 });
