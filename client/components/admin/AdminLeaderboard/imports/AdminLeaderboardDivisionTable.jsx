@@ -14,12 +14,13 @@ import {
 
 import { renderScore } from '../../../imports/PuzzleProgress';
 import { getHintsTaken, getFinalScore } from '../../../../../lib/imports/puzzle-helpers';
+import { isAdmin } from '../../../../../lib/imports/method-helpers';
 
 const UNFINISHED_OFFSET = 26000;
 
 class AdminLeaderboardDivisionTable extends Component {
   render() {
-    const { division, teams } = this.props;
+    const { user, division, teams } = this.props;
 
     const preSortedTeams = sortBy(teams, (team) => {
       return getFinalScore(team) + (team.finished ? 0 : UNFINISHED_OFFSET);
@@ -37,7 +38,7 @@ class AdminLeaderboardDivisionTable extends Component {
     return (
       <Segment basic>
         <Header as="h3" content={`Division: ${division}`}/>
-        {sortedTeams.length > 0 ? this._renderTable(sortedTeams) : this._noTeams()}
+        {sortedTeams.length > 0 ? this._renderTable(user, sortedTeams) : this._noTeams()}
       </Segment>
     );
   }
@@ -46,7 +47,7 @@ class AdminLeaderboardDivisionTable extends Component {
     return <Message info header="No Teams" content="No teams in this division have started playing"/>;
   }
 
-  _renderTable(teams) {
+  _renderTable(user, teams) {
     const puzzleNames = teams[0].puzzles.map((p) => p.name);
     return (
       <Table celled>
@@ -59,14 +60,15 @@ class AdminLeaderboardDivisionTable extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {teams.map((team, i) => this._renderTeamRow(team, i))}
+          {teams.map((team, i) => this._renderTeamRow(user, team, i))}
         </Table.Body>
       </Table>
     );
   }
 
-  _renderTeamRow(team, i) {
-    const { _id: teamId, name, members, memberIds, puzzles, finished, inPerson } = team;
+  _renderTeamRow(user, team, i) {
+    const { _id: teamId, name, members, memberIds, puzzles, finished, inPerson, prize_ineligible } = team;
+    const userIsAdmin = user && isAdmin(user._id);
     const finalScore = getFinalScore(team);
     let playerCt = members ? members.length : (memberIds ? memberIds.length : "?");
     const ic = <MaybeNullIcon
@@ -75,9 +77,16 @@ class AdminLeaderboardDivisionTable extends Component {
       falsey={<Icon name="video" color="yellow" />}
       />;
 
+    const dispName = (prize_ineligible && !userIsAdmin) ? '(redacted)' : name
+    const ineligible = <MaybeNullIcon
+			 value={prize_ineligible && userIsAdmin}
+			 truthy={<Icon name='eye slash' color='red' />}
+			 falsey={ ' ' }
+		       />;
+
     return (
       <Table.Row key={teamId}>
-        <Table.Cell>{i+1} | {name} | {ic} </Table.Cell>
+        <Table.Cell>{i+1} | {dispName} | {ic} {ineligible} </Table.Cell>
         <Table.Cell>{playerCt}</Table.Cell>
         <Table.Cell positive={finished} warning={!finished}>
           <code>{renderScore(finalScore).time} ({finalScore.toFixed(1)} sec)</code>
@@ -107,6 +116,7 @@ class AdminLeaderboardDivisionTable extends Component {
 
 AdminLeaderboardDivisionTable.propTypes = {
   division: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
   teams: PropTypes.arrayOf(Object).isRequired,
 };
 
