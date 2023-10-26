@@ -14,7 +14,7 @@ const { eventYear, eventDate, eventDay, earlyBirdLastDate, registrationCloseDate
 
 /* TODO: these two components should be on timers, and the official times should be
    stored in a well-known place with a well known (ISO 8601, anyone?) format. */
-let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+let cashnet_link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
 const registerNowMessage = (
   <Message icon color='teal'>
@@ -33,7 +33,7 @@ const registrationClosesMessage = (
       <Message.Header>Why Register Now?</Message.Header>
       Step 1 of Registration Closes {registrationCloseDate}, 11:59 PM. <br/>
       Gear sales are closed, but
-      you can still <a href={link} target="_blank">buy and redeem tickets</a> until 10:00 AM {eventDay}, {eventDate}.
+      you can still <a href={cashnet_link} target="_blank">buy and redeem tickets</a> until 10:00 AM {eventDay}, {eventDate}.
     </Message.Content>
   </Message>
 );
