@@ -43,12 +43,7 @@ class HomeHeader extends Component {
     this.forceUpdate();
   }
   render() {
-    let videoHeight = Math.max(700, window.innerWidth * 9 / 16);
-    let videoWidth = videoHeight * 16 / 9;
-
     let opts = {
-      height: videoHeight,
-      width: videoWidth,
       playerVars: {
         rel: 0,
         autoplay: 1,
@@ -64,35 +59,35 @@ class HomeHeader extends Component {
     return (
       <section id="home-header">          
           <div className="header-wrap">
-                <div id="header-video-container">
-                  <YouTube
-                    opts={opts}
-                    videoId={"paBGQzMCdUo"}
-                    id={"player"}
-                    onReady={this.playVideo}
-                    onEnd={this.playVideo}
-                    containerClassName={"video-mask"}
-                    >
-                  </YouTube>
-                  <div id="header-video-content" style={{zIndex: "2", position: "absolute", width: "100%", height: "calc(100% - 100px)", display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateZ(1px)"}}>
-                    <h1 className="header-text text-highlight-color">WWU Eighth Annual</h1>
-                    <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
-                    <h2 className="sub-header-text">
-                      <em>HYBRID EVENT: IN-PERSON OR VIRTUAL</em><br />
-                      {eventDay}, {eventDate} 9:30 AM
-                    </h2>
-                    { this._linkButtons() }
-                    <h3 style={{color: "white", textAlign: "center"}}>
-                      This event is made possible thanks to
-                      <Scrollchor
-                        to="#sponsors"
-                        style={{color: "#bad80a"}}
-                        animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
-                      </Scrollchor>
-                    </h3>
-                  </div>
+              <div id="header-video-container">
+		  <div id="video-mask">
+                      <YouTube
+			  opts={opts}
+			  videoId={"paBGQzMCdUo"}
+			  id={"player"}
+			  onReady={this.playVideo}
+			  onEnd={this.playVideo}
+			  containerClassName={"video-iframe-container"}>
+                      </YouTube>
+		  </div>
+                    <div id="header-video-content">
+		      <h1 className="header-text text-highlight-color">WWU Eighth Annual</h1>
+		      <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
+		      <h2 className="sub-header-text">
+			<em>HYBRID EVENT: IN-PERSON OR VIRTUAL</em><br />
+			{eventDay}, {eventDate} 9:30 AM
+		      </h2>
+		      { this._linkButtons() }
+		      <h3 style={{color: "white", textAlign: "center"}}>
+			This event is made possible thanks to
+			<Scrollchor
+			  to="#sponsors"
+			  style={{color: "#bad80a"}}
+			  animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
+			</Scrollchor>
+		      </h3>
+                    </div>
                   { this._socialMediaButtons()}
-                  
                 </div>
           </div>
 
