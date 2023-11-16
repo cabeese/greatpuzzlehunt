@@ -50,7 +50,7 @@ class AdminUserEditForm extends Component {
         {this._errorMessage()}
 
         <Header as='h3' icon={<Icon name='user' color='blue' />}
-                content='Player Details'
+                content={`Player Details (id ${user._id})`}
                 subheader='This information is required in the case of emergency.' />
 
         <Form.Group widths='equal'>
