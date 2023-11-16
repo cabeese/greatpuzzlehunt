@@ -38,7 +38,7 @@ class Users extends Component {
       <Card key={user._id}>
 	<Card.Content>
 	  <Card.Header>
-	    {user.name}
+	    {user.firstname}
 	  </Card.Header>
 	  <Card.Meta>
 	    { user.bio }
