@@ -45,10 +45,19 @@ class Users extends Component {
 	  </Card.Meta>
 	</Card.Content>
 	<Card.Content extra>
-	  <Button basic icon='mail' content='Message player' onClick={() => this._messageUser(user)}/>
+          { this._mailButton(user) }
 	</Card.Content>
       </Card>
     ));
+  }
+
+  _mailButton(user) {
+    const own_id = this.props.this_user._id;
+    if (user._id == own_id) {
+      return "";
+    }
+    return <Button basic icon='mail' content='Message player'
+                   onClick={() => this._messageUser(user)}/>
   }
 
   _messageUser(user) {
@@ -61,12 +70,12 @@ class Users extends Component {
 }
 
 Users = withTracker(() => {
-  const user = Meteor.user();
+  const this_user = Meteor.user();
   const handle = Meteor.subscribe('users.lookingForTeam');
   const ready = handle.ready();
-  const users = Meteor.users.find({ _id: { $ne: user._id }, lookingForTeam: true }).fetch();
+  const users = Meteor.users.find({lookingForTeam: true }).fetch();
 
-  return { ready, users };
+  return { ready, users, this_user };
 })(Users);
 
 export default Users;

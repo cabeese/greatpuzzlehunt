@@ -49,7 +49,7 @@ Meteor.publish('users.lookingForTeam', function() {
   const { userId } = this;
   if (!userId) return this.ready();
 
-  return Meteor.users.find({ _id: { $ne: userId }, lookingForTeam: true, teamId: null, accountType: { $ne: 'VOLUNTEER' } }, { fields: {
+  return Meteor.users.find({ lookingForTeam: true, teamId: null, accountType: { $ne: 'VOLUNTEER' } }, { fields: {
     firstname: true,
     lastname: true,
     emails: true,
