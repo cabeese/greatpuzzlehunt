@@ -32,24 +32,16 @@ export default class ProfileCards extends Component {
 
     this.marketingPromo = [
       {
-        name: 'Katie Lane',
+        name: 'Kate Jensen',
         title: '',
         role: 'Co-President, Marketing & Promotion',
-        image: '/img/team/katie.png'
+        image: '/img/team/kate_jensen.jpg'
       },
-	  
-	  {
-        name: 'Anya Davis',
-        title: '',
-        role: 'Co-President, Marketing & Promotion',
-        image: '/img/team/anya.png'
-      },
-      
       {
-        name: 'Dalton Lange',
+        name: 'Siri Khalsa',
         title: '',
-        role: 'VP, Marketing & Promotion',
-        image: '/img/team/dalton.jpg',
+        role: 'Co-President, Marketing & Promotion',
+        image: '/img/team/siri_khalsa.jpg'
       },
     ];
 
@@ -74,12 +66,6 @@ export default class ProfileCards extends Component {
         role: 'Lead Developer & Tech Support',
         image: '/img/team/richard.jpg'
       },
-	  {
-        name: 'Eric Fox',
-        title: '',
-        role: 'Developer',
-        image: '/img/team/eric.png'
-      }
     ];
 
     this.budgetCoord = [
@@ -129,6 +115,30 @@ export default class ProfileCards extends Component {
     ];
 
     this.pastProfiles = [
+      {
+        name: 'Eric Fox',
+        title: '',
+        role: 'Developer',
+        image: '/img/team/eric.png'
+      },
+      {
+        name: 'Katie Lane',
+        title: '',
+        role: 'Co-President, Marketing & Promotion',
+        image: '/img/team/katie.png'
+      },
+      {
+        name: 'Anya Davis',
+        title: '',
+        role: 'Co-President, Marketing & Promotion',
+        image: '/img/team/anya.png'
+      },
+      {
+        name: 'Dalton Lange',
+        title: '',
+        role: 'VP, Marketing & Promotion',
+        image: '/img/team/dalton.jpg',
+      },
       {
         name: 'Alexandria Tan',
         title: '',
