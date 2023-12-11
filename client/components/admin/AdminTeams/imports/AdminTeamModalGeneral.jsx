@@ -37,6 +37,15 @@ class AdminTeamModalGeneral extends Component {
             if (err) alert(err);
         });
     }
+    _toggleIneligible(e){
+        e.preventDefault();
+        const { team } = this.props;
+        if(!confirm(`Are you SURE you want to toggle the eligibility status for  team "${team.name}"?`)) return;
+
+        Meteor.call('admin.team.toggleIneligible', team._id, err => {
+            if (err) alert(err);
+        });
+    }
     render() {
         const { team } = this.props;
 
@@ -64,6 +73,15 @@ class AdminTeamModalGeneral extends Component {
                   onClick={this._toggleInPerson.bind(this)}
                   content={team.inPerson ? "Team playing in-person" : "Team playing virtually"}
                   />
+                <br /><br />
+
+                <Button
+                    label="Marking a team ineligible indicates they should not be listed on public leaderboards"
+                    color={team.prize_ineligible ? 'green' : 'red'}
+                    onClick={this._toggleIneligible.bind(this)}
+                    icon={<Icon name={team.prize_ineligible ? 'unlock' : 'lock'} />}
+                    content={team.prize_ineligible ? "Mark team eligible" : "Mark team ineligible (DANGER)"}
+                />
                 <br /><br />
 
                 <Button

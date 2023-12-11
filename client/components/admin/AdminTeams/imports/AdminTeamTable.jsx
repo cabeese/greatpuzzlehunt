@@ -50,7 +50,7 @@ class AdminTeamTable extends Component {
     return (
       <div>
 	<Message icon>
-	  <Icon name="teal address book"/>
+	  <Icon name="address book" color="teal"/>
 	  <Message.Content>
             <Message.Header>
 	      Teams Summary

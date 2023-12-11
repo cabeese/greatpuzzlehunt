@@ -15,12 +15,19 @@ class AdminTeamTableRow extends Component {
     if (!team) {
       return <Table.Row negative>MISSING TEAM!</Table.Row>;
     }
-    const { EMERGENCY_LOCK_OUT } = team;
+    const { EMERGENCY_LOCK_OUT, prize_ineligible } = team;
+
+    const isPrizeIneligible = prize_ineligible ? true : false;
+    const ineligible = <MaybeNullIcon
+			 value={isPrizeIneligible}
+			 truthy={<Icon name='eye slash' color='red' />}
+			 falsey={ ' ' }
+		       />;
 
     return (
       <Table.Row error={EMERGENCY_LOCK_OUT}>
         <Table.Cell>{this._createdAt()}</Table.Cell>
-        <Table.Cell>{this._name()}</Table.Cell>
+        <Table.Cell>{this._name()} {ineligible}</Table.Cell>
         <Table.Cell>{this._division()}</Table.Cell>
         <Table.Cell>{this._checkedIn()}</Table.Cell>
         <Table.Cell>{this._hasBegun()} {this._lockout(EMERGENCY_LOCK_OUT)}</Table.Cell>
