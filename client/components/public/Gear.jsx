@@ -24,20 +24,6 @@ const buyButton = (
 
 const xxlStr = ", +$2 for 2XL or larger.";
 
-const forward = {
-  "ctm": 1,
-  "ctw": 1,
-  "cty": 1,
-  "btm": 1,
-  "btw": 1,
-  "lstw": 1,
-  "lstm": 1,
-  "fcu": 1,
-  "hu": 0,
-  "hy": 0,
-  "qzu": 0
-};
-
 const titles = {
   "ctm": "Men's Cotton Tee",
   "ctw": "Women's Cotton Tee",
@@ -82,31 +68,45 @@ const prices = {
 
 const sizes = {
   "ctm": "S-5XL",
-  "ctw": "XS-3XL",
+  "ctw": "XS-4XL",
   "cty": "XS-L",
   "btm": "XS-4XL",
   "btw": "XS-4XL",
-  "lstw": "S-3XL",
+  "lstw": "XS-4XL",
   "lstm": "S-5XL",
   "fcu": "S-5XL",
-  "hu": "S-5XL",
-  "hy": "S-XL",
+  "hu": "XS-5XL",
+  "hy": "XS-XL",
   "qzu": "S-3XL"
 };
 
-const style_colors = {
-  "ctm": ["Black", "Dark Chocolate", "Forest", "Navy", "Purple"],
-  "ctw": ["Black", "Dark Heather", "Navy", "Purple"],
-  "cty": ["Black", "Forest", "Navy", "Purple"],
-  "btm": ["Black", "Charcoal", "Heathered Brown", "Heathered Charcoal", "Heathered Navy"],
-  "btw": ["Black", "Charcoal", "Heathered Brown", "Heathered Charcoal", "Heathered Navy"],
-  "lstm": ["Black", "Dark Chocolate", "Dark Heather", "Forest Green", "Navy", "Purple"],
-  "lstw": ["Black", "Navy"],
-  "fcu": ["Black", "Dark Chocolate", "Forest Green", "Navy", "Purple"],
-  "hu": ["Black", "Dark Chocolate", "Dark Heather", "Forest Green", "Navy", "Purple"],
-  "hy": ["Black", "Forest Green", "Navy", "Purple"],
-  "qzu": ["Black", "Black Heather", "Forest Green", "J Navy", "Vintage Htr Navy"]
+const styleColors = {
+  "ctm": ['Ash', 'Azalea', 'Cornsilk', 'Gravel', 'Heather Radiant Orchid', 'Heliconia', 'Ice Grey', 'Light Blue', 'Light Pink', 'Mint Green', 'Neon Green', 'Sky', 'Sport Grey', 'White', 'Yellow Haze'],
+  "ctw": ['Ash', 'Candy Pink', 'Light Blue', 'Neon Pink', 'White'],
+  "cty": ['Ash', 'Azalea', 'Gold', 'Heliconia', 'Light Blue', 'Light Pink', 'Mint Green', 'Neon Green', 'Sky', 'Sport Grey', 'White', 'Yellow Haze'],
+  "btm": ['Awareness Pink Heather', 'Blush Frost', 'Heathered Dusty Sage', 'Light Heather Grey', 'White'],
+  "btw": ['Light Heather Grey', 'White'],
+  "lstm": ['Ash', 'Gold', 'Irish Green', 'Light Blue', 'Light Pink', 'Natural', 'Safety Green', 'Sand', 'Sport Grey', 'White'],
+  "lstw": ['Aquatic Blue', 'Candy Pink', 'White'],
+  "fcu": ['Ash', 'Gold', 'Heliconia', 'Irish Green', 'Light Blue', 'Light Pink', 'Safety Green', 'Sand', 'Sport Grey', 'White'],
+  "hu": ['Ash', 'Azalea', 'Gold', 'Heliconia', 'Irish Green', 'Light Blue', 'Light Pink', 'Mint Green', 'Orchid', 'Sand', 'Sport Grey', 'White'],
+  "hy": ['Gold', 'Heliconia', 'Light Pink', 'Sport Grey', 'White'],
+  "qzu": ['Ash', 'Oxford', 'White']
 };
+
+const cardColors = {
+  "ctm": 'Mint Green',
+  "ctw": 'Candy Pink',
+  "cty": 'Sport Grey',
+  "btm": 'Heathered Dusty Sage',
+  "btw": 'White',
+  "lstm": 'Light Blue',
+  "lstw": 'Aquatic Blue',
+  "fcu": 'Heliconia',
+  "hu": 'Sand',
+  "hy": 'Gold',
+  "qzu": 'Oxford'
+}
 
 Gear = class Gear extends Component {
 
@@ -115,49 +115,38 @@ Gear = class Gear extends Component {
 
     this.state = {
       open: false,
-      front: "",
-      back: "",
       code: "",
       title: "",
       size: "",
       materials: "",
       colors: []
-      //swatches: ""
     };
   }
 
   onClose = () => this.setState({open: false});
 
   gearDetails(e) {
-    
-    let str = e.target.src;
-    str = str.split("").reverse().join("");
-    str = str.substring(5, str.indexOf('/'));
-    str = str.split("").reverse().join("");
+    let url = e.target.src;
+    let filename = url.split('/').slice(-1).pop()
+    let name = filename.substring(0, filename.indexOf('_'))
+    console.log(name)
   
     this.setState({
                   open: true,
-                  front: `${s3_prefix}${str}f.jpg`,
-                  back: `${s3_prefix}${str}b.jpg`,
-                  code: str,
-                  //swatches: "/img/gear/swatches/" + str + ".png",
-                  colors: style_colors[str],
-                  size: sizes[str],
-                  title: titles[str],
-                  price: prices[str],
-                  materials: materials[str]});
-  }
-
-  isTall() {
-    return window.innerWidth < window.innerHeight - 200;
+                  code: name,
+                  colors: styleColors[name],
+                  size: sizes[name],
+                  title: titles[name],
+                  price: prices[name],
+                  materials: materials[name]});
   }
 
   getImageCard(code) {
     let title = titles[code];
-    let path = `${s3_prefix}${code}${forward[code] ? "f.jpg" : "b.jpg"}`;
+    let url = this.getImageURL(code, cardColors[code])
     return (
       <div className="gearitem ui card link" style={{verticalAlign: "top", display: "inline-block", marginLeft: "0.5em"}}>
-        <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails.bind(this)} src={path}></img>
+        <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails.bind(this)} src={url}></img>
         <div className="content">
           <span> {title} </span>
         </div>
@@ -165,69 +154,50 @@ Gear = class Gear extends Component {
     );
   }
 
-  render() {
-    let settings = {
-      arrows: false,
-      dots: true,
-      autoplay: true,
-      autoplaySpeed: 5000,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      dotsClass: "carousel-dots"
-    }
+  getImageURL(code, color) {
+    return `${s3_prefix}${code}_${color.toLowerCase().replaceAll(" ", "_")}.jpg`;
+  }
 
+  render() {
     return (
       <Container className="section">
         <Modal closeIcon open={this.state.open} onClose={this.onClose}>
             <Modal.Content>
-              <Grid stackable columns={2}>
-                <Grid.Column width={6}>
-                <Slider {...settings}>
-                  <img src={this.state.front} />
-                  <img src={this.state.back} />
-                </Slider>
-                  <br /><br />
-                  <center>
-                  { buyButton }
-                </center>
-                </Grid.Column>
+              <Grid stackable columns={2} style={{flexWrap: "wrap-reverse"}}>
                 <Grid.Column width={10}>
-                  <Header id="title" as="h2">{this.state.title}</Header>
-                  <p> {this.state.price}</p>
-                  <p>Size range: {this.state.size}</p>
-                  <p>Material: {this.state.materials}</p>
-                  <Header as="h2">Colors:</Header>
-                  {
-                    Object.keys(this.state.colors).map((idx) => {
+                    {Object.keys(this.state.colors).map((idx) => {
                       let color_name = this.state.colors[idx];
                       return (
-                        <div className="gearitem ui card" key={idx} style={{verticalAlign: "top", display: "inline-block", marginLeft: "1em"}}>
-                          <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} src={`${s3_prefix}${this.state.code}_${color_name.toLowerCase().replaceAll(" ", "")}.jpg`}/>
-                          <Card.Content>
-                            <Card.Description>
+                        <div className="gearitem ui card" key={idx} style={{verticalAlign: "top", display: "inline-block", marginRight: "10px", marginTop: "0"}}>
+                          <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} src={this.getImageURL(this.state.code, color_name)}/>
+                          <Card.Content style={{padding: "10px"}}>
                               { color_name }
-                            </Card.Description>
-
                           </Card.Content>
-
                         </div>
                       );
                     }) 
                   }
                   <img width="100%" src={this.state.swatches}></img>
                 </Grid.Column>
-                
+                <Grid.Column width={6}>
+		              <Header id="title" as="h2">{this.state.title}</Header>
+                  <p> {this.state.price}</p>
+                  <p>Size range: {this.state.size}</p>
+                  <p>Material: {this.state.materials}</p>
+		              { buyButton }
+                </Grid.Column>
             </Grid>
             </Modal.Content>
         </Modal>
 
         <Segment basic>
           <PuzzlePageTitle title="Gear" />
+          <Header as="h2">PLEASE NOTE:</Header>
+          SHIRTS ARRIVE <b>AFTER</b> EVENT and are <b>NOT</b> AVAILABLE FOR PICKUP AT EVENT.
+          <br /><br />
           Gear store closes { gearSaleEnd }.
           <br />
-          Shirts will be ordered on Monday, April 17 and assuming no supply chain delays, should be shipped out or ready for pick-up the week of April 24.
+          Shirts will be ordered on Monday, April 22, 2024, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 6, 2024.
           <br /><br />
           Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes.
           <br /><br />
