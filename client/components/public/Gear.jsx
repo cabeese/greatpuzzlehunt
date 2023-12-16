@@ -129,7 +129,6 @@ Gear = class Gear extends Component {
     let url = e.target.src;
     let filename = url.split('/').slice(-1).pop()
     let name = filename.substring(0, filename.indexOf('_'))
-    console.log(name)
   
     this.setState({
                   open: true,
