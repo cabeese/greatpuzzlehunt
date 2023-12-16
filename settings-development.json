@@ -45,6 +45,7 @@
     "age": 26,
     "phone": "5552223333",
     "accountType": "VOLUNTEER",
+    "gameMode": "INPERSON",
     "photoPermission": true,
     "holdHarmless": true,
     "ecName": "Emergency Contact",
