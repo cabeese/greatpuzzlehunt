@@ -56,7 +56,7 @@ Home = class Home extends Component {
   render() {
     return (
       <div>
-          {AnnouncementsMessage}
+          {/* AnnouncementsMessage */}
 
           <HomeHeader/>
 

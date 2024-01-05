@@ -98,19 +98,17 @@ export default class ProfileCards extends Component {
         role: 'Co-President, Management',
         image: '/img/team/lucas.png',
       },
-	  
-	  {
-        name: 'Owen Montefisher',
-        title: '',
-        role: 'Co-President, Management',
-        image: '/img/team/owen.png',
-      },
-	  
-	  {
+      {
         name: 'Andy Nugent',
         title: '',
-        role: 'VP, Management',
+        role: 'Co-President, Management',
         image: '/img/team/andy.png',
+      },
+      {
+        name: 'Owen Montefisher',
+        title: '',
+        role: 'VP, Management',
+        image: '/img/team/owen.png',
       }
     ];
 
