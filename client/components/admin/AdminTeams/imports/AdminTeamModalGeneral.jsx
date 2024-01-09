@@ -48,6 +48,9 @@ class AdminTeamModalGeneral extends Component {
     }
     render() {
         const { team } = this.props;
+        let lookingForMembers = "(unset)";
+        if (team.lookingForMembers === true) lookingForMembers = "yes";
+        else if (team.lookingForMembers === false) lookingForMembers = "no";
 
         return (
             <div>
@@ -59,9 +62,7 @@ class AdminTeamModalGeneral extends Component {
                         <strong> Division:</strong> {team.division}
                     </Grid.Column>
                     <Grid.Column>
-                        <strike>
-                            <strong> Looking for members?</strong> n/a
-                        </strike>
+                        <strong> Looking for members?</strong> {lookingForMembers}
                     </Grid.Column>
                 </Grid>
 
