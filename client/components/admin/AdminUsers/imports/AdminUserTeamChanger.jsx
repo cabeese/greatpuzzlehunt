@@ -27,12 +27,21 @@ class AdminUserTeamChanger extends Component {
 
   render() {
     const { teamId } = this.state;
+    const { lookingForTeam } = this.props.user;
+    let matchmaking_status = "(unset)";
+    if (lookingForTeam === true) matchmaking_status = "looking";
+    else if (lookingForTeam === false) matchmaking_status = "no longer looking";
+
     return (
       <Form onSubmit={(e) => this._update(e)}>
 
         {this._errorMessage()}
 
         <Header as='h3' icon={<Icon name='user' color='blue' />} content='Team' subheader='This section should be replaced by the Team Edit interface later' />
+
+        <span>
+          <u>Matchmaking status:</u> {matchmaking_status}
+        </span>
 
         <Form.Group widths='equal'>
           <Form.Input name='teamId' label='teamId' value={teamId} onChange={(e) => this._handleTextChange(e)} />

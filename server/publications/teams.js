@@ -13,6 +13,7 @@ Meteor.publish('admin.teams', function() {
     hasBegun: 1,
     owner: 1,
     prize_ineligible: 1,
+    lookingForMembers: 1,
     EMERGENCY_LOCK_OUT: 1,
     puzzles: 1,
   }
