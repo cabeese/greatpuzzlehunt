@@ -43,6 +43,12 @@ export default class ProfileCards extends Component {
         role: 'Co-President, Marketing & Promotion',
         image: '/img/team/siri_khalsa.jpg'
       },
+      {
+        name: 'Owen Walzer-Mitchell',
+        title: '',
+        role: 'VP, Marketing & Promotion',
+        image: '/img/team/owen_w-m.png'
+      },
     ];
 
     this.developers = [
