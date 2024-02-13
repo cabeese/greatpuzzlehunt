@@ -76,11 +76,24 @@ Team = class Team extends Component {
     );
   }
 
+  _eligibleMessage() {
+    if (this.props.team.prize_ineligible) {
+      return(
+        <Message icon="warning" warning header="Ineligible for prizes"
+          content="This team has been marked ineligible for prizes. You may proceed to check in and play but will not be listed on the leaderboard or included for prizes. Contact Puzzle Hunt admins for help." />
+      );
+    } else {
+      return(null);
+    }
+  }
+
   _renderMain() {
     return (
       <Segment basic key='settings'>
 
         {this._getHybridMessage()}
+
+	{this._eligibleMessage()}
 
         <Segment color="blue">
           <Header as='h3' icon={<Icon name='settings' color='violet'/>} content='Settings'/>
