@@ -17,7 +17,6 @@ AdminUsers = class AdminUsers extends Component {
 
   _handleLookingChange(e, data) {
     const { checked } = data;
-    console.log('handleLookingChange, checked: ', checked);
     this.setState({ onlyLooking: checked});
   }
 
