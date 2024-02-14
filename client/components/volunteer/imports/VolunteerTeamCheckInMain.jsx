@@ -89,7 +89,7 @@ class VolunteerTeamCheckInMain extends Component {
     if (team.prize_ineligible) {
       return(
         <Message icon="warning" size="large" warning header="Ineligible for prizes"
-          content="This team has been marked ineligible for prizes. Please confirm this with them before completing checkin. Contact the Puzzle Hunt admin for help." />
+		 content="There is an issue with this team's registration, and they have been marked ineligible for prizes and leaderboard. Please send the team to the Puzzle Hunt admin to complete registration." />
       );
     } else {
       return(null);

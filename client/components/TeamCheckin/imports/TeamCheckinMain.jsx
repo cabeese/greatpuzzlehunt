@@ -29,7 +29,7 @@ class TeamCheckinMain extends Component {
     if (team.prize_ineligible) {
       return(
         <Message icon="warning" size="large" warning header="Ineligible for prizes"
-          content="Your team has been marked ineligible for prizes. Please contact a volunteer. You may proceed to check in and play but will not be listed on the leaderboard or included for prizes." />
+		 content="Your team has been marked ineligible for prizes. There is an issue with your team registration; please contact a volunteer before proceeding." />
       );
     } else {
       return(
