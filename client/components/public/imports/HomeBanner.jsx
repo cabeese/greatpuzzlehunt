@@ -8,7 +8,10 @@ import * as DOMPurify from 'dompurify';
 class HomeBanner extends Component {
   render() {
     const gamestate = this.props.gamestate || {};
-    const { bannerHtmlUnsanitized } = gamestate;
+    const { displayBanner, bannerHtmlUnsanitized } = gamestate;
+    if (!displayBanner) {
+      return "";
+    }
     const content = DOMPurify.sanitize(bannerHtmlUnsanitized);
 
     return (

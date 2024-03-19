@@ -16,6 +16,7 @@ class GamestateControlsInner extends Component {
       webinarID: "",
       livestreamBackupURL: "",
       bannerMarkdown: "",
+      displayBanner: false,
     };
     this._getReport = this._getReport.bind(this);
   }
@@ -30,6 +31,7 @@ class GamestateControlsInner extends Component {
         webinarURL: props.gamestate.webinarURL || "",
         webinarID: props.gamestate.webinarID || "",
         bannerMarkdown: props.gamestate.bannerMarkdown || "",
+        displayBanner: props.gamestate.displayBanner,
         livestreamBackupURL: props.gamestate.livestreamBackupURL || "",
       });
     }
@@ -165,6 +167,7 @@ class GamestateControlsInner extends Component {
         { this._fieldButton('Leaderboard') }
 
         <Header as='h3' content='Banner' />
+        { this._fieldButton("displayBanner", "Display Banner on Home Page") }
 	<Form onSubmit={(e) => this.setBanner(e)}>
 	  <Form.TextArea label='Banner (Markdown Supported)'
                          style={{ fontFamily: "courier" }}
@@ -173,7 +176,7 @@ class GamestateControlsInner extends Component {
                          onChange={this.handleChange}
           />
           <p>Try the <a href="https://marked.js.org/demo/">marked demo</a> to
-          get a markdown preview.</p>
+            get a markdown preview.</p>
           <Button type="submit">Save Banner</Button>
         </Form>
       </Container>
