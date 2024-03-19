@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Radio, Container, Input, Button, Header } from 'semantic-ui-react';
+import { Radio, Container, Input, Button, Header, Form, } from 'semantic-ui-react';
 
 import GamestateComp from '../../../imports/GamestateComp';
 
@@ -15,6 +15,8 @@ class GamestateControlsInner extends Component {
       webinarURL: "",
       webinarID: "",
       livestreamBackupURL: "",
+      bannerMarkdown: "",
+      displayBanner: false,
     };
     this._getReport = this._getReport.bind(this);
   }
@@ -28,6 +30,8 @@ class GamestateControlsInner extends Component {
         gameplay: props.gamestate.gameplay,
         webinarURL: props.gamestate.webinarURL || "",
         webinarID: props.gamestate.webinarID || "",
+        bannerMarkdown: props.gamestate.bannerMarkdown || "",
+        displayBanner: props.gamestate.displayBanner,
         livestreamBackupURL: props.gamestate.livestreamBackupURL || "",
       });
     }
@@ -161,6 +165,20 @@ class GamestateControlsInner extends Component {
 
         <Header as='h3' content='Leaderboard'/>
         { this._fieldButton('Leaderboard') }
+
+        <Header as='h3' content='Banner' />
+        { this._fieldButton("displayBanner", "Display Banner on Home Page") }
+	<Form onSubmit={(e) => this.setBanner(e)}>
+	  <Form.TextArea label='Banner (Markdown Supported)'
+                         style={{ fontFamily: "courier" }}
+                         placeholder="# Markdown-supported announcement"
+                         name='bannerMarkdown' value={this.state.bannerMarkdown}
+                         onChange={this.handleChange}
+          />
+          <p>Try the <a href="https://marked.js.org/demo/">marked demo</a> to
+            get a markdown preview.</p>
+          <Button type="submit">Save Banner</Button>
+        </Form>
       </Container>
     );
   }
@@ -201,6 +219,17 @@ class GamestateControlsInner extends Component {
       if(error){
         console.log(error);
         alert("Failed to set webinar info. " + error.reason);
+      }
+    });
+  }
+
+  setBanner(e){
+    e.preventDefault();
+    const { bannerMarkdown } = this.state;
+    Meteor.call('admin.gamestate.setBannerMarkdown', bannerMarkdown, error => {
+      if(error){
+        console.log(error);
+        alert("Failed to set banner info. " + error.reason);
       }
     });
   }
