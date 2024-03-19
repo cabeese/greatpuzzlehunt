@@ -12,6 +12,7 @@ import HomePastEvents from './imports/HomePastEvents';
 import HomePeople from './imports/HomePeople';
 import HomeDonate from './imports/HomeDonate';
 import HomeDonate0 from './imports/HomeDonate0';
+import HomeAnnouncements from './imports/HomeAnnouncements';
 import HomeSponsors from './imports/HomeSponsors';
 import SamplePuzzles from './imports/SamplePuzzles';
 
@@ -30,10 +31,10 @@ const AnnouncementsMessage = (
                     <List>
                       <List.Item>
                         The eighth annual Great Puzzle Hunt will take place
-                        on <strong>Saturday, April 20th, 2024</strong>.
+                        on <strong> {eventDate} </strong>.
                         Mark your calendars!
                       </List.Item>
-
+		      
                       <List.Item>
                         There were a few minor scoring miscalculations on the Meta Puzzle in the
                         Open Division. Click to view
@@ -56,22 +57,24 @@ Home = class Home extends Component {
   render() {
     return (
       <div>
-          {/* AnnouncementsMessage */}
-
-          <HomeHeader/>
-
-          <HomeDonate0 />
-
-          <HomeEarlyBird/>
-
-          <HomeIntro/>
-
-          <HomeDonate/>
-
-          <a name='sponsors'/>
-
-          <HomeSponsors/>
-
+        { /* AnnouncementsMessage */ }
+	
+  	<HomeAnnouncements/>
+	
+        <HomeHeader/>
+	
+        <HomeDonate0 />
+	
+        <HomeEarlyBird/>
+	
+        <HomeIntro/>
+	
+        <HomeDonate/>
+	
+        <a name='sponsors'/>
+	
+        <HomeSponsors/>
+	
       </div>
     );
   }

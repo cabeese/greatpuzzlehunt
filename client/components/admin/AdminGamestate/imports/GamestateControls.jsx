@@ -9,28 +9,36 @@ class GamestateControlsInner extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      reportDLBusy: false,
-      reportEmail: "",
-      webinarURL: "",
-      webinarID: "",
-      livestreamBackupURL: "",
-    };
+    this.state = this._stateFromProps(props);
     this._getReport = this._getReport.bind(this);
   }
 
-  componentWillReceiveProps(props) {
+  _stateFromProps(props) {
     if (props.gamestate) {
-      this.setState({
+      return({
         registration: props.gamestate.registration,
         registrationInPersonOpen: props.gamestate.registrationInPersonOpen,
         registrationVirtualOpen: props.gamestate.registrationVirtualOpen,
         gameplay: props.gamestate.gameplay,
-        webinarURL: props.gamestate.webinarURL || "",
-        webinarID: props.gamestate.webinarID || "",
-        livestreamBackupURL: props.gamestate.livestreamBackupURL || "",
+        webinarURL: props.gamestate.webinarURL,
+        webinarID: props.gamestate.webinarID,
+        livestreamBackupURL: props.gamestate.livestreamBackupURL,
+	message1show: props.gamestate.message1show,
+	message1icon: props.gamestate.message1icon,
+	message1text: props.gamestate.message1text,
+	message1url: props.gamestate.message1url,
+	message2show: props.gamestate.message2show,
+	message2icon: props.gamestate.message2icon,
+	message2text: props.gamestate.message2text,
+	message2url: props.gamestate.message2url
       });
+    } else {
+      return({});
     }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState(this._stateFromProps(props));
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -114,6 +122,71 @@ class GamestateControlsInner extends Component {
             onClick={() => this.addRecipient(this.state.reportEmail)} />
         </div>
         { this._fieldButton('doSendNightlyReports', "Nightly Reports") }
+
+	<Header as='h3' content='Announcements'/>
+
+	{ this._fieldButton('message1show', 'Show message 1') }
+        <Input
+          placeholder="none"
+          name="message1icon"
+          size="small"
+          label="Icon 1"
+          value={this.state.message1icon}
+          onChange={ (e) => this._handleMessageChange(e) }
+        />
+        <Input
+          placeholder="message"
+          name="message1text"
+          size="small"
+          label="Message 1"
+          value={this.state.message1text}
+          onChange={ (e) => this._handleMessageChange(e) }
+        />
+        <Input
+          placeholder="message"
+          name="message1url"
+          size="small"
+          label="URL 1"
+          value={this.state.message1url}
+          onChange={ (e) => this._handleMessageChange(e) }
+        />
+	
+	{ this._fieldButton('message2show', 'Show message 2') }
+        <Input
+          placeholder="none"
+          name="message2icon"
+          size="small"
+          label="Icon 2"
+          value={this.state.message2icon}
+          onChange={ (e) => this._handleMessageChange(e) }
+        />
+        <Input
+          placeholder="message"
+          name="message2text"
+          size="small"
+          label="Message 2"
+          value={this.state.message2text}
+          onChange={ (e) => this._handleMessageChange(e) }
+        />
+        <Input
+          placeholder="message"
+          name="message2url"
+          size="small"
+          label="URL 2"
+          value={this.state.message2url}
+          onChange={ (e) => this._handleMessageChange(e) }
+        />
+        <div style={{marginTop: 10, marginBottom: 10}}>
+          <Button
+            content="Update Messages"
+            onClick={() => this.setMessages(this.state.message1icon,
+					    this.state.message1text,
+					    this.state.message1url,
+					    this.state.message2icon,
+					    this.state.message2text,
+					    this.state.message2url)} />
+	</div>
+	
 
         <Header as='h3' content='Registration and Gear'/>
         { /* TODO: remove this after 2023 Hunt */ }
@@ -205,6 +278,20 @@ class GamestateControlsInner extends Component {
     });
   }
 
+  _handleMessageChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  setMessages(m1icon, m1text, m1url, m2icon, m2text, m2url) {
+    Meteor.call('admin.gamestate.setMessages', m1icon, m1text, m1url, m2icon, m2text, m2url, error => {
+      if (error) {
+        console.log(error);
+        alert("Failed to set messages. " + error.reason);
+      }
+    });
+  }
+
   _fieldButton(fieldName, displayName) {
     if(!displayName){
       displayName = fieldName;
@@ -212,7 +299,7 @@ class GamestateControlsInner extends Component {
     }
     const fieldValue = this.props.gamestate[fieldName];
     return (
-      <div style={{marginTop: 10}}>
+      <div style={{marginTop: 10, marginBottom: 10}}>
         <Radio toggle
           checked={fieldValue}
           label={displayName}
