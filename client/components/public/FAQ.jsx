@@ -449,10 +449,6 @@ FAQ = class FAQ extends Component {
             What should I have on hand?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
-	    <Message error>
-              <em>Note: this information is from 2023 and may be adjusted for the 2024 Hunt.</em>
-	    </Message>
-	    
             Your creativity and problem-solving skills! Along with the following:<br />
             <List bulleted>
               <List.Item><span className="description">At least one smartphone or computer. The more the better! (think about battery life).</span>
@@ -462,13 +458,11 @@ FAQ = class FAQ extends Component {
               </List.Item>
 
               <List.Item description="A clip board, or a notepad" />
-              <List.Item description="Graph paper" />
               <List.Item description="Ruler/Straightedge" />
               <List.Item description="Scissors" />
               <List.Item description="Transparent Tape (like Scotch Tape)" />
               <List.Item description="Writing utensils (pencils, pens, erasers, felt-tips, highlighters)" />
               <List.Item description="Colored Pencils" />
-              <List.Item description="A single hole punch" />
               <List.Item description="Water bottle, snacks (Be sure to bring snacks if you have special dietary needs)" />
               <List.Item description="Umbrella" />
             </List>
