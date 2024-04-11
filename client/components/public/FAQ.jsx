@@ -80,6 +80,10 @@ const schedule_inPerson_data = [
     desc: "Red Square: Music. Pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants. Thank you, Domino's Pizza!"
   },
   {
+    time: "3:30 PM",
+    desc: "Food/Beverage Station closes.",
+  },
+  {
     time: "4:30 PM",
     desc: "Puzzle Stations close."
   },
