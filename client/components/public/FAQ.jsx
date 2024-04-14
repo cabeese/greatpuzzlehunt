@@ -510,12 +510,13 @@ FAQ = class FAQ extends Component {
               Wristbands are distributed at check-in.
             </p>
             <p>
-              Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) throughout the event while supplies last.
+              Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) from 9:30 AM - 3:30 PM, while supplies last.
             </p>
 	    <p><em> Be sure to bring snacks if you have special dietary needs.</em></p>
             <List>
               <List.Item description="9:30 AM - Check in/receive wristband. Refreshment* area opens along Miller Hall."/>
               <List.Item description="1:00 - 3:00 PM - Domino’s Pizza arrives in Red Square"/>
+              <List.Item description="3:30 PM - Food/Beverage Station closes"/>
 	      <p>
 		Special thanks to Haggen, Domino's Pizza, and Dave Brown and Kendra Williams.
             </p>	      
