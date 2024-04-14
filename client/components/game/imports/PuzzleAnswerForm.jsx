@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, Form, Message } from 'semantic-ui-react';
-import NCGiveUp from './NCGiveUp';
+import GiveUp from './NCGiveUp';
 
 export default class PuzzleAnswerForm extends React.Component {
   messageTimer = null;
@@ -44,10 +44,10 @@ export default class PuzzleAnswerForm extends React.Component {
 
   _giveUpButton() {
     const { team, puzzle } = this.props;
-    const show = team.division === "noncompetitive";
-    if(!show) return null;
+    // Don't give this option for "short" puzzles (e.g. Meta Puzzle)
+    if (puzzle.allowedTime < 30) return null;
 
-    return <NCGiveUp team={team} puzzle={puzzle} />
+    return <GiveUp team={team} puzzle={puzzle} />;
   }
 
   _handleSubmit(e) {
