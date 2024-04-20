@@ -30,7 +30,8 @@ class AdminLeaderboardDivisionTable extends Component {
       let nComplete = 0;
       team.puzzles.forEach(puzzle => {
         const { gaveUp, end } = puzzle;
-        if(end && !gaveUp) nComplete++;
+        // if(end && !gaveUp) nComplete++;
+        if (end) nComplete++;
       });
       return -nComplete;
     });
