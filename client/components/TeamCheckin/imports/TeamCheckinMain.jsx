@@ -25,6 +25,19 @@ class TeamCheckinMain extends Component {
     );
   }
 
+  _eligibleMessage(team) {
+    if (team.prize_ineligible) {
+      return(
+        <Message icon="warning" size="large" warning header="Ineligible for prizes"
+		 content="Your team has been marked ineligible for prizes. There is an issue with your team registration; please contact a volunteer before proceeding." />
+      );
+    } else {
+      return(
+	<div> </div>
+      );
+    }
+  }
+
   _firstStep(team){
     if (team.inPerson) {
       return (
@@ -33,7 +46,9 @@ class TeamCheckinMain extends Component {
             <br /><strong>here in person.</strong></h2>
 
           <small>If you will instead be playing virtually, please change
-            this setting on your Team page.</small>
+          this setting on your Team page.</small>
+
+	  {this._eligibleMessage(team)}
         </div>
       );
     } else {
@@ -44,6 +59,8 @@ class TeamCheckinMain extends Component {
 
           <small>Your team should not be present on the Western campus for
             the game. Please talk to us if you have questions.</small>
+
+	  {this._eligibleMessage(team)}
         </div>
       );
     }

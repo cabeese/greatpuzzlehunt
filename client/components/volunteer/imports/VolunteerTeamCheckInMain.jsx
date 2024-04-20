@@ -33,6 +33,7 @@ class VolunteerTeamCheckInMain extends Component {
     return (
       <div>
         {this._header()}
+	{this._eligibleMessage(team)}
         {this._itemsToGive(team, teamMembers)}
         {this._confirmButton(team)}
         {this._members(teamMembers)}
@@ -81,6 +82,18 @@ class VolunteerTeamCheckInMain extends Component {
         </Message.Content>
       </Message>
     );
+  }
+
+
+  _eligibleMessage(team) {
+    if (team.prize_ineligible) {
+      return(
+        <Message icon="warning" size="large" warning header="Ineligible for prizes"
+		 content="There is an issue with this team's registration, and they have been marked ineligible for prizes and leaderboard. Please send the team to the Puzzle Hunt admin to complete registration." />
+      );
+    } else {
+      return(null);
+    }
   }
 
   _members(members) {

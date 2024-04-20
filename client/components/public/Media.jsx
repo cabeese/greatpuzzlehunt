@@ -8,7 +8,7 @@ Media = class Media extends Component {
     return (
       <Container className="section">
       <Segment basic>
-        <PuzzlePageTitle title="Media" subTitle={<span>Photo Credit: <a href="http://www.gabrielleponcz.com/" target="_blank">Gabrielle Poncz</a></span>} />
+        <PuzzlePageTitle title="Media" />
 
         <h2 style={{fontWeight: "600"}}>Check out videos of past Hunts on our 
         <a href="https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A" target="_blank">

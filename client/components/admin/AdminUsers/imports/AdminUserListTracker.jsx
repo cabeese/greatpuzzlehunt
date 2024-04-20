@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 import AdminUserTable from './AdminUserTable';
 
-export default AdminUserListTracker = withTracker(({ userSearch, teamSearch }) => {
+export default AdminUserListTracker = withTracker(({ userSearch, teamSearch, onlyLooking }) => {
   const usersHandle = Meteor.subscribe('admin.users', userSearch);
   const loading = !usersHandle.ready();
 
@@ -48,6 +48,11 @@ export default AdminUserListTracker = withTracker(({ userSearch, teamSearch }) =
   if (teamSearch && teamSearch.length > 0) {
     const teamSearchSafe = teamSearch.trim().toLowerCase();
     users = users.filter((user, i, _users) => (user.teamName.toLowerCase().search(teamSearchSafe) > -1));
+  }
+
+  // Filter users to only those looking for teams
+  if (onlyLooking) {
+    users = users.filter((user, i, _users) => (user.lookingForTeam));
   }
 
   return {

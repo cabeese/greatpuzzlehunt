@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
-import { Grid, Container, Input, Menu, Icon, Label } from 'semantic-ui-react';
+import { Grid, Checkbox, Container, Input, Menu, Icon, Label } from 'semantic-ui-react';
 
 import DebounceSearch from '../../imports/DebounceSearch';
 import AdminUserListTracker from './imports/AdminUserListTracker';
@@ -11,11 +11,17 @@ AdminUsers = class AdminUsers extends Component {
     this.state = {
       userSearch: '',
       teamSearch: '',
+      onlyLooking: false
     };
   }
 
+  _handleLookingChange(e, data) {
+    const { checked } = data;
+    this.setState({ onlyLooking: checked});
+  }
+
   render() {
-    const { userSearch, teamSearch } = this.state;
+    const { userSearch, teamSearch, onlyLooking } = this.state;
 
     return (
       <Container>
@@ -23,8 +29,8 @@ AdminUsers = class AdminUsers extends Component {
 
         <Grid stackable>
 
-          <Grid.Row columns={2}>
-            <Grid.Column width={10}>
+          <Grid.Row columns={3}>
+            <Grid.Column width={8}>
               <DebounceSearch
                 fluid
                 icon='search'
@@ -33,7 +39,7 @@ AdminUsers = class AdminUsers extends Component {
                 onSearch={(search) => this.setState({ userSearch: search })}
               />
             </Grid.Column>
-            <Grid.Column width={6}>
+            <Grid.Column width={5}>
               <DebounceSearch
                 fluid
                 icon='search'
@@ -42,11 +48,20 @@ AdminUsers = class AdminUsers extends Component {
                 onSearch={(search) => this.setState({ teamSearch: search })}
               />
             </Grid.Column>
+	    <Grid.Column width={3}>
+	      <Checkbox
+		toggle
+		name='onlyLooking'
+		label='Only users looking for team'
+		checked={onlyLooking}
+		onChange={ (e, data) => this._handleLookingChange(e, data) }
+	      />
+            </Grid.Column>
           </Grid.Row>
 
           <Grid.Row>
             <Grid.Column>
-              <AdminUserListTracker userSearch={userSearch} teamSearch={teamSearch}/>
+              <AdminUserListTracker userSearch={userSearch} teamSearch={teamSearch} onlyLooking={onlyLooking}/>
             </Grid.Column>
           </Grid.Row>
 

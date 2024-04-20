@@ -4,7 +4,7 @@ import { Container, Grid, Segment, Header, Icon, Image } from 'semantic-ui-react
 import LinkButton from '../../imports/LinkButton';
 
 const { eventYear } = Meteor.settings.public;
-let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+const donation_link = "https://foundation.wwu.edu/greatpuzzlehunt";
 
 export default class HomeDonate0 extends Component {
   render() {
@@ -31,7 +31,7 @@ export default class HomeDonate0 extends Component {
                 <p>Donations of any amount will help support this event.</p>
               </Segment>
               <LinkButton as='a'
-                href={link}
+                href={donation_link}
                 size='large'  content='Donate Online'
                 icon={<Icon name='heart'/>}
                 color="green"

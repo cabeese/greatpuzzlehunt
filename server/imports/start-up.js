@@ -3,6 +3,7 @@
  * For running appliction startup code
 */
 import { cloneDeep } from 'lodash';
+import { WebApp} from 'meteor/webapp';
 
 Meteor.startup(() => {
 
@@ -25,11 +26,12 @@ Meteor.startup(() => {
 
     adminUser = Meteor.users.findOne({ roles: 'admin' });
     Meteor.logger.info("New Admin User: ");
-
-  } else {
-    Meteor.logger.info("Found Admin User: ");
+    Meteor.logger.logobj(adminUser);
   }
 
-  Meteor.logger.logobj(adminUser);
-
+  // include HSTS in response headers for security compliance
+  WebApp.connectHandlers.use(function (req, res, next) {
+    res.setHeader('Strict-Transport-Security', 'max-age=86400; includeSubDomains');
+    next();
+  });
 });

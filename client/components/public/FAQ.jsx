@@ -44,7 +44,7 @@ const gearPricing = (
     <ul>
       <li>Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
       <li>Gear sales end midnight {gearSaleEnd}.</li>
-      <li>Shirts will be ordered on Monday, April 17 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of April 24.</li>
+      <li>Shirts will be ordered on Monday, April 22 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of May 6, 2024.</li>
       <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
     <p> If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help sustain this event. </p>
@@ -65,7 +65,7 @@ const importantDates = (
 const schedule_inPerson_data = [
   {
     time: "9:30–10:15 AM",
-    desc: "Red Square Check-in: Information packet, wristband*, swag bag. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you, Haggen and Woods Coffee!",
+    desc: "Red Square Check-in: Information packet, wristband*, swag bag. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you Haggen, and Dave Brown and Kendra Williams.",
   },
   {
     time: "10:15 AM",
@@ -78,6 +78,10 @@ const schedule_inPerson_data = [
   {
     time: "1:00–3:00 PM",
     desc: "Red Square: Music. Pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants. Thank you, Domino's Pizza!"
+  },
+  {
+    time: "3:30 PM",
+    desc: "Food/Beverage Station closes.",
   },
   {
     time: "4:30 PM",
@@ -165,7 +169,7 @@ FAQ = class FAQ extends Component {
             <h2><Icon color="green" name="car"/> Parking</h2>
             <List>
               <List.Item description="Parking is FREE in the C-Lots on south campus on weekends." />
-              <List.Item description="Go to Red Square in the middle of campus for: Check-in, food, coffee (courtesy of Haggen &amp; Woods Coffee), and Awards Ceremony." />
+              <List.Item description="Go to Red Square in the middle of campus for: Check-in, food (courtesy of Haggen and Domino's Pizza), coffee (courtesy of Dave Brown and Kendra Williams), and Awards Ceremony." />
             </List>
             <Button as='a' href="http://www.wwu.edu/map/" target="_blank" content="Interactive Campus Map" />
 
@@ -458,13 +462,11 @@ FAQ = class FAQ extends Component {
               </List.Item>
 
               <List.Item description="A clip board, or a notepad" />
-              <List.Item description="Graph paper" />
               <List.Item description="Ruler/Straightedge" />
               <List.Item description="Scissors" />
               <List.Item description="Transparent Tape (like Scotch Tape)" />
               <List.Item description="Writing utensils (pencils, pens, erasers, felt-tips, highlighters)" />
               <List.Item description="Colored Pencils" />
-              <List.Item description="A single hole punch" />
               <List.Item description="Water bottle, snacks (Be sure to bring snacks if you have special dietary needs)" />
               <List.Item description="Umbrella" />
             </List>
@@ -508,16 +510,17 @@ FAQ = class FAQ extends Component {
               Wristbands are distributed at check-in.
             </p>
             <p>
-              Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) throughout the event while supplies last.
+              Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) from 9:30 AM - 3:30 PM, while supplies last.
             </p>
 	    <p><em> Be sure to bring snacks if you have special dietary needs.</em></p>
             <List>
               <List.Item description="9:30 AM - Check in/receive wristband. Refreshment* area opens along Miller Hall."/>
-              <List.Item description="1:00 - 3:00 PM - Domino’s Pizza Arrives in Red Square"/>
+              <List.Item description="1:00 - 3:00 PM - Domino’s Pizza arrives in Red Square"/>
+              <List.Item description="3:30 PM - Food/Beverage Station closes"/>
+	      <p>
+		Special thanks to Haggen, Domino's Pizza, and Dave Brown and Kendra Williams.
+            </p>	      
             </List>
-            <p>
-              Special thanks to Haggen, Woods Coffee, and Domino's Pizza.
-            </p>
             * Fresh fruit, rolls, coffee, cocoa, tea
           </Accordion.Content>
 
@@ -551,6 +554,19 @@ FAQ = class FAQ extends Component {
                   <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
                   { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
                   {gearPricing}
+		<LinkButton as='a'
+			    href="https://foundation.wwu.edu/greatpuzzlehunt"
+			    size='large'  content='Donate Online'
+			    icon={<Icon name='heart'/>}
+			    color="green"
+		/>
+		{ gamestate && gamestate.buyGear ?	    
+		  <LinkButton as='a' href="/gear"
+			      size="large" color="orange" target="_blank"
+			      icon={<Icon name="shopping cart" />}
+			      content="Buy Gear"
+		  />
+		  : "" }
                 </Grid.Column>
                 <Grid.Column width={6}>
                   <Image src={`https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/shirt_design_sponsorless.png`}/>
@@ -583,17 +599,19 @@ FAQ = class FAQ extends Component {
               icon={<Icon name='heart'/>}
               color="green"
             />
-            <LinkButton as='a' href="/gear"
-              size="large" color="orange" target="_blank"
-              icon={<Icon name="shopping cart" />}
-              content="Buy Gear"
-            />
+            { gamestate && gamestate.buyGear ?	    
+              <LinkButton as='a' href="/gear"
+			  size="large" color="orange" target="_blank"
+			  icon={<Icon name="shopping cart" />}
+			  content="Buy Gear"
+              />
+	      : "" }
           </Accordion.Content>
 
         </Accordion>
 
         <br/>
-        <p>Last Updated: March 2023</p>
+        <p>Last Updated: February 2024</p>
       </Segment>
       </Container>
     );

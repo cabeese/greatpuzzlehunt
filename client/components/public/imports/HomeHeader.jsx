@@ -14,7 +14,7 @@ const { eventYear, eventDate, eventDay, earlyBirdLastDate, registrationCloseDate
 
 /* TODO: these two components should be on timers, and the official times should be
    stored in a well-known place with a well known (ISO 8601, anyone?) format. */
-let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+let cashnet_link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
 const registerNowMessage = (
   <Message icon color='teal'>
@@ -33,7 +33,7 @@ const registrationClosesMessage = (
       <Message.Header>Why Register Now?</Message.Header>
       Step 1 of Registration Closes {registrationCloseDate}, 11:59 PM. <br/>
       Gear sales are closed, but
-      you can still <a href={link} target="_blank">buy and redeem tickets</a> until 10:00 AM {eventDay}, {eventDate}.
+      you can still <a href={cashnet_link} target="_blank">buy and redeem tickets</a> until 10:00 AM {eventDay}, {eventDate}.
     </Message.Content>
   </Message>
 );
@@ -43,12 +43,7 @@ class HomeHeader extends Component {
     this.forceUpdate();
   }
   render() {
-    let videoHeight = Math.max(700, window.innerWidth * 9 / 16);
-    let videoWidth = videoHeight * 16 / 9;
-
     let opts = {
-      height: videoHeight,
-      width: videoWidth,
       playerVars: {
         rel: 0,
         autoplay: 1,
@@ -64,32 +59,35 @@ class HomeHeader extends Component {
     return (
       <section id="home-header">          
           <div className="header-wrap">
-                <div id="header-video-container">
-                  <YouTube
-                    opts={opts}
-                    videoId={"paBGQzMCdUo"}
-                    id={"player"}
-                    onReady={this.playVideo}
-                    onEnd={this.playVideo}
-                    containerClassName={"video-mask"}
-                    >
-                  </YouTube>
-                  <div id="header-video-content" style={{zIndex: "2", position: "absolute", width: "100%", height: "calc(100% - 100px)", display: "flex", flexDirection: "column", justifyContent: "center", transform: "translateZ(1px)"}}>
-                    <h1 className="header-text text-highlight-color">WWU Seventh Annual</h1>
-                    <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
-                    <h2 className="sub-header-text">{eventDay}, {eventDate} 9:30 AM</h2>
-                    { this._linkButtons() }
-                    <h3 style={{color: "white", textAlign: "center"}}>
-                      This event is made possible thanks to
-                      <Scrollchor
-                        to="#sponsors"
-                        style={{color: "#bad80a"}}
-                        animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
-                      </Scrollchor>
-                    </h3>
-                  </div>
+              <div id="header-video-container">
+		  <div id="video-mask">
+                      <YouTube
+			  opts={opts}
+			  videoId={"paBGQzMCdUo"}
+			  id={"player"}
+			  onReady={this.playVideo}
+			  onEnd={this.playVideo}
+			  containerClassName={"video-iframe-container"}>
+                      </YouTube>
+		  </div>
+                    <div id="header-video-content">
+		      <h1 className="header-text text-highlight-color">WWU Eighth Annual</h1>
+		      <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
+		      <h2 className="sub-header-text">
+			<em>HYBRID EVENT: IN-PERSON OR VIRTUAL</em><br />
+			{eventDay}, {eventDate} 9:30 AM
+		      </h2>
+		      { this._linkButtons() }
+		      <h3 style={{color: "white", textAlign: "center"}}>
+			This event is made possible thanks to
+			<Scrollchor
+			  to="#sponsors"
+			  style={{color: "#bad80a"}}
+			  animate={{offset:-60, duration:800}}><strong> our Awesome Sponsors</strong>
+			</Scrollchor>
+		      </h3>
+                    </div>
                   { this._socialMediaButtons()}
-                  
                 </div>
           </div>
 
@@ -171,6 +169,7 @@ class HomeHeader extends Component {
         {SMButton("instagram", "https://www.instagram.com/wwu.greatpuzzlehunt/")}
         {SMButton("reddit", "https://www.reddit.com/user/gph_official")}
         {SMButton("youtube", "https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A")}
+	{SMButton("discord", "https://discord.gg/32HRRYUe9w")}
       </div>
     )
   }

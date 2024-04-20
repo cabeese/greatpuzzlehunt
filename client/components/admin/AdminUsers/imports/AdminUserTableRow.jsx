@@ -83,7 +83,15 @@ class AdminUserTableRow extends Component {
   }
 
   _team() {
-    return this.props.user.teamName;
+    const { user } = this.props;
+    if (!user.teamName && user.lookingForTeam) {
+      return (
+        <span>
+          <Icon name='eye' color='green' /> <i>Looking...</i>
+        </span>
+      );
+    }
+    return user.teamName;
   }
 
   _actions() {

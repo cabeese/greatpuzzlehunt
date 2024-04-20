@@ -16,14 +16,14 @@ class HomeEarlyBird extends Component {
       <a style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
     );
 
-    let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+    let cashnet_link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
     let urls = ["#", "#", "#", "#"];
     if (registrationOpen) {
       registerButton = (
         <a href="/register" target="_blank" style={{textDecoration:"none", fontSize: "36pt", padding: "40px", borderRadius: "10px", backgroundColor: "#bad80a", color:"black"}}>Register</a>
       );
-      urls = ["/register", link, "/redeem", "/team"];
+      urls = ["/register", cashnet_link, "/redeem", "/team"];
     }
 
     return (

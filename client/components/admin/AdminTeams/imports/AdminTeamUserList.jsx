@@ -42,6 +42,7 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
                     <em>{user.accountType}</em>
                 </Table.Cell>
                 <Table.Cell>{user.name}</Table.Cell>
+                <Table.Cell>{user._id}</Table.Cell>
                 <Table.Cell positive={checkedIn} negative={!checkedIn}>
                     {checkedIn ? "Checked In" : "NOT Checked In"}
                 </Table.Cell>
@@ -90,6 +91,7 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
                     <Table.Row>
                         <Table.HeaderCell>Acct Type</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
+                        <Table.HeaderCell>Id</Table.HeaderCell>
                         <Table.HeaderCell>Check-in Status</Table.HeaderCell>
                         <Table.HeaderCell>Remove</Table.HeaderCell>
                     </Table.Row>

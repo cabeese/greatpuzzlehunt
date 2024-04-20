@@ -11,10 +11,11 @@ Meteor.publish('admin.teams', function() {
     checkinConfirmed: 1,
     inPerson: 1,
     hasBegun: 1,
-    puzzles: 1
-//    'puzzles.start': 1,
-//    'puzzles.end': 1,
-//    'puzzles.name': 1,
+    owner: 1,
+    prize_ineligible: 1,
+    lookingForMembers: 1,
+    EMERGENCY_LOCK_OUT: 1,
+    puzzles: 1,
   }
   return Teams.find({}, {fields: projection});
 });

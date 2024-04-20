@@ -88,16 +88,25 @@ TeamEditor = class TeamEditor extends Component {
 
   _renderNameAndPw() {
     return (
-      <Form.Group>
-        <Form.Input name='name' label='Team Name' placeholder='Team Name'
-                    value={this.state.name} disabled={this.state.checkedIn}
-                    onChange={(e,d) => this._handleTextChange(e,d)}
+      <div>
+	<Form.Group>
+          <Form.Input name='name' label='Team Name' placeholder='Team Name'
+                      value={this.state.name} disabled={this.state.checkedIn}
+                      onChange={(e,d) => this._handleTextChange(e,d)}
           />
-        <Form.Field disabled={this.state.checkedIn}>
-          <label>Team Password <Popup trigger={<Icon name='question'/>} content='You can share your team password with your friends to let them join your team!'/></label>
-          <Input name='password' placeholder='Team Password' value={this.state.password} onChange={(e, d) => this._handleTextChange(e, d)} />
-        </Form.Field>
-      </Form.Group>
+          <Form.Field disabled={this.state.checkedIn}>
+            <label>Team Password <Popup trigger={<Icon name='question'/>} content='You can share your team password with your friends to let them join your team!'/></label>
+            <Input name='password' placeholder='Team Password' value={this.state.password} onChange={(e, d) => this._handleTextChange(e, d)} />
+          </Form.Field>
+	</Form.Group>
+	<Form.Group>
+	  <br />
+	  <small>
+	    We reserve veto rights over non-family-friendly team names.
+	    If you have any questions, please <Link to="/contact">Contact Us</Link>.
+	  </small>
+	</Form.Group>
+      </div>
     );
   }
 

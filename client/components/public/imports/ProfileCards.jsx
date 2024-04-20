@@ -32,24 +32,22 @@ export default class ProfileCards extends Component {
 
     this.marketingPromo = [
       {
-        name: 'Katie Lane',
+        name: 'Kate Jensen',
         title: '',
         role: 'Co-President, Marketing & Promotion',
-        image: '/img/team/katie.png'
+        image: '/img/team/kate_jensen.jpg'
       },
-	  
-	  {
-        name: 'Anya Davis',
-        title: '',
-        role: 'Co-President, Marketing & Promotion',
-        image: '/img/team/anya.png'
-      },
-      
       {
-        name: 'Dalton Lange',
+        name: 'Siri Khalsa',
+        title: '',
+        role: 'Co-President, Marketing & Promotion',
+        image: '/img/team/siri_khalsa.jpg'
+      },
+      {
+        name: 'Owen Walzer-Mitchell',
         title: '',
         role: 'VP, Marketing & Promotion',
-        image: '/img/team/dalton.jpg',
+        image: '/img/team/owen_w-m.png'
       },
     ];
 
@@ -74,12 +72,6 @@ export default class ProfileCards extends Component {
         role: 'Lead Developer & Tech Support',
         image: '/img/team/richard.jpg'
       },
-	  {
-        name: 'Eric Fox',
-        title: '',
-        role: 'Developer',
-        image: '/img/team/eric.png'
-      }
     ];
 
     this.budgetCoord = [
@@ -112,23 +104,45 @@ export default class ProfileCards extends Component {
         role: 'Co-President, Management',
         image: '/img/team/lucas.png',
       },
-	  
-	  {
-        name: 'Owen Montefisher',
-        title: '',
-        role: 'Co-President, Management',
-        image: '/img/team/owen.png',
-      },
-	  
-	  {
+      {
         name: 'Andy Nugent',
         title: '',
-        role: 'VP, Management',
+        role: 'Co-President, Management',
         image: '/img/team/andy.png',
+      },
+      {
+        name: 'Owen Montefisher',
+        title: '',
+        role: 'VP, Management',
+        image: '/img/team/owen.png',
       }
     ];
 
     this.pastProfiles = [
+      {
+        name: 'Eric Fox',
+        title: '',
+        role: 'Developer',
+        image: '/img/team/eric.png'
+      },
+      {
+        name: 'Katie Lane',
+        title: '',
+        role: 'Co-President, Marketing & Promotion',
+        image: '/img/team/katie.png'
+      },
+      {
+        name: 'Anya Davis',
+        title: '',
+        role: 'Co-President, Marketing & Promotion',
+        image: '/img/team/anya.png'
+      },
+      {
+        name: 'Dalton Lange',
+        title: '',
+        role: 'VP, Marketing & Promotion',
+        image: '/img/team/dalton.jpg',
+      },
       {
         name: 'Alexandria Tan',
         title: '',

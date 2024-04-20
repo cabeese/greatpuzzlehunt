@@ -20,6 +20,7 @@ export default async function processTransaction(txData) {
     name,
     gear,
     tickets,
+    donations,
     shippingInfo,
   } = txData;
 
@@ -50,6 +51,7 @@ export default async function processTransaction(txData) {
       tickets,
       shippingInfo,
       gearOrders,
+      donations,
       createdAt: now,
       updatedAt: now,
     });

@@ -7,10 +7,14 @@ PuzzlePageTitle = class PuzzlePageTitle extends Component {
     const smallStyle = {
       fontSize: '.65em',
     };
+    const SubTitle = this.props.subTitle ?
+          <small style={ smallStyle }><br />{this.props.subTitle}</small>
+          :
+          "";
     return (
        <h1 className='dark-blue'>
          {this.props.title}
-         {/* <small style={ smallStyle }>{this.props.subTitle}</small> */}
+         {SubTitle}
         </h1>
     );
   }
