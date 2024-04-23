@@ -10,6 +10,14 @@ export default class SamplePuzzles extends Component {
 
     this.puzzles = {
       '2024': {
+        extra: (
+          <div>
+          <Header as='h2'>Message from Millie:</Header>
+          <p className='h4'> Thank you for participating!
+I understand that the puzzles were on the difficult side this year. Once again, I sincerely apologize. My intent is always to create curiosity, interest, and a jumping-off point for a learning experience, not to demean or frustrate you (for that breaks my heart). Please have a look at the walk-throughs and I will keep trying harder. Millie</p>
+          <br />
+          </div>
+        ),
         puzzles: [
           {
             name: 'Worthy Caws!',
@@ -311,7 +319,7 @@ export default class SamplePuzzles extends Component {
   _puzzles() {
     const { activeIndex } = this.state;
     let ridx = 0
-    return Object.keys(this.puzzles).map((year) => (
+    return Object.keys(this.puzzles).sort((a, b) => b - a).map((year) => (
       <Segment basic key={year}>
       <Header as='h1'>{year}</Header>
         { this.puzzles[year].extra ? this.puzzles[year].extra : null }
