@@ -9,6 +9,69 @@ export default class SamplePuzzles extends Component {
     this.state = {};
 
     this.puzzles = {
+      '2024': {
+        extra: (
+          <div>
+          <Header as='h2'>Message from Millie:</Header>
+          <p className='h4'> Thank you for participating!
+I understand that the puzzles were on the difficult side this year. Once again, I sincerely apologize. My intent is always to create curiosity, interest, and a jumping-off point for a learning experience, not to demean or frustrate you (for that breaks my heart). Please have a look at the walk-throughs and I will keep trying harder. Millie</p>
+          <br />
+          </div>
+        ),
+        puzzles: [
+          {
+            name: 'Worthy Caws!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/caws/puzzle-D1DD71E6-7475-4D3D-A2BE-0F2BE4D90CFF.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/caws/h1-81FC4834-519B-41FE-BE3A-93B92230C783.jpg',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/caws/h2CA295D52-6774-4F61-A1CD-78958A32A0E8.jpg',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/caws/h3-F878EF6A-0F08-4667-8D90-364470C0DFC1.jpg'
+            ],
+            codeWord: 'cherami',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/caws/1.Walk-Through+Solution+WORTHY+CAWS2024.pdf'
+          },
+          {
+            name: 'Hue-Dunnit!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/hue/puzzle-4D662959-0800-493A-9635-3BA19BCA8223.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/hue/h1-1B081C32-0700-4B8B-A990-4642864049BF.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/hue/h2-27CBC56A-F101-4373-BD8D-A91D2167B0E3.png',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/hue/h3-98CA0567-1FDD-41E8-B5F9-B79477569093.png'
+            ],
+            codeWord: 'ignatzsbrick',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/hue/2.Walk-Through+Solution+HUE-DUNNIT2024.pdf'
+          },
+          {
+            name: 'Clef-Hanger!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/clef/puzzle-E6A81E51-DD49-4184-B207-567E49593FC5.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/clef/h1-A283FD3F-306C-4DD5-AA48-407571198E84.jpg',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/clef/h2-4CC1BF41-3B00-4C45-A607-526E6E33F98B.jpg',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/clef/h3-10B80358-F46E-4A74-8515-A904EEBD43A8.jpg'
+            ],
+            codeWord: 'dogfur',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/clef/3.Walk-Through+CLEF-HANGER2024.pdf'
+          },
+          {
+            name: 'Siriusly?!',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/siriusly/puzzle-5E69F5E7-B7B6-466C-82D6-2EDEB0662971.pdf',
+            hints: [
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/siriusly/h1-C04EDBFE-A178-46EF-A75E-CBA1D3E18A39.jpg',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/siriusly/h2-AEA8D5B6-ECE3-47EA-A459-84A3E6E1670E.jpg',
+              'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/siriusly/h3-7EF48A93-738F-4D72-B6D7-66A531BF6533.jpg'
+            ],
+            codeWord: 'lawyers',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/siriusly/4.Walk-Through+Solution+SIriusly2024.pdf'
+          },
+          {
+            name: 'Meta-Puzzle',
+            link: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/meta/puzzle-6DA8923D-16E8-4034-9B27-5DDE62B89B9A.pdf',
+            hints: [],
+            codeWord: 'thecircleoflife',
+            walkthrough: 'https://gph-distributed.s3.us-west-2.amazonaws.com/2024/puzzles/meta/5.Walk-Through+Solution+Meta-Puzzle+2024.pdf'
+          }
+        ]
+      },
       '2023': {
         puzzles: [
           {
@@ -256,7 +319,7 @@ export default class SamplePuzzles extends Component {
   _puzzles() {
     const { activeIndex } = this.state;
     let ridx = 0
-    return Object.keys(this.puzzles).map((year) => (
+    return Object.keys(this.puzzles).sort((a, b) => b - a).map((year) => (
       <Segment basic key={year}>
       <Header as='h1'>{year}</Header>
         { this.puzzles[year].extra ? this.puzzles[year].extra : null }
