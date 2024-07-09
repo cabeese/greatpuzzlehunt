@@ -38,7 +38,7 @@ export default class ProfileCards extends Component {
         image: '/img/team/kate_jensen.jpg'
       },
       {
-        name: 'Siri Khalsa',
+        name: 'Iris Khalsa',
         title: '',
         role: 'Co-President, Marketing & Promotion',
         image: '/img/team/siri_khalsa.jpg'
