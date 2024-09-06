@@ -88,16 +88,16 @@ export default class ProfileCards extends Component {
         image: '/img/team/noah_j.png',
       },
       {
-        name: 'Ryle Jutte',
+        name: 'Rylie Jutte',
         title: '',
         role: 'VP, Budget Coordination',
-        image: '/img/team/rylie.jpg',
+        image: '/img/team/rylie.jpg'
       },
       {
         name: 'Ella Williams',
         title: '',
         role: 'VP, Budget Coordination',
-        image: '/img/team/ella.jpg',
+        image: '/img/team/ella.jpg'
       },
 
     ];
