@@ -124,6 +124,12 @@ export default class ProfileCards extends Component {
 
     this.pastProfiles = [
       {
+        name: 'Joanna Schroeder',
+        title: '',
+        role: 'VP, Budget Coordination',
+        image: '/img/team/joanna.jpg'
+      },
+      {
         name: 'Eric Fox',
         title: '',
         role: 'Developer',
