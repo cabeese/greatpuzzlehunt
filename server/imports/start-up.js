@@ -34,4 +34,19 @@ Meteor.startup(() => {
     res.setHeader('Strict-Transport-Security', 'max-age=86400; includeSubDomains');
     next();
   });
+
+  // experimental request logging
+  WebApp.connectHandlers.use(function (req, res, next) {
+    Meteor.logger.info("Processing request:");
+    Meteor.logger.info(req.headers);
+    next();
+  });
+
+  // experimental DDP connection logging
+  Meteor.onConnection(function (cxn) {
+    Meteor.logger.info("DDP connection made");
+    Meteor.logger.info("id: " + cxn.id);
+    Meteor.logger.info("address: " + cxn.clientAddress);
+    Meteor.logger.logobj(cxn.httpHeaders);
+  });
 });
