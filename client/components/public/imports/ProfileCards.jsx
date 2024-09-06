@@ -38,16 +38,16 @@ export default class ProfileCards extends Component {
         image: '/img/team/kate_jensen.jpg'
       },
       {
-        name: 'Iris Khalsa',
-        title: '',
-        role: 'Co-President, Marketing & Promotion',
-        image: '/img/team/siri_khalsa.jpg'
-      },
-      {
         name: 'Owen Walzer-Mitchell',
         title: '',
-        role: 'VP, Marketing & Promotion',
+        role: 'Co-President, Marketing & Promotion',
         image: '/img/team/owen_w-m.png'
+      },
+      {
+        name: 'Iris Khalsa',
+        title: '',
+        role: 'VP, Marketing & Promotion',
+        image: '/img/team/siri_khalsa.jpg'
       },
     ];
 
@@ -81,20 +81,25 @@ export default class ProfileCards extends Component {
         role: 'Co-President, Budget Coordination',
         image: '/img/team/mayla.png',
       },
-	  
-	  {
+      {
         name: 'Noah Jensen',
         title: '',
         role: 'Co-President, Budget Coordination',
         image: '/img/team/noah_j.png',
       },
-
       {
-        name: 'Joanna Schroeder',
+        name: 'Ryle Jutte',
         title: '',
         role: 'VP, Budget Coordination',
-        image: '/img/team/joanna.jpg'
-      }
+        image: '/img/team/rylie.jpg',
+      },
+      {
+        name: 'Ella Williams',
+        title: '',
+        role: 'VP, Budget Coordination',
+        image: '/img/team/ella.jpg',
+      },
+
     ];
 	
     this.management = [
@@ -119,6 +124,12 @@ export default class ProfileCards extends Component {
     ];
 
     this.pastProfiles = [
+      {
+        name: 'Joanna Schroeder',
+        title: '',
+        role: 'VP, Budget Coordination',
+        image: '/img/team/joanna.jpg'
+      },
       {
         name: 'Eric Fox',
         title: '',
