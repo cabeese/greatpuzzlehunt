@@ -152,7 +152,7 @@ class HomeHeader extends Component {
 
   _socialMediaButtons() {
     function SMButton(siteName, url) {
-      const color = siteName === "reddit" ? "red" : siteName;
+      const color = siteName === "reddit" ? "red" : ( siteName === 'discord' ? "#5865F2" : siteName);
       return <Button
               color={color}
               circular
