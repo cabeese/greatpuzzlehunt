@@ -9,6 +9,7 @@ const donation_link = "https://foundation.wwu.edu/greatpuzzlehunt";
 
 HomeDonate0 = class HomeDonate0 extends Component {
   render() {
+    const gamestate = this.props.gamestate || {};
     return (
       <Container className="section">
       <Segment basic>
@@ -37,11 +38,13 @@ HomeDonate0 = class HomeDonate0 extends Component {
                 icon={<Icon name='heart'/>}
                 color="green"
               />
-              <LinkButton as='a' href="/gear"
-                size="large" color="orange" target="_blank"
-                icon={<Icon name="shopping cart" />}
-                content="Buy Gear"
-              />
+              { gamestate && gamestate.buyGear ?
+		<LinkButton as='a' href="/gear"
+			    size="large" color="orange" target="_blank"
+			    icon={<Icon name="shopping cart" />}
+			    content="Buy Gear"
+		/>
+		: "" }
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -53,3 +56,4 @@ HomeDonate0 = class HomeDonate0 extends Component {
 }
 
 HomeDonate0 = GamestateComp(HomeDonate0);
+export default HomeDonate0;
