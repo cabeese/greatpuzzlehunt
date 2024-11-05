@@ -2,11 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Container, Grid, Segment, Header, Icon, Image } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
+import GamestateComp from '../../imports/GamestateComp';
 
 const { eventYear } = Meteor.settings.public;
 const donation_link = "https://foundation.wwu.edu/greatpuzzlehunt";
 
-export default class HomeDonate0 extends Component {
+HomeDonate0 = class HomeDonate0 extends Component {
   render() {
     return (
       <Container className="section">
@@ -50,3 +51,5 @@ export default class HomeDonate0 extends Component {
     );
   }
 }
+
+HomeDonate0 = GamestateComp(HomeDonate0);
