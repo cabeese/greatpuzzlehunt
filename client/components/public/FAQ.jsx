@@ -44,7 +44,7 @@ const gearPricing = (
     <ul>
       <li>Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
       <li>Gear sales end midnight {gearSaleEnd}.</li>
-      <li>Shirts will be ordered on Monday, April 22 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of May 6, 2024.</li>
+      <li>Shirts will be ordered on Monday, April 28 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of May 12, 2025.</li>
       <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
     <p> If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help sustain this event. </p>
@@ -453,6 +453,9 @@ FAQ = class FAQ extends Component {
             What should I have on hand?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
+            <Message error>
+              <em>Note: this information is from 2024 and may be adjusted for the 2025 Hunt.</em>
+	          </Message>
             Your creativity and problem-solving skills! Along with the following:<br />
             <List bulleted>
               <List.Item><span className="description">At least one smartphone or computer. The more the better! (think about battery life).</span>
@@ -611,7 +614,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: February 2024</p>
+        <p>Last Updated: November 2024</p>
       </Segment>
       </Container>
     );
