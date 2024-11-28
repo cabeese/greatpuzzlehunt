@@ -22,7 +22,35 @@ const buyButton = (
   />
 );
 
-const xxlStr = ", +$2 for 2XL or larger.";
+const additionalCharges = (
+  <table className='charge-table'>
+    <thead>
+      <tr>
+        <th>Size</th>
+        <th>Additional Charge</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2XL</td>
+        <td>$2</td>
+      </tr>
+      <tr>
+        <td>3XL</td>
+        <td>$3</td>
+      </tr>
+      <tr>
+        <td>4XL</td>
+        <td>$4</td>
+      </tr>
+      <tr>
+        <td>5XL</td>
+        <td>$5</td>
+      </tr>
+    </tbody>
+  </table>
+)
+// const xxlStr = "+$2 for 2XL, +$3 for 3XL, +$4 for 4XL, +$5 for 5XL";
 
 const titles = {
   "ctm": "Men's Cotton Tee",
@@ -30,9 +58,10 @@ const titles = {
   "cty": "Youth Cotton Tee",
   "btm": "Men's Cotton/Poly Blend Tee",
   "btw": "Women's Cotton/Poly Blend Tee",
+  "bvtw": "Women's Cotton/Poly Blend V-Neck Tee",
   "lstw": "Women's Long Sleeve Cotton Tee",
   "lstm": "Men's Long Sleeve Cotton Tee",
-  "fcu": "Unisex Crew Sweatshirt",
+  "csu": "Unisex Crew Sweatshirt",
   "hu": "Unisex Hoodie Sweatshirt", 
   "hy": "Youth Hoodie",
   "qzu": "Unisex Quarter-zip Collar Sweatshirt",
@@ -44,26 +73,29 @@ const materials = {
   "cty": "100% Cotton",
   "btm": "50/50 Cotton/Polyester",
   "btw": "50/50 Cotton/Polyester",
+  "bvtw": "50/50 Cotton/Polyester",
   "lstw": "100% Cotton",
   "lstm": "100% Cotton",
-  "fcu": "50/50 Cotton/Polyester",
+  "csu": "50/50 Cotton/Polyester",
   "hu": "50/50 Cotton/Polyester",
   "hy": "50/50 Cotton/Polyester",
   "qzu": "50/50 Cotton/Polyester"
 };
 
 const prices = {
-  "ctm": "$20" + xxlStr,
-  "ctw": "$20" + xxlStr,
-  "cty": "$20" + xxlStr,
-  "btm": "$20" + xxlStr,
-  "btw": "$20" + xxlStr,
-  "lstw": "$25" + xxlStr,
-  "lstm": "$25" + xxlStr,
-  "fcu": "$30" + xxlStr,
-  "hu": "$35" + xxlStr,
-  "hy": "$35" + xxlStr,
-  "qzu": "$35" + xxlStr
+  "ctm": "$20",
+  "ctw": "$20",
+  "cty": "$20",
+  "btm": "$22",
+  "btw": "$20",
+  "bvtw": "$22",
+  "lstw": "$25",
+  "lstm": "$25",
+  "csu": "$30",
+  "hu": "$35",
+  "hy": "$35",
+  "huz": "40",
+  "qzu": "$40"
 };
 
 const sizes = {
@@ -72,40 +104,46 @@ const sizes = {
   "cty": "XS-L",
   "btm": "XS-4XL",
   "btw": "XS-4XL",
+  "bvtw": "XS-4XL",
   "lstw": "XS-4XL",
   "lstm": "S-5XL",
-  "fcu": "S-5XL",
+  "csu": "XS-5XL",
   "hu": "XS-5XL",
   "hy": "XS-XL",
+  "huz": "S-5XL",
   "qzu": "S-3XL"
 };
 
 const styleColors = {
-  "ctm": ['Ash', 'Azalea', 'Cornsilk', 'Gravel', 'Heather Radiant Orchid', 'Heliconia', 'Ice Grey', 'Light Blue', 'Light Pink', 'Mint Green', 'Neon Green', 'Sky', 'Sport Grey', 'White', 'Yellow Haze'],
-  "ctw": ['Ash', 'Candy Pink', 'Light Blue', 'Neon Pink', 'White'],
-  "cty": ['Ash', 'Azalea', 'Gold', 'Heliconia', 'Light Blue', 'Light Pink', 'Mint Green', 'Neon Green', 'Sky', 'Sport Grey', 'White', 'Yellow Haze'],
-  "btm": ['Awareness Pink Heather', 'Blush Frost', 'Heathered Dusty Sage', 'Light Heather Grey', 'White'],
-  "btw": ['Light Heather Grey', 'White'],
-  "lstm": ['Ash', 'Gold', 'Irish Green', 'Light Blue', 'Light Pink', 'Natural', 'Safety Green', 'Sand', 'Sport Grey', 'White'],
-  "lstw": ['Aquatic Blue', 'Candy Pink', 'White'],
-  "fcu": ['Ash', 'Gold', 'Heliconia', 'Irish Green', 'Light Blue', 'Light Pink', 'Safety Green', 'Sand', 'Sport Grey', 'White'],
-  "hu": ['Ash', 'Azalea', 'Gold', 'Heliconia', 'Irish Green', 'Light Blue', 'Light Pink', 'Mint Green', 'Orchid', 'Sand', 'Sport Grey', 'White'],
-  "hy": ['Gold', 'Heliconia', 'Light Pink', 'Sport Grey', 'White'],
-  "qzu": ['Ash', 'Oxford', 'White']
+  "ctm": ['Black', 'Blackberry', 'Charcoal', 'Cobalt', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Lilac', 'Maroon', 'Midnight', 'Military Green', 'Navy', 'Purple'],
+  "ctw": ['Athletic Maroon', 'Dark Heather Grey', 'Jet Black', 'Navy', 'Purple', 'Royal'],
+  "cty": ['Black', 'Charcoal', 'Cobalt', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Maroon', 'Military Green', 'Navy', 'Purple'],
+  "btm": ['Black', 'Charcoal', 'Deep Turquoise Fleck', 'Heathered Brown', 'Heathered Eggplant', 'Heathered Forest Green', 'Heathered Navy', 'Raspberry Fleck', 'Royal Frost', ],
+  "btw": ['Black', 'Charcoal', 'Heathered Eggplant', 'Heathered Navy', 'Heathered Olive', 'Heathered Teal'],
+  "bvtw": ['Black', 'Charcoal', 'Deep Turquoise Fleck', 'Heathered Navy', 'Heathered Olive', 'Heathered Purple', 'Raspberry Fleck'],
+  "lstm": ['Black', 'Charcoal', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Maroon', 'Military Green', 'Navy', 'Purple', 'Royal'],
+  "lstw": ['Athletic Maroon', 'Dark Heather Grey', 'Jet Black', 'Navy', 'Purple', 'Royal'],
+  "csu": ['Black', 'Charcoal', 'Dark Chocolate', 'Dark Heather', 'Forest', 'Maroon', 'Military Green', 'Navy', 'Purple', 'Royal'],
+  "hu": ['Black', 'Charcoal', 'Dark Chocolate', 'Dark Heather', 'Forest', 'Maroon', 'Military Green', 'Navy', 'Purple', 'Royal'],
+  "hy": ['Black', 'Charcoal', 'Dark Heather', 'Forest', 'Maroon', 'Navy', 'Purple', 'Royal'],
+  "huz": ['Black', 'Dark Chocolate', 'Dark Heather', 'Forest', 'Maroon', 'Navy', 'Purple', 'Royal'],
+  "qzu": ['Black', 'Forest Green', 'J Navy', 'Maroon', 'Royal', 'Vintage Heather Navy']
 };
 
 const cardColors = {
-  "ctm": 'Mint Green',
-  "ctw": 'Candy Pink',
-  "cty": 'Sport Grey',
-  "btm": 'Heathered Dusty Sage',
-  "btw": 'White',
-  "lstm": 'Light Blue',
-  "lstw": 'Aquatic Blue',
-  "fcu": 'Heliconia',
-  "hu": 'Sand',
-  "hy": 'Gold',
-  "qzu": 'Oxford'
+  "ctm": 'Blackberry',
+  "ctw": 'Royal',
+  "cty": 'Maroon',
+  "btm": 'Deep Turquoise Fleck',
+  "btw": 'Heathered Olive',
+  "bvtw": 'Heathered Navy',
+  "lstm": 'Black',
+  "lstw": 'Athletic Maroon',
+  "csu": 'Dark Chocolate',
+  "hu": 'Royal',
+  "hy": 'Forest',
+  "huz": 'Navy',
+  "qzu": 'Vintage Heather Navy'
 }
 
 Gear = class Gear extends Component {
@@ -180,9 +218,14 @@ Gear = class Gear extends Component {
                 </Grid.Column>
                 <Grid.Column width={6}>
 		              <Header id="title" as="h2">{this.state.title}</Header>
+                  <hr color="lightgrey"/>
                   <p> {this.state.price}</p>
-                  <p>Size range: {this.state.size}</p>
-                  <p>Material: {this.state.materials}</p>
+                  
+                  <Header as="h3">Information & Sizing</Header>
+                  <p><strong>Material</strong>: {this.state.materials}</p>
+                  <p><strong>Size range</strong>: {this.state.size}</p>
+                  <p>For sizes larger than XL:</p>
+                  { additionalCharges }
 		              { buyButton }
                 </Grid.Column>
             </Grid>
@@ -196,9 +239,9 @@ Gear = class Gear extends Component {
           <br /><br />
           Gear store closes { gearSaleEnd }.
           <br />
-          Shirts will be ordered on Monday, April 22, 2024, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 6, 2024.
+          Shirts will be ordered on Monday, April 28, 2025, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 12, 2025.
           <br /><br />
-          Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes.
+          Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes.
           <br /><br />
           Click on each item for more information.
           <br /><br />
@@ -213,20 +256,20 @@ Gear = class Gear extends Component {
                   <List.Item>
                     <strong>Domestic Shipping</strong>:
                     <List.List>
-                      <List.Item>For any T-shirt (long or short sleeve): $5/shirt</List.Item>
-                      <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip): $8/sweatshirt</List.Item>
+                      <List.Item>For any T-shirt (long or short sleeve): $6/shirt</List.Item>
+                      <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip): $9/sweatshirt</List.Item>
                     </List.List>
                   </List.Item>
                   <List.Item>
                     <strong>International Shipping</strong>:
                     <List.List>
-                      <List.Item>For any shirt (T-shirt or sweatshirt): $25/shirt</List.Item>
+                      <List.Item>For any shirt (T-shirt or sweatshirt): $28/shirt</List.Item>
                     </List.List>
                   </List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={5}>
-                  <Image src={`${s3_prefix}shirt_design.png`}/>
+                  <Image src={`${s3_prefix}shirt_design_background.png`}/>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -236,14 +279,16 @@ Gear = class Gear extends Component {
           { this.getImageCard("cty") }
           { this.getImageCard("btm") }
           { this.getImageCard("btw") }
+          { this.getImageCard("bvtw") }
           { this.getImageCard("lstm") }
           { this.getImageCard("lstw") }
 
           <Header size="medium">Outerwear</Header>
 
-          { this.getImageCard("fcu") }
+          { this.getImageCard("csu") }
           { this.getImageCard("hu") }
           { this.getImageCard("hy") }
+          { this.getImageCard("huz") }
           { this.getImageCard("qzu") }
 
         </Segment>
