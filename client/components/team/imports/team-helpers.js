@@ -3,10 +3,10 @@ import { withTracker } from 'meteor/react-meteor-data';
 
 export const DIVISION_TYPES = [
   {
-    text: 'WWU Students',
-    value: 'wwu-students',
+    text: 'Postsecondary Students',
+    value: 'postsecondary',
     wristBandColor: "Green",
-    description: "All team members must be currently enrolled at WWU (undergrad or grad)."
+    description: "All team members must be currently enrolled in college (undergrad or grad), technical school, or running start. Mix and match-team members from same or different schools.",
   },
   {
     text: 'WWU Alumni',
@@ -14,13 +14,6 @@ export const DIVISION_TYPES = [
     wristBandColor: "Blue",
     description: "At least half of team members must be WWU Alumni"
   },
-  /*{
-    text: 'Postsecondary Students',
-    value: 'postsecondary',
-    wristBandColor: "Purple",
-    description: "All team members must be currently enrolled in college (undergrad or grad), technical school, or running start. Mix and match-team members from same or different schools."
-  },
-  */
   {
     text: 'Secondary Students',
     value: 'secondary',
