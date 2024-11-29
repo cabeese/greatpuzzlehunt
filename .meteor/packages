@@ -34,9 +34,7 @@ jquery
 pagebakers:ionicons
 raderk:qr-decode
 random@1.2.2
-semantic:ui
 session@1.2.2
 tracker@1.3.4
-less
 standard-minifier-css@1.9.3
 underscore

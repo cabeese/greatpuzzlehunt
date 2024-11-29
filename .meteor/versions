@@ -43,7 +43,6 @@ jparker:crypto-base64@0.1.0
 jparker:crypto-core@0.1.0
 jquery@3.0.2
 launch-screen@2.0.1
-less@1.0.4
 localstorage@1.2.1
 logging@1.3.5
 meteor@2.0.1
@@ -76,8 +75,6 @@ reactive-var@1.0.13
 reload@1.3.2
 retry@1.1.1
 routepolicy@1.1.2
-semantic:ui@2.3.1
-semantic:ui-data@2.3.1
 session@1.2.2
 sha@1.0.10
 shell-server@0.6.0
