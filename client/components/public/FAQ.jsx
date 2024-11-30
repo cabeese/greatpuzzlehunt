@@ -42,7 +42,7 @@ const gearPricing = (
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul> */}
     <ul>
-      <li>Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
+      <li>Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
       <li>Gear sales end midnight {gearSaleEnd}.</li>
       <li>Shirts will be ordered on Monday, April 28 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of May 12, 2025.</li>
       <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
@@ -554,8 +554,8 @@ FAQ = class FAQ extends Component {
             <Grid stackable>
               <Grid.Row>
                 <Grid.Column width={10}>
-                  <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
-                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
+                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed. Opens {regularRegistrationStart}.</p>}
+                  <p>There are 13 style choices, wonderful colors, and an awesome design!</p>
                   {gearPricing}
 		<LinkButton as='a'
 			    href="https://foundation.wwu.edu/greatpuzzlehunt"
@@ -572,7 +572,7 @@ FAQ = class FAQ extends Component {
 		  : "" }
                 </Grid.Column>
                 <Grid.Column width={6}>
-                  <Image src={`https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/shirt_design_sponsorless.png`}/>
+                  <Image src={`https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/shirt_design_background.png`}/>
                 </Grid.Column>
 
               </Grid.Row>
