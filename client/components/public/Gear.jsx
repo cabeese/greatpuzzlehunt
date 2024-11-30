@@ -64,6 +64,7 @@ const titles = {
   "csu": "Unisex Crew Sweatshirt",
   "hu": "Unisex Hoodie Sweatshirt", 
   "hy": "Youth Hoodie",
+  "huz": "Unisex Full Zip Hooded Sweatshirt",
   "qzu": "Unisex Quarter-zip Collar Sweatshirt",
 };
 
@@ -79,6 +80,7 @@ const materials = {
   "csu": "50/50 Cotton/Polyester",
   "hu": "50/50 Cotton/Polyester",
   "hy": "50/50 Cotton/Polyester",
+  "huz": "50/50 Cotton/Polyester",
   "qzu": "50/50 Cotton/Polyester"
 };
 
@@ -94,7 +96,7 @@ const prices = {
   "csu": "$30",
   "hu": "$35",
   "hy": "$35",
-  "huz": "40",
+  "huz": "$40",
   "qzu": "$40"
 };
 
