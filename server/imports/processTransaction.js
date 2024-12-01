@@ -93,7 +93,7 @@ function createTicket(tx, email, isStudent, inPerson) {
   let newCode = makeCode(prefix);
 
   // 2. While this code is already in use, generate another
-  while ( Boolean(Tickets.findOne({ code: newCode })) ) {
+  while ( Boolean(Tickets.findOneAsync({ code: newCode })) ) {
     newCode = makeCode(prefix);
   }
 

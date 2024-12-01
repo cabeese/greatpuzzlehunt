@@ -12,7 +12,7 @@ SyncedCron.add({
     return parser.text(time);
   },
   job: function() {
-    const gameState = Gamestate.findOne();
+    const gameState = Gamestate.findOneAsync();
     const sendTime = moment().toString();
     if(!gameState.doSendNightlyReports){
       return;

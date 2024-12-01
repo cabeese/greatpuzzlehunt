@@ -11,7 +11,7 @@ Meteor.startup(() => {
     return;
 
   // Check for Admin account
-  let adminUser = Meteor.users.findOne({roles: 'admin', firstname: 'Noah'});
+  let adminUser = Meteor.users.findOneAsync({roles: 'admin', firstname: 'Noah'});
 
   if (adminUser === undefined) {
 
@@ -24,7 +24,7 @@ Meteor.startup(() => {
     const adminId = Accounts.createUser(adminProps);
     Accounts.addEmail(adminId, Meteor.settings.admin.email, true);
 
-    adminUser = Meteor.users.findOne({ roles: 'admin' });
+    adminUser = Meteor.users.findOneAsync({ roles: 'admin' });
     Meteor.logger.info("New Admin User: ");
     Meteor.logger.logobj(adminUser);
   }
