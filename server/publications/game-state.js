@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
+import { Gamestate } from '../../lib/collections/gamestate-collection.js'
+
 Meteor.publish('gamestate', function() {
     return Gamestate.find({}, {
       registration: 1,

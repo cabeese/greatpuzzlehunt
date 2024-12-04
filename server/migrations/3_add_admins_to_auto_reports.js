@@ -1,5 +1,8 @@
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { Migrations } from "meteor/percolate:migrations";
+
+import { Gamestate } from '../../lib/collections/gamestate-collection.js'
 
 // NOTE! Migrations are no longer run in sequence!
 // This is due to the Meteor 3 transition to async/await.

@@ -2,22 +2,27 @@ import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
 import { getShortName } from '../../lib/imports/util';
 
+import { Teams } from '../../lib/collections/teams'
+import { Puzzles } from '../../lib/collections/puzzles'
+
 const CHECK_INTERVAL = {
   seconds: 5,
 };
 
-function timeOutPuzzles() {
+async function timeOutPuzzles() {
   const now = moment();
-  const teams = Teams.find({
+  const teams = await Teams.find({
     division: { $ne: "noncompetitive" },
     currentPuzzle: { $ne: null },
   }).fetch();
 
-  const puzzles = Puzzles.find({}).fetch().reduce((acc, p) => {
+  const all_puzzles = await Puzzles.find({}).fetch()
+  const puzzles = all_puzzles.reduce((acc, p) => {
     acc[p._id] = p;
     return acc;
   }, {});
 
+  // TODO: make sure this still works
   teams.forEach((team) => {
     const i = team.puzzles.findIndex((p) => (p.puzzleId === team.currentPuzzle));
     const puzzle = team.puzzles[i];
@@ -47,5 +52,7 @@ function timeOutPuzzles() {
 Meteor.startup(() => {
   // On Startup, init Interval for puzzle timeout watcher.
   const interval = moment.duration(CHECK_INTERVAL).asMilliseconds();
-  Meteor.setInterval(timeOutPuzzles, interval);
+  Meteor.setInterval(async() => {
+    await timeOutPuzzles()
+  }, interval);
 });
