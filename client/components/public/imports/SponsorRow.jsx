@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { Segment, Grid, Icon, Header } from 'semantic-ui-react';
 import SponsorLogoList from './SponsorLogoList';
 
+import { Sponsors } from '../../../../lib/collections/sponsors.js'
+
 class SponsorRowInner extends Component {
   render() {
     const { name, price, description, level, sponsors } = this.props;
