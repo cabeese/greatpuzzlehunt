@@ -39,3 +39,4 @@ tracker@1.3.4
 standard-minifier-css@1.9.3
 underscore
 percolate:migrations
+quave:synced-cron
