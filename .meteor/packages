@@ -40,4 +40,3 @@ underscore
 percolate:migrations
 quave:synced-cron
 less@4.1.1-beta300.6
-standard-minifier-css@1.9.3-alpha300.19
