@@ -30,10 +30,11 @@
     "lodash": "^4.17.21",
     "marked": "^12.0.1",
     "meteor-node-stubs": "^1.1.0",
+    "minipass": "^7.1.2",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.35",
     "mongodb": "^6.11.0",
-    "postcss-plugin": "^1.0.0",
+    "os-browserify": "^0.3.0",
     "prop-types": "^15.7.2",
     "qrcode.react": "^1.0.1",
     "react": "^17.0.2",
@@ -54,8 +55,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
-    "postcss": "^8.4.31",
-    "postcss-load-config": "^4.0.2",
     "ts-node": "^10.9.2"
   },
   "postcss": {
