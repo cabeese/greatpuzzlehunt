@@ -119,4 +119,28 @@ module WebTestUtils
     ret
   end
 
+  # when on the puzzles admin page, return a list of the puzzle ids
+  # currently on there
+  def find_current_puzzles(browser = nil)
+    if browser.nil?
+      browser = get_default_admin
+    end
+
+    puzdiv = get_ext_element(:xpath, '//h3[text()="Puzzles"]/../../..', browser)
+    puts "got puzzle div: #{puzdiv}"
+    puts "text: #{puzdiv.text}"
+    puzzles = get_sub_elements(puzdiv, :xpath, '//div[@name]')
+    puts "got puzzles: #{puzzles}"
+    puzzles
+  end
+
+  def find_current_puzzle_ids(browser = nil)
+    puzzles = find_current_puzzles(browser)
+    res = []
+    puzzles.each do |pdiv|
+      res << pdiv.attribute('name')
+    end
+    res
+  end
+
 end

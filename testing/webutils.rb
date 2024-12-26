@@ -143,6 +143,13 @@ module WebTestUtils
     end
   end
 
+  def get_sub_elements(fromelement, m, x)
+    @wait.until do
+      e = fromelement.find_elements(m, x)
+      e
+    end
+  end
+
   def match_source(str, browser = @browser)
     @wait.until do
       browser.page_source.include?(str)

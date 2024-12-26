@@ -72,14 +72,17 @@ x = proc do |browser|
       alert.accept
     end
 
-    # XXX need to be able to match up searches to make sure we are dealing
-    # with the same puzzle every time
     it 'adds new puzzle' do
       nav_to('admin/puzzles', @adminbrowser)
 
       # check that we are on the puzzles page
       h = get_ext_element(:xpath, '//h1', @adminbrowser)
       assert_equal(h.text, 'Puzzles')
+
+      # get the current list of puzzle ids
+      ids_before = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids before: #{ids_before}"
+      assert_equal 0, ids_before.length
 
       # find the new puzzle button and click it
       np = get_ext_element(:xpath, '//button[text()="New Puzzle"]', @adminbrowser)
@@ -99,6 +102,11 @@ x = proc do |browser|
       puts "got edit: #{edit}"
       del = get_ext_element(:xpath, '//button/i[contains(@class, "trash")]', @adminbrowser)
 
+      # get the list of puzzle ids after
+      ids_after = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids after: #{ids_after}"
+      assert_equal 1, ids_after.length
+
       # delete the new puzzle
       del.click
       alert = @adminbrowser.switch_to.alert
@@ -114,7 +122,72 @@ x = proc do |browser|
       end
     end
 
-    it 'adds two puzzles'
+    it 'adds two puzzles' do
+      nav_to('admin/puzzles', @adminbrowser)
+
+      # check that we are on the puzzles page
+      h = get_ext_element(:xpath, '//h1', @adminbrowser)
+      assert_equal(h.text, 'Puzzles')
+
+      # get the current list of puzzle ids
+      ids_before = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids before: #{ids_before}"
+      assert_equal 0, ids_before.length
+
+      # find the new puzzle button and click it for the first puzzle
+      np = get_ext_element(:xpath, '//button[text()="New Puzzle"]', @adminbrowser)
+      refute_nil np
+      puts "got new puzzle button: #{np}"
+      np.click
+
+      # get the list of puzzle ids after
+      ids_after1 = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids after: #{ids_after1}"
+      assert_equal 1, ids_after1.length
+
+      # find the new puzzle button and click it for the second puzzle
+      np = get_ext_element(:xpath, '//button[text()="New Puzzle"]', @adminbrowser)
+      refute_nil np
+      puts "got new puzzle button: #{np}"
+      np.click
+
+      # get the list of puzzle ids after
+      ids_after2 = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids after: #{ids_after2}"
+      assert_equal 2, ids_after2.length
+
+      # pull out the puzzle 1 id
+      puzzle1id = (ids_after1 - ids_before)[0]
+      puts "puzzle 1 id: #{puzzle1id}"
+
+      # pull out the puzzle 2 id
+      puzzle2id = (ids_after2 - ids_after1)[0]
+      puts "puzzle 2 id: #{puzzle2id}"
+
+      # delete puzzle 2
+      del = get_ext_element(:xpath, "//div[@name=\"#{puzzle2id}\"]//button/i[contains(@class, \"trash\")]/..", @adminbrowser)
+      puts "del for p2: #{del}"
+      del.click
+      alert = @adminbrowser.switch_to.alert
+      alert.accept
+      sleep 1
+
+      idsafterd2 = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids after deleting 2: #{idsafterd2}"
+
+      # delete puzzle 1
+      del = get_ext_element(:xpath, "//div[@name=\"#{puzzle1id}\"]//button/i[contains(@class, \"trash\")]/..", @adminbrowser)
+      puts "del for p1: #{del}"
+      del.click
+      alert = @adminbrowser.switch_to.alert
+      alert.accept
+      sleep 1
+
+      # all puzzles gone
+      ids_end = find_current_puzzle_ids(@adminbrowser)
+      puts "ids at end: #{ids_end}"
+      assert_equal 0, ids_end.length
+    end
 
     it 'edits second puzzle'
 
