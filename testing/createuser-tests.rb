@@ -4,6 +4,7 @@ require 'minitest/spec'
 require 'securerandom'
 require 'selenium-webdriver'
 
+require_relative 'adminutils'
 require_relative 'webutils'
 require_relative 'config'
 
@@ -19,8 +20,9 @@ x = proc do |browser|
     include WebTestUtils
     
     before do
+      @reqbrowser = browser
       set_base_url TESTCONFIG[:site]
-      start_server browser
+      start_server @reqbrowser
     end
 
     after do
@@ -28,15 +30,22 @@ x = proc do |browser|
     end
 
     it 'creates and activates new user account' do
+      # ensure registration is turned on
+      @adminbrowser = Selenium::WebDriver.for @reqbrowser
+      nav_to_home(@adminbrowser)
+      succeed_login_as_admin(@adminbrowser)
+      turn_on_registration
+      
+      # do registration
       nav_to_register
       fn, ln, em = gen_random_id
       puts "First name: #{fn}"
       puts "Last name: #{ln}"
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
-                             :student, 'abcdefghijk', 'abcdefghijk',
+                             :student, 'abcdefghijk', 'abcdefghijk', :virtual,
                              '555-555-5555', '37', '10 Maple', 'Someplace',
-                             '01234', 'NE', 'USA', 'A B', 'def',
+                             '01234', 'NE', 'USA', 'Abc Defgh', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
       f = match_source('Thank you for creating an account')
@@ -45,9 +54,6 @@ x = proc do |browser|
       refute_nil f
 
       # check that the user was created
-      @adminbrowser = Selenium::WebDriver.for browser
-      nav_to_home(@adminbrowser)
-      succeed_login_as_admin(@adminbrowser)
       nav_to('admin/users', @adminbrowser)
 
       # make sure the new user is listed on the users list page
@@ -55,7 +61,7 @@ x = proc do |browser|
       refute_nil f
       f = match_source(em, @adminbrowser)
       refute_nil f
-      sleep 5
+      sleep 2
 
       # make sure the user shows email is not verified
       emailtd  = get_ext_element(:xpath, "//td/span[text()='#{em}']", @adminbrowser)
@@ -79,13 +85,13 @@ x = proc do |browser|
 
       # bring up the user details
       morebutton.click
-      sleep 5
+      sleep 2
 
       # make sure that we have the details modal up
       f = match_source('Player Details', @adminbrowser)
       puts "player details: #{f}"
       refute_nil f
-      sleep 5
+      sleep 2
 
       # verify the email address
       verifybutton = get_ext_element(:xpath, '//button[text()="Verify Email"]', @adminbrowser)
@@ -96,7 +102,7 @@ x = proc do |browser|
       closeicon = get_ext_element(:xpath, '//div/i[contains(@class, "close")]', @adminbrowser)
       puts "modal close: #{closeicon} text: #{closeicon.text}"
       closeicon.click
-      sleep 10
+      sleep 4
 
       # make sure the email icon only is showing (no dont icon)
       emailtd  = get_ext_element(:xpath, "//td/span[text()='#{em}']", @adminbrowser)
@@ -109,9 +115,10 @@ x = proc do |browser|
       puts "green: #{green}"
       refute_nil green
 
-      sleep 10
+      sleep 4
 
       # clean up
+      turn_on_registration
       @adminbrowser.quit
     end
   end

@@ -2,9 +2,9 @@
 
    MacOS:
 	* Using MacPorts:
-	    sudo port install ruby31
-	    sudo port select ruby ruby31
-	    add to $PATH: $HOME/.gem/ruby/ruby/3.1.0/bin
+	    sudo port install ruby33
+	    sudo port select ruby ruby33
+	    add to $PATH: $HOME/.gem/ruby/ruby/3.3.0/bin
 	    sudo gem update --system --verbose --no-document
 	    sudo gem update --verbose --no-document
 	    
@@ -13,8 +13,8 @@
 	    (install curl and gnupg2 if not in the base installation)
 	    gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 	    curl -sSL https://get.rvm.io | bash -s stable --ruby
-	    rvm install 3.1
-	    rvm use 3.1 --default
+	    rvm install 3.3
+	    rvm use 3.3 --default
 	    gem update --system --verbose --no-document
 	    gem update --verbose --no-document
 	* Using apt (Ubuntu):

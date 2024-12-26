@@ -219,7 +219,8 @@ module WebTestUtils
   end
 
   # @param [Symbol, nil] accttypearg one of :student, :nonstudent, :volunteer
-  def fill_registration_form(fnarg, lnarg, emailarg, accttypearg, pw1arg, pw2arg, phonearg, agearg, streetarg, cityarg, ziparg, statearg, countryarg, ecnamearg, ecrelarg, ecphonearg, ecemailarg, photoarg, hharg)
+  # @param [Symbol] gamemode one of :virtual, :inperson
+  def fill_registration_form(fnarg, lnarg, emailarg, accttypearg, pw1arg, pw2arg, gamemode, phonearg, agearg, streetarg, cityarg, ziparg, statearg, countryarg, ecnamearg, ecrelarg, ecphonearg, ecemailarg, photoarg, hharg)
     fn = get_ext_element(:xpath, '//input[@name="firstname"]')
     ln = get_ext_element(:xpath, '//input[@name="lastname"]')
     m = get_ext_element(:xpath, '//input[@name="email"]')
@@ -283,6 +284,18 @@ module WebTestUtils
     unless pw2arg.nil?
       pw2.send_keys(pw2arg)
     end
+
+    unless gamemode.nil?
+      @browser.action.send_keys(:tab).perform
+      if gamemode == :inperson
+        @browser.action.send_keys(:down).perform
+      elsif gamemode == :virtual
+        @browser.action.send_keys(:down).perform
+        @browser.action.send_keys(:down).perform
+      end
+      @browser.action.send_keys(:space).perform
+    end
+    
     unless phonearg.nil?
       phone.send_keys(phonearg)
     end
