@@ -1,4 +1,4 @@
-1. Get a recent Ruby version installed (>= 3.0)
+1. Get a recent Ruby version installed (>= 3.0; I use 3.3)
 
    MacOS:
 	* Using MacPorts:
@@ -26,6 +26,9 @@
 
 3. Install the web drivers for browsers
 
+   UPDATE: recent Selenium versions appear to find these on their own,
+   and the drivers do not need to be installed. Skip this section.
+
    The Selenium tools use the W3C webdriver interface to communicate
    between the the test cases and a web browser. The set of web
    drivers to install depends on the browsers to be tested against.
@@ -33,9 +36,6 @@
    The web driver binary should be downloaded from the sources below
    and installed in some directory in your $PATH.  (Recommended:
    install in $HOME/bin)
-
-   UPDATE: recent Selenium versions appear to find these on their own,
-   and the driver does not need to be installed. 
 
    * Firefox
 
@@ -59,10 +59,10 @@
    cases.
 
    Download the testrunner gem from
-   https://chrysaetos.org/extras/testrunner-0.1.7.gem
+   https://chrysaetos.org/extras/testrunner-0.1.12.gem
 
    Then run
-   gem install <dir>/testrunner-0.1.7.gem --no-document --user-install
+   gem install <dir>/testrunner-0.1.12.gem --no-document --user-install
 
    where <dir> is the directory where the gem was downloaded
 
@@ -89,6 +89,8 @@
 
    (Replace the port with another port number if needed)
 
+   Then open:
+   
    http://localhost:7100
 
    in a local browser, and you should see a list of all the test
