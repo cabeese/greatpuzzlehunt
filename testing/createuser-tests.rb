@@ -22,7 +22,7 @@ x = proc do |browser|
     before do
       @reqbrowser = browser
       set_base_url TESTCONFIG[:site]
-      start_server @reqbrowser
+      start_server(@reqbrowser, false, true)
     end
 
     after do
@@ -31,9 +31,6 @@ x = proc do |browser|
 
     it 'creates and activates new user account' do
       # ensure registration is turned on
-      @adminbrowser = Selenium::WebDriver.for @reqbrowser
-      nav_to_home(@adminbrowser)
-      succeed_login_as_admin(@adminbrowser)
       turn_on_registration
       
       # do registration
@@ -44,7 +41,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
                              :student, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '555-555-5555', '37', '10 Maple', 'Someplace',
+                             '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abc Defgh', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -61,7 +58,7 @@ x = proc do |browser|
       refute_nil f
       f = match_source(em, @adminbrowser)
       refute_nil f
-      sleep 2
+      # sleep 2
 
       # make sure the user shows email is not verified
       emailtd  = get_ext_element(:xpath, "//td/span[text()='#{em}']", @adminbrowser)
@@ -118,9 +115,51 @@ x = proc do |browser|
       sleep 4
 
       # clean up
-      turn_on_registration
-      @adminbrowser.quit
+      delete_test_users(CITY_MARKER)
+      turn_off_registration
     end
+
+    it 'creates a team of three' do
+      # ensure registration is turned on
+      turn_on_registration
+
+      NUM = 3
+      users = []
+      (1..NUM).each do |i|
+        users << gen_random_id
+      end
+
+      # register the users
+      users.each do |fn, ln, em|
+        nav_to_register
+        fill_registration_form(fn, ln, em,
+                               :student, 'abcdefghijk', 'abcdefghijk', :virtual,
+                               '555-555-5555', '37', '10 Maple', CITY_MARKER,
+                               '01234', 'NE', 'USA', 'Abc Defgh', 'def',
+                               '123-456-7890', 'abc@def.ghi', true, true)
+        submit_registration_form
+        f = match_source('Thank you for creating an account')
+        refute_nil f
+        f = match_source(em)
+        refute_nil f
+      end
+
+      # verify user emails
+      users.each do |fn, ln, em|
+        verify_user_email(em)
+      end
+
+      # log in as leader (zeroth id) and form team
+      fn, ln, em = users[0]
+      succeed_login_as(em, 'abcdefghijk')
+
+      sleep 5
+      
+      # clean up
+      delete_test_users(CITY_MARKER)
+      turn_off_registration
+    end
+    
   end
 end
 

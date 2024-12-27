@@ -22,10 +22,7 @@ x = proc do |browser|
     before do
       @reqbrowser = browser
       set_base_url TESTCONFIG[:site]
-      start_server @reqbrowser
-      @adminbrowser = Selenium::WebDriver.for @reqbrowser
-      nav_to_home(@adminbrowser)
-      succeed_login_as_admin(@adminbrowser)
+      start_server(@reqbrowser, false, true)
     end
 
     after do

@@ -8,16 +8,11 @@ module WebTestUtils
   def close_admin
     if @adminbrowser
       @adminbrowser.quit
+      @adminbrowser = nil
     end
   end
 
   def get_default_admin
-    if @adminbrowser.nil?
-      @adminbrowser = Selenium::WebDriver.for @reqbrowser
-      nav_to_home(@adminbrowser)
-      succeed_login_as_admin(@adminbrowser)
-    end
-
     @adminbrowser
   end
 
@@ -99,7 +94,7 @@ module WebTestUtils
     # confirm in-person toggle state
     toggle_class_2 = toggle.attribute('class')
     ret = !toggle_class_2.include?('checked')
-    puts "registration toggled on: #{ret}"
+    puts "registration toggled off: #{ret}"
     
     # find virtual registration toggle
     toggle = get_ext_element(:xpath, '//div/label[text()="Virtual Registration"]/..', browser)
@@ -118,9 +113,110 @@ module WebTestUtils
     # confirm virtual toggle state
     toggle_class_2 = toggle.attribute('class')
     ret = !toggle_class_2.include?('checked')
-    puts "registration toggled on: #{ret}"
+    puts "registration toggled off: #{ret}"
     
     ret
+  end
+
+  def verify_user_email(email, browser = nil)
+    if browser.nil?
+      browser = get_default_admin
+    end
+
+    nav_to('admin/users', browser)
+    sleep 0.5
+
+    morebutton = get_ext_element(:xpath, "//td/span[text()='#{email}']/../../td/button[text()='More']", browser)
+    morebutton.click
+    sleep 0.5
+    
+    # make sure that we have the details modal up
+    f = match_source('Player Details', browser)
+    puts "player details: #{f}"
+    refute_nil f
+    
+    # verify the email address
+    verifybutton = get_ext_element(:xpath, '//button[text()="Verify Email"]', browser)
+    puts "verify button: #{verifybutton} text: #{verifybutton.text}"
+    verifybutton.click
+    sleep 0.5
+
+    # close the modal
+    closeicon = get_ext_element(:xpath, '//div/i[contains(@class, "close")]', browser)
+    puts "modal close: #{closeicon} text: #{closeicon.text}"
+    closeicon.click
+    sleep 0.5
+  end
+
+  def delete_test_users(marker, browser = nil)
+    if browser.nil?
+      browser = get_default_admin
+    end
+
+    nav_to('admin/users', browser)
+    sleep 0.5
+    
+    buttons = browser.find_elements(:xpath, '//button[text()="More"]')
+    puts "found #{buttons.length} more buttons on users admin page"
+    if buttons.length == 0
+      puts 'found no more buttons'
+      browser.save_screenshot('./cleanup-no-more-buttons.png')
+    end
+    buttons.each do |button|
+      puts "...clicking on #{button}"
+      begin
+        browser.save_screenshot('./preclickmore.png')
+        button.click
+        sleep 0.5
+        if browser.page_source.include?(marker)
+          puts 'user has city marker, deleting'
+          delete_button = browser.find_element(:xpath, '//div[@class="actions"]/div/button[last()]')
+          begin
+            delete_button.click
+            sleep 0.5
+          rescue Selenium::WebDriver::Error::ElementClickInterceptedError => e
+            puts 'unable to delete; click intercepted error'
+            puts "exception: #{e}"
+            puts "backtrace: #{e.backtrace}"
+            browser.save_screenshot('./clickintercept.png')
+          end
+          alert = browser.switch_to.alert
+          unless alert.text.downcase.include? 'confirm delete '
+            browser.save_screenshot('./unknownalert.png')
+            raise 'unknown alert while deleting users'
+          end
+          alert.accept
+        else
+          # just close the modal
+          puts 'user does not have city marker, not deleting'
+          closebutton = get_ext_element(:xpath, '//div/div/i[@class="close icon"]', @browser)
+          closebutton.click
+        end
+
+        found = true
+        t = Time.now
+        while found
+          if Time.now > (t + 30.0)
+            browser.save_screenshot('./player-dialog-not-gone.png')
+            raise 'Player dialog is not going away'
+          end
+          puts 'polling until player details dialog goes away'
+          found = browser.page_source.include?('Player Details')
+          sleep 0.1
+        end
+      rescue Selenium::WebDriver::Error::ElementClickInterceptedError => e
+        puts "got click intercepted in cleanup: #{e}"
+        puts "backtrace: #{e.backtrace}"
+        browser.save_screenshot('./clickintercept2.png')
+        raise
+      rescue => e
+        puts "got exception in cleanup: #{e}"
+        puts "class #{e.class}"
+        puts "backtrace: #{e.backtrace}"
+      end
+      sleep 1
+    end
+    puts 'done deleting test users'
   end
 
   # when on the puzzles admin page, return a list of the puzzle ids
