@@ -12,9 +12,9 @@ Minitest.seed = 1234
 
 x = proc do |browser|
   # Safari does not support opening multiple browser webdriver sessions
-  if browser == :safari
-    next
-  end
+  # if browser == :safari
+  #   next
+  # end
   
   describe "Puzzle entry and edit #{browser}" do
     include WebTestUtils
@@ -56,18 +56,22 @@ x = proc do |browser|
 
       # save it
       ef.clear
-      ef.send_keys('this is an example')
+      s = SecureRandom.alphanumeric(8)
+      ef.send_keys(s)
+      sleep 3
       sv.click
+      sleep 1
       alert = @adminbrowser.switch_to.alert
       alert.accept
       
       # check status
-      dl = get_ext_element(:xpath, '//a[@href="this is an example"]', @adminbrowser)
+      dl = get_ext_element(:xpath, "//a[@href='#{s}']", @adminbrowser)
       refute_nil dl
 
       # clear the URL
-      ef.clear
+      ef.send_keys(:backspace, :backspace, :backspace, :backspace, :backspace, :backspace, :backspace, :backspace, :backspace)
       sv.click
+      sleep 1
       alert = @adminbrowser.switch_to.alert
       alert.accept
     end
@@ -89,7 +93,8 @@ x = proc do |browser|
       refute_nil np
       puts "got new puzzle button: #{np}"
       np.click
-
+      sleep 1
+      
       # check that a new puzzle now exists
       nplabel = get_ext_element(:xpath, '//div[text()="New Puzzle"]', @adminbrowser)
       refute_nil nplabel
@@ -109,6 +114,7 @@ x = proc do |browser|
 
       # delete the new puzzle
       del.click
+      sleep 1
       alert = @adminbrowser.switch_to.alert
       alert.accept
       sleep 1
@@ -139,6 +145,7 @@ x = proc do |browser|
       refute_nil np
       puts "got new puzzle button: #{np}"
       np.click
+      sleep 1
 
       # get the list of puzzle ids after
       ids_after1 = find_current_puzzle_ids(@adminbrowser)
@@ -150,7 +157,8 @@ x = proc do |browser|
       refute_nil np
       puts "got new puzzle button: #{np}"
       np.click
-
+      sleep 1
+      
       # get the list of puzzle ids after
       ids_after2 = find_current_puzzle_ids(@adminbrowser)
       puts "puzzle ids after: #{ids_after2}"
@@ -168,6 +176,7 @@ x = proc do |browser|
       del = get_ext_element(:xpath, "//div[@name=\"#{puzzle2id}\"]//button/i[contains(@class, \"trash\")]/..", @adminbrowser)
       puts "del for p2: #{del}"
       del.click
+      sleep 1
       alert = @adminbrowser.switch_to.alert
       alert.accept
       sleep 1
@@ -176,11 +185,12 @@ x = proc do |browser|
       puts "puzzle ids after deleting 2: #{idsafterd2}"
 
       # delete puzzle 1
-      del = get_ext_element(:xpath, "//div[@name=\"#{puzzle1id}\"]//button/i[contains(@class, \"trash\")]/..", @adminbrowser)
-      puts "del for p1: #{del}"
-      del.click
-      alert = @adminbrowser.switch_to.alert
-      alert.accept
+      delete_puzzle(puzzle1id, @adminbrowser)
+      # del = get_ext_element(:xpath, "//div[@name=\"#{puzzle1id}\"]//button/i[contains(@class, \"trash\")]/..", @adminbrowser)
+      # puts "del for p1: #{del}"
+      # del.click
+      # alert = @adminbrowser.switch_to.alert
+      # alert.accept
       sleep 1
 
       # all puzzles gone
@@ -189,11 +199,83 @@ x = proc do |browser|
       assert_equal 0, ids_end.length
     end
 
-    it 'edits second puzzle'
+    it 'edits second puzzle' do
+      nav_to('admin/puzzles', @adminbrowser)
+
+      # check that we are on the puzzles page
+      h = get_ext_element(:xpath, '//h1', @adminbrowser)
+      assert_equal(h.text, 'Puzzles')
+
+      # get the current list of puzzle ids
+      ids_before = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids before: #{ids_before}"
+      assert_equal 0, ids_before.length
+
+      # find the new puzzle button and click it for the first puzzle
+      np = get_ext_element(:xpath, '//button[text()="New Puzzle"]', @adminbrowser)
+      refute_nil np
+      puts "got new puzzle button: #{np}"
+      np.click
+      sleep 1
+
+      # get the list of puzzle ids after
+      ids_after1 = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids after: #{ids_after1}"
+      assert_equal 1, ids_after1.length
+
+      # find the new puzzle button and click it for the second puzzle
+      np = get_ext_element(:xpath, '//button[text()="New Puzzle"]', @adminbrowser)
+      refute_nil np
+      puts "got new puzzle button: #{np}"
+      np.click
+      sleep 1
+
+      # get the list of puzzle ids after
+      ids_after2 = find_current_puzzle_ids(@adminbrowser)
+      puts "puzzle ids after: #{ids_after2}"
+      assert_equal 2, ids_after2.length
+
+      # pull out the puzzle 1 id
+      puzzle1id = (ids_after1 - ids_before)[0]
+      puts "puzzle 1 id: #{puzzle1id}"
+
+      # pull out the puzzle 2 id
+      puzzle2id = (ids_after2 - ids_after1)[0]
+      puts "puzzle 2 id: #{puzzle2id}"
+
+
+      # open puzzle 2 for edit
+      sleep 2
+      open_edit_puzzle(puzzle2id, @adminbrowser)
+
+      # confirm edit fields are up
+      sleep 2
+      assert(@adminbrowser.page_source.include?('Download URL (virtual only)'))
+
+      # enter information for puzzle
+      enter_puzzle_info('Puzzle 2', 'abcdef', 0, 35, 45, 17,
+                        'Place 2', 'Url 2', 'Hint 2-1', 'URL 2-1',
+                        'Hint 2-2', 'URL 2-2', 'Hint 2-3', 'URL 2-3',
+                        @adminbrowser)
+
+      # save
+      sleep 3
+      save_puzzle_info(@adminbrowser)
+      close_puzzle_editor(@adminbrowser)
+
+      # confirm times changed in summary
+      match_source('17 bonus', @adminbrowser)
+      match_source('35 allowed', @adminbrowser)
+
+      # clean up puzzles
+      sleep 2
+      ids_after2.each do |id|
+        delete_puzzle(id, @adminbrowser)
+      end
+    end
 
   end
 
 end
 
-# Safari does not support opening two parallel sessions to 
 each_browser x

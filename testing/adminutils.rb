@@ -40,6 +40,7 @@ module WebTestUtils
     unless toggle_class.include?('checked')
       puts('toggling registration')
       toggle.click
+      sleep 1
       alert = browser.switch_to.alert
       alert.accept
     end
@@ -58,6 +59,7 @@ module WebTestUtils
     unless toggle_class.include?('checked')
       puts('toggling registration')
       toggle.click
+      sleep 1
       alert = browser.switch_to.alert
       alert.accept
     end
@@ -89,6 +91,7 @@ module WebTestUtils
     if toggle_class.include?('checked')
       puts('toggling registration')
       toggle.click
+      sleep 1
       alert = browser.switch_to.alert
       alert.accept
     end
@@ -107,6 +110,7 @@ module WebTestUtils
     if toggle_class.include?('checked')
       puts('toggling registration')
       toggle.click
+      sleep 1
       alert = browser.switch_to.alert
       alert.accept
     end
@@ -141,6 +145,82 @@ module WebTestUtils
       res << pdiv.attribute('name')
     end
     res
+  end
+
+  def delete_puzzle(id, browser = nil)
+    if browser.nil?
+      browser = get_default_admin
+    end
+
+    del = get_ext_element(:xpath, "//div[@name=\"#{id}\"]//button/i[contains(@class, \"trash\")]/..", browser)
+    del.click
+    sleep 1
+    alert = browser.switch_to.alert
+    alert.accept
+  end
+
+  def open_edit_puzzle(id, browser = nil)
+    if browser.nil?
+      browser = get_default_admin
+    end
+
+    refute(browser.page_source.include?('Puzzle Editor'))
+
+    edit = get_ext_element(:xpath, "//div[@name=\"#{id}\"]//button[text()='Edit']", browser)
+    edit.click
+    sleep 1
+
+    match_source('Puzzle Editor', browser)
+  end
+
+  def enter_puzzle_info(pname, answer, stage, allowed, timeout, bonus, location, download, hint0text, hint0url, hint1text, hint1url, hint2text, hint2url, browser = nil)
+    if browser.nil?
+      browser = get_default_admin
+    end
+    
+    enter_field('name', pname, browser)
+    enter_field('answer', answer, browser)
+    
+    enter_field('stage', stage, browser)
+    enter_field('allowedTime', allowed, browser)
+    enter_field('timeoutScore', timeout, browser)
+    enter_field('bonusTime', bonus, browser)
+
+    enter_field('location', location, browser)
+    enter_field('downloadURL', download, browser)
+
+    enter_field('hint_0_text', hint0text, browser)
+    enter_field('hint_0_imageUrl', hint0url, browser)
+    enter_field('hint_1_text', hint1text, browser)
+    enter_field('hint_1_imageUrl', hint1url, browser)
+    enter_field('hint_2_text', hint2text, browser)
+    enter_field('hint_2_imageUrl', hint2url, browser)
+  end
+
+  def save_puzzle_info(browser = nil)
+    if browser.nil?
+      browser = get_default_admin
+    end
+
+    save_button = get_ext_element(:xpath, '//h3[text()="Puzzle Editor"]/..//button[text()="Save"]', browser)
+    refute_nil save_button
+
+    puts "got save button: #{save_button}"
+    
+    save_button.click
+    sleep 1
+    alert = browser.switch_to.alert
+    alert.accept
+  end
+
+  def close_puzzle_editor(browser = nil)
+    if browser.nil?
+      browser = get_default_admin
+    end
+
+    close_button = get_ext_element(:xpath, '//h3[text()="Puzzle Editor"]/..//button[text()="Close"]', browser)
+    close_button.click
+    sleep 1
   end
 
 end

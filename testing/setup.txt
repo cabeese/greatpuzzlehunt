@@ -34,6 +34,9 @@
    and installed in some directory in your $PATH.  (Recommended:
    install in $HOME/bin)
 
+   UPDATE: recent Selenium versions appear to find these on their own,
+   and the driver does not need to be installed. 
+
    * Firefox
 
      The geckodriver binary can be installed from
@@ -135,3 +138,12 @@
    will run any tests whose name matches the expression 'text in case
    name'. This typically means that a test gets run once for each
    browser. 
+
+7. Notes
+
+   These unit tests are written assuming that at most one test is
+   being run against a server at any given time.
+
+   The tests generally clean up after themselves as long as they don't
+   fail too badly. In some cases, if a test fails, it will leave state
+   in the database that has to be cleaned up manually. 

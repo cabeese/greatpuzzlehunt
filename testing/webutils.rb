@@ -352,6 +352,13 @@ module WebTestUtils
     sub.click
   end
 
+  def enter_field(fname, val, browser)
+    f = get_ext_element(:xpath, "//input[@name='#{fname}']", browser)
+    refute_nil f
+    f.clear
+    f.send_keys(val.to_s)
+  end
+
   # @return [Array<String, String, String>] array of random strings for
   #    first name, last name, and email
   def gen_random_id
