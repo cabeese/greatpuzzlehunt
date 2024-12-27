@@ -267,6 +267,17 @@ x = proc do |browser|
       match_source('17 bonus', @adminbrowser)
       match_source('35 allowed', @adminbrowser)
 
+      # confirm error indication is off for the edited puzzle
+      sleep 1
+      e1 = get_ext_element(:xpath, "//div[@name='#{puzzle1id}']//i[contains(@class, 'exclamation')]", @adminbrowser)
+      puts "got exclamation 1: #{e1}"
+      refute_nil e1
+
+      assert_raises(Selenium::WebDriver::Error::NoSuchElementError) do
+        e2 = @adminbrowser.find_element(:xpath, "//div[@name='#{puzzle2id}']//i[contains(@class, 'exclamation')]")
+        puts "got exclamation 2: #{e2}"
+      end
+
       # clean up puzzles
       sleep 2
       ids_after2.each do |id|
