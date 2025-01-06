@@ -42,7 +42,9 @@ export default async function processTransaction(txData) {
   */
 
   // 1. Create Transaction
-  const existingTransactions = Transactions.find({ tx }).count();
+  // TODO: this should probably use .findOneAsync() instead. See
+  // https://forums.meteor.com/t/most-performant-way-to-check-for-an-existing-document-in-a-collection/61647/3
+  const existingTransactions = await Transactions.find({ tx }).countAsync();
   if (existingTransactions === 0) {
     Transactions.insert({
       tx,
@@ -61,44 +63,46 @@ export default async function processTransaction(txData) {
 
   // 2. Create Tickets
   if (USING_TICKET_CODES) {
-    const existingTxTickets = Tickets.find({ tx }).count();
+    // TODO: should this also use findOneAsync()?
+    const existingTxTickets = await Tickets.find({ tx }).countAsync();
     if (existingTxTickets === 0) {
       tickets.forEach(ticket => {
-        createTickets(tx, email, ticket.isStudent, ticket.inPerson, ticket.qty);
+        await createTickets(tx, email, ticket.isStudent, ticket.inPerson, ticket.qty);
       });
-      sendTickets(tx, email);
+      await sendTickets(tx, email);
     } else {
       info(`processTransaction: Tickets for tx:${tx} already exists. Skipping Create Tickets`);
     }
   }
 
   // 3. Create GearOrders
-  const existingGearOrders = GearOrders.find({ tx }).count();
+  // TODO: should this also use findOneAsync()?
+  const existingGearOrders = await GearOrders.find({ tx }).countAsync();
   if (existingGearOrders === 0) {
-    createGearOrders(tx, email, gearOrders);
+    await createGearOrders(tx, email, gearOrders);
   } else {
     info(`processTransaction: GearOrders for tx:${tx} already exists. Skipping Create GearOrders`);
   }
 };
 
-function createTickets(tx, email, isStudent, inPerson, qty) {
+async function createTickets(tx, email, isStudent, inPerson, qty) {
   for (let i = 0; i < qty; i++) {
-    createTicket(tx, email, isStudent, inPerson);
+    await createTicket(tx, email, isStudent, inPerson);
   }
 };
 
-function createTicket(tx, email, isStudent, inPerson) {
+async function createTicket(tx, email, isStudent, inPerson) {
   // 1. Generate new code
   const prefix = (inPerson ? "INPR" : "VIRT") + (isStudent ? "STUDENT" : "NONSTUDENT");
   let newCode = makeCode(prefix);
 
   // 2. While this code is already in use, generate another
-  while ( Boolean(Tickets.findOneAsync({ code: newCode })) ) {
+  while ( Boolean(await Tickets.findOneAsync({ code: newCode })) ) {
     newCode = makeCode(prefix);
   }
 
   // 3. Create ticket
-  Tickets.insert({
+  await Tickets.insertAsync({
     tx: tx,
     boughtBy: email,
     type: isStudent ? "STUDENT" : "NONSTUDENT",
@@ -115,12 +119,12 @@ function makeCode(prefix) {
   return `${prefix}${Random.hexString(10)}`.toUpperCase();
 };
 
-function createGearOrders(tx, email, gearOrders) {
+async function createGearOrders(tx, email, gearOrders) {
   const now = new Date();
   gearOrders.forEach((gearOrder) => {
     const { itemcode, color, logo_color: logoColor, size, qty, amount,
             shipping } = gearOrder;
-    GearOrders.insert({
+    await GearOrders.insertAsync({
       tx,
       email,
       itemcode: itemcode,
