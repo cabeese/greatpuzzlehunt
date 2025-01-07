@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment-timezone';
 
+import { Gamestate } from '../../lib/collections/gamestate-collection.js'
 import { sendReports } from '../../lib/imports/sendReports';
 
 SyncedCron.add({
@@ -12,7 +13,7 @@ SyncedCron.add({
     return parser.text(time);
   },
   job: function() {
-    const gameState = Gamestate.findOne();
+    const gameState = Gamestate.findOneAsync();
     const sendTime = moment().toString();
     if(!gameState.doSendNightlyReports){
       return;

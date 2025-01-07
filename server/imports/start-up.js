@@ -5,26 +5,24 @@
 import { cloneDeep } from 'lodash';
 import { WebApp} from 'meteor/webapp';
 
-Meteor.startup(() => {
-
+Meteor.startup(async () => {
   if (!Meteor.isServer)
     return;
 
   // Check for Admin account
-  let adminUser = Meteor.users.findOne({roles: 'admin', firstname: 'Noah'});
+  let adminUser = await Meteor.users.findOneAsync({roles: 'admin', firstname: 'Noah'});
 
   if (adminUser === undefined) {
-
     if (!Meteor.settings.admin) {
       Meteor.logger.error('No "admin" object found in "Meteor.settings"');
       process.exit(1);
     }
 
     const adminProps = cloneDeep(Meteor.settings.admin);
-    const adminId = Accounts.createUser(adminProps);
-    Accounts.addEmail(adminId, Meteor.settings.admin.email, true);
+    const adminId = await Accounts.createUserAsync(adminProps);
+    await Accounts.addEmailAsync(adminId, Meteor.settings.admin.email, true);
 
-    adminUser = Meteor.users.findOne({ roles: 'admin' });
+    adminUser = await Meteor.users.findOneAsync({ roles: 'admin' });
     Meteor.logger.info("New Admin User: ");
     Meteor.logger.logobj(adminUser);
   }
