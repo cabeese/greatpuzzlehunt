@@ -66,7 +66,7 @@ export default async function processTransaction(txData) {
     // TODO: should this also use findOneAsync()?
     const existingTxTickets = await Tickets.find({ tx }).countAsync();
     if (existingTxTickets === 0) {
-      tickets.forEach(ticket => {
+      tickets.forEach(async ticket => {
         await createTickets(tx, email, ticket.isStudent, ticket.inPerson, ticket.qty);
       });
       await sendTickets(tx, email);
@@ -121,7 +121,7 @@ function makeCode(prefix) {
 
 async function createGearOrders(tx, email, gearOrders) {
   const now = new Date();
-  gearOrders.forEach((gearOrder) => {
+  gearOrders.forEach(async (gearOrder) => {
     const { itemcode, color, logo_color: logoColor, size, qty, amount,
             shipping } = gearOrder;
     await GearOrders.insertAsync({
