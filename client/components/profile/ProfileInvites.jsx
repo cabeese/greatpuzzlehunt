@@ -13,7 +13,7 @@ ProfileInvites = class ProfileInvites extends Component {
 
   render() {
     if (!this.props.ready) {
-      return <Loading />
+      return <Loading />;
     } else if (this.props.invites.length === 0) {
       return null;
     }
@@ -46,19 +46,21 @@ ProfileInvites = class ProfileInvites extends Component {
         </Card.Content>
         <Card.Content extra>
           {moment(invite.updatedAt).calendar()}
-          <Button floated='right' icon='reply' color='green' inverted content='Accept' onClick={() => this._handleAcceptClick(invite)}/>
+          <Button floated='right' icon='reply' color='green' inverted content='Accept' onClick={async () => await this._handleAcceptClick(invite)}/>
         </Card.Content>
       </Card>
     ));
   }
 
-  _handleAcceptClick(invite) {
-    Meteor.call('invites.accept', invite, (error, result) => {
-      if (error) return alert(error.reason);
+  async _handleAcceptClick(invite) {
+    try {
+      await Meteor.callAsync('invites.accept', invite);
       browserHistory.push('/team');
-    });
+    } catch (error) {
+      alert(error.reason);
+    }
   }
-}
+};
 
 ProfileInvites = withTracker(({ user }) => {
   const invitesHandle = Meteor.subscribe('invites.myInvites');

@@ -16,7 +16,7 @@ PasswordEditor = class PasswordEditor extends Component {
   render() {
     return (
     <Segment basic>
-      <Form onSubmit={(e) => this._handleSubmit(e)}>
+      <Form onSubmit={async (e) => await this._handleSubmit(e)}>
         <Header as='h3' content='Change Password' icon={<Icon name='lock' color='orange'/>} />
         <Form.Group widths='equal'>
           <Form.Input name='newPassword' label='New Password' type="password" value={this.state.newPassword} onChange={(e) => this._handleChange(e)} />
@@ -41,17 +41,24 @@ PasswordEditor = class PasswordEditor extends Component {
     );
   }
 
-  _handleSubmit(e) {
+  async _handleSubmit(e) {
     e.preventDefault();
 
     const fields = pick(this.state, ['newPassword', 'confirmPassword']);
 
-    Meteor.call('user.update.password', fields, (error, result) => {
-      if (error) return this.setState({ error });
+    try {
+      await Meteor.callAsync('user.update.password', fields);
 
-      this.setState({ success: 'Password Saved!', error: null, newPassword:'', confirmPassword: '' });
+      this.setState({
+        success: 'Password Saved!',
+        error: null,
+        newPassword:'',
+        confirmPassword: ''
+      });
       Meteor.setTimeout(() => this.setState({ success: null }), 2000);
-    });
+    } catch (error) {
+      this.setState({ error });
+    }
   }
 
   _handleChange(e) {
@@ -59,4 +66,4 @@ PasswordEditor = class PasswordEditor extends Component {
     this.setState({ [name]: value });
   }
 
-}
+};
