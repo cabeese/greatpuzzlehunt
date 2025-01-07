@@ -10,8 +10,8 @@ Meteor.publish('admin.puzzles', function() {
   return Puzzles.find();
 });
 
-Meteor.publish('admin.leaderboard', function() {
-  const [gamestate] = Gamestate.find({}, { leaderboard: 1 }).fetch();
+Meteor.publish('admin.leaderboard', async function() {
+  const [gamestate] = await Gamestate.find({}, { leaderboard: 1 }).fetchAsync();
   if(!gamestate.leaderboard && !isAdmin(this.userId)) return this.ready();
 
   // Return All Users and Teams that Checked In.

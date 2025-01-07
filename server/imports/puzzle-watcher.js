@@ -14,16 +14,16 @@ async function timeOutPuzzles() {
   const teams = await Teams.find({
     division: { $ne: "noncompetitive" },
     currentPuzzle: { $ne: null },
-  }).fetch();
+  }).fetchAsync();
 
-  const all_puzzles = await Puzzles.find({}).fetch()
+  const all_puzzles = await await Puzzles.find({}).fetchAsync()
   const puzzles = all_puzzles.reduce((acc, p) => {
     acc[p._id] = p;
     return acc;
   }, {});
 
   // TODO: make sure this still works
-  teams.forEach((team) => {
+  teams.forEach(async (team) => {
     const i = team.puzzles.findIndex((p) => (p.puzzleId === team.currentPuzzle));
     const puzzle = team.puzzles[i];
 
@@ -36,7 +36,7 @@ async function timeOutPuzzles() {
       // Timeout this puzzle
       const teamNameShort = getShortName(team.name);
       Meteor.logger.info(`Team "${teamNameShort} timed out on puzzle ${puzzle.name}`);
-      Teams.update(team._id, {
+      await Teams.updateAsync(team._id, {
         $set: {
           currentPuzzle: null,
           [`puzzles.${i}.end`]: maxTime.toDate(),

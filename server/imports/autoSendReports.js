@@ -12,16 +12,17 @@ SyncedCron.add({
     Meteor.logger.info(`Auto-reports scheduled for ${time}`);
     return parser.text(time);
   },
-  job: function() {
-    const gameState = Gamestate.findOneAsync();
+  job: async function() {
+    const gameState = await Gamestate.findOneAsync();
     const sendTime = moment().toString();
     if(!gameState.doSendNightlyReports){
       return;
     }
 
     Meteor.logger.info(`Sending auto reports at ${sendTime} to: ${gameState.sendReportsTo}`);
-    sendReports(gameState.sendReportsTo);
-    Gamestate.update({ _id: gameState._id}, { $set: { lastAutoReportSend: sendTime }});
+    await sendReports(gameState.sendReportsTo);
+    await Gamestate.updateAsync({ _id: gameState._id},
+                                { $set: { lastAutoReportSend: sendTime }});
   }
 });
 
