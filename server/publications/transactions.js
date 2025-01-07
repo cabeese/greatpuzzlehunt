@@ -2,6 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { check, Match } from 'meteor/check';
 import { isAdmin } from '../../lib/imports/method-helpers.js';
 
+import { GearOrders } from '../../lib/collections/gear-orders.js'
+import { Tickets } from '../../lib/collections/tickets.js'
+import { Transactions } from '../../lib/collections/transactions.js'
+
 Meteor.publish('admin.transactions', function _publishAdminTransactions(search = null) {
   check(search, String);
   if (!isAdmin(this.userId)) { return this.ready(); }

@@ -2,6 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { isAdmin, isVolunteer } from '../../lib/imports/method-helpers.js';
 import moment from 'moment'
 
+import { Puzzles } from '../../lib/collections/puzzles.js'
+import { Gamestate } from '../../lib/collections/gamestate-collection.js'
+
 Meteor.publish('admin.puzzles', function() {
   if (!isAdmin(this.userId)) return this.ready();
   return Puzzles.find();
