@@ -53,12 +53,14 @@ export default class PuzzleProgress extends React.Component {
       // at a slower interval and make local adjustments in-between. This may
       // lead to some jitter if the server is under heavy load, so we may want
       // to reevaluate this in the future.
-      this.interval = Meteor.setInterval(() => {
+      this.interval = Meteor.setInterval(async () => {
         if (this.server_poll_count % 10 === 0) {
-          Meteor.call('serverTime', (err, time) => {
-            if (err) _this.setState({ now: moment() });
-            else _this.setState({ now: moment(time) });
-          });
+          try {
+            const time = await Meteor.callAsync('serverTime');
+            _this.setState({ now: moment(time) });
+          } catch (err) {
+            _this.setState({ now: moment() });
+          }
         } else {
           _this.setState({ now: moment(_this.state.now).add(1, 'second') });
         }
