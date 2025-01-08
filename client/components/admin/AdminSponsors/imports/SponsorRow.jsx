@@ -69,17 +69,7 @@ class SponsorRow extends Component {
             <p></p> {/* For mobile spacing */}
 
             <Form.Group>
-              Image URL: <input name='logoURL' type="text" onChange={(e) => this._onUrlChange(e.target.value) }/>
-              {/* Uses Mongo Image Handling
-              <Dropzone name='logoUpload' className="ui basic teal button" disablePreview style={dropZoneStyle} accept='image/*' multiple={false} onDrop={(files) => this._onDrop(files)}>
-          	    {({getRootProps, getInputProps}) => (
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <Button>Upload Logo</Button>
-                    </div>
-                )}
-              </Dropzone>
-              */ }
+              Image URL: <input name='logoURL' value={logoUrl}  type="text" onChange={(e) => this._onUrlChange(e.target.value) }/>
 
               <Form.Checkbox toggle
                 name='publish'
@@ -103,40 +93,19 @@ class SponsorRow extends Component {
     );
   }
 
-  _onUrlChange(value) {
-    this._save();
+  async _onUrlChange(value) {
+    await this._save();
 
     const data = {
       sponsorId: this.props.sponsor._id,
       imageUrl: value,
     };
 
-    Meteor.call('sponsors.updateImage', data, (error, result) => {
-      if (error) return alert(error.reason);
-    });
-  }
-
-  _onDrop(files) {
-    if (files.length > 0) this.upload(files[0]);
-  }
-
-  upload(file) {
-    Images.insert(file, (error, fileObj) => {
-      if (error) return alert(error.reason);
-
-      // Before updating the image go ahead and save Before
-      // the file upload triggers a server update.
-      this._save();
-
-      const data = {
-        imageId: fileObj._id,
-        sponsorId: this.props.sponsor._id,
-      };
-
-      Meteor.call('sponsors.updateImage', data, (error, result) => {
-        if (error) return alert(error.reason);
-      });
-    });
+    try {
+      await Meteor.callAsync('sponsors.updateImage', data);
+    } catch(error) {
+      alert(error.reason);
+    }
   }
 
   _handleTextChange(e) {
@@ -147,26 +116,30 @@ class SponsorRow extends Component {
 
   _handleDataChange(e, data) {
     const { name, value, checked } = data;
-    // console.log(data);
     this.setState({ [name]: (value || checked) });
 
     this.debouncedSave();
   }
 
-  _save() {
+  async _save() {
     const data = pick(this.state, ['_id', 'name', 'level', 'publish']);
-    Meteor.call('sponsors.update', data, (error, result) => {
-      if (error) return alert(error.reason);
-      this.setState({ message: "Saved" })
+    try {
+      await Meteor.callAsync('sponsors.update', data);
+      this.setState({ message: "Saved" });
       Meteor.setTimeout(() => this._clearMessage(), 1000);
-    });
+    } catch (error) {
+      alert(error.reason);
+      return;
+    }
   }
 
-  _delete(e) {
+  async _delete(e) {
     this.setState({confirming: false});
-    Meteor.call('sponsors.remove', this.props.sponsor._id, (error, result) => {
-      if (error) return alert(error.reason);
-    });
+    try {
+      await Meteor.callAsync('sponsors.remove', this.props.sponsor._id);
+    } catch(error) {
+      alert(error.reason);
+    }
   }
 
   _message() {

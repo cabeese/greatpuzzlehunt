@@ -130,32 +130,38 @@ class AdminUserEditForm extends Component {
     );
   }
 
-  _update(e) {
+  async _update(e) {
     e.preventDefault();
     const userData = _.pick(this.state, USER_FIELDS);
 
     // One call to update normal string fields
-    Meteor.call('admin.user.update', userData, (error, result) => {
-      if (error) {
-        alert(`Failed to save user. ${error}`);
-        return this.setState({ error });
-      }
+    try {
+      await Meteor.callAsync('admin.user.update', userData);
       this.setState({ error: null });
       alert(`${userData.firstname} ${userData.lastname} saved!`);
-    });
+    } catch(error) {
+      alert(`Failed to save user. ${error}`);
+      this.setState({ error });
+      return;
+    }
 
-    // One call to update normal string fields
+    // One call to update the email address, if necessary.
     const emailData = {
       userId: userData._id,
       newEmail: userData.email,
     };
 
     if (userData.email !== this.props.user.email) {
-      Meteor.call('admin.user.updateEmail', emailData, (error, result) => {
-        if (error) return this.setState({ error });
+      try {
+        await Meteor.callAsync('admin.user.updateEmail', emailData);
         this.setState({ error: null });
         alert(`${userData.firstname} ${userData.lastname} email updated to ${emailData.newEmail}`);
-      });
+      } catch(error) {
+        console.error(error);
+        alert(`Failed to change email for user. ${error}`);
+        this.setState({ error });
+        return;
+      }
     }
   }
 

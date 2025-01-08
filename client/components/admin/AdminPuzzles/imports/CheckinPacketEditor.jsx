@@ -26,20 +26,19 @@ class Editor extends Component {
         this.setState({ [name]: value });
     }
 
-    _handleSubmit(e) {
+    async _handleSubmit(e) {
         e.preventDefault();
         this.setState({loading: true});
         const { url } = this.state;
 
-        Meteor.call(`admin.gamestate.setCheckinPacket`, url, error => {
-            if (error){
+        try {
+                await Meteor.callAsync(`admin.gamestate.setCheckinPacket`, url);
+                alert("OK! Saved new check-in packet URL");
+        } catch (error){
                 console.log(error);
                 alert("Failed to save checkin packet. " + error.reason);
-            } else {
-                alert("OK! Saved new check-in packet URL");
-            }
-            this.setState({loading: false});
-        });
+        }
+        this.setState({loading: false});
     }
 
     render(){
@@ -52,11 +51,10 @@ class Editor extends Component {
         const disabled = loading || url === storedURL;
         return (
             <Container>
-                <Form onSubmit={(e) => this._handleSubmit(e) }>
+                <Form onSubmit={async (e) => await this._handleSubmit(e) }>
                     <Form.Group inline>
                         <Form.Input name='url' label='Check-in Packet URL'
                             value={ url } width={15}
-                            onSubmit={this._handleSubmit}
                             onChange={ (e) => this._handleChange(e) }
                             />
                         <Form.Button content="Save" color="green" disabled={disabled} />
