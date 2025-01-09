@@ -10,11 +10,6 @@ TeamListCard = class TeamListCard extends Component {
   constructor(props) {
     super(props);
     const { team } = this.props;
-    Meteor.call('team.owner', team.owner, (error, owner) => {
-      // TODO: handle case where this completes after component unmounts
-      if (error) return console.log(error);
-      this.setState({ owner });
-    });
 
     this.state = {
       isFull: team.members.length >= 6,
@@ -27,6 +22,17 @@ TeamListCard = class TeamListCard extends Component {
       owner: {},
       password: '',
     };
+  }
+
+  async componentDidMount() {
+    try {
+      const { team } = this.props;
+      const owner = await Meteor.callAsync('team.owner', team.owner);
+      // TODO: handle case where this completes after component unmounts
+      this.setState({ owner });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -128,7 +134,7 @@ TeamListCard = class TeamListCard extends Component {
 
   _renderPasswordField() {
     return (
-      <Form onSubmit={(e) => this._handlePasswordSubmit(e)}>
+      <Form onSubmit={async (e) => await this._handlePasswordSubmit(e)}>
         <Form.Input id={this._getPasswordId()} name='password' label='Team Password' value={ this.state.password } onChange={(e) => this.setState({ password: e.target.value })}/>
         <Button color='green' type='submit' content='Submit' size='small'/>
         <Button floated='right' color='red' inverted content='Cancel' size='small' onClick={(e) => this._cancel(e)}/>
@@ -150,14 +156,19 @@ TeamListCard = class TeamListCard extends Component {
     );
   }
 
-  _handlePasswordSubmit(e) {
+  async _handlePasswordSubmit(e) {
     e.preventDefault();
     const { password } = this.state;
-    if (!password) return alert('You must enter a password!');
+    if (!password){
+      alert('You must enter a password!');
+      return;
+    }
 
-    Meteor.call('teams.join', this.props.team._id, password, (error, result) => {
-      if (error) alert(error.reason);
-    });
+    try {
+      await Meteor.callAsync('teams.join', this.props.team._id, password);
+    } catch (error) {
+      alert(error.reason);
+    }
   }
 
   _cancel(e) {
