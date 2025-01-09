@@ -17,12 +17,12 @@ x = proc do |browser|
     before do
       @reqbrowser = browser
       set_base_url TESTCONFIG[:site]
-      start_server(@reqbrowser, false, true)
-      turn_on_registration
+      start_server(@reqbrowser, false, true, true)
+      turn_on_registration(@adminbrowser)
     end
 
     after do
-      turn_off_registration
+      turn_off_registration(@adminbrowser)
       shutdown_server
     end
 
@@ -42,7 +42,7 @@ x = proc do |browser|
       fill_registration_form('Firstname', 'Lastname', TESTCONFIG[:adminuser],
                              :volunteer, 'abcdefghijklmnopq',
                              'abcdefghijklmnopq', :inperson,
-                             '555-555-5555', '37', '10 Maple', 'Someplace',
+                             '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -59,7 +59,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual, 
-                             '555-555-5555', '37', '10 Maple', 'Someplace',
+                             '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -86,7 +86,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form('', ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '555-555-5555', '37', '10 Maple', 'Someplace',
+                             '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -104,7 +104,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, '', em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '555-555-5555', '37', '10 Maple', 'Someplace',
+                             '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -122,7 +122,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijkx', :virtual,
-                             '555-555-5555', '37', '10 Maple', 'Someplace',
+                             '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -140,7 +140,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, '',
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '555-555-5555', '37', '10 Maple', 'Someplace',
+                             '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -157,7 +157,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '555-555-5555', '37', '10 Maple', 'Someplace',
+                             '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -173,7 +173,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '', '37', '10 Maple', 'Someplace',
+                             '', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -191,7 +191,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '+1 31 202020', '37', '10 Maple', 'Someplace',
+                             '+1 31 202020', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'NL', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -209,7 +209,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '555-555-5555', '', '10 Maple', 'Someplace',
+                             '555-555-5555', '', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
@@ -227,7 +227,7 @@ x = proc do |browser|
       puts "Email: #{em}"
       fill_registration_form(fn, ln, em,
                              :volunteer, 'abcdefghijk', 'abcdefghijk', :virtual,
-                             '555-555-5555', '25', '', 'Someplace',
+                             '555-555-5555', '25', '', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form

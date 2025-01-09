@@ -22,11 +22,10 @@ x = proc do |browser|
     before do
       @reqbrowser = browser
       set_base_url TESTCONFIG[:site]
-      start_server(@reqbrowser, false, true)
+      start_server(@reqbrowser, false, true, false)
     end
 
     after do
-      @adminbrowser.quit
       shutdown_server
     end
 

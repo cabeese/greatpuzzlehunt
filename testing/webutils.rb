@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'config.rb'
+require_relative 'browsermgmt'
 
 CITY_MARKER = 'xyzzyABC123'
 
@@ -16,25 +17,16 @@ module WebTestUtils
     @baseurl = u
   end
 
-  def start_server(browser, headless = false, admin_also = false)
-    if (browser == :firefox) && headless
-      options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
-      @browser = Selenium::WebDriver.for browser, options: options
-      if admin_also
-        @adminbrowser = Selenium::WebDriver.for browser, options: options
-      end
-    elsif (browser == :chrome) && headless
-      options = Selenium::WebDriver::Chrome::Options.new(args: ['headless'])
-      @browser = Selenium::WebDriver.for browser, options: options
-      if admin_also
-        @adminbrowser = Selenium::WebDriver.for browser, options: options
-      end
-    else
-      @browser = Selenium::WebDriver.for browser
-      if admin_also
-        @adminbrowser = Selenium::WebDriver.for browser, options: options
-      end
+  def start_server(browser, headless = false, admin_also = false, base = true)
+    @connections = Connections.new(browser, headless, @baseurl)
+
+    if base
+      @browser = @connections.for('base').cxn
+    end 
+    if admin_also
+      @adminbrowser = @connections.for('admin').cxn
     end
+
     @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     @longwait = Selenium::WebDriver::Wait.new(:timeout => 30)
 
@@ -46,12 +38,7 @@ module WebTestUtils
   end
 
   def shutdown_server
-    @browser.quit
-    @browser = nil
-    if @adminbrowser
-      @adminbrowser.quit
-      @adminbrowser = nil
-    end
+    @connections.close_all
   end
 
   # Cause the browser to navigate to the home page (that is, the base

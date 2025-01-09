@@ -5,15 +5,8 @@ require_relative 'config'
 
 module WebTestUtils
 
-  def close_admin
-    if @adminbrowser
-      @adminbrowser.quit
-      @adminbrowser = nil
-    end
-  end
-
   def get_default_admin
-    @adminbrowser
+    @connections.for('admin').cxn
   end
 
   def turn_on_registration(browser = nil)

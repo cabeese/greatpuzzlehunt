@@ -22,7 +22,7 @@ x = proc do |browser|
     before do
       @reqbrowser = browser
       set_base_url TESTCONFIG[:site]
-      start_server(@reqbrowser, false, true)
+      start_server(@reqbrowser, false, false, false)
     end
 
     after do
@@ -31,37 +31,41 @@ x = proc do |browser|
 
     it 'creates and activates new user account' do
       # ensure registration is turned on
-      turn_on_registration
+      admin = @connections.for('admin')
+      admin.nav_to_home
+      admin.succeed_login_as_admin
+      admin.turn_on_registration
       
       # do registration
-      nav_to_register
+      user = @connections.for('user')
+      user.nav_to_register
       fn, ln, em = gen_random_id
       puts "First name: #{fn}"
       puts "Last name: #{ln}"
       puts "Email: #{em}"
-      fill_registration_form(fn, ln, em,
+      user.fill_registration_form(fn, ln, em,
                              :student, 'abcdefghijk', 'abcdefghijk', :virtual,
                              '555-555-5555', '37', '10 Maple', CITY_MARKER,
                              '01234', 'NE', 'USA', 'Abc Defgh', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
-      submit_registration_form
-      f = match_source('Thank you for creating an account')
+      user.submit_registration_form
+      f = user.match_source('Thank you for creating an account')
       refute_nil f
-      f = match_source(em)
+      f = user.match_source(em)
       refute_nil f
 
       # check that the user was created
-      nav_to('admin/users', @adminbrowser)
+      admin.nav_to('admin/users')
 
       # make sure the new user is listed on the users list page
-      f = match_source("#{fn} #{ln}", @adminbrowser)
+      f = admin.match_source("#{fn} #{ln}")
       refute_nil f
-      f = match_source(em, @adminbrowser)
+      f = admin.match_source(em)
       refute_nil f
       # sleep 2
 
       # make sure the user shows email is not verified
-      emailtd  = get_ext_element(:xpath, "//td/span[text()='#{em}']", @adminbrowser)
+      emailtd  = admin.get_ext_element(:xpath, "//td/span[text()='#{em}']")
       puts "emailtd: #{emailtd} text: #{emailtd.text}"
       refute_nil emailtd
       emailtdi = get_sub_element(emailtd, :class, 'icons')
@@ -76,7 +80,7 @@ x = proc do |browser|
       refute_nil emailicon
                                     
       # get the "more..." button to see user details and actions
-      morebutton = get_ext_element(:xpath, "//td/span[text()='#{em}']/../../td/button[text()='More']", @adminbrowser)
+      morebutton = admin.get_ext_element(:xpath, "//td/span[text()='#{em}']/../../td/button[text()='More']")
       puts "morebutton: #{morebutton} text: #{morebutton.text}"
       refute_nil morebutton
 
@@ -85,24 +89,24 @@ x = proc do |browser|
       sleep 2
 
       # make sure that we have the details modal up
-      f = match_source('Player Details', @adminbrowser)
+      f = admin.match_source('Player Details')
       puts "player details: #{f}"
       refute_nil f
       sleep 2
 
       # verify the email address
-      verifybutton = get_ext_element(:xpath, '//button[text()="Verify Email"]', @adminbrowser)
+      verifybutton = admin.get_ext_element(:xpath, '//button[text()="Verify Email"]')
       puts "verify button: #{verifybutton} text: #{verifybutton.text}"
       verifybutton.click
 
       # close the modal
-      closeicon = get_ext_element(:xpath, '//div/i[contains(@class, "close")]', @adminbrowser)
+      closeicon = admin.get_ext_element(:xpath, '//div/i[contains(@class, "close")]')
       puts "modal close: #{closeicon} text: #{closeicon.text}"
       closeicon.click
       sleep 4
 
       # make sure the email icon only is showing (no dont icon)
-      emailtd  = get_ext_element(:xpath, "//td/span[text()='#{em}']", @adminbrowser)
+      emailtd  = admin.get_ext_element(:xpath, "//td/span[text()='#{em}']")
       puts "emailtd: #{emailtd} text: #{emailtd.text}"
       refute_nil emailtd
       emailicon = get_sub_element(emailtd, :class, 'mail')
@@ -115,49 +119,90 @@ x = proc do |browser|
       sleep 4
 
       # clean up
-      delete_test_users(CITY_MARKER)
-      turn_off_registration
+      admin.delete_test_users(CITY_MARKER)
+      admin.turn_off_registration
     end
 
     it 'creates a team of three' do
       # ensure registration is turned on
-      turn_on_registration
+      admin = @connections.for('admin')
+      admin.nav_to_home
+      admin.succeed_login_as_admin
+      admin.turn_on_registration
 
       NUM = 3
       users = []
+      cxns = []
       (1..NUM).each do |i|
-        users << gen_random_id
+        fn, ln, em = gen_random_id
+        cxn = @connections.for(em)
+        users << [fn, ln, em, cxn]
       end
 
       # register the users
-      users.each do |fn, ln, em|
-        nav_to_register
-        fill_registration_form(fn, ln, em,
+      users.each do |fn, ln, em, cxn|
+        cxn.nav_to_register
+        cxn.fill_registration_form(fn, ln, em,
                                :student, 'abcdefghijk', 'abcdefghijk', :virtual,
                                '555-555-5555', '37', '10 Maple', CITY_MARKER,
                                '01234', 'NE', 'USA', 'Abc Defgh', 'def',
                                '123-456-7890', 'abc@def.ghi', true, true)
-        submit_registration_form
-        f = match_source('Thank you for creating an account')
+        cxn.submit_registration_form
+        f = cxn.match_source('Thank you for creating an account')
         refute_nil f
-        f = match_source(em)
+        f = cxn.match_source(em)
         refute_nil f
       end
 
       # verify user emails
-      users.each do |fn, ln, em|
-        verify_user_email(em)
+      users.each do |fn, ln, em, cxn|
+        admin.verify_user_email(em)
       end
 
       # log in as leader (zeroth id) and form team
-      fn, ln, em = users[0]
-      succeed_login_as(em, 'abcdefghijk')
+      fn, ln, em, cxn = users[0]
+      cxn.succeed_login_as(em, 'abcdefghijk')
+      teamname, _unused, teampw = gen_random_id
+      cxn.create_team_from_profile(teamname, teampw)
 
-      sleep 5
+      # check that team exists
+      admin.nav_to('admin/teams')
+      f = admin.match_source(teamname)
+      refute_nil f
+
+      # join player 2
+      fn, ln, em, cxn = users[1]
+      cxn.succeed_login_as(em, 'abcdefghijk')
+      cxn.join_team(teamname, teampw)
       
+      # join player 3
+      fn, ln, em, cxn = users[2]
+      cxn.succeed_login_as(em, 'abcdefghijk')
+      cxn.join_team(teamname, teampw)
+
+      # check team membership from admin
+      admin.nav_to('admin/teams')
+      tn = admin.get_ext_element(:xpath, "//td[text()='#{teamname}']")
+      refute_nil tn
+      tb = admin.get_sub_element(tn, :xpath, "../td/button[text()='More']")
+      tb.click
+      sleep 0.5
+      f = admin.match_source('Team _id:')
+      refute_nil f
+      i = 0
+      users.each do |fn, ln, em, _cxn|
+        puts "looking to match  #{i}: #{fn} #{ln}"
+        f = admin.get_ext_element(:xpath, "//td[text()='#{fn} #{ln}']")
+        refute_nil f
+        i += 1
+      end
+      cb = admin.get_ext_element(:xpath, '//button[test()="Close"]')
+      cb.click
+      sleep 0.5
+
       # clean up
-      delete_test_users(CITY_MARKER)
-      turn_off_registration
+      admin.delete_test_users(CITY_MARKER)
+      admin.turn_off_registration
     end
     
   end
