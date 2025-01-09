@@ -80,7 +80,7 @@ TeamListCard = class TeamListCard extends Component {
     if (count >= 6) return 'blue';
     else if (count >= 4) return 'green';
     else return 'orange';
-  }
+  } 
 
   _getCardExtra() {
     if (this.props.public) {
