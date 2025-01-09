@@ -601,7 +601,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: November 2024</p>
+        <p>Last Updated: January 2025</p>
       </Segment>
       </Container>
     );
