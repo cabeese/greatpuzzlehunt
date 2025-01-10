@@ -361,6 +361,32 @@ module WebTestUtils
     sub.click
   end
 
+  # create a new random user, opening a new browser to do it and
+  # returning info about the user
+  # @param [Symbol] accttype :student, :nonstudent, :volunteer
+  # @param [Symbol] gamemode :inperson or :virtual
+  # @return [Array] firstname, lastname, email, pw, cxn
+  def create_user(accttype, gamemode)
+    fn, ln, em = gen_random_id
+    pw = gen_random_string
+    cxn = @connections.for(em) 
+    
+    cxn.nav_to_register
+    cxn.fill_registration_form(fn, ln, em,
+                               accttype, pw, pw,
+                               gamemode, '555-555-5555', '37',
+                               '10 Maple', CITY_MARKER, '01234', 'NE',
+                               'USA', 'Abc Defgh', 'def',
+                               '123-456-7890', 'abc@def.ghi',
+                               true, true)
+    cxn.submit_registration_form
+    f = cxn.match_source('Thank you for creating an account')
+    refute_nil f
+    f = cxn.match_source(em)
+    refute_nil f
+    [fn, ln, em, pw, cxn]
+  end
+
   def enter_field(fname, val, browser)
     f = get_ext_element(:xpath, "//input[@name='#{fname}']", browser)
     refute_nil f
@@ -373,6 +399,17 @@ module WebTestUtils
   def gen_random_id
     [SecureRandom.alphanumeric(8), SecureRandom.alphanumeric(8),
      "#{SecureRandom.alphanumeric(6)}@#{SecureRandom.alphanumeric(8)}.net"]
+  end
+
+  def gen_random_string
+    SecureRandom.alphanumeric(8)
+  end
+
+  def upcase_first_letter(s)
+    fl = s[0]
+    rest = s[1..]
+    res = fl.upcase + rest
+    res
   end
 
 end

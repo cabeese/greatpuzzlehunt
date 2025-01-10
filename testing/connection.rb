@@ -521,19 +521,49 @@ module WebTestUtils
       joinbutton.click
       sleep 0.5
 
-      sleep 5
+      # sleep 5
       pw = get_sub_element(card, :xpath, '//input[@name="password"]')
       pw.send_keys(teampw)
 
-      sleep 5
+      # sleep 5
       
       sub = get_sub_element(card, :xpath, '//button[text()="Submit"]')
       sub.click
       sleep 0.5
 
-      sleep 5
+      # sleep 5
       f = match_source("Team: #{teamname}")
       refute_nil f
+    end
+
+    def check_team_membership(teamname, users)
+      nav_to('admin/teams')
+      tn = get_ext_element(:xpath, "//td[text()='#{teamname}']")
+      refute_nil tn
+      tb = get_sub_element(tn, :xpath, "../td/button[text()='More']")
+      tb.click
+      sleep 0.5
+      f = match_source('Team _id:')
+      refute_nil f
+
+      i = 0
+      users.each do |fn, ln, em, pw, cxn|
+        puts "looking to match  #{i}: #{fn} #{ln}"
+        f = get_ext_element(:xpath, "//td[text()='#{upcase_first_letter(fn)} #{upcase_first_letter(ln)}']")
+        refute_nil f
+        i += 1
+      end
+
+      cb = get_ext_element(:xpath, '//button[text()="Close"]')
+      cb.click
+      sleep 0.5
+    end
+
+    def upcase_first_letter(s)
+      fl = s[0]
+      rest = s[1..]
+      res = fl.upcase + rest
+      res
     end
 
   end

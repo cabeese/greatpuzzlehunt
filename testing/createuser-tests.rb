@@ -62,7 +62,6 @@ x = proc do |browser|
       refute_nil f
       f = admin.match_source(em)
       refute_nil f
-      # sleep 2
 
       # make sure the user shows email is not verified
       emailtd  = admin.get_ext_element(:xpath, "//td/span[text()='#{em}']")
@@ -86,13 +85,13 @@ x = proc do |browser|
 
       # bring up the user details
       morebutton.click
-      sleep 2
+      sleep 0.5
 
       # make sure that we have the details modal up
       f = admin.match_source('Player Details')
       puts "player details: #{f}"
       refute_nil f
-      sleep 2
+      sleep 0.5
 
       # verify the email address
       verifybutton = admin.get_ext_element(:xpath, '//button[text()="Verify Email"]')
@@ -103,7 +102,7 @@ x = proc do |browser|
       closeicon = admin.get_ext_element(:xpath, '//div/i[contains(@class, "close")]')
       puts "modal close: #{closeicon} text: #{closeicon.text}"
       closeicon.click
-      sleep 4
+      sleep 0.5
 
       # make sure the email icon only is showing (no dont icon)
       emailtd  = admin.get_ext_element(:xpath, "//td/span[text()='#{em}']")
@@ -115,8 +114,6 @@ x = proc do |browser|
       green = get_sub_element(emailtd, :class, 'green')
       puts "green: #{green}"
       refute_nil green
-
-      sleep 4
 
       # clean up
       admin.delete_test_users(CITY_MARKER)
@@ -192,11 +189,11 @@ x = proc do |browser|
       i = 0
       users.each do |fn, ln, em, _cxn|
         puts "looking to match  #{i}: #{fn} #{ln}"
-        f = admin.get_ext_element(:xpath, "//td[text()='#{fn} #{ln}']")
+        f = admin.get_ext_element(:xpath, "//td[text()='#{upcase_first_letter(fn)} #{upcase_first_letter(ln)}']")
         refute_nil f
         i += 1
       end
-      cb = admin.get_ext_element(:xpath, '//button[test()="Close"]')
+      cb = admin.get_ext_element(:xpath, '//button[text()="Close"]')
       cb.click
       sleep 0.5
 
@@ -204,7 +201,46 @@ x = proc do |browser|
       admin.delete_test_users(CITY_MARKER)
       admin.turn_off_registration
     end
-    
+
+    it 'creates a team of three, virtual' do
+      admin = @connections.for('admin')
+      admin.nav_to_home
+      admin.succeed_login_as_admin
+      admin.turn_on_registration
+
+      # register users
+      NUM = 3
+      users = []
+      (1..NUM).each do |i|
+        users << create_user(:student, :virtual)
+      end
+
+      # verify user emails and log in
+      users.each do |fn, ln, em, pw, cxn|
+        admin.verify_user_email(em)
+        sleep 0.5
+        cxn.succeed_login_as(em, pw)
+      end
+
+      # first user creates team
+      fn, ln, em, pw, cxn = users[0]
+      teamname, _unused, teampw = gen_random_id
+      cxn.create_team_from_profile(teamname, teampw)
+
+      # player 2 joins
+      fn, ln, em, pw, cxn = users[1]
+      cxn.join_team(teamname, teampw)
+
+      # player 3 joins
+      fn, ln, em, pw, cxn = users[2]
+      cxn.join_team(teamname, teampw)
+
+      admin.check_team_membership(teamname, users)
+
+      # clean up
+      admin.delete_test_users(CITY_MARKER)
+      admin.turn_off_registration
+    end
   end
 end
 
