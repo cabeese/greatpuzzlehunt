@@ -116,7 +116,7 @@ x = proc do |browser|
       refute_nil green
 
       # clean up
-      admin.delete_test_users(CITY_MARKER)
+      # admin.delete_test_users(CITY_MARKER)
       admin.turn_off_registration
     end
 
@@ -160,7 +160,7 @@ x = proc do |browser|
       fn, ln, em, cxn = users[0]
       cxn.succeed_login_as(em, 'abcdefghijk')
       teamname, _unused, teampw = gen_random_id
-      cxn.create_team_from_profile(teamname, teampw)
+      cxn.create_team_from_profile(teamname, teampw, :postsec, :inperson, false)
 
       # check that team exists
       admin.nav_to('admin/teams')
@@ -225,7 +225,7 @@ x = proc do |browser|
       # first user creates team
       fn, ln, em, pw, cxn = users[0]
       teamname, _unused, teampw = gen_random_id
-      cxn.create_team_from_profile(teamname, teampw)
+      cxn.create_team_from_profile(teamname, teampw, :postsec, :virtual, false)
 
       # player 2 joins
       fn, ln, em, pw, cxn = users[1]
@@ -237,6 +237,71 @@ x = proc do |browser|
 
       admin.check_team_membership(teamname, users)
 
+      # clean up
+      admin.delete_test_users(CITY_MARKER)
+      admin.turn_off_registration
+    end
+    
+    it 'creates a team looking for players' do
+      admin = @connections.for('admin')
+      admin.nav_to_home
+      admin.succeed_login_as_admin
+      admin.turn_on_registration
+      
+      # register users
+      NUM = 3
+      users = []
+      (1..NUM).each do |i|
+        users << create_user(:student, :virtual)
+      end
+      
+      # verify user emails and log in
+      users.each do |fn, ln, em, pw, cxn|
+        puts "user: fn #{fn} ln #{ln} em #{em} pw #{pw}"
+        admin.verify_user_email(em)
+        sleep 0.5
+        cxn.succeed_login_as(em, pw)
+      end
+      
+      # first user creates team, sets as looking for players
+      puts '1. create team'
+      fn, ln, em, pw, cxn0 = users[0]
+      teamname, _unused, teampw = gen_random_id
+      cxn0.create_team_from_profile(teamname, teampw, :alumni, :inperson, true)
+
+      # second user can see team as looking for players
+      puts '2. second player can see team looking'
+      fn, ln, em, pw, cxn1 = users[1]
+      cxn1.nav_to_teams_looking_for_players
+      f = cxn1.find_team_card(teamname)
+      puts "found team card: #{f}"
+      puts "    text: #{f.text}"
+      refute_nil f
+      sleep 0.5
+
+      # admin can see looking for players
+      puts '3. admin can see team looking'
+      admin.check_looking_for_players(teamname, true)
+      sleep 0.5
+
+      # first user turns off looking for players
+      puts '4. turn off looking'
+      cxn0.player_nav_to_team(teamname)
+      cxn0.player_set_team_looking(false)
+      sleep 0.5
+
+      # second user no longer sees team looking for players
+      puts '5. second player cannot see team looking'
+      cxn1.nav_to_profile
+      cxn1.nav_to_teams_looking_for_players
+      assert cxn1.no_match_source(teamname)
+      sleep 0.5
+
+      # admin cannot see team looking for players
+      puts '6. admin cannot see team looking'
+      admin.check_looking_for_players(teamname, false)
+      sleep 0.5
+      
       # clean up
       admin.delete_test_users(CITY_MARKER)
       admin.turn_off_registration

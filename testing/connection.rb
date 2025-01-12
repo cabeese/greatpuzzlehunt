@@ -71,6 +71,11 @@ module WebTestUtils
       end
     end
 
+    def no_match_source(str)
+      s = @cxn.page_source
+      !s.include?(str)
+    end
+
     def accept_alert
       alert = @cxn.switch_to.alert
       alert.accept
@@ -116,7 +121,11 @@ module WebTestUtils
       puts "found create account message: #{b}"
       refute_nil b
     end
-    
+
+    def nav_to_profile
+      nav_to('profile')
+    end
+
     def login_as(userarg, pwarg)
       puts "login as #{userarg}, pw #{pwarg}"
       b = @wait.until do
@@ -467,7 +476,10 @@ module WebTestUtils
       puts 'done deleting test users'
     end
 
-    def create_team_from_profile(teamname, teampw)
+    # @param [Symbol] division :postsec, :alumni, :sec, or :open
+    # @param [Symbol] mode :virtual or :inperson
+    # @param [Boolean] looking true -> turn on looking for members
+    def create_team_from_profile(teamname, teampw, division, mode, looking)
       # look for create team button and click it
       createbutton = get_ext_element(:xpath, "//button[text()='Create a Team']")
       refute_nil createbutton
@@ -495,6 +507,13 @@ module WebTestUtils
       # play
       tplay = get_ext_element(:xpath, '//a[text()="Play In-Person"]')
       tplay.click
+
+      # looking
+      if looking
+        lfm = get_ext_element(:xpath, '//input[@name="lookingForMembers"]/..')
+        refute_nil lfm
+        lfm.click
+      end
 
       # submit
       sub = get_ext_element(:xpath, '//button[text()="Create Team"]')
@@ -536,7 +555,43 @@ module WebTestUtils
       refute_nil f
     end
 
-    def check_team_membership(teamname, users)
+    def player_nav_to_team(teamname)
+      nav_to('team')
+      f = match_source("Team: #{teamname}")
+      refute_nil f
+    end
+
+    def player_set_team_looking(looking)
+      lfm = get_ext_element(:xpath, '//input[@name="lookingForMembers"]/..')
+      refute_nil lfm
+
+      puts "set team looking to: #{looking}"
+      toggle_class = lfm.attribute('class')
+      puts "   current class: #{toggle_class}"
+      if toggle_class.include?('checked')
+        puts 'currently checked'
+        if !looking
+          puts('toggling registration off')
+          lfm.click
+        end
+      else
+        puts 'not currently checked'
+        if looking
+          puts('toggling registration on')
+          lfm.click
+        end
+      end
+      sleep 1
+
+      puts "afterward, toggle class: #{lfm.attribute('class')}"
+
+      save = get_ext_element(:xpath, '//button[text()="Save Team"]')
+      refute_nil save
+      save.click
+      sleep 0.5
+    end
+
+    def admin_nav_to_team_dialog(teamname)
       nav_to('admin/teams')
       tn = get_ext_element(:xpath, "//td[text()='#{teamname}']")
       refute_nil tn
@@ -545,6 +600,16 @@ module WebTestUtils
       sleep 0.5
       f = match_source('Team _id:')
       refute_nil f
+    end
+
+    def close_dialog
+      cb = get_ext_element(:xpath, '//button[text()="Close"]')
+      cb.click
+      sleep 0.5
+    end
+
+    def check_team_membership(teamname, users)
+      admin_nav_to_team_dialog(teamname)
 
       i = 0
       users.each do |fn, ln, em, pw, cxn|
@@ -554,9 +619,37 @@ module WebTestUtils
         i += 1
       end
 
-      cb = get_ext_element(:xpath, '//button[text()="Close"]')
-      cb.click
+      close_dialog
+    end
+
+    def check_looking_for_players(teamname, looking)
+      puts "check looking for players: #{teamname}, #{looking}"
+      admin_nav_to_team_dialog(teamname)
+
+      lstr = 'Looking for members? ' + (looking ? 'yes' : 'no')
+      puts "lstr: #{lstr}"
+
+      lbldiv = get_ext_element(:xpath, '//div/strong[text()=" Looking for members?"]/..')
+      puts "lbldiv: #{lbldiv}"
+      puts "text: #{lbldiv.text}"
+      assert_equal(lstr, lbldiv.text)
+
+      sleep 5
+
+      close_dialog
+    end
+
+    def nav_to_teams_looking_for_players
+      nav_to_profile
+      # lookingbutton = get_ext_element(:xpath, "//a[@href='/team/join?filter=recruiting']")
+      lookingbutton = get_ext_element(:xpath, "//button[text()='Teams looking for players']")
+      refute_nil lookingbutton
+      lookingbutton.click
       sleep 0.5
+      @cxn.save_screenshot('./ntllfp.png')
+      f = get_ext_element(:xpath, '//h1[text()="Join a Team"]')
+      #     f = match_source('Join a Team')
+      refute_nil f
     end
 
     def upcase_first_letter(s)
