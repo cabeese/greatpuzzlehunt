@@ -51,6 +51,7 @@ Meteor.publish('users.lookingForTeam', function() {
 
   return Meteor.users.find({ lookingForTeam: true, teamId: null, accountType: { $ne: 'VOLUNTEER' } }, { fields: {
     firstname: true,
+    lastname: true,
     emails: true,
     bio: true,
     lookingForTeam: true,
