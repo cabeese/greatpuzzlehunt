@@ -369,7 +369,10 @@ x = proc do |browser|
       puts '3a. third player sees message button for first player'
       # P0: looking  P1: logged in  P2: logged in
       # no team
-      msgb = cxn2.get_ext_element(:xpath, "//div[normalize-space()='#{fn0} #{ln0}']/../..//button[text()='Message player']")
+
+      # XXXM3 not supported in m3
+      # msgb = cxn2.get_ext_element(:xpath, "//div[normalize-space()='#{fn0} #{ln0}']/../..//button[text()='Message player']")
+      msgb = cxn2.get_ext_element(:xpath, "//div[normalize-space()='#{fn0}']/../..//button[text()='Message player']")
       puts "msgb: #{msgb}"
       refute_nil msgb
 
@@ -379,7 +382,9 @@ x = proc do |browser|
       msgb.click
       sleep 1
 
-      h = cxn2.get_ext_element(:xpath, "//div[normalize-space()='Message #{upcase_first_letter(fn0)} #{upcase_first_letter(ln0)}']")
+      # XXXM3
+      # h = cxn2.get_ext_element(:xpath, "//div[normalize-space()='Message #{upcase_first_letter(fn0)} #{upcase_first_letter(ln0)}']")
+      h = cxn2.get_ext_element(:xpath, "//div[normalize-space()='Message #{upcase_first_letter(fn0)}']")
       refute_nil h
       puts "header: #{h}"
       cancel = cxn2.get_ext_element(:xpath, '//button[text()="Cancel"]')
@@ -430,13 +435,17 @@ x = proc do |browser|
       # P0: looking  P1: looking  P2: has team
       # Team created with P2
       puts '8. third player invites first player with empty message'
-      msgb = cxn2.get_ext_element(:xpath, "//div[normalize-space()='#{fn0} #{ln0}']/../..//button[text()='Message player']")
+      # XXXM3
+      # msgb = cxn2.get_ext_element(:xpath, "//div[normalize-space()='#{fn0} #{ln0}']/../..//button[text()='Message player']")
+      msgb = cxn2.get_ext_element(:xpath, "//div[normalize-space()='#{fn0}']/../..//button[text()='Message player']")
       puts "msgb: #{msgb}"
       refute_nil msgb
       msgb.click
       sleep 1
 
-      h = cxn2.get_ext_element(:xpath, "//div[normalize-space()='Message #{upcase_first_letter(fn0)} #{upcase_first_letter(ln0)}']")
+      # XXXM3
+      # h = cxn2.get_ext_element(:xpath, "//div[normalize-space()='Message #{upcase_first_letter(fn0)} #{upcase_first_letter(ln0)}']")
+      h = cxn2.get_ext_element(:xpath, "//div[normalize-space()='Message #{upcase_first_letter(fn0)}']")
       refute_nil h
       puts "header: #{h}"
       send = cxn2.get_ext_element(:xpath, '//button[text()="Send"]')
@@ -479,28 +488,34 @@ x = proc do |browser|
       cxn2.nav_to('team')
       sleep 1
       puts 'looking for player 0 name'
+      # XXXM3
+      # x = "//div[normalize-space()='#{ucfn0}']"
       x = "//div[normalize-space()='#{ucfn0} #{ucln0}']"
       puts "xpath: #{x}"
       c = cxn2.get_ext_element(:xpath, x)
       refute_nil c
       puts 'looking for player 0 card'
-      c0 = cxn2.find_player_card(ucfn0, ucln0) 
+      c0 = cxn2.find_player_card_2(ucfn0, ucln0) 
       refute_nil c0
       puts 'looking for player 1 name'
-      x = "//div[normalize-space()='#{ucfn1} #{ucln1}']"
+      # XXXM3
+      # x = "//div[normalize-space()='#{ucfn1} #{ucln1}']"
+      x = "//div[normalize-space()='#{ucfn1}']"
       puts "xpath: #{x}"
       c = cxn2.get_ext_element(:xpath, x)
       refute_nil c
       puts 'looking for player 1'
-      c1 = cxn2.find_player_card(ucfn1, ucln1)
+      c1 = cxn2.find_player_card_2(ucfn1, ucln1)
       refute_nil c1
       puts 'looking for player 2 name'
-      x = "//div[normalize-space()='#{ucfn2} #{ucln2}']"
+      # XXXM3
+      # x = "//div[normalize-space()='#{ucfn2} #{ucln2}']"
+      x = "//div[normalize-space()='#{ucfn2}']"
       puts "xpath: #{x}"
       c = cxn2.get_ext_element(:xpath, x)
       refute_nil c
       puts 'looking for player 2'
-      c2 = cxn2.find_player_card(ucfn2, ucln2)
+      c2 = cxn2.find_player_card_2(ucfn2, ucln2)
       refute_nil c2
 
       # admin sees all three team members

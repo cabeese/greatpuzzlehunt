@@ -637,6 +637,14 @@ module WebTestUtils
     def find_player_card(firstname, lastname)
       puts "find player card: #{firstname} #{lastname}"
       @cxn.save_screenshot('./find-player-card.png')
+      # XXXM3 m3 test site does not support this yet
+      # get_ext_element(:xpath, "//div[normalize-space()='#{firstname} #{lastname}']/../..")
+      get_ext_element(:xpath, "//div[text()='#{firstname}']/../..")
+    end
+
+    def find_player_card_2(firstname, lastname)
+      puts "find player card: #{firstname} #{lastname}"
+      @cxn.save_screenshot('./find-player-card.png')
       get_ext_element(:xpath, "//div[normalize-space()='#{firstname} #{lastname}']/../..")
     end
     
