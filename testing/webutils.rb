@@ -5,6 +5,10 @@ require_relative 'browsermgmt'
 
 CITY_MARKER = 'xyzzyABC123'
 
+LOGIN_FAIL = { 'm3' => 'Something went wrong. Please check your credentials.',
+               'm2' => 'Incorrect password' }
+
+
 def each_browser(p)
   TESTCONFIG[:browsers].each do |b|
     p.call(b)
@@ -200,7 +204,7 @@ module WebTestUtils
     login_as(user, pw, browser)
 
     # check that still on the login screen
-    match_source('Incorrect password', browser)
+    match_source(LOGIN_FAIL[TESTCONFIG[:mversion]], browser)
   end
 
   def login_as_admin(browser = @browser)
@@ -365,9 +369,12 @@ module WebTestUtils
   # returning info about the user
   # @param [Symbol] accttype :student, :nonstudent, :volunteer
   # @param [Symbol] gamemode :inperson or :virtual
+  # @param [String] suffix string suffix for user names
   # @return [Array] firstname, lastname, email, pw, cxn
-  def create_user(accttype, gamemode)
+  def create_user(accttype, gamemode, suffix = '')
     fn, ln, em = gen_random_id
+    fn += suffix
+    ln += suffix
     pw = gen_random_string
     cxn = @connections.for(em) 
     

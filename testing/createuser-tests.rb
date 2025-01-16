@@ -116,7 +116,7 @@ x = proc do |browser|
       refute_nil green
 
       # clean up
-      # admin.delete_test_users(CITY_MARKER)
+      admin.delete_test_users(CITY_MARKER)
       admin.turn_off_registration
     end
 
@@ -267,6 +267,8 @@ x = proc do |browser|
       puts '1. create team'
       fn, ln, em, pw, cxn0 = users[0]
       teamname, _unused, teampw = gen_random_id
+      puts "team name: #{teamname}"
+      puts "team pw: #{teampw}"
       cxn0.create_team_from_profile(teamname, teampw, :alumni, :inperson, true)
 
       # second user can see team as looking for players
@@ -288,13 +290,14 @@ x = proc do |browser|
       puts '4. turn off looking'
       cxn0.player_nav_to_team(teamname)
       cxn0.player_set_team_looking(false)
-      sleep 0.5
+      sleep 1
 
       # second user no longer sees team looking for players
       puts '5. second player cannot see team looking'
-      cxn1.nav_to_profile
       cxn1.nav_to_teams_looking_for_players
-      assert cxn1.no_match_source(teamname)
+      teams = cxn1.team_card_names
+      puts "got teams: #{teams}"
+      refute teams.include?(teamname)
       sleep 0.5
 
       # admin cannot see team looking for players
@@ -302,6 +305,281 @@ x = proc do |browser|
       admin.check_looking_for_players(teamname, false)
       sleep 0.5
       
+      # clean up
+      admin.delete_test_users(CITY_MARKER)
+      admin.turn_off_registration
+    end
+
+    it 'creates players looking for team' do
+      admin = @connections.for('admin')
+      admin.nav_to_home
+      admin.succeed_login_as_admin
+      admin.turn_on_registration
+      
+      # register users
+      NUM = 3
+      users = []
+      (1..NUM).each do |i|
+        users << create_user(:student, :inperson, "#{i - 1}")
+      end
+      
+      # verify user emails and log in
+      users.each do |fn, ln, em, pw, cxn|
+        puts "user: fn #{fn} ln #{ln} em #{em} pw #{pw}"
+        admin.verify_user_email(em)
+        sleep 0.5
+        cxn.succeed_login_as(em, pw)
+      end
+
+      fn0, ln0, em0, pw0, cxn0 = users[0]
+      ucfn0 = upcase_first_letter(fn0)
+      ucln0 = upcase_first_letter(ln0)
+      fn1, ln1, em1, pw1, cxn1 = users[1]
+      ucfn1 = upcase_first_letter(fn1)
+      ucln1 = upcase_first_letter(ln1)
+      fn2, ln2, em2, pw2, cxn2 = users[2]
+      ucfn2 = upcase_first_letter(fn2)
+      ucln2 = upcase_first_letter(ln2)
+
+      # first player looking for team
+      # P0: logged in  P1: logged in  P2: logged in
+      # no team
+      puts "1. first player looking for team"
+      cxn0.nav_to_profile
+      cxn0.player_set_looking_for_team(true, 'abcdefghijklmnopqrstuvwxyz')
+
+      # admin can see first player looking
+      # P0: looking  P1: logged in  P2: logged in
+      # no team
+      puts '2. admin can see first player looking'
+      admin.admin_nav_to_player_detail(em0)
+      puts 'looking for looking message'
+      f = admin.get_ext_element(:xpath, '//span[text()="looking"]')
+      puts "f: #{f}"
+      refute_nil f
+
+      # third player can see first player looking
+      # P0: looking  P1: logged in  P2: logged in
+      # no team
+      puts '3. third player can see first player looking'
+      cxn2.nav_to_players_looking_for_team
+      card = cxn2.find_player_card(fn0, ln0)
+      refute_nil card
+
+      puts '3a. third player sees message button for first player'
+      # P0: looking  P1: logged in  P2: logged in
+      # no team
+      msgb = cxn2.get_ext_element(:xpath, "//div[normalize-space()='#{fn0} #{ln0}']/../..//button[text()='Message player']")
+      puts "msgb: #{msgb}"
+      refute_nil msgb
+
+      puts '3b. third player can send message to first player'
+      # P0: looking  P1: logged in  P2: logged in
+      # no team
+      msgb.click
+      sleep 1
+
+      h = cxn2.get_ext_element(:xpath, "//div[normalize-space()='Message #{upcase_first_letter(fn0)} #{upcase_first_letter(ln0)}']")
+      refute_nil h
+      puts "header: #{h}"
+      cancel = cxn2.get_ext_element(:xpath, '//button[text()="Cancel"]')
+      puts "cancel: #{cancel}"
+      refute_nil cancel
+      cancel.click
+      sleep 1
+
+      # second player looking for team
+      # P0: looking  P1: logged in  P2: logged in
+      # no team
+      puts '4. second player looking for team'
+      cxn1.nav_to_profile
+      cxn1.player_set_looking_for_team(true, 'abcdefghijklmnopqrstuvwxyz')
+
+      # first player can see second looking
+      # P0: looking  P1: looking  P2: logged in
+      # no team
+      puts '5. first player can see second looking'
+      cxn0.nav_to_players_looking_for_team
+      f = cxn0.find_player_card(fn1, ln1)
+      refute_nil f
+
+      # third player creates team
+      # P0: looking  P1: looking  P2: logged in
+      # no team
+      puts '6. third player creates team'
+      teamname, _unused, teampw = gen_random_id
+      puts "team name: #{teamname}"
+      puts "team pw: #{teampw}"
+      cxn2.nav_to_profile
+      cxn2.create_team_from_profile(teamname, teampw, :alumni, :inperson, true)
+
+      # third player sees other two players looking
+      # P0: looking  P1: looking  P2: has team
+      # Team created with P2
+      puts '7. third player sees other two players looking'
+      browse = cxn2.get_ext_element(:xpath, '//a[@href="/looking-for-team"]')
+      refute_nil browse
+      browse.click
+      sleep 0.5
+      f0 = cxn2.find_player_card(fn0, ln0)
+      refute_nil f0
+      f1 = cxn2.find_player_card(fn1, ln1)
+      refute_nil f1
+
+      # third player invites first player with empty message
+      # P0: looking  P1: looking  P2: has team
+      # Team created with P2
+      puts '8. third player invites first player with empty message'
+      msgb = cxn2.get_ext_element(:xpath, "//div[normalize-space()='#{fn0} #{ln0}']/../..//button[text()='Message player']")
+      puts "msgb: #{msgb}"
+      refute_nil msgb
+      msgb.click
+      sleep 1
+
+      h = cxn2.get_ext_element(:xpath, "//div[normalize-space()='Message #{upcase_first_letter(fn0)} #{upcase_first_letter(ln0)}']")
+      refute_nil h
+      puts "header: #{h}"
+      send = cxn2.get_ext_element(:xpath, '//button[text()="Send"]')
+      puts "send: #{send}"
+      refute_nil send
+      send.click
+      sleep 1
+
+      # third player gets error message about empty text
+      puts '9. third player gets error message about empty text'
+      # XXX this isn't checked 
+
+      # third player invites first player with a valid message
+      puts '10. third player invites first player with valid message'
+      # P0: looking  P1: looking  P2: has team, message dialog
+      # Team created with P2
+      # XXX skip this because blank message not checked
+      close = cxn2.get_ext_element(:xpath, '//button[text()="Close"]')
+      puts "close: #{close}"
+      refute_nil close
+      close.click
+      sleep 1
+
+      # second player joins
+      # P0: looking  P1: looking  P2: has team
+      # Team created with P2
+      puts '11. first player joins'
+      cxn1.join_team(teamname, teampw)
+
+      # first player joins
+      puts '12. second player joins'
+      # P0: looking  P1: has team  P2: has team
+      # Team created with P2, P1
+      cxn0.join_team(teamname, teampw)
+
+      # player 3 sees all three team members
+      # P0: has team  P1: has team: has team
+      # Team created with P2, P0, P1
+      puts '13. third player sees team membership'
+      cxn2.nav_to('team')
+      sleep 1
+      puts 'looking for player 0 name'
+      x = "//div[normalize-space()='#{ucfn0} #{ucln0}']"
+      puts "xpath: #{x}"
+      c = cxn2.get_ext_element(:xpath, x)
+      refute_nil c
+      puts 'looking for player 0 card'
+      c0 = cxn2.find_player_card(ucfn0, ucln0) 
+      refute_nil c0
+      puts 'looking for player 1 name'
+      x = "//div[normalize-space()='#{ucfn1} #{ucln1}']"
+      puts "xpath: #{x}"
+      c = cxn2.get_ext_element(:xpath, x)
+      refute_nil c
+      puts 'looking for player 1'
+      c1 = cxn2.find_player_card(ucfn1, ucln1)
+      refute_nil c1
+      puts 'looking for player 2 name'
+      x = "//div[normalize-space()='#{ucfn2} #{ucln2}']"
+      puts "xpath: #{x}"
+      c = cxn2.get_ext_element(:xpath, x)
+      refute_nil c
+      puts 'looking for player 2'
+      c2 = cxn2.find_player_card(ucfn2, ucln2)
+      refute_nil c2
+
+      # admin sees all three team members
+      # P0: has team  P1: has team: has team
+      # Team created with P2, P0, P1
+      puts '14. admin sees all three team members'
+      admin.check_team_membership(teamname, users)
+
+      # clean up
+      admin.delete_test_users(CITY_MARKER)
+      admin.turn_off_registration
+    end
+
+    it 'create team and remove players' do
+      admin = @connections.for('admin')
+      admin.nav_to_home
+      admin.succeed_login_as_admin
+      admin.turn_on_registration
+      
+      # register users
+      NUM = 3
+      users = []
+      (1..NUM).each do |i|
+        users << create_user(:student, :inperson, "#{i - 1}")
+      end
+      
+      # verify user emails and log in
+      users.each do |fn, ln, em, pw, cxn|
+        puts "user: fn #{fn} ln #{ln} em #{em} pw #{pw}"
+        admin.verify_user_email(em)
+        sleep 0.5
+        cxn.succeed_login_as(em, pw)
+      end
+
+      fn0, ln0, em0, pw0, cxn0 = users[0]
+      ucfn0 = upcase_first_letter(fn0)
+      ucln0 = upcase_first_letter(ln0)
+      fn1, ln1, em1, pw1, cxn1 = users[1]
+      ucfn1 = upcase_first_letter(fn1)
+      ucln1 = upcase_first_letter(ln1)
+      fn2, ln2, em2, pw2, cxn2 = users[2]
+      ucfn2 = upcase_first_letter(fn2)
+      ucln2 = upcase_first_letter(ln2)
+
+      puts '1. P0 creates team'
+      teamname, teampw, _unused = gen_random_id
+      puts "team name: #{teamname}"
+      puts "team pw: #{teampw}"
+      cxn0.create_team_from_profile(teamname, teampw, :alumni, :inperson, true)
+
+      puts '2. P1 joins team'
+      cxn1.join_team(teamname, teampw)
+
+      puts '3. P2 joins team'
+      cxn2.join_team(teamname, teampw)
+      admin.check_team_membership(teamname, users)
+
+      puts '4. P0 removes P2'
+      cxn0.player_remove_team_member(teamname, fn2, ln2, em2, true)
+
+      puts '5. P0 removes P0 and gets error'
+      cxn0.player_remove_team_member(teamname, fn0, ln0, em0, true)
+
+      puts '6. P0 deletes team'
+      del = cxn0.get_ext_element(:xpath, '//button[text()="Delete Team"]')
+      del.click
+      sleep 0.5
+      cxn0.accept_alert
+
+      puts '7. P1 has no team'
+      cxn1.nav_to('team')
+      f = cxn1.match_source('I know who I\'ll be playing with')
+      assert f
+
+      puts '8. P0 has no team'
+      cxn0.nav_to('team')
+      f = cxn0.match_source('I know who I\'ll be playing with')
+      assert f
+
       # clean up
       admin.delete_test_users(CITY_MARKER)
       admin.turn_off_registration

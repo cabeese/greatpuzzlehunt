@@ -51,6 +51,13 @@ module WebTestUtils
       end
     end
 
+    def get_ext_elements(m, x)
+      @wait.until do
+        e = @cxn.find_elements(m, x)
+        e
+      end
+    end
+
     def get_sub_element(fromelement, m, x)
       @wait.until do
         e = fromelement.find_element(m, x)
@@ -72,7 +79,9 @@ module WebTestUtils
     end
 
     def no_match_source(str)
+      puts "no match source: #{str}"
       s = @cxn.page_source
+      puts "source: #{s}"
       !s.include?(str)
     end
 
@@ -409,6 +418,38 @@ module WebTestUtils
       sleep 0.5
     end
 
+    def change_user_email(fn, ln, oldemail, newemail)
+      nav_to('admin/users')
+      sleep 0.5
+      
+      morebutton = get_ext_element(:xpath, "//td/span[text()='#{oldemail}']/../../td/button[text()='More']")
+      morebutton.click
+      sleep 0.5
+      
+      # make sure that we have the details modal up
+      f = match_source('Player Details')
+      puts "player details: #{f}"
+      refute_nil f
+      f = match_source("#{upcase_first_letter(fn)} #{upcase_first_letter(ln)}")
+      puts "player name: #{f}"
+      refute_nil f
+
+      # update email field
+      ef = get_ext_element(:xpath, '//input[@name="email"]')
+      refute_nil ef
+      ef.clear
+      ef.send_keys(newemail)
+
+      # save changes
+      update = get_ext_element(:xpath, '//button[text()="Update"]')
+      refute_nil update
+      update.click
+      sleep 0.5
+      accept_alert
+      sleep 1
+      accept_alert
+    end
+
     def delete_test_users(marker)
       nav_to('admin/users')
       sleep 0.5
@@ -476,6 +517,69 @@ module WebTestUtils
       puts 'done deleting test users'
     end
 
+    def mark_user_as_verified(fn, ln, em)
+      # check that the user was created
+      nav_to('admin/users')
+
+      # make sure the new user is listed on the users list page
+      f = match_source("#{fn} #{ln}")
+      refute_nil f
+      f = match_source(em)
+      refute_nil f
+
+      # make sure the user shows email is not verified
+      emailtd  = get_ext_element(:xpath, "//td/span[text()='#{em}']")
+      puts "emailtd: #{emailtd} text: #{emailtd.text}"
+      refute_nil emailtd
+      emailtdi = get_sub_element(emailtd, :class, 'icons')
+      puts "emailtdi: #{emailtdi} text: #{emailtdi.text}"
+      refute_nil emailtdi
+      noicon = get_sub_element(emailtdi, :class, 'dont')
+      puts "noicon: #{noicon} text: #{noicon.text}"
+      refute_nil noicon
+
+      emailicon = get_sub_element(emailtdi, :class, 'mail')
+      puts "emailicon: #{emailicon}"
+      refute_nil emailicon
+                                    
+      # get the "more..." button to see user details and actions
+      morebutton = get_ext_element(:xpath, "//td/span[text()='#{em}']/../../td/button[text()='More']")
+      puts "morebutton: #{morebutton} text: #{morebutton.text}"
+      refute_nil morebutton
+
+      # bring up the user details
+      morebutton.click
+      sleep 0.5
+
+      # make sure that we have the details modal up
+      f = match_source('Player Details')
+      puts "player details: #{f}"
+      refute_nil f
+      sleep 0.5
+
+      # verify the email address
+      verifybutton = get_ext_element(:xpath, '//button[text()="Verify Email"]')
+      puts "verify button: #{verifybutton} text: #{verifybutton.text}"
+      verifybutton.click
+
+      # close the modal
+      closeicon = get_ext_element(:xpath, '//div/i[contains(@class, "close")]')
+      puts "modal close: #{closeicon} text: #{closeicon.text}"
+      closeicon.click
+      sleep 0.5
+
+      # make sure the email icon only is showing (no dont icon)
+      emailtd  = get_ext_element(:xpath, "//td/span[text()='#{em}']")
+      puts "emailtd: #{emailtd} text: #{emailtd.text}"
+      refute_nil emailtd
+      emailicon = get_sub_element(emailtd, :class, 'mail')
+      puts "emailicon: #{emailicon}"
+      refute_nil emailicon
+      green = get_sub_element(emailtd, :class, 'green')
+      puts "green: #{green}"
+      refute_nil green
+    end
+
     # @param [Symbol] division :postsec, :alumni, :sec, or :open
     # @param [Symbol] mode :virtual or :inperson
     # @param [Boolean] looking true -> turn on looking for members
@@ -529,9 +633,22 @@ module WebTestUtils
       puts "find team card: #{teamname}"
       get_ext_element(:xpath, "//div[text()='#{teamname}']/../..")
     end
+
+    def find_player_card(firstname, lastname)
+      puts "find player card: #{firstname} #{lastname}"
+      @cxn.save_screenshot('./find-player-card.png')
+      get_ext_element(:xpath, "//div[normalize-space()='#{firstname} #{lastname}']/../..")
+    end
     
     def join_team(teamname, teampw)
+      puts "in join team, name: #{teamname} pw: #{teampw}"
+      @cxn.save_screenshot('./join-team-start.png')
       nav_to('team/join')
+      sleep 0.5
+      hdr = get_ext_element(:xpath, "//h1[text()='Join a Team']")
+      refute_nil hdr
+      puts 'about to look for team card'
+      @cxn.save_screenshot('./join-team-find-card.png')
       card = find_team_card(teamname)
       puts "got team card: #{card}"
       puts "text: #{card.text}"
@@ -540,17 +657,13 @@ module WebTestUtils
       joinbutton.click
       sleep 0.5
 
-      # sleep 5
       pw = get_sub_element(card, :xpath, '//input[@name="password"]')
       pw.send_keys(teampw)
 
-      # sleep 5
-      
       sub = get_sub_element(card, :xpath, '//button[text()="Submit"]')
       sub.click
       sleep 0.5
 
-      # sleep 5
       f = match_source("Team: #{teamname}")
       refute_nil f
     end
@@ -562,6 +675,7 @@ module WebTestUtils
     end
 
     def player_set_team_looking(looking)
+      puts "player set team looking: #{looking}"
       lfm = get_ext_element(:xpath, '//input[@name="lookingForMembers"]/..')
       refute_nil lfm
 
@@ -581,13 +695,32 @@ module WebTestUtils
           lfm.click
         end
       end
-      sleep 1
+      sleep 2
 
       puts "afterward, toggle class: #{lfm.attribute('class')}"
 
       save = get_ext_element(:xpath, '//button[text()="Save Team"]')
       refute_nil save
       save.click
+      sleep 1
+      puts 'done player set team looking'
+    end
+
+    def admin_nav_to_player_detail(email)
+      nav_to('admin/users')
+      sleep 0.5
+      morebutton = get_ext_element(:xpath, "//td/span[text()='#{email}']/../../td/button[text()='More']")
+      puts "morebutton: #{morebutton} text: #{morebutton.text}"
+      refute_nil morebutton
+      
+      # bring up the user details
+      morebutton.click
+      sleep 0.5
+      
+      # make sure that we have the details modal up
+      f = match_source('Player Details')
+      puts "player details: #{f}"
+      refute_nil f
       sleep 0.5
     end
 
@@ -634,8 +767,6 @@ module WebTestUtils
       puts "text: #{lbldiv.text}"
       assert_equal(lstr, lbldiv.text)
 
-      sleep 5
-
       close_dialog
     end
 
@@ -650,6 +781,130 @@ module WebTestUtils
       f = get_ext_element(:xpath, '//h1[text()="Join a Team"]')
       #     f = match_source('Join a Team')
       refute_nil f
+    end
+
+    def team_card_names
+      puts 'in team card names'
+      cnlist = get_ext_elements(:xpath, '//div[@class="ui centered card"]/div[@class="content"]/div[@class="header"]')
+      puts "cnlist: #{cnlist}"
+      c = cnlist.map do |cn|
+        cn.text
+      end
+      c 
+    end
+
+    def nav_to_players_looking_for_team
+      nav_to_profile
+      lookingbutton = get_ext_element(:xpath, "//button[text()='Players looking for teams']")
+      refute_nil lookingbutton
+      lookingbutton.click
+      sleep 0.5
+      @cxn.save_screenshot('./nplft.png')
+      f = get_ext_element(:xpath, '//h1[text()="Players Looking for a Team"]')
+      refute_nil f
+    end
+
+    def player_set_looking_for_team(looking, biotext)
+      puts "pslft: looking #{looking} text #{biotext}"
+      bio = get_ext_element(:name, 'bio')
+      refute_nil bio
+      puts "bio: #{bio}"
+      puts 'clearing and updating bio'
+      sleep 0.5
+      bio.clear
+      sleep 0.5
+      bio.send_keys(biotext)
+      sleep 0.5
+
+      puts 'looking for toggle'
+      lft = get_ext_element(:xpath, '//input[@name="lookingForTeam"]/..')
+      refute_nil lft
+
+      puts "set looking to: #{looking}"
+      toggle_class = lft.attribute('class')
+      puts "   current class: #{toggle_class}"
+      if toggle_class.include?('checked')
+        puts 'currently checked'
+        if !looking
+          puts('toggling looking off')
+          lft.click
+        end
+      else
+        puts 'not currently checked'
+        if looking
+          puts('toggling looking on')
+          lft.click
+        end
+      end
+      sleep 1
+
+      puts "afterward, toggle class: #{lft.attribute('class')}"
+
+      save = get_ext_element(:xpath, '//button[text()="Save"]')
+      refute_nil save
+      save.click
+      sleep 1
+    end
+
+    def player_remove_team_member(teamname, fn, ln, em, should_succeed)
+      player_nav_to_team(teamname)
+      ucfn = upcase_first_letter(fn)
+      ucln = upcase_first_letter(ln)
+      cardname = get_ext_element(:xpath, "//div[normalize-space()='#{ucfn} #{ucln}']")
+      refute_nil cardname
+      remove = get_ext_element(:xpath, "//div[normalize-space()='#{ucfn} #{ucln}']/../..//button[text()='Remove']")
+      refute_nil remove
+      remove.click
+      sleep 0.5
+      accept_alert
+      sleep 0.5
+      if should_succeed
+        # XXX add check here
+      else
+        assert match_source('You cannot remove yourself!')
+      end
+    end
+
+    def change_password(newpw)
+      puts "change password to: #{newpw}"
+      nav_to('profile')
+      pw1 = get_ext_element(:name, 'newPassword')
+      puts "pw1: #{pw1}"
+      refute_nil pw1
+      pw2 = get_ext_element(:name, 'confirmPassword')
+      puts "pw2: #{pw2}"
+      refute_nil pw2
+      pw1.clear
+      pw2.clear
+      pw1.send_keys(newpw)
+      pw2.send_keys(newpw)
+      sleep 2
+      save = get_ext_element(:xpath, '//h3[normalize-space()="Change Password"]/..//button[text()="Save"]')
+      puts "save: #{save}"
+      refute_nil save
+      save.click
+      sleep 1
+    end
+
+    def change_password_2(newpw1, newpw2)
+      puts "change password to: #{newpw1}, #{newpw2}"
+      nav_to('profile')
+      pw1 = get_ext_element(:name, 'newPassword')
+      puts "pw1: #{pw1}"
+      refute_nil pw1
+      pw2 = get_ext_element(:name, 'confirmPassword')
+      puts "pw2: #{pw2}"
+      refute_nil pw2
+      pw1.clear
+      pw2.clear
+      pw1.send_keys(newpw1)
+      pw2.send_keys(newpw2)
+      sleep 2
+      save = get_ext_element(:xpath, '//h3[normalize-space()="Change Password"]/..//button[text()="Save"]')
+      puts "save: #{save}"
+      refute_nil save
+      save.click
+      sleep 1
     end
 
     def upcase_first_letter(s)

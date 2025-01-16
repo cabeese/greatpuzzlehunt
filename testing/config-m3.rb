@@ -5,5 +5,6 @@ TESTCONFIG = {
   :adminuser => 'support@greatpuzzlehunt.com',
   :adminpw => 'testtest',
   :adminfullname => 'Noah S',
+  :mversion => 'm3',
   :browsers => [:firefox]  # omit safari because it won't open multiple parallel connections
 }
