@@ -8,6 +8,10 @@ import {
 
 import { sendTickets } from '../../lib/imports/sendTickets';
 
+import { GearOrders } from '../../lib/collections/gear-orders.js';
+import { Tickets } from '../../lib/collections/tickets.js';
+import { Transactions } from '../../lib/collections/transactions.js';
+
 const USING_TICKET_CODES = false;
 
 export default async function processTransaction(txData) {
@@ -46,7 +50,7 @@ export default async function processTransaction(txData) {
   // https://forums.meteor.com/t/most-performant-way-to-check-for-an-existing-document-in-a-collection/61647/3
   const existingTransactions = await Transactions.find({ tx }).countAsync();
   if (existingTransactions === 0) {
-    Transactions.insert({
+    await Transactions.insertAsync({
       tx,
       email,
       name,
