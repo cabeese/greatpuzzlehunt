@@ -21,14 +21,17 @@ TeamDangerZone = class TeamDangerZone extends Component {
   }
 
   _renderLeaveTeam() {
-    return <Button content='Leave Team' icon='trash' labelPosition='right' color='red' onClick={() => this._handleLeaveTeam()}/>;
+    return <Button content='Leave Team' icon='trash' labelPosition='right' color='red'
+                   onClick={async () => await this._handleLeaveTeam()}/>;
   }
 
-  _handleLeaveTeam() {
+  async _handleLeaveTeam() {
     if (confirm(`Are you sure you want to leave ${this.props.team.name}?`)) {
-      Meteor.call('teams.leave', (error, result) => {
-        if (error) return alert(error.reason);
-      });
+      try {
+        await Meteor.callAsync('teams.leave');
+      } catch (error) {
+        alert(error.reason);
+      }
     }
   }
 
@@ -36,14 +39,16 @@ TeamDangerZone = class TeamDangerZone extends Component {
     return <Button content='Delete Team' icon='trash' labelPosition='right' color='red' onClick={() => this._handleDeleteTeam()}/>;
   }
 
-  _handleDeleteTeam() {
+  async _handleDeleteTeam() {
     if (confirm(`Are you sure you want to delete ${this.props.team.name}?\n(This will remove all members from the team!)`)) {
-      Meteor.call('teams.delete', (error, result) => {
-        if (error) return alert(error.reason);
-      });
+      try {
+        await Meteor.callAsync('teams.delete');
+      } catch (error) {
+        alert(error.reason);
+      }
     }
   }
-}
+};
 
 TeamDangerZone.propTypes = {
   team: PropTypes.object.isRequired,

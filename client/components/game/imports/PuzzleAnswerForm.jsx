@@ -25,7 +25,8 @@ export default class PuzzleAnswerForm extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={ (e) => this._handleSubmit(e) } style={ { paddingTop: '10px' }}>
+      <Form onSubmit={ async (e) => await this._handleSubmit(e) }
+            style={ { paddingTop: '10px' }}>
         <Form.Input
           size='large'
           name='answer'
@@ -50,7 +51,7 @@ export default class PuzzleAnswerForm extends React.Component {
     return <GiveUp team={team} puzzle={puzzle} />;
   }
 
-  _handleSubmit(e) {
+  async _handleSubmit(e) {
     e.preventDefault();
     // const smartQuoteRegex = /\u{201c}|\u{201d}/ug
     // const smartApostropheRegex = /\u{2018}|\u{2019}/ug
@@ -59,9 +60,9 @@ export default class PuzzleAnswerForm extends React.Component {
     // const answer = this.state.answer.replace(smartQuoteRegex, '"').replace(smartApostropheRegex, '\'');
     const answer = this.state.answer.replaceAll(nonCharacterDigit, '');
 
-    Meteor.call('team.puzzle.answer', puzzle.puzzleId, answer, (error, result) => {
+    try {
+      const result = await Meteor.callAsync('team.puzzle.answer', puzzle.puzzleId, answer);
       this.setState({ answer: '' });
-      if (error) return this.setState({ error });
 
       if (this.messageTimer) Meteor.clearTimeout(this.messageTimer);
 
@@ -78,7 +79,9 @@ export default class PuzzleAnswerForm extends React.Component {
           message: null, triggerHintImageURL: '',
         }), timeout);
       }
-    });
+    } catch (error) {
+      this.setState({ error });
+    }
   }
 
   _handleChange(e) {

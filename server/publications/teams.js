@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { isAdmin, isVolunteer } from '../../lib/imports/method-helpers.js';
 
+import { Puzzles } from '../../lib/collections/puzzles.js'
+import { Teams } from '../../lib/collections/teams.js'
+
 Meteor.publish('admin.teams', function() {
   if (!isAdmin(this.userId)) return this.ready();
 
@@ -28,14 +31,14 @@ Meteor.publish('admin.teams.export', function() {
   return [users, teams];
 });
 
-Meteor.publish('teams.myTeam', function() {
+Meteor.publish('teams.myTeam', async function() {
   const { userId } = this;
 
   if (!userId) {
     return this.ready();
   }
 
-  const user = Meteor.users.findOne(userId);
+  const user = await Meteor.users.findOneAsync(userId);
   if (!user) return this.ready();
 
   const userFields = {
@@ -48,18 +51,15 @@ Meteor.publish('teams.myTeam', function() {
     teamId: 1,
   };
 
-  ret = [
+  let ret = [
     Teams.find({ members: userId }),
   ];
   /* There's a mongo edge case that will cause an error if the 'myTeam' service
    * is called when the current user is not on a team. It appears to be due to
    * Mongo and Meteor disagreeing on how to handle the query when `user.teamId`
    * is undefined. Thus we only run the query if the user is actually on a team.
-   * For the time being, additional print statements are being added here to
-   * help provide insight if this continues to be a problem, but they could be
-   * removed at a later date if needed.
    */
-  if( user.teamId ){
+  if (user.teamId) {
     ret.push(Meteor.users.find({ teamId: user.teamId }, { fields: userFields }));
   }
 
@@ -90,9 +90,9 @@ Meteor.publish('teams.browse', function() {
   });
 });
 
-Meteor.publish('game.progress', function() {
+Meteor.publish('game.progress', async function() {
   const { userId } = this;
-  const user = Meteor.users.findOne(userId);
+  const user = await Meteor.users.findOneAsync(userId);
 
   const teamQuery = {
     hasBegun: true,

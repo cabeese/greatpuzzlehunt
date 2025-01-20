@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment-timezone';
 
+import { Gamestate } from '../../lib/collections/gamestate-collection.js'
 import { sendReports } from '../../lib/imports/sendReports';
 
 SyncedCron.add({
@@ -11,16 +12,17 @@ SyncedCron.add({
     Meteor.logger.info(`Auto-reports scheduled for ${time}`);
     return parser.text(time);
   },
-  job: function() {
-    const gameState = Gamestate.findOne();
+  job: async function() {
+    const gameState = await Gamestate.findOneAsync();
     const sendTime = moment().toString();
     if(!gameState.doSendNightlyReports){
       return;
     }
 
     Meteor.logger.info(`Sending auto reports at ${sendTime} to: ${gameState.sendReportsTo}`);
-    sendReports(gameState.sendReportsTo);
-    Gamestate.update({ _id: gameState._id}, { $set: { lastAutoReportSend: sendTime }});
+    await sendReports(gameState.sendReportsTo);
+    await Gamestate.updateAsync({ _id: gameState._id},
+                                { $set: { lastAutoReportSend: sendTime }});
   }
 });
 

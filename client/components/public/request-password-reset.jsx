@@ -19,7 +19,7 @@ RequestPasswordReset = class RequestPasswordReset extends Component {
       <Grid.Row columns="1">
         <Grid.Column>
           <Segment raised>
-            <Form onSubmit={(e) => this._handleSubmit(e)}>
+            <Form onSubmit={async (e) => await this._handleSubmit(e)}>
               <Header as="h2" color="violet" content="Request Password Reset"/>
               <Form.Input name="email" icon='mail' iconPosition='left' placeholder="Email" value={this.state.email} onChange={(e) => this._handleChange(e)}/>
               <Form.Button type='submit' color='violet' content='Reset' fluid/>
@@ -55,13 +55,15 @@ RequestPasswordReset = class RequestPasswordReset extends Component {
     this.setState({ [name]: value });
   }
 
-  _handleSubmit(e) {
+  async _handleSubmit(e) {
     e.preventDefault();
 
     // Call Meteor method to create account.
-    Meteor.call('user.passwordReset', this.state.email, (error, result) => {
-      if (error) return this.setState({ error });
+    try {
+      const result = await Meteor.callAsync('user.passwordReset', this.state.email);
       this.setState({ error: null, resultEmail: result.email, email: ''});
-    });
+    } catch (error) {
+      this.setState({ error });
+    }
   }
 }

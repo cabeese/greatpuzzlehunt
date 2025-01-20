@@ -55,17 +55,20 @@ class AdminTransactionTableRow extends Component {
     const { transaction, tickets, gearOrders } = this.props;
     const { tx } = transaction;
     return [
-      <Button basic key={`${tx}-btn-1`} icon='mail' content='Resend' onClick={() => this._resendTickets(transaction)}/>,
+      <Button basic key={`${tx}-btn-1`} icon='mail' content='Resend'
+              onClick={async() => await this._resendTickets(transaction)}/>,
     ];
   }
 
-  _resendTickets({ tx, email }) {
+  async _resendTickets({ tx, email }) {
     const confirmMessage = `Are you sure you want to resend the ticket email for\nTx: ${tx} to ${email}?`;
     if (confirm(confirmMessage)) {
-      Meteor.call('admin.transactions.resend', tx, email, (error, result) => {
-        if (error) return alert(error.reason);
+      try {
+        await Meteor.callAsync('admin.transactions.resend', tx, email);
         alert("Sent!");
-      });
+      } catch (error) {
+        alert(error.reason);
+      }
     }
   }
 

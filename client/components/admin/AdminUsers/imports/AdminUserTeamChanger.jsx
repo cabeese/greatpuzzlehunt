@@ -33,7 +33,7 @@ class AdminUserTeamChanger extends Component {
     else if (lookingForTeam === false) matchmaking_status = "no longer looking";
 
     return (
-      <Form onSubmit={(e) => this._update(e)}>
+      <Form onSubmit={async (e) => await this._update(e)}>
 
         {this._errorMessage()}
 
@@ -52,15 +52,17 @@ class AdminUserTeamChanger extends Component {
     );
   }
 
-  _update(e) {
+  async _update(e) {
     e.preventDefault();
     const {userId, teamId} = this.state;
 
-    Meteor.call('admin.user.setTeam', userId, teamId, (error, result) => {
-      if (error) return this.setState({ error });
+    try {
+      await Meteor.callAsync('admin.user.setTeam', userId, teamId);
       this.setState({ error: null });
       alert(`Team updated for this user!`);
-    });
+    } catch (error) {
+      this.setState({ error });
+    }
   }
 
   _handleTextChange(e) {

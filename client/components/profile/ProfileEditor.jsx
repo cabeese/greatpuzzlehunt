@@ -39,7 +39,7 @@ ProfileEditorUI = class ProfileEditor extends Component {
     const canChangeGameMode = ready && gamestate.registrationInPersonOpen;
     return (
     <Segment basic>
-      <Form onSubmit={(e) => this._handleSubmit(e)}>
+      <Form onSubmit={async (e) => await this._handleSubmit(e)}>
         <Header as='h3' content='Account' icon={<Icon name='user' color='green' />} />
 
         <Form.Group widths='equal'>
@@ -85,19 +85,20 @@ ProfileEditorUI = class ProfileEditor extends Component {
     );
   }
 
-  _handleSubmit(e) {
+  async _handleSubmit(e) {
     e.preventDefault();
 
     const fields = pick(this.state, ['firstname', 'lastname', 'gameMode', 'lookingForTeam', 'bio']);
     this.setState({saving: true});
 
-    Meteor.call('user.update.account', fields, (error, result) => {
-      this.setState({saving: false});
-      if (error) return this.setState({ error });
-
+    try {
+      await Meteor.callAsync('user.update.account', fields);
       this.setState({ success: 'Account Saved!', error: null });
       Meteor.setTimeout(() => this.setState({ success: null }), 2000);
-    });
+    } catch (error) {
+      this.setState({ error });
+    }
+    this.setState({saving: false});
   }
 
   _handleChange(e) {

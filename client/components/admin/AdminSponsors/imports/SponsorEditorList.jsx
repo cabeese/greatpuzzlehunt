@@ -30,10 +30,13 @@ class SponsorEditorList extends Component {
     );
   }
 
-  _newSponsor(e) {
-    Meteor.call('sponsors.create', (error, result) => {
-      if (error) return alert(error.reason);
-    });
+  async _newSponsor(e) {
+    try {
+      await Meteor.callAsync('sponsors.create');
+    } catch (error) {
+      console.error(error);
+      alert(error.reason);
+    }
   }
 
   _renderSponsors() {

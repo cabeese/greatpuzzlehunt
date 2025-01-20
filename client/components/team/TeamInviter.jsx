@@ -21,7 +21,7 @@ TeamInviter = class TeamInviter extends Component {
 
   _renderInviteForm() {
     return (
-      <Form onSubmit={(e, d) => this._handleSubmit(e, d)}>
+      <Form onSubmit={async (e, d) => await this._handleSubmit(e, d)}>
         <Form.Input type='text' name='email' placeholder="Friend's Email" label="Friend's Email" value={this.state.email} onChange={(e) => this._handleChange(e)}/>
         <Form.Group>
           <Form.Button type='submit' content='Invite' icon='send' labelPosition='right'/>
@@ -45,16 +45,18 @@ TeamInviter = class TeamInviter extends Component {
     this.setState({ [name]: value });
   }
 
-  _handleSubmit(e, formData) {
+  async _handleSubmit(e, formData) {
     e.preventDefault();
 
-    Meteor.call('teams.inviteMember', this.props.team, this.state.email.toLowerCase(), (error, result) => {
-      if (error) return this.setState({ error });
-
+    try {
+      await Meteor.callAsync('teams.inviteMember', this.props.team,
+                             this.state.email.toLowerCase());
       this.setState({ email: '', error: null });
-    });
+    } catch (error) {
+      this.setState({ error });
+    }
   }
-}
+};
 
 TeamInviter.propTypes = {
   team: PropTypes.object.isRequired,

@@ -391,16 +391,25 @@ export default TopBar = class TopBar extends Component {
 
 TopBar = GamestateComp(TopBar);
 TopBar = withTracker(() => {
+  const user = Meteor.user({ fields: {
+    roles: 1,
+    firstname: 1,
+    teamId: 1,
+  }});
+  if (user && !user.roles) {
+    console.error("this component tried to call user.hasRole ",
+                  "but user.roles is undefined. ",
+                  "component: TopBar.jsx");
+  }
   return {
-    user: Meteor.user(),
+    user,
     isAdmin() {
-      return Boolean(Meteor.user()) && Meteor.user().hasRole('admin');
+      return Boolean(user) && user.hasRole('admin');
     },
     isVolunteer() {
-      return Boolean(Meteor.user()) && Meteor.user().hasRole('volunteer');
+      return Boolean(user) && user.hasRole('volunteer');
     },
     hasTeam() {
-      const user = Meteor.user();
       return Boolean(user) && user.teamId;
     },
   };

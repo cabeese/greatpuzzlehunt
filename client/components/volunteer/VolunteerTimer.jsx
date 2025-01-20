@@ -5,6 +5,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Container, Segment, Message, Button } from 'semantic-ui-react';
 import WithRouter from '../imports/WithRouter';
 
+import { Teams } from '../../../lib/collections/teams.js';
+
 import VolunteerPuzzle from './imports/VolunteerPuzzle';
 
 class VolunteerTimerInner extends React.Component {

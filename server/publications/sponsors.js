@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { isAdmin } from '../../lib/imports/method-helpers.js';
 
+import { Sponsors } from '../../lib/collections/sponsors.js'
+
 const SPONSOR_FIELDS = {
   name: 1,
   level: 1,

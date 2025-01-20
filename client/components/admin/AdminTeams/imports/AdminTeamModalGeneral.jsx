@@ -5,46 +5,42 @@ import PropTypes from 'prop-types';
 
 import AdminTeamUserListTracker from './AdminTeamUserList';
 
+async function callMeteorMethod(methodName, ...args) {
+  try {
+    await Meteor.callAsync(methodName, ...args);
+  } catch (err) {
+    alert(err);
+  }
+}
+
 class AdminTeamModalGeneral extends Component {
-    _toggleCheckedIn(e) {
+    async _toggleCheckedIn(e) {
         e.preventDefault();
         const { team } = this.props;
         if (!confirm(`Toggle check-in for team ${team.name}?`)) return;
 
-        Meteor.call('team.checkin.toggle', team._id, (err, res) => {
-            if (err) {
-                alert(err);
-            }
-        });
+        await callMeteorMethod('team.checkin.toggle', team._id);
     }
-    _toggleInPerson(e) {
+    async _toggleInPerson(e) {
         e.preventDefault();
         const { team } = this.props;
         if (!confirm(`Toggle in-person for team ${team.name}?`)) return;
 
-        Meteor.call('admin.team.toggleInPerson', team._id, (err, res) => {
-            if (err) {
-                alert(err);
-            }
-        });
+        await callMeteorMethod('admin.team.toggleInPerson', team._id);
     }
-    _toggleLockout(e){
+    async _toggleLockout(e){
         e.preventDefault();
         const { team } = this.props;
         if(!confirm(`Are you SURE you want to toggle the puzzle answer lock team for "${team.name}"?`)) return;
 
-        Meteor.call('admin.team.toggleLockout', team._id, err => {
-            if (err) alert(err);
-        });
+        await callMeteorMethod('admin.team.toggleLockout', team._id);
     }
-    _toggleIneligible(e){
+    async _toggleIneligible(e){
         e.preventDefault();
         const { team } = this.props;
         if(!confirm(`Are you SURE you want to toggle the eligibility status for  team "${team.name}"?`)) return;
 
-        Meteor.call('admin.team.toggleIneligible', team._id, err => {
-            if (err) alert(err);
-        });
+        await callMeteorMethod('admin.team.toggleIneligible', team._id);
     }
     render() {
         const { team } = this.props;

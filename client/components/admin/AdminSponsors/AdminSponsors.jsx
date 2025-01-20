@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'semantic-ui-react';
 
+import { Sponsors } from '../../../../lib/collections/sponsors.js'
+
 import SponsorEditorList from './imports/SponsorEditorList';
 
 class AdminSponsorsInner extends Component {
