@@ -58,7 +58,7 @@ const importantDates = (
     <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
     <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
     <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can join a team until 10:00 AM (PT).</List.Item>
-    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes.</List.Item>
+    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes at midnight.</List.Item>
   </List>
 );
 
@@ -200,19 +200,6 @@ FAQ = class FAQ extends Component {
             <iframe frameBorder="0" height="450" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDzFT6fltUNTF7Vas25IJmMkUAa5yVPi4I&amp;q=Campus+Services+Bellingham+WA" width="100%" />
           </Accordion.Content> 
 
-          <Accordion.Title active={activeIndex === 1} index={1} onClick={(e,p) => this.handleClick(e,p)} >
-            <Icon color="red" size="huge" name="dropdown"/>
-            <Icon name="info"/>
-            Safety
-          </Accordion.Title>
-          <Accordion.Content active={activeIndex === 1}>
-            In support of safety, teammates:
-            <ul>
-              <li>From different households may connect via a video conferencing platform (Zoom, Discord, Skype, &hellip;).</li>
-              <li>In the same physical space may follow the <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html">CDC recommendations</a>.
-              </li>
-            </ul>
-          </Accordion.Content>
           <Accordion.Title active={activeIndex === 2} index={2} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="info"/>
@@ -336,12 +323,12 @@ FAQ = class FAQ extends Component {
           <Accordion.Content active={activeIndex === 6}>
             <List className='bulleted'>
               <List.Item 
-                header="WWU Students"
-                description="All team members must be currently enrolled at WWU (undergrad or grad)."
+                header="Post-secondary Students"
+                description="All team members must be currently enrolled in a post-secondary institution - undergrad or grad (college, university, technical school, etc.)."
               />
               <List.Item
                 header="WWU Alumni"
-                description="At least half of team members must be WWU Alumni"
+                description="At least half of team members must be WWU Alumni."
               />
               {/*
               <List.Item 
@@ -614,7 +601,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: November 2024</p>
+        <p>Last Updated: January 2025</p>
       </Segment>
       </Container>
     );

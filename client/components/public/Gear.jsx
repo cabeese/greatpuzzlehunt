@@ -89,7 +89,7 @@ const prices = {
   "ctw": "$20",
   "cty": "$20",
   "btm": "$22",
-  "btw": "$20",
+  "btw": "$22",
   "bvtw": "$22",
   "lstw": "$25",
   "lstm": "$25",
@@ -239,7 +239,7 @@ Gear = class Gear extends Component {
           <Header as="h2">PLEASE NOTE:</Header>
           SHIRTS ARRIVE <b>AFTER</b> EVENT and are <b>NOT</b> AVAILABLE FOR PICKUP AT EVENT.
           <br /><br />
-          Gear store closes { gearSaleEnd }.
+          Gear store closes { gearSaleEnd } at midnight.
           <br />
           Shirts will be ordered on Monday, April 28, 2025, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 12, 2025.
           <br /><br />
@@ -259,7 +259,7 @@ Gear = class Gear extends Component {
                     <strong>Domestic Shipping</strong>:
                     <List.List>
                       <List.Item>For any T-shirt (long or short sleeve): $6/shirt</List.Item>
-                      <List.Item>For any sweatshirts (crew, hoodie, &frac14; zip): $9/sweatshirt</List.Item>
+                      <List.Item>For any sweatshirt (all sweatshirt styles): $9/sweatshirt</List.Item>
                     </List.List>
                   </List.Item>
                   <List.Item>
