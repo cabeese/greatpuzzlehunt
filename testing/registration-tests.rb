@@ -46,6 +46,7 @@ x = proc do |browser|
                              '01234', 'NE', 'USA', 'Abcde Fghij', 'def',
                              '123-456-7890', 'abc@def.ghi', true, true)
       submit_registration_form
+      @browser.save_screenshot('./existing-email-message.png')
       f = match_source('Email already exists')
       puts "email exists message: #{f}"
       refute_nil f

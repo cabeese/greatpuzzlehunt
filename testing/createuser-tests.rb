@@ -499,8 +499,9 @@ x = proc do |browser|
       refute_nil c0
       puts 'looking for player 1 name'
       # XXXM3
-      # x = "//div[normalize-space()='#{ucfn1} #{ucln1}']"
-      x = "//div[normalize-space()='#{ucfn1}']"
+      x = "//div[normalize-space()='#{ucfn1} #{ucln1}']"
+      # x = "//div[normalize-space()='#{ucfn1}']"
+      # x = "//div[normalize-space()='#{fn1}']"
       puts "xpath: #{x}"
       c = cxn2.get_ext_element(:xpath, x)
       refute_nil c
@@ -509,8 +510,8 @@ x = proc do |browser|
       refute_nil c1
       puts 'looking for player 2 name'
       # XXXM3
-      # x = "//div[normalize-space()='#{ucfn2} #{ucln2}']"
-      x = "//div[normalize-space()='#{ucfn2}']"
+      x = "//div[normalize-space()='#{ucfn2} #{ucln2}']"
+      # x = "//div[normalize-space()='#{ucfn2}']"
       puts "xpath: #{x}"
       c = cxn2.get_ext_element(:xpath, x)
       refute_nil c
