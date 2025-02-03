@@ -51,12 +51,7 @@ Meteor.publish('users.lookingForTeam', function() {
   const { userId } = this;
   if (!userId) return this.ready();
 
-  return Meteor.users.find({ lookingForTeam: true, teamId: null, accountType: { $ne: 'VOLUNTEER' } }, { fields: {
-    firstname: true,
-    emails: true,
-    bio: true,
-    lookingForTeam: true,
-  }});
+  return Meteor.users.find({ lookingForTeam: true, teamId: null, accountType: { $ne: 'VOLUNTEER' } }, { fields: USER_FIELDS });
 });
 
 Meteor.publish('admin.team.members', function(teamId) {

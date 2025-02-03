@@ -1,10 +1,10 @@
-1. Get a recent Ruby version installed (>= 3.0)
+1. Get a recent Ruby version installed (>= 3.0; I use 3.3)
 
    MacOS:
 	* Using MacPorts:
-	    sudo port install ruby31
-	    sudo port select ruby ruby31
-	    add to $PATH: $HOME/.gem/ruby/ruby/3.1.0/bin
+	    sudo port install ruby33
+	    sudo port select ruby ruby33
+	    add to $PATH: $HOME/.gem/ruby/ruby/3.3.0/bin
 	    sudo gem update --system --verbose --no-document
 	    sudo gem update --verbose --no-document
 	    
@@ -13,8 +13,8 @@
 	    (install curl and gnupg2 if not in the base installation)
 	    gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 	    curl -sSL https://get.rvm.io | bash -s stable --ruby
-	    rvm install 3.1
-	    rvm use 3.1 --default
+	    rvm install 3.3
+	    rvm use 3.3 --default
 	    gem update --system --verbose --no-document
 	    gem update --verbose --no-document
 	* Using apt (Ubuntu):
@@ -25,6 +25,9 @@
    gem install selenium-webdriver --verbose --no-document --user-install
 
 3. Install the web drivers for browsers
+
+   UPDATE: recent Selenium versions appear to find these on their own,
+   and the drivers do not need to be installed. Skip this section.
 
    The Selenium tools use the W3C webdriver interface to communicate
    between the the test cases and a web browser. The set of web
@@ -56,10 +59,10 @@
    cases.
 
    Download the testrunner gem from
-   https://chrysaetos.org/extras/testrunner-0.1.7.gem
+   https://chrysaetos.org/extras/testrunner-0.1.12.gem
 
    Then run
-   gem install <dir>/testrunner-0.1.7.gem --no-document --user-install
+   gem install <dir>/testrunner-0.1.12.gem --no-document --user-install
 
    where <dir> is the directory where the gem was downloaded
 
@@ -86,6 +89,8 @@
 
    (Replace the port with another port number if needed)
 
+   Then open:
+   
    http://localhost:7100
 
    in a local browser, and you should see a list of all the test
@@ -135,3 +140,12 @@
    will run any tests whose name matches the expression 'text in case
    name'. This typically means that a test gets run once for each
    browser. 
+
+7. Notes
+
+   These unit tests are written assuming that at most one test is
+   being run against a server at any given time.
+
+   The tests generally clean up after themselves as long as they don't
+   fail too badly. In some cases, if a test fails, it will leave state
+   in the database that has to be cleaned up manually. 

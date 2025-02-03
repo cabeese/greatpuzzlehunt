@@ -20,3 +20,4 @@ settings-test.json
 testing/config.rb
 testing/testresults/
 *~
+testing/*.png

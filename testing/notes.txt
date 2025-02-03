@@ -1,0 +1,9 @@
+Notes on the unit tests
+
+1. All users that are created in the tests should have the City in
+   their address set to the constant CITY_MARKER. This is used to
+   automatically clean out all users created by unit tests, even when
+   the tests fail.
+
+   Do not use this string in the City field if you don't want those
+   user entries to be deleted.

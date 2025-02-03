@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 require_relative 'config.rb'
+require_relative 'browsermgmt'
+
+CITY_MARKER = 'xyzzyABC123'
+
+LOGIN_FAIL = { 'm3' => 'Something went wrong. Please check your credentials.',
+               'm2' => 'Incorrect password' }
+
 
 def each_browser(p)
   TESTCONFIG[:browsers].each do |b|
@@ -14,22 +21,28 @@ module WebTestUtils
     @baseurl = u
   end
 
-  def start_server(browser, headless = false)
-    if (browser == :firefox) && headless
-      options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
-      @browser = Selenium::WebDriver.for browser, options: options
-    elsif (browser == :chrome) && headless
-      options = Selenium::WebDriver::Chrome::Options.new(args: ['headless'])
-      @browser = Selenium::WebDriver.for browser, options: options
-    else
-      @browser = Selenium::WebDriver.for browser
+  def start_server(browser, headless = false, admin_also = false, base = true)
+    @connections = Connections.new(browser, headless, @baseurl)
+
+    if base
+      @browser = @connections.for('base').cxn
+    end 
+    if admin_also
+      @adminbrowser = @connections.for('admin').cxn
     end
+
     @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
     @longwait = Selenium::WebDriver::Wait.new(:timeout => 30)
+
+    if admin_also
+      nav_to_home(@adminbrowser)
+      succeed_login_as_admin(@adminbrowser)
+    end
+    puts "server start: browser: #{@browser} admin browser: #{@adminbrowser}"
   end
 
   def shutdown_server
-    @browser.quit
+    @connections.close_all
   end
 
   # Cause the browser to navigate to the home page (that is, the base
@@ -143,6 +156,13 @@ module WebTestUtils
     end
   end
 
+  def get_sub_elements(fromelement, m, x)
+    @wait.until do
+      e = fromelement.find_elements(m, x)
+      e
+    end
+  end
+
   def match_source(str, browser = @browser)
     @wait.until do
       browser.page_source.include?(str)
@@ -184,7 +204,7 @@ module WebTestUtils
     login_as(user, pw, browser)
 
     # check that still on the login screen
-    match_source('Incorrect password', browser)
+    match_source(LOGIN_FAIL[TESTCONFIG[:mversion]], browser)
   end
 
   def login_as_admin(browser = @browser)
@@ -219,7 +239,8 @@ module WebTestUtils
   end
 
   # @param [Symbol, nil] accttypearg one of :student, :nonstudent, :volunteer
-  def fill_registration_form(fnarg, lnarg, emailarg, accttypearg, pw1arg, pw2arg, phonearg, agearg, streetarg, cityarg, ziparg, statearg, countryarg, ecnamearg, ecrelarg, ecphonearg, ecemailarg, photoarg, hharg)
+  # @param [Symbol] gamemode one of :virtual, :inperson
+  def fill_registration_form(fnarg, lnarg, emailarg, accttypearg, pw1arg, pw2arg, gamemode, phonearg, agearg, streetarg, cityarg, ziparg, statearg, countryarg, ecnamearg, ecrelarg, ecphonearg, ecemailarg, photoarg, hharg)
     fn = get_ext_element(:xpath, '//input[@name="firstname"]')
     ln = get_ext_element(:xpath, '//input[@name="lastname"]')
     m = get_ext_element(:xpath, '//input[@name="email"]')
@@ -283,6 +304,18 @@ module WebTestUtils
     unless pw2arg.nil?
       pw2.send_keys(pw2arg)
     end
+
+    unless gamemode.nil?
+      @browser.action.send_keys(:tab).perform
+      if gamemode == :inperson
+        @browser.action.send_keys(:down).perform
+      elsif gamemode == :virtual
+        @browser.action.send_keys(:down).perform
+        @browser.action.send_keys(:down).perform
+      end
+      @browser.action.send_keys(:space).perform
+    end
+    
     unless phonearg.nil?
       phone.send_keys(phonearg)
     end
@@ -332,11 +365,58 @@ module WebTestUtils
     sub.click
   end
 
+  # create a new random user, opening a new browser to do it and
+  # returning info about the user
+  # @param [Symbol] accttype :student, :nonstudent, :volunteer
+  # @param [Symbol] gamemode :inperson or :virtual
+  # @param [String] suffix string suffix for user names
+  # @return [Array] firstname, lastname, email, pw, cxn
+  def create_user(accttype, gamemode, suffix = '')
+    fn, ln, em = gen_random_id
+    fn += suffix
+    ln += suffix
+    pw = gen_random_string
+    cxn = @connections.for(em) 
+    
+    cxn.nav_to_register
+    cxn.fill_registration_form(fn, ln, em,
+                               accttype, pw, pw,
+                               gamemode, '555-555-5555', '37',
+                               '10 Maple', CITY_MARKER, '01234', 'NE',
+                               'USA', 'Abc Defgh', 'def',
+                               '123-456-7890', 'abc@def.ghi',
+                               true, true)
+    cxn.submit_registration_form
+    f = cxn.match_source('Thank you for creating an account')
+    refute_nil f
+    f = cxn.match_source(em)
+    refute_nil f
+    [fn, ln, em, pw, cxn]
+  end
+
+  def enter_field(fname, val, browser)
+    f = get_ext_element(:xpath, "//input[@name='#{fname}']", browser)
+    refute_nil f
+    f.clear
+    f.send_keys(val.to_s)
+  end
+
   # @return [Array<String, String, String>] array of random strings for
   #    first name, last name, and email
   def gen_random_id
     [SecureRandom.alphanumeric(8), SecureRandom.alphanumeric(8),
      "#{SecureRandom.alphanumeric(6)}@#{SecureRandom.alphanumeric(8)}.net"]
+  end
+
+  def gen_random_string
+    SecureRandom.alphanumeric(8)
+  end
+
+  def upcase_first_letter(s)
+    fl = s[0]
+    rest = s[1..]
+    res = fl.upcase + rest
+    res
   end
 
 end

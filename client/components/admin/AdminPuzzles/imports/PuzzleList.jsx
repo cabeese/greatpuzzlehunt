@@ -79,7 +79,7 @@ class PuzzleList extends Component {
     });
 
     return (
-      <Grid.Row columns={5} key={ puzzle._id } color={isActive ? "teal" : undefined}>
+      <Grid.Row columns={5} name={ puzzle._id} key={ puzzle._id } color={isActive ? "teal" : undefined}>
         <Grid.Column>
           <Label color={ stagesColors[puzzle.stage] } content={ puzzle.stage }/>&nbsp; { puzzle.name }
         </Grid.Column>
