@@ -1,10 +1,10 @@
-import { meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Segment, Icon, Button, Image
 } from 'semantic-ui-react';
-import QR from 'qrcode.react';
+import { QRCodeCanvas } from 'qrcode.react';
 
 class TeamCheckInQRCode extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class TeamCheckInQRCode extends Component {
       return null;
     }
     return (
-      <QR value={this._qrUrl()} size={192} />
+      <QRCodeCanvas value={this._qrUrl()} size={192} />
     );
   }
 

@@ -1,4 +1,4 @@
-import { meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -17,31 +17,25 @@ class TeamCheckInVirtually extends Component {
       modalOpen: false,
       modalHeader: "",
       modalContent: "",
-    }
+    };
   }
 
   showConfirm = () => this.setState({ confirmationOpen: true })
-  handleConfirm = () => {
+  handleConfirm = async () => {
     const self = this;
     const { teamId } = this.props;
-    Meteor.call('team.checkin.virtuallyByPlayer', teamId, error => {
-      self.setState({ confirmationOpen: false })
-      if (error) {
-        self.setState({
-          modalOpen: true,
-          modalHeader: "Failed to check your team :(",
-          modalContent: `${error.reason}. If this continues to be a problem, please contact support.`
-        });
-      } else {
-        self.setState({
-          modalOpen: true,
-          modalHeader: "You are checked in!",
-          modalContent: `You may proceed to the game page`
-        });
-      }
-    });
-
+    self.setState({ confirmationOpen: false });
+    try {
+      await Meteor.callAsync('team.checkin.virtuallyByPlayer', teamId);
+    } catch (error) {
+      self.setState({
+        modalOpen: true,
+        modalHeader: "Failed to check your team :(",
+        modalContent: `${error.reason}. If this continues to be a problem, please contact support.`
+      });
+    }
   }
+
   handleCancelConfirm = () => this.setState({ confirmationOpen: false })
   closeErrorModal = () => this.setState({modalOpen: false});
 

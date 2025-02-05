@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import QR from 'qrcode.react';
+import { QRCodeCanvas } from 'qrcode.react';
 
 export default class PuzzleQRCode extends React.Component {
   constructor(props) {
@@ -43,7 +43,7 @@ export default class PuzzleQRCode extends React.Component {
     return (
       <Segment basic textAlign='center'>
         <Header as='h4' content={ this.props.qrLabel }/>
-        <QR value={ url } size={ 212 }/>
+        <QRCodeCanvas value={ url } size={ 212 }/>
       </Segment>
     );
   }

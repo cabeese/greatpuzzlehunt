@@ -162,11 +162,13 @@ class VolunteerTeamCheckInMain extends Component {
     );
   }
 
-  _confirmTeamCheckin({_id: teamId, name}) {
-    Meteor.call('team.checkin.confirm', teamId, (error, result) => {
-      if (error) return alert(error.reason);
-      this.setState({ showConfirm: false });
-    });
+  async _confirmTeamCheckin({_id: teamId, name}) {
+    try {
+      await Meteor.callAsync('team.checkin.confirm', teamId);
+    } catch (error) {
+      alert(error.reason);
+    }
+    this.setState({ showConfirm: false });
   }
 
   _confirmModal(team) {
@@ -179,7 +181,7 @@ class VolunteerTeamCheckInMain extends Component {
         cancelButton="Cancel"
         confirmButton="Yes Check Them In!"
         onCancel={() => this.setState({ showConfirm: false })}
-        onConfirm={() => this._confirmTeamCheckin(team)}/>
+        onConfirm={async () => await this._confirmTeamCheckin(team)} />
     );
   }
 }
