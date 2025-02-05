@@ -1,4 +1,4 @@
-import { meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
