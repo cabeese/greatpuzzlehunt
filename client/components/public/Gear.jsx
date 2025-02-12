@@ -14,7 +14,7 @@ const link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
 const s3_prefix = `https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/`;
 
-const buyButton = (  
+const buyButton = (
   <LinkButton as='a' href={link}
     size="huge" color="orange" target="_blank"
     icon={<Icon name="shopping cart" />}
@@ -62,7 +62,7 @@ const titles = {
   "lstw": "Women's Long Sleeve Cotton Tee",
   "lstm": "Men's Long Sleeve Cotton Tee",
   "csu": "Unisex Crew Sweatshirt",
-  "hu": "Unisex Hoodie Sweatshirt", 
+  "hu": "Unisex Hoodie Sweatshirt",
   "hy": "Youth Hoodie",
   "huz": "Unisex Full Zip Hooded Sweatshirt",
   "qzu": "Unisex Quarter-zip Collar Sweatshirt",
@@ -120,7 +120,7 @@ const styleColors = {
   "ctm": ['Black', 'Blackberry', 'Charcoal', 'Cobalt', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Lilac', 'Maroon', 'Midnight', 'Military Green', 'Navy', 'Purple'],
   "ctw": ['Athletic Maroon', 'Dark Heather Grey', 'Jet Black', 'Navy', 'Purple', 'Royal'],
   "cty": ['Black', 'Charcoal', 'Cobalt', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Maroon', 'Military Green', 'Navy', 'Purple'],
-  "btm": ['Black', 'Charcoal', 'Deep Turquoise Fleck', 'Heathered Brown', 'Heathered Eggplant', 'Heathered Forest Green', 'Heathered Navy', 'Raspberry Fleck', 'Royal Frost', ],
+  "btm": ['Black', 'Charcoal', 'Deep Turquoise Fleck', 'Heathered Brown', 'Heathered Eggplant', 'Heathered Forest Green', 'Heathered Navy', 'Raspberry Fleck', 'Royal Frost',],
   "btw": ['Black', 'Charcoal', 'Heathered Eggplant', 'Heathered Navy', 'Heathered Olive', 'Heathered Teal'],
   "bvtw": ['Black', 'Charcoal', 'Deep Turquoise Fleck', 'Heathered Navy', 'Heathered Olive', 'Heathered Purple', 'Raspberry Fleck'],
   "lstm": ['Black', 'Charcoal', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Maroon', 'Military Green', 'Navy', 'Purple', 'Royal'],
@@ -163,32 +163,33 @@ Gear = class Gear extends Component {
     };
   }
 
-  onClose = () => this.setState({open: false});
+  onClose = () => this.setState({ open: false });
 
   gearDetails(e) {
     let url = e.target.src;
     let filename = url.split('/').slice(-1).pop()
     let name = filename.substring(0, filename.indexOf('_'))
-  
+
     this.setState({
-                  open: true,
-                  code: name,
-                  colors: styleColors[name],
-                  size: sizes[name],
-                  title: titles[name],
-                  price: prices[name],
-                  materials: materials[name]});
+      open: true,
+      code: name,
+      colors: styleColors[name],
+      size: sizes[name],
+      title: titles[name],
+      price: prices[name],
+      materials: materials[name]
+    });
   }
 
   getImageCard(code) {
     let title = titles[code];
     let url = this.getImageURL(code, cardColors[code])
     return (
-      <div className="gearitem ui card link" style={{verticalAlign: "top", display: "inline-block", marginLeft: "0.5em"}}>
-        <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} onClick={this.gearDetails.bind(this)} src={url}></img>
-        <div className="content">
-          <span> {title} </span>
-        </div>
+      <div className="gearitem ui card link" style={{ verticalAlign: "top", display: "inline-block" }}>
+        <img style={{ maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom" }} onClick={this.gearDetails.bind(this)} src={url}></img>
+        <Card.Content style={{ padding: "10px" }}>
+          {title}
+        </Card.Content>
       </div>
     );
   }
@@ -198,40 +199,64 @@ Gear = class Gear extends Component {
   }
 
   render() {
+    let settings = {
+      arrows: false,
+      dots: true,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      dotsClass: "carousel-dots",
+    }
     return (
       <Container className="section">
         <Modal closeIcon open={this.state.open} onClose={this.onClose}>
-            <Modal.Content>
-              <Grid stackable columns={2} style={{flexWrap: "wrap-reverse"}}>
-                <Grid.Column width={10}>
-                    {Object.keys(this.state.colors).map((idx) => {
-                      let color_name = this.state.colors[idx];
-                      return (
-                        <div className="gearitem ui card" key={idx} style={{verticalAlign: "top", display: "inline-block", marginRight: "10px", marginTop: "0"}}>
-                          <img style={{maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom"}} src={this.getImageURL(this.state.code, color_name)}/>
-                          <Card.Content style={{padding: "10px"}}>
-                              { color_name }
-                          </Card.Content>
-                        </div>
-                      );
-                    }) 
-                  }
-                  <img width="100%" src={this.state.swatches}></img>
-                </Grid.Column>
-                <Grid.Column width={6}>
-		              <Header id="title" as="h2">{this.state.title}</Header>
-                  <hr color="lightgrey"/>
-                  <p> {this.state.price}</p>
-                  
-                  <Header as="h3">Information & Sizing</Header>
-                  <p><strong>Material</strong>: {this.state.materials}</p>
-                  <p><strong>Size range</strong>: {this.state.size}</p>
-                  <p>For sizes larger than XL:</p>
-                  { additionalCharges }
-		              { buyButton }
-                </Grid.Column>
+          <Modal.Content>
+            <Grid stackable columns={2} style={{ flexWrap: "wrap" }}>
+
+
+              <Grid.Column width={8}>
+                <Slider {...settings}>
+                  <img src={this.getImageURL(this.state.code, "black")} />
+                  <img src={this.getImageURL(this.state.code, "black")} />
+                </Slider>
+
+
+              </Grid.Column>
+              <Grid.Column width={8}>
+                <Header id="title" as="h2">{this.state.title}</Header>
+                <hr color="lightgrey" />
+                <p> {this.state.price}</p>
+
+                <Header as="h3">Information & Sizing</Header>
+                <p><strong>Material</strong>: {this.state.materials}</p>
+                <p><strong>Size range</strong>: {this.state.size}</p>
+                <p>For sizes larger than XL:</p>
+                {additionalCharges}
+                {buyButton}
+              </Grid.Column>
+
+
             </Grid>
-            </Modal.Content>
+            <div>
+              <div className="gear-container">
+                {Object.keys(this.state.colors).map((idx) => {
+                  let color_name = this.state.colors[idx];
+                  return (
+                    <div className="gearitem ui card" key={idx} style={{ verticalAlign: "top", display: "inline-block" }}>
+                      <img style={{ maxHeight: "100%", maxWidth: "100%", verticalAlign: "bottom" }} src={this.getImageURL(this.state.code, color_name)} />
+                      <Card.Content style={{ padding: "10px" }}>
+                        {color_name}
+                      </Card.Content>
+                    </div>
+                  );
+                })
+                }
+              </div>
+            </div>
+          </Modal.Content>
         </Modal>
 
         <Segment basic>
@@ -239,7 +264,7 @@ Gear = class Gear extends Component {
           <Header as="h2">PLEASE NOTE:</Header>
           SHIRTS ARRIVE <b>AFTER</b> EVENT and are <b>NOT</b> AVAILABLE FOR PICKUP AT EVENT.
           <br /><br />
-          Gear store closes { gearSaleEnd } at midnight.
+          Gear store closes {gearSaleEnd} at midnight.
           <br />
           Shirts will be ordered on Monday, April 28, 2025, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 12, 2025.
           <br /><br />
@@ -252,7 +277,7 @@ Gear = class Gear extends Component {
             <Grid.Row>
               <Grid.Column width={7}>
                 <Header as="h2">Shipping Options</Header>
-                
+
                 <List bulleted>
                   <List.Item><strong>Pick up on campus</strong>: FREE</List.Item>
                   <List.Item>
@@ -271,28 +296,29 @@ Gear = class Gear extends Component {
                 </List>
               </Grid.Column>
               <Grid.Column width={5}>
-                  <Image src={`${s3_prefix}shirt_design_background.png`}/>
+                <Image src={`${s3_prefix}shirt_design_background.png`} />
               </Grid.Column>
             </Grid.Row>
           </Grid>
           <Header size="medium">Shirts</Header>
-          { this.getImageCard("ctm") }
-          { this.getImageCard("ctw") }
-          { this.getImageCard("cty") }
-          { this.getImageCard("btm") }
-          { this.getImageCard("btw") }
-          { this.getImageCard("bvtw") }
-          { this.getImageCard("lstm") }
-          { this.getImageCard("lstw") }
-
+          <div className="gear-container">
+            {this.getImageCard("ctm")}
+            {this.getImageCard("ctw")}
+            {this.getImageCard("cty")}
+            {this.getImageCard("btm")}
+            {this.getImageCard("btw")}
+            {this.getImageCard("bvtw")}
+            {this.getImageCard("lstm")}
+            {this.getImageCard("lstw")}
+          </div>
           <Header size="medium">Outerwear</Header>
-
-          { this.getImageCard("csu") }
-          { this.getImageCard("hu") }
-          { this.getImageCard("hy") }
-          { this.getImageCard("huz") }
-          { this.getImageCard("qzu") }
-
+          <div className="gear-container">
+            {this.getImageCard("csu")}
+            {this.getImageCard("hu")}
+            {this.getImageCard("hy")}
+            {this.getImageCard("huz")}
+            {this.getImageCard("qzu")}
+          </div>
         </Segment>
       </Container>
     )
