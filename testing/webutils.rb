@@ -394,6 +394,51 @@ module WebTestUtils
     [fn, ln, em, pw, cxn]
   end
 
+  # create a new team
+  # @param [Connection] connection for the admin (already logged in) 
+  # @param [Integer] numplayers number of players on the team
+  # @param [Symbol] playermode :virtual or :inperson
+  # @param [Symbol] teammode same
+  # @return [Array<Array>] list of information about players on
+  #   the new team: first name, last name, email, password, connection
+  def create_team(connections, admin, numplayers, playermode, teammode)
+    users = []
+    (1..numplayers).each do |i|
+      fn, ln, em = gen_random_id
+      pw = gen_random_string
+      cxn = connections.for(em)
+      users << [fn, ln, em, pw, cxn]
+    end
+
+    teamname, _unused, teampw = gen_random_id
+
+    # create user accounts
+    first_user = true
+    users.each do |fn, ln, em, pw, cxn|
+      cxn.nav_to_register
+      cxn.fill_registration_form(fn, ln, em,
+                                 :student, pw, pw, playermode,
+                                 '555-555-5555', '37', '10 Maple', CITY_MARKER,
+                                 '01234', 'NE', 'USA', 'Abc Defgh', 'def',
+                                 '123-456-7890', 'abc@def.ghi', true, true)
+        cxn.submit_registration_form
+        f = cxn.match_source('Thank you for creating an account')
+        refute_nil f
+        admin.verify_user_email(em)
+        sleep 1
+        cxn.succeed_login_as(em, pw)
+
+        if first_user
+          # leader creates team
+          cxn.create_team_from_profile(teamname, teampw, :postsec, teammode, false)
+          first_user = false
+        else
+          cxn.join_team(teamname, teampw)
+        end
+    end
+    [teamname, teampw, users]
+  end
+
   def enter_field(fname, val, browser)
     f = get_ext_element(:xpath, "//input[@name='#{fname}']", browser)
     refute_nil f
