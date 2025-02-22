@@ -62,7 +62,7 @@ export default class PuzzleAnswerForm extends React.Component {
 
     try {
       const result = await Meteor.callAsync('team.puzzle.answer', puzzle.puzzleId, answer);
-      this.setState({ answer: '' });
+      this.setState({ answer: '', error: '' });
 
       if (this.messageTimer) Meteor.clearTimeout(this.messageTimer);
 

@@ -17,7 +17,7 @@ export default class UnstartedPuzzle extends React.Component {
     const startUrl = `${window.location.origin}/volunteer/time/${team._id}/${puzzle.puzzleId}`;
     return (
       <Segment disabled={ disabled }>
-        <Header as='h3' content={this.props.puzzle.name} subheader={this.props.puzzle.location}/>
+        <Header as='h3' content={puzzle.name} subheader={puzzle.location}/>
 
         <PuzzleQRCode
           team={ team }
