@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'qrutils'
 require_relative 'webutils'
 
 module WebTestUtils
@@ -10,12 +11,13 @@ module WebTestUtils
 
     attr_accessor :assertions
     
-    def initialize(browser, headless, baseurl)
+    def initialize(browser, headless, baseurl, connections)
       @cxn = nil
       @browser = browser
       @headless = headless
       @baseurl = baseurl
       @assertions = 0
+      @connections = connections
       if (browser == :firefox) && headless
         options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
         @cxn = Selenium::WebDriver.for browser, options: options
@@ -31,6 +33,10 @@ module WebTestUtils
     end
 
     attr_reader :cxn
+
+    def set_base_url(b)
+      @baseurl = b
+    end
 
     def close
       @cxn.quit
@@ -589,7 +595,7 @@ module WebTestUtils
       end
 
       # leader completes checkin
-      sleep 10
+      sleep 1
       puts 'completing checkin'
       complete = get_ext_element(:xpath, '//button[text()="Check In with Volunteer"]')
       refute_nil complete
@@ -604,6 +610,12 @@ module WebTestUtils
       qrss = qr.screenshot_as(:base64).unpack1('m')
       puts "qrss is: #{qrss}"
       IO.write('qrcode.png', qrss)
+
+      txt = WebTestUtils.decode_qr(@connections, 'qrcode.png')
+      puts "got text: #{txt}"
+      s = txt.split('/')
+      puts "teamid: #{s[-1]}"
+      s[-1]
     end
 
     def fail_check_in_partial_team
@@ -656,6 +668,36 @@ module WebTestUtils
       # alert = switch_to.alert
       # alert.accept
       puts 'done with team checkin'
+    end
+
+    def confirm_check_in(teamid)
+      puts "confirm check in: #{teamid}"
+      nav_to("volunteer/checkin/#{teamid}")
+
+      # confirm on right page
+      c = get_ext_element(:xpath, '//div[text()="Confirm check-in to see what they need."]')
+      puts "got confirmation banner: #{c}"
+      refute_nil c
+
+      # get confirm button
+      button = get_ext_element(:xpath, '//button[text()="Confirm Check In"]')
+      puts "got confirm button: #{button}"
+      refute_nil button
+
+      # click
+      puts 'click confirmation button'
+      button.click
+      sleep 1
+
+      # confirmation dialog
+      yesbutton = get_ext_element(:xpath, '//button[text()="Yes Check Them In!"]')
+      refute_nil yesbutton
+      yesbutton.click
+      sleep 1
+
+      # check final confirmation
+      c = get_ext_element(:xpath, '//div[text()="Check In Confirmed!"]')
+      refute_nil c
     end
 
     def delete_test_users(marker)

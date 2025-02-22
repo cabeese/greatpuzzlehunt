@@ -82,8 +82,10 @@ x = proc do |browser|
       admin.turn_on_checkin
 
       # leader starts checkin
-      leader.start_check_in_inperson_team
-      # XXX continue checkin
+      teamid = leader.start_check_in_inperson_team
+
+      # volunteer (admin) confirms checkin
+      admin.confirm_check_in(teamid)
 
       # admin confirm team checked in
       admin.check_team_membership(teamname, users)
@@ -163,6 +165,23 @@ x = proc do |browser|
 
       # clean up
       admin.delete_test_users(CITY_MARKER)
+    end
+
+    it 'decodes QR code' do
+      admin = @connections.for('admin')
+      admin.nav_to('qrcode')
+
+      qr = admin.get_ext_element(:xpath, '//canvas')
+      puts "got qr: #{qr}"
+      refute_nil qr
+      
+      qrss = qr.screenshot_as(:base64).unpack1('m')
+      puts "qrss is: #{qrss}"
+      IO.write('qrcode.png', qrss)
+
+      txt = WebTestUtils.decode_qr(@connections, 'qrcode.png')
+      puts "got text: #{txt}"
+      assert_equal 'Hello QR Codes!', txt
     end
   end
 

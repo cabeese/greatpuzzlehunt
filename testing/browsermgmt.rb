@@ -19,7 +19,7 @@ module WebTestUtils
         return b
       end
 
-      @ids[id] = Connection.new(@browser, @headless, @baseurl)
+      @ids[id] = Connection.new(@browser, @headless, @baseurl, self)
     end
 
     def close(id)
