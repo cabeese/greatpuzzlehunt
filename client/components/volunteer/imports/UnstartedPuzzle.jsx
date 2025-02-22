@@ -56,7 +56,7 @@ export default class UnstartedPuzzle extends React.Component {
         fluid
         size='large'
         content='Start Timer'
-        onClick={ () => this._startTimer() }
+        onClick={ async () => await this._startTimer() }
       />;
     }
   }
@@ -72,7 +72,7 @@ export default class UnstartedPuzzle extends React.Component {
     );
   }
 
-  _startTimer() {
+  async _startTimer() {
     const { team, puzzle, volunteer } = this.props;
     if (puzzle.puzzleId !== volunteer.puzzleStation) {
       const target = find(team.puzzles, (p) => p.puzzleId === puzzle.puzzleId);
@@ -90,9 +90,11 @@ You can only start a puzzle time that matches your current active puzzle station
       return;
     }
 
-    Meteor.call('volunteer.team.startPuzzle', team._id, puzzle.puzzleId, (error, result) => {
-      if (error) return this.setState({ error });
-    });
+    try {
+      await Meteor.callAsync('volunteer.team.startPuzzle', team._id, puzzle.puzzleId);
+    } catch (error) {
+      this.setState({ error });
+    }
   }
 }
 

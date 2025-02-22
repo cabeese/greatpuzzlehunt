@@ -97,17 +97,19 @@ class VolunteerPuzzleSelectorInner extends Component {
             confirmButton="Yes do it!"
             content={confirmContent}
             onCancel={() => this.setState({ [puzzle._id]: false })}
-            onConfirm={() => this._setActivePuzzleStation(puzzle._id)} />
+            onConfirm={async () => await this._setActivePuzzleStation(puzzle._id)} />
         </Message.Content>
       </Message>
     );
   }
 
-  _setActivePuzzleStation(puzzleId) {
-    Meteor.call('volunteer.setPuzzleStation', puzzleId, (error, result) => {
-      if (error) return alert(`Error! ${error.reason}`);
+  async _setActivePuzzleStation(puzzleId) {
+    try {
+      await Meteor.callAsync('volunteer.setPuzzleStation', puzzleId);
       this.setState({[puzzleId]: false });
-    });
+    } catch (error) {
+      alert(`Error! ${error.reason}`);
+    }
   }
 }
 
