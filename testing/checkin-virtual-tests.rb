@@ -11,7 +11,7 @@ require_relative 'webutils'
 Minitest.seed = 1234
 
 x = proc do |browser|
-  describe "Virtual team checkin tests #{browser}" do
+  describe "Team checkin tests #{browser}" do
     include WebTestUtils
     
     before do
@@ -96,53 +96,25 @@ x = proc do |browser|
       admin.delete_test_users(CITY_MARKER)
     end
 
-    it 'creates and checks in a team mixed virtual and in person'
-
-    it 'does not check in a team without all players present' do
+    it 'checks in a team without all players present' do
       admin = @connections.for('admin')
       admin.nav_to_home
       admin.succeed_login_as_admin
 
       # create a virtual team of N virtual players
       admin.turn_on_registration
-      teamname, teampw, users = create_team(@connections, admin, 4, :virtual, :virtual)
+      teamname, teampw, users = create_team(@connections, admin, 4, :inperson, :inperson)
       admin.turn_off_registration
 
       leader = users[0][4]
 
       admin.turn_on_checkin
 
-      # admin confirm team checked in
-      admin.check_team_membership(teamname, users)
+      # leader starts checkin, but only partial
+      teamid = leader.fail_check_in_partial_team
 
-      # leader marks players as here
-      leader.fail_check_in_partial_team
-
-      # clean up
-      admin.turn_off_checkin
-      admin.delete_test_users(CITY_MARKER)
-    end
-
-    it 'does not check in a team that is too small' do
-      admin = @connections.for('admin')
-      admin.nav_to_home
-      admin.succeed_login_as_admin
-
-      # create a virtual team of N virtual players
-      admin.turn_on_registration
-      teamname, teampw, users = create_team(@connections, admin, 2, :virtual, :virtual)
-      admin.turn_off_registration
-
-      leader = users[0][4]
-
-      admin.turn_on_checkin
-
-      # admin confirm team checked in
-      admin.check_team_membership(teamname, users)
-
-      # leader marks players as here
-      # XXX fail at checkin 
-      leader.check_in_virtual_team
+      # check in, but there will be some people not here
+      admin.confirm_check_in(teamid, false)
 
       # clean up
       admin.turn_off_checkin
@@ -157,11 +129,14 @@ x = proc do |browser|
       # create a virtual team of N virtual players
       admin.turn_on_registration
       teamname, teampw, users = create_team(@connections, admin, 2, :virtual, :virtual)
+
+      # check in not allowed
       admin.turn_off_registration
+      admin.turn_off_checkin
 
       leader = users[0][4]
 
-      # XXX try checkin and get failure message
+      leader.fail_start_check_in
 
       # clean up
       admin.delete_test_users(CITY_MARKER)

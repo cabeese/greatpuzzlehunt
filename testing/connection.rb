@@ -295,6 +295,7 @@ module WebTestUtils
         toggle.click
         sleep 1
         accept_alert
+        sleep 1
       end
       
       # confirm in person toggle is checked
@@ -323,7 +324,9 @@ module WebTestUtils
         if toggle_class.include?('checked')
           puts('toggling checkin')
           toggle.click
+          sleep 1
           accept_alert
+          sleep 1
         end
         
         # confirm toggle is not checked
@@ -569,6 +572,14 @@ module WebTestUtils
       puts 'done with team checkin'
     end
 
+    def fail_start_check_in
+      puts 'check in in-person team'
+      nav_to('team/checkin')
+      sleep 10
+
+      assert match_source('Waiting for Check In to open')
+    end
+
     def start_check_in_inperson_team
       puts 'check in in-person team'
       nav_to('team/checkin')
@@ -651,26 +662,27 @@ module WebTestUtils
       # leader completes checkin
       sleep 1
       puts 'completing checkin'
-      complete = @longwait.until do
-        e = @cxn.find_element(:xpath, '//button[text()="VIRTUAL Self-Check in"]')
-        e
-      end
+      complete = get_ext_element(:xpath, '//button[text()="Check In with Volunteer"]')
       complete.click
       sleep 3
-      
-      # acknowledge alert
-      puts 'acknowledging alert'
-      ab = @longwait.until do
-        e = @cxn.find_element(:xpath, '//button[text()="We\'re playing virtually!"]')
-        e
-      end
-      ab.click 
-      # alert = switch_to.alert
-      # alert.accept
-      puts 'done with team checkin'
+
+      # extract QR code
+      qr = get_ext_element(:xpath, '//canvas')
+      puts "got qr: #{qr}"
+      refute_nil qr
+
+      qrss = qr.screenshot_as(:base64).unpack1('m')
+      puts "qrss is: #{qrss}"
+      IO.write('qrcode.png', qrss)
+
+      txt = WebTestUtils.decode_qr(@connections, 'qrcode.png')
+      puts "got text: #{txt}"
+      s = txt.split('/')
+      puts "teamid: #{s[-1]}"
+      s[-1]
     end
 
-    def confirm_check_in(teamid)
+    def confirm_check_in(teamid, allhere = true)
       puts "confirm check in: #{teamid}"
       nav_to("volunteer/checkin/#{teamid}")
 
@@ -678,6 +690,12 @@ module WebTestUtils
       c = get_ext_element(:xpath, '//div[text()="Confirm check-in to see what they need."]')
       puts "got confirmation banner: #{c}"
       refute_nil c
+
+      if allhere
+        assert(no_match_source('Not Here'))
+      else
+        assert(match_source('Not Here'))
+      end
 
       # get confirm button
       button = get_ext_element(:xpath, '//button[text()="Confirm Check In"]')
