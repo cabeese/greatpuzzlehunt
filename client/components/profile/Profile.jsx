@@ -10,7 +10,8 @@ import { extend } from 'lodash';
 import { browserHistory } from '../../history';
 
 const { eventYear } = Meteor.settings.public;
-let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+// let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
+let link = 'https://foundation.wwu.edu/greatpuzzlehunt';
 
 Profile = class Profile extends Component {
 
