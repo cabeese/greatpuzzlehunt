@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'qrutils'
 require_relative 'webutils'
 
 module WebTestUtils
@@ -10,12 +11,13 @@ module WebTestUtils
 
     attr_accessor :assertions
     
-    def initialize(browser, headless, baseurl)
+    def initialize(browser, headless, baseurl, connections)
       @cxn = nil
       @browser = browser
       @headless = headless
       @baseurl = baseurl
       @assertions = 0
+      @connections = connections
       if (browser == :firefox) && headless
         options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
         @cxn = Selenium::WebDriver.for browser, options: options
@@ -32,6 +34,10 @@ module WebTestUtils
 
     attr_reader :cxn
 
+    def set_base_url(b)
+      @baseurl = b
+    end
+
     def close
       @cxn.quit
       @cxn = nil
@@ -46,6 +52,13 @@ module WebTestUtils
 
     def get_ext_element(m, x)
       @wait.until do
+        e = @cxn.find_element(m, x)
+        e
+      end
+    end
+
+    def get_ext_element_long(m, x)
+      @longwait.until do
         e = @cxn.find_element(m, x)
         e
       end
@@ -264,6 +277,70 @@ module WebTestUtils
       
       ret
     end
+
+    def turn_on_checkin
+      puts 'admin: turn on checkin'
+      
+      # go to the game control page
+      nav_to('admin/gamestate')
+      
+      # find in-person registration toggle
+      toggle = get_ext_element(:xpath, '//div/label[text()="CheckIn"]/..')
+      puts "got toggle div: #{toggle}"
+    
+      # if not checked, click it and then confirm the popup alert
+      toggle_class = toggle.attribute('class')
+      unless toggle_class.include?('checked')
+        puts('toggling checkin')
+        toggle.click
+        sleep 1
+        accept_alert
+        sleep 1
+      end
+      
+      # confirm in person toggle is checked
+      toggle_class_2 = toggle.attribute('class')
+      ret = toggle_class_2.include?('checked')
+      puts "checkin toggle status: #{ret}"
+      assert ret
+      puts "checkin toggled on: #{ret}"
+    end
+    
+
+    def turn_off_checkin
+      puts 'admin: turn off checkin'
+      ret = false
+      
+      begin
+        # go to the game control page
+        nav_to('admin/gamestate')
+        
+        # find checkin toggle
+        toggle = get_ext_element_long(:xpath, '//div/label[text()="CheckIn"]/..')
+        puts "got toggle div: #{toggle}"
+        
+        # if checked, click it and then confirm the popup alert
+        toggle_class = toggle.attribute('class')
+        if toggle_class.include?('checked')
+          puts('toggling checkin')
+          toggle.click
+          sleep 1
+          accept_alert
+          sleep 1
+        end
+        
+        # confirm toggle is not checked
+        toggle_class_2 = toggle.attribute('class')
+        ret = !toggle_class_2.include?('checked')
+        puts "checkin toggled: #{ret}"
+      rescue Selenium::WebDriver::Error::TimeoutError
+        puts 'timeout turning checkin off'
+        @browser.save_screenshot('./gameplay-stop-checkin.png')
+        ret = false
+      end
+      
+      ret
+    end
     
     # @param [Symbol, nil] accttypearg one of :student, :nonstudent, :volunteer
     # @param [Symbol] gamemode one of :virtual, :inperson
@@ -450,6 +527,197 @@ module WebTestUtils
       accept_alert
     end
 
+    def check_in_virtual_team
+      puts 'check in virtual team'
+      nav_to('team/checkin')
+      sleep 1.5
+
+      # press start checkin button
+      start_button = nil
+      begin
+        start_button = get_ext_element_long(:xpath, '//button[text()="Start Check In"]')
+      rescue Selenium::WebDriver::Error::TimeoutError
+        puts 'Unable to find start checkin button'
+        save_screenshot('./no-start-checkin-button.png')
+      end
+      start_button.click
+      sleep 1.5
+      
+      # leader marks all players as here
+      puts 'checking in all players'
+      buttons = get_ext_elements(:xpath, '//button[text()="Here!"]')
+      puts "got buttons: #{buttons}"
+      buttons.each do |button|
+        puts "checking in next player #{button}"
+        button.click
+      end
+
+      # leader completes checkin
+      sleep 1
+      puts 'completing checkin'
+      complete = get_ext_element(:xpath, '//button[text()="VIRTUAL Self-Check in"]')
+      refute_nil complete
+      complete.click
+      sleep 3
+      
+      # acknowledge alert
+      puts 'acknowledging alert'
+      ab = @longwait.until do
+        e = @cxn.find_element(:xpath, '//button[text()="We\'re playing virtually!"]')
+        e
+      end
+      ab.click 
+      # alert = switch_to.alert
+      # alert.accept
+      puts 'done with team checkin'
+    end
+
+    def fail_start_check_in
+      puts 'check in in-person team'
+      nav_to('team/checkin')
+      sleep 10
+
+      assert match_source('Waiting for Check In to open')
+    end
+
+    def start_check_in_inperson_team
+      puts 'check in in-person team'
+      nav_to('team/checkin')
+      sleep 1.5
+
+      # press start checkin button
+      start_button = nil
+      begin
+        start_button = get_ext_element_long(:xpath, '//button[text()="Start Check In"]')
+      rescue Selenium::WebDriver::Error::TimeoutError
+        puts 'Unable to find start checkin button'
+        save_screenshot('./no-start-checkin-button.png')
+      end
+      start_button.click
+      sleep 1.5
+      
+      # leader marks all players as here
+      puts 'checking in all players'
+      buttons = get_ext_elements(:xpath, '//button[text()="Here!"]')
+      puts "got buttons: #{buttons}"
+      buttons.each do |button|
+        puts "checking in next player #{button}"
+        button.click
+      end
+
+      # leader completes checkin
+      sleep 1
+      puts 'completing checkin'
+      complete = get_ext_element(:xpath, '//button[text()="Check In with Volunteer"]')
+      refute_nil complete
+      complete.click
+      sleep 3
+
+      # extract QR code
+      qr = get_ext_element(:xpath, '//canvas')
+      puts "got qr: #{qr}"
+      refute_nil qr
+
+      qrss = qr.screenshot_as(:base64).unpack1('m')
+      puts "qrss is: #{qrss}"
+      IO.write('qrcode.png', qrss)
+
+      txt = WebTestUtils.decode_qr(@connections, 'qrcode.png')
+      puts "got text: #{txt}"
+      s = txt.split('/')
+      puts "teamid: #{s[-1]}"
+      s[-1]
+    end
+
+    def fail_check_in_partial_team
+      puts 'fail check in partial team'
+      nav_to('team/checkin')
+      sleep 1.5
+
+      # press start checkin button
+      start_button = nil
+      begin
+        start_button = get_ext_element_long(:xpath, '//button[text()="Start Check In"]')
+      rescue Selenium::WebDriver::Error::TimeoutError
+        puts 'Unable to find start checkin button'
+        save_screenshot('./no-start-checkin-button.png')
+      end
+      start_button.click
+      sleep 1.5
+      
+      # leader marks some players as here
+      puts 'checking in some players'
+      buttons = @cxn.find_elements(:xpath, '//button[text()="Here!"]')
+      puts "got buttons: #{buttons}"
+      numbuttons = buttons.length
+      tocheck = numbuttons - 1
+      buttons.each do |button|
+        puts "checking in next player #{button}"
+        if tocheck > 0
+          button.click
+          tocheck -= 1
+        end
+      end
+
+      # leader completes checkin
+      sleep 1
+      puts 'completing checkin'
+      complete = get_ext_element(:xpath, '//button[text()="Check In with Volunteer"]')
+      complete.click
+      sleep 3
+
+      # extract QR code
+      qr = get_ext_element(:xpath, '//canvas')
+      puts "got qr: #{qr}"
+      refute_nil qr
+
+      qrss = qr.screenshot_as(:base64).unpack1('m')
+      puts "qrss is: #{qrss}"
+      IO.write('qrcode.png', qrss)
+
+      txt = WebTestUtils.decode_qr(@connections, 'qrcode.png')
+      puts "got text: #{txt}"
+      s = txt.split('/')
+      puts "teamid: #{s[-1]}"
+      s[-1]
+    end
+
+    def confirm_check_in(teamid, allhere = true)
+      puts "confirm check in: #{teamid}"
+      nav_to("volunteer/checkin/#{teamid}")
+
+      # confirm on right page
+      c = get_ext_element(:xpath, '//div[text()="Confirm check-in to see what they need."]')
+      puts "got confirmation banner: #{c}"
+      refute_nil c
+
+      if allhere
+        assert(no_match_source('Not Here'))
+      else
+        assert(match_source('Not Here'))
+      end
+
+      # get confirm button
+      button = get_ext_element(:xpath, '//button[text()="Confirm Check In"]')
+      puts "got confirm button: #{button}"
+      refute_nil button
+
+      # click
+      puts 'click confirmation button'
+      button.click
+      sleep 1
+
+      # confirmation dialog
+      yesbutton = get_ext_element(:xpath, '//button[text()="Yes Check Them In!"]')
+      refute_nil yesbutton
+      yesbutton.click
+      sleep 1
+
+      # check final confirmation
+      c = get_ext_element(:xpath, '//div[text()="Check In Confirmed!"]')
+      refute_nil c
+    end
+
     def delete_test_users(marker)
       nav_to('admin/users')
       sleep 0.5
@@ -584,6 +852,7 @@ module WebTestUtils
     # @param [Symbol] mode :virtual or :inperson
     # @param [Boolean] looking true -> turn on looking for members
     def create_team_from_profile(teamname, teampw, division, mode, looking)
+      puts "create team: #{teamname} div #{division} mode #{mode} looking #{looking}"
       # look for create team button and click it
       createbutton = get_ext_element(:xpath, "//button[text()='Create a Team']")
       refute_nil createbutton
@@ -609,8 +878,15 @@ module WebTestUtils
       tdiv.click
 
       # play
-      tplay = get_ext_element(:xpath, '//a[text()="Play In-Person"]')
-      tplay.click
+      if mode == :inperson
+        tplay = get_ext_element(:xpath, '//a[text()="Play In-Person"]')
+        tplay.click
+      elsif mode == :virtual
+        tplay = get_ext_element(:xpath, '//a[text()="Play Virtually"]')
+        tplay.click
+      else
+        raise "unknown team mode: #{mode}"
+      end
 
       # looking
       if looking
@@ -776,6 +1052,13 @@ module WebTestUtils
       assert_equal(lstr, lbldiv.text)
 
       close_dialog
+    end
+
+    def check_team_checked_in(teamname)
+      admin_nav_to_team_dialog(teamname)
+
+      undobutton = get_ext_element(:xpath, '//button[text()="Undo Check-In"]')
+      refute_nil undobutton
     end
 
     def nav_to_teams_looking_for_players
