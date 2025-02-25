@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import QR from 'qrcode.react';
+import { QRCodeCanvas } from 'qrcode.react';
 import {Container, Segment} from 'semantic-ui-react';
 
 QRCode = class QRCode extends Component {
@@ -64,7 +64,7 @@ QRCode = class QRCode extends Component {
         </p>
         <p className="h4">QR codes are just a way of encoding arbitrary data.  Below we have an example for you to play with!<br/>Try typing something else in!  (Try typing in a lot of characters)</p>
 
-        <QR value={this.state.encode} size={parseInt(this.state.size)} />
+        <QRCodeCanvas value={this.state.encode} size={parseInt(this.state.size)} />
 
         <br/>
         <div className="ui form">
