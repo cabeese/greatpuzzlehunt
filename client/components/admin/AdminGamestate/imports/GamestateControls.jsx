@@ -5,6 +5,20 @@ import { Radio, Container, Input, Button, Header, Form, } from 'semantic-ui-reac
 
 import GamestateComp from '../../../imports/GamestateComp';
 
+async function callMeteorMethod(methodName, ...args) {
+  try {
+    await Meteor.callAsync(methodName, ...args);
+    return true;
+  } catch(error) {
+    console.error(`Failed to call meteor method "${methodName}" with args`,
+                  ...args);
+    console.log(error);
+    alert(`${methodName} failed: ${error.message}`);
+    return false;
+  }
+}
+
+
 class GamestateControlsInner extends Component {
 
   constructor(props) {
@@ -48,10 +62,10 @@ class GamestateControlsInner extends Component {
     }
   }
 
-  _getReport(index) {
+  async _getReport(index) {
     let self = this;
     this.setState({reportDLBusy: true});
-    Meteor.call('admin.downloadReport', index, (error, result) => {
+    await Meteor.callAsync('admin.downloadReport', index, (error, result) => {
       self.setState({reportDLBusy: false});
       if(error){
         console.log(error);
@@ -82,20 +96,22 @@ class GamestateControlsInner extends Component {
 
         <Header as="h4" content="Email Reports" />
         <Button icon="mail" content="Email (all 3) Reports to Me"
-          onClick={(e) => Meteor.call('admin.sendReport')} />
+                onClick={async (e) => {
+                  await callMeteorMethod('admin.sendReport');
+                }} />
         <Button icon="mail" content="Email List of Users & Teams to Me"
-          onClick={(e) => {
-            Meteor.call('admin.sendUsersAndTeams'); alert("Emails are sending!");
+          onClick={async (e) => {
+            await callMeteorMethod('admin.sendUsersAndTeams');
           }} />
         <Button icon="mail" content="Email Leaderboard to Me"
-          onClick={(e) => Meteor.call('admin.sendLeaderboard')} />
+          onClick={async (e) => await callMeteorMethod('admin.sendLeaderboard')} />
 
         <Header as="h4" content="Nightly Reports" />
         <div>
           {sendReportsTo.map(email => {
             return (
               <Button
-                onClick={() => this.removeRecipient(email)}
+                onClick={async () => await this.removeRecipient(email)}
                 key={email}
                 content={email}
                 icon="x"
@@ -115,7 +131,7 @@ class GamestateControlsInner extends Component {
 
           <Button
             content="Add recipient to reports list"
-            onClick={() => this.addRecipient(this.state.reportEmail)} />
+            onClick={async () => await this.addRecipient(this.state.reportEmail)} />
         </div>
         { this._fieldButton('doSendNightlyReports', "Nightly Reports") }
 
@@ -168,7 +184,7 @@ class GamestateControlsInner extends Component {
 
         <Header as='h3' content='Banner' />
         { this._fieldButton("displayBanner", "Display Banner on Home Page") }
-	<Form onSubmit={(e) => this.setBanner(e)}>
+	<Form onSubmit={async (e) => await this.setBanner(e)}>
 	  <Form.TextArea label='Banner (Markdown Supported)'
                          style={{ fontFamily: "courier" }}
                          placeholder="# Markdown-supported announcement"
@@ -187,51 +203,31 @@ class GamestateControlsInner extends Component {
     return (
       <Button icon="download"
         content={name}
-        onClick={ () => this._getReport(index) }
+        onClick={ async () => await this._getReport(index) }
         disabled={this.state.reportDLBusy} />
     );
   }
 
-  removeRecipient(email) {
+  async removeRecipient(email) {
     if(confirm(`Are you sure you want to remove ${email} from nightly reports?`)){
-      Meteor.call(`admin.gamestate.reports.removeRecipient`, email, error => {
-        if (error){
-          console.log(error);
-          alert("Failed to remove email. " + error.reason);
-        }
-      });
+      await callMeteorMethod(`admin.gamestate.reports.removeRecipient`, email);
     }
   }
 
-  addRecipient(email) {
+  async addRecipient(email) {
     if(!email) return;
 
-    Meteor.call(`admin.gamestate.reports.addRecipient`, email, error => {
-      if (error){
-        console.log(error);
-        alert("Failed to add email. " + error.reason);
-      }
-    });
+    await callMeteorMethod(`admin.gamestate.reports.addRecipient`, email);
   };
 
-  setWebinarInfo(url, id, backupURL){
-    Meteor.call('admin.gamestate.setWebinarInfo', url, id, backupURL, error => {
-      if(error){
-        console.log(error);
-        alert("Failed to set webinar info. " + error.reason);
-      }
-    });
+  async setWebinarInfo(url, id, backupURL){
+    await callMeteorMethod('admin.gamestate.setWebinarInfo', url, id, backupURL);
   }
 
-  setBanner(e){
+  async setBanner(e){
     e.preventDefault();
     const { bannerMarkdown } = this.state;
-    Meteor.call('admin.gamestate.setBannerMarkdown', bannerMarkdown, error => {
-      if(error){
-        console.log(error);
-        alert("Failed to set banner info. " + error.reason);
-      }
-    });
+    await callMeteorMethod('admin.gamestate.setBannerMarkdown', bannerMarkdown);
   }
 
   _fieldButton(fieldName, displayName) {
@@ -245,17 +241,15 @@ class GamestateControlsInner extends Component {
         <Radio toggle
           checked={fieldValue}
           label={displayName}
-          onClick={(e) => this._toggleField(fieldName) }
+          onClick={async (e) => await this._toggleField(fieldName) }
         />
       </div>
     );
   }
 
-  _toggleField(fieldName) {
+  async _toggleField(fieldName) {
     if (confirm(`Are you sure you want to toggle ${fieldName}?`)) {
-      Meteor.call(`admin.gamestate.toggleField`, fieldName, (error, result) => {
-        if (error) alert(error.reason);
-      });
+      await callMeteorMethod(`admin.gamestate.toggleField`, fieldName);
     }
   }
 }

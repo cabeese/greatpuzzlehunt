@@ -42,7 +42,7 @@ const gearPricing = (
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul> */}
     <ul>
-      <li>Prices on varying styles range from $20&ndash;$35, additional $2 for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
+      <li>Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
       <li>Gear sales end midnight {gearSaleEnd}.</li>
       <li>Shirts will be ordered on Monday, April 28 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of May 12, 2025.</li>
       <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
@@ -58,7 +58,7 @@ const importantDates = (
     <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
     <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
     <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can join a team until 10:00 AM (PT).</List.Item>
-    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes.</List.Item>
+    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes at midnight.</List.Item>
   </List>
 );
 
@@ -200,19 +200,6 @@ FAQ = class FAQ extends Component {
             <iframe frameBorder="0" height="450" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDzFT6fltUNTF7Vas25IJmMkUAa5yVPi4I&amp;q=Campus+Services+Bellingham+WA" width="100%" />
           </Accordion.Content> 
 
-          <Accordion.Title active={activeIndex === 1} index={1} onClick={(e,p) => this.handleClick(e,p)} >
-            <Icon color="red" size="huge" name="dropdown"/>
-            <Icon name="info"/>
-            Safety
-          </Accordion.Title>
-          <Accordion.Content active={activeIndex === 1}>
-            In support of safety, teammates:
-            <ul>
-              <li>From different households may connect via a video conferencing platform (Zoom, Discord, Skype, &hellip;).</li>
-              <li>In the same physical space may follow the <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/prevention.html">CDC recommendations</a>.
-              </li>
-            </ul>
-          </Accordion.Content>
           <Accordion.Title active={activeIndex === 2} index={2} onClick={(e,p) => this.handleClick(e,p)} >
             <Icon color="red" size="huge" name="dropdown"/>
             <Icon name="info"/>
@@ -336,12 +323,12 @@ FAQ = class FAQ extends Component {
           <Accordion.Content active={activeIndex === 6}>
             <List className='bulleted'>
               <List.Item 
-                header="WWU Students"
-                description="All team members must be currently enrolled at WWU (undergrad or grad)."
+                header="Post-secondary Students"
+                description="All team members must be currently enrolled in a post-secondary institution - undergrad or grad (college, university, technical school, etc.)."
               />
               <List.Item
                 header="WWU Alumni"
-                description="At least half of team members must be WWU Alumni"
+                description="At least half of team members must be WWU Alumni."
               />
               {/*
               <List.Item 
@@ -554,8 +541,8 @@ FAQ = class FAQ extends Component {
             <Grid stackable>
               <Grid.Row>
                 <Grid.Column width={10}>
-                  <p>There are 11 style choices, wonderful colors, and an awesome design!</p>
-                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed.</p>}
+                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed. Opens {regularRegistrationStart}.</p>}
+                  <p>There are 13 style choices, wonderful colors, and an awesome design!</p>
                   {gearPricing}
 		<LinkButton as='a'
 			    href="https://foundation.wwu.edu/greatpuzzlehunt"
@@ -572,7 +559,7 @@ FAQ = class FAQ extends Component {
 		  : "" }
                 </Grid.Column>
                 <Grid.Column width={6}>
-                  <Image src={`https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/shirt_design_sponsorless.png`}/>
+                  <Image src={`https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/shirt_design_background.png`}/>
                 </Grid.Column>
 
               </Grid.Row>
@@ -614,7 +601,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: November 2024</p>
+        <p>Last Updated: January 2025</p>
       </Segment>
       </Container>
     );

@@ -8,11 +8,11 @@ const accts = Meteor.settings.accounts || {};
 const { token } = accts;
 
 WebApp.connectHandlers.use("/api", bodyParser.urlencoded({ extended: true }));
-WebApp.connectHandlers.use('/api/tickets', (req, res, next) => {
+WebApp.connectHandlers.use('/api/tickets', async (req, res, next) => {
   Meteor.logger.info(`Request on "/api/tickets" from ${Meteor.logger.jstring(req.headers)}`);
   const req_token = req.query.token;
 
-  handleRequest(req, res, req_token, req.body);
+  await handleRequest(req, res, req_token, req.body);
 });
 
 const handleRequest = async (req, res, req_token, body) => {
@@ -43,7 +43,7 @@ const handleRequest = async (req, res, req_token, body) => {
 
 const badResponse = (res, message) => {
   Meteor.logger.info(`Request on "/api/tickets" with bad data`);
-  body = {
+  const body = {
     error: "Invalid data",
     details: message,
   };

@@ -22,16 +22,19 @@ class PuzzleList extends Component {
       <Grid.Row columns='1'>
         <Grid.Column>
           <Header as='h3' content='Puzzles'/>
-          <Button basic size='small' content='New Puzzle' onClick={ () => this._createPuzzle() }/>
+          <Button basic size='small' content='New Puzzle'
+                  onClick={async () => await this._createPuzzle() }/>
         </Grid.Column>
       </Grid.Row>
     );
   }
 
-  _createPuzzle() {
-    Meteor.call('admin.puzzle.create', (error, result) => {
-      if (error) return alert(error.reason);
-    });
+  async _createPuzzle() {
+    try {
+      await Meteor.callAsync('admin.puzzle.create');
+    } catch (error) {
+      alert(error.reason);
+    }
   }
 
   _puzzles() {
@@ -76,7 +79,7 @@ class PuzzleList extends Component {
     });
 
     return (
-      <Grid.Row columns={5} key={ puzzle._id } color={isActive ? "teal" : undefined}>
+      <Grid.Row columns={5} name={ puzzle._id} key={ puzzle._id } color={isActive ? "teal" : undefined}>
         <Grid.Column>
           <Label color={ stagesColors[puzzle.stage] } content={ puzzle.stage }/>&nbsp; { puzzle.name }
         </Grid.Column>

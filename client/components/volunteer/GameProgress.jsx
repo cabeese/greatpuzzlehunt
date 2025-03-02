@@ -8,6 +8,9 @@ import moment from 'moment';
 import { renderDuration } from '../imports/PuzzleProgress';
 import { getFinalScore } from '../../../lib/imports/puzzle-helpers';
 
+import { Puzzles } from '../../../lib/collections/puzzles.js';
+import { Teams } from '../../../lib/collections/teams.js';
+
 class GameProgressInner extends React.Component {
   constructor(props) {
     super(props);

@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
+import { Teams } from '../../../lib/collections/teams.js'
+
 export default function TeamComp(Comp) {
   return withTracker(() => {
     const handle = Meteor.subscribe('teams.myTeam');

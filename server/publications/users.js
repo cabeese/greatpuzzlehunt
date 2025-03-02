@@ -3,6 +3,8 @@ import { check, Match } from 'meteor/check';
 import { isAdmin } from '../../lib/imports/method-helpers.js';
 import { extend } from 'lodash';
 
+import { Teams } from '../../lib/collections/teams.js'
+
 const FIND_LIMIT = 25;
 const USER_FIELDS = {
   emails: 1,
@@ -35,11 +37,11 @@ Meteor.publish(null, function() {
   return Meteor.users.find({ _id: userId }, { fields: USER_FIELDS });
 });
 
-Meteor.publish('users.myTeam', function() {
+Meteor.publish('users.myTeam', async function() {
   const { userId } = this;
   if (!userId) return this.ready();
 
-  const user = Meteor.users.findOne(userId);
+  const user = await Meteor.users.findOneAsync(userId);
   if (!user) return this.ready();
 
   return Meteor.users.find({ teamId: user.teamId }, { fields: USER_FIELDS });
@@ -49,12 +51,7 @@ Meteor.publish('users.lookingForTeam', function() {
   const { userId } = this;
   if (!userId) return this.ready();
 
-  return Meteor.users.find({ lookingForTeam: true, teamId: null, accountType: { $ne: 'VOLUNTEER' } }, { fields: {
-    firstname: true,
-    emails: true,
-    bio: true,
-    lookingForTeam: true,
-  }});
+  return Meteor.users.find({ lookingForTeam: true, teamId: null, accountType: { $ne: 'VOLUNTEER' } }, { fields: USER_FIELDS });
 });
 
 Meteor.publish('admin.team.members', function(teamId) {

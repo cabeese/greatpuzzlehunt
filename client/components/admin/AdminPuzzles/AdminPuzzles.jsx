@@ -57,11 +57,13 @@ AdminPuzzles = class AdminPuzzles extends Component {
     this.setState({ activePuzzle: puzzle });
   }
 
-  _deletePuzzle(puzzle) {
+  async _deletePuzzle(puzzle) {
     if (!confirm(`Are you sure you want to delete ${puzzle.name} (${puzzle._id})?`)) return;
-    Meteor.call('admin.puzzle.delete', puzzle._id, (error, result) => {
-      if (error) return alert(error.reason);
+    try {
+      await Meteor.callAsync('admin.puzzle.delete', puzzle._id);
       console.log(`Deleted puzzle ${puzzle.name} (${puzzle._id})`);
-    });
+    } catch (error) {
+      alert(error.reason);
+    }
   }
 }

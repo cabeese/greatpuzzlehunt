@@ -1,6 +1,8 @@
-import { Meteor } from 'meteor/meteor'
+import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import React, { Component } from 'react';
+
+import { Teams } from '../../../../../lib/collections/teams.js';
 
 import AdminTeamTable from './AdminTeamTable';
 

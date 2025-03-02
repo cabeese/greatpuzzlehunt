@@ -1,7 +1,29 @@
 # The Great Puzzle Hunt
 An on-line and in person real-time puzzle scavenger hunt!
 
-## Development Setup
+## Development Setup (As of Meteor 3)
+
+> Meteor 3 considerably modified the install process. The instructions here are brief because of that, but may be incomplete.
+
+You should have NodeJS (and possibly Python) installed on your machine. Then:
+
+```bash
+npx meteor
+```
+
+The [Meteor docs](https://docs.meteor.com/about/install.html) have further details.
+
+After installing meteor and cloning this repository, run
+
+```bash
+npm start
+```
+
+to start the server. Then navigate to `localhost:3000` to see the page.
+
+## Development Setup Prior to Meteor 3
+
+> NOTE: These instructions are for older versions of the project using Meteor@2.
 
 1. Install `python2` if you don't already have it (needed for nvm). You'll likely also need `build-essential` and `coreutils` package if on a fresh Linux install.)
 

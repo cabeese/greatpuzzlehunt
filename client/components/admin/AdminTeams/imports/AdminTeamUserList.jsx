@@ -17,13 +17,13 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
         }
     }
 
-    removeUserFromTeam(userId){
-        Meteor.call('admin.user.setTeam', userId, "", error => {
-            if(error){
-                console.log(error);
-                alert(`Failed to remove user from team. ${error.reason}`);
-            }
-        });
+    async removeUserFromTeam(userId){
+        try {
+            await Meteor.callAsync('admin.user.setTeam', userId, "");
+        } catch (error){
+            console.log(error);
+            alert(`Failed to remove user from team. ${error.reason}`);
+        }
     }
 
     _userRow(user){
@@ -48,7 +48,7 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
                 </Table.Cell>
                 <Table.Cell>
                     <Button color="red" size="small" disabled={isOwner}
-                        onClick={() => this.removeUserFromTeam(user._id)}>
+                        onClick={async () => await this.removeUserFromTeam(user._id)}>
                         <Icon name="x" />Remove
                     </Button>
                 </Table.Cell>

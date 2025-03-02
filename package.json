@@ -2,9 +2,6 @@
   "name": "wwugreatpuzzlehunt",
   "version": "1.0.0",
   "description": "A Puzzle Hunt Game System",
-  "engines": {
-    "node": "16.x"
-  },
   "main": "main.js",
   "scripts": {
     "start": "meteor --settings settings-development.json || true",
@@ -22,7 +19,7 @@
   },
   "homepage": "https://github.com/kyle-rader/greatpuzzlehunt#readme",
   "dependencies": {
-    "@babel/runtime": "^7.15.4",
+    "@babel/runtime": "^7.26.7",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.1",
     "clipboard": "^2.0.8",
@@ -33,17 +30,17 @@
     "lodash": "^4.17.21",
     "marked": "^12.0.1",
     "meteor-node-stubs": "^1.1.0",
+    "minipass": "^7.1.2",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.35",
-    "mongodb": "^4.3.1",
+    "mongodb": "^6.11.0",
+    "os-browserify": "^0.3.0",
     "prop-types": "^15.7.2",
-    "qrcode.react": "^1.0.1",
+    "qrcode.react": "^4.2.0",
     "react": "^17.0.2",
-    "react-addons-create-fragment": "^15.6.2",
     "react-addons-pure-render-mixin": "^15.6.3",
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.2",
-    "react-mounter": "^1.2.0",
     "react-paginate": "^8.0.3",
     "react-router-dom": "^6.1.1",
     "react-scroll-up": "^1.3.7",
@@ -51,15 +48,14 @@
     "react-slick": "^0.28.1",
     "react-youtube": "^7.13.1",
     "request": "^2.88.2",
-    "semantic-ui-react": "^2.0.4",
+    "semantic-ui-react": "^2.1.5",
     "slick-carousel": "^1.8.1",
     "winston": "^3.3.3",
     "winston-transport": "^4.4.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.1",
-    "postcss": "8.4.31",
-    "postcss-load-config": "^4.0.1"
+    "autoprefixer": "^6.7.7",
+    "ts-node": "^10.9.2"
   },
   "postcss": {
     "plugins": {

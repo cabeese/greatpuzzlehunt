@@ -8,6 +8,8 @@ import moment from 'moment';
 
 import { browserHistory } from '../../history';
 
+import { Teams } from '../../../lib/collections/teams.js';
+
 import {DIVISION_TYPES} from './imports/team-helpers';
 
 const DIVISION_OPTS = [

@@ -180,7 +180,7 @@ class RegisterForm extends Component {
   _form() {
     return (
       <div>
-      <Form onSubmit={ (e) => this._register(e) } style={ this._formStyle() }>
+        <Form onSubmit={ async (e) => { await this._register(e); } } style={ this._formStyle() }>
         <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at 9:30am Pacific Time`} />
         {/* materials banner
         <Message color='orange' size='huge'>
@@ -316,16 +316,19 @@ class RegisterForm extends Component {
     };
   }
 
-  _register(e) {
+  async _register(e) {
     e.preventDefault();
-    const data = this._registrationData();
-
     this.setState({ mode: 'loading' });
 
-    Meteor.call('user.register', data, (error, result) => {
-      if (error) return this.setState({ error, mode: 'register' });
-      this.setState({ error: null, result, mode: 'thankyou' });
-    });
+    const data = this._registrationData();
+
+    try {
+      await Meteor.callAsync('user.register', data);
+      this.setState({ error: null, mode: 'thankyou' });
+    } catch(error) {
+      this.setState({ error, mode: 'register' });
+      return;
+    }
   }
 
   _gameModeNote(inPersonOpen) {

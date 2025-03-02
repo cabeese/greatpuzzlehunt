@@ -63,19 +63,18 @@ class MessageUserModal extends Component {
 
   _handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
-  _sendMessage(e) {
+  async _sendMessage(e) {
     // send the message
     this.setState({loading: true});
-    Meteor.call('user.matchmaking-message', this.state.user.email.toLowerCase(), this.state.text, (error, result) => {
-      if (error) {
-	      this.setState({
-          error: error.message,
-          loading: false,
-        });
-      } else {
-        this.setState({didSend: true, loading: false});
-      }
-    });
+    try {
+      await Meteor.callAsync('user.matchmaking-message', this.state.user.email.toLowerCase(), this.state.text);
+      this.setState({didSend: true, loading: false});
+    } catch (error) {
+      this.setState({
+        error: error.message,
+        loading: false,
+      });
+    }
   }
 
   _clearState() {

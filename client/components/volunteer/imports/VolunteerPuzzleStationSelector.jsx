@@ -11,6 +11,9 @@ import {
   Confirm,
 } from 'semantic-ui-react';
 
+import { Gamestate } from '../../../../lib/collections/gamestate-collection.js';
+import { Puzzles } from '../../../../lib/collections/puzzles.js';
+
 function volunteerPuzzleComp(Comp) {
   return withTracker((props) => {
     const handle = Meteor.subscribe('volunteer.puzzles');

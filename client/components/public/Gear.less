@@ -1,9 +1,31 @@
 @import '../../lib/less/variables.less';
 
+.ui.modal > .content {
+    font-size: 12pt;
+}
+
+// Put single black border between cells of table
+.charge-table th, .charge-table td {
+    border-style: solid;
+    border: 1px solid black;
+    padding: 0.5em;
+}
+
+.charge-table {
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+.slick-prev, .slick-next
+{
+    color: black;
+    background-color: black;
+}
+
 .carousel-dots
 {
     position: absolute;
-    bottom: -25px;
+    bottom: 25px;
 
     display: block;
 
@@ -58,7 +80,7 @@
 }
 .carousel-dots li button:before
 {
-    font-size: 30px;
+    font-size: 40px;
     line-height: 20px;
 
     position: absolute;
@@ -83,12 +105,29 @@
     color: black;
 }
 
+.gear-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: first baseline;
+    gap: 20px;
+}
+
 .gearitem {
     width: 30% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ui.modal .gearitem {
+    width: 20% !important;
 }
 
 @media all and (max-width: @desktop-min) {
     .gearitem {
         width: 45% !important;
     }
+    .ui.modal .gearitem {
+        width: 45% !important;
+    }
 }
+

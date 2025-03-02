@@ -18,10 +18,19 @@ Authed = class Authed extends React.Component {
 }
 
 Authed = withTracker(({ accessLevel }) => {
+  // TODO: fetching the entire user object is expensive. We should
+  // trim down to the minimum necessary fields, though this may be
+  // complex due to how many components use this component.
+  const user = Meteor.user();
   return {
-    user: Meteor.user(),
+    user: user,
     canView() {
-      return Boolean(Meteor.user()) && Meteor.user().hasRole(accessLevel);
+      if (user && !user.roles) {
+        console.error("this component tried to call user.hasRole ",
+                      "but user.roles is undefined. ",
+                      "component: Authed.jsx");
+      }
+      return Boolean(user) && user.hasRole(accessLevel);
     }
   };
 })(Authed);

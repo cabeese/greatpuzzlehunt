@@ -1,4 +1,4 @@
-import { meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -8,15 +8,18 @@ import {
 class PreUserCheckin extends Component {
   render() {
     return (
-      <Button fluid color="green" size="large" icon="rocket" content="Start Check In" onClick={(e) => this._startChecking(e)}/>
+      <Button fluid color="green" size="large" icon="rocket" content="Start Check-In"
+              onClick={async (e) => await this._startCheckIn(e)}/>
     );
   }
 
-  _startChecking(e) {
+  async _startCheckIn(e) {
     e.preventDefault();
-    Meteor.call('team.checkin.start', (error, result) => {
-      if (error) return alert(`Oops! ${error.reason}`);
-    });
+    try {
+      await Meteor.callAsync('team.checkin.start');
+    } catch (error) {
+      alert(`Oops! ${error.reason}`);
+    }
   }
 }
 

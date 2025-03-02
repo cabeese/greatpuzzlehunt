@@ -44,7 +44,7 @@ TeamEditor = class TeamEditor extends Component {
 
   render() {
     return (
-      <Form widths='equal' onSubmit={(e) => this._saveTeam(e)}>
+      <Form widths='equal' onSubmit={async (e) => await this._saveTeam(e)}>
 
         {this._ncConfirmation()}
 
@@ -228,15 +228,17 @@ TeamEditor = class TeamEditor extends Component {
     );
   }
 
-  _saveTeam(e) {
+  async _saveTeam(e) {
     e.preventDefault();
     const data = this._teamData();
 
-    Meteor.call('teams.upsert', data, (error, result) => {
-      if (error) return this.setState({ error });
+    try {
+      await Meteor.callAsync('teams.upsert', data);
       this.setState({ success: 'Team Saved!', error: null });
       Meteor.setTimeout(() => this.setState({success: null}), 2000);
-    });
+    } catch(error) {
+      this.setState({ error });
+    }
   }
 
   _teamData() {

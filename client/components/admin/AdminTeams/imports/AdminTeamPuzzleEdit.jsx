@@ -84,7 +84,7 @@ class AdminTeamPuzzleEdit extends Component {
     this.state.hints.forEach((hint, index) => {
       const boxname = 'hint' + index;
       hintsEdit.push(<Checkbox name={boxname}
-			       onChange={(e, data) => this._handleCheckChange(e, data)}
+			       onChange={async (e, data) => await this._handleCheckChange(e, data)}
 			       checked={hint.taken}
 		     />);
       hintsEdit.push('\u00A0\u00A0');
@@ -130,21 +130,21 @@ class AdminTeamPuzzleEdit extends Component {
 	      </Form.Field>
 	      <Form.Field width={2} error={this.state.startHHError}>
 		<Input name='start-hh'
-                       onChange={(e, data) => this._handleStartDataChange(e, data)}
+                       onChange={async (e, data) => await this._handleStartDataChange(e, data)}
 		       value={pstarthh}
 		/>
 	      </Form.Field>
 	      <Form.Field width={2} error={this.state.startMMError}>
 		<label> : </label>
 		<Input name='start-mm'
-                       onChange={(e, data) => this._handleStartDataChange(e, data)}
+                       onChange={async (e, data) => await this._handleStartDataChange(e, data)}
 		       value={pstartmm}
 		/>
 	      </Form.Field>
 	      <Form.Field width={2} error={this.state.startSSError}>
 		<label> : </label>
 		<Input name='start-ss'
-                       onChange={(e, data) => this._handleStartDataChange(e, data)}
+                       onChange={async (e, data) => await this._handleStartDataChange(e, data)}
 		       value={pstartss}
 		/>
 	      </Form.Field>
@@ -166,21 +166,21 @@ class AdminTeamPuzzleEdit extends Component {
 	      </Form.Field>
 	      <Form.Field width={2} error={this.state.endHHError} inline>
 		<Input name='end-hh'
-                       onChange={(e, data) => this._handleEndDataChange(e, data)}
+                       onChange={async (e, data) => await this._handleEndDataChange(e, data)}
 		       value={pendhh}
 		/>
 	      </Form.Field>
 	      <Form.Field width={2} error={this.state.endMMError} inline>
 		<label> : </label>
 		<Input name='end-mm'
-                       onChange={(e, data) => this._handleEndDataChange(e, data)}
+                       onChange={async (e, data) => await this._handleEndDataChange(e, data)}
 		       value={pendmm}
 		/>
 	      </Form.Field>
 	      <Form.Field width={2} error={this.state.endSSError} inline>
 		<label> : </label>
 		<Input name='end-ss'
-                       onChange={(e, data) => this._handleEndDataChange(e, data)}
+                       onChange={async (e, data) => await this._handleEndDataChange(e, data)}
 		       value={pendss}
 		/>
 	      </Form.Field>
@@ -242,7 +242,7 @@ class AdminTeamPuzzleEdit extends Component {
 		  color='green'
 		  content='Save'
 		  disabled={this._isAnError()}
-		  onClick={(e) => this._update(e)}
+		  onClick={async (e) => await this._update(e)}
 		/>
 	      </Form.Field>
 	    </Form.Group>
@@ -261,7 +261,7 @@ class AdminTeamPuzzleEdit extends Component {
     );
   }
 
-  _handleStartDataChange(e, data) {
+  async _handleStartDataChange(e, data) {
     const { name } = data;
 
     let startEdit = moment(this.state.start);
@@ -293,10 +293,10 @@ class AdminTeamPuzzleEdit extends Component {
 		    startMMError: mmErr,
 		    startSSError: ssErr
 		  });
-    this._recalculateScore();
+    await this._recalculateScore();
   }
 
-  _handleEndDataChange(e, data) {
+  async _handleEndDataChange(e, data) {
     const { name } = data;
 
     let endEdit = moment(this.editPuzzle.end);
@@ -328,10 +328,10 @@ class AdminTeamPuzzleEdit extends Component {
 		    endMMError: mmErr,
 		    endSSError: ssErr
 		  });
-    this._recalculateScore();
+    await this._recalculateScore();
   }
 
-  _handleCheckChange(e, data) {
+  async _handleCheckChange(e, data) {
     const { name } = data;
     const oldHints = this.editPuzzle.hints;
     let newHints = [];
@@ -348,50 +348,48 @@ class AdminTeamPuzzleEdit extends Component {
     });
     this.editPuzzle.hints = newHints;
     this.setState({ hints: newHints });
-    this._recalculateScore();
+    await this._recalculateScore();
   }
 
-  _recalculateScore() {
+  async _recalculateScore() {
     this.setState( { startEndOrderError: (this.editPuzzle.start >= this.editPuzzle.end) });
 
-    Meteor.call('admin.team.computeScore', this.editPuzzle,
-		(err, res) => {
-		  if (err) {
-		    console.log('recalculate score error');
-		    console.log(err);
-		  } else {
-		    const [newTimeout, newScore] = res;
-		    this.editPuzzle.score = newScore;
-		    this.editPuzzle.timedOut = newTimeout;
-		    this.setState({ score: newScore, timedOut: newTimeout });
-		  }
-		});
+    try {
+      await Meteor.callAsync('admin.team.computeScore', this.editPuzzle);
+      const [newTimeout, newScore] = res;
+      this.editPuzzle.score = newScore;
+      this.editPuzzle.timedOut = newTimeout;
+      this.setState({ score: newScore, timedOut: newTimeout });
+    } catch (err) {
+      console.log('recalculate score error');
+      console.log(err);
+    }
   }
 
-  _resetStart() {
+  async _resetStart() {
     this.editPuzzle.start = this.props.puzzle.start;
     this.setState({ start: this.props.puzzle.start,
 		    startHHError: false,
 		    startMMError: false,
 		    startSSError: false
 		  });
-    this._recalculateScore();
+    await this._recalculateScore();
   }
 
-  _resetEnd() {
+  async _resetEnd() {
     this.editPuzzle.end = this.props.puzzle.end;
     this.setState({ end: this.props.puzzle.end,
 		    endHHError: false,
 		    endMMError: false,
 		    endSSError: false
 		  });
-    this._recalculateScore();
+    await this._recalculateScore();
   }
 
-  _resetHints() {
+  async _resetHints() {
     this.editPuzzle.hints = this.props.puzzle.hints;
     this.setState({ hints: this.props.puzzle.hints });
-    this._recalculateScore();
+    await this._recalculateScore();
   }
 
   _isAnError() {
@@ -405,22 +403,19 @@ class AdminTeamPuzzleEdit extends Component {
 	    this.state.saveError );
   }
 
-  _update(e) {
+  async _update(e) {
     e.preventDefault();
 
-    Meteor.call('admin.team.updatePuzzlePlay',
-		this.props.team._id,
-		this.editPuzzle,
-		(err, res) => {
-		  if (err) {
-		    alert(`Failed to update puzzle play information. ${err}`);
-		    return this.setState({saveError: err});
-		  } else {
-		    this.setState({saveError: null});
-		    alert('Puzzle play information updated');
-		  }
-		});
-		
+    try {
+      await Meteor.callAsync('admin.team.updatePuzzlePlay',
+		             this.props.team._id,
+		             this.editPuzzle);
+      this.setState({saveError: null});
+      alert('Puzzle play information updated');
+    } catch (err) {
+      alert(`Failed to update puzzle play information. ${err}`);
+      this.setState({saveError: err});
+    }
   }
 }
 

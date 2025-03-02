@@ -91,7 +91,8 @@ class PuzzleEditor extends Component {
         </Form.Group>
 
         <Form.Group>
-          <Form.Button color='green' content='Save' onClick={(e) => this._save(e)}/>
+          <Form.Button color='green' content='Save'
+                       onClick={async (e) => await this._save(e)}/>
           <Form.Button basic content='Close' onClick={this.props.closePuzzle}/>
         </Form.Group>
 
@@ -99,7 +100,7 @@ class PuzzleEditor extends Component {
     );
   }
 
-  _save(e) {
+  async _save(e) {
     e.preventDefault();
     const { name, stage, answer, allowedTime, timeoutScore,
             bonusTime, location, downloadURL, hints,
@@ -119,10 +120,12 @@ class PuzzleEditor extends Component {
       triggerHintImageURL: triggerHintImageURL.trim(),
     };
 
-    Meteor.call('admin.puzzle.update', this.props.puzzle._id, fields, (error, result) => {
-      if (error) return alert(error.reason);
-      alert(`"${fields.name}" saved!`)
-    });
+    try {
+      await Meteor.callAsync('admin.puzzle.update', this.props.puzzle._id, fields);
+      alert(`"${fields.name}" saved!`);
+    } catch (error) {
+      alert(error.reason);
+    }
   }
 
   _handleChange(e) {
