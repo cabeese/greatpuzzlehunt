@@ -23,7 +23,6 @@ export default class InactivePuzzle extends React.Component {
         team={ team }
         puzzle={ puzzle }
         disabled={ disabled }
-        showAnswer={ true }
       />;
     } else if (team.inPerson) {
       return <UnstartedPuzzle
