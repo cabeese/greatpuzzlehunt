@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Segment, Header, Message, Statistic } from 'semantic-ui-react';
 import moment from 'moment';
 
-import PuzzleProgress, { renderScore } from './PuzzleProgress';
-import { getHintsTaken } from '../../../lib/imports/puzzle-helpers';
+import PuzzleProgress, { renderScore } from '../../imports/PuzzleProgress';
+import { getHintsTaken } from '../../../../lib/imports/puzzle-helpers';
 
 export default class CompletePuzzle extends React.Component {
   render() {

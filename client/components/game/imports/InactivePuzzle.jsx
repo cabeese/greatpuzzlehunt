@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Segment, Header, Progress, Button } from 'semantic-ui-react';
 import UnstartedPuzzle from './UnstartedPuzzle';
 import UnstartedPuzzleVirtual from './UnstartedPuzzleVirtual';
-import CompletePuzzle from '../../imports/CompletePuzzle';
+import CompletePuzzle from './CompletePuzzle';
 
 export default class InactivePuzzle extends React.Component {
   constructor(props) {
