@@ -11,18 +11,22 @@ class GameUI extends Component {
   render() {
     const { team } = this.props;
     if (!team.hasBegun) {
-      return <Button fluid size='big' color='blue' content='Click to Begin' onClick={() => this._begin() }/>
+      return <Button fluid size='big' color='blue'
+                     content='Click to Begin'
+                     onClick={async () => await this._begin() } />;
     } else if (!team.puzzles) {
-      return <Loading/>
+      return <Loading/>;
     } else {
       return this._main();
     }
   }
 
-  _begin() {
-    Meteor.call('team.begin', (error, result) => {
-      if (error) alert(`Oops! ${error.reason}`);
-    });
+  async _begin() {
+    try {
+      await Meteor.callAsync('team.begin');
+    } catch (error) {
+      alert(`Oops! ${error.reason}`);
+    }
   }
 
   _main() {

@@ -73,7 +73,7 @@ class PuzzleList extends Component {
       }
     });
     puzzle.hints.forEach((hint, i) => {
-      if (!hint.imageUrl || !hint.text) {
+      if (!hint.imageUrl && !hint.text) {
         issues.push(`Hint ${i} empty or missing data`);
       }
     });

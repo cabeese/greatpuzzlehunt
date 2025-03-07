@@ -47,7 +47,7 @@ VolunteerTimerInner.propTypes = {
   ready: PropTypes.bool.isRequired,
   volunteer: PropTypes.object,
   team: PropTypes.object,
-  teamId: PropTypes.object,  
+  teamId: PropTypes.string,
   puzzleId: PropTypes.string,
 };
 

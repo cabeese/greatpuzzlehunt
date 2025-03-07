@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Header, Button, Modal, Icon, } from 'semantic-ui-react';
@@ -14,19 +15,18 @@ export default class UnstartedPuzzleVirtual extends React.Component {
 
   showConfirm = () => this.setState({ confirmOpen: true })
   handleCancelConfirm = () => this.setState({ confirmOpen: false })
-  handleConfirm = () => {
+  handleConfirm = async () => {
     const teamId = this.props.team._id;
     const puzzleId = this.props.puzzle.puzzleId;
-    Meteor.call('team.startPuzzleVirtuallyByPlayer', teamId, puzzleId, error => {
-      this.setState({ confirmOpen: false });
-
-      if (error) {
-        this.setState({
-          modalContent: error.reason,
-          modalOpen: true,
-        });
-      }
-    });
+    try {
+      await Meteor.callAsync('team.startPuzzleVirtuallyByPlayer', teamId, puzzleId);
+    } catch (error) {
+      this.setState({
+        modalContent: error.reason,
+        modalOpen: true,
+      });
+    }
+    this.setState({ confirmOpen: false });
   }
 
   _downloadButton = () => {

@@ -48,7 +48,7 @@ export default class PuzzleHints extends React.Component {
           confirmButton={confirmButton}
           cancelButton="No, not yet"
           onCancel={() => this.setState({showConfirm: false, hintToTake: null })}
-          onConfirm={() => this._takeHint()}
+          onConfirm={async () => await this._takeHint()}
           size="large"
         />
       </Grid>
@@ -88,14 +88,16 @@ export default class PuzzleHints extends React.Component {
     }
   }
 
-  _takeHint() {
+  async _takeHint() {
     const { team, puzzle } = this.props;
     const { hintToTake } = this.state;
 
-    Meteor.call('team.puzzle.takeHint', puzzle.puzzleId, hintToTake, (error, result) => {
-      if (error) return alert(error.reason);
+    try {
+      await Meteor.callAsync('team.puzzle.takeHint', puzzle.puzzleId, hintToTake);
       this.setState({ showConfirm: false, hintToTake: null });
-    });
+    } catch (error) {
+      alert(error.reason);
+    }
   }
 }
 
