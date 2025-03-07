@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Segment, Header, Progress, Button } from 'semantic-ui-react';
 
 import UnstartedPuzzle from './UnstartedPuzzle';
-import CompletePuzzle from '../../imports/CompletePuzzle';
 
 export default class InactivePuzzle extends React.Component {
   constructor(props) {
@@ -19,7 +18,12 @@ export default class InactivePuzzle extends React.Component {
     const { team, volunteer, puzzle, disabled } = this.props;
     const { complete } = this.state;
     if (complete) {
-      return <CompletePuzzle team={team} puzzle={puzzle} disabled={disabled} showAnswer={false}/>;
+      const message = puzzle.timedOut ? "Timed out" : "Completed";
+      return (
+        <Segment>
+          <Header as="h3" content={message} />
+        </Segment>
+      );
     } else {
       return <UnstartedPuzzle
         team={team}

@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Segment, Header, Message, Statistic } from 'semantic-ui-react';
+import { Button, Segment, Header, Message, Statistic } from 'semantic-ui-react';
 import moment from 'moment';
 
-import PuzzleProgress, { renderScore } from './PuzzleProgress';
-import { getHintsTaken } from '../../../lib/imports/puzzle-helpers';
+import PuzzleProgress, { renderScore } from '../../imports/PuzzleProgress';
+import { getHintsTaken } from '../../../../lib/imports/puzzle-helpers';
 
 export default class CompletePuzzle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showAnswer: false,
+    };
+  }
+
   render() {
     const { team, puzzle, disabled } = this.props;
     const isNC = team.division === "noncompetitive";
@@ -32,20 +39,34 @@ export default class CompletePuzzle extends React.Component {
   }
 
   _answer() {
+    if (this.props.puzzle.timedOut && !this.state.showAnswer) {
+      return this._answerHidden();
+    } else {
+      return this._answerDisplayed();
+    }
+  }
+
+  _answerHidden() {
+    const self = this;
+    return (
+      <Button content="Answer hidden - click to reveal"
+              color="green"
+              onClick={() => self.setState({showAnswer: true}) } />
+    );
+  }
+
+  _answerDisplayed() {
     const { puzzle } = this.props;
     const { time, minutes } = renderScore(puzzle.score);
     const hintsTaken = getHintsTaken(puzzle.hints);
-    if (this.props.showAnswer) {
-      return (
-        <pre>
-          Answer: { puzzle.answer }<br/>
-          Hints : { hintsTaken }<br/>
-          Score : { time }<br/>
-                  ({ minutes } minutes)
-        </pre>
-      );
-    }
-    return null;
+    return (
+      <pre>
+        Answer: { puzzle.answer }<br/>
+        Hints : { hintsTaken }<br/>
+        Score : { time }<br/>
+        ({ minutes } minutes)
+      </pre>
+    );
   }
 }
 
@@ -53,5 +74,4 @@ CompletePuzzle.propTypes = {
   team: PropTypes.object.isRequired,
   puzzle: PropTypes.object.isRequired,
   disabled: PropTypes.bool.isRequired,
-  showAnswer: PropTypes.bool.isRequired,
 };
