@@ -21,6 +21,12 @@ npm start
 
 to start the server. Then navigate to `localhost:3000` to see the page.
 
+## Puzzle Watcher "Worker"
+
+The run loop that checks for timed-out puzzles can be offloaded to a
+separate process, and should be when running in production. For
+details, see the documentation in `workers/README.md`.
+
 ## Development Setup Prior to Meteor 3
 
 > NOTE: These instructions are for older versions of the project using Meteor@2.
