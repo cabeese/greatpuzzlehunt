@@ -457,6 +457,8 @@ FAQ = class FAQ extends Component {
               <List.Item description="Transparent Tape (like Scotch Tape)" />
               <List.Item description="Writing utensils (pencils, pens, erasers, felt-tips, highlighters)" />
               <List.Item description="Colored Pencils" />
+              <List.Item description="Light source (a window and daylight works wonderfully)" />
+              <List.Item description="Push pin or tack, with a piece of cardboard or pad of paper to push pin into (or an end of a paper clip can work, though less efficient)" />
               <List.Item description="Water bottle, snacks (Be sure to bring snacks if you have special dietary needs)" />
               <List.Item description="Umbrella" />
             </List>
