@@ -403,6 +403,7 @@ TopBar = withTracker(() => {
   }
   return {
     user,
+    // is there perhaps some missing async call here?
     isAdmin() {
       return Boolean(user) && user.hasRole('admin');
     },

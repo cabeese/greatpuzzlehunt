@@ -18,11 +18,10 @@ class AdminLeaderboardMain extends Component {
   }
 
   _stateFromProps(props) {
-    const { user, teams } = props;
+    const { teams } = props;
 
     return {
       teamsByDivision: groupBy(teams, (team) => team.division),
-      user: user,
     };
   }
 
@@ -39,16 +38,20 @@ class AdminLeaderboardMain extends Component {
   }
 
   _renderDivisions() {
-    const { user, teamsByDivision } = this.state;
+    const { teamsByDivision } = this.state;
+    const { userIsAdmin } = this.props;
     return Object.keys(teamsByDivision).map((division) => {
-      return <AdminLeaderboardDivisionTable user={user} division={DIVISION_MAP[division]} teams={teamsByDivision[division]} key={division}/>
+      return <AdminLeaderboardDivisionTable userIsAdmin={userIsAdmin}
+                                            division={DIVISION_MAP[division]}
+                                            teams={teamsByDivision[division]}
+                                            key={division} />;
     });
   }
 }
 
 AdminLeaderboardMain.propTypes = {
   teams: PropTypes.arrayOf(Object).isRequired,
-  user: PropTypes.object.isRequired,
+  userIsAdmin: PropTypes.bool.isRequired,
 };
 
 export default AdminLeaderboardMain;

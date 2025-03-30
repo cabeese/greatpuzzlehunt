@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { isAdmin, isVolunteer } from '../../lib/imports/method-helpers.js';
 import moment from 'moment'
 
+import { Teams } from '../../lib/collections/teams.js'
 import { Puzzles } from '../../lib/collections/puzzles.js'
 import { Gamestate } from '../../lib/collections/gamestate-collection.js'
 
@@ -12,7 +13,8 @@ Meteor.publish('admin.puzzles', function() {
 
 Meteor.publish('admin.leaderboard', async function() {
   const [gamestate] = await Gamestate.find({}, { leaderboard: 1 }).fetchAsync();
-  if(!gamestate.leaderboard && !isAdmin(this.userId)) return this.ready();
+  const userIsAdmin = await isAdmin(this.userId);
+  if(!gamestate.leaderboard && !userIsAdmin) return this.ready();
 
   // Return All Users and Teams that Checked In.
   return [
