@@ -12,23 +12,6 @@ import AdminLeaderboardDivisionTable from './AdminLeaderboardDivisionTable';
 import { DIVISION_MAP } from '../../../team/imports/team-helpers';
 
 class AdminLeaderboardMain extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this._stateFromProps(props);
-  }
-
-  _stateFromProps(props) {
-    const { teams } = props;
-
-    return {
-      teamsByDivision: groupBy(teams, (team) => team.division),
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(this._stateFromProps(nextProps));
-  }
-
   render() {
     return (
       <Segment basic>
@@ -38,8 +21,8 @@ class AdminLeaderboardMain extends Component {
   }
 
   _renderDivisions() {
-    const { teamsByDivision } = this.state;
-    const { userIsAdmin } = this.props;
+    const { teams, userIsAdmin } = this.props;
+    const teamsByDivision = groupBy(teams, (team) => team.division);
     return Object.keys(teamsByDivision).map((division) => {
       return <AdminLeaderboardDivisionTable userIsAdmin={userIsAdmin}
                                             division={DIVISION_MAP[division]}
