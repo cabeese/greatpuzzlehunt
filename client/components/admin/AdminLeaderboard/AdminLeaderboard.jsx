@@ -22,24 +22,39 @@ const thinSegmentStyle = {
 AdminLeaderboard = class AdminLeaderboard extends Component {
   render() {
     const { teams, ready, gamestate, user } = this.props;
+    const userIsAdmin = this._userIsAdmin();
     const content = this._getContent();
     return (
       <Container fluid>
         <Segment basic style={thinSegmentStyle}>
           <Header as="h2" content="Leader Board"/>
-          {ready && (user ? isAdmin(user._id) : false) ? <Message info header="Stats" content={`${teams.length} teams in play.`}/> : null}
+          {ready && userIsAdmin ?
+           <Message info header="Stats" content={`${teams.length} teams in play.`}/>
+           : null}
           {content}
         </Segment>
       </Container>
     );
   }
 
+  _userIsAdmin() {
+    const { user } = this.props;
+    // Note: in some cases, the user object may be only partially
+    // populated and will be missing the 'roles' array. In this case,
+    // we may get a false negative (i.e. admin marked as non-admin)
+    // when the page first loads. This is likely not a concern,
+    // however, because this check is only used to reveal a few
+    // low-impact things, and the component will likely be refreshed
+    // with an updated 'user' object almost immediately anyways.
+    return !!(user && user.hasRole('admin'));
+  }
+
   _getContent() {
     const { ready, user, teams, gamestate } = this.props;
     const isLeaderboardReady = ready ? gamestate.leaderboard : false;
-    const userIsAdmin = ready && user ? isAdmin(user._id) : false;
+    const userIsAdmin = this._userIsAdmin();
     if (ready && (isLeaderboardReady || userIsAdmin)) {
-      return <AdminLeaderboardMain user={user} teams={teams} />;
+      return <AdminLeaderboardMain userIsAdmin={userIsAdmin} teams={teams} />;
     } else if (ready && !userIsAdmin) {
       return <Message info content={'Leaderboard is not available yet.'} />;
     } else {
