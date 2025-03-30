@@ -440,9 +440,6 @@ FAQ = class FAQ extends Component {
             What should I have on hand?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
-            <Message error>
-              <em>Note: this information is from 2024 and may be adjusted for the 2025 Hunt.</em>
-	          </Message>
             Your creativity and problem-solving skills! Along with the following:<br />
             <List bulleted>
               <List.Item><span className="description">At least one smartphone or computer. The more the better! (think about battery life).</span>
