@@ -199,6 +199,19 @@ class GamestateControlsInner extends Component {
         </Form>
 
 	<Header as='h3' content='Donation'/>
+        <Input
+          placeholder="https://foundation.wwu.edu/greatpuzzlehunt"
+            name="givingURL"
+            size="small"
+            label="URL"
+            value={this.state.givingURL}
+            onChange={this.handleChange}
+        />
+	<br />
+        <Button
+          content="Update donation info"
+          onClick={() => this.setGivingURL(this.state.givingURL)} />
+	
       </Container>
     );
   }
