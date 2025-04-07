@@ -31,6 +31,7 @@ class GamestateControlsInner extends Component {
       livestreamBackupURL: "",
       bannerMarkdown: "",
       displayBanner: false,
+      givingURL: "",
     };
     this._getReport = this._getReport.bind(this);
   }
@@ -46,6 +47,7 @@ class GamestateControlsInner extends Component {
         webinarID: props.gamestate.webinarID || "",
         bannerMarkdown: props.gamestate.bannerMarkdown || "",
         displayBanner: props.gamestate.displayBanner,
+        givingURL: props.gamestate.givingURL || "",
         livestreamBackupURL: props.gamestate.livestreamBackupURL || "",
       });
     }
@@ -195,6 +197,8 @@ class GamestateControlsInner extends Component {
             get a markdown preview.</p>
           <Button type="submit">Save Banner</Button>
         </Form>
+
+	<Header as='h3' content='Donation'/>
       </Container>
     );
   }
