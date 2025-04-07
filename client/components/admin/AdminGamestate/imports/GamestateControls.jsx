@@ -247,6 +247,12 @@ class GamestateControlsInner extends Component {
     await callMeteorMethod('admin.gamestate.setBannerMarkdown', bannerMarkdown);
   }
 
+  async setGivingURL(e){
+    e.preventDefault();
+    const { givingURL } = this.state;
+    await callMeteorMethod('admin.gamestate.setGivingURL', givingURL);
+  }
+
   _fieldButton(fieldName, displayName) {
     if(!displayName){
       displayName = fieldName;
