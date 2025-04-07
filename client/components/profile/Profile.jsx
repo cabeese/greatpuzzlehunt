@@ -11,7 +11,7 @@ import { browserHistory } from '../../history';
 import { Gamestate } from '../../../lib/collections/gamestate-collection.js';
 
 const { eventYear } = Meteor.settings.public;
-let link = 'https://foundation.wwu.edu/greatpuzzlehunt';
+// let link = 'https://foundation.wwu.edu/greatpuzzlehunt';
 
 Profile = class Profile extends Component {
 
@@ -48,6 +48,8 @@ Profile = class Profile extends Component {
 
   _renderMain() {
     const { showTeamPreview } = this.state;
+    const gamestate = this.props.gamestate || {};
+    const givingURL = gamestate && gamestate.givingURL ? gamestate.givingURL : "https://foundation.wwu.edu/greatpuzzlehunt";
     return (
       <Container>
         <Segment>
@@ -76,7 +78,7 @@ Profile = class Profile extends Component {
             <br/>
             <div>
             <LinkButton as='a'
-              href={link}
+              href={givingURL}
               size='large'  content='Donate Online'
               icon={<Icon name='heart'/>}
               color="green"
