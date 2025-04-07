@@ -199,18 +199,20 @@ class GamestateControlsInner extends Component {
         </Form>
 
 	<Header as='h3' content='Donation'/>
-        <Input
-          placeholder="https://foundation.wwu.edu/greatpuzzlehunt"
+        <div style={{marginTop: 10, marginBottom: 10}}>
+          <Input
+            placeholder="https://foundation.wwu.edu/greatpuzzlehunt"
             name="givingURL"
             size="small"
             label="URL"
             value={this.state.givingURL}
             onChange={this.handleChange}
-        />
-
-        <Button
-          content="Update donation info"
-          onClick={async () => await this.setGivingURL(this.state.givingURL)} />
+          />
+	  <br/>
+          <Button
+            content="Update donation info"
+            onClick={async () => await this.setGivingURL(this.state.givingURL)} />
+        </div>
 	
       </Container>
     );
@@ -248,7 +250,7 @@ class GamestateControlsInner extends Component {
   }
 
   async setGivingURL(url){
-    Meteor.logger.info(`${user.name} called set giving url`);
+    // Meteor.logger.info(`${user.name} called set giving url`);
     // e.preventDefault();
     // const { givingURL } = this.state;
     await callMeteorMethod('admin.gamestate.setGivingURL', url);
