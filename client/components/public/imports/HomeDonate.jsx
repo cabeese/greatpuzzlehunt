@@ -55,4 +55,4 @@ HomeDonate = class HomeDonate extends Component {
   }
 }
 
-HomeDonate = GamestateComp(HomeDonate);
+export HomeDonate = GamestateComp(HomeDonate);
