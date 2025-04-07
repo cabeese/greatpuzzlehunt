@@ -210,7 +210,7 @@ class GamestateControlsInner extends Component {
 	<br />
         <Button
           content="Update donation info"
-          onClick={() => this.setGivingURL(this.state.givingURL)} />
+          onClick={async () => await this.setGivingURL(this.state.givingURL)} />
 	
       </Container>
     );
