@@ -118,11 +118,12 @@ class HomeHeader extends Component {
     );
 
     const donateButton = (
-      <LinkButton as='a' href="https://foundation.wwu.edu/greatpuzzlehunt"
-        size='huge'
-        color="green"
-        icon={<Icon name='heart'/>}
-        content='Donate'
+      <LinkButton as='a'
+		  href={ gamestate.givingURL ? gamestate.givingURL : "https://foundation.wwu.edu/greatpuzzlehunt" }
+		  size='huge'
+		  color="green"
+		  icon={<Icon name='heart'/>}
+		  content='Donate'
       />
     );
 

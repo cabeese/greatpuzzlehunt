@@ -10,7 +10,6 @@ import { extend } from 'lodash';
 import { browserHistory } from '../../history';
 
 const { eventYear } = Meteor.settings.public;
-// let link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 let link = 'https://foundation.wwu.edu/greatpuzzlehunt';
 
 Profile = class Profile extends Component {
@@ -94,7 +93,12 @@ Profile = class Profile extends Component {
 }
 
 Profile = withTracker((props) => {
+  const handle = Meteor.subscribe('gamestate');
+  const ready = handle.ready();
+  const gamestate = Gamestate.findOne({});
   return {
+    ready,
+    gamestate,
     user: Meteor.user(),
   };
 })(Profile);
