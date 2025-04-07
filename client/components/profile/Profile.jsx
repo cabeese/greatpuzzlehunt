@@ -8,6 +8,7 @@ import moment from 'moment';
 import { extend } from 'lodash';
 
 import { browserHistory } from '../../history';
+import { Gamestate } from '../../../lib/collections/gamestate-collection.js';
 
 const { eventYear } = Meteor.settings.public;
 let link = 'https://foundation.wwu.edu/greatpuzzlehunt';
