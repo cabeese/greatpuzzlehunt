@@ -97,8 +97,8 @@ Profile = withTracker((props) => {
   const ready = handle.ready();
   const gamestate = Gamestate.findOne({});
   return {
-    ready,
-    gamestate,
+    ready: ready,
+    gamestate: gamestate,
     user: Meteor.user(),
   };
 })(Profile);
