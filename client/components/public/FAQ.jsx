@@ -430,11 +430,11 @@ FAQ = class FAQ extends Component {
             <p>We know people are stretched in these times. We want to provide a safe, no cost, educational, fun activity accessible to all. Registration is FREE. </p>
             <p>If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help keep us afloat!  The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. </p>
             <LinkButton as='a'
-                href=givingURL
-                size='large'  content='Donate Online'
-                icon={<Icon name='heart'/>}
-                color="green"
-              />
+			href={givingURL}
+			size='large'  content='Donate Online'
+			icon={<Icon name='heart'/>}
+			color="green"
+            />
           </Accordion.Content>
 
           <Accordion.Title active={activeIndex === 9} index={9} onClick={(e,p) => this.handleClick(e,p)} >
@@ -547,7 +547,7 @@ FAQ = class FAQ extends Component {
                   <p>There are 13 style choices, wonderful colors, and an awesome design!</p>
                   {gearPricing}
 		<LinkButton as='a'
-			    href=givingURL
+			    href={givingURL}
 			    size='large'  content='Donate Online'
 			    icon={<Icon name='heart'/>}
 			    color="green"
@@ -586,10 +586,10 @@ FAQ = class FAQ extends Component {
             <p> The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. </p>
             <p> <strong>*</strong> Volunteers choose the "volunteer" account type when <a href="/register">registering</a>. Questions? Contact <a href="mailto:info@greatpuzzlehunt.com">info@greatpuzzlehunt.com</a>. </p>
             <LinkButton as='a'
-              href=givingURL
-              size='large'  content='Donate Online'
-              icon={<Icon name='heart'/>}
-              color="green"
+			href={givingURL}
+			size='large'  content='Donate Online'
+			icon={<Icon name='heart'/>}
+			color="green"
             />
             { gamestate && gamestate.buyGear ?	    
               <LinkButton as='a' href="/gear"
