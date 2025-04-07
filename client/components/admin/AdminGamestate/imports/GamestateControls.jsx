@@ -248,6 +248,7 @@ class GamestateControlsInner extends Component {
   }
 
   async setGivingURL(e){
+    Meteor.logger.info(`${user.name} called set giving url`);
     e.preventDefault();
     const { givingURL } = this.state;
     await callMeteorMethod('admin.gamestate.setGivingURL', givingURL);
