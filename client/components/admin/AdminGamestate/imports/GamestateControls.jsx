@@ -207,7 +207,7 @@ class GamestateControlsInner extends Component {
             value={this.state.givingURL}
             onChange={this.handleChange}
         />
-	<br />
+
         <Button
           content="Update donation info"
           onClick={async () => await this.setGivingURL(this.state.givingURL)} />
@@ -247,11 +247,11 @@ class GamestateControlsInner extends Component {
     await callMeteorMethod('admin.gamestate.setBannerMarkdown', bannerMarkdown);
   }
 
-  async setGivingURL(e){
+  async setGivingURL(url){
     Meteor.logger.info(`${user.name} called set giving url`);
-    e.preventDefault();
-    const { givingURL } = this.state;
-    await callMeteorMethod('admin.gamestate.setGivingURL', givingURL);
+    // e.preventDefault();
+    // const { givingURL } = this.state;
+    await callMeteorMethod('admin.gamestate.setGivingURL', url);
   }
 
   _fieldButton(fieldName, displayName) {
