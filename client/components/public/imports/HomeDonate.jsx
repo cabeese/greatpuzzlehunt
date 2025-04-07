@@ -6,6 +6,8 @@ import GamestateComp from '../../imports/GamestateComp';
 
 HomeDonate = class HomeDonate extends Component {
   render() {
+    const gamestate = this.props.gamestate || {};
+    const givingURL = gamestate && gamestate.givingURL ? gamestate.givingURL : "https://foundation.wwu.edu/greatpuzzlehunt";
     return (
       <Container className="section">
       <Segment basic>
@@ -30,16 +32,16 @@ HomeDonate = class HomeDonate extends Component {
                 The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible.
               </Segment>
               <LinkButton as='a'
-                href="https://foundation.wwu.edu/greatpuzzlehunt"
-                size='large'  content='Donate Online'
-                icon={<Icon name='heart'/>}
-                color="green"
+			  href={givingURL}
+			  size='large'  content='Donate Online'
+			  icon={<Icon name='heart'/>}
+			  color="green"
               />
               <LinkButton as='a'
-                href="https://foundation.wwu.edu/how-make-gift"
-                size='large'  className="white button" content='Donating by check?'
-                icon={<Icon name='heart'/>}
-                color="green"
+			  href="https://foundation.wwu.edu/how-make-gift"
+			  size='large'  className="white button" content='Donating by check?'
+			  icon={<Icon name='heart'/>}
+			  color="green"
               />
             </Grid.Column>
 
