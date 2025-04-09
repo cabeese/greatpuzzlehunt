@@ -5,11 +5,11 @@ import LinkButton from '../../imports/LinkButton';
 import GamestateComp from '../../imports/GamestateComp';
 
 const { eventYear } = Meteor.settings.public;
-const donation_link = "https://foundation.wwu.edu/greatpuzzlehunt";
 
 HomeDonate0 = class HomeDonate0 extends Component {
   render() {
     const gamestate = this.props.gamestate || {};
+    const givingURL = gamestate && gamestate.givingURL ? gamestate.givingURL : "https://foundation.wwu.edu/greatpuzzlehunt";
     return (
       <Container className="section">
       <Segment basic>
@@ -33,7 +33,7 @@ HomeDonate0 = class HomeDonate0 extends Component {
                 <p>Donations of any amount will help support this event.</p>
               </Segment>
               <LinkButton as='a'
-                href={donation_link}
+                href={givingURL}
                 size='large'  content='Donate Online'
                 icon={<Icon name='heart'/>}
                 color="green"

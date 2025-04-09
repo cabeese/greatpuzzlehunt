@@ -2,9 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { Container, Grid, Segment, Header, Icon, Image } from 'semantic-ui-react';
 import LinkButton from '../../imports/LinkButton';
+import GamestateComp from '../../imports/GamestateComp';
 
-export default class HomeDonate extends Component {
+HomeDonate = class HomeDonate extends Component {
   render() {
+    const gamestate = this.props.gamestate || {};
+    const givingURL = gamestate && gamestate.givingURL ? gamestate.givingURL : "https://foundation.wwu.edu/greatpuzzlehunt";
     return (
       <Container className="section">
       <Segment basic>
@@ -26,19 +29,19 @@ export default class HomeDonate extends Component {
                   <li><a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">Sponsoring</a> a student or team that needs help to participate.</li>
                   <li>Non-monetary support such as <a href="mailto:&#109;&#105;&#108;&#108;&#105;&#101;&#064;&#119;&#119;&#117;&#046;&#101;&#100;&#117;">prizes</a> or <a href="/register">signing up</a> as a volunteer!</li>
                 </ul> */}
-                The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. 
+                The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible.
               </Segment>
               <LinkButton as='a'
-                href="https://foundation.wwu.edu/greatpuzzlehunt"
-                size='large'  content='Donate Online'
-                icon={<Icon name='heart'/>}
-                color="green"
+			  href={givingURL}
+			  size='large'  content='Donate Online'
+			  icon={<Icon name='heart'/>}
+			  color="green"
               />
               <LinkButton as='a'
-                href="https://foundation.wwu.edu/how-make-gift"
-                size='large'  className="white button" content='Donating by check?'
-                icon={<Icon name='heart'/>}
-                color="green"
+			  href="https://foundation.wwu.edu/how-make-gift"
+			  size='large'  className="white button" content='Donating by check?'
+			  icon={<Icon name='heart'/>}
+			  color="green"
               />
             </Grid.Column>
 
@@ -53,3 +56,6 @@ export default class HomeDonate extends Component {
     );
   }
 }
+
+HomeDonate = GamestateComp(HomeDonate);
+export default HomeDonate;

@@ -31,6 +31,7 @@ class GamestateControlsInner extends Component {
       livestreamBackupURL: "",
       bannerMarkdown: "",
       displayBanner: false,
+      givingURL: "",
     };
     this._getReport = this._getReport.bind(this);
   }
@@ -46,6 +47,7 @@ class GamestateControlsInner extends Component {
         webinarID: props.gamestate.webinarID || "",
         bannerMarkdown: props.gamestate.bannerMarkdown || "",
         displayBanner: props.gamestate.displayBanner,
+        givingURL: props.gamestate.givingURL || "",
         livestreamBackupURL: props.gamestate.livestreamBackupURL || "",
       });
     }
@@ -195,6 +197,22 @@ class GamestateControlsInner extends Component {
             get a markdown preview.</p>
           <Button type="submit">Save Banner</Button>
         </Form>
+
+	<Header as='h3' content='Donation'/>
+        <div style={{marginTop: 10, marginBottom: 10}}>
+          <Input
+            placeholder="https://foundation.wwu.edu/greatpuzzlehunt"
+            name="givingURL"
+            size="small"
+            label="URL"
+            value={this.state.givingURL}
+            onChange={this.handleChange}
+          />
+          <Button
+            content="Update donation info"
+            onClick={async () => await this.setGivingURL(this.state.givingURL)} />
+        </div>
+	
       </Container>
     );
   }
@@ -228,6 +246,10 @@ class GamestateControlsInner extends Component {
     e.preventDefault();
     const { bannerMarkdown } = this.state;
     await callMeteorMethod('admin.gamestate.setBannerMarkdown', bannerMarkdown);
+  }
+
+  async setGivingURL(url){
+    await callMeteorMethod('admin.gamestate.setGivingURL', url);
   }
 
   _fieldButton(fieldName, displayName) {
