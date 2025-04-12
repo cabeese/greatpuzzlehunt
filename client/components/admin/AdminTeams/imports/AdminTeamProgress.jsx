@@ -5,6 +5,8 @@ import { Table, Icon, Label, Button } from 'semantic-ui-react'
 import { renderScore } from '../../../imports/PuzzleProgress';
 import moment from 'moment';
 
+import { Teams } from '../../../../../lib/collections/teams.js';
+
 AdminTeamProgress = class AdminTeamsProgress extends Component {
   constructor(props){
     super(props);
