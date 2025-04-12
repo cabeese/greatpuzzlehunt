@@ -78,7 +78,7 @@ AdminTeamProgress = class AdminTeamsProgress extends Component {
     
     return (
       <Table>
-        <Table.Header>
+        <Table.Header key="team progress table row header">
           <Table.Row>
             <Table.Cell>Puzzle</Table.Cell>
             <Table.Cell>Started</Table.Cell>
