@@ -400,7 +400,7 @@ class AdminTeamPuzzleEdit extends Component {
 	    this.state.endHHError ||
 	    this.state.endMMError ||
 	    this.state.endSSError ||
-	    this.state.saveError );
+	    (this.state.saveError != null) );
   }
 
   async _update(e) {
