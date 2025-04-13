@@ -10,7 +10,7 @@ import {
 } from 'semantic-ui-react';
 
 import AdminLeaderboardTracker from './imports/AdminLeaderboardTracker';
-import AdminLeaderboardMain from './imports/AdminLeaderboardMain';
+import LeaderboardInternal from './LeaderboardInternal';
 import GamestateComp from '../../imports/GamestateComp';
 import { isAdmin } from '../../../../lib/imports/method-helpers';
 
@@ -21,16 +21,13 @@ const thinSegmentStyle = {
 
 AdminLeaderboard = class AdminLeaderboard extends Component {
   render() {
-    const { teams, ready, gamestate, user } = this.props;
+    const { teams, ready, gamestate } = this.props;
     const userIsAdmin = this._userIsAdmin();
     const content = this._getContent();
     return (
       <Container fluid>
         <Segment basic style={thinSegmentStyle}>
           <Header as="h2" content="Leader Board"/>
-          {ready && userIsAdmin ?
-           <Message info header="Stats" content={`${teams.length} teams in play.`}/>
-           : null}
           {content}
         </Segment>
       </Container>
@@ -38,7 +35,7 @@ AdminLeaderboard = class AdminLeaderboard extends Component {
   }
 
   _userIsAdmin() {
-    const { user } = this.props;
+    const user = Meteor.user();
     // Note: in some cases, the user object may be only partially
     // populated and will be missing the 'roles' array. In this case,
     // we may get a false negative (i.e. admin marked as non-admin)
@@ -50,24 +47,22 @@ AdminLeaderboard = class AdminLeaderboard extends Component {
   }
 
   _getContent() {
-    const { ready, user, teams, gamestate } = this.props;
-    const isLeaderboardReady = ready ? gamestate.leaderboard : false;
+    const { ready, gamestate } = this.props;
     const userIsAdmin = this._userIsAdmin();
-    if (ready && (isLeaderboardReady || userIsAdmin)) {
-      return <AdminLeaderboardMain userIsAdmin={userIsAdmin} teams={teams} />;
-    } else if (ready && !userIsAdmin) {
-      return <Message info content={'Leaderboard is not available yet.'} />;
+    const display = userIsAdmin || (ready && gamestate.leaderboard === true);
+    if (!ready) {
+      return <Loading />;
+    } else if (display) {
+      return <LeaderboardInternal userIsAdmin={userIsAdmin} />;
     } else {
-      return <Loading/>;
+      return <Message info content={'Leaderboard is not available yet.'} />;
     }
   }
-}
+};
 
 AdminLeaderboard.propTypes = {
   ready: PropTypes.bool.isRequired,
-  user: PropTypes.object,
-  teams: PropTypes.arrayOf(Object),
   gamestate: PropTypes.object,
 };
 
-AdminLeaderboard = AdminLeaderboardTracker(GamestateComp(AdminLeaderboard));
+AdminLeaderboard = GamestateComp(AdminLeaderboard);
