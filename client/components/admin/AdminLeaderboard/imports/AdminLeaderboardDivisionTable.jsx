@@ -71,7 +71,7 @@ class AdminLeaderboardDivisionTable extends Component {
   _renderTeamRow(team, i, userIsAdmin) {
     const { _id: teamId, name, members, memberIds, puzzles, finished, inPerson, prize_ineligible } = team;
     const finalScore = getFinalScore(team);
-    let playerCt = members ? members.length : (memberIds ? memberIds.length : "?");
+    let playerCt = members ? members.length : "?";
     const ic = <MaybeNullIcon
       value={inPerson}
       truthy={<Icon name="group" color="blue" />}
