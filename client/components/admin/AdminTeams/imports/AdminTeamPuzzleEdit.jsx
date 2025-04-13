@@ -355,7 +355,7 @@ class AdminTeamPuzzleEdit extends Component {
     this.setState( { startEndOrderError: (this.editPuzzle.start >= this.editPuzzle.end) });
 
     try {
-      await Meteor.callAsync('admin.team.computeScore', this.editPuzzle);
+      const res = await Meteor.callAsync('admin.team.computeScore', this.editPuzzle);
       const [newTimeout, newScore] = res;
       this.editPuzzle.score = newScore;
       this.editPuzzle.timedOut = newTimeout;
@@ -400,7 +400,7 @@ class AdminTeamPuzzleEdit extends Component {
 	    this.state.endHHError ||
 	    this.state.endMMError ||
 	    this.state.endSSError ||
-	    this.state.saveError );
+	    (this.state.saveError != null) );
   }
 
   async _update(e) {
