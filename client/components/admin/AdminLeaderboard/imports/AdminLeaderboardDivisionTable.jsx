@@ -20,7 +20,7 @@ const UNFINISHED_OFFSET = 26000;
 
 class AdminLeaderboardDivisionTable extends Component {
   render() {
-    const { user, division, teams } = this.props;
+    const { userIsAdmin, division, teams } = this.props;
 
     const preSortedTeams = sortBy(teams, (team) => {
       return getFinalScore(team) + (team.finished ? 0 : UNFINISHED_OFFSET);
@@ -39,7 +39,8 @@ class AdminLeaderboardDivisionTable extends Component {
     return (
       <Segment basic>
         <Header as="h3" content={`Division: ${division}`}/>
-        {sortedTeams.length > 0 ? this._renderTable(user, sortedTeams) : this._noTeams()}
+        {sortedTeams.length > 0 ?
+         this._renderTable(sortedTeams, userIsAdmin) : this._noTeams()}
       </Segment>
     );
   }
@@ -48,7 +49,7 @@ class AdminLeaderboardDivisionTable extends Component {
     return <Message info header="No Teams" content="No teams in this division have started playing"/>;
   }
 
-  _renderTable(user, teams) {
+  _renderTable(teams, userIsAdmin) {
     const puzzleNames = teams[0].puzzles.map((p) => p.name);
     return (
       <Table celled>
@@ -61,17 +62,16 @@ class AdminLeaderboardDivisionTable extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {teams.map((team, i) => this._renderTeamRow(user, team, i))}
+          {teams.map((team, i) => this._renderTeamRow(team, i, userIsAdmin))}
         </Table.Body>
       </Table>
     );
   }
 
-  _renderTeamRow(user, team, i) {
+  _renderTeamRow(team, i, userIsAdmin) {
     const { _id: teamId, name, members, memberIds, puzzles, finished, inPerson, prize_ineligible } = team;
-    const userIsAdmin = user && isAdmin(user._id);
     const finalScore = getFinalScore(team);
-    let playerCt = members ? members.length : (memberIds ? memberIds.length : "?");
+    let playerCt = members ? members.length : "?";
     const ic = <MaybeNullIcon
       value={inPerson}
       truthy={<Icon name="group" color="blue" />}
@@ -118,7 +118,7 @@ class AdminLeaderboardDivisionTable extends Component {
 
 AdminLeaderboardDivisionTable.propTypes = {
   division: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
+  userIsAdmin: PropTypes.bool.isRequired,
   teams: PropTypes.arrayOf(Object).isRequired,
 };
 
