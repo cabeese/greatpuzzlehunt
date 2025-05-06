@@ -12,10 +12,10 @@ export default class SamplePuzzles extends Component {
       '2024': {
         extra: (
           <div>
-          <Header as='h2'>Message from Millie:</Header>
-          <p className='h4'> Thank you for participating!
-I understand that the puzzles were on the difficult side this year. Once again, I sincerely apologize. My intent is always to create curiosity, interest, and a jumping-off point for a learning experience, not to demean or frustrate you (for that breaks my heart). Please have a look at the walk-throughs and I will keep trying harder. Millie</p>
-          <br />
+            <Header as='h2'>Message from Millie:</Header>
+            <p className='h4'> Thank you for participating!
+            I understand that the puzzles were on the difficult side this year. Once again, I sincerely apologize. My intent is always to create curiosity, interest, and a jumping-off point for a learning experience, not to demean or frustrate you (for that breaks my heart). Please have a look at the walk-throughs and I will keep trying harder. Millie</p>
+            <br />
           </div>
         ),
         puzzles: [
@@ -186,9 +186,9 @@ I understand that the puzzles were on the difficult side this year. Once again, 
         inspiration: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/_solutions/0.READ_ME_FIRST+v5-2021.pdf',
         extra: (
           <div>
-          <Header as='h2'>Apology</Header>
-          <p className='h4'>The puzzles were more challenging than intended this year. Like all of you, I have been isolated for over a year. Working in a vacuum, I missed the mark on some hints and the amount of time needed in a virtual environment. The goal was to provide a fun, free, safe opportunity for anyone to play and puzzle for the day. I hope that you might still enjoy playing with the puzzles after the event.</p>
-          <br />
+            <Header as='h2'>Apology</Header>
+            <p className='h4'>The puzzles were more challenging than intended this year. Like all of you, I have been isolated for over a year. Working in a vacuum, I missed the mark on some hints and the amount of time needed in a virtual environment. The goal was to provide a fun, free, safe opportunity for anyone to play and puzzle for the day. I hope that you might still enjoy playing with the puzzles after the event.</p>
+            <br />
           </div>
         ),
         infoPacket: 'https://gph-distributed.s3-us-west-2.amazonaws.com/2021/2021_infopacket.pdf',
@@ -298,9 +298,9 @@ I understand that the puzzles were on the difficult side this year. Once again, 
   render() {
     
     return (
-        
-        <Container className="section">
-          <Segment basic>
+      
+      <Container className="section">
+        <Segment basic>
           <PuzzlePageTitle title="Sample Puzzles" />
           <Grid padded centered textAlign="left" stackable>
             <Grid.Row>
@@ -312,7 +312,7 @@ I understand that the puzzles were on the difficult side this year. Once again, 
           { this._puzzles() }
           <Image fluid src="/img/2016/event-photos/team-the-purple-penguins-thin.jpg"/>
         </Segment>
-       </Container>
+      </Container>
     )
   }
 
@@ -321,12 +321,12 @@ I understand that the puzzles were on the difficult side this year. Once again, 
     let ridx = 0
     return Object.keys(this.puzzles).sort((a, b) => b - a).map((year) => (
       <Segment basic key={year}>
-      <Header as='h1'>{year}</Header>
+        <Header as='h1'>{year}</Header>
         { this.puzzles[year].extra ? this.puzzles[year].extra : null }
         { this.puzzles[year].infoPacket ? <><span className='h4'>Info Packet: </span><Button as='a' target='_blank' href={this.puzzles[year].infoPacket} content='Download'/></> : null }
         { this.puzzles[year].inspiration ? 
           <span className='h4'><br />Puzzle Inspiration (Contains spoilers): <Button as='a' target='_blank' href={this.puzzles[year].inspiration} content="Download"/></span>
-        : null }
+          : null }
         { this.puzzles[year].puzzles.map((puzzle, j) => (
           <Accordion styled fluid key={year+j}>
             <Accordion.Title active={activeIndex === ridx} index={ridx} onClick={(e,p) => this.handleClick(e,p)} >
@@ -363,11 +363,11 @@ I understand that the puzzles were on the difficult side this year. Once again, 
                   </Grid.Column>
                   <Grid.Column>
                     { puzzle.walkthrough ?
-                    <Segment padded inverted color='blue'>
-                      <Header as='h2'>Walkthrough</Header>
+                      <Segment padded inverted color='blue'>
+                        <Header as='h2'>Walkthrough</Header>
                         <Button as='a' target='_blank' href={puzzle.walkthrough} content="Download"/>
-                    </Segment>
-                    : null }
+                      </Segment>
+                      : null }
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
