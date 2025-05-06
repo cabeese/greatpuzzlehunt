@@ -9,6 +9,61 @@ export default class SamplePuzzles extends Component {
     this.state = {};
 
     this.puzzles = {
+      '2025': {
+        puzzles: [
+          {
+            name: "It Takes Three to Tangle!",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/1_tangle/puzzle-6CB64CBD-1A1D-46C0-9F36-BDF1C2B40D17.pdf",
+            hints: [
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/1_tangle/h1-29945749-4036-4DAF-8F46-2D267D6DB93E.jpg",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/1_tangle/h2-7668C438-688C-4C06-B7E0-2995F1B5DA76.jpg",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/1_tangle/h3-1E713E7C-D026-4E6E-8546-09C9B211C9AA.jpg",
+            ],
+            codeWord: "TMESIPTERIS OBLANCEOLATA",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/1_tangle/1.Walk-Through+Solution+IT+TAKES+THREE+TO+TANGLE+2025.pdf",
+          },
+          {
+            name: "Near Myth!",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/2_myth/puzzle-538A541B-F6EB-4BF0-92A1-851132474185.pdf",
+            hints: [
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/2_myth/h1-3D91A915-C28B-4C99-81D8-34D1000E2065.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/2_myth/h2-A8F530A9-919D-4E87-96EE-94704A5A449B.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/2_myth/h3-610D6B4C-F8C3-4DEA-825E-C28797222197.jpg",
+            ],
+            codeWord: "WEREWOLF",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/2_myth/2.Walk-Through+NEAR+MYTH+2025.pdf",
+          },
+          {
+            name: "Something's Afoot!",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/3_afoot/puzzle-C3A3CBD2-A401-42B1-89C6-504A17B7CF69.pdf",
+            hints: [
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/3_afoot/h1-E344FED7-247E-4921-929C-B2180254B035.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/3_afoot/h2-9AE0A6DA-A5C2-4583-B90A-CA0516C44D48.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/3_afoot/h3-F7E824E1-8398-4A3B-8599-576E06185F85.png",
+            ],
+            codeWord: "THREE AND ONE-HALF",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/3_afoot/3.Walk-Through+Solution+SOMETHING'S+AFOOT+2025.pdf",
+          },
+          {
+            name: "Saving His-Story One Nickel at a Time!",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/4_hist/puzzle-0B79D790-57C5-4F09-ABE4.pdf",
+            hints: [
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/4_hist/h1-33D3C813-37B4-407D-A5E9.jpg",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/4_hist/h2-DA820132-21C0-4A53-A8BA.jpg",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/4_hist/h3-0BA459C8-14F5-41B4-83C7.jpg",
+            ],
+            codeWord: "URINE",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/4_hist/4.Walk-Through+Solution+SAVING+HIS-STORY+ONE+NICKEL+AT+A+TIME+2025.pdf",
+          },
+          {
+            name: "Meta-Puzzle",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/meta/puzzle-4954EB95-1AC5-4B8A-89F8-6294ADC1EEA8.pdf",
+            hints: [],
+            codeWord: "NATIONAL PRETZEL DAY",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2025/puzzles/meta/5.Walk-Through+Solution+Meta-Puzzle+2025.pdf",
+          },
+        ]
+      },
       '2024': {
         extra: (
           <div>
