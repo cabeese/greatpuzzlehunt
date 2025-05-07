@@ -11,12 +11,36 @@ export default class PuzzleHints extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       showConfirm: false,
       hintToTake: null,
     };
     this.gridStyle = {
       paddingTop: '15px',
     };
+  }
+
+  confirmButton() {
+    if (this.state.loading) {
+      return (
+        <Button color="blue" disabled loading>
+          <Icon name="clock" /> Fetching hint...
+        </Button>
+      );
+    } else {
+      return (
+        <Button color="blue">
+          <Icon name="clock" /> YES! Take the hint!
+        </Button>
+      );
+    }
+  }
+
+  cancelButton() {
+    const { loading } = this.state;
+    return (
+      <Button disabled={loading} content="No, not yet" />
+    );
   }
 
   render() {
@@ -32,11 +56,6 @@ export default class PuzzleHints extends React.Component {
         <p>This will add <b>{currentHintCost} minutes</b> to your team's score!</p>
       </Segment>
     );
-    const confirmButton = (
-      <Button color="blue">
-        <Icon name="clock" /> YES! Take the hint!
-        </Button>
-    );
     return (
       <Grid style={ this.gridStyle }>
         { this._renderHints() }
@@ -45,8 +64,8 @@ export default class PuzzleHints extends React.Component {
           open={showConfirm}
           header="Wait! Are you sure?"
           content={confirmContent}
-          confirmButton={confirmButton}
-          cancelButton="No, not yet"
+          confirmButton={this.confirmButton()}
+          cancelButton={this.cancelButton()}
           onCancel={() => this.setState({showConfirm: false, hintToTake: null })}
           onConfirm={async () => await this._takeHint()}
           size="large"
@@ -93,11 +112,13 @@ export default class PuzzleHints extends React.Component {
     const { hintToTake } = this.state;
 
     try {
+      this.setState({loading: true});
       await Meteor.callAsync('team.puzzle.takeHint', puzzle.puzzleId, hintToTake);
       this.setState({ showConfirm: false, hintToTake: null });
     } catch (error) {
       alert(error.reason);
     }
+    this.setState({loading: false});
   }
 }
 
