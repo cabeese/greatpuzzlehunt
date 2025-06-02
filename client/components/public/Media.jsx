@@ -100,6 +100,13 @@ Media = class Media extends Component {
         <h2 style={{fontWeight: "600"}}>WWU Great Puzzle Hunt Photos</h2>
         <Image.Group size="medium">
           <Image
+            src='/img/media-page/cover_2025.jpg'
+            as='a'
+            label={{ as: 'a', ribbon: 'true', content: '2025', color: 'black' }}
+            href='https://flic.kr/s/aHBqjCgqhk'
+            target='_blank'
+            />
+          <Image
             src='/img/media-page/cover_2024.jpg'
             as='a'
             label={{ as: 'a', ribbon: 'true', content: '2024', color: 'black' }}
