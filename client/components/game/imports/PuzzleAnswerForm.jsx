@@ -9,6 +9,7 @@ export default class PuzzleAnswerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       answer: '',
       triggerHintImageURL: '',
       message: null,
@@ -35,7 +36,8 @@ export default class PuzzleAnswerForm extends React.Component {
           value={ this.state.answer }
           onChange={ (e) => this._handleChange(e) }
         />
-        <Form.Button basic fluid color='green' content='Submit Answer'/>
+        <Form.Button basic fluid color='green' content='Submit Answer'
+                     disabled={this.state.loading} />
         { this._message() }
         { this._error() }
         { this._giveUpButton() }
@@ -61,6 +63,7 @@ export default class PuzzleAnswerForm extends React.Component {
     const answer = this.state.answer.replaceAll(nonCharacterDigit, '');
 
     try {
+      this.setState({ loading: true });
       const result = await Meteor.callAsync('team.puzzle.answer', puzzle.puzzleId, answer);
       this.setState({ answer: '', error: '' });
 
@@ -82,6 +85,7 @@ export default class PuzzleAnswerForm extends React.Component {
     } catch (error) {
       this.setState({ error });
     }
+    this.setState({ loading: false });
   }
 
   _handleChange(e) {
