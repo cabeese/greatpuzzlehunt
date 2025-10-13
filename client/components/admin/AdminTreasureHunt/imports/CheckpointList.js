@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
+import { sortBy} from 'lodash';
 import PropTypes from 'prop-types';
 import { Grid, Header, Label, Button, Icon, Popup, List, } from 'semantic-ui-react';
 
@@ -38,7 +39,9 @@ class CheckpointList extends Component {
   _checkpoints() {
     const { checkpoints, activeCheckpoint } = this.props;
     const activeCheckpointId = activeCheckpoint ? activeCheckpoint._id : null;
-    return checkpoints.map((checkpoint) => this._checkpoint(checkpoint, activeCheckpointId));
+    const sortedCheckpoints = sortBy(checkpoints, ['sequence', 'name'])
+
+    return sortedCheckpoints.map((checkpoint) => this._checkpoint(checkpoint, activeCheckpointId));
   }
 
   _validation(issues) {
@@ -77,9 +80,12 @@ class CheckpointList extends Component {
     // });
 
     return (
-      <Grid.Row columns={2} name={ checkpoint._id} key={ checkpoint._id } color={isActive ? "teal" : undefined}>
+      <Grid.Row columns={3} name={ checkpoint._id} key={ checkpoint._id } color={isActive ? "teal" : undefined}>
         <Grid.Column>
           <Label content={ checkpoint.sequence }/>&nbsp; { checkpoint.name }
+        </Grid.Column>
+	<Grid.Column>
+	  { this._numWaypoints(checkpoint) }&nbsp; waypoints
         </Grid.Column>
         <Grid.Column>
           { this._validation(issues) }
@@ -95,6 +101,16 @@ class CheckpointList extends Component {
         </Grid.Column>
       </Grid.Row>
     );
+  }
+
+  _numWaypoints(checkpoint) {
+    var num=0;
+    num += checkpoint.cw0 ? 1 : 0;
+    num += checkpoint.cw1 ? 1 : 0;
+    num += checkpoint.cw2 ? 1 : 0;
+    num += checkpoint.cw3 ? 1 : 0;
+    num += checkpoint.cw4 ? 1 : 0;
+    return num;
   }
 
   _edit(checkpoint) {
