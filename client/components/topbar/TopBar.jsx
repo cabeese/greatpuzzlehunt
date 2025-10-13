@@ -103,6 +103,11 @@ const adminMenuItems = [
     to: '/admin/puzzles',
     iconClass: 'violet puzzle',
   },
+  {
+    name: 'Treasure Hunt',
+    to: '/admin/checkpoints',
+    iconClass: 'blue compass',
+  },
 ];
 
 const volunteerMenuItems = [

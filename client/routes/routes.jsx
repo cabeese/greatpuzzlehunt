@@ -82,6 +82,7 @@ export const renderRoutes = () => {
           <Route path='transactions' element={<RequireAuth accessLevel='admin'><AdminTransactions /></RequireAuth>} />
           <Route path='sponsors' element={<RequireAuth accessLevel='admin'><AdminSponsors /></RequireAuth>} />
           <Route path='puzzles' element={<RequireAuth accessLevel='admin'><AdminPuzzles /></RequireAuth>} />
+          <Route path='checkpoints' element={<RequireAuth accessLevel='admin'><AdminTreasureHunt /></RequireAuth>} />
           <Route path='gamestate' element={<RequireAuth accessLevel='admin'><AdminGamestate /></RequireAuth>} />
         </Route>
         <Route path='*' element={<Home />}/>

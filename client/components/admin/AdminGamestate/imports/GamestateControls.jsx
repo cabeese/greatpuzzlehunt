@@ -43,6 +43,7 @@ class GamestateControlsInner extends Component {
         registrationInPersonOpen: props.gamestate.registrationInPersonOpen,
         registrationVirtualOpen: props.gamestate.registrationVirtualOpen,
         gameplay: props.gamestate.gameplay,
+        thplay: props.gamestate.thplay,
         webinarURL: props.gamestate.webinarURL || "",
         webinarID: props.gamestate.webinarID || "",
         bannerMarkdown: props.gamestate.bannerMarkdown || "",
@@ -142,6 +143,7 @@ class GamestateControlsInner extends Component {
         <small>Deprecated 'register' state: {`${registration_status}`}</small>
         { this._fieldButton('registrationInPersonOpen', 'In-Person Registration') }
         { this._fieldButton('registrationVirtualOpen', 'Virtual Registration') }
+	{ this._fieldButton('registrationTHOnlyOpen', 'Treasure Hunt only Registration') }
         { this._fieldButton('buyGear', '"Buy Gear" Button (on homepage)') }
 
         <Header as='h3' content='Webinar'/>
@@ -180,6 +182,7 @@ class GamestateControlsInner extends Component {
         <Header as='h3' content='Game Day!'/>
         { this._fieldButton('CheckIn') }
         { this._fieldButton('Gameplay') }
+        { this._fieldButton('thPlay', 'Treasure hunt play') }
 
         <Header as='h3' content='Leaderboard'/>
         { this._fieldButton('Leaderboard') }
