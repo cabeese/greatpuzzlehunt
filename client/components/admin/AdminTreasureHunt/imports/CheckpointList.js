@@ -93,6 +93,10 @@ class CheckpointList extends Component {
             icon='trash'
             onClick={ () => this._delete(checkpoint) }
           />
+	  <Button basic floated='right'
+		  content='QR code'
+		  onClick={ () => this._qrcode(checkpoint) }
+	  />
           <Button basic floated='right'
             content='Edit'
             color='green'
@@ -120,11 +124,16 @@ class CheckpointList extends Component {
   _delete(checkpoint) {
     this.props.onDelete(checkpoint);
   }
+
+  _qrcode(checkpoint) {
+    this.props.onQRCode(checkpoint);
+  }
 }
 
 CheckpointList.propTypes = {
   checkpoints: PropTypes.array.isRequired,
   onEdit: PropTypes.func.isRequired,
+  onQRCode: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 

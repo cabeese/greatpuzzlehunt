@@ -4,6 +4,7 @@ import { Container, Divider, Message, Segment } from 'semantic-ui-react';
 
 import CheckpointEditor from './imports/CheckpointEditor';
 import CheckpointList from './imports/CheckpointList';
+import CheckpointQRViewer from './imports/CheckpointQRViewer';
 import GamestateControls from '../AdminGamestate/imports/GamestateControls';
 
 AdminTreasureHunt = class AdminTreasureHunt extends Component {
@@ -12,6 +13,7 @@ AdminTreasureHunt = class AdminTreasureHunt extends Component {
 
     this.state = {
       activeCheckpoint: null,
+      qrCheckpoint: null
     };
   }
 
@@ -22,13 +24,18 @@ AdminTreasureHunt = class AdminTreasureHunt extends Component {
         <Segment>
         <CheckpointList
           activeCheckpoint={this.state.activeCheckpoint}
+	  qrCheckpoint={this.state.qrCheckpoint}
           onEdit={ (checkpoint) => this._editCheckpoint(checkpoint) }
+	  onQRCode={ (checkpoint) => this._qrcodeCheckpoint(checkpoint) }
           onDelete={ (checkpoint) => this._deleteCheckpoint(checkpoint) }
         />
         </Segment>
 
         <Segment>
           { this._editor() }
+        </Segment>
+        <Segment>
+          { this._qrcode() }
         </Segment>
       </Container>
     );
@@ -50,6 +57,24 @@ AdminTreasureHunt = class AdminTreasureHunt extends Component {
 
   _editCheckpoint(checkpoint) {
     this.setState({ activeCheckpoint: checkpoint });
+  }
+
+  _qrcode() {
+    const { qrCheckpoint } = this.state;
+    if (!qrCheckpoint) {
+      return <Message info content='Select a checkpoint to see QR code...'/>;
+    }
+    return (
+      <CheckpointQRViewer
+        checkpoint={ qrCheckpoint }
+        key={qrCheckpoint._id}
+        closeCheckpointQR={ () => this.setState({ qrCheckpoint: null }) }
+      />
+    );
+  }
+
+  _qrcodeCheckpoint(checkpoint) {
+    this.setState({ qrCheckpoint: checkpoint });
   }
 
   async _deleteCheckpoint(checkpoint) {
