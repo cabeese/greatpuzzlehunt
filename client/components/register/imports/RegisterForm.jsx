@@ -139,7 +139,8 @@ class RegisterForm extends Component {
     if (!this.props.ready) {
       return <Loading/>
     } else if (this.props.gamestate.registrationInPersonOpen ||
-               this.props.gamestate.registrationVirtualOpen) {
+               this.props.gamestate.registrationVirtualOpen ||
+	       this.props.gamestate.registrationTHOnlyOpen) {
       return this._renderMain();
     } else {
       return <Message
