@@ -225,6 +225,8 @@ class RegisterForm extends Component {
                       onChange={ (e) => this._handleTextChange(e) }/>
         </Form.Group>
 
+        { this._gameModeNote(this.props.gamestate.registrationInPersonOpen) }
+
         <Form.Group widths='equal' grouped>
           <Form.Dropdown name='gameMode' label='Anticipated Game Mode'
                          placeholder='Virtual vs In-Person...'
@@ -232,7 +234,6 @@ class RegisterForm extends Component {
                          selection options={gameModeOptions} value={ this.state.gameMode }
                          onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
-        { this._gameModeNote(this.props.gamestate.registrationInPersonOpen) }
 
         <Form.Group widths='equal' grouped>
           <p>
@@ -396,8 +397,8 @@ class RegisterForm extends Component {
       return (
         <Message
           color='yellow'
-          header='In-person registration is now closed'
-          content="We are no longer accepting additional in-person players for this year"
+          header='Puzzle Hunt in-person registration is now closed'
+          content="We are no longer accepting additional in-person Puzzle Hunt players for this year"
         />
       );
     }

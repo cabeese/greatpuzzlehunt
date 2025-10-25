@@ -25,7 +25,8 @@ class RegisterInner extends Component {
     };
 
     if (gamestate.registrationInPersonOpen ||
-        gamestate.registrationVirtualOpen) {
+        gamestate.registrationVirtualOpen ||
+        gamestate.registrationTreasureHuntOpen) {
       content = (
         <Segment basic>
           <RegisterForm />
