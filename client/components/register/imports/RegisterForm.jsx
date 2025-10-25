@@ -183,6 +183,9 @@ class RegisterForm extends Component {
 
   _form() {
     const gameModeConflict = this.state.playingTreasureHunt && this.state.gameMode === "VIRTUAL";
+    const registrationPuzzleHuntOpen = this.props.gamestate.registrationInPersonOpen ||
+          this.props.gamestate.registrationVirtualOpen;
+    const registrationTreasureHuntOpen = this.props.gamestate.registrationTreasureHuntOpen;
     return (
       <div>
         <Form onSubmit={ async (e) => { await this._register(e); } } style={ this._formStyle() }>
@@ -244,6 +247,7 @@ class RegisterForm extends Component {
             defaultChecked={this.state.playingPuzzleHunt}
             name='playingPuzzleHunt'
             label="Participating in the Great Puzzle Hunt"
+            disabled={!registrationPuzzleHuntOpen}
             onChange={ (e,data) => this._handleDataChange(e,data) } />
           <Form.Checkbox
             toggle
@@ -252,6 +256,7 @@ class RegisterForm extends Component {
               pointing: 'left',
             } : null}
             defaultChecked={this.state.playingTreasureHunt}
+            disabled={!registrationTreasureHuntOpen}
             name='playingTreasureHunt'
             label="Participating in the Treasure Hunt"
             onChange={ (e,data) => this._handleDataChange(e,data) } />
