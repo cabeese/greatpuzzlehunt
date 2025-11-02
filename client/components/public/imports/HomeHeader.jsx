@@ -71,7 +71,7 @@ class HomeHeader extends Component {
                       </YouTube>
 		  </div>
                     <div id="header-video-content">
-		      <h1 className="header-text text-highlight-color">WWU Ninth Annual</h1>
+		      <h1 className="header-text text-highlight-color">WWU Tenth Annual</h1>
 		      <h1 className="header-text gigantic">Great Puzzle Hunt</h1>
 		      <h2 className="sub-header-text">
 			<em>HYBRID EVENT: IN-PERSON OR VIRTUAL</em><br />
