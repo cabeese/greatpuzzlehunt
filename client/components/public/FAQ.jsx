@@ -76,11 +76,11 @@ const schedule_inPerson_data = [
     desc: "Red Square: Puzzle Hunt Starts."
   },
   {
-    time: "1:00–3:00 PM",
+    time: "12:30–2:30 PM",
     desc: "Red Square: Music. Pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants. Thank you, Domino's Pizza!"
   },
   {
-    time: "3:30 PM",
+    time: "3:00 PM",
     desc: "Food/Beverage Station closes.",
   },
   {
@@ -88,7 +88,7 @@ const schedule_inPerson_data = [
     desc: "Puzzle Stations close."
   },
   {
-    time: "5:00 PM",
+    time: "4:45 PM",
     desc: "Red Square: Award Ceremony & Prizes!**"
   },
 ]
@@ -111,7 +111,7 @@ const schedule_virtual_data = [
     desc: "Puzzle Hunt Ends."
   },
   {
-    time: "5:00 PM (PT)",
+    time: "4:45 PM (PT)",
     desc: <span>Leaderboard Posted, Live stream - claim your bragging rights! (<a href="#">link TBA</a>)</span>
   },
 ]
@@ -443,6 +443,9 @@ FAQ = class FAQ extends Component {
             What should I have on hand?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 9}>
+            <Message error>
+              <em>Note: this information is from 2025 and may be adjusted for the 2026 Hunt.</em>
+	    </Message>
             Your creativity and problem-solving skills! Along with the following:<br />
             <List bulleted>
               <List.Item><span className="description">At least one smartphone or computer. The more the better! (think about battery life).</span>
@@ -502,15 +505,15 @@ FAQ = class FAQ extends Component {
               Wristbands are distributed at check-in.
             </p>
             <p>
-              Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) from 9:30 AM - 3:30 PM, while supplies last.
+              Coffee, tea, cocoa, and light refreshments will be available in front of Miller Hall (in Red Square) from 9:30 AM - 3:00 PM, while supplies last.
             </p>
 	    <p><em> Be sure to bring snacks if you have special dietary needs.</em></p>
             <List>
-              <List.Item description="9:30 AM - Check in/receive wristband. Refreshment* area opens along Miller Hall."/>
-              <List.Item description="1:00 - 3:00 PM - Domino’s Pizza arrives in Red Square"/>
-              <List.Item description="3:30 PM - Food/Beverage Station closes"/>
+              <List.Item description="9:30 - 10:15 AM - Check in/receive wristband. Refreshment* area opens along Miller Hall."/>
+              <List.Item description="12:30 - 2:30 PM - Domino’s Pizza arrives in Red Square"/>
+              <List.Item description="3:00 PM - Food/Beverage Station closes"/>
 	      <p>
-		Special thanks to Haggen, Domino's Pizza, and Dave Brown and Kendra Williams.
+		Special thanks to Haggen, Domino's Pizza, Dave Brown, and Kendra Williams.
             </p>	      
             </List>
             * Fresh fruit, rolls, coffee, cocoa, tea
@@ -603,7 +606,7 @@ FAQ = class FAQ extends Component {
         </Accordion>
 
         <br/>
-        <p>Last Updated: January 2025</p>
+        <p>Last Updated: November 2025</p>
       </Segment>
       </Container>
     );
