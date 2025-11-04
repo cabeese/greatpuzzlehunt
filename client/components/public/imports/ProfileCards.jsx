@@ -12,7 +12,7 @@ export default class ProfileCards extends Component {
         name: 'Millie Johnson',
         title: '',
         role: 'Director, Founder, Coordinator, Puzzle Creator',
-        image: '/img/2016/event-photos/millie_johnson.jpg',
+        image: '/img/team/millie_johnson.jpg',
       },
 	  
       {
@@ -324,8 +324,9 @@ export default class ProfileCards extends Component {
   }
 
   _renderProfileCard({ name, title, role, image }) {
+    const img_prefix = "https://gph-distributed.s3.us-west-2.amazonaws.com";
     return <Card key={name}
-      image={image}
+      image={img_prefix + image}
       header={name}
       meta={title}
       description={role}
