@@ -51,7 +51,7 @@ export default class HomeIntro extends Component {
             <Grid.Column>
               <Segment padded inverted color='blue' >
                 <Header as='h1' size="medium" >When?</Header>
-                {eventDay}, {eventDate} from 9:30 AM&ndash;4:30 PM (PT). Leaderboard posted and prizes awarded at 5:00 PM (PT).<br/>
+                {eventDay}, {eventDate} from 9:30 AM&ndash;4:30 PM (PT). Leaderboard posted and prizes awarded at 4:45 PM (PT).<br/>
                 {/* virtualeventonly
                  Awards and Prizes* at 4:30 PM<br/>
                 *Must be present at awards ceremony to claim prizes, else prizes go to the next place team.<br/> 
