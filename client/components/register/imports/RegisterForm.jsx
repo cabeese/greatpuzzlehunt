@@ -181,7 +181,7 @@ class RegisterForm extends Component {
     return (
       <div>
         <Form onSubmit={ async (e) => { await this._register(e); } } style={ this._formStyle() }>
-        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at 9:30am Pacific Time`} />
+        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt and/or Treasure Hunt`} subheader={`${eventDate} at 9:30am Pacific Time`} />
         {/* materials banner
         <Message color='orange' size='huge'>
           <Message.Content>
