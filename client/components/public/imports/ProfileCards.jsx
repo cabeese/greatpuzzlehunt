@@ -12,7 +12,7 @@ export default class ProfileCards extends Component {
         name: 'Millie Johnson',
         title: '',
         role: 'Director, Founder, Coordinator, Puzzle Creator',
-        image: '/img/2016/event-photos/millie_johnson.jpg',
+        image: '/img/team/millie_johnson.jpg',
       },
 	  
       {
@@ -75,30 +75,30 @@ export default class ProfileCards extends Component {
     ];
 
     this.budgetCoord = [
-	  {
-        name: 'Mayla Ward',
-        title: '',
-        role: 'Co-President, Budget Coordination',
-        image: '/img/team/mayla.png',
-      },
       {
-        name: 'Noah Jensen',
+        name: 'Ella Williams',
         title: '',
         role: 'Co-President, Budget Coordination',
-        image: '/img/team/noah_j.png',
+        image: '/img/team/ella.jpg'
       },
       {
         name: 'Rylie Jutte',
         title: '',
-        role: 'VP, Budget Coordination',
+        role: 'Co-President, Budget Coordination',
         image: '/img/team/rylie.jpg'
       },
       {
-        name: 'Ella Williams',
+        name: 'Julia Olson',
         title: '',
-        role: 'VP, Budget Coordination',
-        image: '/img/team/ella.jpg'
-      }
+        role: 'Co-VP, Budget Coordination',
+        image: '/img/team/julia_olson.png',
+      },
+      {
+        name: 'Nora Lewis',
+        title: '',
+        role: 'Co-VP, Budget Coordination',
+        image: '/img/team/nora_lewis.jpg',
+      },
     ];
 	
     this.management = [
@@ -117,12 +117,30 @@ export default class ProfileCards extends Component {
       {
         name: 'Owen Montefisher',
         title: '',
-        role: 'VP, Management',
+        role: 'Co-VP, Management',
         image: '/img/team/owen.png',
-      }
+      },
+      {
+        name: 'Brandon Rae',
+        title: '',
+        role: 'Co-VP, Management',
+        image: '/img/team/brandon_rae.jpeg',
+      },
     ];
 
     this.pastProfiles = [
+      {
+        name: 'Mayla Ward',
+        title: '',
+        role: 'Co-President, Budget Coordination',
+        image: '/img/team/mayla.png',
+      },
+      {
+        name: 'Noah Jensen',
+        title: '',
+        role: 'Co-President, Budget Coordination',
+        image: '/img/team/noah_j.png',
+      },
       {
         name: 'Joanna Schroeder',
         title: '',
@@ -306,8 +324,9 @@ export default class ProfileCards extends Component {
   }
 
   _renderProfileCard({ name, title, role, image }) {
+    const img_prefix = "https://gph-distributed.s3.us-west-2.amazonaws.com";
     return <Card key={name}
-      image={image}
+      image={img_prefix + image}
       header={name}
       meta={title}
       description={role}

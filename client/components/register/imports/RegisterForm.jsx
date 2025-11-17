@@ -9,6 +9,7 @@ import { Segment,
   Dropdown,
   Message,
   Radio,
+  Popup,
 } from 'semantic-ui-react';
 import { pick } from 'lodash';
 import { gameModeOptions, gameModeEnum, } from '../../../../lib/imports/util'
@@ -116,6 +117,8 @@ class RegisterForm extends Component {
       password: '',
       confirmPassword: '',
       gameMode: '',
+      playingPuzzleHunt: false,
+      playingTreasureHunt: false,
       coords: '',
       phone: '',
       age: '',
@@ -140,13 +143,13 @@ class RegisterForm extends Component {
       return <Loading/>
     } else if (this.props.gamestate.registrationInPersonOpen ||
                this.props.gamestate.registrationVirtualOpen ||
-	       this.props.gamestate.registrationTHOnlyOpen) {
+               this.props.gamestate.registrationTreasureHuntOpen) {
       return this._renderMain();
     } else {
       return <Message
         info
         header='Registration is closed'
-        content="Next year's Great Puzzle Hunt is in development" />
+        content="Next year's Great Puzzle Hunt is in development" />;
     }
   }
 
@@ -179,6 +182,10 @@ class RegisterForm extends Component {
   }
 
   _form() {
+    const gameModeConflict = this.state.playingTreasureHunt && this.state.gameMode === "VIRTUAL";
+    const registrationPuzzleHuntOpen = this.props.gamestate.registrationInPersonOpen ||
+          this.props.gamestate.registrationVirtualOpen;
+    const registrationTreasureHuntOpen = this.props.gamestate.registrationTreasureHuntOpen;
     return (
       <div>
         <Form onSubmit={ async (e) => { await this._register(e); } } style={ this._formStyle() }>
@@ -218,13 +225,43 @@ class RegisterForm extends Component {
                       onChange={ (e) => this._handleTextChange(e) }/>
         </Form.Group>
 
+        { this._gameModeNote(this.props.gamestate.registrationInPersonOpen) }
+
         <Form.Group widths='equal' grouped>
           <Form.Dropdown name='gameMode' label='Anticipated Game Mode'
                          placeholder='Virtual vs In-Person...'
+                         error={gameModeConflict}
                          selection options={gameModeOptions} value={ this.state.gameMode }
                          onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
-        { this._gameModeNote(this.props.gamestate.registrationInPersonOpen) }
+
+        <Form.Group widths='equal' grouped>
+          <p>
+            <strong>Activity Selection</strong>
+            &nbsp;&nbsp;
+            <Popup trigger={<Icon name='help' color='red' />}
+                   content='Optionally participate in a wayfinding "Treasure Hunt" after the Puzzle Hunt. You may register for either or both!'
+            />
+          </p>
+          <Form.Checkbox
+            toggle
+            defaultChecked={this.state.playingPuzzleHunt}
+            name='playingPuzzleHunt'
+            label="Participating in the Great Puzzle Hunt"
+            disabled={!registrationPuzzleHuntOpen}
+            onChange={ (e,data) => this._handleDataChange(e,data) } />
+          <Form.Checkbox
+            toggle
+            error={gameModeConflict ? {
+              content: 'Treasure Hunt is only open to in-person players',
+              pointing: 'left',
+            } : null}
+            defaultChecked={this.state.playingTreasureHunt}
+            disabled={!registrationTreasureHuntOpen}
+            name='playingTreasureHunt'
+            label="Participating in the Treasure Hunt"
+            onChange={ (e,data) => this._handleDataChange(e,data) } />
+        </Form.Group>
 
         <Header as='h3' icon={<Icon name='home' color='blue'/>} content='Player Details'
                 subheader='This information is required in the case of emergency.'/>
@@ -317,8 +354,25 @@ class RegisterForm extends Component {
     };
   }
 
+  _getNextValidationError() {
+    if (this.state.playingTreasureHunt && this.state.gameMode === "VIRTUAL") {
+      return "The Treasure Hunt is only open to in-person players";
+    }
+
+    return null;
+  }
+
   async _register(e) {
     e.preventDefault();
+
+    const validationError = this._getNextValidationError();
+    if (validationError) {
+      this.setState({ error: {
+        reason: validationError,
+      }});
+      return;
+    }
+
     this.setState({ mode: 'loading' });
 
     const data = this._registrationData();
@@ -343,8 +397,8 @@ class RegisterForm extends Component {
       return (
         <Message
           color='yellow'
-          header='In-person registration is now closed'
-          content="We are no longer accepting additional in-person players for this year"
+          header='Puzzle Hunt in-person registration is now closed'
+          content="We are no longer accepting additional in-person Puzzle Hunt players for this year"
         />
       );
     }
@@ -353,6 +407,7 @@ class RegisterForm extends Component {
   _registrationData() {
     const fields = [
         'firstname', 'lastname', 'email', 'accountType', 'password', 'confirmPassword', 'gameMode',
+        'playingTreasureHunt', 'playingPuzzleHunt',
         'coords', 'phone', 'age', 'address', 'city', 'zip', 'state', 'country',
         'ecName', 'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
         'photoPermission', 'holdHarmless'
