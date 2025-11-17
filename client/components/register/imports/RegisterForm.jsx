@@ -16,7 +16,7 @@ import { gameModeOptions, gameModeEnum, } from '../../../../lib/imports/util'
 
 import GamestateComp from '../../imports/GamestateComp';
 
-const { registrationCloseDate, eventYear, eventDate, eventDay } = Meteor.settings.public;
+const { registrationCloseDate, eventYear, eventDate, eventDay, treasureHuntEndDate } = Meteor.settings.public;
 
 const { fromEmail } = Meteor.settings.public;
 
@@ -444,7 +444,7 @@ class RegisterForm extends Component {
     return (
       <Segment basic>
         <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor
-child) to participate either in-person or virtually in the {eventYear} WWU Great Puzzle Hunt and/or WWU Treasure Hunt sponsored by the WWU Mathematics Department, held on {eventDay}, {eventDate} (hereinafter referred to as “Puzzle Hunt” and/or “Treasure Hunt”). I understand the risks involved in the Puzzle Hunt and/or Treasure Hunt, including the unlikely but potential risk of
+	  child) to participate either in-person or virtually in the {eventYear} WWU Great Puzzle Hunt and/or WWU Treasure Hunt sponsored by the WWU Mathematics Department, held {eventDate} through {treasureHuntEndDate} (hereinafter referred to as “Puzzle Hunt” and/or “Treasure Hunt”). I understand the risks involved in the Puzzle Hunt and/or Treasure Hunt, including the unlikely but potential risk of
 injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
         <p>In consideration of my (or my minor child’s) voluntary participation in the Puzzle Hunt and/or Treasure Hunt, I agree to hold harmless Western Washington University, its officers, agents, volunteers, or employees from and against all financial loss, claim, suit, action, damage, or expense, arising out of my (or my minor child’s) participation, unless caused by the negligence or willful misconduct of the University, its officers, agents, volunteers, or employees.</p>
         <p><strong>In-Person Participation</strong>: I understand that Western Washington University strongly recommends that participants have comprehensive health insurance coverage.</p>
