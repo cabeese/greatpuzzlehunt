@@ -16,7 +16,7 @@ import { gameModeOptions, gameModeEnum, } from '../../../../lib/imports/util'
 
 import GamestateComp from '../../imports/GamestateComp';
 
-const { registrationCloseDate, eventYear, eventDate, eventDay } = Meteor.settings.public;
+const { registrationCloseDate, eventYear, eventDate, eventDay, treasureHuntEndDate } = Meteor.settings.public;
 
 const { fromEmail } = Meteor.settings.public;
 
@@ -189,7 +189,7 @@ class RegisterForm extends Component {
     return (
       <div>
         <Form onSubmit={ async (e) => { await this._register(e); } } style={ this._formStyle() }>
-        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt`} subheader={`${eventDate} at 9:30am Pacific Time`} />
+        <Header as='h1' icon={<Icon name='user' color='green'/>} content={`Create account for the ${eventYear} Great Puzzle Hunt and/or Treasure Hunt`} subheader={`${eventDate} at 9:30am Pacific Time`} />
         {/* materials banner
         <Message color='orange' size='huge'>
           <Message.Content>
@@ -312,7 +312,7 @@ class RegisterForm extends Component {
 
         <List>
           <List.Item><strong>Participants under age 18 who are not enrolled WWU students</strong>: A parent/legal guardian must complete this registration form on behalf of their minor. </List.Item>
-          <List.Item><strong>Participants under age 14</strong>: A parent/legal guardian must complete this registration form on behalf of their minor. In addition, at least one adult must register as a team member on a team with any participants under age 14 and accompany them at all times during the Puzzle Hunt.</List.Item>
+          <List.Item><strong>Participants under age 14</strong>: A parent/legal guardian must complete this registration form on behalf of their minor. In addition, at least one adult must register as a team member on a team with any participants under age 14 and accompany them at all times during the Puzzle Hunt and/or Treasure Hunt.</List.Item>
         </List>
 
         <Header as='h3' icon={<Icon name='camera' color='violet'/>} content='Photo Permission'/>
@@ -321,7 +321,7 @@ class RegisterForm extends Component {
           toggle
           defaultChecked={this.state.photoPermission}
           name='photoPermission'
-          label="I hereby give my permission to Western and the Great Puzzle Hunt to use my (or my minor child's) image, in photo or video, in whole or in part, for public information and marketing of the WWU Great Puzzle Hunt at its discretion."
+          label="I hereby give my permission to Western and the Great Puzzle Hunt to use my (or my minor child's) image, in photo or video, in whole or in part, for public information and marketing of the WWU Great Puzzle Hunt and/or Treasure Hunt at its discretion."
           onChange={ (e,data) => this._handleDataChange(e,data) } />
 
         <Header as='h3' icon={<Icon name='pencil' color='orange'/>}
@@ -444,9 +444,9 @@ class RegisterForm extends Component {
     return (
       <Segment basic>
         <p>I hereby acknowledge that I have voluntarily chosen (or voluntarily chosen to allow my minor
-child) to participate either in-person or virtually in the {eventYear} WWU Great Puzzle Hunt sponsored by the WWU Mathematics Department, held on {eventDay}, {eventDate} (hereinafter referred to as “Puzzle Hunt”). I understand the risks involved in the Puzzle Hunt, including the unlikely but potential risk of
+	  child) to participate either in-person or virtually in the {eventYear} WWU Great Puzzle Hunt and/or WWU Treasure Hunt sponsored by the WWU Mathematics Department, held {eventDate} through {treasureHuntEndDate} (hereinafter referred to as “Puzzle Hunt” and/or “Treasure Hunt”). I understand the risks involved in the Puzzle Hunt and/or Treasure Hunt, including the unlikely but potential risk of
 injury to me (or my minor child), and I agree to accept any and all risks associated with my participation.</p>
-        <p>In consideration of my (or my minor child’s) voluntary participation in the Puzzle Hunt, I agree to hold harmless Western Washington University, its officers, agents, volunteers, or employees from and against all financial loss, claim, suit, action, damage, or expense, arising out of my (or my minor child’s) participation, unless caused by the negligence or willful misconduct of the University, its officers, agents, volunteers, or employees.</p>
+        <p>In consideration of my (or my minor child’s) voluntary participation in the Puzzle Hunt and/or Treasure Hunt, I agree to hold harmless Western Washington University, its officers, agents, volunteers, or employees from and against all financial loss, claim, suit, action, damage, or expense, arising out of my (or my minor child’s) participation, unless caused by the negligence or willful misconduct of the University, its officers, agents, volunteers, or employees.</p>
         <p><strong>In-Person Participation</strong>: I understand that Western Washington University strongly recommends that participants have comprehensive health insurance coverage.</p>
         <p>If you are feeling ill, please stay home. Masks are no longer required on Western's campus, but please be understanding, respectful, and considerate of individual choices to mask or not to mask.</p>
         <p>I understand and acknowledge that a medical emergency may develop which necessitates the need for immediate medical treatment for a participant. I hereby authorize Western and its officers, agents, volunteers, or employees to arrange or provide any necessary emergency medical treatment on my (or my minor child’s) behalf.</p>
