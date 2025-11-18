@@ -44,8 +44,6 @@ class AdminUserEditForm extends Component {
 
   render() {
     const user = _.pick(this.state, [...USER_FIELDS, "paid"]);
-    console.log('user edit form');
-    console.log(user);
     return (
       <Form onSubmit={(e) => this._update(e)}>
 

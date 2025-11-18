@@ -6,7 +6,7 @@ import { Teams } from '../../../../../lib/collections/teams.js'
 
 import AdminUserTable from './AdminUserTable';
 
-export default AdminUserListTracker = withTracker(({ userSearch, teamSearch, onlyLooking }) => {
+export default AdminUserListTracker = withTracker(({ userSearch, teamSearch, onlyLooking, onlyPuzzleHunt, onlyTreasureHunt }) => {
   const usersHandle = Meteor.subscribe('admin.users', userSearch);
   const loading = !usersHandle.ready();
 
@@ -57,6 +57,16 @@ export default AdminUserListTracker = withTracker(({ userSearch, teamSearch, onl
     users = users.filter((user, i, _users) => (user.lookingForTeam));
   }
 
+  // Filter users to only those playing puzzle hunt
+  if (onlyPuzzleHunt) {
+    users = users.filter((user, i, _users) => (user.playingPuzzleHunt));
+  }
+
+  // Filter users to only those playing treasure hunt
+  if (onlyTreasureHunt) {
+    users = users.filter((user, i, _users) => (user.playingTreasureHunt));
+  }
+  
   return {
     loading,
     users,
