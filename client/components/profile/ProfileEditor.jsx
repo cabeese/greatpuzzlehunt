@@ -29,14 +29,19 @@ ProfileEditorUI = class ProfileEditor extends Component {
       gameMode: user.gameMode || '',
       email: user.getEmail(),
       lookingForTeam: user.lookingForTeam || false,
+      playingPuzzleHunt: user.playingPuzzleHunt || false,
+      playingTreasureHunt: user.playingTreasureHunt || false,
       bio: user.bio || '',
     };
   }
 
   render() {
-    const { firstname, lastname, gameMode, lookingForTeam, bio } = this.state;
+    const { firstname, lastname, gameMode, lookingForTeam,
+	    playingPuzzleHunt, playingTreasureHunt, bio } = this.state;
     const { ready, gamestate } = this.props;
     const canChangeGameMode = ready && gamestate.registrationInPersonOpen;
+    const canChangePuzzlePlay = ready && (gamestate.registrationInPersonOpen || gamestate.registrationVirtualOpen);
+    const canChangeTreasurePlay = ready && gamestate.registrationTreasureHuntOpen;
     return (
     <Segment basic>
       <Form onSubmit={async (e) => await this._handleSubmit(e)}>
@@ -53,7 +58,17 @@ ProfileEditorUI = class ProfileEditor extends Component {
                          selection options={gameModeOptions} value={ this.state.gameMode }
                          onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
-        <p><small><strong>Note:</strong> if you need to change this setting after the deadline has passed,
+        <Form.Group widths='equal'>
+	  <Form.Field>
+	    <Checkbox toggle name='playingPuzzleHunt' label='Playing puzzle hunt' checked={ playingPuzzleHunt } onChange={(e,data) => this._handleDataChange(e,data)} disabled={!canChangePuzzlePlay} />
+	  </Form.Field>
+        </Form.Group>
+        <Form.Group widths='equal'>
+	  <Form.Field>
+	    <Checkbox toggle name='playingTreasureHunt' label='Playing treasure hunt' checked={ playingTreasureHunt } onChange={(e,data) => this._handleDataChange(e,data)} disabled={!canChangeTreasurePlay} />
+	  </Form.Field>
+        </Form.Group>
+        <p><small><strong>Note:</strong> if you need to change these settings after the deadline has passed,
              please email us at <a href="mailto:support@greatpuzzlehunt.com">support@greatpuzzlehunt.com</a> ASAP.
              We need an accurate headcount for ordering food, etc.</small></p>
 
