@@ -25,7 +25,7 @@ const USER_FIELDS = [
   '_id', 'firstname', 'lastname', 'email', 'accountType',
   'phone', 'age', 'address', 'city', 'zip', 'state', 'country', 'ecName',
   'ecRelationship', 'ecPhone', 'ecEmail', 'parentGuardian',
-  'photoPermission', "gameMode",
+  'photoPermission', "gameMode", 'playingPuzzleHunt', 'playingTreasureHunt'
 ];
 
 class AdminUserEditForm extends Component {
@@ -44,6 +44,8 @@ class AdminUserEditForm extends Component {
 
   render() {
     const user = _.pick(this.state, [...USER_FIELDS, "paid"]);
+    console.log('user edit form');
+    console.log(user);
     return (
       <Form onSubmit={(e) => this._update(e)}>
 
@@ -100,6 +102,20 @@ class AdminUserEditForm extends Component {
                        placeholder='Virtual vs In-Person...'
                        selection options={gameModeOptions} value={ user.gameMode }
                        onChange={ (e, data) => this._handleDataChange(e, data) }/>
+
+        <Form.Checkbox
+          toggle
+          defaultChecked={user.playingPuzzleHunt}
+          name='playingPuzzleHunt'
+          label="Playing puzzle hunt"
+          onChange={(e, data) => this._handleDataChange(e, data)} />
+
+        <Form.Checkbox
+          toggle
+          defaultChecked={user.playingTreasureHunt}
+          name='playingTreasureHunt'
+          label="Playing treasure hunt"
+          onChange={(e, data) => this._handleDataChange(e, data)} />
 
         <Header as='h3' icon={<Icon name='ambulance' color='red' />}
                 content='Emergency Contact'

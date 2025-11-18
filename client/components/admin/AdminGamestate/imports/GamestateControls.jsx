@@ -183,7 +183,7 @@ class GamestateControlsInner extends Component {
         <Header as='h3' content='Game Day!'/>
         { this._fieldButton('CheckIn') }
         { this._fieldButton('Gameplay') }
-        { this._fieldButton('thPlay', 'Treasure hunt play') }
+        { this._fieldButton('treasureHuntPlay', 'Treasure hunt play') }
 
         <Header as='h3' content='Leaderboard'/>
         { this._fieldButton('Leaderboard') }
