@@ -42,6 +42,7 @@ ProfileEditorUI = class ProfileEditor extends Component {
     const canChangeGameMode = ready && gamestate.registrationInPersonOpen;
     const canChangePuzzlePlay = ready && (gamestate.registrationInPersonOpen || gamestate.registrationVirtualOpen);
     const canChangeTreasurePlay = ready && gamestate.registrationTreasureHuntOpen;
+
     return (
     <Segment basic>
       <Form onSubmit={async (e) => await this._handleSubmit(e)}>
@@ -103,7 +104,7 @@ ProfileEditorUI = class ProfileEditor extends Component {
   async _handleSubmit(e) {
     e.preventDefault();
 
-    const fields = pick(this.state, ['firstname', 'lastname', 'gameMode', 'lookingForTeam', 'bio']);
+    const fields = pick(this.state, ['firstname', 'lastname', 'gameMode', 'lookingForTeam', 'bio', 'playingPuzzleHunt', 'playingTreasureHunt']);
     this.setState({saving: true});
 
     try {
