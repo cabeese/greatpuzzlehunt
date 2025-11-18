@@ -69,19 +69,17 @@ class GamestateControlsInner extends Component {
   async _getReport(index) {
     let self = this;
     this.setState({reportDLBusy: true});
-    await Meteor.callAsync('admin.downloadReport', index, (error, result) => {
+    try {
+      let result = await Meteor.callAsync('admin.downloadReport', index);
       self.setState({reportDLBusy: false});
-      if(error){
-        console.log(error);
-        alert(`Failed to generate report. ${error.message}. See logs for details`);
-      } else if(result) {
-        let encodedUri = `data:text/csv;charset=${result.encoding},` +
+      let encodedUri = `data:text/csv;charset=${result.encoding},` +
           encodeURI(result.content);
-        window.open(encodedUri);
-      } else {
-        alert("Something went wrong - no error but also no data.");
-      }
-    });
+      window.open(encodedUri);
+    } catch (error) {
+      self.setState({reportDLBusy: false});
+      console.log(error);
+      alert(`Failed to generate report. ${error.message}. See logs for details`);
+    }
   }
 
   _renderForm() {
