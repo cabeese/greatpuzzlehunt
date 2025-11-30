@@ -17,7 +17,7 @@ import {
 } from 'semantic-ui-react';
 import GamestateComp from '../imports/GamestateComp';
 
-const { eventYear, eventDate, eventDay, siteName, earlyBirdLastDate, gearSaleEnd, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
+const { eventYear, eventDate, eventDay, siteName, earlyBirdLastDate, gearSaleEnd, registrationOpenDate, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
 let donationLink = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
@@ -42,9 +42,9 @@ const gearPricing = (
       <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
     </ul> */}
     <ul>
-      <li>Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes. Gear store open {regularRegistrationStart}&ndash;{gearSaleEnd}.</li>
+      <li>Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes. Gear store opens {registrationOpenDate}&ndash;{gearSaleEnd}.</li>
       <li>Gear sales end midnight {gearSaleEnd}.</li>
-      <li>Shirts will be ordered on Monday, April 28 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of May 12, 2025.</li>
+      <li>Shirts will be ordered on Monday, April 20 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of May 4, 2026.</li>
       <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
     </ul>
     <p> If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help sustain this event. </p>
@@ -546,7 +546,7 @@ FAQ = class FAQ extends Component {
             <Grid stackable>
               <Grid.Row>
                 <Grid.Column width={10}>
-                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed. Opens {regularRegistrationStart}.</p>}
+                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed. Opens {registrationOpenDate}.</p>}
                   <p>There are 13 style choices, wonderful colors, and an awesome design!</p>
                   {gearPricing}
 		<LinkButton as='a'
