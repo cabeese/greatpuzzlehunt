@@ -358,6 +358,12 @@ class RegisterForm extends Component {
     if (this.state.playingTreasureHunt && this.state.gameMode === "VIRTUAL") {
       return "The Treasure Hunt is only open to in-person players";
     }
+    if (this.state.playingTreasureHunt && this.state.accountType == "VOLUNTEER") {
+      return "Volunteers cannot play the Treasure Hunt";
+    }
+    if (this.state.playingPuzzleHunt && this.state.accountType == "VOLUNTEER") {
+      return "Volunteers cannot play the Puzzle Hunt";
+    }
 
     return null;
   }
