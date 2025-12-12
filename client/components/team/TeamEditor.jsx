@@ -31,11 +31,15 @@ TeamEditor = class TeamEditor extends Component {
         password: team.password || '',
         division: team.division || null,
         inPerson: (team.inPerson || false),
+	playingPuzzleHunt: (team.playingPuzzleHunt || false),
+	playingTreasureHunt: (team.playingTreasureHunt || false),
         lookingForMembers: (team.lookingForMembers || false),
         checkedIn: team.checkinConfirmed,
       };
     }
-    return { name: '', password: '', division: null, inPerson: false, lookingForMembers: false, checkedIn: false};
+    return { name: '', password: '', division: null, inPerson: false,
+	     playingPuzzleHunt: false, playingTreasureHunt: false,
+	     lookingForMembers: false, checkedIn: false};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,6 +65,10 @@ TeamEditor = class TeamEditor extends Component {
         <Segment>
           {this._renderHybrid()}
         </Segment>
+
+	<Segment>
+	  {this._renderPlaying()}
+	</Segment>
 
         <Segment>
           {this._renderLFM()}
@@ -158,6 +166,37 @@ TeamEditor = class TeamEditor extends Component {
     );
   }
 
+  _renderPlaying() {
+    console.log('render playing');
+    console.log(this.state.playingPuzzleHunt);
+    console.log(this.state.playingTreasureHunt);
+    return (
+      <Form.Group widths='equal' grouped>
+	<p>
+          <strong>Activity selection</strong>
+          &nbsp;&nbsp;
+          <Popup trigger={<Icon name='help' color='red' />}
+                 content='In-person teams optionally participate in a wayfinding "Treasure Hunt" after the Puzzle Hunt. You may register for either or both!'
+            />
+        </p>
+        <Form.Checkbox
+          toggle
+          defaultChecked={this.state.playingPuzzleHunt}
+          name='playingPuzzleHunt'
+          label="Participating in the Great Puzzle Hunt"
+          disabled={this.state.checkedIn}
+          onChange={ (e,data) => this._handleDataChange(e,data) } />
+        <Form.Checkbox
+          toggle
+          defaultChecked={this.state.playingTreasureHunt}
+          disabled={this.state.checkedIn || !this.state.inPerson}
+          name='playingTreasureHunt'
+          label="Participating in the Treasure Hunt"
+          onChange={ (e,data) => this._handleDataChange(e,data) } />
+      </Form.Group>
+    );
+  }
+
   _renderLFM() {
     return (
       <Form.Field disabled={this.state.checkedIn}>
@@ -198,11 +237,21 @@ TeamEditor = class TeamEditor extends Component {
   }
 
   _setInPerson(enableInPerson) {
+    console.log('set in person:');
+    console.log(enableInPerson);
     this.setState({inPerson: enableInPerson});
+    if (!enableInPerson) {
+      console.log('clearing treasure hunt');
+      this.setState({playingTreasureHunt: false});
+    }
   }
 
   _handleDataChange(e, data) {
     const { name, value, checked } = data;
+    console.log('handle data change');
+    console.log(name);
+    console.log(value);
+    console.log(checked);
     if(value === "noncompetitive"){
       this.setState({showConfirm: true});
     } else {
@@ -243,9 +292,11 @@ TeamEditor = class TeamEditor extends Component {
 
   _teamData() {
     const { team } = this.props;
-    const { name, password, division, lookingForMembers, inPerson } = this.state;
+    const { name, password, division, lookingForMembers,
+	    playingPuzzleHunt, playingTreasureHunt, inPerson } = this.state;
     return {
       name, password, division, lookingForMembers, inPerson,
+      playingPuzzleHunt, playingTreasureHunt,
       _id: team ? team._id : undefined,
     };
   }
