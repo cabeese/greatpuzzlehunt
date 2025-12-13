@@ -13,6 +13,8 @@ Meteor.publish('admin.teams', function() {
     division: 1,
     checkinConfirmed: 1,
     inPerson: 1,
+    playingPuzzleHunt: 1,
+    playingTreasureHunt: 1,
     hasBegun: 1,
     owner: 1,
     prize_ineligible: 1,

@@ -18,9 +18,7 @@ class CheckpointQRViewer extends Component {
 
   render() {
     const { checkpoint } = this.props;
-    console.log('checkpoint: ', checkpoint);
     const url = `${window.location.origin}/th/checkpoint/${checkpoint.sequence}`;
-    console.log('url: ', url);
     const hdr = `Checkpoint ${checkpoint.name} QR code`;
     return (
       <Form onSubmit={(e) => e.preventDefault() }>

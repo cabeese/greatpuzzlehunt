@@ -167,9 +167,6 @@ TeamEditor = class TeamEditor extends Component {
   }
 
   _renderPlaying() {
-    console.log('render playing');
-    console.log(this.state.playingPuzzleHunt);
-    console.log(this.state.playingTreasureHunt);
     return (
       <Form.Group widths='equal' grouped>
 	<p>
@@ -237,21 +234,14 @@ TeamEditor = class TeamEditor extends Component {
   }
 
   _setInPerson(enableInPerson) {
-    console.log('set in person:');
-    console.log(enableInPerson);
     this.setState({inPerson: enableInPerson});
     if (!enableInPerson) {
-      console.log('clearing treasure hunt');
       this.setState({playingTreasureHunt: false});
     }
   }
 
   _handleDataChange(e, data) {
     const { name, value, checked } = data;
-    console.log('handle data change');
-    console.log(name);
-    console.log(value);
-    console.log(checked);
     if(value === "noncompetitive"){
       this.setState({showConfirm: true});
     } else {

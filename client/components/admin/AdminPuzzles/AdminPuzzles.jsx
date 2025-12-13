@@ -61,7 +61,6 @@ AdminPuzzles = class AdminPuzzles extends Component {
     if (!confirm(`Are you sure you want to delete ${puzzle.name} (${puzzle._id})?`)) return;
     try {
       await Meteor.callAsync('admin.puzzle.delete', puzzle._id);
-      console.log(`Deleted puzzle ${puzzle.name} (${puzzle._id})`);
     } catch (error) {
       alert(error.reason);
     }

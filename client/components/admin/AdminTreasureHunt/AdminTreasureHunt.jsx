@@ -81,7 +81,6 @@ AdminTreasureHunt = class AdminTreasureHunt extends Component {
     if (!confirm(`Are you sure you want to delete ${checkpoint.name} (${checkpoint._id})?`)) return;
     try {
       await Meteor.callAsync('admin.thcheckpoints.delete', checkpoint._id);
-      console.log(`Deleted checkpoint ${checkpoint.name} (${checkpoint._id})`);
     } catch (error) {
       alert(error.reason);
     }
