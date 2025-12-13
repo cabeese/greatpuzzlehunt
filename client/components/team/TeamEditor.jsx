@@ -168,7 +168,7 @@ TeamEditor = class TeamEditor extends Component {
 
   _renderPlaying() {
     return (
-      <Form.Group widths='equal' grouped>
+      <Form.Group widths='equal' grouped disabled={this.state.checkedIn}>
 	<p>
           <strong>Activity selection</strong>
           &nbsp;&nbsp;
@@ -179,6 +179,7 @@ TeamEditor = class TeamEditor extends Component {
         <Form.Checkbox
           toggle
           defaultChecked={this.state.playingPuzzleHunt}
+	  checked={this.state.playingPuzzleHunt}
           name='playingPuzzleHunt'
           label="Participating in the Great Puzzle Hunt"
           disabled={this.state.checkedIn}
@@ -186,6 +187,7 @@ TeamEditor = class TeamEditor extends Component {
         <Form.Checkbox
           toggle
           defaultChecked={this.state.playingTreasureHunt}
+          checked={this.state.playingTreasureHunt}
           disabled={this.state.checkedIn || !this.state.inPerson}
           name='playingTreasureHunt'
           label="Participating in the Treasure Hunt"

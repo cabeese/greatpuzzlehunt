@@ -88,6 +88,8 @@ Meteor.publish('teams.browse', function() {
       owner: 1,
       lookingForMembers: 1,
       inPerson: 1,
+      playingPuzzleHunt: 1,
+      playingTreasureHunt: 1,
     },
   });
 });
