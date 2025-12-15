@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Icon, Label, Button, Progress } from 'semantic-ui-react';
+import { Table, Icon, Image, Label, Button, Progress } from 'semantic-ui-react';
 import MaybeNullIcon from '../../../imports/MaybeNullIcon';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../../../imports/PuzzleTreasureIcons';
 import moment from 'moment';
 
 class AdminTeamTableRow extends Component {
@@ -15,7 +16,8 @@ class AdminTeamTableRow extends Component {
     if (!team) {
       return <Table.Row negative>MISSING TEAM!</Table.Row>;
     }
-    const { EMERGENCY_LOCK_OUT, prize_ineligible } = team;
+    const { EMERGENCY_LOCK_OUT, prize_ineligible, playingPuzzleHunt,
+	    playingTreasureHunt } = team;
 
     const isPrizeIneligible = prize_ineligible ? true : false;
     const ineligible = <MaybeNullIcon
@@ -24,10 +26,13 @@ class AdminTeamTableRow extends Component {
 			 falsey={ ' ' }
 		       />;
 
+    const phi = <PuzzleHuntIcon value={playingPuzzleHunt}/>;
+    const thi = <TreasureHuntIcon value={playingTreasureHunt}/>;
+
     return (
       <Table.Row error={EMERGENCY_LOCK_OUT}>
         <Table.Cell>{this._createdAt()}</Table.Cell>
-        <Table.Cell>{this._name()} {ineligible}</Table.Cell>
+        <Table.Cell>{this._name()} { phi } { thi } {ineligible}</Table.Cell>
         <Table.Cell>{this._division()}</Table.Cell>
         <Table.Cell>{this._checkedIn()}</Table.Cell>
         <Table.Cell>{this._hasBegun()} {this._lockout(EMERGENCY_LOCK_OUT)}</Table.Cell>

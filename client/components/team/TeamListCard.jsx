@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Icon, Button, Progress, Form, Popup, Header } from 'semantic-ui-react';
+import { Card, Icon, Image, Button, Progress, Form, Popup, Header } from 'semantic-ui-react';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../imports/PuzzleTreasureIcons';
 import moment from 'moment';
 
 import { DIVISION_MAP } from './imports/team-helpers.js';
@@ -56,7 +57,11 @@ TeamListCard = class TeamListCard extends Component {
     return (
       <Card centered>
         <Card.Content>
-          <Card.Header>{ team.name }</Card.Header>
+          <Card.Header>
+	    { team.name } &nbsp;
+	    <PuzzleHuntIcon value={ team.playingPuzzleHunt }/> &nbsp;
+	    <TreasureHuntIcon value={ team.playingTreasureHunt }/>
+	  </Card.Header>
           <Card.Meta>
             { this._getGameModeIcon(inPerson) } { division }
           </Card.Meta>

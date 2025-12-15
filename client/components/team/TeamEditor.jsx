@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Form, Message, Input, Popup, Icon, Checkbox, Confirm, Segment, Menu, } from 'semantic-ui-react';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../imports/PuzzleTreasureIcons';
 import { DIVISION_TYPES } from "./imports/team-helpers"
 
 import { browserHistory } from '../../history';
@@ -176,22 +177,28 @@ TeamEditor = class TeamEditor extends Component {
                  content='In-person teams optionally participate in a wayfinding "Treasure Hunt" after the Puzzle Hunt. You may register for either or both!'
             />
         </p>
-        <Form.Checkbox
-          toggle
-          defaultChecked={this.state.playingPuzzleHunt}
-	  checked={this.state.playingPuzzleHunt}
-          name='playingPuzzleHunt'
-          label="Participating in the Great Puzzle Hunt"
-          disabled={this.state.checkedIn}
-          onChange={ (e,data) => this._handleDataChange(e,data) } />
-        <Form.Checkbox
-          toggle
-          defaultChecked={this.state.playingTreasureHunt}
-          checked={this.state.playingTreasureHunt}
-          disabled={this.state.checkedIn || !this.state.inPerson}
-          name='playingTreasureHunt'
-          label="Participating in the Treasure Hunt"
-          onChange={ (e,data) => this._handleDataChange(e,data) } />
+	<Form.Group inline>
+	  <PuzzleHuntIcon value={true} disabled={this.state.checkedIn}/> &nbsp;
+          <Form.Checkbox
+            toggle
+            defaultChecked={this.state.playingPuzzleHunt}
+	    checked={this.state.playingPuzzleHunt}
+            name='playingPuzzleHunt'
+            label="Participating in the Great Puzzle Hunt"
+            disabled={this.state.checkedIn}
+            onChange={ (e,data) => this._handleDataChange(e,data) } />
+	</Form.Group>
+	<Form.Group inline>
+	  <TreasureHuntIcon value={true} disabled={this.state.checkedIn || !this.state.inPerson}/> &nbsp;
+          <Form.Checkbox
+            toggle
+            defaultChecked={this.state.playingTreasureHunt}
+            checked={this.state.playingTreasureHunt}
+            disabled={this.state.checkedIn || !this.state.inPerson}
+            name='playingTreasureHunt'
+            label="Participating in the Treasure Hunt"
+            onChange={ (e,data) => this._handleDataChange(e,data) } />
+	</Form.Group>
       </Form.Group>
     );
   }

@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component, } from 'react';
 import { Button, Icon, Grid } from 'semantic-ui-react';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../../../imports/PuzzleTreasureIcons';
 import PropTypes from 'prop-types';
 
 import AdminTeamUserListTracker from './AdminTeamUserList';
@@ -92,19 +93,21 @@ class AdminTeamModalGeneral extends Component {
                     </Grid.Column>
                 </Grid>
 
-                <AdminTeamUserListTracker id={team._id} owner={team.owner} />
-
-                <Button
-                  label="Manually override this team's in-person setting"
-                  color={team.inPerson ? "blue" : "yellow"}
-                  onClick={this._toggleInPerson.bind(this)}
-                  content={team.inPerson ? "Team playing in-person" : "Team playing virtually"}
-                  />
-                <br /><br />
-
+              <AdminTeamUserListTracker id={team._id} owner={team.owner} />
+	      
+              <Button
+                label="Manually override this team's in-person setting"
+                color={team.inPerson ? "blue" : "yellow"}
+		icon={<Icon name={team.inPerson ? 'group' : 'video'}/>}
+                onClick={this._toggleInPerson.bind(this)}
+                content={team.inPerson ? "Team playing in-person" : "Team playing virtually"}
+              />
+              <br /><br />
+	      
 	      <Button
 		label="Manually override team playing puzzle hunt"
 		color={team.playingPuzzleHunt ? 'green' : 'red'}
+		icon={<PuzzleHuntIcon value={true} spaced='right'/>}
 		onClick={this._togglePlayingPuzzleHunt.bind(this)}
 		content={team.playingPuzzleHunt ? "Playing" : "Not playing"}
 	      />
@@ -113,6 +116,7 @@ class AdminTeamModalGeneral extends Component {
 	      <Button
 		label="Manually override team playing treasure hunt"
 		color={team.playingTreasureHunt ? 'green' : 'red'}
+		icon={<TreasureHuntIcon value={true} spaced='right'/>}
 		onClick={this._togglePlayingTreasureHunt.bind(this)}
 		content={team.playingTreasureHunt ? "Playing" : "Not playing"}
 	      />
