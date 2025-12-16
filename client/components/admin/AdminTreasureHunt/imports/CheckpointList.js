@@ -18,13 +18,20 @@ class CheckpointList extends Component {
 
   _actions() {
     return (
-      <Grid.Row columns='1'>
-        <Grid.Column>
-          <Header as='h3' content='Checkpoints'/>
-          <Button basic size='small' content='New Checkpoint'
-                  onClick={async () => await this._createCheckpoint() }/>
-        </Grid.Column>
-      </Grid.Row>
+      <div>
+	<Grid.Row columns='1'>
+          <Grid.Column>
+            <Header as='h3' content='Checkpoints'/>
+            <Button basic size='small' content='New Checkpoint'
+                    onClick={async () => await this._createCheckpoint() }/>
+          </Grid.Column>
+	</Grid.Row>
+	<p>
+	  <small>
+	    Checkpoints must be numbered consecutively, starting from zero.
+	  </small>
+	</p>
+      </div>
     );
   }
 
