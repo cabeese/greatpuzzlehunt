@@ -66,7 +66,7 @@ TeamBrowser = class TeamBrowser extends Component {
       <Container className="section">
         <Segment basic>
           <PuzzlePageTitle title={this._getTitle()} />
-          <p>Don\'t have a team to join? Filter by "Recruiting" teams to find open teams
+          <p>Don't have a team to join? Filter by "Recruiting" teams to find open teams
           looking for players like you!</p>
 	  <p>
 	    <PuzzleHuntIcon value={true}/> = planning to play Puzzle Hunt, &nbsp;
