@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Icon, Button } from 'semantic-ui-react';
 import MaybeNullIcon from '../../../imports/MaybeNullIcon';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../../../imports/PuzzleTreasureIcons';
 import moment from 'moment';
 
 class AdminUserTableRow extends Component {
@@ -34,15 +35,20 @@ class AdminUserTableRow extends Component {
 
   _name() {
     const { user } = this.props;
-    const { firstname, lastname, gameMode, paid, accountType } = user;
+    const { firstname, lastname, gameMode, paid, accountType,
+	    playingPuzzleHunt, playingTreasureHunt } = user;
     const fullname = `${firstname} ${lastname}`;
     const gameModeIcon = gameMode ? gameMode === "INPERSON" : null;
     let volunteerIcon = null;
     let adminIcon = null;
     let venueIcon = <MaybeNullIcon value={gameModeIcon}
-      truthy={<Icon name="group" color="blue" />}
-      falsey={<Icon name="video" color="green" />}
-      />;
+				   truthy={<Icon name="group" color="blue" />}
+				   falsey={<Icon name="video" color="green" />}
+		    />;
+    const puzzleIcon = playingPuzzleHunt ?
+      <PuzzleHuntIcon value={true}/> : '';
+    const treasureIcon = playingTreasureHunt ?
+      <TreasureHuntIcon value={true}/> : '';
 
     if (user.hasRole('volunteer')) {
       volunteerIcon = <Icon name='hand paper' color='teal'/>;
@@ -54,8 +60,10 @@ class AdminUserTableRow extends Component {
 
     return (
       <span>
-        <Icon name='ticket' color={paid ? 'green' : 'yellow'}/>
+        { /* <Icon name='ticket' color={paid ? 'green' : 'yellow'}/> */ }
         {venueIcon}
+	{puzzleIcon}
+	{treasureIcon}
         {fullname}
         {adminIcon}{volunteerIcon}
       </span>

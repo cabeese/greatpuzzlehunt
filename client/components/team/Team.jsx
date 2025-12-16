@@ -42,7 +42,7 @@ Team = class Team extends Component {
       <Segment basic>
         <PuzzlePageTitle
           title={this._getTitle()}
-          subTitle={this.state.lastUpdate ? `Last Updated: ${this.state.lastUpdated}` : ''}
+          subtitle={this.state.lastUpdate ? `Last Updated: ${this.state.lastUpdated}` : ''}
           />
         {content}
       </Segment>

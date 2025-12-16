@@ -9,7 +9,7 @@ LookingForTeam = class LookingForTeam extends Component {
   render() {
     return (
       <Container>
-        <PuzzlePageTitle title='Players Looking for a Team' subtitle='Find a team or more players'/>
+        <PuzzlePageTitle title='Players Looking for a Team' />
         <LFTUserList/>
       </Container>
     );
