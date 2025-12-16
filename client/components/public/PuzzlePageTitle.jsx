@@ -7,8 +7,6 @@ PuzzlePageTitle = class PuzzlePageTitle extends Component {
     const smallStyle = {
       fontSize: '.65em',
     };
-    console.log('puzzle page title, subtitle:');
-    console.log(this.props.subtitle);
     const SubTitle = this.props.subtitle ?
           <small style={ smallStyle }><br />{this.props.subtitle}</small>
           :
