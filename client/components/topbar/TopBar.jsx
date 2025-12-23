@@ -8,6 +8,7 @@ import Scrollchor from 'react-scrollchor';
 import { browserHistory } from '../../history';
 
 import GamestateComp from '../imports/GamestateComp';
+import { PuzzleHuntIcon, TreasureHuntIcon } from '../imports/PuzzleTreasureIcons';
 
 const leaderboardLink = {
   name: 'Leaderboard',
@@ -224,6 +225,7 @@ export default TopBar = class TopBar extends Component {
 
           {this._checkinButton()}
           {this._gameButton()}
+	  {this._treasureHuntButton()}
 
           {this._profileMenu()}
         </div>
@@ -368,8 +370,19 @@ export default TopBar = class TopBar extends Component {
     if (!hasTeam()) return null;
     return (
       <Link className="item" to="/game">
-        <Icon name="puzzle"/>
-        Game
+	<PuzzleHuntIcon value={true} />
+        Puzzle hunt
+      </Link>
+    );
+  }
+
+  _treasureHuntButton() {
+    const { hasTeam } = this.props;
+    if (!hasTeam()) return null;
+    return (
+      <Link className="item" to="/treasure">
+	<TreasureHuntIcon value={true} />
+        Treasure hunt
       </Link>
     );
   }

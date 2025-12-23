@@ -31,12 +31,8 @@ AdminTreasureHunt = class AdminTreasureHunt extends Component {
         />
         </Segment>
 
-        <Segment>
-          { this._editor() }
-        </Segment>
-        <Segment>
-          { this._qrcode() }
-        </Segment>
+        { this._editor() }
+        { this._qrcode() }
       </Container>
     );
   }
@@ -44,14 +40,16 @@ AdminTreasureHunt = class AdminTreasureHunt extends Component {
   _editor() {
     const { activeCheckpoint } = this.state;
     if (!activeCheckpoint) {
-      return <Message info content='Select a checkpoint to edit...'/>;
+      return '';
     }
     return (
-      <CheckpointEditor
-        checkpoint={ activeCheckpoint }
-        key={activeCheckpoint._id}
-        closeCheckpoint={ () => this.setState({ activeCheckpoint: null }) }
-      />
+      <Segment>
+	<CheckpointEditor
+          checkpoint={ activeCheckpoint }
+          key={activeCheckpoint._id}
+          closeCheckpoint={ () => this.setState({ activeCheckpoint: null }) }
+	/>
+      </Segment>
     );
   }
 
@@ -62,14 +60,16 @@ AdminTreasureHunt = class AdminTreasureHunt extends Component {
   _qrcode() {
     const { qrCheckpoint } = this.state;
     if (!qrCheckpoint) {
-      return <Message info content='Select a checkpoint to see QR code...'/>;
+      return '';
     }
     return (
-      <CheckpointQRViewer
-        checkpoint={ qrCheckpoint }
-        key={qrCheckpoint._id}
-        closeCheckpointQR={ () => this.setState({ qrCheckpoint: null }) }
-      />
+      <Segment>
+	<CheckpointQRViewer
+          checkpoint={ qrCheckpoint }
+          key={qrCheckpoint._id}
+          closeCheckpointQR={ () => this.setState({ qrCheckpoint: null }) }
+	/>
+      </Segment>
     );
   }
 

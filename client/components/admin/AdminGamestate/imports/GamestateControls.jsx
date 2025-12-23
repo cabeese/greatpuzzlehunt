@@ -44,7 +44,7 @@ class GamestateControlsInner extends Component {
         registrationVirtualOpen: props.gamestate.registrationVirtualOpen,
         registrationTreasureHuntOpen: props.gamestate.registrationTreasureHuntOpen,
         gameplay: props.gamestate.gameplay,
-        thplay: props.gamestate.thplay,
+        treasureplay: props.gamestate.treasureplay,
         webinarURL: props.gamestate.webinarURL || "",
         webinarID: props.gamestate.webinarID || "",
         bannerMarkdown: props.gamestate.bannerMarkdown || "",
@@ -180,8 +180,8 @@ class GamestateControlsInner extends Component {
 
         <Header as='h3' content='Game Day!'/>
         { this._fieldButton('CheckIn') }
-        { this._fieldButton('Gameplay') }
-        { this._fieldButton('treasureHuntPlay', 'Treasure hunt play') }
+        { this._fieldButton('gameplay', 'Puzzle hunt play') }
+        { this._fieldButton('treasureplay', 'Treasure hunt play') }
 
         <Header as='h3' content='Leaderboard'/>
         { this._fieldButton('Leaderboard') }
