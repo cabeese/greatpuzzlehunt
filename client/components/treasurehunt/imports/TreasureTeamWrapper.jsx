@@ -1,15 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
+import { withTracker } from 'meteor/react-meteor-data';
+import { sortBy} from 'lodash';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button, Container, Grid, Header, Label, Message } from 'semantic-ui-react';
 
-import TeamComp from '../../imports/TeamComp';
-// import GameUI from './GameUI.jsx';
+import { THCheckpoints } from '../../../../lib/collections/thcheckpoints.js';
+import { Teams } from '../../../../lib/collections/teams.js'
 
 class TreasureTeamWrapper extends Component {
   render() {
     const { ready } = this.props;
+    
     return (
       <Container>
         {this._title()}
@@ -93,6 +96,14 @@ class TreasureTeamWrapper extends Component {
 	    <Grid.Row columns='1'>
 	      <Header content='Checkpoints' />
 	    </Grid.Row>
+	    <Grid.Row>
+	      <Grid.Column width="2">
+		{ this._checkpointStatuses() }
+	      </Grid.Column>
+	      <Grid.Column width="14">
+		{ this._checkpointMessages() }
+	      </Grid.Column>
+	    </Grid.Row>
 	  </Grid>
 	);
       } else {
@@ -107,6 +118,64 @@ class TreasureTeamWrapper extends Component {
 	</Message>
       );
     }
+  }
+
+  _checkpointStatuses() {
+    const { checkpoints, team } = this.props;
+    const completed = team.completedCheckpoint;
+    const active = (completed == null) ? 0 : (completed + 1);
+    console.log('checkpoints');
+    console.log(checkpoints);
+    const sortedCheckpoints = sortBy(checkpoints, ['sequence', 'name'])
+    console.log(sortedCheckpoints);
+    return (
+      <Grid stackable>
+	{ sortedCheckpoints.map((checkpoint) => this._oneCheckpoint(checkpoint, active)) }
+      </Grid>
+    );
+  }
+
+  _checkpointMessages() {
+    const { checkpoints, team } = this.props;
+    const completed = team.completedCheckpoint;
+    const active = (completed == null) ? 0 : (completed + 1);
+    const numck = checkpoints.length;
+    const ckCompleted = (completed == null) ? null : checkpoints.find((c) => c.sequence == completed);
+    let msgCompleted = '';
+    if (ckCompleted != null) {
+      msgCompleted = <p> {ckCompleted == null ? '' : ckCompleted.finishDescription} </p>
+      
+    }
+    const ckActive = checkpoints.find((c) => c.sequence == active);
+    let msgActive = '';
+    if (ckActive != null) {
+      msgActive = <p> {ckActive == null ? '' : ckActive.startDescription} </p>
+    }
+    return (
+      <div>
+	{msgCompleted} {msgActive}
+      </div>
+    );
+  }
+
+  _oneCheckpoint(checkpoint, active) {
+    let color = 'none';
+    let ltext = '';
+    if (checkpoint.sequence < active) {
+      color = 'green';
+      ltext = ': completed';
+    } else if (checkpoint.sequence == active) {
+      color = 'orange';
+      ltext = ': active';
+    }
+    return (
+      <Grid.Row columns={1} name={checkpoint._id} key={checkpoint._id}>
+	<Grid.Column>
+	  <Label content={checkpoint.sequence + 1} color={color}/> &nbsp;
+	  {checkpoint.name} {ltext}
+	  </Grid.Column>
+      </Grid.Row>
+    );
   }
 
   async _startPlaying() {
@@ -140,8 +209,27 @@ class TreasureTeamWrapper extends Component {
 
 TreasureTeamWrapper.propTypes = {
   ready: PropTypes.bool.isRequired,
-  team: PropTypes.object,
+  team: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  checkpoints: PropTypes.array.isRequired,
 };
 
-export default TeamComp(TreasureTeamWrapper);
+function TreasureTracker(Comp) {
+  return withTracker(() => {
+    const handle1 = Meteor.subscribe('teams.myTeam');
+    const handle2 = Meteor.subscribe('admin.thcheckpoints');
+    const user = Meteor.user();
+    const ready = Boolean(handle1.ready() && handle2.ready() && user);
+    const team = ready ? Teams.findOne(user.teamId) : null;
+    const checkpoints = ready ? THCheckpoints.find({}).fetch() : null;
+
+    return {
+      user,
+      ready,
+      team,
+      checkpoints
+    };
+  })(Comp);
+};
+
+export default TreasureTracker(TreasureTeamWrapper);

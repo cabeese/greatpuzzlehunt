@@ -80,11 +80,6 @@ class CheckpointList extends Component {
         issues.push(`Invalid value for ${field}`);
       }
     });
-    // puzzle.hints.forEach((hint, i) => {
-    //   if (!hint.imageUrl && !hint.text) {
-    //     issues.push(`Hint ${i} empty or missing data`);
-    //   }
-    // });
 
     return (
       <Grid.Row columns={3} name={ checkpoint._id} key={ checkpoint._id } color={isActive ? "teal" : undefined}>

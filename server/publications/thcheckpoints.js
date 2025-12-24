@@ -5,7 +5,6 @@ import moment from 'moment'
 import { THCheckpoints } from '../../lib/collections/thcheckpoints.js'
 
 Meteor.publish('admin.thcheckpoints', function() {
-  if (!isAdmin(this.userId)) return this.ready();
   return THCheckpoints.find();
 });
 
