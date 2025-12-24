@@ -366,25 +366,33 @@ export default TopBar = class TopBar extends Component {
   }
 
   _gameButton() {
-    const { hasTeam } = this.props;
+    const { gamestate, hasTeam } = this.props;
     if (!hasTeam()) return null;
-    return (
-      <Link className="item" to="/game">
-	<PuzzleHuntIcon value={true} />
-        Puzzle hunt
-      </Link>
-    );
+    if (gamestate && gamestate.gameplay) {
+      return (
+	<Link className="item" to="/game">
+	  <PuzzleHuntIcon value={true} />
+          Puzzle hunt
+	</Link>
+      );
+    } else {
+      return null;
+    }
   }
 
   _treasureHuntButton() {
-    const { hasTeam } = this.props;
+    const { gamestate, hasTeam } = this.props;
     if (!hasTeam()) return null;
-    return (
-      <Link className="item" to="/treasure">
-	<TreasureHuntIcon value={true} />
-        Treasure hunt
-      </Link>
-    );
+    if (gamestate && gamestate.treasureplay) { 
+      return (
+	<Link className="item" to="/treasure">
+	  <TreasureHuntIcon value={true} />
+          Treasure hunt
+	</Link>
+      );
+    } else {
+      return null;
+    }
   }
 
   _logout(event) {
