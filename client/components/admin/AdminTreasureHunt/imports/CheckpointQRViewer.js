@@ -18,10 +18,10 @@ class CheckpointQRViewer extends Component {
 
   render() {
     const { checkpoint } = this.props;
-    const url = `${window.location.origin}/th/checkpoint/${checkpoint.sequence}`;
+    const url = `${window.location.origin}/treasure/checkpoint/${checkpoint.sequence}`;
     const hdr = `Checkpoint ${checkpoint.name} QR code`;
     return (
-      <Form onSubmit={(e) => e.preventDefault() }>
+      <Form onSubmit={ (e) => e.preventDefault() }>
         <Header as='h3' content={ hdr }/>
 
 	<Form.Group>
@@ -29,7 +29,7 @@ class CheckpointQRViewer extends Component {
 	</Form.Group>
 
         <Form.Group>
-          <Form.Button basic content='Close' onClick={this.props.closeCheckpointQR}/>
+          <Form.Button basic content='Close' onClick={ this.props.closeCheckpointQR }/>
         </Form.Group>
 
       </Form>

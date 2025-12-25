@@ -67,8 +67,11 @@ export const renderRoutes = () => {
         <Route path='looking-for-team' element={<RequireAuth accessLevel='user'><LookingForTeam /></RequireAuth>} />
 
       {/* Treasure hunt routes */}
-      { <Route path='treasure' element={<RequireAuth accessLevel='user'><Treasure /></RequireAuth>} /> }
-
+      <Route path='treasure'>
+	<Route index element={<RequireAuth accessLevel='user'><Treasure /></RequireAuth>} /> 
+        <Route path='checkpoint/:checkpointId' element={<RequireAuth accessLevel='user'><TreasureCheckpoint /></RequireAuth>}/>
+      </Route>
+      
         {/* Volunteer Routes */}
         <Route path='volunteer'>
           <Route index element={<RequireAuth accessLevel='volunteer'><Volunteer /></RequireAuth> }/>

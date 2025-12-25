@@ -15,7 +15,7 @@ class TreasureTeamWrapper extends Component {
     
     return (
       <Container>
-        {this._title()}
+        { this._title() }
 	{ ready ? this._content() : this._loading() }
       </Container>
     );
@@ -97,10 +97,10 @@ class TreasureTeamWrapper extends Component {
 	      <Header content='Checkpoints' />
 	    </Grid.Row>
 	    <Grid.Row>
-	      <Grid.Column width="2">
+	      <Grid.Column width="4">
 		{ this._checkpointStatuses() }
 	      </Grid.Column>
-	      <Grid.Column width="14">
+	      <Grid.Column width="12">
 		{ this._checkpointMessages() }
 	      </Grid.Column>
 	    </Grid.Row>
@@ -159,7 +159,7 @@ class TreasureTeamWrapper extends Component {
   }
 
   _oneCheckpoint(checkpoint, active) {
-    let color = 'none';
+    let color = 'grey';
     let ltext = '';
     if (checkpoint.sequence < active) {
       color = 'green';
@@ -209,9 +209,9 @@ class TreasureTeamWrapper extends Component {
 
 TreasureTeamWrapper.propTypes = {
   ready: PropTypes.bool.isRequired,
-  team: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  checkpoints: PropTypes.array.isRequired,
+  team: PropTypes.object,
+  user: PropTypes.object,
+  checkpoints: PropTypes.array
 };
 
 function TreasureTracker(Comp) {
