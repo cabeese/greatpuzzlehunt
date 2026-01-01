@@ -253,3 +253,33 @@
     height: 190px;
   }
 }
+
+.bottom-split-sponsor-bar {
+    width: 100%;
+    height: 72px;
+    line-height: 72px;
+    text-align: center;
+    background: #1D457E;
+    color: white;
+}
+
+/* from https://css-generators.com/wavy-circle/ */
+.wavy-circle {
+    --s: 150px; /* adjust to control the size */
+    background: #FBDDC5;
+    text-align: center;
+    line-height: var(--s);
+    margin: 0px auto;
+    padding-top: 35px;  /* Hack for getting image in the right spot */
+
+  width: var(--s);
+  aspect-ratio: 1;
+  --g:/calc(var(--s)*0.175) calc(var(--s)*0.175) radial-gradient(50% 50%,#000 99%,#0000 101%) no-repeat;
+  mask: calc(50% + var(--s)*0.39) calc(50% + var(--s)*0) var(--g),calc(50% + var(--s)*0.276) calc(50% + var(--s)*0.276) var(--g),calc(50% + var(--s)*0) calc(50% + var(--s)*0.39) var(--g),calc(50% + var(--s)*-0.276) calc(50% + var(--s)*0.276) var(--g),calc(50% + var(--s)*-0.39) calc(50% + var(--s)*0) var(--g),calc(50% + var(--s)*-0.276) calc(50% + var(--s)*-0.276) var(--g),calc(50% + var(--s)*0) calc(50% + var(--s)*-0.39) var(--g),calc(50% + var(--s)*0.276) calc(50% + var(--s)*-0.276) var(--g),radial-gradient(calc(var(--s)*0.413),#000 99%,#0000 101%) subtract,calc(50% + var(--s)*0.417) calc(50% + var(--s)*0.173) var(--g),calc(50% + var(--s)*0.173) calc(50% + var(--s)*0.417) var(--g),calc(50% + var(--s)*-0.173) calc(50% + var(--s)*0.417) var(--g),calc(50% + var(--s)*-0.417) calc(50% + var(--s)*0.173) var(--g),calc(50% + var(--s)*-0.417) calc(50% + var(--s)*-0.173) var(--g),calc(50% + var(--s)*-0.173) calc(50% + var(--s)*-0.417) var(--g),calc(50% + var(--s)*0.173) calc(50% + var(--s)*-0.417) var(--g),calc(50% + var(--s)*0.417) calc(50% + var(--s)*-0.173) var(--g);
+}
+
+.wavy-circle img {
+    display: block;
+    height: 80px;
+    margin: 0px auto;
+}
