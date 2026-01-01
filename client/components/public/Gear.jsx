@@ -134,7 +134,7 @@ const cardColors = {
     "btm": 'Electric Purple Heather',
     "btw": 'Aqua Heather',
     "bvtw": 'Grey Frost',
-    "lstm": 'Indigo Blue',
+    "lstm": 'Indigo blue',
     "lstw": 'White',
     "csu": 'Black',
     "hu": 'Mint Green',
@@ -297,7 +297,7 @@ Gear = class Gear extends Component {
 					<br />
 					Gear store closes {gearSaleEnd} at midnight.
 					<br />
-					Shirts will be ordered on Monday, April 20, 2025, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 4, 2026.
+					Shirts will be ordered on Monday, April 20, 2026, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 4, 2026.
 					<br /><br />
 					Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes.
 					<br /><br />
@@ -324,7 +324,6 @@ Gear = class Gear extends Component {
 				<Grid.Column width={5}>
 					<Image src={`${s3_prefix}shirt_design_background.png`} />
 				</Grid.Column>
-			{/* </Grid.Row> */}
 		    </Grid>
 		    <Header size="medium">Shirts</Header>
 		    <div className="gear-container">
