@@ -290,25 +290,20 @@ Gear = class Gear extends Component {
 		    <PuzzlePageTitle title="Gear" />
 			<Grid stackable>
 				<Grid.Column width={7}>
-				<Header as="h2">PLEASE NOTE:</Header>
-				SHIRTS ARRIVE <b>AFTER</b> EVENT and are <b>NOT</b> AVAILABLE FOR PICKUP AT EVENT.
-				<br /><br />
-				Gear store opens {registrationOpenDate}.
-				<br />
-				Gear store closes {gearSaleEnd} at midnight.
-				<br />
-				Shirts will be ordered on Monday, April 20, 2025, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 4, 2026.
-				<br /><br />
-				Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes.
-				<br /><br />
-				Click on each item for more information.
-				<br /><br />
-
-		    
-			{/* <Grid.Row> */}
-			    
+					<Header as="h2">PLEASE NOTE:</Header>
+					SHIRTS ARRIVE <b>AFTER</b> EVENT and are <b>NOT</b> AVAILABLE FOR PICKUP AT EVENT.
+					<br /><br />
+					Gear store opens {registrationOpenDate}.
+					<br />
+					Gear store closes {gearSaleEnd} at midnight.
+					<br />
+					Shirts will be ordered on Monday, April 20, 2025, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 4, 2026.
+					<br /><br />
+					Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes.
+					<br /><br />
+					Click on each item for more information.
+					<br /><br />
 					<Header as="h2">Shipping Options</Header>
-
 					<List bulleted>
 						<List.Item><strong>Pick up on campus</strong>: FREE</List.Item>
 						<List.Item>
