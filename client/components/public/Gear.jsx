@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Container, Segment, Header, Icon, Modal, Grid, List, Card, Image } from 'semantic-ui-react';
 import LinkButton from '../imports/LinkButton';
 
-const { eventYear, gearSaleEnd } = Meteor.settings.public;
+const { eventYear, gearSaleEnd, registrationOpenDate } = Meteor.settings.public;
 
 const link = `https://commerce.cashnet.com/TheGreatPuzzleHunt${eventYear}`;
 
@@ -79,35 +79,68 @@ const sizes = {
 };
 
 const styleColors = {
-    "ctm": ['Black', 'Blackberry', 'Charcoal', 'Cobalt', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Lilac', 'Maroon', 'Midnight', 'Military Green', 'Navy', 'Purple'],
-    "ctw": ['Athletic Maroon', 'Dark Heather Grey', 'Jet Black', 'Navy', 'Purple', 'Royal'],
-    "cty": ['Black', 'Charcoal', 'Cobalt', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Maroon', 'Military Green', 'Navy', 'Purple'],
-    "btm": ['Black', 'Charcoal', 'Deep Turquoise Fleck', 'Heathered Brown', 'Heathered Eggplant', 'Heathered Forest Green', 'Heathered Navy', 'Raspberry Fleck', 'Royal Frost',],
-    "btw": ['Black', 'Charcoal', 'Heathered Eggplant', 'Heathered Navy', 'Heathered Olive', 'Heathered Teal'],
-    "bvtw": ['Black', 'Charcoal', 'Deep Turquoise Fleck', 'Heathered Navy', 'Heathered Olive', 'Heathered Purple', 'Raspberry Fleck'],
-    "lstm": ['Black', 'Charcoal', 'Dark Chocolate', 'Dark Heather', 'Forest Green', 'Maroon', 'Military Green', 'Navy', 'Purple', 'Royal'],
-    "lstw": ['Athletic Maroon', 'Dark Heather Grey', 'Jet Black', 'Navy', 'Purple', 'Royal'],
-    "csu": ['Black', 'Charcoal', 'Dark Chocolate', 'Dark Heather', 'Forest', 'Maroon', 'Military Green', 'Navy', 'Purple', 'Royal'],
-    "hu": ['Black', 'Charcoal', 'Dark Chocolate', 'Dark Heather', 'Forest', 'Maroon', 'Military Green', 'Navy', 'Purple', 'Royal'],
-    "hy": ['Black', 'Charcoal', 'Dark Heather', 'Forest', 'Maroon', 'Navy', 'Purple', 'Royal'],
-    "huz": ['Black', 'Dark Chocolate', 'Dark Heather', 'Forest', 'Maroon', 'Navy', 'Purple', 'Royal'],
-    "qzu": ['Black', 'Forest Green', 'J Navy', 'Maroon', 'Royal', 'Vintage Heather Navy']
+	"ctm": [
+		'Aquatic', 'Ash', 'Azalea', 'Black', 'Carolina Blue', 'Cornsilk', 'Gravel', 'Heliconia', 'Ice Grey',
+		'Light Blue', 'Light Pink', 'Mint Green', 'Natural', 'Safety Green', 'Safety Pink', 'Sport Grey',
+		'Violet', 'White', 'Yellow Haze'
+	],
+	"ctw": [
+		'Ash', 'Athletic Heather', 'Candy Pink', 'Jet Black', 'Light Blue', 'White'
+	],
+	"cty": [
+		'Aquatic', 'Ash', 'Black', 'Carolina Blue', 'Light Blue', 'Light Pink', 'Mint Green', 'Natural',
+		'Safety Green', 'Safety Pink', 'Sport Grey', 'White', 'Yellow Haze'
+	],
+	"btm": [
+		'Aqua Heather', 'Awareness Pink Heather', 'Black', 'Carnation Pink', 'Electric Purple Heather',
+		'Flint Blue Heather', 'Heathered Dusty Sage', 'Light Heather Grey', 'Safety Green', 'White'
+	],
+	"btw": [
+		'Aqua Heather', 'Black', 'Light Heather Grey', 'White'
+	],
+	"bvtw": [
+		'Black', 'Blush Frost', 'Grey Frost', 'Heathered Lavender', 'Heathered Royal', 'White'
+	],
+	"lstm": [
+		'Ash', 'Black', 'Carolina Blue', 'Indigo blue', 'Light Blue', 'Light Pink', 'Natural', 'Safety Green',
+		'Sport Grey', 'White'
+	],
+	"lstw": [
+		'Aquatic Blue', 'Athletic Heather', 'Candy Pink', 'Jet Black', 'White'
+	],
+	"csu": [
+		'Ash', 'Black', 'Carolina Blue', 'Light Blue', 'Light Pink', 'Safety Green', 'Safety Pink', 'Sand',
+		'Sport Grey', 'White'
+	],
+	"hu": [
+		'Ash', 'Black', 'Carolina Blue', 'Heliconia', 'Light Blue', 'Light Pink', 'Mint Green', 'Old Gold',
+		'Orchid', 'Safety Green', 'Safety Pink', 'Sand', 'Sport Grey', 'Violet', 'White'
+	],
+	"hy": [
+		'Ash', 'Black', 'Carolina Blue', 'Gold', 'Heliconia', 'Light Pink', 'Sport Grey', 'White'
+	],
+	"huz": [
+		'Ash', 'Black', 'Carolina Blue', 'Safety Green', 'Sport Grey', 'White'
+	],
+	"qzu": [
+		'Ash', 'Black', 'Oxford', 'White'
+	]
 };
 
 const cardColors = {
-    "ctm": 'Blackberry',
-    "ctw": 'Royal',
-    "cty": 'Cobalt',
-    "btm": 'Deep Turquoise Fleck',
-    "btw": 'Heathered Olive',
-    "bvtw": 'Heathered Navy',
-    "lstm": 'Black',
-    "lstw": 'Athletic Maroon',
-    "csu": 'Dark Chocolate',
-    "hu": 'Royal',
-    "hy": 'Forest',
-    "huz": 'Navy',
-    "qzu": 'Vintage Heather Navy'
+    "ctm": 'Safety Green',
+    "ctw": 'Light Blue',
+    "cty": 'Safety Pink',
+    "btm": 'Electric Purple Heather',
+    "btw": 'Aqua Heather',
+    "bvtw": 'Grey Frost',
+    "lstm": 'Indigo Blue',
+    "lstw": 'White',
+    "csu": 'Black',
+    "hu": 'Mint Green',
+    "hy": 'Gold',
+    "huz": 'Carolina Blue',
+    "qzu": 'Ash'
 }
 
 Gear = class Gear extends Component {
@@ -157,7 +190,7 @@ Gear = class Gear extends Component {
     }
 
     getImageURL(code, color, prefix="", suffix="") {
-	return `${s3_prefix}${prefix}${code}_${color.toLowerCase().replaceAll(" ", "_")}${suffix}.jpg`;
+		return `${s3_prefix}${prefix}${code}_${color.toLowerCase().replaceAll(" ", "-")}${suffix}.webp`;
     }
     
 
@@ -255,44 +288,43 @@ Gear = class Gear extends Component {
 
 		<Segment basic>
 		    <PuzzlePageTitle title="Gear" />
-		    <Header as="h2">PLEASE NOTE:</Header>
-		    SHIRTS ARRIVE <b>AFTER</b> EVENT and are <b>NOT</b> AVAILABLE FOR PICKUP AT EVENT.
-		    <br /><br />
-		    Gear store closes {gearSaleEnd} at midnight.
-		    <br />
-		    Shirts will be ordered on Monday, April 28, 2025, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 12, 2025.
-		    <br /><br />
-		    Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes.
-		    <br /><br />
-		    Click on each item for more information.
-		    <br /><br />
-
-		    <Grid stackable>
-			<Grid.Row>
-			    <Grid.Column width={7}>
-				<Header as="h2">Shipping Options</Header>
-
-				<List bulleted>
-				    <List.Item><strong>Pick up on campus</strong>: FREE</List.Item>
-				    <List.Item>
-					<strong>Domestic Shipping</strong>:
-					<List.List>
-					    <List.Item>For any T-shirt (long or short sleeve): $6/shirt</List.Item>
-					    <List.Item>For any sweatshirt (all sweatshirt styles): $9/sweatshirt</List.Item>
-					</List.List>
-				    </List.Item>
-				    <List.Item>
-					<strong>International Shipping</strong>:
-					<List.List>
-					    <List.Item>For any shirt (T-shirt or sweatshirt): $28/shirt</List.Item>
-					</List.List>
-				    </List.Item>
-				</List>
-			    </Grid.Column>
-			    <Grid.Column width={5}>
-				<Image src={`${s3_prefix}shirt_design_background.png`} />
-			    </Grid.Column>
-			</Grid.Row>
+			<Grid stackable>
+				<Grid.Column width={7}>
+					<Header as="h2">PLEASE NOTE:</Header>
+					SHIRTS ARRIVE <b>AFTER</b> EVENT and are <b>NOT</b> AVAILABLE FOR PICKUP AT EVENT.
+					<br /><br />
+					Gear store opens {registrationOpenDate}.
+					<br />
+					Gear store closes {gearSaleEnd} at midnight.
+					<br />
+					Shirts will be ordered on Monday, April 20, 2025, and assuming no supply chain delays, should be shipped out or ready for pick-up the week of May 4, 2026.
+					<br /><br />
+					Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes.
+					<br /><br />
+					Click on each item for more information.
+					<br /><br />
+					<Header as="h2">Shipping Options</Header>
+					<List bulleted>
+						<List.Item><strong>Pick up on campus</strong>: FREE</List.Item>
+						<List.Item>
+						<strong>Domestic Shipping</strong>:
+						<List.List>
+							<List.Item>For any T-shirt (long or short sleeve): $6/shirt</List.Item>
+							<List.Item>For any sweatshirt (all sweatshirt styles): $9/sweatshirt</List.Item>
+						</List.List>
+						</List.Item>
+						<List.Item>
+						<strong>International Shipping</strong>:
+						<List.List>
+							<List.Item>For any shirt (T-shirt or sweatshirt): $28/shirt</List.Item>
+						</List.List>
+						</List.Item>
+					</List>
+				</Grid.Column>
+				<Grid.Column width={5}>
+					<Image src={`${s3_prefix}shirt_design_background.png`} />
+				</Grid.Column>
+			{/* </Grid.Row> */}
 		    </Grid>
 		    <Header size="medium">Shirts</Header>
 		    <div className="gear-container">
