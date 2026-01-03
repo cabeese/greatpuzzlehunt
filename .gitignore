@@ -21,3 +21,4 @@ testing/config.rb
 testing/testresults/
 *~
 testing/*.png
+tmp*
