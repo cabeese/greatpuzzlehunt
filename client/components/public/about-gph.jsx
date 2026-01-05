@@ -15,6 +15,7 @@ import {
   getAnchorName,
   puzzle_schedule_virtual_data,
   puzzle_schedule_inPerson_data,
+  importantDates,
   Parking,
   Directions,
   AboutGear,
@@ -100,6 +101,23 @@ class AboutGph extends Component {
           fifty-first, competing in the puzzle hunt is a great way to
           stretch your mental muscles, bond with your teammates, and
           have a lot of fun!
+        </p>
+
+        <h2>Who is it for?</h2>
+        <List bulleted>
+          <List.Item>Students, Faculty, Staff, Alumni, Community, Family, Everyone, Anywhere!</List.Item>
+          <List.Item>Each team with participant(s) under age 14 must include at least one registered adult team member to accompany minor(s) at all times.</List.Item>
+          <List.Item>Participants under 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.</List.Item>
+        </List>
+
+        <h2>Why Participate?</h2>
+        <p>Stretch your mental muscles, bond with your teammates, compete alongside people of all ages and walks of life, and have a lot of fun!</p>
+
+        <p>FREE, FUN, FOOD, MUSIC, PRIZES, and MORE!</p>
+
+        <h2>What if it rains?</h2>
+        <p>
+          Welcome to Washington.  We hunt on!
         </p>
       </div>
     );
@@ -187,7 +205,7 @@ class AboutGph extends Component {
         </p>
 
         <p>
-          <strong>WWU Alumin</strong><br />
+          <strong>WWU Alumni</strong><br />
           At least half of team members must be WWU Alumni.
         </p>
 
@@ -334,6 +352,8 @@ class AboutGph extends Component {
           A parent/legal guardian must complete the registration form
           on behalf of their minor.
         </p>
+
+        {importantDates}
       </div>
     );
   }
@@ -341,43 +361,37 @@ class AboutGph extends Component {
   _schedule() {
     return (
       <Grid stackable columns={2}>
-        <Grid.Column>
-          <Header as="h3">In-Person Teams</Header>
-          {puzzle_schedule_inPerson_data.map(({time, desc}) => (
-            <div key={time}>
-              <strong>{time}</strong>
-              <br />
+        <Grid.Row>
+          <Grid.Column>
+            <Header as="h3">In-Person Teams</Header>
+            {puzzle_schedule_inPerson_data.map(({time, desc}) => (
+              <div key={time}>
+                <strong>{time}</strong>
+                <br />
 
-              <p>{desc}</p>
-            </div>
-          ))}
-        </Grid.Column>
+                <p>{desc}</p>
+              </div>
+            ))}
+          </Grid.Column>
 
-        <Grid.Column>
-          <Header as="h3">Virtual Teams</Header>
-          {puzzle_schedule_virtual_data.map(({time, desc}) => (
-            <div key={time}>
-              <strong>{time}</strong>
-              <br />
+          <Grid.Column>
+            <Header as="h3">Virtual Teams</Header>
+            {puzzle_schedule_virtual_data.map(({time, desc}) => (
+              <div key={time}>
+                <strong>{time}</strong>
+                <br />
 
-              <p>{desc}</p>
-            </div>
-          ))}
-        </Grid.Column>
+                <p>{desc}</p>
+              </div>
+            ))}
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row>
+          * Must be wearing wristband to enter the free refreshments area.<br />
+          ** Must be present at awards ceremony to claim prizes.
+        </Grid.Row>
       </Grid>
-    );
-  }
-
-  _gear() {
-    return (
-      <AboutGear />
-    );
-  }
-
-  _support() {
-    return (
-      <div>
-      </div>
     );
   }
   // ==================================================================
@@ -387,8 +401,8 @@ class AboutGph extends Component {
   // Map of `Section Name` -> `Section Body Component`.
   // Order of this map determines rendering order.
   SECTION_MAP = {
+    "Mission Statement": this._missionStatement(),
     "Game Details": this._gameDetails(),
-    "Rules": <Rules />,
     "Teams": this._teams(),
     "Tools": this._tools(),
     "Prizes": this._prizes(),
@@ -398,6 +412,7 @@ class AboutGph extends Component {
     "Register": this._register(),
     "Schedule": this._schedule(),
     "Gear": <AboutGear />,
+    "Rules": <Rules />,
     "Support": <Support />,
   }
 

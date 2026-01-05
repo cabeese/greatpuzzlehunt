@@ -11,8 +11,10 @@ import {
 import LinkButton from '../../imports/LinkButton';
 import GamestateComp from '../../imports/GamestateComp';
 const {
+  eventDate,
   eventYear,
   gearSaleEnd,
+  registrationCloseDate,
   registrationOpenDate,
   regularRegistrationStart,
 } = Meteor.settings.public;
@@ -76,6 +78,15 @@ export const puzzle_schedule_virtual_data = [
     desc: "Leaderboard Posted, Live stream - claim your bragging rights!"
   },
 ];
+
+export const importantDates = (
+  <List className='bulleted'>
+    <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
+    <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
+    <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can join a team until 10:00 AM (PT).</List.Item>
+    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes at midnight.</List.Item>
+  </List>
+);
 
 export class Parking extends Component {
   render() {

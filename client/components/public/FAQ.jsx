@@ -19,6 +19,7 @@ import GamestateComp from '../imports/GamestateComp';
 import {
   puzzle_schedule_virtual_data,
   puzzle_schedule_inPerson_data,
+  importantDates,
   AboutGear,
   Support,
 } from './imports/common-details';
@@ -36,16 +37,6 @@ const wristbandNote = (
   <span>
     Must be wearing wristband to enter the free refreshments area.
   </span>
-);
-
-const importantDates = (
-  <List className='bulleted'>
-    {/* <List.Item><strong>{earlyBirdLastDate}</strong>: Early Bird discount prices for ticket codes and official gear end.</List.Item> */}
-    <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
-    <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
-    <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can join a team until 10:00 AM (PT).</List.Item>
-    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes at midnight.</List.Item>
-  </List>
 );
 
 const schedule_inPerson = (
