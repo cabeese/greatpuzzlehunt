@@ -8,14 +8,9 @@ const { regularRegistrationStart, eventDate, eventDay, gearSaleEnd } = Meteor.se
 import HomeBanner from './imports/HomeBanner';
 import HomeHeader from './imports/HomeHeader';
 import HomeAboutSplit from './imports/HomeAboutSplit';
-import HomeIntro from './imports/HomeIntro';
-import HomeEarlyBird from './imports/HomeEarlyBird';
-import HomePastEvents from './imports/HomePastEvents';
-import HomePeople from './imports/HomePeople';
+import HomeRegister from './imports/HomeRegister';
 import HomeDonate from './imports/HomeDonate';
-import HomeDonate0 from './imports/HomeDonate0';
 import HomeSponsors from './imports/HomeSponsors';
-import SamplePuzzles from './imports/SamplePuzzles';
 
 Home = class Home extends Component {
   render() {
@@ -27,16 +22,12 @@ Home = class Home extends Component {
 
         <HomeAboutSplit />
 
+        <HomeRegister />
+
         <div className="bottom-split-sponsor-bar">
           The Great Puzzle Hunt and Treasure Hunt are FREE events thanks to
           our <u><a href="#sponsors" style={{color: "white"}}>sponsors</a></u>.
         </div>
-
-        {/* <HomeDonate0 /> */}
-
-        {/* <HomeEarlyBird/> */}
-
-        {/* <HomeIntro/> */}
 
         <HomeDonate/>
 

@@ -37,7 +37,7 @@ class HomeAboutSplit extends Component {
         </Header>
 
         <p>
-          Teams of up to 6 (recommended size 4-6) work virtually or travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets.
+          Teams of up to 6 (recommended size 4-6) work virtually or travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets. <Link to="register">Registration</Link> required.
         </p>
         <Link to="about-gph">
           <Button
@@ -68,8 +68,7 @@ class HomeAboutSplit extends Component {
 
           <strong>Virtual:</strong> Anywhere that has internet access,
           a smartphone or computer, a printer,
-          and materials to be listed in the
-          FAQs <a href="TODO">What should I have on hand?</a>
+          and <Link to="about-gph#tools">the required tools</Link>.
         </p>
       </Grid.Column>
     );
