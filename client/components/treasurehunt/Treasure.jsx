@@ -10,9 +10,6 @@ class TreasureStateWrapper extends Component {
   render() {
     const { ready, gamestate } = this.props;
 
-    console.log('gamestate:');
-    console.log(gamestate);
-
     if (!ready) {
       return <Container><Loading/></Container>;
     }

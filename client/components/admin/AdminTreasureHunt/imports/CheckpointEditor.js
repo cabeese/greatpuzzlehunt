@@ -39,6 +39,18 @@ class CheckpointEditor extends Component {
     );
   }
 
+  _booleanInput(name, label) {
+    const value = this.state[name];
+    return (
+      <Form.Checkbox
+	name = { name }
+	label = { label }
+	checked = { value }
+	onChange = { (e) => this._handleBoolChange(e) }
+      />
+    );
+  }
+  
   _numericalInput(name, label) {
     const value = this.state[name];
     const isError = isNaN(parseInt(value, 10)) ||
@@ -69,11 +81,8 @@ class CheckpointEditor extends Component {
         { this._textInput("startDescription", "Description of start") }
         { this._textInput("finishDescription", "Message on finishing") }
 
-        { this._textOrBlankInput("cw0", "Codeword 0") }
-        { this._textOrBlankInput("cw1", "Codeword 1") }
-        { this._textOrBlankInput("cw2", "Codeword 2") }
-        { this._textOrBlankInput("cw3", "Codeword 3") }
-        { this._textOrBlankInput("cw4", "Codeword 4") }
+	{ this._booleanInput("hasCodeword", "Has codeword?") }
+        { this._textOrBlankInput("codeword", "Codeword") }
       
         <Form.Group>
           <Form.Button color='green' content='Save'
@@ -88,18 +97,15 @@ class CheckpointEditor extends Component {
   async _save(e) {
     e.preventDefault();
     const { name, sequence, startDescription, finishDescription, 
-            cw0, cw1, cw2, cw3, cw4 } = this.state;
+            codeword, hasCodeword } = this.state;
     const nonCharacterDigit = /[^a-zA-Z0-9]/ug
     const fields = {
       name: name.trim(),
       sequence: parseInt(sequence),
       startDescription: startDescription.trim(),
       finishDescription: finishDescription.trim(),
-      cw0: cw0.trim(),
-      cw1: cw1.trim(),
-      cw2: cw2.trim(),
-      cw3: cw3.trim(),
-      cw4: cw4.trim(),
+      codeword: codeword.trim(),
+      hasCodeword: hasCodeword
     };
 
     try {
@@ -113,6 +119,11 @@ class CheckpointEditor extends Component {
   _handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+  }
+
+  _handleBoolChange(e) {
+    const curr = this.state.hasCodeword;
+    this.setState({ hasCodeword: !curr });
   }
 }
 

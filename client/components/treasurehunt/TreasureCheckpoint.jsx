@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Link } from 'react-router-dom';
-import { Button, Container, Grid, Header, Label, Message } from 'semantic-ui-react';
+import { Button, Container, Form, Grid, Header, Label, Message } from 'semantic-ui-react';
 import WithRouter from '../imports/WithRouter';
 
 import { THCheckpoints } from '../../../lib/collections/thcheckpoints.js';
@@ -12,15 +12,17 @@ import { Teams } from '../../../lib/collections/teams.js';
 class TreasureCheckpointInner extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loading: false,
+      answer: '',
+      message: null,
+      error: null,
+    }
   }
 
   render() {
     const { ready } = this.props;
     const { checkpoints, team } = this.props;
-    console.log('team:');
-    console.log(team);
-    console.log('checkpoints:');
-    console.log(checkpoints);
     if (ready) {
       return (
 	<Container>
@@ -56,13 +58,20 @@ class TreasureCheckpointInner extends React.Component {
 	);
     } else {
       const checkpoint = this._getCheckpoint();
+      if (checkpoint == null) {
+	return (
+	  <Grid.Row columns='1'>
+	    <Container>
+	      Invalid checkpoint!
+	    </Container>
+	    <Link to='/treasure'>
+	      <Button content='Status page' />
+	    </Link>
+	  </Grid.Row>
+	);
+      }
       const active = this._activeCheckpoint();
-      console.log('this checkpoint:');
-      console.log(checkpoint);
-      console.log('active checkpoint:');
-      console.log(active);
       if (checkpoint.sequence < active) {
-	console.log('case: already completed this checkpoint');
 	return (
 	  <Grid.Row columns='1'>
 	    <Container>
@@ -74,58 +83,75 @@ class TreasureCheckpointInner extends React.Component {
 	  </Grid.Row>
 	);
       } else if (checkpoint.sequence > active) {
-	console.log('case: complete previous ones first');
 	return (
 	  <Grid.Row columns='1'>
 	    <Container>
 	      You must complete the checkpoints before this one first!
 	    </Container>
-	    <Link to='/treasure'>
+	    <Link to= '/treasure'>
 	      <Button content='Status page' />
 	    </Link>
 	  </Grid.Row>
 	);
       } else {
-	console.log('this is the right checkpoint');
-	return (
-	  <div>
-	    <Grid.Row columns='1'>
-	      <Container>
-		Enter the codewords you found along the way.
-	      </Container>
-	    </Grid.Row>
-	    { this._codewords() }
-	    <Button basic content='Submit' onClick={ async () => await this._submitCodewords() } />
-	    </div>
-	);
+	if (checkpoint.hasCodeword) {
+	  return (
+	    <Form onSubmit = { async (e) => await this._handleSubmit(e) }>
+	      Enter the codeword you found along the way.
+	      <Form.Input
+		inline
+		name = 'answer'
+		label = 'Codeword:'
+		value = { this.state.answer }
+		onChange = { (e) => this._handleChange(e) }
+	      />
+	      <Form.Button basic fluid
+			   color='green'
+			   content='Submit Answer'
+			   disabled={this.state.loading} />
+	      { this._message() }
+	      { this._error() }
+	    </Form>
+	  );
+	} else {
+	  return (
+	    <Form onSubmit = { async (e) => await this._handleSubmit(e) }>
+	      You found the checkpoint! 
+              <Form.Button basic fluid color='green' content='Continue'
+			   disabled={this.state.loading} />
+	      { this._message() }
+	      { this._error() }
+	    </Form>
+	  );
+	}
       }
     }
   }
 
-  _codewords() {
-    const checkpoint = this._getCheckpoint();
-    let cwcount = 0;
-    if ((checkpoint.cw0 != null) && (checkpoint.cw0 != '')) {
-      cwcount += 1;
-    }
-    if ((checkpoint.cw1 != null) && (checkpoint.cw1 != '')) {
-      cwcount += 1;
-    }
-    if ((checkpoint.cw2 != null) && (checkpoint.cw2 != '')) {
-      cwcount += 1;
-    }
-    if ((checkpoint.cw3 != null) && (checkpoint.cw3 != '')) {
-      cwcount += 1;
-    }
-    if ((checkpoint.cw4 != null) && (checkpoint.cw4 != '')) {
-      cwcount += 1;
-    }
-    // XXX pick up here: create the right number of entry fields
-    return null;
-  }
+  async _handleSubmit(e) {
+    const nonCharacterDigit = /[^a-zA-Z0-9]/ug
+    const answer = this.state.answer.replaceAll(nonCharacterDigit, '');
 
-  async _submitCodewords() {
-    console.log('submit codewords here');
+    try {
+      this.setState({ loading: true });
+      const { checkpointId } = this.props;
+      const result = await Meteor.callAsync('team.treasure.answer', checkpointId, answer);
+      this.setState({ answer: '', error: ''});
+
+      const { success, message } = result;
+      if (success) {
+	window.location.href = '/treasure';
+      } else {
+	if (message) {
+	  this.setState({ message });
+	} else {
+	  this.setState({ message: null });
+	}
+      }
+    } catch (err) {
+      this.setState({ error: err.message });
+    }
+    this.setState({ loading: false });
   }
 
   _activeCheckpoint() {
@@ -149,6 +175,36 @@ class TreasureCheckpointInner extends React.Component {
     return(ck);
   }
 
+  _handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  _message() {
+    const { message } = this.state;
+    if (message) {
+      return (
+	<Message>
+	  { message }
+	</Message>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  _error() {
+    const { error } = this.state;
+    if (!error) {
+      return null;
+    }
+    return <Message
+      negative
+      content={ error }
+      onDismiss={ () => this.setState({ error: null }) }
+    />
+  }
+
 }
 
 TreasureCheckpointInner.propTypes = {
@@ -164,11 +220,6 @@ TreasureCheckpoint = WithRouter(withTracker((props) => {
   const handle2 = Meteor.subscribe('admin.thcheckpoints');
   const user = Meteor.user();
   const ready = Boolean(handle1.ready() && handle2.ready() && user);
-  console.log('tracker ready:');
-  console.log(ready);
-  console.log(handle1.ready());
-  console.log(handle2.ready());
-  console.log(user);
   const team = ready ? Teams.findOne(user.teamId) : null;
   const checkpoints = ready ? THCheckpoints.find({}).fetch() : null;
   return {

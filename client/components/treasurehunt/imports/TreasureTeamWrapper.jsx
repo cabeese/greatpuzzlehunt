@@ -22,7 +22,7 @@ class TreasureTeamWrapper extends Component {
   }
 
   _title() {
-    return ( <PuzzlePageTitle title='Treasure Hunt status' /> );
+    return ( <PuzzlePageTitle title='Treasure Hunt progress' /> );
   }
 
   _loading() {
@@ -102,6 +102,7 @@ class TreasureTeamWrapper extends Component {
 	      </Grid.Column>
 	      <Grid.Column width="12">
 		{ this._checkpointMessages() }
+		{ this._completionMessage() }
 	      </Grid.Column>
 	    </Grid.Row>
 	  </Grid>
@@ -124,15 +125,28 @@ class TreasureTeamWrapper extends Component {
     const { checkpoints, team } = this.props;
     const completed = team.completedCheckpoint;
     const active = (completed == null) ? 0 : (completed + 1);
-    console.log('checkpoints');
-    console.log(checkpoints);
     const sortedCheckpoints = sortBy(checkpoints, ['sequence', 'name'])
-    console.log(sortedCheckpoints);
     return (
       <Grid stackable>
 	{ sortedCheckpoints.map((checkpoint) => this._oneCheckpoint(checkpoint, active)) }
       </Grid>
     );
+  }
+
+  _completionMessage() {
+    const { checkpoints, team } = this.props;
+    const completed = team.completedCheckpoint;
+    const active = (completed == null) ? 0 : (completed + 1);
+    const numck = checkpoints.length;
+    if (active >= numck) {
+      return (
+	<div>
+	  Thanks for playing the treasure hunt!
+	</div>
+      );
+    } else {
+      return null;
+    }
   }
 
   _checkpointMessages() {
@@ -181,13 +195,9 @@ class TreasureTeamWrapper extends Component {
   async _startPlaying() {
     const { team } = this.props;
     const teamId = team._id;
-    console.log('Start playing!');
-    console.log(teamId);
     try {
       await Meteor.callAsync('team.startTreasureHunt', teamId);
-      console.log('back from start TH');
     } catch (error) {
-      console.log(error);
       alert(error.reason);
     }
   }
@@ -195,13 +205,9 @@ class TreasureTeamWrapper extends Component {
   async _clearPlaying() {
     const { team } = this.props;
     const teamId = team._id;
-    console.log('clear playing!');
-    console.log(teamId);
     try {
       await Meteor.callAsync('team.clearTreasureHunt', teamId);
-      console.log('back from clear TH');
     } catch (error) {
-      console.log(error);
       alert(error.reason);
     }
   }

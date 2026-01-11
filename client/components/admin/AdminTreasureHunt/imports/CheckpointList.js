@@ -81,13 +81,20 @@ class CheckpointList extends Component {
       }
     });
 
+    let cwtext = '';
+    if (checkpoint.hasCodeword) {
+      cwtext = checkpoint.codeword;
+    } else {
+      cwtext = 'no codeword';
+    }
+
     return (
       <Grid.Row columns={3} name={ checkpoint._id} key={ checkpoint._id } color={isActive ? "teal" : undefined}>
         <Grid.Column>
           <Label content={ checkpoint.sequence }/>&nbsp; { checkpoint.name }
         </Grid.Column>
 	<Grid.Column>
-	  { this._numWaypoints(checkpoint) }&nbsp; waypoints
+	  { cwtext }
         </Grid.Column>
         <Grid.Column>
           { this._validation(issues) }
@@ -107,16 +114,6 @@ class CheckpointList extends Component {
         </Grid.Column>
       </Grid.Row>
     );
-  }
-
-  _numWaypoints(checkpoint) {
-    var num=0;
-    num += checkpoint.cw0 ? 1 : 0;
-    num += checkpoint.cw1 ? 1 : 0;
-    num += checkpoint.cw2 ? 1 : 0;
-    num += checkpoint.cw3 ? 1 : 0;
-    num += checkpoint.cw4 ? 1 : 0;
-    return num;
   }
 
   _edit(checkpoint) {
