@@ -21,6 +21,8 @@ Meteor.publish('admin.teams', function() {
     lookingForMembers: 1,
     EMERGENCY_LOCK_OUT: 1,
     puzzles: 1,
+    startedTreasureHunt: 1,
+    completedCheckpoint: 1
   }
   return Teams.find({}, {fields: projection});
 });

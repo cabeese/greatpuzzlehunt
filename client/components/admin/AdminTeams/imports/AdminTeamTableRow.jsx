@@ -37,6 +37,7 @@ class AdminTeamTableRow extends Component {
         <Table.Cell>{this._checkedIn()}</Table.Cell>
         <Table.Cell>{this._hasBegun()} {this._lockout(EMERGENCY_LOCK_OUT)}</Table.Cell>
         <Table.Cell>{this._progress()}</Table.Cell>
+	<Table.Cell>{this._treasureProgress()}</Table.Cell>
         <Table.Cell>{this._actions()}</Table.Cell>
       </Table.Row>
     );
@@ -102,6 +103,9 @@ class AdminTeamTableRow extends Component {
 
   _progress() {
     const { team } = this.props;
+    if (!team.playingPuzzleHunt) {
+      return "No";
+    }
     if (!team.hasBegun || !team.puzzles || team.puzzles.length < 1){
       return "--";
     };
@@ -138,6 +142,26 @@ class AdminTeamTableRow extends Component {
     }
   }
 
+  _treasureProgress() {
+    const { team, checkpoints } = this.props;
+
+    if (!team.playingTreasureHunt) {
+      return "No";
+    }
+    if (!team.startedTreasureHunt) {
+      return "--";
+    };
+
+    const completed = team.completedCheckpoint;
+    const active = (completed == null) ? 0 : (completed + 1);
+    const numck = checkpoints.length;
+    if (active >= numck) {
+      return ("Done!");
+    } else {
+      return(`${active} of ${numck}`);
+    }
+  }
+
   _actions() {
     const { team, selectTeam } = this.props;
     return (
@@ -148,6 +172,7 @@ class AdminTeamTableRow extends Component {
 
 AdminTeamTableRow.propTypes = {
   team: PropTypes.object.isRequired,
+  checkpoints: PropTypes.arrayOf(PropTypes.object),
   selectTeam: PropTypes.func.isRequired,
 };
 
