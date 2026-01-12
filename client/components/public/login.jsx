@@ -81,6 +81,12 @@ Login = class Login extends Component {
           <Message>
             <Link to="/register">Sign up</Link> &nbsp; | &nbsp; <Link to="/requestpasswordreset">Forgot Password</Link>
           </Message>
+
+	  <div>
+	    Want to play the Puzzle Hunt or Treasure Hunt? <br/>
+	    <Link to="/register"> Register here </Link>
+	  </div>
+
         </Grid.Column>
       </Grid>
     );
