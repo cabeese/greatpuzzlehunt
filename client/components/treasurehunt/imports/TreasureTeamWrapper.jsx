@@ -8,6 +8,7 @@ import { Button, Container, Grid, Header, Label, Message } from 'semantic-ui-rea
 
 import { THCheckpoints } from '../../../../lib/collections/thcheckpoints.js';
 import { Teams } from '../../../../lib/collections/teams.js'
+import { formatLabel } from './format'
 
 class TreasureTeamWrapper extends Component {
   render() {
@@ -157,13 +158,13 @@ class TreasureTeamWrapper extends Component {
     const ckCompleted = (completed == null) ? null : checkpoints.find((c) => c.sequence == completed);
     let msgCompleted = '';
     if (ckCompleted != null) {
-      msgCompleted = <p> {ckCompleted == null ? '' : ckCompleted.finishDescription} </p>
+      msgCompleted = formatLabel(ckCompleted == null ? '' : ckCompleted.finishDescription)
       
     }
     const ckActive = checkpoints.find((c) => c.sequence == active);
     let msgActive = '';
     if (ckActive != null) {
-      msgActive = <p> {ckActive == null ? '' : ckActive.startDescription} </p>
+      msgActive = formatLabel(ckActive == null ? '' : ckActive.startDescription)
     }
     return (
       <div>

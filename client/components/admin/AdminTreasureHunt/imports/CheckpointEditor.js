@@ -27,6 +27,18 @@ class CheckpointEditor extends Component {
     );
   }
 
+  _textMultilineInput(name, label) {
+    return (
+      <Form.TextArea
+        name={name}
+        label={label}
+        error={ this.state[name] ? false : 'Empty!' }
+        value={ this.state[name] }
+        onChange={ (e) => this._handleChange(e) }
+      />
+    );
+  }
+
   _textOrBlankInput(name, label) {
     return (
       <Form.Input
@@ -78,8 +90,9 @@ class CheckpointEditor extends Component {
           { this._numericalInput("sequence", "Sequence") }
         </Form.Group>
 
-        { this._textInput("startDescription", "Description of start") }
-        { this._textInput("finishDescription", "Message on finishing") }
+        { this._textMultilineInput("startDescription", "Description of start") }
+	{ this._textMultilineInput("codewordLabel", "Label for codeword entry") }
+        { this._textMultilineInput("finishDescription", "Message on finishing") }
 
 	{ this._booleanInput("hasCodeword", "Has codeword?") }
         { this._textOrBlankInput("codeword", "Codeword") }
@@ -96,13 +109,15 @@ class CheckpointEditor extends Component {
 
   async _save(e) {
     e.preventDefault();
-    const { name, sequence, startDescription, finishDescription, 
+    const { name, sequence, startDescription, codewordLabel,
+	    finishDescription, 
             codeword, hasCodeword } = this.state;
     const nonCharacterDigit = /[^a-zA-Z0-9]/ug
     const fields = {
       name: name.trim(),
       sequence: parseInt(sequence),
       startDescription: startDescription.trim(),
+      codewordLabel: codewordLabel.trim(),
       finishDescription: finishDescription.trim(),
       codeword: codeword.trim(),
       hasCodeword: hasCodeword
