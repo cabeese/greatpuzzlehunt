@@ -8,6 +8,7 @@ import WithRouter from '../imports/WithRouter';
 
 import { THCheckpoints } from '../../../lib/collections/thcheckpoints.js';
 import { Teams } from '../../../lib/collections/teams.js';
+import { formatLabel } from './imports/format';
 
 class TreasureCheckpointInner extends React.Component {
   constructor(props) {
@@ -86,7 +87,7 @@ class TreasureCheckpointInner extends React.Component {
 	return (
 	  <Grid.Row columns='1'>
 	    <Container>
-	      You must complete the checkpoints before this one first!
+	      You must complete all the previous checkpoints first!
 	    </Container>
 	    <Link to= '/treasure'>
 	      <Button content='Status page' />
@@ -95,9 +96,11 @@ class TreasureCheckpointInner extends React.Component {
 	);
       } else {
 	if (checkpoint.hasCodeword) {
+	  const codewordLabel = checkpoint.codewordLabel;
+	  const cwl = this._label(checkpoint);
 	  return (
 	    <Form onSubmit = { async (e) => await this._handleSubmit(e) }>
-	      Enter the codeword you found along the way.
+	      { cwl }
 	      <Form.Input
 		inline
 		name = 'answer'
@@ -125,6 +128,14 @@ class TreasureCheckpointInner extends React.Component {
 	  );
 	}
       }
+    }
+  }
+
+  _label(checkpoint) {
+    if (checkpoint.codewordLabel == null) {
+      return(<p> Enter the codeword you found along the way. </p>);
+    } else {
+      return(formatLabel(checkpoint.codewordLabel));
     }
   }
 
