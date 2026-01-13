@@ -49,6 +49,13 @@ class TreasureTeamWrapper extends Component {
     const { team } = this.props;
   }
 
+  // add back in to started markup for debugging:
+  // <Button basic size='small' content='Clear playing'
+  // color='black'
+  // onClick={ async () => await this._clearPlaying() }
+  // />
+
+
   _checkinStatus() {
     const { team } = this.props;
     if (team) {
@@ -58,10 +65,6 @@ class TreasureTeamWrapper extends Component {
 	    <Message.Header>
 	      Team { team.name } has started playing
 	    </Message.Header>
-	    <Button basic size='small' content='Clear playing'
-		    color='black'
-		    onClick={ async () => await this._clearPlaying() }
-		    />
 	  </Message>
 	);
       } else {
