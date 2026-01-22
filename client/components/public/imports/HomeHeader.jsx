@@ -170,7 +170,6 @@ class HomeHeader extends Component {
         {SMButton("instagram", "https://www.instagram.com/wwu.greatpuzzlehunt/")}
         {SMButton("reddit", "https://www.reddit.com/user/gph_official")}
         {SMButton("youtube", "https://www.youtube.com/channel/UCTc814_FbilFiSVktIWec8A")}
-	{SMButton("discord", "https://discord.gg/32HRRYUe9w")}
       </div>
     )
   }

@@ -24,35 +24,14 @@ const gearLink = {
 
 const mainMenuLinks = [
   {
-    name: 'Sponsors',
-    to: '/#sponsors',
-    iconClass: 'green heart',
-    custom: true,
+    name: 'About GPH',
+    to: '/about-gph',
+    iconClass: 'puzzle',
   },
   {
-    name: 'Teams',
-    to: '/teams-list',
-    iconClass: 'blue users',
-  },
-  {
-    name: 'Contact',
-    to: '/contact',
-    iconClass: 'violet mail',
-  },
-  {
-    name: 'Puzzles',
-    to: '/puzzles',
-    iconClass: 'red puzzle',
-  },
-  {
-    name: 'FAQ',
-    to: '/faq',
-    iconClass: 'orange question',
-  },
-  {
-    name: 'Rules of Play',
-    to: '/rules',
-    iconClass: 'teal circle info',
+    name: 'About TH',
+    to: '/about-th',
+    iconClass: 'search',
   },
   {
     name: 'Media',
@@ -60,9 +39,9 @@ const mainMenuLinks = [
     iconClass: 'olive camera',
   },
   {
-    name: 'QR Encoder',
-    to: '/qrcode',
-    iconClass: 'grey qrcode',
+    name: 'Contact',
+    to: '/contact',
+    iconClass: 'violet mail',
   },
 ];
 
@@ -169,7 +148,7 @@ export default TopBar = class TopBar extends Component {
       height: '50px',
       marginLeft: "7px",
       marginTop: "7px",
-    }
+    };
     let logoShadow = {
       width: '125px',
       height: '125px',
@@ -180,19 +159,18 @@ export default TopBar = class TopBar extends Component {
       mixBlendMode: "darken"
     };
     let logoLink = (
-      <a href="/" style={{zIndex: "99"}}>
+      <Link to="/">
         <div style={ this.isSmall() ? logoMobile : logoDesktop }>
           <img height="50px" src="/img/topbar-logo.png"></img>
         </div>
-      </a>
+      </Link>
     );
     let logoLinkShadow = (
       
       <div style={{position: "absolute", height: "100px", width:"100%", overflow: "hidden", marginTop:"66.41px", marginLeft:"-3px", pointerEvents: "none"}}>
       <div style={logoShadow}></div>
       </div>
-      
-    )
+    );
 
     return (
       <div className="ui fixed small labeled icon menu top-bar" ref="topbar">
@@ -240,17 +218,19 @@ export default TopBar = class TopBar extends Component {
     /* Quick fix for the fact that the leaderboard can be in two menus at
        once and we don't want to reuse its path as a key. React complains. */
     const key = item.key || item.to;
+    const icon = <Icon className={item.iconClass} />;
+
     if (item.custom) {
       return (
         <a key={key} className='item' href={item.to}>
-          <Icon className={item.iconClass}/>
+          {icon}
           {item.name}
         </a>
       );
     } else {
       return (
         <Link key={key} className='item' to={ item.to }>
-          <Icon className={ item.iconClass }/>
+          {icon}
           { item.name }
         </Link>
       );

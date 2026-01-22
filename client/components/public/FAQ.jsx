@@ -16,6 +16,13 @@ import {
   Grid
 } from 'semantic-ui-react';
 import GamestateComp from '../imports/GamestateComp';
+import {
+  puzzle_schedule_virtual_data,
+  puzzle_schedule_inPerson_data,
+  importantDates,
+  AboutGear,
+  Support,
+} from './imports/common-details';
 
 const { eventYear, eventDate, eventDay, siteName, earlyBirdLastDate, gearSaleEnd, registrationOpenDate, registrationCloseDate, regularRegistrationStart, regularRegistrationEnd } = Meteor.settings.public;
 
@@ -32,93 +39,9 @@ const wristbandNote = (
   </span>
 );
 
-const gearPricing = (
-  <span>
-    <strong>Official Puzzle Gear Pricing</strong>
-    {/* <ul>
-      <li>Early Bird Discount Price (varying styles: prices range from $11-$27, additional $2 for extended sizes) until {earlyBirdLastDate}</li>
-      <li>Regular Price (varying styles: prices range from $14-$30, additional $2 for extended sizes) begins {regularRegistrationStart} through {gearSaleEnd}</li>
-      <li>Gear sale ends midnight {gearSaleEnd}</li>
-      <li>The sale of these shirts helps to fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design. Pick up your shirts at event check-in.</li>
-    </ul> */}
-    <ul>
-      <li>Prices on varying styles range from $20&ndash;$40, additional charges for extended sizes. Gear store opens {registrationOpenDate}&ndash;{gearSaleEnd}.</li>
-      <li>Gear sales end midnight {gearSaleEnd}.</li>
-      <li>Shirts will be ordered on Monday, April 20 and assuming no supply chain delays, should be shipped out or ready for pick-up by the end of the week of May 4, 2026.</li>
-      <li>The sale of these shirts helps fund this event. Support the WWU Great Puzzle Hunt and wear our official Great Puzzle Hunt gear! Check out the styles, colors, and design.</li>
-    </ul>
-    <p> If you are able, please consider making a small donation (suggested $5 students, $10 nonstudents) and/or buying a shirt (our only fund raiser). Donations of any amount will help sustain this event. </p>
-
-  </span>
-);
-
-const importantDates = (
-  <List className='bulleted'>
-    {/* <List.Item><strong>{earlyBirdLastDate}</strong>: Early Bird discount prices for ticket codes and official gear end.</List.Item> */}
-    <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
-    <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
-    <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can join a team until 10:00 AM (PT).</List.Item>
-    <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes at midnight.</List.Item>
-  </List>
-);
-
-const schedule_inPerson_data = [
-  {
-    time: "9:30–10:15 AM",
-    desc: "Red Square Check-in: Information packet, wristband*, swag bag. Photos for team costume competition. Rolls, coffee, cocoa, tea, fresh fruit. Free to registered participants. Thank you Haggen, and Dave Brown and Kendra Williams.",
-  },
-  {
-    time: "10:15 AM",
-    desc: "Red Square: Announcements."
-  },
-  {
-    time: "10:30 AM",
-    desc: "Red Square: Puzzle Hunt Starts."
-  },
-  {
-    time: "12:30–2:30 PM",
-    desc: "Red Square: Music. Pizza. Grab a slice or 2, cookies, & beverage between puzzles. Free to registered participants. Thank you, Domino's Pizza!"
-  },
-  {
-    time: "3:00 PM",
-    desc: "Food/Beverage Station closes.",
-  },
-  {
-    time: "4:30 PM",
-    desc: "Puzzle Stations close."
-  },
-  {
-    time: "4:45 PM",
-    desc: "Red Square: Award Ceremony & Prizes!**"
-  },
-]
-
-const schedule_virtual_data = [
-  {
-    time: "9:30–10:15 AM (PT)",
-    desc: "Check-in: Download and open information packet."
-  },
-  {
-    time: "10:15 AM (PT)",
-    desc: <span>Live Stream Announcements (<a href="#">link TBA</a>)</span>
-  },
-  {
-    time: "10:30 AM (PT)",
-    desc: "Puzzle Hunt Starts."
-  },
-  {
-    time: "4:30 PM (PT)",
-    desc: "Puzzle Hunt Ends."
-  },
-  {
-    time: "4:45 PM (PT)",
-    desc: <span>Leaderboard Posted, Live stream - claim your bragging rights! (<a href="#">link TBA</a>)</span>
-  },
-]
-
 const schedule_inPerson = (
   <List bulleted>
-    {schedule_inPerson_data.map((item, idx) => (
+    {puzzle_schedule_inPerson_data.map((item, idx) => (
       <List.Item header={item.time} content={item.desc} key={idx}/>
     ))}
   </List>
@@ -126,7 +49,7 @@ const schedule_inPerson = (
 
 const schedule_virtual = (
   <List bulleted>
-    {schedule_virtual_data.map((item, idx) => (
+    {puzzle_schedule_virtual_data.map((item, idx) => (
       <List.Item header={item.time} content={item.desc} key={idx}/>
     ))}
   </List>
@@ -543,33 +466,7 @@ FAQ = class FAQ extends Component {
             What does the Gear/Apparel look like?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 15}>
-            <Grid stackable>
-              <Grid.Row>
-                <Grid.Column width={10}>
-                  { gamestate && gamestate.buyGear ? <p>Take a look at our gear and order <a href="/gear">here</a>.</p> : <p>The Great Puzzle Hunt Gear store is currently closed. Opens {registrationOpenDate}.</p>}
-                  <p>There are 13 style choices, wonderful colors, and an awesome design!</p>
-                  {gearPricing}
-		<LinkButton as='a'
-			    href={givingURL}
-			    size='large'  content='Donate Online'
-			    icon={<Icon name='heart'/>}
-			    color="green"
-		/>
-		{ gamestate && gamestate.buyGear ?	    
-		  <LinkButton as='a' href="/gear"
-			      size="large" color="orange" target="_blank"
-			      icon={<Icon name="shopping cart" />}
-			      content="Buy Gear"
-		  />
-		  : "" }
-                </Grid.Column>
-                <Grid.Column width={6}>
-                  <Image src={`https://gph-distributed.s3.us-west-2.amazonaws.com/${eventYear}/gear/shirt_design_background.png`}/>
-                </Grid.Column>
-
-              </Grid.Row>
-
-            </Grid>
+            <AboutGear />
           </Accordion.Content>
           
           <Accordion.Title active={activeIndex === 18} index={18} onClick={(e,p) => this.handleClick(e,p)} >
@@ -578,29 +475,7 @@ FAQ = class FAQ extends Component {
             How can I support the Great Puzzle Hunt?
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 18}>
-            <p> We keep this event free to you thanks to generous donations from our sponsors, and from gear purchases. These contributions help cover costs of this event including web fees and development, graphics, prizes, advertising, and much more. </p>
-            <p>You can help out by:
-              <ul>
-                <li> Donating any amount. $5 and $10 donations make a difference. </li>
-                 <li> Purchasing a shirt!</li>
-		<li> Volunteering!* It takes a team to make the Puzzle Hunt happen, and we are grateful for everyone who helps out.</li>
-	      </ul>
-	    </p> 
-            <p> The WWU Great Puzzle Hunt operates under WWU Foundation's 501(c)(3) status, so all donations are tax deductible. </p>
-            <p> <strong>*</strong> Volunteers choose the "volunteer" account type when <a href="/register">registering</a>. Questions? Contact <a href="mailto:info@greatpuzzlehunt.com">info@greatpuzzlehunt.com</a>. </p>
-            <LinkButton as='a'
-			href={givingURL}
-			size='large'  content='Donate Online'
-			icon={<Icon name='heart'/>}
-			color="green"
-            />
-            { gamestate && gamestate.buyGear ?	    
-              <LinkButton as='a' href="/gear"
-			  size="large" color="orange" target="_blank"
-			  icon={<Icon name="shopping cart" />}
-			  content="Buy Gear"
-              />
-	      : "" }
+            <Support />
           </Accordion.Content>
 
         </Accordion>

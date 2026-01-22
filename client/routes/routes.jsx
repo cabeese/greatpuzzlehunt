@@ -6,6 +6,9 @@ import App from '../components/app/App';
 
 import { browserHistory } from '../history';
 
+import AboutGph from '../components/public/about-gph';
+import AboutTh from '../components/public/about-th';
+
 {/* Custom Router: https://stackoverflow.com/a/70000286 */}
 const CustomRouter = ({ history, ...props }) => {
   const [state, setState] = useState({
@@ -40,6 +43,8 @@ export const renderRoutes = () => {
         <Route path='contact' element={<Contact />}/>
         <Route path='puzzles' element={<SamplePuzzles />}/>
         <Route path='faq' element={<FAQ />}/>
+        <Route path='about-gph' element={<AboutGph />} />
+        <Route path='about-th' element={<AboutTh />} />
         <Route path='qrcode' element={<QRCode />}/>
         <Route path='register' element={<Register />}/>
         <Route path='rules' element={ <RulesOfPlay /> }/>
