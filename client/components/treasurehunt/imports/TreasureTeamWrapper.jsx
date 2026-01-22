@@ -49,13 +49,6 @@ class TreasureTeamWrapper extends Component {
     const { team } = this.props;
   }
 
-  // add back in to started markup for debugging:
-  // <Button basic size='small' content='Clear playing'
-  // color='black'
-  // onClick={ async () => await this._clearPlaying() }
-  // />
-
-
   _checkinStatus() {
     const { team } = this.props;
     if (team) {
@@ -201,16 +194,6 @@ class TreasureTeamWrapper extends Component {
     const teamId = team._id;
     try {
       await Meteor.callAsync('team.startTreasureHunt', teamId);
-    } catch (error) {
-      alert(error.reason);
-    }
-  }
-
-  async _clearPlaying() {
-    const { team } = this.props;
-    const teamId = team._id;
-    try {
-      await Meteor.callAsync('team.clearTreasureHunt', teamId);
     } catch (error) {
       alert(error.reason);
     }

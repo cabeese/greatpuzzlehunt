@@ -7,8 +7,6 @@ export class PuzzleHuntIcon extends Component {
     const puzzleHuntURL = '/img/GPH-icons-puzzle.svg';
     const {value, disabled, spaced} = this.props;
 
-    const sp = spaced ? 'true' : 'false';
-    
     if (value === true) {
       if (disabled) {
 	return <Image src={puzzleHuntURL} disabled inline style={{width: '18px', height: 'auto'}}/>
@@ -27,8 +25,6 @@ export class TreasureHuntIcon extends Component {
     const treasureHuntURL = '/img/GPH-icons-chest.svg';
     const {value, disabled, spaced} = this.props;
 
-    const sp = spaced ? 'true' : 'false';
-    
     if (value === true) {
       if (disabled) {
 	return <Image src={treasureHuntURL} inline disabled style={{width: '18px', height: 'auto'}}/>

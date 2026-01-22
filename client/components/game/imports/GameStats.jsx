@@ -26,8 +26,6 @@ class GameStats extends Component {
 
   render() {
     const { team } = this.props;
-    console.log('team game play:');
-    console.log(team);
     const puzzlesSolved = team.puzzles.reduce((acc, p) => (acc + (p.score ? 1 : 0)), 0);
     const finished = team.puzzles.length === puzzlesSolved;
     const { time, minutes } = renderScore(getFinalScore(team));
