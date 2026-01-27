@@ -43,7 +43,7 @@ class AboutGph extends Component {
           thinking, teamwork, technology, and encourage inclusion.
         </p>
 
-        <h3>TODO(noah): ADD PHOTO</h3>
+        {/* <h3>TODO(noah): ADD PHOTO</h3> */}
       </div>
     );
   }
