@@ -96,6 +96,10 @@ export class Parking extends Component {
           <strong>Parking is FREE in the C-Lots on south campus on weekends.</strong>
         </p>
 
+        <p>
+          <small>On weekdays, C lots are free after 4:30 pm (Monday, April 20, 2026 is a weekday)</small>
+        </p>
+
         <Button as="a"
                 basic color='blue' size='small'
                 href="http://www.wwu.edu/map/" target="_blank">
