@@ -30,7 +30,7 @@ class AboutTh extends Component {
     return (
       <div>
         <p>
-          The Treasure Hunt is IN-PERSON, only. Register (FREE) to gain access to the Official <strong>Treasure Hunt Map and Secret Starting Location</strong> and <strong>QR codes at check-point stations that contain clues.</strong> (See <a href="#schedule">schedule</a> section)
+          The Treasure Hunt is IN-PERSON, only. Register (FREE) to gain access to the <strong>Official Treasure Hunt Map and Secret Starting Location</strong> and <strong>QR codes at check-point stations that contain clues and/or directions.</strong> (See <a href="#schedule">schedule</a> section)
         </p>
 
         <p>
@@ -49,7 +49,7 @@ class AboutTh extends Component {
         </p>
 
         <p>
-          <strong>Sample rocks</strong> Top: orange avatar; Under side: directions; Perhaps letters on either side. 
+          <strong>Sample rocks</strong> Top: orange avatar; Under side: directions; Perhaps letters on either side.
         </p>
 
         <p>
@@ -59,8 +59,10 @@ class AboutTh extends Component {
         </p>
 
         <ImageGroup size='large'>
-          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
-          <Image src='https://react.semantic-ui.com/images/wireframe/image.png' />
+          <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/img/static/th-rock-01a-bottom+directions-letters.jpg' />
+          <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/img/static/th-rock-01b-top-avatar-letters.jpg' />
+          <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/img/static/th-rock-02a-bottom.jpg' />
+          <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/img/static/th-rock-02b-top.jpg' />
         </ImageGroup>
 
         <h2>Please, leave no traces</h2>
@@ -77,7 +79,7 @@ class AboutTh extends Component {
           <strong>Distance directions</strong> will be given in metric units and compass directions in degrees from True North (not Magnetic North).  iPhones have a good built-in compass app. A good, free compass app for Androids is Digital Compass from Axiomatic Inc. 
         </p>
 
-        <Image src='https://react.semantic-ui.com/images/wireframe/image.png'
+        <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/img/static/treasure-chest-02.jpg'
                size='medium' floated='right' />
 
         <p>
@@ -128,9 +130,6 @@ class AboutTh extends Component {
         <p>
           Access the Official Treasure Hunt Map and Secret Starting Location  starting at 7:00 am on April 19, 2026.
         </p>
-
-        <Button>TODO</Button>
-        <Button>TODO</Button>
 
         <List bulleted>
           <List.Item>
@@ -210,11 +209,20 @@ class AboutTh extends Component {
     return (
       <div>
         <p>
+          <strong>REGISTRATION CLOSES MONDAY, APRIL 20, 2026 at 7:45 PM</strong>
+        </p>
+
+        <p>
           Registration is FREE and open to all. Donations are gratefully accepted.
         </p>
 
         <p>
           Participants under age 14 must include at least one registered adult team member to accompany minor(s) at all times.
+        </p>
+
+        <p>
+          Registration is required for all participants in 
+          either or both events for safety, liability, and emergency purposes.
         </p>
 
         <p>
@@ -235,7 +243,7 @@ class AboutTh extends Component {
       <div>
         <p>
           <strong>
-            April 19, 2026 - 7:00 AM
+            April 19, 2026 at 7:00 AM - April 20, 2026 at 8:00 PM
           </strong>
         </p>
 
@@ -286,15 +294,15 @@ class AboutTh extends Component {
   // Order of this map determines rendering order.
   SECTION_MAP = {
     "Game Details": this._gameDetails(),
-    "Etiquette": this._etiquette(),
+    "Schedule": this._schedule(),
     "Secret Starting Place and Map": this._secretStartingPlaceAndMap(),
-    "Teams": this._teams(),
     "Tools": this._tools(),
+    "Teams": this._teams(),
+    "Etiquette": this._etiquette(),
+    "Register": this._register(),
     "Prizes": this._prizes(),
     "Parking": <Parking />,
     "Directions": <Directions />,
-    "Register": this._register(),
-    "Schedule": this._schedule(),
     "Gear": <AboutGear />,
     "Support": <Support />,
   }
