@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Icon, Label, Button, Progress } from 'semantic-ui-react';
+import { Table, Icon, Image, Label, Button, Progress } from 'semantic-ui-react';
 import MaybeNullIcon from '../../../imports/MaybeNullIcon';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../../../imports/PuzzleTreasureIcons';
 import moment from 'moment';
 
 class AdminTeamTableRow extends Component {
@@ -15,7 +16,8 @@ class AdminTeamTableRow extends Component {
     if (!team) {
       return <Table.Row negative>MISSING TEAM!</Table.Row>;
     }
-    const { EMERGENCY_LOCK_OUT, prize_ineligible } = team;
+    const { EMERGENCY_LOCK_OUT, prize_ineligible, playingPuzzleHunt,
+	    playingTreasureHunt } = team;
 
     const isPrizeIneligible = prize_ineligible ? true : false;
     const ineligible = <MaybeNullIcon
@@ -24,14 +26,18 @@ class AdminTeamTableRow extends Component {
 			 falsey={ ' ' }
 		       />;
 
+    const phi = <PuzzleHuntIcon value={playingPuzzleHunt}/>;
+    const thi = <TreasureHuntIcon value={playingTreasureHunt}/>;
+
     return (
       <Table.Row error={EMERGENCY_LOCK_OUT}>
         <Table.Cell>{this._createdAt()}</Table.Cell>
-        <Table.Cell>{this._name()} {ineligible}</Table.Cell>
+        <Table.Cell>{this._name()} { phi } { thi } {ineligible}</Table.Cell>
         <Table.Cell>{this._division()}</Table.Cell>
         <Table.Cell>{this._checkedIn()}</Table.Cell>
         <Table.Cell>{this._hasBegun()} {this._lockout(EMERGENCY_LOCK_OUT)}</Table.Cell>
         <Table.Cell>{this._progress()}</Table.Cell>
+	<Table.Cell>{this._treasureProgress()}</Table.Cell>
         <Table.Cell>{this._actions()}</Table.Cell>
       </Table.Row>
     );
@@ -97,6 +103,9 @@ class AdminTeamTableRow extends Component {
 
   _progress() {
     const { team } = this.props;
+    if (!team.playingPuzzleHunt) {
+      return "No";
+    }
     if (!team.hasBegun || !team.puzzles || team.puzzles.length < 1){
       return "--";
     };
@@ -133,6 +142,26 @@ class AdminTeamTableRow extends Component {
     }
   }
 
+  _treasureProgress() {
+    const { team, checkpoints } = this.props;
+
+    if (!team.playingTreasureHunt) {
+      return "No";
+    }
+    if (!team.startedTreasureHunt) {
+      return "--";
+    };
+
+    const completed = team.completedCheckpoint;
+    const active = (completed == null) ? 0 : (completed + 1);
+    const numck = checkpoints.length;
+    if (active >= numck) {
+      return ("Done!");
+    } else {
+      return(`${active} of ${numck}`);
+    }
+  }
+
   _actions() {
     const { team, selectTeam } = this.props;
     return (
@@ -143,6 +172,7 @@ class AdminTeamTableRow extends Component {
 
 AdminTeamTableRow.propTypes = {
   team: PropTypes.object.isRequired,
+  checkpoints: PropTypes.arrayOf(PropTypes.object),
   selectTeam: PropTypes.func.isRequired,
 };
 

@@ -11,7 +11,9 @@ AdminUsers = class AdminUsers extends Component {
     this.state = {
       userSearch: '',
       teamSearch: '',
-      onlyLooking: false
+      onlyLooking: false,
+      onlyTreasureHunt: false,
+      onlyPuzzleHunt: false
     };
   }
 
@@ -20,8 +22,19 @@ AdminUsers = class AdminUsers extends Component {
     this.setState({ onlyLooking: checked});
   }
 
+  _handleOnlyPuzzleChange(e, data) {
+    const { checked } = data;
+    this.setState({ onlyPuzzleHunt: checked});
+  }
+
+  _handleOnlyTreasureChange(e, data) {
+    const { checked } = data;
+    this.setState({ onlyTreasureHunt: checked});
+  }
+
   render() {
-    const { userSearch, teamSearch, onlyLooking } = this.state;
+    const { userSearch, teamSearch, onlyLooking, onlyTreasureHunt,
+	    onlyPuzzleHunt } = this.state;
 
     return (
       <Container>
@@ -29,7 +42,6 @@ AdminUsers = class AdminUsers extends Component {
 
         <Grid stackable>
 
-          <Grid.Row columns={3}>
             <Grid.Column width={8}>
               <DebounceSearch
                 fluid
@@ -39,7 +51,7 @@ AdminUsers = class AdminUsers extends Component {
                 onSearch={(search) => this.setState({ userSearch: search })}
               />
             </Grid.Column>
-            <Grid.Column width={5}>
+	    <Grid.Column width={8}>
               <DebounceSearch
                 fluid
                 icon='search'
@@ -48,7 +60,7 @@ AdminUsers = class AdminUsers extends Component {
                 onSearch={(search) => this.setState({ teamSearch: search })}
               />
             </Grid.Column>
-	    <Grid.Column width={3}>
+	    <Grid.Column width={5}>
 	      <Checkbox
 		toggle
 		name='onlyLooking'
@@ -57,11 +69,28 @@ AdminUsers = class AdminUsers extends Component {
 		onChange={ (e, data) => this._handleLookingChange(e, data) }
 	      />
             </Grid.Column>
-          </Grid.Row>
+	    <Grid.Column width={5}>
+	      <Checkbox
+		toggle
+		name='onlyPuzzleHunt'
+		label='Only users playing Puzzle Hunt'
+		checked={onlyPuzzleHunt}
+		onChange={ (e, data) => this._handleOnlyPuzzleChange(e, data) }
+	      />
+            </Grid.Column>
+	    <Grid.Column width={5}>
+	      <Checkbox
+		toggle
+		name='onlyTreasureHunt'
+		label='Only users playing Treasure Hunt'
+		checked={onlyTreasureHunt}
+		onChange={ (e, data) => this._handleOnlyTreasureChange(e, data) }
+	      />
+            </Grid.Column>
 
           <Grid.Row>
             <Grid.Column>
-              <AdminUserListTracker userSearch={userSearch} teamSearch={teamSearch} onlyLooking={onlyLooking}/>
+              <AdminUserListTracker userSearch={userSearch} teamSearch={teamSearch} onlyLooking={onlyLooking} onlyPuzzleHunt={onlyPuzzleHunt} onlyTreasureHunt={onlyTreasureHunt}/>
             </Grid.Column>
           </Grid.Row>
 

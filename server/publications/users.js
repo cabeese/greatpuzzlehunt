@@ -23,6 +23,8 @@ const USER_FIELDS = {
   paid: 1,
   ticketUsed: 1,
   puzzleStation: 1,
+  playingTreasureHunt: 1,
+  playingPuzzleHunt: 1
 };
 
 Meteor.users.deny({

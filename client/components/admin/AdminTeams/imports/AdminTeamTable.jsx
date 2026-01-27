@@ -68,7 +68,8 @@ class AdminTeamTable extends Component {
               <Table.HeaderCell>Division</Table.HeaderCell>
               <Table.HeaderCell>Checked In</Table.HeaderCell>
               <Table.HeaderCell>Started?</Table.HeaderCell>
-              <Table.HeaderCell>Progress</Table.HeaderCell>
+              <Table.HeaderCell>GPH</Table.HeaderCell>
+              <Table.HeaderCell>TH</Table.HeaderCell>
               <Table.HeaderCell>Actions</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -83,11 +84,12 @@ class AdminTeamTable extends Component {
   }
 
   _mapTeams() {
-    const { teams } = this.props;
+    const { teams, checkpoints } = this.props;
     return teams.map((team) => {
       return (
         <AdminTeamTableRow
           team={team}
+	  checkpoints={checkpoints}
           key={team._id}
           selectTeam={ () => this._selectTeam(team._id) }
         />
@@ -107,6 +109,7 @@ class AdminTeamTable extends Component {
 AdminTeamTable.propTypes = {
   loading: PropTypes.bool.isRequired,
   teams: PropTypes.arrayOf(PropTypes.object),
+  checkpoints: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default AdminTeamTable;

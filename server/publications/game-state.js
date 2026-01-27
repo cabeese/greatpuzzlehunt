@@ -6,6 +6,7 @@ Meteor.publish('gamestate', function() {
     return Gamestate.find({}, {
       registration: 1,
       gameplay: 1,
+      treasureplay: 1,
       leaderboard: 1,
       sendReportsTo: 1,
       checkin: 1,

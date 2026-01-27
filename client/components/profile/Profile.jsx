@@ -54,7 +54,7 @@ Profile = class Profile extends Component {
         <Segment>
           <PuzzlePageTitle
             title={this.props.user.name}
-            subTitle={this.props.user.getEmail()}
+            subtitle={this.props.user.getEmail()}
             />
           Last Updated: {this.state.updatedAt}
           <ProfileEditor user={this.props.user} />

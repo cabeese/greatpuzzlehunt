@@ -8,6 +8,7 @@ import Scrollchor from 'react-scrollchor';
 import { browserHistory } from '../../history';
 
 import GamestateComp from '../imports/GamestateComp';
+import { PuzzleHuntIcon, TreasureHuntIcon } from '../imports/PuzzleTreasureIcons';
 
 const leaderboardLink = {
   name: 'Leaderboard',
@@ -81,6 +82,11 @@ const adminMenuItems = [
     name: 'Puzzles',
     to: '/admin/puzzles',
     iconClass: 'violet puzzle',
+  },
+  {
+    name: 'Treasure Hunt',
+    to: '/admin/checkpoints',
+    iconClass: 'blue compass',
   },
 ];
 
@@ -197,6 +203,7 @@ export default TopBar = class TopBar extends Component {
 
           {this._checkinButton()}
           {this._gameButton()}
+	  {this._treasureHuntButton()}
 
           {this._profileMenu()}
         </div>
@@ -339,14 +346,33 @@ export default TopBar = class TopBar extends Component {
   }
 
   _gameButton() {
-    const { hasTeam } = this.props;
+    const { gamestate, hasTeam } = this.props;
     if (!hasTeam()) return null;
-    return (
-      <Link className="item" to="/game">
-        <Icon name="puzzle"/>
-        Game
-      </Link>
-    );
+    if (gamestate && gamestate.gameplay) {
+      return (
+	<Link className="item" to="/game">
+	  <PuzzleHuntIcon value={true} />
+          Puzzle hunt
+	</Link>
+      );
+    } else {
+      return null;
+    }
+  }
+
+  _treasureHuntButton() {
+    const { gamestate, hasTeam } = this.props;
+    if (!hasTeam()) return null;
+    if (gamestate && gamestate.treasureplay) { 
+      return (
+	<Link className="item" to="/treasure">
+	  <TreasureHuntIcon value={true} />
+          Treasure hunt
+	</Link>
+      );
+    } else {
+      return null;
+    }
   }
 
   _logout(event) {

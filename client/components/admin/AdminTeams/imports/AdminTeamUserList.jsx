@@ -27,33 +27,34 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
     }
 
     _userRow(user){
-        const { checkedIn } = user;
-        const isOwner = this.props.owner == user._id;
-        return (
-            <Table.Row key={user.email}>
-                <Table.Cell>
-                    {isOwner ?
-                        <Label ribbon>
-                            <Icon name="trophy" color="orange" />
-                            Owner
-                        </Label>
-                        : ""
-                    }
-                    <em>{user.accountType}</em>
-                </Table.Cell>
-                <Table.Cell>{user.name}</Table.Cell>
-                <Table.Cell>{user._id}</Table.Cell>
-                <Table.Cell positive={checkedIn} negative={!checkedIn}>
-                    {checkedIn ? "Checked In" : "NOT Checked In"}
-                </Table.Cell>
-                <Table.Cell>
-                    <Button color="red" size="small" disabled={isOwner}
-                        onClick={async () => await this.removeUserFromTeam(user._id)}>
-                        <Icon name="x" />Remove
-                    </Button>
-                </Table.Cell>
-            </Table.Row>
-        )
+      const { checkedIn } = user;
+      const isOwner = this.props.owner == user._id;
+      return (
+        <Table.Row key={user.email}>
+          <Table.Cell>
+            {isOwner ?
+             <Label ribbon>
+               <Icon name="trophy" color="orange" />
+               Owner
+             </Label>
+             : ""
+            }
+            <em>{user.accountType}</em>
+          </Table.Cell>
+          <Table.Cell>{user.name}</Table.Cell>
+	  <Table.Cell>{user.email}</Table.Cell>
+          <Table.Cell>{user._id}</Table.Cell>
+          <Table.Cell positive={checkedIn} negative={!checkedIn}>
+            {checkedIn ? "Checked In" : "NOT Checked In"}
+          </Table.Cell>
+          <Table.Cell>
+            <Button color="red" size="small" disabled={isOwner}
+                    onClick={async () => await this.removeUserFromTeam(user._id)}>
+              <Icon name="x" />Remove
+            </Button>
+          </Table.Cell>
+        </Table.Row>
+      )
     }
 
     _checkinYes(){
@@ -86,20 +87,21 @@ AdminTeamUserList = class AdminTeamsUserList extends Component {
         }
 
         return (
-            <Table celled>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Acct Type</Table.HeaderCell>
-                        <Table.HeaderCell>Name</Table.HeaderCell>
-                        <Table.HeaderCell>Id</Table.HeaderCell>
-                        <Table.HeaderCell>Check-in Status</Table.HeaderCell>
-                        <Table.HeaderCell>Remove</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                    {users.map(this._userRow)}
-                </Table.Body>
-            </Table>
+          <Table celled>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Acct Type</Table.HeaderCell>
+                <Table.HeaderCell>Name</Table.HeaderCell>
+  		<Table.HeaderCell>Email</Table.HeaderCell>
+                <Table.HeaderCell>Id</Table.HeaderCell>
+                <Table.HeaderCell>Check-in Status</Table.HeaderCell>
+                <Table.HeaderCell>Remove</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              {users.map(this._userRow)}
+            </Table.Body>
+          </Table>
         );
     }
 }

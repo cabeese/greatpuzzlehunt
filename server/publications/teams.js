@@ -13,12 +13,16 @@ Meteor.publish('admin.teams', function() {
     division: 1,
     checkinConfirmed: 1,
     inPerson: 1,
+    playingPuzzleHunt: 1,
+    playingTreasureHunt: 1,
     hasBegun: 1,
     owner: 1,
     prize_ineligible: 1,
     lookingForMembers: 1,
     EMERGENCY_LOCK_OUT: 1,
     puzzles: 1,
+    startedTreasureHunt: 1,
+    completedCheckpoint: 1
   }
   return Teams.find({}, {fields: projection});
 });
@@ -86,6 +90,8 @@ Meteor.publish('teams.browse', function() {
       owner: 1,
       lookingForMembers: 1,
       inPerson: 1,
+      playingPuzzleHunt: 1,
+      playingTreasureHunt: 1,
     },
   });
 });

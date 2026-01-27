@@ -6,7 +6,7 @@ import {
   Segment, Header, Grid, Icon, Button, Message, List
 } from 'semantic-ui-react';
 
-class TeamMemeberCheckIn extends Component {
+class TeamMemberCheckIn extends Component {
   render() {
     return (
       <div>
@@ -56,9 +56,9 @@ class TeamMemeberCheckIn extends Component {
   }
 }
 
-TeamMemeberCheckIn.propTypes = {
+TeamMemberCheckIn.propTypes = {
   team: PropTypes.object.isRequired,
   teamMembers: PropTypes.arrayOf(Object).isRequired,
 };
 
-export default TeamMemeberCheckIn;
+export default TeamMemberCheckIn;

@@ -151,7 +151,7 @@ class TeamCheckinMain extends Component {
     let title = `GPH ${eventYear} Check In`;
     return (
       <Container>
-        <PuzzlePageTitle title={title} subTitle={team.name}/>
+        <PuzzlePageTitle title={title} subtitle={team.name}/>
 
         {this._checkInBody(user, team, teamMembers)}
       </Container>

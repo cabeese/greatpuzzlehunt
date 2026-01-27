@@ -51,7 +51,7 @@ QRCode = class QRCode extends Component {
       <Container className="section">
       <Segment basic>
 
-      <PuzzlePageTitle title="QR Encoder" subTitle="" />
+      <PuzzlePageTitle title="QR Encoder" subtitle="" />
 
       <div className="ui container">
         <h2>Why is this here?</h2>

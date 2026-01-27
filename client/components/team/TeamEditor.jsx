@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Form, Message, Input, Popup, Icon, Checkbox, Confirm, Segment, Menu, } from 'semantic-ui-react';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../imports/PuzzleTreasureIcons';
 import { DIVISION_TYPES } from "./imports/team-helpers"
 
 import { browserHistory } from '../../history';
@@ -31,11 +32,15 @@ TeamEditor = class TeamEditor extends Component {
         password: team.password || '',
         division: team.division || null,
         inPerson: (team.inPerson || false),
+	playingPuzzleHunt: (team.playingPuzzleHunt || false),
+	playingTreasureHunt: (team.playingTreasureHunt || false),
         lookingForMembers: (team.lookingForMembers || false),
         checkedIn: team.checkinConfirmed,
       };
     }
-    return { name: '', password: '', division: null, inPerson: false, lookingForMembers: false, checkedIn: false};
+    return { name: '', password: '', division: null, inPerson: false,
+	     playingPuzzleHunt: false, playingTreasureHunt: false,
+	     lookingForMembers: false, checkedIn: false};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,6 +66,10 @@ TeamEditor = class TeamEditor extends Component {
         <Segment>
           {this._renderHybrid()}
         </Segment>
+
+	<Segment>
+	  {this._renderPlaying()}
+	</Segment>
 
         <Segment>
           {this._renderLFM()}
@@ -158,6 +167,42 @@ TeamEditor = class TeamEditor extends Component {
     );
   }
 
+  _renderPlaying() {
+    return (
+      <Form.Group widths='equal' grouped disabled={this.state.checkedIn}>
+	<p>
+          <strong>Activity selection</strong>
+          &nbsp;&nbsp;
+          <Popup trigger={<Icon name='help' color='red' />}
+                 content='In-person teams optionally participate in a wayfinding "Treasure Hunt" after the Puzzle Hunt. You may register for either or both!'
+            />
+        </p>
+	<Form.Group inline>
+	  <PuzzleHuntIcon value={true} disabled={this.state.checkedIn}/> &nbsp;
+          <Form.Checkbox
+            toggle
+            defaultChecked={this.state.playingPuzzleHunt}
+	    checked={this.state.playingPuzzleHunt}
+            name='playingPuzzleHunt'
+            label="Participating in the Great Puzzle Hunt"
+            disabled={this.state.checkedIn}
+            onChange={ (e,data) => this._handleDataChange(e,data) } />
+	</Form.Group>
+	<Form.Group inline>
+	  <TreasureHuntIcon value={true} disabled={this.state.checkedIn || !this.state.inPerson}/> &nbsp;
+          <Form.Checkbox
+            toggle
+            defaultChecked={this.state.playingTreasureHunt}
+            checked={this.state.playingTreasureHunt}
+            disabled={this.state.checkedIn || !this.state.inPerson}
+            name='playingTreasureHunt'
+            label="Participating in the Treasure Hunt"
+            onChange={ (e,data) => this._handleDataChange(e,data) } />
+	</Form.Group>
+      </Form.Group>
+    );
+  }
+
   _renderLFM() {
     return (
       <Form.Field disabled={this.state.checkedIn}>
@@ -199,6 +244,9 @@ TeamEditor = class TeamEditor extends Component {
 
   _setInPerson(enableInPerson) {
     this.setState({inPerson: enableInPerson});
+    if (!enableInPerson) {
+      this.setState({playingTreasureHunt: false});
+    }
   }
 
   _handleDataChange(e, data) {
@@ -243,9 +291,11 @@ TeamEditor = class TeamEditor extends Component {
 
   _teamData() {
     const { team } = this.props;
-    const { name, password, division, lookingForMembers, inPerson } = this.state;
+    const { name, password, division, lookingForMembers,
+	    playingPuzzleHunt, playingTreasureHunt, inPerson } = this.state;
     return {
       name, password, division, lookingForMembers, inPerson,
+      playingPuzzleHunt, playingTreasureHunt,
       _id: team ? team._id : undefined,
     };
   }

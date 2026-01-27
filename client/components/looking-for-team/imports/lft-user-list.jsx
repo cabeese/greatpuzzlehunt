@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Icon, Button } from 'semantic-ui-react';
 
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../../imports/PuzzleTreasureIcons';
+
 import MessageUserModal from '../../message-user/message-user';
 
 class Users extends Component {
@@ -20,6 +22,10 @@ class Users extends Component {
     const { messageUser } = this.state;
     return (
       <div>
+	<p>
+	  <PuzzleHuntIcon value={true}/> = planning to play Puzzle Hunt, &nbsp;
+	  <TreasureHuntIcon value={true}/> = planning to play Treasure Hunt.
+	</p>
 	<Card.Group>
 	  { this._users() }
 	</Card.Group>
@@ -38,7 +44,7 @@ class Users extends Component {
       <Card key={user._id}>
 	<Card.Content>
 	  <Card.Header>
-	    {user.firstname} {user.lastname}
+	    {user.firstname} {user.lastname} <PuzzleHuntIcon value={user.playingPuzzleHunt}/> <TreasureHuntIcon value={user.playingTreasureHunt}/>
 	  </Card.Header>
 	  <Card.Meta>
 	    { user.bio }

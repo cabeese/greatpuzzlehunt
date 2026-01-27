@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Icon, Button, Progress, Form, Popup, Header } from 'semantic-ui-react';
+import { Card, Icon, Image, Button, Progress, Form, Popup, Header } from 'semantic-ui-react';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../imports/PuzzleTreasureIcons';
 import moment from 'moment';
 
 import { DIVISION_MAP } from './imports/team-helpers.js';
@@ -56,7 +57,11 @@ TeamListCard = class TeamListCard extends Component {
     return (
       <Card centered>
         <Card.Content>
-          <Card.Header>{ team.name }</Card.Header>
+          <Card.Header>
+	    { team.name } &nbsp;
+	    <PuzzleHuntIcon value={ team.playingPuzzleHunt }/> &nbsp;
+	    <TreasureHuntIcon value={ team.playingTreasureHunt }/>
+	  </Card.Header>
           <Card.Meta>
             { this._getGameModeIcon(inPerson) } { division }
           </Card.Meta>
@@ -120,8 +125,14 @@ TeamListCard = class TeamListCard extends Component {
       );
     }
 
-    const joinBtn = !showOwner && !showPasswordField ? <Button basic size='small' floated='right' icon='reply' labelPosition='right' content='Join Team' onClick={() => this.setState({ showPasswordField: true })}/> : null;
-    const passwordForm = showPasswordField ? this._renderPasswordField() : null;
+    const { team } = this.props;
+
+    let user = Meteor.user();
+    const mismatch = (user.playingPuzzleHunt != team.playingPuzzleHunt) || (user.playingTreasureHunt != team.playingTreasureHunt);
+    const joinColor = mismatch ? 'red' : 'grey';
+
+    const joinBtn = !showOwner && !showPasswordField ? <Button basic size='small' floated='right' icon='reply' labelPosition='right' color={ joinColor } content='Join Team' onClick={() => this.setState({ showPasswordField: true })}/> : null;
+    const passwordForm = showPasswordField ? this._renderPasswordField(mismatch) : null;
     return (
       <Card.Content extra>
         { lookingBtn }
@@ -132,9 +143,13 @@ TeamListCard = class TeamListCard extends Component {
     );
   }
 
-  _renderPasswordField() {
+  _renderPasswordField(mismatch) {
+    const warning = mismatch ? <div> 
+				 <p> Warning: check what the team is playing </p>
+			       </div> : null;
     return (
       <Form onSubmit={async (e) => await this._handlePasswordSubmit(e)}>
+	{warning}
         <Form.Input id={this._getPasswordId()} name='password' label='Team Password' value={ this.state.password } onChange={(e) => this.setState({ password: e.target.value })}/>
         <Button color='green' type='submit' content='Submit' size='small'/>
         <Button floated='right' color='red' inverted content='Cancel' size='small' onClick={(e) => this._cancel(e)}/>

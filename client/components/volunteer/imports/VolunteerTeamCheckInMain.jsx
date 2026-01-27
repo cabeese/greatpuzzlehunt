@@ -34,6 +34,7 @@ class VolunteerTeamCheckInMain extends Component {
       <div>
         {this._header()}
 	{this._eligibleMessage(team)}
+	{this._notPlayingMessage(team)}
         {this._itemsToGive(team, teamMembers)}
         {this._confirmButton(team)}
         {this._members(teamMembers)}
@@ -49,7 +50,7 @@ class VolunteerTeamCheckInMain extends Component {
   _header() {
     const { name } = this.props.team;
     let title = `GPH ${eventYear} Check In`
-    return <PuzzlePageTitle title={title} subTitle={name}/>;
+    return <PuzzlePageTitle title={title} subtitle={name}/>;
   }
 
   _itemsToGive(team, teamMembers) {
@@ -65,7 +66,7 @@ class VolunteerTeamCheckInMain extends Component {
       )
     };
     teamMembers.forEach(member => {
-      if (member.checkedIn && (member.gameMode === 'INPERSON')) packets++;
+      if (member.checkedIn && member.playingPuzzleHunt && (member.gameMode === 'INPERSON')) packets++;
       if (!member.photoPermission) noPhotoUsers++;
     });
 
@@ -84,6 +85,20 @@ class VolunteerTeamCheckInMain extends Component {
     );
   }
 
+
+  _notPlayingMessage(team) {
+    if (!team.playingPuzzleHunt) {
+      return (
+	<Message icon="warning"
+		 size="large"
+		 warning
+		 header="Not playing puzzle hunt"
+		 content="There is a problem with this team's registration. They are marked as not playing the puzzle hunt. Please send the team to the Puzzle Hunt admin to adjust registration." />
+      );
+    } else {
+      return null;
+    }
+  }
 
   _eligibleMessage(team) {
     if (team.prize_ineligible) {

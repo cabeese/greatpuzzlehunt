@@ -71,6 +71,12 @@ export const renderRoutes = () => {
         </Route>
         <Route path='looking-for-team' element={<RequireAuth accessLevel='user'><LookingForTeam /></RequireAuth>} />
 
+      {/* Treasure hunt routes */}
+      <Route path='treasure'>
+	<Route index element={<RequireAuth accessLevel='user'><Treasure /></RequireAuth>} /> 
+        <Route path='checkpoint/:checkpointId' element={<RequireAuth accessLevel='user'><TreasureCheckpoint /></RequireAuth>}/>
+      </Route>
+      
         {/* Volunteer Routes */}
         <Route path='volunteer'>
           <Route index element={<RequireAuth accessLevel='volunteer'><Volunteer /></RequireAuth> }/>
@@ -87,6 +93,7 @@ export const renderRoutes = () => {
           <Route path='transactions' element={<RequireAuth accessLevel='admin'><AdminTransactions /></RequireAuth>} />
           <Route path='sponsors' element={<RequireAuth accessLevel='admin'><AdminSponsors /></RequireAuth>} />
           <Route path='puzzles' element={<RequireAuth accessLevel='admin'><AdminPuzzles /></RequireAuth>} />
+          <Route path='checkpoints' element={<RequireAuth accessLevel='admin'><AdminTreasureHunt /></RequireAuth>} />
           <Route path='gamestate' element={<RequireAuth accessLevel='admin'><AdminGamestate /></RequireAuth>} />
         </Route>
         <Route path='*' element={<Home />}/>

@@ -7,8 +7,8 @@ PuzzlePageTitle = class PuzzlePageTitle extends Component {
     const smallStyle = {
       fontSize: '.65em',
     };
-    const SubTitle = this.props.subTitle ?
-          <small style={ smallStyle }><br />{this.props.subTitle}</small>
+    const SubTitle = this.props.subtitle ?
+          <small style={ smallStyle }><br />{this.props.subtitle}</small>
           :
           "";
     return (
@@ -22,5 +22,5 @@ PuzzlePageTitle = class PuzzlePageTitle extends Component {
 
 PuzzlePageTitle.propTypes = {
   title: PropTypes.node.isRequired,
-  subTitle: PropTypes.string,
+  subtitle: PropTypes.string,
 };

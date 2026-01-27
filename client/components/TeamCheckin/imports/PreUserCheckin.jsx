@@ -8,7 +8,7 @@ import {
 class PreUserCheckin extends Component {
   render() {
     return (
-      <Button fluid color="green" size="large" icon="rocket" content="Start Check-In"
+      <Button fluid color="green" size="large" icon="rocket" content="Start Puzzle Hunt Check-In"
               onClick={async (e) => await this._startCheckIn(e)}/>
     );
   }

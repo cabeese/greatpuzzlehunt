@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Card, Icon, Button, Message } from 'semantic-ui-react';
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../imports/PuzzleTreasureIcons';
 
 TeamMembers = class TeamMembers extends Component {
   constructor(props) {
@@ -16,22 +17,28 @@ TeamMembers = class TeamMembers extends Component {
   render() {
     if (this.props.ready) {
       return (
-        <Card.Group>
-          {this._renderMembers()}
-          <Message
-           negative
-           hidden={!this.state.error}
-           icon="warning sign"
-           onDismiss={() => this.setState({ error: null })}
-           content={this.state.error ? this.state.error.reason : ''}
-          />
-          <Message
-           positive
-           hidden={!this.state.success || !this.props.showsSuccess}
-           icon="check"
-           content={this.state.success}
-          />
-        </Card.Group>
+	<div>
+	  <p>
+	    <PuzzleHuntIcon value={true}/> = planning to play Puzzle Hunt, &nbsp;
+	    <TreasureHuntIcon value={true}/> = planning to play Treasure Hunt.
+	  </p>
+          <Card.Group>
+            {this._renderMembers()}
+            <Message
+              negative
+              hidden={!this.state.error}
+              icon="warning sign"
+              onDismiss={() => this.setState({ error: null })}
+              content={this.state.error ? this.state.error.reason : ''}
+            />
+            <Message
+              positive
+              hidden={!this.state.success || !this.props.showsSuccess}
+              icon="check"
+              content={this.state.success}
+            />
+          </Card.Group>
+	</div>
       );
     }
     return <Loading />;
@@ -53,7 +60,7 @@ TeamMembers = class TeamMembers extends Component {
         <Card key={member._id}>
           <Card.Content>
             <Card.Header>
-              {member.name}
+              {member.name} <PuzzleHuntIcon value={member.playingPuzzleHunt}/> <TreasureHuntIcon value={member.playingTreasureHunt}/>
             </Card.Header>
             <Card.Meta>
               {member.getEmail()}<br/>{member.phone}

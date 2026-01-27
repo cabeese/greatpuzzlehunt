@@ -9,7 +9,7 @@ import moment from 'moment';
 import { browserHistory } from '../../history';
 
 import { Teams } from '../../../lib/collections/teams.js';
-
+import {PuzzleHuntIcon, TreasureHuntIcon} from '../imports/PuzzleTreasureIcons';
 import {DIVISION_TYPES} from './imports/team-helpers';
 
 const DIVISION_OPTS = [
@@ -17,6 +17,12 @@ const DIVISION_OPTS = [
   ...(DIVISION_TYPES.map( ({text, value}) => ({text, value}))),
   /* Add the 'All' sorting option */
   { text: 'All', value: 'all' }
+];
+
+const PLAYING_OPTS = [
+  { text: 'Any', value: 'both' },
+  { text: 'Puzzle hunt', value: 'puzzle' },
+  { text: 'Treasure hunt', value: 'treasure' },
 ];
 
 // Matchmaking filter options. Allow user to view only teams looking for new
@@ -40,6 +46,7 @@ TeamBrowser = class TeamBrowser extends Component {
       mmFilter: this.props.urlFilter == 'recruiting' ? 'recruiting' : 'all',
       sortBy: 'none',
       division: 'all',
+      playing: 'both',
       public: Boolean(this.props.public),
     };
   }
@@ -61,6 +68,10 @@ TeamBrowser = class TeamBrowser extends Component {
           <PuzzlePageTitle title={this._getTitle()} />
           <p>Don't have a team to join? Filter by "Recruiting" teams to find open teams
           looking for players like you!</p>
+	  <p>
+	    <PuzzleHuntIcon value={true}/> = planning to play Puzzle Hunt, &nbsp;
+	    <TreasureHuntIcon value={true}/> = planning to play Treasure Hunt.
+	  </p>
           <Header as='h3' icon={<Icon name='options' color='violet'/>} content='Options'/>
           <Form>
             <Form.Group widths='equal'>
@@ -69,6 +80,7 @@ TeamBrowser = class TeamBrowser extends Component {
                            onChange={(e, data) => this._handleChange(e, data)}/>
               <Form.Select label='Sort By' name='sortBy' options={SORT_BY_OPTS} value={this.state.sortBy} onChange={(e, data) => this._handleChange(e, data)}/>
               <Form.Select label='Division' name='division' options={DIVISION_OPTS} value={this.state.division} onChange={(e, data) => this._handleChange(e, data)}/>
+              <Form.Select label='Playing' name='playing' options={PLAYING_OPTS} value={this.state.playing} onChange={(e, data) => this._handleChange(e, data)}/>
             </Form.Group>
           </Form>
           { this.props.ready ? <TeamList teams={this._getTeams()} public={this.state.public}/> : <Loading /> }
@@ -89,7 +101,7 @@ TeamBrowser = class TeamBrowser extends Component {
   }
 
   _getTeams() {
-    const { mmFilter, sortBy, division } = this.state;
+    const { mmFilter, sortBy, division, playing } = this.state;
     let { teams } = this.props;
 
     // First filter down teams
@@ -98,6 +110,12 @@ TeamBrowser = class TeamBrowser extends Component {
     }
     if (mmFilter === "recruiting") {
       teams = filter(teams, team => team.lookingForMembers === true);
+    }
+
+    if (playing === 'puzzle') {
+      teams = filter(teams, team => team.playingPuzzleHunt === true);
+    } else if (playing === 'treasure') {
+      teams = filter(teams, team => team.playingTreasureHunt === true);
     }
 
     // Then sort filtered results.
