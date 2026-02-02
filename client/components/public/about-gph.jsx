@@ -177,15 +177,9 @@ class AboutGph extends Component {
           Explore Teams
         </Button>
 
-        <h3>In-Person teams:</h3>
-        <p>Reach the outdoor location shown on your smartphone and scan your
-          team code (which starts clock) to receive a puzzle.</p>
-
-        <h3>Virtual teams:</h3>
+        <h3>Tools Needed</h3>
         <p>
-          Check in on morning of Hunt to download the info packet. At
-          START time, select the first puzzle to download and start
-          the team clock.
+          See the <a href="#tools">Tools</a> section for details.
         </p>
         <p>
           You’ll need your wizard bag (scissors, tape, hole punch,
@@ -195,6 +189,17 @@ class AboutGph extends Component {
           you are sent to the next destination or (virtual) – you may
           open the next puzzle. Connect all the code words to complete
           the game!
+        </p>
+
+        <h3>In-Person teams:</h3>
+        <p>Reach the outdoor location shown on your smartphone and scan your
+          team code (which starts clock) to receive a puzzle.</p>
+
+        <h3>Virtual teams:</h3>
+        <p>
+          Check in on morning of Hunt to download the info packet. At
+          START time, select the first puzzle to download and start
+          the team clock.
         </p>
 
         <h3>Team Divisions</h3>
@@ -354,6 +359,12 @@ class AboutGph extends Component {
         </p>
 
         {importantDates}
+
+        <Button as="a"
+                basic color='blue' size='small'
+                href={"/register"}>
+          Register
+        </Button>
       </div>
     );
   }
@@ -403,13 +414,13 @@ class AboutGph extends Component {
   SECTION_MAP = {
     "Mission Statement": this._missionStatement(),
     "Game Details": this._gameDetails(),
+    "Register": this._register(),
     "Teams": this._teams(),
     "Tools": this._tools(),
     "Prizes": this._prizes(),
     "Food": this._food(),
     "Parking": this._parking(),
     "Directions": <Directions />,
-    "Register": this._register(),
     "Schedule": this._schedule(),
     "Gear": <AboutGear />,
     "Rules": <Rules />,

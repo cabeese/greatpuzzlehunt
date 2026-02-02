@@ -53,14 +53,29 @@ class HomeRegisterComp extends Component {
     );
   }
 
+  _registrationTreasureHuntOnly() {
+    return (
+      <Segment textAlign='center'>
+        We are still accepting Treasure Hunt registrations. Please note that <strong>registration for The Great Puzzle Hunt is closed at this time.</strong>
+
+        <br />
+        <LinkButton
+          to="/register"
+          size="huge" color="blue" content="Register Now! (Treasure Hunt Only)" />
+      </Segment>
+    );
+  }
+
   _getBody() {
     const { ready, gamestate } = this.props;
     if (!ready || !gamestate) return "";
 
-    const { registrationInPersonOpen, registrationVirtualOpen } = gamestate;
+    const { registrationInPersonOpen, registrationVirtualOpen,
+            registrationTreasureHuntOpen } = gamestate;
 
     if (registrationInPersonOpen) return this._registrationFullyOpen();
     if (registrationVirtualOpen) return this._registrationVirtualOnly();
+    if (registrationTreasureHuntOpen) return this._registrationTreasureHuntOnly();
     return this._registrationClosed();
   }
     

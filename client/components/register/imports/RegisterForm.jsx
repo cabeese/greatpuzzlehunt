@@ -198,7 +198,7 @@ class RegisterForm extends Component {
         </Message>
         */}
 
-        <p><strong>Important</strong>: Without valid name, email, or mailing address, you eliminate the chances to receive prizes. We use age to guide our puzzle development and location to make certain we geodistribute the files to proper sites that can be accessed by all participants.</p>
+        <p><strong>Important</strong>: Registration is required for all participants for safety, liability, and emergency purposes. We use age to guide our puzzle development and location to make certain we geodistribute the files to proper sites that can be accessed by all participants.</p>
 
         {this._errorMessage()}
 
@@ -359,7 +359,7 @@ class RegisterForm extends Component {
       return "The Treasure Hunt is only open to in-person players";
     }
     if (this.state.playingTreasureHunt && this.state.accountType == "VOLUNTEER") {
-      return "Volunteers cannot play the Treasure Hunt";
+      return "Volunteers must create a separate account to play the Treasure Hunt";
     }
     if (this.state.playingPuzzleHunt && this.state.accountType == "VOLUNTEER") {
       return "Volunteers cannot play the Puzzle Hunt";

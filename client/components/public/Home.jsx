@@ -24,11 +24,6 @@ Home = class Home extends Component {
 
         <HomeRegister />
 
-        <div className="bottom-split-sponsor-bar">
-          The Great Puzzle Hunt and Treasure Hunt are FREE events thanks to
-          our <u><a href="#sponsors" style={{color: "white"}}>sponsors</a></u>.
-        </div>
-
         <HomeDonate/>
 
         <a name='sponsors'/>
