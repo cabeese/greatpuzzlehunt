@@ -16,6 +16,7 @@ import {
 } from 'semantic-ui-react';
 import {
   getAnchorName,
+  matchmakingInfo,
   Parking,
   Directions,
   AboutGear,
@@ -88,10 +89,6 @@ class AboutTh extends Component {
 
         <p>
           You may need to connect all the information in some way to respond to the question on the last QR code to get the final destination of the TREASURE CHEST, where you may collect a trinket, one for each team member, please.
-        </p>
-
-        <p>
-          Your team will be added to the bragging rights chart for how many parts of the Treasure Hunt were completed.
         </p>
 
         <h2>Who is it for?</h2>
@@ -169,6 +166,8 @@ class AboutTh extends Component {
         <p>
           A maximum of 6 people are allowed on a team.
         </p>
+
+        {matchmakingInfo}
       </div>
     );
   }
@@ -208,10 +207,6 @@ class AboutTh extends Component {
   _prizes() {
     return (
       <div>
-        <p>
-          Your team will be added to the bragging rights chart for how many parts of the Treasure Hunt were completed. Time does not matter.
-        </p>
-
         <p>
           Once you find the final <strong>TREASURE CHEST</strong>, you may collect a trinket (one for each team member, please).
         </p>
