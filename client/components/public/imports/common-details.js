@@ -81,7 +81,6 @@ export const puzzle_schedule_virtual_data = [
 
 export const importantDates = (
   <List className='bulleted'>
-    <List.Item><strong>{regularRegistrationStart}</strong>: Registration and Official Gear Store opens</List.Item>
     <List.Item><strong>{registrationCloseDate}</strong>: Step 1 of Registration (Create an Account) Closes - Or earlier if team limit is reached</List.Item>
     <List.Item><strong>{eventDate}</strong>: If you've already created an account, you can join a team until 10:00 AM (PT).</List.Item>
     <List.Item><strong>{gearSaleEnd}</strong>: Official Gear store closes at midnight.</List.Item>
@@ -109,6 +108,51 @@ export class Parking extends Component {
     );
   }
 }
+
+export const matchmakingInfo = (
+  <div>
+    <h3>Don’t have a team?</h3>
+
+    <p>
+      That's okay! After you create an account, you can use our
+      "matchmaking" feature to find an open team to join or other
+      players who are also looking for a team. Then, visit
+      the <a href="profile">Profile</a> page to select one of two options:
+      </p>
+
+      <p>
+        <strong>Browse players looking for a team:</strong> Select this option to see other
+        players who are currently "solo" but would like to find
+        other players to form a new team with. You can send them a
+        message to decide if you'd be a good fit.
+      </p>
+
+    <p>
+      <strong>Browse teams looking for more members:</strong> Select
+      this option to see teams that are short a few members and
+      are actively recruiting new players. Send a message to their
+      team captain to get in touch. The team captain can then
+      share the Team Password so you can join that group.
+    </p>
+
+    <p>
+      <strong>A few things to note:</strong>
+      <br />When exchanging messages with other players or team
+      captains, your email address may be shared with whoever you
+      contact.
+      <br />Be sure to check the Virtual or In-Person
+      setting for a team you're interested in joining. If that
+      team is planning to play in-person but you can't be there
+      physically, this could be a problem!
+    </p>
+
+    <Button as="a"
+            basic color='blue' size='small'
+            href={"teams-list"}>
+      Explore Teams
+    </Button>
+  </div>
+);
 
 export class Directions extends Component {
   render() {

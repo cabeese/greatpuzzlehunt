@@ -67,8 +67,11 @@ class HomeAboutSplit extends Component {
           <br /><br />
 
           <strong>Virtual:</strong> Anywhere that has internet access,
-          a smartphone or computer, a printer,
-          and <Link to="about-gph#tools">the required tools</Link>.
+          a smartphone or computer, and a printer.
+        </p>
+
+        <p>
+          <strong>Be sure to bring <Link to="about-gph#tools">the required tools</Link>!</strong>
         </p>
       </Grid.Column>
     );
@@ -86,7 +89,7 @@ class HomeAboutSplit extends Component {
         </Header>
 
         <p>
-          <strong>Find the hidden treasure!</strong> A FREE, fun outdoor adventure. Use a compass and map orienteering to collect clues & respond to questions, ulteimately collecting a memento from the hidden treasure chest on the WWU campus!
+          <strong>Find the hidden treasure!</strong> A FREE, fun outdoor adventure. Use a compass and map orienteering to collect clues & respond to questions, ultimately collecting a memento from the hidden treasure chest on the WWU campus! <Link to="register">Registration</Link> required.
         </p>
         <Link to="about-th">
           <Button
@@ -114,6 +117,8 @@ class HomeAboutSplit extends Component {
           On the beautiful WWU campus<br />
           in Bellingham, WA.
         </p>
+
+        <strong>Be sure to bring <Link to="about-th#tools">the required tools</Link>!</strong>
       </Grid.Column>
     );
   }

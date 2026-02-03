@@ -16,6 +16,7 @@ import {
 } from 'semantic-ui-react';
 import {
   getAnchorName,
+  matchmakingInfo,
   Parking,
   Directions,
   AboutGear,
@@ -45,7 +46,7 @@ class AboutTh extends Component {
         </p>
 
         <p>
-          <strong>Look for:</strong> painted rocks hidden about campus that contain information to collect in your logbook (see <a href="tools">tools</a> section) and clues leading to the “next location.” The “next location” will be another marked rock or a light pole, sculpture, or other campus landmark that might have a Treasure Hunt logo and/or a QR code affixed.
+          <strong>Look for:</strong> painted rocks hidden about campus that contain information to collect in your logbook (see <a href="#tools">tools</a> section) and clues leading to the “next location.” The “next location” will be another marked rock or a light pole, sculpture, or other campus landmark that might have a Treasure Hunt logo and/or a QR code affixed.
         </p>
 
         <p>
@@ -90,8 +91,18 @@ class AboutTh extends Component {
           You may need to connect all the information in some way to respond to the question on the last QR code to get the final destination of the TREASURE CHEST, where you may collect a trinket, one for each team member, please.
         </p>
 
+        <h2>Who is it for?</h2>
+        <List bulleted>
+          <List.Item>
+            Students, Faculty, Staff, Alumni, Community, Friends, Family, anyone who enjoys an outdoor adventure.
+          </List.Item>
+          <List.Item>Each team with participant(s) under age 14 must include at least one registered adult team member to accompany minor(s) at all times.</List.Item>
+          <List.Item>Participants under 18 who are not enrolled WWU students: A parent/legal guardian must complete the registration form on behalf of their minor.</List.Item>
+        </List>
+
+        <h2>What if it rains?</h2>
         <p>
-          Your team will be added to the bragging rights chart for how many parts of the Treasure Hunt were completed.
+          Welcome to Washington.  We hunt on!
         </p>
       </div>
     );
@@ -142,7 +153,7 @@ class AboutTh extends Component {
             Registered Great Puzzle Hunt & Treasure Hunt Players will be offered a link to the Official Treasure Hunt Map and Secret Starting Location, upon completion of the Meta-Puzzle. 
           </List.Item>
           <List.Item>
-            Registered Great Puzzle Hunt & Treasure Hunt Players who do not complete the MetaPuzzle can access the Official Treasure Hunt Map and Secret Starting Location here (live link) starting at 7:00 am on April 19, 2026.
+            Registered Great Puzzle Hunt & Treasure Hunt Players who do not complete the MetaPuzzle can access the Official Treasure Hunt Map and Secret Starting Location starting at 7:00 am on April 19, 2026.
           </List.Item>
         </List>
       </div>
@@ -155,6 +166,8 @@ class AboutTh extends Component {
         <p>
           A maximum of 6 people are allowed on a team.
         </p>
+
+        {matchmakingInfo}
       </div>
     );
   }
@@ -164,10 +177,10 @@ class AboutTh extends Component {
       <div>
         <List bulleted>
           <List.Item>
-            <strong>Official Treasure Hunt Map</strong> (see <a href="#schedule">schedule</a> section)
+            <strong>Official Treasure Hunt Map</strong> (see above)
           </List.Item>
           <List.Item>
-            <strong>Secret starting location</strong> (see <a href="#schedule">schedule</a> section)
+            <strong>Secret starting location</strong> (see above)
           </List.Item>
           <List.Item>
             <strong>Compass App</strong> or actual compass set to True North (not magnetic North)
@@ -194,10 +207,6 @@ class AboutTh extends Component {
   _prizes() {
     return (
       <div>
-        <p>
-          Your team will be added to the bragging rights chart for how many parts of the Treasure Hunt were completed. Time does not matter.
-        </p>
-
         <p>
           Once you find the final <strong>TREASURE CHEST</strong>, you may collect a trinket (one for each team member, please).
         </p>
@@ -251,9 +260,6 @@ class AboutTh extends Component {
           Event Starts. Registered Treasure Hunt players can access the Official Treasure Hunt Map and Secret Starting Locations.
         </p>
 
-        <Button>TODO - MAP</Button>
-        <Button>TODO - STARTING LOCATION</Button>
-
         <p>
           The Treasure Hunt is not timed, but it ends at 8:00 PM, Monday, April 20, 2026
         </p>
@@ -261,14 +267,15 @@ class AboutTh extends Component {
         <Divider />
 
         <p>
-          Only registered players may gain access to the <strong>Official Treasure Hunt Map and Secret Starting Location</strong> and <strong>QR codes at check-point stations</strong> that contain clues        </p>
-        .
+          Only registered players may gain access to the <strong>Official Treasure Hunt Map and Secret Starting Location</strong> and <strong>QR codes at check-point stations</strong> that contain clues. These will be available through the "Treasure Hunt Gameplay" section of the site when players gain access.
+        </p>
+
         <p>
           However, <u>Great Puzzle Hunt</u> finishers gain early access to the Treasure Hunt on April 18, 2026 after completing the meta puzzle. 
         </p>
-        .
+
         <p>
-          Registered Great Puzzle Hunt & Treasure Hunt Players who <strong>do not complete the MetaPuzzle</strong> can access the Official Treasure Hunt Map and Secret Starting Location here (live link) starting at 7:00 am on April 19, 2026.
+          Registered Great Puzzle Hunt & Treasure Hunt Players who <strong>do not complete the MetaPuzzle</strong> can access the Official Treasure Hunt Map and Secret Starting Location here starting at 7:00 am on April 19, 2026.
         </p>
       </div>
     );
@@ -294,12 +301,12 @@ class AboutTh extends Component {
   // Order of this map determines rendering order.
   SECTION_MAP = {
     "Game Details": this._gameDetails(),
+    "Register": this._register(),
     "Schedule": this._schedule(),
     "Secret Starting Place and Map": this._secretStartingPlaceAndMap(),
     "Tools": this._tools(),
     "Teams": this._teams(),
     "Etiquette": this._etiquette(),
-    "Register": this._register(),
     "Prizes": this._prizes(),
     "Parking": <Parking />,
     "Directions": <Directions />,

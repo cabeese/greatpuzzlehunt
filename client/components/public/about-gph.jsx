@@ -16,6 +16,7 @@ import {
   puzzle_schedule_virtual_data,
   puzzle_schedule_inPerson_data,
   importantDates,
+  matchmakingInfo,
   Parking,
   Directions,
   AboutGear,
@@ -43,7 +44,7 @@ class AboutGph extends Component {
           thinking, teamwork, technology, and encourage inclusion.
         </p>
 
-        {/* <h3>TODO(noah): ADD PHOTO</h3> */}
+        <Image src='/img/gathering-wide-angle.jpg' />
       </div>
     );
   }
@@ -91,7 +92,7 @@ class AboutGph extends Component {
         </p>
 
         <p>
-          Prizes are awarded to in-person top scoring teams in each
+          Prizes are awarded to <strong>in-person</strong> top scoring teams in each
           division, best in-person costumes, and team names. Must be
           present at awards ceremony to claim prizes.
         </p>
@@ -126,6 +127,9 @@ class AboutGph extends Component {
   _teams() {
     return (
       <div>
+        <Image src='https://gph-distributed.s3.us-west-2.amazonaws.com/img/static/costume-team-2.jpg'
+               size='medium' floated='right' />
+
         <p>
           A maximum of 6 people are allowed on a team.
         </p>
@@ -136,46 +140,21 @@ class AboutGph extends Component {
           etc.)..
         </p>
 
-        <h3>Don’t have a team?</h3>
+        {matchmakingInfo}
 
+        <h3>Tools Needed</h3>
         <p>
-          That's okay! After you create an account, you can use our
-          "matchmaking" feature to find an open team to join or other
-          players who are also looking for a team. Then, visit
-          the <a href="profile">Profile</a> page to select one of two options:
+          See the <a href="#tools">Tools</a> section for details.
         </p>
-
         <p>
-          <strong>Browse players looking for a team:</strong> Select this option to see other
-          players who are currently "solo" but would like to find
-          other players to form a new team with. You can send them a
-          message to decide if you'd be a good fit.
+          You’ll need your wizard bag (scissors, tape, hole punch,
+          etc.), as well as critical thinking, reasoning, and teamwork
+          to MacGyver your way through. Once you solve the puzzle and
+          enter the code word(s), the clock stops, and (in-person) –
+          you are sent to the next destination or (virtual) – you may
+          open the next puzzle. Connect all the code words to complete
+          the game!
         </p>
-
-        <p>
-          <strong>Browse teams looking for more members:</strong> Select
-          this option to see teams that are short a few members and
-          are actively recruiting new players. Send a message to their
-          team captain to get in touch. The team captain can then
-          share the Team Password so you can join that group.
-        </p>
-
-        <p>
-          <strong>A few things to note:</strong>
-          <br />When exchanging messages with other players or team
-          captains, your email address may be shared with whoever you
-          contact.
-          <br />Be sure to check the Virtual or In-Person
-          setting for a team you're interested in joining. If that
-          team is planning to play in-person but you can't be there
-          physically, this could be a problem!
-        </p>
-
-        <Button as="a"
-                basic color='blue' size='small'
-                href={"teams-list"}>
-          Explore Teams
-        </Button>
 
         <h3>In-Person teams:</h3>
         <p>Reach the outdoor location shown on your smartphone and scan your
@@ -186,15 +165,6 @@ class AboutGph extends Component {
           Check in on morning of Hunt to download the info packet. At
           START time, select the first puzzle to download and start
           the team clock.
-        </p>
-        <p>
-          You’ll need your wizard bag (scissors, tape, hole punch,
-          etc.), as well as critical thinking, reasoning, and teamwork
-          to MacGyver your way through. Once you solve the puzzle and
-          enter the code word(s), the clock stops, and (in-person) –
-          you are sent to the next destination or (virtual) – you may
-          open the next puzzle. Connect all the code words to complete
-          the game!
         </p>
 
         <h3>Team Divisions</h3>
@@ -354,6 +324,12 @@ class AboutGph extends Component {
         </p>
 
         {importantDates}
+
+        <Button as="a"
+                basic color='blue' size='small'
+                href={"/register"}>
+          Register
+        </Button>
       </div>
     );
   }
@@ -403,13 +379,13 @@ class AboutGph extends Component {
   SECTION_MAP = {
     "Mission Statement": this._missionStatement(),
     "Game Details": this._gameDetails(),
+    "Register": this._register(),
     "Teams": this._teams(),
     "Tools": this._tools(),
     "Prizes": this._prizes(),
     "Food": this._food(),
     "Parking": this._parking(),
     "Directions": <Directions />,
-    "Register": this._register(),
     "Schedule": this._schedule(),
     "Gear": <AboutGear />,
     "Rules": <Rules />,
