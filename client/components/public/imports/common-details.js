@@ -141,9 +141,10 @@ export const matchmakingInfo = (
       captains, your email address may be shared with whoever you
       contact.
       <br />Be sure to check the Virtual or In-Person
-      setting for a team you're interested in joining. If that
-      team is planning to play in-person but you can't be there
-      physically, this could be a problem!
+      setting for a team you're interested in joining, as well as if
+      they're playing the "Puzzle Hunt" and/or the "Treasure Hunt." If
+      that team is planning to play a different game or from a
+      different location than you, this could be a problem!
     </p>
 
     <Button as="a"
