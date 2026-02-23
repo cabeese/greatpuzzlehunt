@@ -51,7 +51,7 @@ class HomeAboutSplit extends Component {
 	</div>
 
         <p>
-          Teams of up to 6 (recommended size 4-6) work virtually or travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets. <Link to="register">Registration</Link> required.
+	  <strong> Solve puzzles! </strong> Teams of up to 6 (recommended size 4-6) work virtually or travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets. <Link to="register">Registration</Link> required.
         </p>
         <Link to="about-gph">
           <Button
