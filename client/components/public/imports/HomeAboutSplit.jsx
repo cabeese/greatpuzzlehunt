@@ -36,6 +36,20 @@ class HomeAboutSplit extends Component {
           Puzzle Hunt
         </Header>
 
+	<div style={{textAlign: "left"}}>
+	<ul>
+	  <li>
+	    Free, Fun, Food, Music, Prizes, Costumes encouraged
+	  </li>
+	  <li>
+	    One day outdoor puzzle race
+	  </li>
+	  <li>
+	    In-person and virtual event
+	  </li>
+	</ul>
+	</div>
+
         <p>
           Teams of up to 6 (recommended size 4-6) work virtually or travel on foot about WWU campus (outdoors) solving a collection of puzzles involving logic, patterns, decoding, and a variety of skill sets. <Link to="register">Registration</Link> required.
         </p>
@@ -88,6 +102,20 @@ class HomeAboutSplit extends Component {
           Treasure Hunt
         </Header>
 
+	<div style={{textAlign: "left"}}>
+	<ul>
+	  <li>
+	    Free, Fun, Map and Compass Adventure
+	  </li>
+	  <li>
+	    Open 2-3 days—join in and play at your leisure
+	  </li>
+	  <li>
+	    In-person event
+	  </li>
+	</ul>
+	</div>
+
         <p>
           <strong>Find the hidden treasure!</strong> A FREE, fun outdoor adventure. Use a compass and map orienteering to collect clues & respond to questions, ultimately collecting a memento from the hidden treasure chest on the WWU campus! <Link to="register">Registration</Link> required.
         </p>
@@ -106,7 +134,7 @@ class HomeAboutSplit extends Component {
           Open April 19, 2026, 7:00 AM to April 20, 2026, 8:00 PM.
         </p>
         <p>
-          <em>GPH finishers gain early access to the Treasure Hunt on April 18, 2026.</em>
+          <em>Puzzle Hunt finishers gain early access to the Treasure Hunt on April 18, 2026.</em>
         </p>
 
         <Header as="h2" size="medium">
