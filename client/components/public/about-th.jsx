@@ -16,7 +16,6 @@ import {
 } from 'semantic-ui-react';
 import {
   getAnchorName,
-  matchmakingInfo,
   Parking,
   Directions,
   AboutGear,
@@ -41,6 +40,9 @@ class AboutTh extends Component {
           Enjoy a fun, outdoor adventure, requiring walking at least 1 mile around WWU campus on varied terrain (grass & gravel paths, paved walkways) using compass and map orienteering (see <a href="#tools">tools</a> section). Collect clues & respond to questions at checkpoints with the ultimate goal to collect a memento from the treasure chest hidden somewhere on campus!
         </p>
 
+	<p>
+	  Once the Treasure Hunt starts, you will find a "Treasure Hunt" button in the top bar to take you to your team's Treasure Hunt page. That page will give you clues about where to go next and will include a link to the map.
+	</p> 
         <p>
           <strong>Goal: HAVE FUN!</strong> Find the hidden treasure chest on WWU campus. Don’t ruin the game for others. Try to be inconspicuous with your findings.
         </p>
@@ -153,7 +155,7 @@ class AboutTh extends Component {
             Registered Great Puzzle Hunt & Treasure Hunt Players will be offered a link to the Official Treasure Hunt Map and Secret Starting Location, upon completion of the Meta-Puzzle. 
           </List.Item>
           <List.Item>
-            Registered Great Puzzle Hunt & Treasure Hunt Players who do not complete the MetaPuzzle can access the Official Treasure Hunt Map and Secret Starting Location starting at 7:00 am on April 19, 2026.
+            Registered Great Puzzle Hunt & Treasure Hunt Players who do not complete the MetaPuzzle can access the Official Treasure Hunt Map and Secret Starting Location starting at 7:00 am on April 19, 2026 through a link in the top bar on this web site.
           </List.Item>
         </List>
       </div>
@@ -167,7 +169,44 @@ class AboutTh extends Component {
           A maximum of 6 people are allowed on a team.
         </p>
 
-        {matchmakingInfo}
+	<div>
+	  <h3>Don’t have a team?</h3>
+	  
+	  <p>
+	    That's okay! After you create an account, you can use our
+	    "matchmaking" feature to find an open team to join or other
+	    players who are also looking for a team. Then, visit
+	    the <a href="profile">Profile</a> page to select one of two options:
+	    </p>
+	    
+	    <p>
+              <strong>Browse players looking for a team:</strong> Select this option to see other
+              players who are currently "solo" but would like to find
+              other players to form a new team with. You can send them a
+              message to decide if you'd be a good fit.
+	    </p>
+	  
+	  <p>
+	    <strong>Browse teams looking for more members:</strong> Select
+	    this option to see teams that are short a few members and
+	    are actively recruiting new players. Send a message to their
+	    team captain to get in touch. The team captain can then
+	    share the Team Password so you can join that group.
+	  </p>
+	  
+	  <p>
+	    <strong>A few things to note:</strong>
+	    <br />When exchanging messages with other players or team
+	    captains, your email address may be shared with whoever you
+	    contact.
+	  </p>
+	  
+	  <Button as="a"
+		  basic color='blue' size='small'
+		  href={"teams-list"}>
+	    Explore Teams
+	  </Button>
+	</div>
       </div>
     );
   }
@@ -342,14 +381,13 @@ class AboutTh extends Component {
         {/* Render each section (including header and anchor) */}
         <Segment>
           {Object.entries(this.SECTION_MAP).map(([name, body]) => (
-            <React.Fragment key={name}>
+	    <div id={getAnchorName(name)}>
               <Header as="h1" size="medium">
-                <a id={getAnchorName(name)} />
                 {name}
               </Header>
 
               {body}
-            </React.Fragment>
+            </div>
           ))}
         </Segment>
       </Container>
