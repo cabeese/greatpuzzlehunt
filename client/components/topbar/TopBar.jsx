@@ -35,6 +35,11 @@ const mainMenuLinks = [
     iconClass: 'search',
   },
   {
+    name: 'Teams',
+    to: '/teams-list',
+    iconClass: 'blue users',
+  },
+  {
     name: 'Media',
     to: '/media',
     iconClass: 'olive camera',
