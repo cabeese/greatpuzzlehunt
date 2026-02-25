@@ -8,7 +8,7 @@ import LinkButton from '../../imports/LinkButton';
 import GamestateComp from '../../imports/GamestateComp';
 
 const { eventYear, eventDate, eventDay, earlyBirdLastDate,
-        registrationCloseDate,
+        registrationCloseDate, treasureRegistrationCloseDate
       } = Meteor.settings.public;
 
 class HomeRegisterComp extends Component {
@@ -35,7 +35,11 @@ class HomeRegisterComp extends Component {
           to="/register"
           size="huge" color="blue" content="Register Now!" />
         <br />
-        <small>In-person registration closes at 11:59 PM PT on {registrationCloseDate}</small>
+        <small>
+	  In-person Puzzle Hunt registration closes at 11:59 PM PT on {registrationCloseDate}
+	  <br/>
+	  Treasure Hunt registration closes at 11:59 PM PT on {treasureRegistrationCloseDate}
+	</small>
       </Segment>
     );
   }
