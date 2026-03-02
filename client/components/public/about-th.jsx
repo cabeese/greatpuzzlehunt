@@ -152,10 +152,10 @@ class AboutTh extends Component {
             The Treasure Hunt is open April 19, 2026, 7:00 AM to April 20, 2026, 8:00 PM. However, Great Puzzle Hunt finishers gain early access to the Treasure Hunt on April 18, 2026. 
           </List.Item>
           <List.Item>
-            Registered Great Puzzle Hunt & Treasure Hunt Players will be offered a link to the Official Treasure Hunt Map and Secret Starting Location, upon completion of the Meta-Puzzle. 
+            Registered Great Puzzle Hunt & Treasure Hunt Players will see a link to their team Treasure Hunt page, with the Official Treasure Hunt Map and Secret Starting Location, upon completion of the Meta-Puzzle. 
           </List.Item>
           <List.Item>
-            Registered Great Puzzle Hunt & Treasure Hunt Players who do not complete the MetaPuzzle can access the Official Treasure Hunt Map and Secret Starting Location starting at 7:00 am on April 19, 2026 through a link in the top bar on this web site.
+            Registered Great Puzzle Hunt & Treasure Hunt Players who do not complete the MetaPuzzle can access the Official Treasure Hunt Map and Secret Starting Location starting at 7:00 am on April 19, 2026 through the Treasure Hunt link in the top bar on this web site.
           </List.Item>
         </List>
       </div>
@@ -216,10 +216,10 @@ class AboutTh extends Component {
       <div>
         <List bulleted>
           <List.Item>
-            <strong>Official Treasure Hunt Map</strong> (see above)
+            <strong>Official Treasure Hunt Map</strong> accessible from your team's Treasure Hunt page; you may want to print a copy
           </List.Item>
           <List.Item>
-            <strong>Secret starting location</strong> (see above)
+            <strong>Secret starting location</strong> on your team's Treasure Hunt page
           </List.Item>
           <List.Item>
             <strong>Compass App</strong> or actual compass set to True North (not magnetic North)
@@ -314,7 +314,7 @@ class AboutTh extends Component {
         </p>
 
         <p>
-          Registered Great Puzzle Hunt & Treasure Hunt Players who <strong>do not complete the MetaPuzzle</strong> can access the Official Treasure Hunt Map and Secret Starting Location here starting at 7:00 am on April 19, 2026.
+          Registered Great Puzzle Hunt & Treasure Hunt Players who <strong>do not complete the MetaPuzzle</strong> can access the Official Treasure Hunt Map and Secret Starting Location starting at 7:00 am on April 19, 2026 using the Treasure Hunt link in the top bar.
         </p>
       </div>
     );

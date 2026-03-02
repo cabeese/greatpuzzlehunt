@@ -50,7 +50,7 @@ class TreasureCheckpointInner extends React.Component {
 	return (
 	  <Grid.Row columns='1'>
 	    <Container>
-	      Team { team.name } has not yet started playing the Treasure Hunt! You can start playing from your Treasure Hunt status page.
+	      Team { team.name } has not yet started playing the Treasure Hunt! You can start playing from your team Treasure Hunt page.
 	    </Container>
 	    <Link to='/treasure'>
 	      <Button content='Status page' />

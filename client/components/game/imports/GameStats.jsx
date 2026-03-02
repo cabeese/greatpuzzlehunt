@@ -73,8 +73,14 @@ class GameStats extends Component {
 	You're signed up to play the Treasure Hunt! When you're ready, head to the
 	&nbsp;
 	<Link to='/treasure'>
-	  <Button content='Team status page' />
+	  <Button content='Team Treasure Hunt page' />
 	</Link>
+	<br/>
+	For the Official Treasure Hunt Map:
+	<ul>
+	  <li> Download and read map from your mobile device, or </li>
+	  <li> Pick up a hard copy in the Math Center in Bond Hall 209/211A. </li>
+	</ul>
       </div>
     );
   }
