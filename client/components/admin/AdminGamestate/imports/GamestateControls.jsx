@@ -51,6 +51,8 @@ class GamestateControlsInner extends Component {
         displayBanner: props.gamestate.displayBanner,
         givingURL: props.gamestate.givingURL || "",
         livestreamBackupURL: props.gamestate.livestreamBackupURL || "",
+	treasureMapURL: props.gamestate.treasureMapURL || "",
+	treasureLogURL: props.gamestate.treasureLogURL || ""
       });
     }
   }
@@ -214,6 +216,29 @@ class GamestateControlsInner extends Component {
             content="Update donation info"
             onClick={async () => await this.setGivingURL(this.state.givingURL)} />
         </div>
+
+	<Header as='h3' content='Treasure Hunt info'/>
+	<div style={{marginTop: 10, marginBotton: 10}}>
+	  <Input
+	    name="treasureMapURL"
+	    size="small"
+	    label="Map URL"
+	    value={this.state.treasureMapURL}
+	    onChange={this.handleChange}
+	  />
+	  <br/>
+	  <Input
+	    name="treasureLogURL"
+	    size="small"
+	    label="Log URL"
+	    value={this.state.treasureLogURL}
+	    onChange={this.handleChange}
+	  />
+	  <br/>
+          <Button
+            content="Update Treasure Hunt info"
+            onClick={async () => await this.setTreasureInfo(this.state.treasureMapURL, this.state.treasureLogURL)} />
+	</div>
 	
       </Container>
     );
@@ -252,6 +277,10 @@ class GamestateControlsInner extends Component {
 
   async setGivingURL(url){
     await callMeteorMethod('admin.gamestate.setGivingURL', url);
+  }
+
+  async setTreasureInfo(mapurl, logurl) {
+    await callMeteorMethod('admin.gamestate.setTreasureInfo', mapurl, logurl);
   }
 
   _fieldButton(fieldName, displayName) {

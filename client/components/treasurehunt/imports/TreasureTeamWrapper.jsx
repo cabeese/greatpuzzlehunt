@@ -8,6 +8,7 @@ import { Button, Container, Grid, Header, Label, Message } from 'semantic-ui-rea
 
 import { THCheckpoints } from '../../../../lib/collections/thcheckpoints.js';
 import { Teams } from '../../../../lib/collections/teams.js'
+import { Gamestate } from '../../../../lib/collections/gamestate-collection.js'
 import { formatLabel } from './format'
 
 class TreasureTeamWrapper extends Component {
@@ -39,6 +40,7 @@ class TreasureTeamWrapper extends Component {
 	<div>
 	  { this._subtitle() }
 	  { this._checkinStatus() }
+	  { this._mapInfo() }
 	  { this._huntStatus() }
 	</div>
       );
@@ -53,13 +55,7 @@ class TreasureTeamWrapper extends Component {
     const { team } = this.props;
     if (team) {
       if (team.startedTreasureHunt) {
-	return (
-	  <Message info>
-	    <Message.Header>
-	      Team { team.name } has started playing
-	    </Message.Header>
-	  </Message>
-	);
+	return null;
       } else {
 	return (
 	  <Grid.Row columns='1'>
@@ -84,6 +80,61 @@ class TreasureTeamWrapper extends Component {
     }
   }
 
+  _mapInfo() {
+    const { gamestate } = this.props;
+    const { team } = this.props;
+
+    if (gamestate) {
+      if (team.startedTreasureHunt) {
+	const mapURL = gamestate[0].treasureMapURL;
+	const logURL = gamestate[0].treasureLogURL;
+	
+	return (
+	  <Grid stackable>
+	    <Grid.Row columns='1'>
+	      <Header content='Information' />
+	    </Grid.Row>
+	    <Grid.Row>
+	      <Grid.Column>
+		<Container>
+		  Team { team.name } has started playing
+		</Container>
+		<br/>
+		<Container>
+		  Official Treasure Hunt Map &nbsp;
+		  <Button basic
+			  as='a'
+			  size='small'
+			  content='Download'
+			  href={mapURL}
+		  />
+		  <br/>
+		  <ul>
+		    <li> Download and read map from your mobile device, or </li>
+		    <li> You may want to print a hard copy. </li>
+		  </ul>
+		</Container>
+		<Container>
+		  Treasure Hunt Log &nbsp;
+		  <Button basic
+			  as='a'
+			  size='small'
+			  content='Download'
+			  href={logURL}
+		  />
+		</Container>
+	      </Grid.Column>
+	    </Grid.Row>
+	  </Grid>
+	);
+      } else {
+	return null;
+      }
+    } else {
+      return null;
+    }
+  }
+  
   _huntStatus() {
     const { team } = this.props;
     if (team) {
@@ -204,23 +255,27 @@ TreasureTeamWrapper.propTypes = {
   ready: PropTypes.bool.isRequired,
   team: PropTypes.object,
   user: PropTypes.object,
-  checkpoints: PropTypes.array
+  checkpoints: PropTypes.array,
+  gamestate: PropTypes.array
 };
 
 function TreasureTracker(Comp) {
   return withTracker(() => {
     const handle1 = Meteor.subscribe('teams.myTeam');
     const handle2 = Meteor.subscribe('admin.thcheckpoints');
+    const handle3 = Meteor.subscribe('gamestate');
     const user = Meteor.user();
-    const ready = Boolean(handle1.ready() && handle2.ready() && user);
+    const ready = Boolean(handle1.ready() && handle2.ready() && handle3.ready() && user);
     const team = ready ? Teams.findOne(user.teamId) : null;
     const checkpoints = ready ? THCheckpoints.find({}).fetch() : null;
+    const gamestate = ready? Gamestate.find({}).fetch() : null;
 
     return {
       user,
       ready,
       team,
-      checkpoints
+      checkpoints,
+      gamestate
     };
   })(Comp);
 };
