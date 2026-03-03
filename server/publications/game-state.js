@@ -10,5 +10,7 @@ Meteor.publish('gamestate', function() {
       leaderboard: 1,
       sendReportsTo: 1,
       checkin: 1,
+      treasureMapURL: 1,
+      treasureLogURL: 1
     });
 });

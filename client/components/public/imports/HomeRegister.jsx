@@ -38,7 +38,7 @@ class HomeRegisterComp extends Component {
         <small>
 	  In-person Puzzle Hunt registration closes at 11:59 PM PT on {registrationCloseDate}
 	  <br/>
-	  Treasure Hunt registration closes at 11:59 PM PT on {treasureRegistrationCloseDate}
+	  Treasure Hunt registration closes at 7:45 PM PT on {treasureRegistrationCloseDate}
 	</small>
       </Segment>
     );
