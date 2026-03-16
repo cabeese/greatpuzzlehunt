@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLayoutEffect, useState } from "react";
-import { Router, Switch, Route, Routes } from 'react-router-dom';
+import { useLayoutEffect, useState, useEffect } from "react";
+import { Router, Switch, Route, Routes, useLocation } from 'react-router-dom';
 import RequireAuth from '../components/app/imports/RequireAuth.js';
 import App from '../components/app/App';
 
@@ -8,6 +8,24 @@ import { browserHistory } from '../history';
 
 import AboutGph from '../components/public/about-gph';
 import AboutTh from '../components/public/about-th';
+
+// Force the page to scroll to the top when it loads. This
+// unfortunately doesn't perfectly preserve scroll position when going
+// backwards through history, but it's preferable to jumping to the
+// middle of a section each time you click a new link.
+//
+// From:
+// https://medium.com/@caden0002/fixing-scroll-position-issues-in-react-router-scroll-to-top-on-navigation-86bcfbdfc9db
+const ScrollToTopWrapper = ({ children }) => {
+  const location = useLocation();
+
+  useLayoutEffect(() => {
+    // Scroll to the top of the page when the route changes
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [location.pathname]);
+
+  return children;
+};
 
 {/* Custom Router: https://stackoverflow.com/a/70000286 */}
 const CustomRouter = ({ history, ...props }) => {
@@ -30,8 +48,9 @@ const CustomRouter = ({ history, ...props }) => {
 
 export const renderRoutes = () => {
   return (
-  <CustomRouter history={browserHistory}>
-    <Routes>
+    <CustomRouter history={browserHistory}>
+      <ScrollToTopWrapper>
+     <Routes>
     <Route path='/' element={<App />}>
 
         {/* Home/Public Routes */}
@@ -99,6 +118,7 @@ export const renderRoutes = () => {
         <Route path='*' element={<Home />}/>
       </Route>
     </Routes>
+      </ScrollToTopWrapper>
   </CustomRouter>
-    );
-}
+  );
+};
