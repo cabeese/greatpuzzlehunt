@@ -184,7 +184,7 @@ export default TopBar = class TopBar extends Component {
     );
 
     return (
-      <div className="ui fixed small labeled icon menu top-bar" ref="topbar">
+      <div className="ui fixed small labeled icon menu top-bar" ref="topbar" id="topbar">
         
         {/* this._renderSocialButtons() */}
         { logoLink }
