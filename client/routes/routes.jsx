@@ -8,6 +8,7 @@ import { browserHistory } from '../history';
 
 import AboutGph from '../components/public/about-gph';
 import AboutTh from '../components/public/about-th';
+import { scrollTo } from '../components/public/imports/common-details';
 
 // Force the page to scroll to the top when it loads. This
 // unfortunately doesn't perfectly preserve scroll position when going
@@ -20,8 +21,13 @@ const ScrollToTopWrapper = ({ children }) => {
   const location = useLocation();
 
   useLayoutEffect(() => {
-    // Scroll to the top of the page when the route changes
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Scroll to the top of the page (or section) when the route
+    // changes (aka when a new "page" is loaded).
+    if (location.hash) {
+      scrollTo(`a${location.hash}`);
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
   }, [location.pathname]);
 
   return children;
