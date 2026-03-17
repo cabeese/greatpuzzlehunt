@@ -12,6 +12,7 @@ import {
   Grid,
 } from 'semantic-ui-react';
 import {
+  scrollTo,
   getAnchorName,
   puzzle_schedule_virtual_data,
   puzzle_schedule_inPerson_data,
@@ -403,12 +404,10 @@ class AboutGph extends Component {
         {/* Render links to anchors on the page */}
         {Object.keys(this.SECTION_MAP).map(name => {
           const target = getAnchorName(name);
-          // TODO: use JS to scroll and fix offset from header
-          // https://www.geeksforgeeks.org/html/offsetting-an-anchor-to-adjust-for-fixed-header/
           return (
-            <Button as="a" key={target}
+            <Button key={target}
                     basic color='blue' size='small'
-                    href={`#${target}`}>
+                    onClick={scrollTo.bind(this, `a#${target}`)}>
               {name}
             </Button>
           );

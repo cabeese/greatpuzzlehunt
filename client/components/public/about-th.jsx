@@ -15,6 +15,7 @@ import {
   Segment,
 } from 'semantic-ui-react';
 import {
+  scrollTo,
   getAnchorName,
   Parking,
   Directions,
@@ -367,12 +368,10 @@ class AboutTh extends Component {
         {/* Render links to anchors on the page */}
         {Object.keys(this.SECTION_MAP).map(name => {
           const target = getAnchorName(name);
-          // TODO: use JS to scroll and fix offset from header
-          // https://www.geeksforgeeks.org/html/offsetting-an-anchor-to-adjust-for-fixed-header/
           return (
-            <Button as="a" key={target}
+            <Button key={target}
                     basic color='blue' size='small'
-                    href={`#${target}`}>
+                    onClick={scrollTo.bind(this, `a#${target}`)}>
               {name}
             </Button>
           );
@@ -381,13 +380,14 @@ class AboutTh extends Component {
         {/* Render each section (including header and anchor) */}
         <Segment>
           {Object.entries(this.SECTION_MAP).map(([name, body]) => (
-	    <div id={getAnchorName(name)}>
+            <React.Fragment key={name}>
               <Header as="h1" size="medium">
+                <a id={getAnchorName(name)} />
                 {name}
               </Header>
 
               {body}
-            </div>
+            </React.Fragment>
           ))}
         </Segment>
       </Container>

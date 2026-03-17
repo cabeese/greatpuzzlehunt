@@ -25,6 +25,29 @@ export function getAnchorName(name) {
   return name.replaceAll(" ", "-").toLowerCase();
 }
 
+// Scroll to a given anchor on a page.
+// Equivalent to adding an `<a href="#anchorName` />` except that it
+// takes into account the height of the #topbar navigation bar.
+//
+// Credit to
+// https://www.geeksforgeeks.org/html/offsetting-an-anchor-to-adjust-for-fixed-header/
+export function scrollTo(anchorName) {
+  const topbar = document.querySelector("div#topbar");
+  const offset = topbar.offsetHeight;
+
+  const target = document.querySelector(anchorName);
+  if (!target) {
+    console.warn(`Unable to scroll to unknown target ${anchorName}`);
+    return;
+  }
+  const targetPosition = target.getBoundingClientRect().top - offset;
+
+  window.scrollTo({
+    top: targetPosition + window.pageYOffset,
+    behavior: 'smooth'
+  });
+}
+
 export const puzzle_schedule_inPerson_data = [
   {
     time: "9:30–10:15 AM",
