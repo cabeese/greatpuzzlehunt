@@ -23,6 +23,7 @@ import {
   AboutGear,
   Support,
 } from './imports/common-details';
+import { Link } from 'react-router-dom';
 import Rules from './imports/rules';
 
 class AboutGph extends Component {
@@ -121,6 +122,22 @@ class AboutGph extends Component {
         <p>
           Welcome to Washington.  We hunt on!
         </p>
+      </div>
+    );
+  }
+
+  _pastPuzzles() {
+    return (
+      <div>
+        <h3>What do the puzzles look like?</h3>
+
+        Check out puzzles from previous years!<br />
+
+        <Link to="/puzzles">
+          <Button basic color='blue' size='small'>
+            Explore Past Puzzles
+          </Button>
+        </Link>
       </div>
     );
   }
@@ -380,6 +397,7 @@ class AboutGph extends Component {
   SECTION_MAP = {
     "Mission Statement": this._missionStatement(),
     "Game Details": this._gameDetails(),
+    "Past Puzzles": this._pastPuzzles(),
     "Register": this._register(),
     "Teams": this._teams(),
     "Tools": this._tools(),
