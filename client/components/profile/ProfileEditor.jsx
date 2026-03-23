@@ -42,6 +42,7 @@ ProfileEditorUI = class ProfileEditor extends Component {
     const canChangeGameMode = ready && gamestate.registrationInPersonOpen;
     const canChangePuzzlePlay = ready && (gamestate.registrationInPersonOpen || gamestate.registrationVirtualOpen);
     const canChangeTreasurePlay = ready && gamestate.registrationTreasureHuntOpen;
+    const gameModeConflict = this.state.playingTreasureHunt && this.state.gameMode === "VIRTUAL";
 
     return (
     <Segment basic>
@@ -60,14 +61,22 @@ ProfileEditorUI = class ProfileEditor extends Component {
                          onChange={ (e, data) => this._handleDataChange(e, data) }/>
         </Form.Group>
         <Form.Group widths='equal'>
-	  <Form.Field>
-	    <Checkbox toggle name='playingPuzzleHunt' label='Playing puzzle hunt' checked={ playingPuzzleHunt } onChange={(e,data) => this._handleDataChange(e,data)} disabled={!canChangePuzzlePlay} />
-	  </Form.Field>
+	  <Form.Checkbox toggle name='playingPuzzleHunt'
+                         label='Playing puzzle hunt'
+                         checked={ playingPuzzleHunt }
+                         onChange={(e,data) => this._handleDataChange(e,data)}
+                         disabled={!canChangePuzzlePlay} />
         </Form.Group>
         <Form.Group widths='equal'>
-	  <Form.Field>
-	    <Checkbox toggle name='playingTreasureHunt' label='Playing treasure hunt' checked={ playingTreasureHunt } onChange={(e,data) => this._handleDataChange(e,data)} disabled={!canChangeTreasurePlay} />
-	  </Form.Field>
+	    <Form.Checkbox toggle name='playingTreasureHunt'
+                      label='Playing treasure hunt'
+                      checked={ playingTreasureHunt }
+                      onChange={(e,data) => this._handleDataChange(e,data)}
+                      error={gameModeConflict ? {
+                        content: 'Treasure Hunt is only open to in-person players',
+                        pointing: 'left',
+                      } : null}
+                      disabled={!canChangeTreasurePlay} />
         </Form.Group>
         <p><small><strong>Note:</strong> if you need to change these settings after the deadline has passed,
              please email us at <a href="mailto:support@greatpuzzlehunt.com">support@greatpuzzlehunt.com</a> ASAP.
