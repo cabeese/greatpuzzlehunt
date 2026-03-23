@@ -183,9 +183,11 @@ class RegisterForm extends Component {
 
   _form() {
     const gameModeConflict = this.state.playingTreasureHunt && this.state.gameMode === "VIRTUAL";
-    const registrationPuzzleHuntOpen = this.props.gamestate.registrationInPersonOpen ||
-          this.props.gamestate.registrationVirtualOpen;
-    const registrationTreasureHuntOpen = this.props.gamestate.registrationTreasureHuntOpen;
+    const registrationPuzzleHuntAllowed = this.state.accountType !== "VOLUNTEER" &&
+          ( this.props.gamestate.registrationInPersonOpen ||
+            this.props.gamestate.registrationVirtualOpen );
+    const registrationTreasureHuntAllowed = this.props.gamestate.registrationTreasureHuntOpen
+          && this.state.accountType !== "VOLUNTEER";
     return (
       <div>
         <Form onSubmit={ async (e) => { await this._register(e); } } style={ this._formStyle() }>
@@ -248,7 +250,7 @@ class RegisterForm extends Component {
             defaultChecked={this.state.playingPuzzleHunt}
             name='playingPuzzleHunt'
             label="Participating in the Great Puzzle Hunt"
-            disabled={!registrationPuzzleHuntOpen}
+            disabled={!registrationPuzzleHuntAllowed}
             onChange={ (e,data) => this._handleDataChange(e,data) } />
           <Form.Checkbox
             toggle
@@ -257,7 +259,7 @@ class RegisterForm extends Component {
               pointing: 'left',
             } : null}
             defaultChecked={this.state.playingTreasureHunt}
-            disabled={!registrationTreasureHuntOpen}
+            disabled={!registrationTreasureHuntAllowed}
             name='playingTreasureHunt'
             label="Participating in the Treasure Hunt"
             onChange={ (e,data) => this._handleDataChange(e,data) } />
