@@ -76,10 +76,10 @@ class GameStats extends Component {
 	  <Button content='Team Treasure Hunt page' />
 	</Link>
 	<br/>
-	For the Official Treasure Hunt Map:
+	For the Official Treasure Hunt Map and Log:
 	<ul>
 	  <li> Download and read map from your mobile device, or </li>
-	  <li> Pick up a hard copy in the Math Center in Bond Hall 209/211A. </li>
+	  <li> Pick up a hard copy at puzzle stations during the Great Puzzle Hunt. </li>
 	</ul>
       </div>
     );

@@ -91,6 +91,7 @@ class CheckpointEditor extends Component {
         </Form.Group>
 
         { this._textMultilineInput("startDescription", "Description of start") }
+	{ this._textInput("startImage", "Optional URL of an image to show with start description") }
 	{ this._textMultilineInput("codewordLabel", "Label for codeword entry") }
         { this._textMultilineInput("finishDescription", "Message on finishing") }
 
@@ -109,7 +110,7 @@ class CheckpointEditor extends Component {
 
   async _save(e) {
     e.preventDefault();
-    const { name, sequence, startDescription, codewordLabel,
+    const { name, sequence, startDescription, codewordLabel, startImage,
 	    finishDescription, 
             codeword, hasCodeword } = this.state;
     const nonCharacterDigit = /[^a-zA-Z0-9]/ug
@@ -118,6 +119,7 @@ class CheckpointEditor extends Component {
       sequence: parseInt(sequence),
       startDescription: startDescription.trim(),
       codewordLabel: codewordLabel.trim(),
+      startImage: startImage.trim(),
       finishDescription: finishDescription.trim(),
       codeword: codeword.trim(),
       hasCodeword: hasCodeword
