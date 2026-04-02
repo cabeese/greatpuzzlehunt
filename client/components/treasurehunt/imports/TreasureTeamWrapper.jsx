@@ -124,10 +124,6 @@ class TreasureTeamWrapper extends Component {
 		    <li> You may want to print a hard copy. </li>
 		  </ul>
 		</Container>
-	    <Button basic size='small' content='Clear playing'
-		    color='black'
-		    onClick={ async () => await this._clearPlaying() }
-		    />
 	      </Grid.Column>
 	    </Grid.Row>
 	  </Grid>
@@ -218,11 +214,7 @@ class TreasureTeamWrapper extends Component {
     if (ckActive != null) {
       msgActive = formatLabel(ckActive == null ? '' : ckActive.startDescription)
     }
-    console.log('ckactive: ');
-    console.log(ckActive);
     const imgActive = this._imgActive(ckActive);
-    console.log('imgactive:');
-    console.log(imgActive);
     return (
       <div>
 	{msgCompleted} {msgActive} {imgActive}
@@ -264,16 +256,6 @@ class TreasureTeamWrapper extends Component {
     const teamId = team._id;
     try {
       await Meteor.callAsync('team.startTreasureHunt', teamId);
-    } catch (error) {
-      alert(error.reason);
-    }
-  }
-
-  async _clearPlaying() {
-    const { team } = this.props;
-    const teamId = team._id;
-    try {
-      await Meteor.callAsync('team.clearTreasureHunt', teamId);
     } catch (error) {
       alert(error.reason);
     }
