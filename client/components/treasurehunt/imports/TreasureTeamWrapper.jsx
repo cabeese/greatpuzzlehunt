@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { sortBy} from 'lodash';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button, Container, Grid, Header, Label, Message } from 'semantic-ui-react';
+import { Button, Container, Grid, Header, Image, Label, Message } from 'semantic-ui-react';
 
 import { THCheckpoints } from '../../../../lib/collections/thcheckpoints.js';
 import { Teams } from '../../../../lib/collections/teams.js'
@@ -108,12 +108,8 @@ class TreasureTeamWrapper extends Component {
 			  content='Download'
 			  href={mapURL}
 		  />
-		  <br/>
-		  <ul>
-		    <li> Download and read map from your mobile device, or </li>
-		    <li> You may want to print a hard copy. </li>
-		  </ul>
 		</Container>
+		<br/>
 		<Container>
 		  Treasure Hunt Log &nbsp;
 		  <Button basic
@@ -122,6 +118,11 @@ class TreasureTeamWrapper extends Component {
 			  content='Download'
 			  href={logURL}
 		  />
+		  <br/>
+		  <ul>
+		    <li> Download and read map and log from your mobile device, or </li>
+		    <li> You may want to print a hard copy. </li>
+		  </ul>
 		</Container>
 	      </Grid.Column>
 	    </Grid.Row>
@@ -213,11 +214,21 @@ class TreasureTeamWrapper extends Component {
     if (ckActive != null) {
       msgActive = formatLabel(ckActive == null ? '' : ckActive.startDescription)
     }
+    const imgActive = this._imgActive(ckActive);
     return (
       <div>
-	{msgCompleted} {msgActive}
+	{msgCompleted} {msgActive} {imgActive}
       </div>
     );
+  }
+
+  _imgActive(ckActive) {
+    if (ckActive != null) {
+      if (ckActive.startImage != null) {
+	return <Image src={ckActive.startImage} inline />
+      }
+    }
+    return null;
   }
 
   _oneCheckpoint(checkpoint, active) {
