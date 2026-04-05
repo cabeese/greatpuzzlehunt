@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Header, Icon, Button } from 'semantic-ui-react';
 
+import GiveUp from './NCGiveUp';
 import PuzzleQRCode from './PuzzleQrCode';
 import PuzzleAnswerForm from './PuzzleAnswerForm';
 import PuzzleProgress from '../../imports/PuzzleProgress';
@@ -57,6 +58,14 @@ export default class ActivePuzzle extends React.Component {
     }
   }
 
+  _giveUpButton() {
+    const { team, puzzle } = this.props;
+    // Don't give this option for "short" puzzles (e.g. Meta Puzzle)
+    if (puzzle.allowedTime < 30) return null;
+
+    return <GiveUp team={team} puzzle={puzzle} />;
+  }
+
   render() {
     const { team, puzzle } = this.props;
 
@@ -73,6 +82,7 @@ export default class ActivePuzzle extends React.Component {
           team={ team }
           puzzle={ puzzle }
         />
+        { this._giveUpButton() }
       </Segment>
     );
   }
