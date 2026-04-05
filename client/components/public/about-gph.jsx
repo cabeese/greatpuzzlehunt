@@ -160,6 +160,43 @@ class AboutGph extends Component {
 
         {matchmakingInfo}
 
+        <h3>Instructions for "Hybrid" Teams</h3>
+
+        <p>
+          Some teams may need to play with one or more members in-person on
+          campus with others joining virtually from another location. Such
+          teams will play just like in-person teams, but virtual players
+          will have access to download the PDFs of each puzzle when the
+          in-person participants begin the timer.
+        </p>
+
+        <p>
+          Note that it is up to individual teams to figure out a
+          communication mechanism for their remote players (phone call,
+          Zoom, Discord, etc.). Please do your best to limit noise for the
+          sake of surrounding puzzlers.
+        </p>
+
+        <p>
+          <strong>Team leaders</strong> should configure their Team setting to be "In-Person."
+        </p>
+        <p>
+          <strong>All players</strong> should select "In-Person" or "Virtual" as their Game Mode
+          on their profile page, depending on how they plan to participate.
+        </p>
+
+        <p>
+          To start each puzzle, the in-person players must go to a puzzle
+          station to pick up physical puzzles . The Puzzle Station
+          Volunteer will start the timer for the team; this will make the
+          PDF available for remote players to download simulatneously.
+        </p>
+
+        <p>
+          Virtual and In-Person Players may take hints, submit answers, or
+          "give up" on behalf of the whole team.
+        </p>
+
         <h3>Tools Needed</h3>
         <p>
           See the <a href="#tools">Tools</a> section for details.
