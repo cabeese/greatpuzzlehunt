@@ -10,6 +10,11 @@ import {
   Message,
   List,
   Grid,
+  Item,
+  ItemGroup,
+  ItemImage,
+  ItemHeader,
+  ItemContent,
 } from 'semantic-ui-react';
 import {
   scrollTo,
@@ -228,9 +233,6 @@ class AboutGph extends Component {
   _tools() {
     return (
       <div>
-        <Message error>
-          <em>Note: this information is from 2025 and may be adjusted for the 2026 Hunt.</em>
-	</Message>
         Your creativity and problem-solving skills! Along with the following:<br />
         <List bulleted>
           <List.Item><span className="description">At least one smartphone or computer. The more the better! (think about battery life).</span>
@@ -240,13 +242,13 @@ class AboutGph extends Component {
           </List.Item>
 
           <List.Item description="A clip board, or a notepad" />
+          <List.Item description="Grid paper" />
           <List.Item description="Ruler/Straightedge" />
           <List.Item description="Scissors" />
+          <List.Item description="Standard cubical dice; one per team member" />
           <List.Item description="Transparent Tape (like Scotch Tape)" />
           <List.Item description="Writing utensils (pencils, pens, erasers, felt-tips, highlighters)" />
           <List.Item description="Colored Pencils" />
-          <List.Item description="Light source (a window and daylight works wonderfully)" />
-          <List.Item description="Push pin or tack, with a piece of cardboard or pad of paper to push pin into (or an end of a paper clip can work, though less efficient)" />
           <List.Item description="Water bottle, snacks (Be sure to bring snacks if you have special dietary needs)" />
           <List.Item description="Umbrella" />
         </List>
@@ -257,13 +259,65 @@ class AboutGph extends Component {
               <List.Item description="Will be used by event leaders for announcements, prizes, and troubleshooting. A link to join the Zoom session will be provided on the website on game day." />
             </List.List>
           </List.Item>
-          <List.Item><span className="description">Printer (a color printer might be helpful)</span>
+          <List.Item><span className="description">Printer (a color printer will be helpful)</span>
             <List.List>
               <List.Item description="You will want hard copies of most puzzles to fold, cut, etc." />
             </List.List>
           </List.Item>
           <List.Item description="Water to drink and a sack lunch or snacks." />
+          <List.Item>
+            If your team members are playing from separate locations, you can
+            try <a href="https://www.figma.com/figjam/jamboard-alternative/">FigJam</a>
+            , <a href="https://lucid.co/compare/jamboard-replacement">Lucidspark</a>
+            , or <a href="miro.com/migrate-from-jamboard/">Miro</a> for
+            a free interactive whiteboard.
+          </List.Item>
         </List>
+
+        <p>
+          <strong>Dice footnote for players:</strong>
+        </p>
+        <p>
+          It is important that the pips on the dice used in puzzles have proper orientation.
+        </p>
+
+        <ItemGroup>
+          <Item>
+            <ItemImage
+              size="small"
+              src="https://gph-distributed.s3.us-west-2.amazonaws.com/2026/tools-dice/die-net.png" />
+            <ItemContent verticalAlign="middle">
+              <h3>Proper "net"</h3>
+              Here is a net with proper orientation once folded.
+            </ItemContent>
+          </Item>
+        </ItemGroup>
+
+        <p>
+          Here are criteria for a proper standard die:
+        </p>
+
+        <ItemGroup>
+          <Item>
+            <ItemImage
+              size="small"
+              src="https://gph-distributed.s3.us-west-2.amazonaws.com/2026/tools-dice/proper-die-123-pips.png" />
+            <ItemContent verticalAlign="middle">
+              <h3>Look for the "V"</h3>
+              There is always a corner where the 1, 2, and 3 are touching. When the 1is on top and the 2 and three facing you, the 2 is left and 3 right and they form a "V."
+            </ItemContent>
+          </Item>
+
+          <Item>
+            <ItemImage
+              size="small"
+              src="https://gph-distributed.s3.us-west-2.amazonaws.com/2026/tools-dice/proper-dice-6-pips.png" />
+            <ItemContent verticalAlign="middle">
+              <h3>6 points at 3 and 4</h3>
+              The 6-pip face with 2 parallel sets of 3 dots has a specific orientation. The 2 parallel sets of the 6 must point to the 3 and the 4.
+            </ItemContent>
+          </Item>
+        </ItemGroup>
       </div>
     );
   }
