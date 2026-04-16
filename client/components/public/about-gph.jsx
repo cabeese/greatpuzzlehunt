@@ -315,7 +315,8 @@ class AboutGph extends Component {
           <strong>Dice footnote for players:</strong>
         </p>
         <p>
-          It is important that the pips on the dice used in puzzles have proper orientation.
+          It is important that the pips on the dice used in this year's puzzles
+          have <strong>a specific orientation</strong>.
         </p>
 
         <ItemGroup>
@@ -325,13 +326,13 @@ class AboutGph extends Component {
               src="https://gph-distributed.s3.us-west-2.amazonaws.com/2026/tools-dice/die-net.png" />
             <ItemContent verticalAlign="middle">
               <h3>Proper "net"</h3>
-              Here is a net with proper orientation once folded.
+              Here is a net with the specific orientation once folded.
             </ItemContent>
           </Item>
         </ItemGroup>
 
         <p>
-          Here are criteria for a proper standard die:
+          Here are criteria for a standard die with the necessary pip orientation:
         </p>
 
         <ItemGroup>
