@@ -281,7 +281,7 @@ class AboutGph extends Component {
           <List.Item description="A clip board, or a notepad" />
           <List.Item description="Grid paper" />
           <List.Item description="Ruler/Straightedge" />
-          <List.Item description="Scissors" />
+          <List.Item description="Scissors; one per team member" />
           <List.Item description="Standard cubical dice; one per team member" />
           <List.Item description="Transparent Tape (like Scotch Tape)" />
           <List.Item description="Writing utensils (pencils, pens, erasers, felt-tips, highlighters)" />
@@ -311,12 +311,14 @@ class AboutGph extends Component {
           </List.Item>
         </List>
 
+        {/* For 2026, include a note about specific dice */}
+        <a id="dice" />
+        <h3>Special Notes for 2026</h3>
+
         <p>
-          <strong>Dice footnote for players:</strong>
-        </p>
-        <p>
-          It is important that the pips on the dice used in this year's puzzles
-          have <strong>a specific orientation</strong>.
+          One of the 2026 puzzles is designed to
+          work <strong><u>only</u></strong> with
+          standard <em>Western right-handed cubical dice</em>.
         </p>
 
         <ItemGroup>
@@ -335,7 +337,7 @@ class AboutGph extends Component {
           Here are criteria for a standard die with the necessary pip orientation:
         </p>
 
-        <ItemGroup>
+        <ItemGroup divided>
           <Item>
             <ItemImage
               size="small"
@@ -356,6 +358,10 @@ class AboutGph extends Component {
             </ItemContent>
           </Item>
         </ItemGroup>
+
+        <p>
+          Another 2026 puzzle involves <strong>a lot of cutting!</strong> Virtual teams are encouraged to divide this work among team members as much as possible. (This means having multiple pairs of scissors!)
+        </p>
       </div>
     );
   }
