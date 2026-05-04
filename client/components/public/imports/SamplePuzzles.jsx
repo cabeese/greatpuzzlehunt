@@ -9,6 +9,61 @@ export default class SamplePuzzles extends Component {
     this.state = {};
 
     this.puzzles = {
+      '2026': {
+        puzzles: [
+          {
+            name: "If the Bill Fits - The Plaid-Opus Pursuit!",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/1_pursuit/puzzle-bd8da4e0-7ff1-4ebc-b769-08d794ea8857.pdf",
+            hints: [
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/1_pursuit/h1-89bac74f.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/1_pursuit/h2-d42a4897.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/1_pursuit/h3-3586ebc3.png",
+            ],
+            codeWord: "PLATO",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/1_pursuit/1.Walk-Through+Solution+THE+PLAID-OPUS+PURSUIT+2026.pdf",
+          },
+          {
+            name: "Glyph Me a Clue!",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/2_glyph/puzzle-04c38f86-eeb5-4eae-bba7-c8ed99fccf1f.pdf",
+            hints: [
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/2_glyph/h1-04d8935b.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/2_glyph/h2-9139e73e.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/2_glyph/h3-aebcc132.png",
+            ],
+            codeWord: "EXTRATERRESTRIALS",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/2_glyph/2.Walk-Through+GLYPH+ME+A+CLUE+2026.pdf",
+          },
+          {
+            name: "Sole Mission!",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/3_mission/puzzle-67a4f352-0e3e-4036-b5bf-651894841522.pdf",
+            hints: [
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/3_mission/h1-6ea87809.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/3_mission/h2-ce810566.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/3_mission/h3-b7aca496.png",
+            ],
+            codeWord: "WILLIAM S NYE",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/3_mission/3.Walk-Through+Solution+SOLE+MISSION+2026.pdf",
+          },
+          {
+            name: "Lack of Shelf Control!",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/4_control/puzzle-ea78f338-f373-4087-b5ae-a0246e665679.pdf",
+            hints: [
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/4_control/h1-4c119534.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/4_control/h2-6a6917a3.png",
+              "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/4_control/h3-5c872d9a.png",
+            ],
+            codeWord: "GREEN EGGS AND HAM",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/4_control/4.Walk-Through+Solution+LACK+OF+SHELF+CONTROL+2026-4.pdf",
+          },
+          {
+            name: "Meta-Puzzle",
+            link: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/5_meta/puzzle-63d0156c-b83b-43ae-bd65-5e98dbb939da.pdf",
+            hints: [],
+            codeWord: "WE JUST KNEW WE WERE HAVING FUN",
+            walkthrough: "https://gph-distributed.s3.us-west-2.amazonaws.com/2026/puzzles/5_meta/5.Walk-Through+Solution+Meta-Puzzle+2026.pdf",
+          },
+        ]
+      },
       '2025': {
         puzzles: [
           {
