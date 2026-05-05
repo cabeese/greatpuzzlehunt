@@ -35,9 +35,9 @@ const mainMenuLinks = [
     iconClass: 'search',
   },
   {
-    name: 'Teams',
-    to: '/teams-list',
-    iconClass: 'blue users',
+    name: 'Puzzles',
+    to: '/puzzles',
+    iconClass: 'blue history',
   },
   {
     name: 'Media',
